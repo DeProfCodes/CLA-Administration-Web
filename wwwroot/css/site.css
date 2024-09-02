@@ -1,6 +1,17 @@
-
-
+/*============================Layout CSS ==============================*/
 #LeftNavMenu
 {
     background: #fafafa;
+}
+.left-nav-icons
+{
+    font-size: 23px;
+    color: #04316d;
+}
+.left-nav-titles
+{
+    font-size: 23px;
+    margin-left:10px;
+    color: #04316d;
+    font-weight:bold;
 }

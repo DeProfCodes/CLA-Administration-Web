@@ -45,7 +45,7 @@
     $(document).ready(function ()
     {
         LoadLayoutSections();
-        LoadPageArea('@DashboardPages.Dashboard');
+        LoadPageArea('@ModulesPages.PopupOverview');
     });
 
     function LoadLayoutSections()
@@ -60,6 +60,7 @@
     function LoadPageArea(page, id)
     {
         var url = GetPageUrl(page, id);
+        console.log("URL -> " + url);
 
         LoadPartialWithSpinner(url, "#DashboardMainArea");
         //SetActivePageCss(page, id);
@@ -71,6 +72,7 @@
 
         // Dashboard Section
         if (page == '@DashboardPages.Dashboard') url = '@Url.Action(DashboardPages.Dashboard.GetDisplayName(), mainControllerName)';
+        if (page == '@ModulesPages.PopupOverview') url = '@Url.Action(ModulesPages.PopupOverview.GetDisplayName(), mainControllerName)';
         
         return url;
     }

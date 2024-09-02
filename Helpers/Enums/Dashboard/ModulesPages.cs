@@ -2,13 +2,13 @@
 
 namespace CLA_Administration_Web.Helpers.Enums.Dashboard
 {
-    public enum DashboardPages
+    public enum ModulesPages
     {
         [Display(Name = "")]
         None,
 
-        [Display(Name = "Dashboard")]
-        Dashboard,
+        [Display(Name = "Overview")]
+        PopupOverview,
 
     }
 }
