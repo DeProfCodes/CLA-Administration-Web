@@ -24,13 +24,13 @@ namespace CLA_Administration_Web.Controllers
         [HttpGet]
         public async Task<IActionResult> TopNavigation()
         {
-            return PartialView(DashboardLinkPages.TopNavigationPageLink);
+            return PartialView(DashboardLinkPages.Layouts.TopNavigationPageLink);
         }
 
         [HttpGet]
         public async Task<IActionResult> LeftNavigation()
         {
-            return PartialView(DashboardLinkPages.LeftNavigationPageLink);
+            return PartialView(DashboardLinkPages.Layouts.LeftNavigationPageLink);
         }
 
         #endregion
@@ -39,6 +39,20 @@ namespace CLA_Administration_Web.Controllers
         {
             return PartialView(DashboardLinkPages.DashboardPageLink);
         }
+
+        #region MODULES
+
+        #region POPUPS
+
+        public IActionResult Overview()
+        {
+            return PartialView(DashboardLinkPages.Modules.PopupPageLink);
+        }
+
+        #endregion
+
+        #endregion
+
     }
 }
  

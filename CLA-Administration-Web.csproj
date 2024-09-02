@@ -8,6 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="MockData\" />
+    <Folder Include="ViewModel\" />
     <Folder Include="wwwroot\assets\plugins\bootstrap-material-datetimepicker\css\" />
   </ItemGroup>
 

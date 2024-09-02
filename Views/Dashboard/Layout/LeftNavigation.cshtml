@@ -1,4 +1,7 @@
-﻿<!--start sidebar -->
+﻿
+<link href="~/assets/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" />
+
+<!--start sidebar -->
 <aside class="sidebar-wrapper" data-simplebar="true" id="LeftNavMenu">
     <div class="sidebar-header">
         <div>
@@ -8,19 +11,10 @@
     <!--navigation-->
     <ul class="metismenu" id="menu">
         <li>
-            <a href="index.html">
-                <div class="parent-icon">
-                    <ion-icon name="home-outline"></ion-icon>
-                </div>
-                <div class="menu-title">Dashboard</div>
-            </a>
-        </li>
-        <li>
-            <a href="javascript:;" class="has-arrow">
-                <div class="parent-icon">
-                    <ion-icon name="bag-handle-outline"></ion-icon>
-                </div>
-                <div class="menu-title">eCommerce</div>
+            <a onclick="ExpandLeftNavMenu('')">
+                <i class="bi bi-house-fill left-nav-icons"></i>
+                <span class="left-nav-titles">Dashboard</span>
+                <i class="bi bi-chevron-right ms-lg-auto left-nav-icons"></i>
             </a>
             <ul>
                 <li>
@@ -517,3 +511,5 @@
     <!--end navigation-->
 </aside>
 <!--end sidebar -->
+
+<script src="~/assets/plugins/metismenu/js/metisMenu.min.js"></script>
