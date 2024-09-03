@@ -10,5 +10,8 @@ namespace CLA_Administration_Web.Helpers.Enums.Dashboard
         [Display(Name = "Dashboard")]
         Dashboard,
 
+        [Display(Name = "Calendar")]
+        Calendar,
+
     }
 }

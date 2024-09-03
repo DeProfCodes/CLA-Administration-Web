@@ -1,75 +1,31 @@
-﻿
+﻿@using CLA_Administration_Web.Helpers.Enums.Dashboard
+
 <link href="~/assets/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" />
 
 <!--start sidebar -->
-<aside class="sidebar-wrapper" data-simplebar="true" id="LeftNavMenu">
+<aside class="sidebar-wrapper theme-bg" data-simplebar="true" id="LeftNavMenu">
     <div class="sidebar-header">
         <div>
-            <img src="~/assets/images/New Logo.png" class="logo-icon" alt="logo icon">
+            <img src="~/assets/images/white-logo.png" class="logo-icon" alt="logo icon">
         </div>
     </div>
     <!--navigation-->
     <ul class="metismenu" id="menu">
         <li>
-            <a onclick="ExpandLeftNavMenu('')">
-                <i class="bi bi-house-fill left-nav-icons"></i>
-                <span class="left-nav-titles">Dashboard</span>
-                <i class="bi bi-chevron-right ms-lg-auto left-nav-icons"></i>
+            <a onclick="ExpandToggleLeftNavMenu('Dashboard')" id="DashboardLink" class="left-nav-menu-item">
+                <i class="bi bi-grid-fill left-nav-icons" id="DashboardLeftIcon"></i>
+                <span class="left-nav-titles" id="DashboardTitle">Dashboard</span>
+                <i class="bi bi-chevron-right ms-lg-auto left-nav-icons" id="DashboardRightIcon"></i>
             </a>
-            <ul>
+            <ul id="DashboardDropdown" class="mm-collapse left-nav-sub-menu">
                 <li>
-                    <a href="ecommerce-shop-grid-view.html">
-                        <ion-icon name="ellipse-outline"></ion-icon>Product Grid
+                    <a onclick="OpenPage('@DashboardPages.Dashboard')">
+                        <i class="bi bi-house-fill left-sub-nav-icons" id="DashboardHomeLeftIcon"></i><span class="left-sub-nav-title">Home</span>
                     </a>
                 </li>
                 <li>
-                    <a href="ecommerce-shop-list-view.html">
-                        <ion-icon name="ellipse-outline"></ion-icon>Product List
-                    </a>
-                </li>
-                <li>
-                    <a href="ecommerce-shop-grid-view-top-filter.html">
-                        <ion-icon name="ellipse-outline"></ion-icon>Product Top Filters
-                    </a>
-                </li>
-                <li>
-                    <a href="ecommerce-product-details.html">
-                        <ion-icon name="ellipse-outline"></ion-icon>Product Details
-                    </a>
-                </li>
-                <li>
-                    <a href="ecommerce-product-comparison.html">
-                        <ion-icon name="ellipse-outline"></ion-icon>Product Comparison
-                    </a>
-                </li>
-                <li>
-                    <a href="ecommerce-shop-cart.html">
-                        <ion-icon name="ellipse-outline"></ion-icon>Shoping Cart
-                    </a>
-                </li>
-                <li>
-                    <a href="ecommerce-checkout-details.html">
-                        <ion-icon name="ellipse-outline"></ion-icon>Checkout
-                    </a>
-                </li>
-                <li>
-                    <a href="ecommerce-checkout-shipping.html">
-                        <ion-icon name="ellipse-outline"></ion-icon>Shipping
-                    </a>
-                </li>
-                <li>
-                    <a href="ecommerce-checkout-payment.html">
-                        <ion-icon name="ellipse-outline"></ion-icon>Payment
-                    </a>
-                </li>
-                <li>
-                    <a href="ecommerce-checkout-review.html">
-                        <ion-icon name="ellipse-outline"></ion-icon>Review Cart
-                    </a>
-                </li>
-                <li>
-                    <a href="ecommerce-checkout-complete.html">
-                        <ion-icon name="ellipse-outline"></ion-icon>Order Complete
+                    <a onclick="OpenPage('@DashboardPages.Calendar')">
+                        <i class="bi bi-calendar2-week-fill left-sub-nav-icons" id="DashboardCalendarLeftIcon"></i><span class="left-sub-nav-title">Calendar</span>
                     </a>
                 </li>
             </ul>
@@ -513,3 +469,43 @@
 <!--end sidebar -->
 
 <script src="~/assets/plugins/metismenu/js/metisMenu.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+<script>
+    
+    function ExpandToggleLeftNavMenu(groupName)
+    {
+        var linkId = `#${groupName}Link`;
+        var leftIconId = `#${groupName}LeftIcon`;
+        var titleId = `#${groupName}Title`;
+        var rightIconId = `#${groupName}RightIcon`;
+        var dropDownId = `#${groupName}Dropdown`;
+
+        if($(dropDownId).hasClass('mm-show') == false)
+        {
+            $(leftIconId).addClass('left-nav-menu-active');
+            $(titleId).addClass('left-nav-menu-active');
+            $(rightIconId).addClass('left-nav-menu-active');
+            $(rightIconId).removeClass('bi-chevron-right');
+            $(rightIconId).addClass('bi-chevron-down');
+
+            $(linkId).addClass('left-nav-menu-active');
+            $(dropDownId).addClass("mm-show");
+            $(linkId).attr('ari-expanded', true);
+           
+        }
+        else
+        {
+            $(leftIconId).removeClass('left-nav-menu-active');
+            $(titleId).removeClass('left-nav-menu-active');
+            $(rightIconId).removeClass('left-nav-menu-active');
+            $(rightIconId).addClass('bi-chevron-right');
+            $(rightIconId).removeClass('bi-chevron-down');
+
+            $(linkId).removeClass('left-nav-menu-active');
+            $(dropDownId).removeClass("mm-show");
+            $(linkId).attr('ari-expanded', false)
+        }
+    }
+
+</script>
