@@ -9,76 +9,122 @@
 <div class="wrapper">
 
     <!--start sidebar -->
-    <div id="LeftNavigation">
-    </div>
+    <div id="LeftNavigation"></div>
     <!--end sidebar -->
-
+  
     <!--start top header-->
-    <div id="TopNavigation">
-    </div>
-    <!--end top header-->
-
+    <div id="TopNavigation"></div>
+    <!--end top header -->
+   
     <!-- start page content wrapper-->
     <div class="page-content-wrapper">
+      
+        <!-- Loader -->
+        <div id="loader" class="loader">
+            <!-- GIF Loader -->
+            <img src="~/assets/images/Loading_2.gif" alt="Loading..." id="loaderImage" class="loader-image" />
+            <!-- Loader Message -->
+            <p id="loaderMessage">Loading...</p>
+        </div>
+        <!--End Loader -->
+
         <!-- start page content-->
         <div class="page-content" id="DashboardMainArea">
-            
+            <!-- Your page content will be loaded here -->
+       
         </div>
         <!-- end page content-->
+      
+        <!--Start Back To Top Button-->
+        <a href="javaScript:;" class="back-to-top">
+            <ion-icon name="arrow-up-outline"></ion-icon>
+        </a>
+        <!--End Back To Top Button-->
+   
     </div>
     <!--end page content wrapper-->
 
-    <!--Start Back To Top Button-->
-    <a href="javaScript:;" class="back-to-top">
-        <ion-icon name="arrow-up-outline"></ion-icon>
-    </a>
-    <!--End Back To Top Button-->
 </div>
 <!--end wrapper-->
+
+
+
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
 
+
+
+
 <script>
 
-    $(document).ready(function ()
-    {
+    $(document).ready(function () {
         LoadLayoutSections();
         LoadPageArea('@DashboardPages.Dashboard');
     });
 
-    function LoadLayoutSections()
-    {
+    function LoadLayoutSections() {
         var topNavUrl = '@Url.Action("TopNavigation", mainControllerName)';
         var leftNavUrl = '@Url.Action("LeftNavigation", mainControllerName)';
 
+        ShowLoader("Loading Layout Sections");
+
+     
         LoadPartialWithSpinner(topNavUrl, "#TopNavigation");
         LoadPartialWithSpinner(leftNavUrl, "#LeftNavigation");
+
+        setTimeout(HideLoader, 4000);
     }
 
-    function OpenPage(page, id)
-    {
+    function OpenPage(page, id) {
         LoadPageArea(page, id);
     }
 
-    function LoadPageArea(page, id)
-    {
+    function LoadPageArea(page, id) {
         var url = GetPageUrl(page, id);
-        
+        var pageName = GetPageName(page);
+
+       
+        ShowLoader("Loading " + pageName);
+        $("#DashboardMainArea").css("visibility", "hidden");
+
         LoadPartialWithSpinner(url, "#DashboardMainArea");
-        //SetActivePageCss(page, id);
+
+     
+        setTimeout(function () {
+            HideLoader();
+            $("#DashboardMainArea").css("visibility", "visible");
+        }, 4000);
     }
 
-    function GetPageUrl(page, id)
-    {
+    function GetPageUrl(page, id) {
         var url = "";
 
-        // Dashboard Section
         if (page == '@DashboardPages.Dashboard') url = '@Url.Action(DashboardPages.Dashboard.GetDisplayName(), mainControllerName)';
         if (page == '@ModulesPages.PopupOverview') url = '@Url.Action(ModulesPages.PopupOverview.GetDisplayName(), mainControllerName)';
-        
+
         return url;
     }
+
+    function GetPageName(page) {
+        if (page == '@DashboardPages.Dashboard') return "Dashboard";
+        if (page == '@ModulesPages.PopupOverview') return "Popup Overview";
+        return "Page";
+    }
+
+    function ShowLoader(message) {
+        $("#loaderMessage").text(message);
+        $(".loader").css("visibility", "visible");
+
+        
+        $(".loader-image").css("visibility", "visible");
+    }
+
+    function HideLoader() {
+        $(".loader").css("visibility", "hidden");
+        $(".loader-image").css("visibility", "hidden"); 
+    }
+
 
 </script>
