@@ -59,29 +59,32 @@
 
 <script>
 
-    $(document).ready(function () {
+    $(document).ready(function ()
+    {
         LoadLayoutSections();
         LoadPageArea('@DashboardPages.Dashboard');
     });
 
-    function LoadLayoutSections() {
+    function LoadLayoutSections()
+    {
         var topNavUrl = '@Url.Action("TopNavigation", mainControllerName)';
         var leftNavUrl = '@Url.Action("LeftNavigation", mainControllerName)';
 
         ShowLoader("Loading Layout Sections");
-
-     
+             
         LoadPartialWithSpinner(topNavUrl, "#TopNavigation");
         LoadPartialWithSpinner(leftNavUrl, "#LeftNavigation");
 
         setTimeout(HideLoader, 3000);
     }
 
-    function OpenPage(page, id) {
+    function OpenPage(page, id)
+    {
         LoadPageArea(page, id);
     }
 
-    function LoadPageArea(page, id) {
+    function LoadPageArea(page, id)
+    {
         var url = GetPageUrl(page, id);
         var pageName = GetPageName(page);
               
@@ -89,10 +92,14 @@
   
         LoadPartialWithSpinner(url, "#DashboardMainArea");
             
-        setTimeout(function () { HideLoader(); }, 3000);
+        setTimeout(function ()
+        { HideLoader();
+        
+        }, 3000);
     }
 
-    function GetPageUrl(page, id) {
+    function GetPageUrl(page, id) 
+    {
         var url = "";
 
         if (page == '@DashboardPages.Dashboard') url = '@Url.Action(DashboardPages.Dashboard.GetDisplayName(), mainControllerName)';
@@ -101,13 +108,15 @@
         return url;
     }
 
-    function GetPageName(page) {
+    function GetPageName(page) 
+    {
         if (page == '@DashboardPages.Dashboard') return "Dashboard";
         if (page == '@ModulesPages.PopupOverview') return "Popup Overview";
         return "Page";
     }
 
-    function ShowLoader(message) {
+    function ShowLoader(message)
+    {
         $("#loaderMessage").text(message);
         $(".loader").css("visibility", "visible");
 
@@ -115,7 +124,8 @@
         $(".loader-image").css("visibility", "visible");
     }
 
-    function HideLoader() {
+    function HideLoader()
+    {
         $(".loader").css("visibility", "hidden");
         $(".loader-image").css("visibility", "hidden"); 
     }
