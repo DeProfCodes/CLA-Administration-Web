@@ -74,7 +74,7 @@
         LoadPartialWithSpinner(topNavUrl, "#TopNavigation");
         LoadPartialWithSpinner(leftNavUrl, "#LeftNavigation");
 
-        setTimeout(HideLoader, 4000);
+        setTimeout(HideLoader, 3000);
     }
 
     function OpenPage(page, id) {
@@ -84,18 +84,12 @@
     function LoadPageArea(page, id) {
         var url = GetPageUrl(page, id);
         var pageName = GetPageName(page);
-
-       
+              
         ShowLoader("Loading " + pageName);
-        $("#DashboardMainArea").css("visibility", "hidden");
-
+  
         LoadPartialWithSpinner(url, "#DashboardMainArea");
-
-     
-        setTimeout(function () {
-            HideLoader();
-            $("#DashboardMainArea").css("visibility", "visible");
-        }, 4000);
+            
+        setTimeout(function () { HideLoader(); }, 3000);
     }
 
     function GetPageUrl(page, id) {

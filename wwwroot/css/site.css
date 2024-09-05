@@ -38,8 +38,9 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: calc(100% - 50px);
+ 
+    width: calc(100% - 100px); /* Adjust 200px if the left navigation width changes */
+    height: 100%;
     background-color: rgba(255, 255, 255, 0.8);
     display: flex;
     flex-direction: column;
@@ -48,18 +49,18 @@
     font-size: 24px;
     color: #333;
     z-index: 1000;
-    visibility: hidden; 
-    margin-left: 200px; 
-    margin-top: 50px; 
-    padding: 2rem;
+    visibility: hidden; /* Initially hidden */
+    margin-left: 260px; /* Adjust 200px to match left navigation width */
+    margin-top: 62px; /* Adjust 50px to match top navigation height */
 }
 
 .loader-image {
     width: 50px;
     height: 50px;
-    visibility: hidden; 
+    visibility: hidden; /* Initially hidden */
 }
 
 #loaderMessage {
-    margin-top: 20px; 
+    margin-top: 20px; /* Space between image and text */
 }
+
