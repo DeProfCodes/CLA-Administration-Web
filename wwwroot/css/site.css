@@ -34,3 +34,21 @@
 {
     padding-left: 5px !important;
 }
+.left-sub-nav-link
+{
+    cursor: pointer;
+}
+.left-sub-nav-link:hover
+{
+    background: navy !important;
+}
+.left-sub-nav-menu-active
+{
+    background: #e0bc00 !important;
+    color: #04316d !important;
+}
+.left-sub-nav-menu-active:hover
+{
+    background: #e0bc00 !important;
+    color: #04316d !important;
+}

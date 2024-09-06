@@ -19,8 +19,6 @@ namespace CLA_Administration_Web.Controllers
             return View();
         }
 
-        #region LAYOUTS
-
         [HttpGet]
         public async Task<IActionResult> TopNavigation()
         {
@@ -33,26 +31,15 @@ namespace CLA_Administration_Web.Controllers
             return PartialView(DashboardLinkPages.Layouts.LeftNavigationPageLink);
         }
 
-        #endregion
-
         public IActionResult Dashboard()
         {
-            return PartialView(DashboardLinkPages.DashboardPageLink);
+            return PartialView(DashboardLinkPages.DashboardHomePageLink);
         }
 
-        #region MODULES
-
-        #region POPUPS
-
-        public IActionResult Overview()
+        public IActionResult Calendar()
         {
-            return PartialView(DashboardLinkPages.Modules.PopupPageLink);
+            return PartialView(DashboardLinkPages.DashboardCalendarPageLink);
         }
-
-        #endregion
-
-        #endregion
-
     }
 }
  
