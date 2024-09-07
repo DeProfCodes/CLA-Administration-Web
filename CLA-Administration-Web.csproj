@@ -7,12 +7,26 @@
     <RootNamespace>CLA_Administration_Web</RootNamespace>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <NoWarn>1701;1702;8618</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <NoWarn>1701;1702;8618</NoWarn>
+  </PropertyGroup>
+
   <ItemGroup>
     <Folder Include="wwwroot\assets\plugins\bootstrap-material-datetimepicker\css\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="CLACommonFunctionsLibrary_NET">
+      <HintPath>..\..\..\Miscellaneous\# Utilities #\CLACommonFunctionsLibrary_NET.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

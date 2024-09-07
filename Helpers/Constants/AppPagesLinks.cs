@@ -1,19 +1,16 @@
 ﻿namespace CLA_Administration_Web.Helpers.Constants
 {
-    public class DashboardLinkPages
+    public class AppPagesLinks
     {
-        //Layouts Section Pages
         public class Layouts
         {
             public const string TopNavigationPageLink = "~/Views/Layout/TopNavigation.cshtml";
             public const string LeftNavigationPageLink = "~/Views/Layout/LeftNavigation.cshtml";
         }
-
-        //DashboardPages
+        
         public const string DashboardHomePageLink = "~/Views/Dashboard/Home.cshtml";
         public const string DashboardCalendarPageLink = "~/Views/Dashboard/Calendar.cshtml";
 
-        //Modules Pages
         public class Modules
         {
             public const string ContentLibraryCategoriesPageLink = "~/Views/Modules/ContentLibrary/Categories.cshtml";
@@ -41,5 +38,16 @@
             public const string RSSAddNewPageLink = "~/Views/Modules/RSS/AddNew.cshtml";
         }
 
+        public class Settings
+        {
+            public const string StagingUsersPageLink = "~/Views/Settings/StagingUsers.cshtml";
+            public const string SetupExclusionsPageLink = "~/Views/Settings/SetupExclusions.cshtml";
+            public const string AdminAccessPageLink = "~/Views/Settings/AdminAccess.cshtml";
+            public const string TargetGroupsPageLink = "~/Views/Settings/TargetGroups.cshtml";
+            public const string CustomUserSettingsPageLink = "~/Views/Settings/CustomUserSettings.cshtml";
+            public const string ActiveConnectionsPageLink = "~/Views/Settings/ActiveConnections.cshtml";
+            public const string SkinsOfflineImagesPageLink = "~/Views/Settings/SkinsOfflineImages.cshtml";
+            public const string DesktopInformationPageLink = "~/Views/Settings/DesktopInformation.cshtml";
+        }
     }
 }

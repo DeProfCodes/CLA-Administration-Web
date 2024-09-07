@@ -7,28 +7,28 @@ namespace CLA_Administration_Web.Helpers.Enums.Shared
         [Display(Name = "")]
         None,
 
-        [Display(Name = "ContentLibrary")]
+        [Display(Name = "ContentLibrary", Description = "Content Library")]
         ContentLibrary,
 
-        [Display(Name = "LockedDesktop")]
+        [Display(Name = "LockedDesktop", Description = "Locked Desktop")]
         LockedDesktop,
 
-        [Display(Name = "Desktop")]
+        [Display(Name = "Desktop", Description = "Desktop")]
         Desktop,
 
-        [Display(Name = "Screensaver")]
+        [Display(Name = "Screensaver", Description = "Screensaver")]
         Screensaver,
 
-        [Display(Name = "Popup")]
+        [Display(Name = "Popup", Description = "Popup")]
         Popup,
 
-        [Display(Name = "Survey")]
+        [Display(Name = "Survey", Description = "Survey")]
         Survey,
 
-        [Display(Name = "Ticker")]
+        [Display(Name = "Ticker", Description = "Ticker")]
         Ticker,
 
-        [Display(Name = "RSS")]
+        [Display(Name = "RSS", Description = "RSS")]
         RSS,
     }
 }

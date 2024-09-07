@@ -16,72 +16,72 @@ namespace CLA_Administration_Web.Controllers
 
         public IActionResult ContentLibraryCategories()
         {
-            return PartialView(DashboardLinkPages.Modules.ContentLibraryCategoriesPageLink);
+            return PartialView(AppPagesLinks.Modules.ContentLibraryCategoriesPageLink);
         }
 
         public IActionResult ContentLibraryContent()
         {
-            return PartialView(DashboardLinkPages.Modules.ContentLibraryContentsPageLink);
+            return PartialView(AppPagesLinks.Modules.ContentLibraryContentsPageLink);
         }
 
         public IActionResult DesktopOverview()
         {
-            return PartialView(DashboardLinkPages.Modules.DesktopOverviewPageLink);
+            return PartialView(AppPagesLinks.Modules.DesktopOverviewPageLink);
         }
 
         public IActionResult DesktopAddNew()
         {
-            return PartialView(DashboardLinkPages.Modules.DesktopAddNewPageLink);
+            return PartialView(AppPagesLinks.Modules.DesktopAddNewPageLink);
         }
 
         public IActionResult LockedDesktopOverview()
         {
-            return PartialView(DashboardLinkPages.Modules.LockedDesktopOverviewPageLink);
+            return PartialView(AppPagesLinks.Modules.LockedDesktopOverviewPageLink);
         }
 
         public IActionResult LockedDesktopAddNew()
         {
-            return PartialView(DashboardLinkPages.Modules.LockedDesktopAddNewPageLink);
+            return PartialView(AppPagesLinks.Modules.LockedDesktopAddNewPageLink);
         }
 
         public IActionResult ScreensaverOverview()
         {
-            return PartialView(DashboardLinkPages.Modules.ScreensaverOverviewPageLink);
+            return PartialView(AppPagesLinks.Modules.ScreensaverOverviewPageLink);
         }
 
         public IActionResult ScreensaverAddNew()
         {
-            return PartialView(DashboardLinkPages.Modules.ScreensaverAddNewPageLink);
+            return PartialView(AppPagesLinks.Modules.ScreensaverAddNewPageLink);
         }
 
         public IActionResult PopupOverview()
         {
-            return PartialView(DashboardLinkPages.Modules.PopupOverviewPageLink);
+            return PartialView(AppPagesLinks.Modules.PopupOverviewPageLink);
         }
 
         public IActionResult PopupAddNew()
         {
-            return PartialView(DashboardLinkPages.Modules.PopupAddNewPageLink);
+            return PartialView(AppPagesLinks.Modules.PopupAddNewPageLink);
         }
 
         public IActionResult SurveyOverview()
         {
-            return PartialView(DashboardLinkPages.Modules.SurveyOverviewPageLink);
+            return PartialView(AppPagesLinks.Modules.SurveyOverviewPageLink);
         }
 
         public IActionResult SurveyAddNew()
         {
-            return PartialView(DashboardLinkPages.Modules.SurveyAddNewPageLink);
+            return PartialView(AppPagesLinks.Modules.SurveyAddNewPageLink);
         }
 
         public IActionResult TickerOverview()
         {
-            return PartialView(DashboardLinkPages.Modules.TickerOverviewPageLink);
+            return PartialView(AppPagesLinks.Modules.TickerOverviewPageLink);
         }
 
         public IActionResult TickerAddNew()
         {
-            return PartialView(DashboardLinkPages.Modules.TickerAddNewPageLink);
+            return PartialView(AppPagesLinks.Modules.TickerAddNewPageLink);
         }
     }
 }

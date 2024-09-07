@@ -1,9 +1,11 @@
-﻿@using CLA_Administration_Web.Helpers.Enums.Dashboard
+﻿@using CLACommonFunctionsLibrary_NET.Helpers.Enums
+@using CLA_Administration_Web.Helpers.Enums.AppPages
 @using CLA_Administration_Web.Helpers.Enums.Shared
 
 @{
     var dashboardController = "Dashboard";
     var modulesController = "Modules";
+    var settingsController = "Settings";
 }
 
 <!--start wrapper-->
@@ -104,6 +106,16 @@
         if (page == '@ModulesPages.RSSOverview') url = '@Url.Action(ModulesPages.RSSOverview.GetDisplayName(), modulesController)';
         if (page == '@ModulesPages.RSSAddNew') url = '@Url.Action(ModulesPages.RSSAddNew.GetDisplayName(), modulesController)';
         
+        // Settings Section
+        if (page == '@SettingsPages.StagingUsers') url = '@Url.Action(SettingsPages.StagingUsers.GetDisplayName(), settingsController)';
+        if (page == '@SettingsPages.SetupExclusions') url = '@Url.Action(SettingsPages.SetupExclusions.GetDisplayName(), settingsController)';
+        if (page == '@SettingsPages.AdminAccess') url = '@Url.Action(SettingsPages.AdminAccess.GetDisplayName(), settingsController)';
+        if (page == '@SettingsPages.TargetGroups') url = '@Url.Action(SettingsPages.TargetGroups.GetDisplayName(), settingsController)';
+        if (page == '@SettingsPages.CustomUserSettings') url = '@Url.Action(SettingsPages.CustomUserSettings.GetDisplayName(), settingsController)';
+        if (page == '@SettingsPages.ActiveConnections') url = '@Url.Action(SettingsPages.ActiveConnections.GetDisplayName(), settingsController)';
+        if (page == '@SettingsPages.SkinsOfflineImages') url = '@Url.Action(SettingsPages.SkinsOfflineImages.GetDisplayName(), settingsController)';
+        if (page == '@SettingsPages.DesktopInformation') url = '@Url.Action(SettingsPages.DesktopInformation.GetDisplayName(), settingsController)';
+
         return url;
     }
 
