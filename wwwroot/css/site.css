@@ -1,7 +1,56 @@
 /*============================Layout CSS ==============================*/
-#LeftNavMenu
+
+.left-nav-icons
 {
-    background: #fafafa;
+    font-size: 23px;
+    color: white;
+}
+.left-nav-titles
+{
+    font-size: 23px;
+    margin-left:10px;
+    color: white;
+    font-weight:bold;
+}
+.left-nav-menu-active
+{
+    color: yellow !important;
+}
+.left-nav-menu-item
+{
+    cursor: pointer;
+}
+.left-sub-nav-icons
+{
+    font-size: 18px;
+    color: white;
+}
+.left-sub-nav-title
+{
+    color: white;
+    margin-left: 8px;
+}
+.left-nav-sub-menu
+{
+    padding-left: 5px !important;
+}
+.left-sub-nav-link
+{
+    cursor: pointer;
+}
+.left-sub-nav-link:hover
+{
+    background: navy !important;
+}
+.left-sub-nav-menu-active
+{
+    background: #e0bc00 !important;
+    color: #04316d !important;
+}
+.left-sub-nav-menu-active:hover
+{
+    background: #e0bc00 !important;
+    color: #04316d !important;
 }
 .left-nav-icons
 {

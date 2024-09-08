@@ -1,8 +1,11 @@
-﻿@using CLA_Administration_Web.Helpers.Enums.Dashboard
+﻿@using CLACommonFunctionsLibrary_NET.Helpers.Enums
+@using CLA_Administration_Web.Helpers.Enums.AppPages
 @using CLA_Administration_Web.Helpers.Enums.Shared
 
 @{
-    var mainControllerName = "Dashboard";
+    var dashboardController = "Dashboard";
+    var modulesController = "Modules";
+    var settingsController = "Settings";
 }
 
 <!--start wrapper-->
@@ -50,18 +53,22 @@
 
     function LoadLayoutSections()
     {
-        var topNavUrl = '@Url.Action("TopNavigation", mainControllerName)';
-        var leftNavUrl = '@Url.Action("LeftNavigation", mainControllerName)';
+        var topNavUrl = '@Url.Action("TopNavigation", dashboardController)';
+        var leftNavUrl = '@Url.Action("LeftNavigation", dashboardController)';
 
         LoadPartialWithSpinner(topNavUrl, "#TopNavigation");
         LoadPartialWithSpinner(leftNavUrl, "#LeftNavigation");
     }
 
+    function OpenPage(page, id)
+    {
+        LoadPageArea(page, id);
+    }
+
     function LoadPageArea(page, id)
     {
         var url = GetPageUrl(page, id);
-        console.log("URL -> " + url);
-
+        
         LoadPartialWithSpinner(url, "#DashboardMainArea");
         //SetActivePageCss(page, id);
     }
@@ -71,9 +78,44 @@
         var url = "";
 
         // Dashboard Section
-        if (page == '@DashboardPages.Dashboard') url = '@Url.Action(DashboardPages.Dashboard.GetDisplayName(), mainControllerName)';
-        if (page == '@ModulesPages.PopupOverview') url = '@Url.Action(ModulesPages.PopupOverview.GetDisplayName(), mainControllerName)';
+        if (page == '@DashboardPages.Dashboard') url = '@Url.Action(DashboardPages.Dashboard.GetDisplayName(), dashboardController)';
+        if (page == '@DashboardPages.Calendar') url = '@Url.Action(DashboardPages.Calendar.GetDisplayName(), dashboardController)';
+
+        // Modules Section
+        if (page == '@ModulesPages.ContentLibraryCategories') url = '@Url.Action(ModulesPages.ContentLibraryCategories.GetDisplayName(), modulesController)';
+        if (page == '@ModulesPages.ContentLibraryContent') url = '@Url.Action(ModulesPages.ContentLibraryContent.GetDisplayName(), modulesController)';
+        //
+        if (page == '@ModulesPages.DesktopOverview') url = '@Url.Action(ModulesPages.DesktopOverview.GetDisplayName(), modulesController)';
+        if (page == '@ModulesPages.DesktopAddNew') url = '@Url.Action(ModulesPages.DesktopAddNew.GetDisplayName(), modulesController)';
+        //
+        if (page == '@ModulesPages.LockedDesktopOverview') url = '@Url.Action(ModulesPages.LockedDesktopOverview.GetDisplayName(), modulesController)';
+        if (page == '@ModulesPages.LockedDesktopAddNew') url = '@Url.Action(ModulesPages.LockedDesktopAddNew.GetDisplayName(), modulesController)';
+        //
+        if (page == '@ModulesPages.ScreensaverOverview') url = '@Url.Action(ModulesPages.ScreensaverOverview.GetDisplayName(), modulesController)';
+        if (page == '@ModulesPages.ScreensaverAddNew') url = '@Url.Action(ModulesPages.ScreensaverAddNew.GetDisplayName(), modulesController)';
+        //
+        if (page == '@ModulesPages.PopupOverview') url = '@Url.Action(ModulesPages.PopupOverview.GetDisplayName(), modulesController)';
+        if (page == '@ModulesPages.PopupAddNew') url = '@Url.Action(ModulesPages.PopupAddNew.GetDisplayName(), modulesController)';
+        //
+        if (page == '@ModulesPages.SurveyOverview') url = '@Url.Action(ModulesPages.SurveyOverview.GetDisplayName(), modulesController)';
+        if (page == '@ModulesPages.SurveyAddNew') url = '@Url.Action(ModulesPages.SurveyAddNew.GetDisplayName(), modulesController)';
+        //
+        if (page == '@ModulesPages.TickerOverview') url = '@Url.Action(ModulesPages.TickerOverview.GetDisplayName(), modulesController)';
+        if (page == '@ModulesPages.TickerAddNew') url = '@Url.Action(ModulesPages.TickerAddNew.GetDisplayName(), modulesController)';
+        //
+        if (page == '@ModulesPages.RSSOverview') url = '@Url.Action(ModulesPages.RSSOverview.GetDisplayName(), modulesController)';
+        if (page == '@ModulesPages.RSSAddNew') url = '@Url.Action(ModulesPages.RSSAddNew.GetDisplayName(), modulesController)';
         
+        // Settings Section
+        if (page == '@SettingsPages.StagingUsers') url = '@Url.Action(SettingsPages.StagingUsers.GetDisplayName(), settingsController)';
+        if (page == '@SettingsPages.SetupExclusions') url = '@Url.Action(SettingsPages.SetupExclusions.GetDisplayName(), settingsController)';
+        if (page == '@SettingsPages.AdminAccess') url = '@Url.Action(SettingsPages.AdminAccess.GetDisplayName(), settingsController)';
+        if (page == '@SettingsPages.TargetGroups') url = '@Url.Action(SettingsPages.TargetGroups.GetDisplayName(), settingsController)';
+        if (page == '@SettingsPages.CustomUserSettings') url = '@Url.Action(SettingsPages.CustomUserSettings.GetDisplayName(), settingsController)';
+        if (page == '@SettingsPages.ActiveConnections') url = '@Url.Action(SettingsPages.ActiveConnections.GetDisplayName(), settingsController)';
+        if (page == '@SettingsPages.SkinsOfflineImages') url = '@Url.Action(SettingsPages.SkinsOfflineImages.GetDisplayName(), settingsController)';
+        if (page == '@SettingsPages.DesktopInformation') url = '@Url.Action(SettingsPages.DesktopInformation.GetDisplayName(), settingsController)';
+
         return url;
     }
 

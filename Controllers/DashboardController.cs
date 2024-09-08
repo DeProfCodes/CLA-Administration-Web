@@ -1,5 +1,7 @@
 using CLA_Administration_Web.Helpers.Constants;
+using CLA_Administration_Web.Helpers.Layout;
 using CLA_Administration_Web.Models;
+using CLA_Administration_Web.ViewModels.Layouts;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -19,25 +21,32 @@ namespace CLA_Administration_Web.Controllers
             return View();
         }
 
-        #region LAYOUTS
-
         [HttpGet]
         public async Task<IActionResult> TopNavigation()
         {
-            return PartialView(DashboardLinkPages.Layouts.TopNavigationPageLink);
+            return PartialView(AppPagesLinks.Layouts.TopNavigationPageLink);
         }
 
         [HttpGet]
         public async Task<IActionResult> LeftNavigation()
         {
-            return PartialView(DashboardLinkPages.Layouts.LeftNavigationPageLink);
-        }
+            var leftNavViewModel = new LeftNavigationViewModel
+            {
+                ModuleNamesPages = LayoutsHelper.GetModuleNamesAndPages(),
+                SettingsNamesType = LayoutsHelper.GetSettingsNamesTypes(),
+            };
 
-        #endregion
+            return PartialView(AppPagesLinks.Layouts.LeftNavigationPageLink, leftNavViewModel);
+        }
 
         public IActionResult Dashboard()
         {
-            return PartialView(DashboardLinkPages.DashboardPageLink);
+            return PartialView(AppPagesLinks.DashboardHomePageLink);
+        }
+
+        public IActionResult Calendar()
+        {
+            return PartialView(AppPagesLinks.DashboardCalendarPageLink);
         }
 
         #region MODULES
