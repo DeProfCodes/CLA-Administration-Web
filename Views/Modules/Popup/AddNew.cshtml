@@ -1,4 +1,173 @@
-﻿
-<h1 class="text-center">
-    Popup Add New
-</h1>
+﻿ 
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css"> 
+<style>
+
+    .right-bar{
+        background-color: #f8f9fa;
+        border-left: 1px solid #dee2e6;
+        padding-top: 20px;
+    }
+    .sidebar {
+        background-color: #f8f9fa;
+        border-right: 1px solid #dee2e6;
+        padding-top: 20px;
+    }
+
+
+        .sidebar a {
+            display: block;
+            padding: 10px;
+            color: #002855;
+            text-decoration: none;
+        }
+
+            .sidebar a.active {
+                background-color: #002855;
+                color: white;
+                border-radius: 20px;
+            }
+
+            .sidebar a:hover {
+                background-color: #002855;
+                color: white;
+                border-radius: 20px;
+            }
+
+    .main-content .btn-group .btn {
+      
+        padding: 0.5rem 1rem;
+    }
+
+    .main-content .btn.active {
+        background-color: #002855;
+        color: white;
+    }
+
+    .upload-section {
+        border: 1px dashed #ced4da;
+        padding: 1rem;
+        text-align: center;
+        border-radius: 0.5rem;
+    }
+
+        .upload-section i {
+            font-size: 24px;
+            color: #ced4da;
+        }
+
+    .pagination-section {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+        .pagination-section .page-link {
+            background-color: #002855;
+            color: white;
+            border-radius: 0.5rem;
+        }
+
+    .next-btn {
+        background-color: #002855;
+        color: white;
+        border-radius: 20px;
+        padding: 0.75rem 2rem;
+    }
+</style>
+  
+
+<div class="container p-4">
+    <!-- Card containing the entire content -->
+    <div class="d-flex justify-content-between">
+    <h2 class="fw-bold">Popup Module</h2>
+    <button class="btn btn-outline-primary"><i class="bi bi-layout-text-sidebar-reverse"></i> Popup Overview</button>
+    </div>
+
+
+<!-- Breadcrumb -->
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="#">Modules</a></li>
+        <li class="breadcrumb-item"><a href="#">Popup</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Add New</li>
+    </ol>
+</nav>
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <!-- Row to divide content -->
+            <div class="row">
+                <!-- Header -->
+                <div class="col-12">
+                    
+                </div>
+
+                <!-- Sidebar (col-4) -->
+                <div class="col-2">
+                    <div class="sidebar text-center">
+                        <a href="#" class="active">Link Type</a>
+                        <a href="#">Skin</a>
+                        <a href="#">Texts</a>
+                        <a href="#">Times</a>
+                        <a href="#">Displays</a>
+                        <a href="#">Repeat</a>
+                        <a href="#">Feedback</a>
+                        <a href="#">Target Users</a>
+                        <a href="#">Exposure Summary</a>
+                    </div>
+                </div>
+
+                <!-- Main Content (col-8) -->
+                <div class="col-8">
+                    <div class="main-content">
+                    <h5 class="fw-bold mb-3">1. Popup Link Type</h5>
+                    <p>Please select what popup will link to when clicked by the user. The popup can launch any of the below options when clicked on or be linked to nothing.</p>
+                  
+                
+                    <div class="btn-group mb-4 " role="group">
+                        <button type="button" class="btn btn-outline-primary">No Link</button>
+                            <button type="button" class="btn btn-outline-primary active">Image</button>
+                        <button type="button" class="btn btn-outline-primary">Audio</button>
+                        <button type="button" class="btn btn-outline-primary">Video</button>
+                        <button type="button" class="btn btn-outline-primary">Ticker</button>
+                     
+                    </div>
+                        <div class="btn-group mb-4 " role="group">
+                            
+                            <button type="button" class="btn btn-outline-primary">Document</button>
+                            <button type="button" class="btn btn-outline-primary">Website</button>
+                            <button type="button" class="btn btn-outline-primary">Email</button>
+                            <button type="button" class="btn btn-outline-primary">Survey</button>
+                            <button type="button" class="btn btn-outline-primary">Policy</button>
+                        </div>
+                     
+                        <!-- Attachment -->
+                        <div class="mb-4">
+                            <label for="attachment" class="form-label fw-bold">Attachment :</label>
+                            <input type="text" class="form-control-plaintext" id="attachment" value="testImage1.png">
+                        </div>
+
+                        <!-- Upload Section -->
+                        <div class="upload-section mb-4">
+                            <i class="bi bi-cloud-arrow-up-fill"></i>
+                            <p class="mt-2">Drag & Drop file here or</p>
+                            <button class="btn btn-outline-primary">Browse</button>
+                        </div>
+
+                        <!-- Next Button -->
+                        <div class="pagination-section">
+                            <button class="btn next-btn">Next</button>
+                            <p class="mt-2">1 of 9</p>
+                        </div>
+                    </div>
+                </div>
+                 <div class="col-2 right-bar">
+
+                      <p>Preview</p>
+                 </div>
+            </div> <!-- End of Row -->
+        </div>
+    </div> <!-- End of Card -->
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
