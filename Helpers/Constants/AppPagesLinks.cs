@@ -49,5 +49,17 @@
             public const string SkinsOfflineImagesPageLink = "~/Views/Settings/SkinsOfflineImages.cshtml";
             public const string DesktopInformationPageLink = "~/Views/Settings/DesktopInformation.cshtml";
         }
+
+        public class Reports
+        {
+            public const string SurveyPageLink = "~/Views/Reports/Survey.cshtml";
+            public const string PopupPageLink = "~/Views/Reports/Popup.cshtml";
+            public const string TickerPageLink = "~/Views/Reports/Ticker.cshtml";
+            public const string PolicyPageLink = "~/Views/Reports/Policy.cshtml";
+            public const string ActiveUsersPageLink = "~/Views/Reports/ActiveUsers.cshtml";
+            public const string ActiveMachinesPageLink = "~/Views/Reports/ActiveMachines.cshtml";
+            public const string CampaignDispatchPageLink = "~/Views/Reports/CampaignDispatch.cshtml";
+            public const string TroubleshootPageLink = "~/Views/Reports/Troubleshoot.cshtml";
+        }
     }
 }

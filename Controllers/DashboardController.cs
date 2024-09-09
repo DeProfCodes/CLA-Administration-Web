@@ -32,8 +32,9 @@ namespace CLA_Administration_Web.Controllers
         {
             var leftNavViewModel = new LeftNavigationViewModel
             {
-                ModuleNamesPages = LayoutsHelper.GetModuleNamesAndPages(),
-                SettingsNamesType = LayoutsHelper.GetSettingsNamesTypes(),
+                ModulesLeftNavigation = LayoutsHelper.GetModuleNamesAndPages(),
+                SettingsLeftNavigation = LayoutsHelper.GetSettingsNamesTypes(),
+                ReportsLeftNavigation = LayoutsHelper.GetReportsNamesTypes(),
             };
 
             return PartialView(AppPagesLinks.Layouts.LeftNavigationPageLink, leftNavViewModel);

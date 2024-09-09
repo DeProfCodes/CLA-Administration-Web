@@ -2,12 +2,13 @@
 
 .left-nav-icons
 {
-    font-size: 23px;
+    font-size: 16px;
     color: white;
+    width: 18px;
 }
 .left-nav-titles
 {
-    font-size: 23px;
+    font-size: 18px;
     margin-left:10px;
     color: white;
     font-weight:bold;
@@ -22,7 +23,7 @@
 }
 .left-sub-nav-icons
 {
-    font-size: 18px;
+    font-size: 16px;
     color: white;
 }
 .left-sub-nav-title

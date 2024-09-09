@@ -27,12 +27,12 @@
             <ul id="DashboardDropdown" class="mm-collapse left-nav-sub-menu">
                 <li>
                     <a onclick="OpenPage('@DashboardPages.Dashboard')" class="left-sub-nav-link">
-                        <i class="bi bi-house-fill left-sub-nav-icons" id="DashboardHomeLeftIcon"></i><span class="left-sub-nav-title">Home</span>
+                        <i class="bi bi-house left-sub-nav-icons" id="DashboardHomeLeftIcon"></i><span class="left-sub-nav-title">Home</span>
                     </a>
                 </li>
                 <li>
                     <a onclick="OpenPage('@DashboardPages.Calendar')" class="left-sub-nav-link">
-                        <i class="bi bi-calendar2-week-fill left-sub-nav-icons" id="DashboardCalendarLeftIcon"></i><span class="left-sub-nav-title">Calendar</span>
+                        <i class="bi bi-calendar2-week left-sub-nav-icons" id="DashboardCalendarLeftIcon"></i><span class="left-sub-nav-title">Calendar</span>
                     </a>
                 </li>
             </ul>
@@ -45,7 +45,7 @@
                 <i class="bi bi-chevron-right ms-lg-auto left-nav-icons" id="ModulesRightIcon"></i>
             </a>
             <ul id="ModulesDropdown" class="mm-collapse left-nav-sub-menu">
-                @foreach (var modulePage in Model.ModuleNamesPages)
+                @foreach (var modulePage in Model.ModulesLeftNavigation)
                 {
                     var moduleName = modulePage.ModuleName.GetDisplayName();
                     var linkId = $"{moduleName}Link";
@@ -86,20 +86,42 @@
                 <i class="bi bi-chevron-right ms-lg-auto left-nav-icons" id="SettingsRightIcon"></i>
             </a>
             <ul id="SettingsDropdown" class="mm-collapse left-nav-sub-menu">
-                @foreach (var setting in Model.SettingsNamesType)
+                @foreach (var settingVm in Model.SettingsLeftNavigation)
                 {
-                    var settingName = setting.GetDisplayName();
+                    var settingName = settingVm.SettingName.GetDisplayName();
                     var linkId = $"{settingName}Link";
                     var leftIconId = $"{settingName}LeftIcon";
                     var titleId = $"{settingName}Title";
-                    var title = setting.GetDisplayDescription();
-                    var icon = "";// LayoutHtmlHelpers.GetModuleIcon(module);
-                    var page = "";//LayoutHtmlHelpers.GetModuleSubOverviewPageForLeftNavigation(module);
-                    var addNewPage = "";// LayoutHtmlHelpers.GetModuleSubAddNewPageForLeftNavigation(module);
+                    var title = settingVm.SettingName.GetDisplayDescription();
+                    
+                    <li>
+                        <a onclick="OpenPage('@settingVm.SettingName')" id="@linkId" class="left-sub-nav-link">
+                            <img class="left-nav-icons" id="@leftIconId" src="@settingVm.IconWhiteUrl" />
+                            <span class="left-sub-nav-title" id="@titleId">@title</span>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </li>
+        <!-- Reports -->
+        <li>
+            <a onclick="ExpandToggleLeftMainNavMenu('Reports')" id="ReportsLink" class="left-nav-menu-item">
+                <i class="bi bi-boxes left-nav-icons" id="ReportsLeftIcon"></i>
+                <span class="left-nav-titles" id="ReportsTitle">Reports</span>
+                <i class="bi bi-chevron-right ms-lg-auto left-nav-icons" id="ReportsRightIcon"></i>
+            </a>
+            <ul id="ReportsDropdown" class="mm-collapse left-nav-sub-menu">
+                @foreach (var reportVm in Model.ReportsLeftNavigation)
+                {
+                    var reportName = reportVm.ReportName.GetDisplayName();
+                    var linkId = $"{reportName}Link";
+                    var leftIconId = $"{reportName}LeftIcon";
+                    var titleId = $"{reportName}Title";
+                    var title = reportVm.ReportName.GetDisplayDescription();
 
                     <li>
-                        <a onclick="OpenPage('@settingName')" id="@linkId" class="left-sub-nav-link">
-                            <i class="@icon left-nav-icons" id="@leftIconId"></i>
+                        <a onclick="OpenPage('@reportVm.ReportName')" id="@linkId" class="left-sub-nav-link">
+                            <img class="left-nav-icons" id="@leftIconId" src="@reportVm.IconWhiteUrl" />
                             <span class="left-sub-nav-title" id="@titleId">@title</span>
                         </a>
                     </li>
@@ -117,11 +139,24 @@
 
 <script>
     
-    function ExpandToggleLeftNavMenu(linkId, leftIconId, titleId, rightIconId, dropDownId, activeNavCss)
+    function ToggleIconImageActive(leftIconId, isActive)
+    {
+        var iconImgUrl = $(leftIconId).attr("src");
+        
+        var newUrl = isActive ? iconImgUrl.replace('white', 'blue') : iconImgUrl.replace('blue', 'white');
+
+        $(leftIconId).attr("src", newUrl);
+    }
+
+    function ExpandToggleLeftNavMenu(linkId, leftIconId, titleId, rightIconId, dropDownId, activeNavCss, isImageIcon)
     {
         if ($(dropDownId).hasClass('menu-active') == false)
         {
-            $(leftIconId).addClass(activeNavCss);
+            if(isImageIcon)
+                ToggleIconImageActive(leftIconId, true);
+            else
+                $(leftIconId).addClass(activeNavCss);
+            
             $(titleId).addClass(activeNavCss);
             $(rightIconId).addClass(activeNavCss);
             $(rightIconId).removeClass('bi-chevron-right');
@@ -136,7 +171,11 @@
         }
         else
         {
-            $(leftIconId).removeClass(activeNavCss);
+            if (isImageIcon)
+                ToggleIconImageActive(leftIconId, false);
+            else
+                $(leftIconId).removeClass(activeNavCss);
+
             $(titleId).removeClass(activeNavCss);
             $(rightIconId).removeClass(activeNavCss);
             $(rightIconId).addClass('bi-chevron-right');
@@ -156,7 +195,7 @@
         var rightIconId = `#${groupName}RightIcon`;
         var dropDownId = `#${groupName}Dropdown`;
 
-        ExpandToggleLeftNavMenu(linkId, leftIconId, titleId, rightIconId, dropDownId, 'left-nav-menu-active');
+        ExpandToggleLeftNavMenu(linkId, leftIconId, titleId, rightIconId, dropDownId, 'left-nav-menu-active', false);
     }
 
     function ExpandToggleLeftSubNavMenu(groupName)
@@ -167,7 +206,7 @@
         var rightIconId = `#${groupName}RightIcon`;
         var dropDownId = `#${groupName}Dropdown`;
 
-        ExpandToggleLeftNavMenu(linkId, leftIconId, titleId, rightIconId, dropDownId, 'left-sub-nav-menu-active');
+        ExpandToggleLeftNavMenu(linkId, leftIconId, titleId, rightIconId, dropDownId, 'left-sub-nav-menu-active', true);
     }
 
 </script>

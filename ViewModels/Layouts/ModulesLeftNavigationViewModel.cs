@@ -3,7 +3,7 @@ using CLA_Administration_Web.Helpers.Enums.Shared;
 
 namespace CLA_Administration_Web.ViewModels.Layouts
 {
-    public class ModuleNameAndPagesViewModel
+    public class ModulesLeftNavigationViewModel
     {
         public ModuleNamesType ModuleName { get; set; }
 

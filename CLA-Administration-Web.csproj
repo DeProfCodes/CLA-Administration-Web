@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\assets\plugins\bootstrap-material-datetimepicker\css\" />
+    <Folder Include="wwwroot\js\helpers\htmlHelpers\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,6 +28,13 @@
     <Reference Include="CLACommonFunctionsLibrary_NET">
       <HintPath>..\..\..\Miscellaneous\# Utilities #\CLACommonFunctionsLibrary_NET.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\Shared\Helpers\HtmlHelpers\AppUrlsHelper.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>
