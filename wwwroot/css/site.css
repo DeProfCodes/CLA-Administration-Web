@@ -53,3 +53,14 @@
     background: #e0bc00 !important;
     color: #04316d !important;
 }
+#LeftNavigationActualMenu
+{
+    min-height: 85vh !important;
+    height: 85vh !important;
+    overflow: auto;
+    margin-bottom:15px
+}
+::-webkit-scrollbar 
+{
+    display: none;
+}

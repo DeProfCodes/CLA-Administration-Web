@@ -4,7 +4,7 @@ namespace CLA_Administration_Web.Helpers.Enums.Shared
 {
     public enum ReportsNamesType
     {
-        [Display(Name = "", ShortName = "")]
+        [Display(Name = "", Description = "")]
         None,
 
         [Display(Name = "Survey", Description = "Survey")]

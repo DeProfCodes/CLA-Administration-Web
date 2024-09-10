@@ -6,10 +6,13 @@ namespace CLA_Administration_Web.Helpers.Layout
 {
     public class LayoutsHelper
     {
+        public const string WhiteIconsFolder = "/images/icons/white";
+        public const string BlueIconsFolder = "/images/icons/blue";
+
         public static List<ModulesLeftNavigationViewModel> GetModuleNamesAndPages()
         {
-            var whiteModuleIcons = "/images/icons/white/modules";
-            var blueModuleIcons = "/images/icons/blue/modules";
+            var whiteModuleIcons = $"{WhiteIconsFolder}/modules";
+            var blueModuleIcons = $"{BlueIconsFolder}/modules";
 
             var modulesList = new List<ModulesLeftNavigationViewModel>
             {
@@ -83,56 +86,64 @@ namespace CLA_Administration_Web.Helpers.Layout
 
         public static List<SettingsLeftNavigationViewModel> GetSettingsNamesTypes()
         {
-            var whiteSettingsIcons = "/images/icons/white/settings";
-            var blueSettingsIcons = "/images/icons/blue/settings";
+            var whiteSettingsIcons = $"{WhiteIconsFolder}/settings";
+            var blueSettingsIcons = $"{BlueIconsFolder}/settings";
 
             var settingsList = new List<SettingsLeftNavigationViewModel>
             {
                 new SettingsLeftNavigationViewModel
                 {
                     SettingName = SettingsNamesType.StagingUsers,
+                    SettingsPage = SettingsPages.StagingUsers,
                     IconWhiteUrl = $"{whiteSettingsIcons}/staging-users.png",
                     IconBlueUrl = $"{blueSettingsIcons}/staging-users.png"
                 },
                 new SettingsLeftNavigationViewModel
                 {
                     SettingName = SettingsNamesType.SetupExlusions,
+                    SettingsPage = SettingsPages.SetupExclusions,
                     IconWhiteUrl = $"{whiteSettingsIcons}/setup-exclusions.png",
                     IconBlueUrl = $"{blueSettingsIcons}/setup-exclusions.png"
                 },
                 new SettingsLeftNavigationViewModel
                 {
                     SettingName = SettingsNamesType.AdminAccess,
+                    SettingsPage = SettingsPages.AdminAccess,
                     IconWhiteUrl = $"{whiteSettingsIcons}/admin-access.png",
                     IconBlueUrl = $"{blueSettingsIcons}/admin-access.png"
                 },
                 new SettingsLeftNavigationViewModel
                 {
                     SettingName = SettingsNamesType.TargetGroups,
+                    SettingsPage = SettingsPages.TargetGroups,
                     IconWhiteUrl = $"{whiteSettingsIcons}/rebuild-targeted-groups.png",
                     IconBlueUrl = $"{blueSettingsIcons}/rebuild-targeted-groups.png"
                 },
                 new SettingsLeftNavigationViewModel
                 {
                     SettingName = SettingsNamesType.CustomUserSettings,
+                    SettingsPage = SettingsPages.CustomUserSettings,
                     IconWhiteUrl = $"{whiteSettingsIcons}/custom-user.png",
                     IconBlueUrl = $"{blueSettingsIcons}/custom-user.png"
                 },
                 new SettingsLeftNavigationViewModel
                 {
                     SettingName = SettingsNamesType.ActiveConnections,
+                    SettingsPage = SettingsPages.ActiveConnections,
                     IconWhiteUrl = $"{whiteSettingsIcons}/active-connections.png",
                     IconBlueUrl = $"{blueSettingsIcons}/active-connections.png"
                 },
                 new SettingsLeftNavigationViewModel
                 {
                     SettingName = SettingsNamesType.SkinsOfflineImages,
+                    SettingsPage = SettingsPages.SkinsOfflineImages,
                     IconWhiteUrl = $"{whiteSettingsIcons}/skins-offline-images.png",
                     IconBlueUrl = $"{blueSettingsIcons}/skins-offline-images.png"
                 },
                 new SettingsLeftNavigationViewModel
                 {
                     SettingName = SettingsNamesType.DesktopInformation,
+                    SettingsPage = SettingsPages.DesktopInformation,
                     IconWhiteUrl = $"{whiteSettingsIcons}/desktop-information.png",
                     IconBlueUrl = $"{blueSettingsIcons}/desktop-information.png"
                 }
@@ -142,61 +153,140 @@ namespace CLA_Administration_Web.Helpers.Layout
 
         public static List<ReportsLeftNavigationViewModel> GetReportsNamesTypes()
         {
-            var whiteReportsIcons = "/images/icons/white/reports";
-            var blueReportsIcons = "/images/icons/blue/reports";
+            var whiteReportsIcons = $"{WhiteIconsFolder}/reports";
+            var blueReportsIcons = $"{BlueIconsFolder}/reports";
 
             var reportsList = new List<ReportsLeftNavigationViewModel>
             {
                 new ReportsLeftNavigationViewModel
                 {
                     ReportName = ReportsNamesType.Survey,
+                    ReportPage = ReportsPages.Survey,
                     IconWhiteUrl = $"{whiteReportsIcons}/survey.png",
                     IconBlueUrl = $"{blueReportsIcons}/survey.png"
                 },
                 new ReportsLeftNavigationViewModel
                 {
                     ReportName = ReportsNamesType.Popup,
+                    ReportPage = ReportsPages.Popup,
                     IconWhiteUrl = $"{whiteReportsIcons}/popup.png",
                     IconBlueUrl = $"{blueReportsIcons}/popup.png"
                 },
                 new ReportsLeftNavigationViewModel
                 {
                     ReportName = ReportsNamesType.Ticker,
+                    ReportPage = ReportsPages.Ticker,
                     IconWhiteUrl = $"{whiteReportsIcons}/ticker.png",
                     IconBlueUrl = $"{blueReportsIcons}/ticker.png"
                 },
                 new ReportsLeftNavigationViewModel
                 {
                     ReportName = ReportsNamesType.Policy,
+                    ReportPage = ReportsPages.Policy,
                     IconWhiteUrl = $"{whiteReportsIcons}/policy.png",
                     IconBlueUrl = $"{blueReportsIcons}/policy.png"
                 },
                 new ReportsLeftNavigationViewModel
                 {
                     ReportName = ReportsNamesType.ActiveUsers,
+                    ReportPage = ReportsPages.ActiveUsers,
                     IconWhiteUrl = $"{whiteReportsIcons}/active-users.png",
                     IconBlueUrl = $"{blueReportsIcons}/active-users.png"
                 },
                 new ReportsLeftNavigationViewModel
                 {
                     ReportName = ReportsNamesType.ActiveMachines,
+                    ReportPage = ReportsPages.ActiveMachines,
                     IconWhiteUrl = $"{whiteReportsIcons}/active-machines.png",
                     IconBlueUrl = $"{blueReportsIcons}/active-machines.png"
                 },
                 new ReportsLeftNavigationViewModel
                 {
                     ReportName = ReportsNamesType.CampaignDispatch,
+                    ReportPage = ReportsPages.CampaignDispatch,
                     IconWhiteUrl = $"{whiteReportsIcons}/campaign-dispatch.png",
                     IconBlueUrl = $"{blueReportsIcons}/campaign-dispatch.png"
                 },
                 new ReportsLeftNavigationViewModel
                 {
                     ReportName = ReportsNamesType.Troubleshoot,
+                    ReportPage = ReportsPages.Troubleshoot,
                     IconWhiteUrl = $"{whiteReportsIcons}/troubleshoot.png",
                     IconBlueUrl = $"{blueReportsIcons}/troubleshoot.png"
                 }
             };
             return reportsList;
+        }
+
+        public static List<SupportLeftNavigationViewModel> GetSupportNamesTypes()
+        {
+            var whiteSupportIcons = $"{WhiteIconsFolder}/support";
+            var blueSupportIcons = $"{BlueIconsFolder}/support";
+
+            var supportList = new List<SupportLeftNavigationViewModel>
+            {
+                new SupportLeftNavigationViewModel
+                {
+                    SupportName = SupportNamesType.AboutUs,
+                    SupportPage = SupportPages.AboutUs,
+                    IconWhiteUrl = $"{whiteSupportIcons}/about-us.png",
+                    IconBlueUrl = $"{blueSupportIcons}/survey.png"
+                },
+                new SupportLeftNavigationViewModel
+                {
+                    SupportName = SupportNamesType.Tutorials,
+                    SupportPage = SupportPages.Tutorials,
+                    IconWhiteUrl = $"{whiteSupportIcons}/tutorials.png",
+                    IconBlueUrl = $"{blueSupportIcons}/popup.png"
+                },
+                new SupportLeftNavigationViewModel
+                {
+                    SupportName = SupportNamesType.RemoteAssistance,
+                    SupportPage = SupportPages.RemoteAssistance,
+                    IconWhiteUrl = $"{whiteSupportIcons}/remote-assistance.png",
+                    IconBlueUrl = $"{blueSupportIcons}/remote-assistance.png"
+                },
+                new SupportLeftNavigationViewModel
+                {
+                    SupportName = SupportNamesType.Contact,
+                    SupportPage = SupportPages.ContactUs,
+                    IconWhiteUrl = $"{whiteSupportIcons}/contact.png",
+                    IconBlueUrl = $"{blueSupportIcons}/contact.png"
+                },
+                new SupportLeftNavigationViewModel
+                {
+                    SupportName = SupportNamesType.FAQ,
+                    SupportPage = SupportPages.FAQ,
+                    IconWhiteUrl = $"{whiteSupportIcons}/faq.png",
+                    IconBlueUrl = $"{blueSupportIcons}/faq.png"
+                }
+            };
+            return supportList;
+        }
+
+        public static List<AccountLeftNavigationViewModel> GetAccountNamesTypes()
+        {
+            var whiteAccountIcons = $"{WhiteIconsFolder}/account";
+            var blueAccountIcons = $"{BlueIconsFolder}/account";
+
+            var accountList = new List<AccountLeftNavigationViewModel>
+            {
+                new AccountLeftNavigationViewModel
+                {
+                    AccountName = AccountNamesType.AccountOverview,
+                    AccountPage = AccountPages.AccountOverview,
+                    IconWhiteUrl = $"{whiteAccountIcons}/account-overview.png",
+                    IconBlueUrl = $"{blueAccountIcons}/account-overview.png"
+                },
+                new AccountLeftNavigationViewModel
+                {
+                    AccountName = AccountNamesType.Security,
+                    AccountPage = AccountPages.SecuritySettings,
+                    IconWhiteUrl = $"{whiteAccountIcons}/security-settings.png",
+                    IconBlueUrl = $"{blueAccountIcons}/security-settings.png"
+                }
+            };
+            return accountList;
         }
     }
 }

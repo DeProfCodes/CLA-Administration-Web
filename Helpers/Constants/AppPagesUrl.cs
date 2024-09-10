@@ -5,10 +5,18 @@ namespace CLA_Administration_Web.Helpers.Constants
 {
     public class AppPagesUrl
     {
+        public const string accountController = "Account";
         public const string dashboardController = "Dashboard";
         public const string modulesController = "Modules";
         public const string settingsController = "Settings";
         public const string reportsController = "Reports";
+        public const string supportController = "Support";
+
+        public class Account
+        {
+            public static string AccountOverview = $"/{accountController}/{AccountPages.AccountOverview}";
+            public static string SecuritySettings = $"/{accountController}/{AccountPages.SecuritySettings}";
+        }
 
         public class Dashboard
         {
@@ -65,6 +73,15 @@ namespace CLA_Administration_Web.Helpers.Constants
             public static string ActiveMachines = $"/{reportsController}/{ReportsPages.ActiveMachines.GetDisplayName()}";
             public static string CampaignDispatch = $"/{reportsController}/{ReportsPages.CampaignDispatch.GetDisplayName()}";
             public static string Troubleshoot = $"/{reportsController}/{ReportsPages.Troubleshoot.GetDisplayName()}";
+        }
+
+        public class Support
+        {
+            public static string AboutUs = $"/{supportController}/{SupportPages.AboutUs.GetDisplayName()}";
+            public static string Tutorials = $"/{supportController}/{SupportPages.Tutorials.GetDisplayName()}";
+            public static string RemoteAssistance = $"/{supportController}/{SupportPages.RemoteAssistance.GetDisplayName()}";
+            public static string ContactUs = $"/{supportController}/{SupportPages.ContactUs.GetDisplayName()}";
+            public static string FAQ = $"/{supportController}/{SupportPages.FAQ.GetDisplayName()}";
         }
     }
 }

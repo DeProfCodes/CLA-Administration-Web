@@ -1,9 +1,5 @@
 using CLA_Administration_Web.Helpers.Constants;
-using CLA_Administration_Web.Helpers.Layout;
-using CLA_Administration_Web.Models;
-using CLA_Administration_Web.ViewModels.Layouts;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace CLA_Administration_Web.Controllers
 {

@@ -57,6 +57,17 @@
         if (page == '@ReportsPages.CampaignDispatch') url = '@AppPagesUrl.Reports.CampaignDispatch';
         if (page == '@ReportsPages.Troubleshoot') url = '@AppPagesUrl.Reports.Troubleshoot';
 
+        // Support Section
+        if (page == '@SupportPages.AboutUs') url = '@AppPagesUrl.Support.AboutUs';
+        if (page == '@SupportPages.Tutorials') url = '@AppPagesUrl.Support.Tutorials';
+        if (page == '@SupportPages.RemoteAssistance') url = '@AppPagesUrl.Support.RemoteAssistance';
+        if (page == '@SupportPages.ContactUs') url = '@AppPagesUrl.Support.ContactUs';
+        if (page == '@SupportPages.FAQ') url = '@AppPagesUrl.Support.FAQ';
+
+        // Account Section
+        if (page == '@AccountPages.AccountOverview') url = '@AppPagesUrl.Account.AccountOverview';
+        if (page == '@AccountPages.SecuritySettings') url = '@AppPagesUrl.Account.SecuritySettings';
+        
         return url;
     }
 
@@ -92,7 +103,7 @@
         //
         if (page == '@ModulesPages.RSSOverview') title = "RSS Overview";
         if (page == '@ModulesPages.RSSAddNew') title = "Add New RSS";
-        
+
         // Settings Section
         if (page == '@SettingsPages.StagingUsers') title = "Manage Staging Users";
         if (page == '@SettingsPages.SetupExclusions') title = "Manage Setup Exclusions";
@@ -112,6 +123,16 @@
         if (page == '@ReportsPages.ActiveMachines') title = "Active Machines Report";
         if (page == '@ReportsPages.CampaignDispatch') title = "Campaign Dispatch Listing Report";
         if (page == '@ReportsPages.Troubleshoot') title = "Troubleshoot Report";
+
+        // Support Section
+        if (page == '@SupportPages.AboutUs') title = "About CLA";
+        if (page == '@SupportPages.Tutorials') title = "CLA Tutorials";
+        if (page == '@SupportPages.RemoteAssistance') title = "Remote Assistance";
+        if (page == '@SupportPages.ContactUs') title = "Contact Support";
+
+         // Account Section
+        if (page == '@AccountPages.AccountOverview') title = "Account Overview";
+        if (page == '@AccountPages.SecuritySettings') title = "Security Settings";
 
         return title;
     }

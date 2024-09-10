@@ -1,9 +1,7 @@
 using CLA_Administration_Web.Helpers.Constants;
 using CLA_Administration_Web.Helpers.Layout;
-using CLA_Administration_Web.Models;
 using CLA_Administration_Web.ViewModels.Layouts;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace CLA_Administration_Web.Controllers
 {
@@ -35,6 +33,8 @@ namespace CLA_Administration_Web.Controllers
                 ModulesLeftNavigation = LayoutsHelper.GetModuleNamesAndPages(),
                 SettingsLeftNavigation = LayoutsHelper.GetSettingsNamesTypes(),
                 ReportsLeftNavigation = LayoutsHelper.GetReportsNamesTypes(),
+                SupportLeftNavigation = LayoutsHelper.GetSupportNamesTypes(),
+                AccountLeftNavigation = LayoutsHelper.GetAccountNamesTypes(),
             };
 
             return PartialView(AppPagesLinks.Layouts.LeftNavigationPageLink, leftNavViewModel);
@@ -42,12 +42,12 @@ namespace CLA_Administration_Web.Controllers
 
         public IActionResult Dashboard()
         {
-            return PartialView(AppPagesLinks.DashboardHomePageLink);
+            return PartialView(AppPagesLinks.Dashboard.DashboardHomePageLink);
         }
 
         public IActionResult Calendar()
         {
-            return PartialView(AppPagesLinks.DashboardCalendarPageLink);
+            return PartialView(AppPagesLinks.Dashboard.DashboardCalendarPageLink);
         }
     }
 }

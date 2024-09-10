@@ -12,11 +12,11 @@
 <aside class="sidebar-wrapper theme-bg" data-simplebar="true" id="LeftNavMenu">
     <div class="sidebar-header">
         <div>
-            <img src="~/assets/images/white-logo.png" class="logo-icon" alt="logo icon">
+            <img src="~/images/logos/logo-white.png" class="logo-icon" alt="logo icon">
         </div>
     </div>
     <!--navigation-->
-    <ul class="metismenu" id="menu">
+    <ul class="metismenu" id="LeftNavigationActualMenu" >
         <!-- Dashboard -->
         <li>
             <a onclick="ExpandToggleLeftMainNavMenu('Dashboard')" id="DashboardLink" class="left-nav-menu-item">
@@ -81,7 +81,7 @@
         <!-- Settings -->
         <li>
             <a onclick="ExpandToggleLeftMainNavMenu('Settings')" id="SettingsLink" class="left-nav-menu-item">
-                <i class="bi bi-boxes left-nav-icons" id="SettingsLeftIcon"></i>
+                <i class="bi bi-gear-fill left-nav-icons" id="SettingsLeftIcon"></i>
                 <span class="left-nav-titles" id="SettingsTitle">Settings</span>
                 <i class="bi bi-chevron-right ms-lg-auto left-nav-icons" id="SettingsRightIcon"></i>
             </a>
@@ -95,7 +95,7 @@
                     var title = settingVm.SettingName.GetDisplayDescription();
                     
                     <li>
-                        <a onclick="OpenPage('@settingVm.SettingName')" id="@linkId" class="left-sub-nav-link">
+                        <a onclick="OpenPage('@settingVm.SettingsPage')" id="@linkId" class="left-sub-nav-link">
                             <img class="left-nav-icons" id="@leftIconId" src="@settingVm.IconWhiteUrl" />
                             <span class="left-sub-nav-title" id="@titleId">@title</span>
                         </a>
@@ -106,7 +106,7 @@
         <!-- Reports -->
         <li>
             <a onclick="ExpandToggleLeftMainNavMenu('Reports')" id="ReportsLink" class="left-nav-menu-item">
-                <i class="bi bi-boxes left-nav-icons" id="ReportsLeftIcon"></i>
+                <i class="bi bi-pie-chart-fill left-nav-icons" id="ReportsLeftIcon"></i>
                 <span class="left-nav-titles" id="ReportsTitle">Reports</span>
                 <i class="bi bi-chevron-right ms-lg-auto left-nav-icons" id="ReportsRightIcon"></i>
             </a>
@@ -120,7 +120,7 @@
                     var title = reportVm.ReportName.GetDisplayDescription();
 
                     <li>
-                        <a onclick="OpenPage('@reportVm.ReportName')" id="@linkId" class="left-sub-nav-link">
+                        <a onclick="OpenPage('@reportVm.ReportPage')" id="@linkId" class="left-sub-nav-link">
                             <img class="left-nav-icons" id="@leftIconId" src="@reportVm.IconWhiteUrl" />
                             <span class="left-sub-nav-title" id="@titleId">@title</span>
                         </a>
@@ -128,9 +128,62 @@
                 }
             </ul>
         </li>
-      
+        <!-- Support -->
+        <li>
+            <a onclick="ExpandToggleLeftMainNavMenu('Support')" id="SupportLink" class="left-nav-menu-item">
+                <i class="bx bx-support left-nav-icons" id="SupportLeftIcon"></i>
+                <span class="left-nav-titles" id="SupportTitle">Support</span>
+                <i class="bi bi-chevron-right ms-lg-auto left-nav-icons" id="SupportRightIcon"></i>
+            </a>
+            <ul id="SupportDropdown" class="mm-collapse left-nav-sub-menu">
+                @foreach (var supportVm in Model.SupportLeftNavigation)
+                {
+                    var supportName = supportVm.SupportName.GetDisplayName();
+                    var linkId = $"{supportName}Link";
+                    var leftIconId = $"{supportName}LeftIcon";
+                    var titleId = $"{supportName}Title";
+                    var title = supportVm.SupportName.GetDisplayDescription();
+
+                    <li>
+                        <a onclick="OpenPage('@supportVm.SupportPage')" id="@linkId" class="left-sub-nav-link">
+                            <img class="left-nav-icons" id="@leftIconId" src="@supportVm.IconWhiteUrl" />
+                            <span class="left-sub-nav-title" id="@titleId">@title</span>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </li>
+        <!-- Account -->
+        <li>
+            <a onclick="ExpandToggleLeftMainNavMenu('Account')" id="AccountLink" class="left-nav-menu-item">
+                <i class="bi bi-person-fill left-nav-icons" id="AccountLeftIcon"></i>
+                <span class="left-nav-titles" id="AccountTitle">Account</span>
+                <i class="bi bi-chevron-right ms-lg-auto left-nav-icons" id="AccountRightIcon"></i>
+            </a>
+            <ul id="AccountDropdown" class="mm-collapse left-nav-sub-menu">
+                @foreach (var accountVm in Model.AccountLeftNavigation)
+                {
+                    var accountName = accountVm.AccountName.GetDisplayName();
+                    var linkId = $"{accountName}Link";
+                    var leftIconId = $"{accountName}LeftIcon";
+                    var titleId = $"{accountName}Title";
+                    var title = accountVm.AccountName.GetDisplayDescription();
+
+                    <li>
+                        <a onclick="OpenPage('@accountVm.AccountPage')" id="@linkId" class="left-sub-nav-link">
+                            <img class="left-nav-icons" id="@leftIconId" src="@accountVm.IconWhiteUrl" />
+                            <span class="left-sub-nav-title" id="@titleId">@title</span>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </li>
     </ul>
     <!--end navigation-->
+    <a onclick="Logout()" id="LogoutLink" class="left-nav-menu-item" style="padding:20px">
+        <i class="bi bi-door-open-fill left-nav-icons" id="LogoutLeftIcon"></i>
+        <span class="left-nav-titles" id="LogoutTitle">Logout</span>
+    </a>
 </aside>
 <!--end sidebar -->
 

@@ -2,14 +2,23 @@
 {
     public class AppPagesLinks
     {
+        public class Account
+        {
+            public const string AccountOverviewPageLink = "~/Views/Account/AccountOverview.cshtml";
+            public const string SecuritySettingsPageLink = "~/Views/Account/SecuritySettings.cshtml";
+        }
+
         public class Layouts
         {
             public const string TopNavigationPageLink = "~/Views/Layout/TopNavigation.cshtml";
             public const string LeftNavigationPageLink = "~/Views/Layout/LeftNavigation.cshtml";
         }
-        
-        public const string DashboardHomePageLink = "~/Views/Dashboard/Home.cshtml";
-        public const string DashboardCalendarPageLink = "~/Views/Dashboard/Calendar.cshtml";
+
+        public class Dashboard
+        {
+            public const string DashboardHomePageLink = "~/Views/Dashboard/Home.cshtml";
+            public const string DashboardCalendarPageLink = "~/Views/Dashboard/Calendar.cshtml";
+        }
 
         public class Modules
         {
@@ -61,5 +70,15 @@
             public const string CampaignDispatchPageLink = "~/Views/Reports/CampaignDispatch.cshtml";
             public const string TroubleshootPageLink = "~/Views/Reports/Troubleshoot.cshtml";
         }
+
+        public class Support
+        {
+            public const string AboutUsPageLink = "~/Views/Support/AboutUs.cshtml";
+            public const string TutorialsPageLink = "~/Views/Support/Tutorials.cshtml";
+            public const string RemoteAssistancePageLink = "~/Views/Support/RemoteAssistance.cshtml";
+            public const string ContactUsPageLink = "~/Views/Support/ContactUs.cshtml";
+            public const string FAQPageLink = "~/Views/Support/FAQ.cshtml";
+        }
+
     }
 }

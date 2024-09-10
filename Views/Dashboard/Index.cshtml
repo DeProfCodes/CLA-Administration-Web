@@ -4,17 +4,6 @@
 @using CLA_Administration_Web.Helpers.Enums.Shared
 @using CLA_Administration_Web.Helpers.Shared
 
-@{
-    ViewData["Title"] = "Dashboard";
-
-    var dashboardController = "Dashboard";
-    var modulesController = "Modules";
-    var settingsController = "Settings";
-    var reportsController = "Reports";
-
-    Enum page2 = null;
-}
-
 <!--start wrapper-->
 <div class="wrapper">
 
@@ -47,24 +36,25 @@
 </div>
 <!--end wrapper-->
 
-
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
 
-@{ await Html.RenderPartialAsync("~/Views/Shared/Helpers/HtmlHelpers/AppUrlsHelper.cshtml"); }
+@{ 
+    await Html.RenderPartialAsync("~/Views/Shared/Helpers/HtmlHelpers/AppUrlsHelper.cshtml"); 
+}
 
 <script>
 
     $(document).ready(function ()
     {
         LoadLayoutSections();
-        LoadPageArea('@DashboardPages.Dashboard');
+        OpenPage('@DashboardPages.Dashboard');
     });
 
     function LoadLayoutSections()
     {
-        var topNavUrl = '@Url.Action("TopNavigation", dashboardController)';
-        var leftNavUrl = '@Url.Action("LeftNavigation", dashboardController)';
+        var topNavUrl = '@Url.Action("TopNavigation", "Dashboard")';
+        var leftNavUrl = '@Url.Action("LeftNavigation", "Dashboard")';
 
         LoadPartialWithSpinner(topNavUrl, "#TopNavigation");
         LoadPartialWithSpinner(leftNavUrl, "#LeftNavigation");
