@@ -72,7 +72,30 @@
     {
         var url = GetPageUrl(page, id);
         
+        var pageName = GetPageTitle(page);
+        ShowLoader("Loading " + pageName);
+
         LoadPartialWithSpinner(url, "#DashboardMainArea");
+
+        setTimeout(function ()
+        {
+            HideLoader();
+
+        }, 3000);
+    }
+
+    function ShowLoader(message)
+    {
+        $("#loaderMessage").text(message);
+        $(".loader").css("visibility", "visible");
+
+        $(".loader-image").css("visibility", "visible");
+    }
+
+    function HideLoader()
+    {
+        $(".loader").css("visibility", "hidden");
+        $(".loader-image").css("visibility", "hidden");
     }
 
     function Logout()

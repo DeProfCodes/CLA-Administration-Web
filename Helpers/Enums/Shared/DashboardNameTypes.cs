@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CLA_Administration_Web.Helpers.Enums.AppPages
+namespace CLA_Administration_Web.Helpers.Enums.Shared
 {
     public enum DashboardNameTypes
     {

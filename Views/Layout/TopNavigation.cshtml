@@ -1,4 +1,5 @@
 ﻿@using CLA_Administration_Web.Helpers.Enums.AppPages
+@using CLA_Administration_Web.Helpers.Enums.Shared
 @model CLA_Administration_Web.ViewModels.Layouts.TopNavigationViewModel
 
 <!--start top header-->
@@ -186,7 +187,7 @@
                 </li>
             </ul>
             <span style="border-right:1px solid silver; margin:10px;" id="UserProfileSeparator"></span>
-            <ul class="navbar-nav align-items-center" onclick="OpenUserProfile()" id="ProfileDropdownContainer">
+            <ul class="navbar-nav align-items-center" id="ProfileDropdownContainer">
                 <li class="nav-item dropdown dropdown-user-setting">
                     <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;" data-bs-toggle="dropdown">
                         <div class="user-setting" style="margin-left:4px">
@@ -210,7 +211,7 @@
                             <hr class="dropdown-divider">
                         </li>
                         <li>
-                            <a class="dropdown-item" href="javascript:;">
+                            <a class="dropdown-item" onclick="OpenUserProfile()">
                                 <div class="d-flex align-items-center">
                                     <div class="">
                                         <ion-icon name="person-outline"></ion-icon>
@@ -220,7 +221,7 @@
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="javascript:;">
+                            <a class="dropdown-item" onclick="OpenUserSettings()">
                                 <div class="d-flex align-items-center">
                                     <div class="">
                                         <ion-icon name="settings-outline"></ion-icon>
@@ -304,7 +305,43 @@
         ExpandCloseAllMainMenuDropdowns();
         ExpandOpenLeftNavMenu(linkId, leftIconId, titleId, rightIconId, dropDownId, 'left-nav-menu-active', false);
 
-        OpenLeftNavigationPage('@DashboardNameTypes.Calendar', 'CalendarSubLink');
+        OpenLeftNavigationPage('@DashboardPages.Calendar', 'CalendarSubLink');
+    }
+
+    function OpenUserProfile()
+    {
+        var groupName = 'Account';
+
+        var linkId = `#${groupName}Link`;
+        var leftIconId = `#${groupName}LeftIcon`;
+        var titleId = `#${groupName}Title`;
+        var rightIconId = `#${groupName}RightIcon`;
+        var dropDownId = `#${groupName}Dropdown`;
+
+        ExpandCloseAllMainMenuDropdowns();
+        ExpandOpenLeftNavMenu(linkId, leftIconId, titleId, rightIconId, dropDownId, 'left-nav-menu-active', false);
+
+        OpenLeftNavigationPage('@AccountPages.AccountOverview', 'AccountOverviewLink');
+
+        $("#ProfileDropdown").removeClass('show');
+    }
+
+    function OpenUserSettings()
+    {
+        var groupName = 'Account';
+
+        var linkId = `#${groupName}Link`;
+        var leftIconId = `#${groupName}LeftIcon`;
+        var titleId = `#${groupName}Title`;
+        var rightIconId = `#${groupName}RightIcon`;
+        var dropDownId = `#${groupName}Dropdown`;
+
+        ExpandCloseAllMainMenuDropdowns();
+        ExpandOpenLeftNavMenu(linkId, leftIconId, titleId, rightIconId, dropDownId, 'left-nav-menu-active', false);
+
+        OpenLeftNavigationPage('@AccountPages.SecuritySettings', 'SecurityLink');
+
+        $("#ProfileDropdown").removeClass('show');
     }
 
 
