@@ -18,12 +18,14 @@ namespace CLA_Administration_Web.Helpers.Layout
             {
                 new DashboardLeftNavigationViewModel
                 {
+                    DashboardName = DashboardNameTypes.Dashboard,
                     DashboardPage = DashboardPages.Dashboard,
                     IconWhiteUrl = $"{whiteDashboardIcons}/home.png",
                     IconBlueUrl = $"{blueDashboardIcons}/home.png"
                 },
                 new DashboardLeftNavigationViewModel
                 {
+                    DashboardName = DashboardNameTypes.Calendar,
                     DashboardPage = DashboardPages.Calendar,
                     IconWhiteUrl = $"{whiteDashboardIcons}/calendar.png",
                     IconBlueUrl = $"{blueDashboardIcons}/calendar.png"

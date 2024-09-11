@@ -5,6 +5,8 @@ namespace CLA_Administration_Web.ViewModels.Layouts
 {
     public class DashboardLeftNavigationViewModel
     {
+        public DashboardNameTypes DashboardName { get; set; }
+
         public DashboardPages DashboardPage { get; set; }
 
         public string IconWhiteUrl { get; set; }

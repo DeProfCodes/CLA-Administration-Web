@@ -26,11 +26,11 @@
             <ul id="DashboardDropdown" class="mm-collapse left-nav-sub-menu">
                 @foreach (var dashboardPage in Model.DashboardLeftNavigation)
                 {
-                    var dashboardName = dashboardPage.DashboardPage.GetDisplayName();
+                    var dashboardName = dashboardPage.DashboardName.GetDisplayName();
                     var linkId = $"{dashboardName}SubLink";
                     var leftIconId = $"{dashboardName}LeftIcon";
                     var titleId = $"{dashboardName}Title";
-                    var title = dashboardPage.DashboardPage.GetDisplayName();
+                    var title = dashboardPage.DashboardName.GetDisplayDescription();
 
                     <li>
                         <a onclick="OpenLeftNavigationPage('@dashboardPage.DashboardPage', '@linkId')" id="@linkId" class="left-sub-nav-link">

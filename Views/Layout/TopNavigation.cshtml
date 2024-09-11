@@ -17,7 +17,7 @@
         <div class="top-navbar-right ms-auto" style="display:flex">
             <ul class="navbar-nav align-items-center">
                 <li >
-                    <a class="nav-link dark-mode-icon" onclick="OpenPage('@DashboardPages.Calendar')" style="cursor:pointer">
+                    <a class="nav-link dark-mode-icon" onclick="OpenCalendar()" style="cursor:pointer">
                         <div class="mode-icon">
                             <i class='bx bx-calendar top-nav-icons' id="TopNavCalendarIcon"></i>
                         </div>
@@ -290,5 +290,22 @@
             $("#LeftNavMenu").css('left', '-300px');
         }
     }
+
+    function OpenCalendar()
+    {
+        var groupName = 'Dashboard';
+
+        var linkId = `#${groupName}Link`;
+        var leftIconId = `#${groupName}LeftIcon`;
+        var titleId = `#${groupName}Title`;
+        var rightIconId = `#${groupName}RightIcon`;
+        var dropDownId = `#${groupName}Dropdown`;
+
+        ExpandCloseAllMainMenuDropdowns();
+        ExpandOpenLeftNavMenu(linkId, leftIconId, titleId, rightIconId, dropDownId, 'left-nav-menu-active', false);
+
+        OpenLeftNavigationPage('@DashboardNameTypes.Calendar', 'CalendarSubLink');
+    }
+
 
 </script>
