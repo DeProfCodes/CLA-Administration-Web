@@ -4,6 +4,8 @@ namespace CLA_Administration_Web.ViewModels.Layouts
 {
     public class LeftNavigationViewModel
     {
+        public List<DashboardLeftNavigationViewModel> DashboardLeftNavigation { get; set; }
+
         public List<AdminLeftNavigationViewModel> AdminLeftNavigation { get; set; }
 
         public List<ModulesLeftNavigationViewModel> ModulesLeftNavigation { get; set; }

@@ -9,6 +9,29 @@ namespace CLA_Administration_Web.Helpers.Layout
         public const string WhiteIconsFolder = "/images/icons/white";
         public const string BlueIconsFolder = "/images/icons/blue";
 
+        public static List<DashboardLeftNavigationViewModel> GetDashboardNamesTypes()
+        {
+            var whiteDashboardIcons = $"{WhiteIconsFolder}/dashboard";
+            var blueDashboardIcons = $"{BlueIconsFolder}/dashboard";
+
+            var dashboardList = new List<DashboardLeftNavigationViewModel>
+            {
+                new DashboardLeftNavigationViewModel
+                {
+                    DashboardPage = DashboardPages.Dashboard,
+                    IconWhiteUrl = $"{whiteDashboardIcons}/home.png",
+                    IconBlueUrl = $"{blueDashboardIcons}/home.png"
+                },
+                new DashboardLeftNavigationViewModel
+                {
+                    DashboardPage = DashboardPages.Calendar,
+                    IconWhiteUrl = $"{whiteDashboardIcons}/calendar.png",
+                    IconBlueUrl = $"{blueDashboardIcons}/calendar.png"
+                }
+            };
+            return dashboardList;
+        }
+
         public static List<AdminLeftNavigationViewModel> GetAdminNamesTypes()
         {
             var whiteAdminIcons = $"{WhiteIconsFolder}/admin";

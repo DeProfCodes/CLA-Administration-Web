@@ -5,7 +5,6 @@
 @using CLA_Administration_Web.Helpers.Enums.Shared
 @using CLA_Administration_Web.Helpers.Html
 
-
 <link href="~/assets/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" />
 
 <!--start sidebar -->
@@ -25,16 +24,21 @@
                 <i class="bi bi-chevron-right ms-lg-auto left-nav-arrow-icons" id="DashboardRightIcon"></i>
             </a>
             <ul id="DashboardDropdown" class="mm-collapse left-nav-sub-menu">
-                <li>
-                    <a onclick="OpenPage('@DashboardPages.Dashboard')" class="left-sub-nav-link">
-                        <i class="bi bi-house left-sub-nav-icons" id="DashboardHomeLeftIcon"></i><span class="left-sub-nav-title">Home</span>
-                    </a>
-                </li>
-                <li>
-                    <a onclick="OpenPage('@DashboardPages.Calendar')" class="left-sub-nav-link">
-                        <i class="bx bx-calendar left-sub-nav-icons" id="DashboardCalendarLeftIcon"></i><span class="left-sub-nav-title">Calendar</span>
-                    </a>
-                </li>
+                @foreach (var dashboardPage in Model.DashboardLeftNavigation)
+                {
+                    var dashboardName = dashboardPage.DashboardPage.GetDisplayName();
+                    var linkId = $"{dashboardName}SubLink";
+                    var leftIconId = $"{dashboardName}LeftIcon";
+                    var titleId = $"{dashboardName}Title";
+                    var title = dashboardPage.DashboardPage.GetDisplayName();
+
+                    <li>
+                        <a onclick="OpenLeftNavigationPage('@dashboardPage.DashboardPage', '@linkId')" id="@linkId" class="left-sub-nav-link">
+                            <img class="left-nav-img-icons" id="@leftIconId" src="@dashboardPage.IconWhiteUrl" />
+                            <span class="left-sub-nav-title" id="@titleId">@title</span>
+                        </a>
+                    </li>
+                }
             </ul>
         </li>
         <!-- Admin -->
@@ -54,7 +58,7 @@
                     var title = adminPage.AdminName.GetDisplayDescription();
                     
                     <li>
-                        <a onclick="OpenPage('@adminPage.AdminPage')" id="@linkId" class="left-sub-nav-link">
+                        <a onclick="OpenLeftNavigationPage('@adminPage.AdminPage', '@linkId')" id="@linkId" class="left-sub-nav-link">
                             <img class="left-nav-img-icons" id="@leftIconId" src="@adminPage.IconWhiteUrl" />
                             <span class="left-sub-nav-title" id="@titleId">@title</span>
                         </a>
@@ -80,7 +84,9 @@
                     var rightIconId = $"{moduleName}RightIcon";
                     var dropdownId = $"{moduleName}Dropdown";
                     var overviewLeftIcon = $"{moduleName}OverviewLeftIcon";
-                    
+                    var overviewId = $"{moduleName}OverviewLink";
+                    var addNewId = $"{moduleName}AddNewLink";
+
                     <li>
                         <a onclick="ExpandToggleLeftSubNavMenu('@moduleName')" id="@linkId" class="left-sub-nav-link">
                             <img class="left-nav-img-icons" id="@leftIconId" src="@modulePage.IconWhiteUrl" />
@@ -89,12 +95,12 @@
                         </a>
                         <ul id="@dropdownId" class="mm-collapse left-nav-sub-menu">
                             <li>
-                                <a onclick="OpenPage('@modulePage.OverviewPage')" class="left-sub-nav-link">
+                                <a onclick="OpenLeftNavigationPage('@modulePage.OverviewPage', '@overviewId')" class="left-sub-nav-link" id="@overviewId">
                                     <i class="ri-menu-search-fill left-sub-nav-icons" id="@overviewLeftIcon"></i><span class="left-sub-nav-title">Overview</span>
                                 </a>
                             </li>
                             <li>
-                                <a onclick="OpenPage('@modulePage.AddNewPage')" class="left-sub-nav-link">
+                                <a onclick="OpenLeftNavigationPage('@modulePage.AddNewPage', '@addNewId')" class="left-sub-nav-link" id="@addNewId">
                                     <i class="bi bi-plus-circle-fill left-sub-nav-icons" id="@leftIconId"></i><span class="left-sub-nav-title">Add New</span>
                                 </a>
                             </li>
@@ -120,7 +126,7 @@
                     var title = settingVm.SettingName.GetDisplayDescription();
                     
                     <li>
-                        <a onclick="OpenPage('@settingVm.SettingsPage')" id="@linkId" class="left-sub-nav-link">
+                        <a onclick="OpenLeftNavigationPage('@settingVm.SettingsPage', '@linkId')" id="@linkId" class="left-sub-nav-link">
                             <img class="left-nav-img-icons" id="@leftIconId" src="@settingVm.IconWhiteUrl" />
                             <span class="left-sub-nav-title" id="@titleId">@title</span>
                         </a>
@@ -145,7 +151,7 @@
                     var title = reportVm.ReportName.GetDisplayDescription();
 
                     <li>
-                        <a onclick="OpenPage('@reportVm.ReportPage')" id="@linkId" class="left-sub-nav-link">
+                        <a onclick="OpenLeftNavigationPage('@reportVm.ReportPage','@linkId')" id="@linkId" class="left-sub-nav-link">
                             <img class="left-nav-img-icons" id="@leftIconId" src="@reportVm.IconWhiteUrl" />
                             <span class="left-sub-nav-title" id="@titleId">@title</span>
                         </a>
@@ -170,7 +176,7 @@
                     var title = supportVm.SupportName.GetDisplayDescription();
 
                     <li>
-                        <a onclick="OpenPage('@supportVm.SupportPage')" id="@linkId" class="left-sub-nav-link">
+                        <a onclick="OpenLeftNavigationPage('@supportVm.SupportPage','@linkId')" id="@linkId" class="left-sub-nav-link">
                             <img class="left-nav-img-icons" id="@leftIconId" src="@supportVm.IconWhiteUrl" />
                             <span class="left-sub-nav-title" id="@titleId">@title</span>
                         </a>
@@ -195,7 +201,7 @@
                     var title = accountVm.AccountName.GetDisplayDescription();
 
                     <li>
-                        <a onclick="OpenPage('@accountVm.AccountPage')" id="@linkId" class="left-sub-nav-link">
+                        <a onclick="OpenLeftNavigationPage('@accountVm.AccountPage', '@linkId')" id="@linkId" class="left-sub-nav-link">
                             <img class="left-nav-img-icons" id="@leftIconId" src="@accountVm.IconWhiteUrl" />
                             <span class="left-sub-nav-title" id="@titleId">@title</span>
                         </a>
@@ -226,42 +232,73 @@
         $(leftIconId).attr("src", newUrl);
     }
 
-    function ExpandToggleLeftNavMenu(linkId, leftIconId, titleId, rightIconId, dropDownId, activeNavCss, isImageIcon)
+    function ExpandOpenLeftNavMenu(linkId, leftIconId, titleId, rightIconId, dropDownId, activeNavCss, isImageIcon)
     {
-        if ($(dropDownId).hasClass('menu-active') == false)
-        {
-            if(isImageIcon)
-                ToggleIconImageActive(leftIconId, true);
-            else
-                $(leftIconId).addClass(activeNavCss);
-            
-            $(titleId).addClass(activeNavCss);
-            $(rightIconId).addClass(activeNavCss);
-            $(rightIconId).removeClass('bi-chevron-right');
-            $(rightIconId).addClass('bi-chevron-down');
-
-            $(linkId).addClass(activeNavCss);
-
-
-            $(dropDownId).addClass("menu-active");
-            $(dropDownId).slideDown();
-
-        }
+        if (isImageIcon)
+            ToggleIconImageActive(leftIconId, true);
         else
+            $(leftIconId).addClass(activeNavCss);
+
+        $(titleId).addClass(activeNavCss);
+        $(rightIconId).addClass(activeNavCss);
+        $(rightIconId).removeClass('bi-chevron-right');
+        $(rightIconId).addClass('bi-chevron-down');
+
+        $(linkId).addClass(activeNavCss);
+
+
+        $(dropDownId).addClass("menu-active");
+        $(dropDownId).slideDown();
+    }
+
+    function ExpandCloseLeftNavMenu(linkId, leftIconId, titleId, rightIconId, dropDownId, activeNavCss, isImageIcon)
+    {
+        if (isImageIcon)
+            ToggleIconImageActive(leftIconId, false);
+        else
+            $(leftIconId).removeClass(activeNavCss);
+
+        $(titleId).removeClass(activeNavCss);
+        $(rightIconId).removeClass(activeNavCss);
+        $(rightIconId).addClass('bi-chevron-right');
+        $(rightIconId).removeClass('bi-chevron-down');
+
+        $(linkId).removeClass(activeNavCss);
+        $(dropDownId).removeClass("menu-active");
+        $(dropDownId).slideUp();
+    }
+
+    function ExpandCloseAllMainMenuDropdowns()
+    {
+        const leftMenus = ["Dashboard", "Admin", "Modules", "Settings", "Reports", "Support", "Account"];
+
+        for (let i = 0; i < leftMenus.length; i++)
         {
-            if (isImageIcon)
-                ToggleIconImageActive(leftIconId, false);
-            else
-                $(leftIconId).removeClass(activeNavCss);
+            var groupName = leftMenus[i];
+            var linkId = `#${groupName}Link`;
+            var leftIconId = `#${groupName}LeftIcon`;
+            var titleId = `#${groupName}Title`;
+            var rightIconId = `#${groupName}RightIcon`;
+            var dropDownId = `#${groupName}Dropdown`;
 
-            $(titleId).removeClass(activeNavCss);
-            $(rightIconId).removeClass(activeNavCss);
-            $(rightIconId).addClass('bi-chevron-right');
-            $(rightIconId).removeClass('bi-chevron-down');
+            ExpandCloseLeftNavMenu(linkId, leftIconId, titleId, rightIconId, dropDownId, 'left-nav-menu-active', false);
+        }
+    }
 
-            $(linkId).removeClass(activeNavCss);
-            $(dropDownId).removeClass("menu-active");
-            $(dropDownId).slideUp();
+    function ExpandCloseAllSubMenuDropdowns()
+    {
+        const leftMenus = ["ContentLibrary", "LockedDesktop", "Desktop", "Screensaver", "Popup", "Survey", "Ticker", "RSS"];
+
+        for (let i = 0; i < leftMenus.length; i++)
+        {
+            var groupName = leftMenus[i];
+            var linkId = `#${groupName}Link`;
+            var leftIconId = `#${groupName}LeftIcon`;
+            var titleId = `#${groupName}Title`;
+            var rightIconId = `#${groupName}RightIcon`;
+            var dropDownId = `#${groupName}Dropdown`;
+
+            ExpandCloseLeftNavMenu(linkId, leftIconId, titleId, rightIconId, dropDownId, 'left-sub-nav-menu-active', true);
         }
     }
 
@@ -273,7 +310,17 @@
         var rightIconId = `#${groupName}RightIcon`;
         var dropDownId = `#${groupName}Dropdown`;
 
-        ExpandToggleLeftNavMenu(linkId, leftIconId, titleId, rightIconId, dropDownId, 'left-nav-menu-active', false);
+        var isOpening = $(dropDownId).hasClass('menu-active') == false;
+        
+        if(isOpening)
+        {
+            ExpandCloseAllMainMenuDropdowns();
+            ExpandOpenLeftNavMenu(linkId, leftIconId, titleId, rightIconId, dropDownId, 'left-nav-menu-active', false);
+        }
+        else
+        {
+            ExpandCloseLeftNavMenu(linkId, leftIconId, titleId, rightIconId, dropDownId, 'left-nav-menu-active', false);
+        }
     }
 
     function ExpandToggleLeftSubNavMenu(groupName)
@@ -284,7 +331,29 @@
         var rightIconId = `#${groupName}RightIcon`;
         var dropDownId = `#${groupName}Dropdown`;
 
-        ExpandToggleLeftNavMenu(linkId, leftIconId, titleId, rightIconId, dropDownId, 'left-sub-nav-menu-active', true);
+        var isOpening = $(dropDownId).hasClass('menu-active') == false;
+
+        if (isOpening)
+        {
+            ExpandCloseAllSubMenuDropdowns();
+            ExpandOpenLeftNavMenu(linkId, leftIconId, titleId, rightIconId, dropDownId, 'left-sub-nav-menu-active', true);
+        }
+        else
+        {
+            ExpandCloseLeftNavMenu(linkId, leftIconId, titleId, rightIconId, dropDownId, 'left-sub-nav-menu-active', true);
+        }
+    }
+
+    function SetLinkActive(linkId)
+    {
+       $('.left-sub-nav-link').removeClass("active-sub-nav-link");
+       $(linkId).addClass("active-sub-nav-link");
+    }
+
+    function OpenLeftNavigationPage(page, linkId)
+    {
+        SetLinkActive(`#${linkId}`);
+        OpenPage(page);
     }
 
 </script>

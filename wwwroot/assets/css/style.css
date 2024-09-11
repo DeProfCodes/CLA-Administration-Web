@@ -1665,7 +1665,7 @@ ul.categories-list li
 
     .wrapper .page-content-wrapper
     {
-        margin-left: 0px;
+        margin-left: 0px !important;
     }
 
     .top-header

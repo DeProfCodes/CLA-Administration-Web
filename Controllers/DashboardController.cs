@@ -38,6 +38,7 @@ namespace CLA_Administration_Web.Controllers
         {
             var leftNavViewModel = new LeftNavigationViewModel
             {
+                DashboardLeftNavigation = LayoutsHelper.GetDashboardNamesTypes(),
                 AdminLeftNavigation = LayoutsHelper.GetAdminNamesTypes(),
                 ModulesLeftNavigation = LayoutsHelper.GetModuleNamesAndPages(),
                 SettingsLeftNavigation = LayoutsHelper.GetSettingsNamesTypes(),

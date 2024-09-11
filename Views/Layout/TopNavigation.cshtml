@@ -1,10 +1,10 @@
 ﻿@model CLA_Administration_Web.ViewModels.Layouts.TopNavigationViewModel
 
 <!--start top header-->
-<header class="top-header theme-bg">
+<header class="top-header theme-bg" id="TopNavigationBar">
     <nav class="navbar navbar-expand gap-3">
         <!-- Toggle Icon -->
-        <div class="toggle-icon">
+        <div class="toggle-icon" onclick="ToggleLeftNavigationMenu()">
             <i class="bi bi-list"></i>
         </div>
         <!-- Search Bar -->
@@ -18,7 +18,7 @@
                 <li >
                     <a class="nav-link dark-mode-icon" href="javascript:;">
                         <div class="mode-icon">
-                            <i class='bx bx-calendar top-nav-icons'></i>
+                            <i class='bx bx-calendar top-nav-icons' id="TopNavCalendarIcon"></i>
                         </div>
                     </a>
                 </li>
@@ -184,7 +184,7 @@
                     </div>
                 </li>
             </ul>
-            <span style="border-right:1px solid silver; margin:10px;"></span>
+            <span style="border-right:1px solid silver; margin:10px;" id="UserProfileSeparator"></span>
             <ul class="navbar-nav align-items-center" onclick="OpenUserProfile()" id="ProfileDropdownContainer">
                 <li class="nav-item dropdown dropdown-user-setting">
                     <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;" data-bs-toggle="dropdown">
@@ -193,7 +193,7 @@
                         </div>
                     </a>
                     <i class="bi bi-chevron-down" style="color:white;font-size:10px;margin-top:6px;margin-left:-8px"></i>
-                    <ul class="dropdown-menu dropdown-menu-end" style="margin-top:250px;cursor:pointer" id="ProfileDropdown">
+                    <ul class="dropdown-menu dropdown-menu-end" style="margin-top:250px;cursor:pointer;width:230px !important" id="ProfileDropdown" >
                         <li>
                             <a class="dropdown-item" href="javascript:;">
                                 <div class="d-flex flex-row align-items-center gap-2">
@@ -244,13 +244,13 @@
                     </ul>
                 </li>
                 <li style="margin-left:10px; cursor:pointer">
-                    <div class="text-white" style="display:grid">
+                    <div class="text-white" style="display:grid" id="UserInfoGrid">
                         <span id="UserName">@Model.UserFullname</span>
                         <span id="UserRole" style="color:silver;font-style:italic; font-size:12px">@Model.CompanyDepartment</span>
                     </div>
                 </li>
             </ul>
-            <span style="border-right:1px solid silver; margin:10px;"></span>
+            <span style="border-right:1px solid silver; margin:10px;" id="UserCompanyImageSeparator"></span>
             <div id="UserCompany">
                 <img src="@Model.CompanyLogo" id="UserCompanyImage" />
             </div>
@@ -263,7 +263,6 @@
 
     window.addEventListener('click', function (e)
     {
-        console.log("sir => " + document.getElementById('ProfileDropdownContainer').contains(e.target));
         if (document.getElementById('ProfileDropdownContainer').contains(e.target))
         {
             $("#ProfileDropdown").addClass('show');
@@ -271,23 +270,24 @@
         else
         {
             $("#ProfileDropdown").removeClass('show');
-            // Clicked outside the box
         }
     });
 
-    document.addEventListener("click", (evt) =>
+    function ToggleLeftNavigationMenu()
     {
-        let targetElement = evt.target;
-        //console.log("dara - > " + targetElement);
-
-        if (targetElement == $("#ProfileDropdown"))
+        var isClosed = $("#TopNavigationBar").css('left') == '0px';
+        if(isClosed)
         {
-            //$("#ProfileDropdown").addClass('show');
+            $("#TopNavigationBar").css('left', '260px');
+            $("#PageArea").css('margin-left', '260px');
+            $("#LeftNavMenu").css('left', '0');
         }
         else
         {
-           // $("#ProfileDropdown").removeClass('show');
+            $("#TopNavigationBar").css('left', '0px');
+            $("#PageArea").css('margin-left', '0px');
+            $("#LeftNavMenu").css('left', '-300px');
         }
-    });
+    }
 
 </script>
