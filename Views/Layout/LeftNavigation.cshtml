@@ -223,6 +223,11 @@
 
 <script>
     
+    $(document).ready(function ()
+    {
+        InitialPage();
+    });
+
     function ToggleIconImageActive(leftIconId, isActive)
     {
         var iconImgUrl = $(leftIconId).attr("src");
@@ -354,6 +359,12 @@
     {
         SetLinkActive(`#${linkId}`);
         OpenPage(page);
+    }
+
+    function InitialPage()
+    {
+        ExpandToggleLeftMainNavMenu('Dashboard');
+        OpenLeftNavigationPage('@DashboardPages.Dashboard', 'DashboardSubLink');
     }
 
 </script>

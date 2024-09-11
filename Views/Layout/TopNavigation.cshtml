@@ -1,4 +1,5 @@
-﻿@model CLA_Administration_Web.ViewModels.Layouts.TopNavigationViewModel
+﻿@using CLA_Administration_Web.Helpers.Enums.AppPages
+@model CLA_Administration_Web.ViewModels.Layouts.TopNavigationViewModel
 
 <!--start top header-->
 <header class="top-header theme-bg" id="TopNavigationBar">
@@ -16,7 +17,7 @@
         <div class="top-navbar-right ms-auto" style="display:flex">
             <ul class="navbar-nav align-items-center">
                 <li >
-                    <a class="nav-link dark-mode-icon" href="javascript:;">
+                    <a class="nav-link dark-mode-icon" onclick="OpenPage('@DashboardPages.Calendar')" style="cursor:pointer">
                         <div class="mode-icon">
                             <i class='bx bx-calendar top-nav-icons' id="TopNavCalendarIcon"></i>
                         </div>

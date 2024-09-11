@@ -48,7 +48,6 @@
     $(document).ready(function ()
     {
         LoadLayoutSections();
-        OpenPage('@DashboardPages.Dashboard');
     });
 
     function LoadLayoutSections()
@@ -76,4 +75,17 @@
         LoadPartialWithSpinner(url, "#DashboardMainArea");
     }
 
+    function Logout()
+    {
+        swal({
+            title: "Logout",
+            text: "You will be logged out of CLA Admin Tool",
+            icon: "warning",
+            buttons: true,
+            dangerMode: false
+        }).then((confirmed) =>
+        {
+            swal('Log out success', 'You have been successfully logged out!', 'success');
+        });
+    }
 </script>
