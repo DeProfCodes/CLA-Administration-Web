@@ -1,88 +1,32 @@
-﻿<!--start top header-->
+﻿@model CLA_Administration_Web.ViewModels.Layouts.TopNavigationViewModel
+
+<!--start top header-->
 <header class="top-header theme-bg">
     <nav class="navbar navbar-expand gap-3">
+        <!-- Toggle Icon -->
         <div class="toggle-icon">
-            <ion-icon name="menu-outline"></ion-icon>
+            <i class="bi bi-list"></i>
         </div>
-
-        <form class="searchbar">
-            <div class="position-absolute top-50 translate-middle-y search-icon ms-3">
-                <ion-icon name="search-outline"></ion-icon>
-            </div>
-            <input class="form-control" type="text" placeholder="Search for anything">
-            <div class="position-absolute top-50 translate-middle-y search-close-icon">
-                <ion-icon name="close-outline"></ion-icon>
-            </div>
-        </form>
-        <div class="top-navbar-right ms-auto">
-
+        <!-- Search Bar -->
+        <div id="TopNavSearchContainer">
+            <input class="form-control" type="text" placeholder="Search for anything" id="TopNavSearchBar">
+            <i class="bi bi-search" id="TopNavSearchIcon"></i>
+        </div>
+        <!-- Icons -->
+        <div class="top-navbar-right ms-auto" style="display:flex">
             <ul class="navbar-nav align-items-center">
-                <li class="nav-item">
-                    <a class="nav-link mobile-search-button" href="javascript:;">
-                        <div class="">
-                            <ion-icon name="search-outline"></ion-icon>
-                        </div>
-                    </a>
-                </li>
-                <li class="nav-item">
+                <li >
                     <a class="nav-link dark-mode-icon" href="javascript:;">
                         <div class="mode-icon">
-                            <ion-icon name="moon-outline"></ion-icon>
+                            <i class='bx bx-calendar top-nav-icons'></i>
                         </div>
                     </a>
                 </li>
-                <li class="nav-item dropdown dropdown-large dropdown-apps">
+                <li class="nav-item dropdown dropdown-large hidden">
                     <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;" data-bs-toggle="dropdown">
-                        <div class="">
-                            <ion-icon name="apps-outline"></ion-icon>
-                        </div>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
-                        <div class="row row-cols-3 g-3 p-3">
-                            <div class="col text-center">
-                                <div class="app-box mx-auto bg-gradient-purple text-white">
-                                    <ion-icon name="cart-outline"></ion-icon>
-                                </div>
-                                <div class="app-title">Orders</div>
-                            </div>
-                            <div class="col text-center">
-                                <div class="app-box mx-auto bg-gradient-info text-white">
-                                    <ion-icon name="people-outline"></ion-icon>
-                                </div>
-                                <div class="app-title">Teams</div>
-                            </div>
-                            <div class="col text-center">
-                                <div class="app-box mx-auto bg-gradient-success text-white">
-                                    <ion-icon name="shield-checkmark-outline"></ion-icon>
-                                </div>
-                                <div class="app-title">Tasks</div>
-                            </div>
-                            <div class="col text-center">
-                                <div class="app-box mx-auto bg-gradient-danger text-white">
-                                    <ion-icon name="videocam-outline"></ion-icon>
-                                </div>
-                                <div class="app-title">Media</div>
-                            </div>
-                            <div class="col text-center">
-                                <div class="app-box mx-auto bg-gradient-warning text-white">
-                                    <ion-icon name="file-tray-outline"></ion-icon>
-                                </div>
-                                <div class="app-title">Files</div>
-                            </div>
-                            <div class="col text-center">
-                                <div class="app-box mx-auto bg-gradient-branding text-white">
-                                    <ion-icon name="notifications-outline"></ion-icon>
-                                </div>
-                                <div class="app-title">Alerts</div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="nav-item dropdown dropdown-large">
-                    <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;" data-bs-toggle="dropdown">
-                        <div class="position-relative">
+                        <div class="position-relative" style="font-size:20px">
                             <span class="notify-badge">8</span>
-                            <ion-icon name="notifications-outline"></ion-icon>
+                            <i class="bi bi-bell-fill"></i>
                         </div>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end">
@@ -239,20 +183,24 @@
                         </a>
                     </div>
                 </li>
+            </ul>
+            <span style="border-right:1px solid silver; margin:10px;"></span>
+            <ul class="navbar-nav align-items-center" onclick="OpenUserProfile()" id="ProfileDropdownContainer">
                 <li class="nav-item dropdown dropdown-user-setting">
                     <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;" data-bs-toggle="dropdown">
-                        <div class="user-setting">
-                            <img src="assets/images/avatars/06.png" class="user-img" alt="">
+                        <div class="user-setting" style="margin-left:4px">
+                            <img src="@Model.ProfilePictureUrl" class="user-img" alt="">
                         </div>
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-end">
+                    <i class="bi bi-chevron-down" style="color:white;font-size:10px;margin-top:6px;margin-left:-8px"></i>
+                    <ul class="dropdown-menu dropdown-menu-end" style="margin-top:250px;cursor:pointer" id="ProfileDropdown">
                         <li>
                             <a class="dropdown-item" href="javascript:;">
                                 <div class="d-flex flex-row align-items-center gap-2">
-                                    <img src="assets/images/avatars/06.png" alt="" class="rounded-circle" width="54" height="54">
+                                    <img src="@Model.ProfilePictureUrl" alt="" class="rounded-circle" width="54" height="54">
                                     <div class="">
-                                        <h6 class="mb-0 dropdown-user-name">Jhon Deo</h6>
-                                        <small class="mb-0 dropdown-user-designation text-secondary">UI Developer</small>
+                                        <h6 class="mb-0 dropdown-user-name">@Model.UserFullname</h6>
+                                        <small class="mb-0 dropdown-user-designation text-secondary">@Model.CompanyDepartment</small>
                                     </div>
                                 </div>
                             </a>
@@ -281,36 +229,6 @@
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="javascript:;">
-                                <div class="d-flex align-items-center">
-                                    <div class="">
-                                        <ion-icon name="speedometer-outline"></ion-icon>
-                                    </div>
-                                    <div class="ms-3"><span>Dashboard</span></div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="javascript:;">
-                                <div class="d-flex align-items-center">
-                                    <div class="">
-                                        <ion-icon name="wallet-outline"></ion-icon>
-                                    </div>
-                                    <div class="ms-3"><span>Earnings</span></div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="javascript:;">
-                                <div class="d-flex align-items-center">
-                                    <div class="">
-                                        <ion-icon name="cloud-download-outline"></ion-icon>
-                                    </div>
-                                    <div class="ms-3"><span>Downloads</span></div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
                             <hr class="dropdown-divider">
                         </li>
                         <li>
@@ -325,10 +243,51 @@
                         </li>
                     </ul>
                 </li>
-
+                <li style="margin-left:10px; cursor:pointer">
+                    <div class="text-white" style="display:grid">
+                        <span id="UserName">@Model.UserFullname</span>
+                        <span id="UserRole" style="color:silver;font-style:italic; font-size:12px">@Model.CompanyDepartment</span>
+                    </div>
+                </li>
             </ul>
+            <span style="border-right:1px solid silver; margin:10px;"></span>
+            <div id="UserCompany">
+                <img src="@Model.CompanyLogo" id="UserCompanyImage" />
+            </div>
 
         </div>
     </nav>
 </header>
-<!--end top header-->
+
+<script>
+
+    window.addEventListener('click', function (e)
+    {
+        console.log("sir => " + document.getElementById('ProfileDropdownContainer').contains(e.target));
+        if (document.getElementById('ProfileDropdownContainer').contains(e.target))
+        {
+            $("#ProfileDropdown").addClass('show');
+        } 
+        else
+        {
+            $("#ProfileDropdown").removeClass('show');
+            // Clicked outside the box
+        }
+    });
+
+    document.addEventListener("click", (evt) =>
+    {
+        let targetElement = evt.target;
+        //console.log("dara - > " + targetElement);
+
+        if (targetElement == $("#ProfileDropdown"))
+        {
+            //$("#ProfileDropdown").addClass('show');
+        }
+        else
+        {
+           // $("#ProfileDropdown").removeClass('show');
+        }
+    });
+
+</script>

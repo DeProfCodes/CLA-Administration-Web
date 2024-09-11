@@ -5,12 +5,22 @@ namespace CLA_Administration_Web.Helpers.Constants
 {
     public class AppPagesUrl
     {
+        public const string adminController = "Admin";
         public const string accountController = "Account";
         public const string dashboardController = "Dashboard";
         public const string modulesController = "Modules";
         public const string settingsController = "Settings";
         public const string reportsController = "Reports";
         public const string supportController = "Support";
+
+        public class Admin
+        {
+            public static string UploadFiles = $"/{adminController}/{AdminPages.UploadFiles}";
+            public static string ApplicationParameters = $"/{adminController}/{AdminPages.ApplicationParameters}";
+            public static string Licensing = $"/{adminController}/{AdminPages.Licensing}";
+            public static string AutoReminders = $"/{adminController}/{AdminPages.AutoReminders}";
+            public static string SQLBrowser = $"/{adminController}/{AdminPages.SQLBrowser}";
+        }
 
         public class Account
         {

@@ -9,6 +9,45 @@ namespace CLA_Administration_Web.Helpers.Layout
         public const string WhiteIconsFolder = "/images/icons/white";
         public const string BlueIconsFolder = "/images/icons/blue";
 
+        public static List<AdminLeftNavigationViewModel> GetAdminNamesTypes()
+        {
+            var whiteAdminIcons = $"{WhiteIconsFolder}/admin";
+            var blueAdminIcons = $"{BlueIconsFolder}/admin";
+
+            var settingsList = new List<AdminLeftNavigationViewModel>
+            {
+                new AdminLeftNavigationViewModel
+                {
+                    AdminName = AdminNamesTypes.UploadFiles,
+                    AdminPage = AdminPages.UploadFiles,
+                    IconWhiteUrl = $"{whiteAdminIcons}/upload-files.png",
+                    IconBlueUrl = $"{blueAdminIcons}/upload-files.png"
+                },
+                new AdminLeftNavigationViewModel
+                {
+                    AdminName = AdminNamesTypes.ApplicationParameters,
+                    AdminPage = AdminPages.ApplicationParameters,
+                    IconWhiteUrl = $"{whiteAdminIcons}/application-parameters.png",
+                    IconBlueUrl = $"{blueAdminIcons}/application-parameters.png"
+                },
+                new AdminLeftNavigationViewModel
+                {
+                    AdminName = AdminNamesTypes.Licensing,
+                    AdminPage = AdminPages.Licensing,
+                    IconWhiteUrl = $"{whiteAdminIcons}/licensing.png",
+                    IconBlueUrl = $"{blueAdminIcons}/licensing.png"
+                },
+                new AdminLeftNavigationViewModel
+                {
+                    AdminName = AdminNamesTypes.SQLBrowser,
+                    AdminPage = AdminPages.SQLBrowser,
+                    IconWhiteUrl = $"{whiteAdminIcons}/sql-browser.png",
+                    IconBlueUrl = $"{blueAdminIcons}/sql-browser.png"
+                }
+            };
+            return settingsList;
+        }
+
         public static List<ModulesLeftNavigationViewModel> GetModuleNamesAndPages()
         {
             var whiteModuleIcons = $"{WhiteIconsFolder}/modules";
@@ -139,6 +178,13 @@ namespace CLA_Administration_Web.Helpers.Layout
                     SettingsPage = SettingsPages.SkinsOfflineImages,
                     IconWhiteUrl = $"{whiteSettingsIcons}/skins-offline-images.png",
                     IconBlueUrl = $"{blueSettingsIcons}/skins-offline-images.png"
+                },
+                new SettingsLeftNavigationViewModel
+                {
+                    SettingName = SettingsNamesType.DefaultFonts,
+                    SettingsPage = SettingsPages.DefaultFonts,
+                    IconWhiteUrl = $"{whiteSettingsIcons}/default-fonts.png",
+                    IconBlueUrl = $"{blueSettingsIcons}/default-fonts.png"
                 },
                 new SettingsLeftNavigationViewModel
                 {

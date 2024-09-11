@@ -28,6 +28,9 @@ namespace CLA_Administration_Web.Helpers.Enums.AppPages
         [Display(Name = "SkinsOfflineImages")]
         SkinsOfflineImages,
 
+        [Display(Name = "DefaultFonts")]
+        DefaultFonts,
+
         [Display(Name = "DesktopInformation")]
         DesktopInformation
     }

@@ -20,9 +20,9 @@
         <!-- Dashboard -->
         <li>
             <a onclick="ExpandToggleLeftMainNavMenu('Dashboard')" id="DashboardLink" class="left-nav-menu-item">
-                <i class="bi bi-grid-fill left-nav-icons" id="DashboardLeftIcon"></i>
+                <i class="bi bi-grid-fill left-main-nav-icons" id="DashboardLeftIcon"></i>
                 <span class="left-nav-titles" id="DashboardTitle">Dashboard</span>
-                <i class="bi bi-chevron-right ms-lg-auto left-nav-icons" id="DashboardRightIcon"></i>
+                <i class="bi bi-chevron-right ms-lg-auto left-nav-arrow-icons" id="DashboardRightIcon"></i>
             </a>
             <ul id="DashboardDropdown" class="mm-collapse left-nav-sub-menu">
                 <li>
@@ -32,17 +32,42 @@
                 </li>
                 <li>
                     <a onclick="OpenPage('@DashboardPages.Calendar')" class="left-sub-nav-link">
-                        <i class="bi bi-calendar2-week left-sub-nav-icons" id="DashboardCalendarLeftIcon"></i><span class="left-sub-nav-title">Calendar</span>
+                        <i class="bx bx-calendar left-sub-nav-icons" id="DashboardCalendarLeftIcon"></i><span class="left-sub-nav-title">Calendar</span>
                     </a>
                 </li>
+            </ul>
+        </li>
+        <!-- Admin -->
+        <li>
+            <a onclick="ExpandToggleLeftMainNavMenu('Admin')" id="AdminLink" class="left-nav-menu-item">
+                <i class="bi bi-kanban-fill left-main-nav-icons" id="AdminLeftIcon"></i>
+                <span class="left-nav-titles" id="AdminTitle">Admin</span>
+                <i class="bi bi-chevron-right ms-lg-auto left-nav-arrow-icons" id="AdminRightIcon"></i>
+            </a>
+            <ul id="AdminDropdown" class="mm-collapse left-nav-sub-menu">
+                @foreach (var adminPage in Model.AdminLeftNavigation)
+                {
+                    var adminName = adminPage.AdminName.GetDisplayName();
+                    var linkId = $"{adminName}Link";
+                    var leftIconId = $"{adminName}LeftIcon";
+                    var titleId = $"{adminName}Title";
+                    var title = adminPage.AdminName.GetDisplayDescription();
+                    
+                    <li>
+                        <a onclick="OpenPage('@adminPage.AdminPage')" id="@linkId" class="left-sub-nav-link">
+                            <img class="left-nav-img-icons" id="@leftIconId" src="@adminPage.IconWhiteUrl" />
+                            <span class="left-sub-nav-title" id="@titleId">@title</span>
+                        </a>
+                    </li>
+                }
             </ul>
         </li>
         <!-- Modules -->
         <li>
             <a onclick="ExpandToggleLeftMainNavMenu('Modules')" id="ModulesLink" class="left-nav-menu-item">
-                <i class="bi bi-boxes left-nav-icons" id="ModulesLeftIcon"></i>
+                <i class="bi bi-boxes left-main-nav-icons" id="ModulesLeftIcon"></i>
                 <span class="left-nav-titles" id="ModulesTitle">Modules</span>
-                <i class="bi bi-chevron-right ms-lg-auto left-nav-icons" id="ModulesRightIcon"></i>
+                <i class="bi bi-chevron-right ms-lg-auto left-nav-arrow-icons" id="ModulesRightIcon"></i>
             </a>
             <ul id="ModulesDropdown" class="mm-collapse left-nav-sub-menu">
                 @foreach (var modulePage in Model.ModulesLeftNavigation)
@@ -58,9 +83,9 @@
                     
                     <li>
                         <a onclick="ExpandToggleLeftSubNavMenu('@moduleName')" id="@linkId" class="left-sub-nav-link">
-                            <img class="left-nav-icons" id="@leftIconId" src="@modulePage.IconWhiteUrl"/>
+                            <img class="left-nav-img-icons" id="@leftIconId" src="@modulePage.IconWhiteUrl" />
                             <span class="left-sub-nav-title" id="@titleId">@title</span>
-                            <i class="bi bi-chevron-right ms-lg-auto left-nav-icons" id="@rightIconId"></i>
+                            <i class="bi bi-chevron-right ms-lg-auto left-nav-arrow-icons" id="@rightIconId"></i>
                         </a>
                         <ul id="@dropdownId" class="mm-collapse left-nav-sub-menu">
                             <li>
@@ -81,9 +106,9 @@
         <!-- Settings -->
         <li>
             <a onclick="ExpandToggleLeftMainNavMenu('Settings')" id="SettingsLink" class="left-nav-menu-item">
-                <i class="bi bi-gear-fill left-nav-icons" id="SettingsLeftIcon"></i>
+                <i class="bi bi-gear-fill left-main-nav-icons" id="SettingsLeftIcon"></i>
                 <span class="left-nav-titles" id="SettingsTitle">Settings</span>
-                <i class="bi bi-chevron-right ms-lg-auto left-nav-icons" id="SettingsRightIcon"></i>
+                <i class="bi bi-chevron-right ms-lg-auto left-nav-arrow-icons" id="SettingsRightIcon"></i>
             </a>
             <ul id="SettingsDropdown" class="mm-collapse left-nav-sub-menu">
                 @foreach (var settingVm in Model.SettingsLeftNavigation)
@@ -96,7 +121,7 @@
                     
                     <li>
                         <a onclick="OpenPage('@settingVm.SettingsPage')" id="@linkId" class="left-sub-nav-link">
-                            <img class="left-nav-icons" id="@leftIconId" src="@settingVm.IconWhiteUrl" />
+                            <img class="left-nav-img-icons" id="@leftIconId" src="@settingVm.IconWhiteUrl" />
                             <span class="left-sub-nav-title" id="@titleId">@title</span>
                         </a>
                     </li>
@@ -106,9 +131,9 @@
         <!-- Reports -->
         <li>
             <a onclick="ExpandToggleLeftMainNavMenu('Reports')" id="ReportsLink" class="left-nav-menu-item">
-                <i class="bi bi-pie-chart-fill left-nav-icons" id="ReportsLeftIcon"></i>
+                <i class="bi bi-pie-chart-fill left-main-nav-icons" id="ReportsLeftIcon"></i>
                 <span class="left-nav-titles" id="ReportsTitle">Reports</span>
-                <i class="bi bi-chevron-right ms-lg-auto left-nav-icons" id="ReportsRightIcon"></i>
+                <i class="bi bi-chevron-right ms-lg-auto left-nav-arrow-icons" id="ReportsRightIcon"></i>
             </a>
             <ul id="ReportsDropdown" class="mm-collapse left-nav-sub-menu">
                 @foreach (var reportVm in Model.ReportsLeftNavigation)
@@ -121,7 +146,7 @@
 
                     <li>
                         <a onclick="OpenPage('@reportVm.ReportPage')" id="@linkId" class="left-sub-nav-link">
-                            <img class="left-nav-icons" id="@leftIconId" src="@reportVm.IconWhiteUrl" />
+                            <img class="left-nav-img-icons" id="@leftIconId" src="@reportVm.IconWhiteUrl" />
                             <span class="left-sub-nav-title" id="@titleId">@title</span>
                         </a>
                     </li>
@@ -131,9 +156,9 @@
         <!-- Support -->
         <li>
             <a onclick="ExpandToggleLeftMainNavMenu('Support')" id="SupportLink" class="left-nav-menu-item">
-                <i class="bx bx-support left-nav-icons" id="SupportLeftIcon"></i>
+                <i class="bx bx-support left-main-nav-icons" id="SupportLeftIcon"></i>
                 <span class="left-nav-titles" id="SupportTitle">Support</span>
-                <i class="bi bi-chevron-right ms-lg-auto left-nav-icons" id="SupportRightIcon"></i>
+                <i class="bi bi-chevron-right ms-lg-auto left-nav-arrow-icons" id="SupportRightIcon"></i>
             </a>
             <ul id="SupportDropdown" class="mm-collapse left-nav-sub-menu">
                 @foreach (var supportVm in Model.SupportLeftNavigation)
@@ -146,7 +171,7 @@
 
                     <li>
                         <a onclick="OpenPage('@supportVm.SupportPage')" id="@linkId" class="left-sub-nav-link">
-                            <img class="left-nav-icons" id="@leftIconId" src="@supportVm.IconWhiteUrl" />
+                            <img class="left-nav-img-icons" id="@leftIconId" src="@supportVm.IconWhiteUrl" />
                             <span class="left-sub-nav-title" id="@titleId">@title</span>
                         </a>
                     </li>
@@ -156,9 +181,9 @@
         <!-- Account -->
         <li>
             <a onclick="ExpandToggleLeftMainNavMenu('Account')" id="AccountLink" class="left-nav-menu-item">
-                <i class="bi bi-person-fill left-nav-icons" id="AccountLeftIcon"></i>
+                <i class="bi bi-person-fill left-main-nav-icons" id="AccountLeftIcon"></i>
                 <span class="left-nav-titles" id="AccountTitle">Account</span>
-                <i class="bi bi-chevron-right ms-lg-auto left-nav-icons" id="AccountRightIcon"></i>
+                <i class="bi bi-chevron-right ms-lg-auto left-nav-arrow-icons" id="AccountRightIcon"></i>
             </a>
             <ul id="AccountDropdown" class="mm-collapse left-nav-sub-menu">
                 @foreach (var accountVm in Model.AccountLeftNavigation)
@@ -171,7 +196,7 @@
 
                     <li>
                         <a onclick="OpenPage('@accountVm.AccountPage')" id="@linkId" class="left-sub-nav-link">
-                            <img class="left-nav-icons" id="@leftIconId" src="@accountVm.IconWhiteUrl" />
+                            <img class="left-nav-img-icons" id="@leftIconId" src="@accountVm.IconWhiteUrl" />
                             <span class="left-sub-nav-title" id="@titleId">@title</span>
                         </a>
                     </li>
@@ -181,7 +206,7 @@
     </ul>
     <!--end navigation-->
     <a onclick="Logout()" id="LogoutLink" class="left-nav-menu-item" style="padding:20px">
-        <i class="bi bi-door-open-fill left-nav-icons" id="LogoutLeftIcon"></i>
+        <i class="bi bi-door-open-fill left-main-nav-icons" id="LogoutLeftIcon"></i>
         <span class="left-nav-titles" id="LogoutTitle">Logout</span>
     </a>
 </aside>

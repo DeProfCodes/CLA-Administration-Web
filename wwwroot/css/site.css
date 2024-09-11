@@ -1,10 +1,24 @@
 /*============================Layout CSS ==============================*/
 
-.left-nav-icons
+.hidden
+{
+    display: none !important;
+}
+.left-nav-img-icons
+{
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+}
+.left-main-nav-icons
 {
     font-size: 16px;
     color: white;
-    width: 18px;
+}
+.left-nav-arrow-icons
+{
+    font-size: 16px;
+    color: white;
 }
 .left-nav-titles
 {
@@ -63,4 +77,33 @@
 ::-webkit-scrollbar 
 {
     display: none;
+}
+#TopNavSearchBar
+{
+    padding-left:20px;
+    padding-right:50px;
+    border-radius: 20px;
+    width: 300px;
+}
+#TopNavSearchContainer
+{
+    margin-left: 50px !important;
+    display:flex;
+}
+#TopNavSearchIcon
+{
+    margin-left: -35px;
+    margin-top: 5px;
+    font-size: 20px;
+}
+.top-nav-icons
+{
+    font-size: 35px;
+    color: white;
+    margin-top:5px;
+}
+#UserCompanyImage
+{
+    width:150px;
+    margin-top:12px;
 }

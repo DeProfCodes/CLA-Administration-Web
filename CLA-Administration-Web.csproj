@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\assets\plugins\bootstrap-material-datetimepicker\css\" />
+    <Folder Include="wwwroot\images\profiles\" />
   </ItemGroup>
 
   <ItemGroup>

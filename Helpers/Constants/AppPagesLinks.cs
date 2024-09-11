@@ -2,6 +2,15 @@
 {
     public class AppPagesLinks
     {
+        public class Admin
+        {
+            public const string UploadFilesPageLink = "~/Views/Admin/UploadFiles.cshtml";
+            public const string ApplicationParametersPageLink = "~/Views/Admin/ApplicationParameters.cshtml";
+            public const string LicensingPageLink = "~/Views/Admin/Licensing.cshtml";
+            public const string AutoRemindersPageLink = "~/Views/Admin/AutoReminders.cshtml";
+            public const string SQLBrowserPageLink = "~/Views/Admin/SQLBrowser.cshtml";
+        }
+
         public class Account
         {
             public const string AccountOverviewPageLink = "~/Views/Account/AccountOverview.cshtml";

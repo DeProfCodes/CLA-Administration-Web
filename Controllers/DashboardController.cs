@@ -22,7 +22,15 @@ namespace CLA_Administration_Web.Controllers
         [HttpGet]
         public async Task<IActionResult> TopNavigation()
         {
-            return PartialView(AppPagesLinks.Layouts.TopNavigationPageLink);
+            var topNavViewModel = new TopNavigationViewModel
+            {
+                ProfilePictureUrl = "/images/company/vodacom/ndhuvazim-nth-47852.png",
+                UserFullname = "Proficient Mkansi",
+                CompanyDepartment = "Accounting Department",
+                CompanyLogo = "/images/company/vodacom/logo.png"
+            };
+
+            return PartialView(AppPagesLinks.Layouts.TopNavigationPageLink, topNavViewModel);
         }
 
         [HttpGet]
@@ -30,6 +38,7 @@ namespace CLA_Administration_Web.Controllers
         {
             var leftNavViewModel = new LeftNavigationViewModel
             {
+                AdminLeftNavigation = LayoutsHelper.GetAdminNamesTypes(),
                 ModulesLeftNavigation = LayoutsHelper.GetModuleNamesAndPages(),
                 SettingsLeftNavigation = LayoutsHelper.GetSettingsNamesTypes(),
                 ReportsLeftNavigation = LayoutsHelper.GetReportsNamesTypes(),
