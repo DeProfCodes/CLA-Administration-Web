@@ -20,7 +20,7 @@
     
     <div id="loader" class="loader">
         <!-- GIF Loader -->
-        <img src="~/assets/images/Loading_2.gif" alt="Loading..." id="loaderImage" class="loader-image" />
+        <img src="~/images/others/loading-waiting.gif" alt="Loading..." id="loaderImage" class="loader-image" />
         <!-- Loader Message -->
         <p id="loaderMessage">Loading...</p>
     </div>
@@ -82,15 +82,15 @@
         var url = GetPageUrl(page, id);
         
         var pageName = GetPageTitle(page);
+        
         ShowLoader("Loading " + pageName);
-
-        LoadPartialWithSpinner(url, "#DashboardMainArea");
 
         setTimeout(function ()
         {
             HideLoader();
+            LoadPartialWithSpinner(url, "#DashboardMainArea");
 
-        }, 3000);
+        }, 2000);
     }
 
     function ShowLoader(message)

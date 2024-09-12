@@ -22,12 +22,14 @@ namespace CLA_Administration_Web.Controllers
         [HttpGet]
         public async Task<IActionResult> TopNavigation()
         {
+            string BaseAddress = LaunchSettingsHelper.IsLiveSite ? "/WebAdminTool" : "";
+            
             var topNavViewModel = new TopNavigationViewModel
             {
-                ProfilePictureUrl = "/images/company/vodacom/ndhuvazim-nth-47852.png",
+                ProfilePictureUrl = $"{BaseAddress}/images/company/vodacom/ndhuvazim-nth-47852.png",
                 UserFullname = "Proficient Mkansi",
                 CompanyDepartment = "Accounting Department",
-                CompanyLogo = "/images/company/vodacom/logo.png"
+                CompanyLogo = $"{BaseAddress}/images/company/vodacom/logo.png"
             };
 
             return PartialView(AppPagesLinks.Layouts.TopNavigationPageLink, topNavViewModel);

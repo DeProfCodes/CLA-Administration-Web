@@ -5,13 +5,15 @@ namespace CLA_Administration_Web.Helpers.Constants
 {
     public class AppPagesUrl
     {
-        public const string adminController = "Admin";
-        public const string accountController = "Account";
-        public const string dashboardController = "Dashboard";
-        public const string modulesController = "Modules";
-        public const string settingsController = "Settings";
-        public const string reportsController = "Reports";
-        public const string supportController = "Support";
+        public static string BaseAddress = LaunchSettingsHelper.IsLiveSite ? "WebAdminTool/" : "";
+
+        public static string adminController = $"{BaseAddress}Admin";
+        public static string accountController = $"{BaseAddress}Account";
+        public static string dashboardController = $"{BaseAddress}Dashboard";
+        public static string modulesController = $"{BaseAddress}Modules";
+        public static string settingsController = $"{BaseAddress}Settings";
+        public static string reportsController = $"{BaseAddress}Reports";
+        public static string supportController = $"{BaseAddress}Support";
 
         public class Admin
         {

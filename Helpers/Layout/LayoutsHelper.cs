@@ -1,4 +1,5 @@
-﻿using CLA_Administration_Web.Helpers.Enums.AppPages;
+﻿using CLA_Administration_Web.Helpers.Constants;
+using CLA_Administration_Web.Helpers.Enums.AppPages;
 using CLA_Administration_Web.Helpers.Enums.Shared;
 using CLA_Administration_Web.ViewModels.Layouts;
 
@@ -6,8 +7,10 @@ namespace CLA_Administration_Web.Helpers.Layout
 {
     public class LayoutsHelper
     {
-        public const string WhiteIconsFolder = "/images/icons/white";
-        public const string BlueIconsFolder = "/images/icons/blue";
+        public static string BaseAddress = LaunchSettingsHelper.IsLiveSite ? "/WebAdminTool" : "";
+
+        public static string WhiteIconsFolder = $"{BaseAddress}/images/icons/white";
+        public static string BlueIconsFolder = $"{BaseAddress}/images/icons/blue";
 
         public static List<DashboardLeftNavigationViewModel> GetDashboardNamesTypes()
         {
