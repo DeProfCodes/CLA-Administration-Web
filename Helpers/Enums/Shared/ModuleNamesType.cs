@@ -4,7 +4,7 @@ namespace CLA_Administration_Web.Helpers.Enums.Shared
 {
     public enum ModuleNamesType
     {
-        [Display(Name = "")]
+        [Display(Name = "", Description = "")]
         None,
 
         [Display(Name = "ContentLibrary", Description = "Content Library")]

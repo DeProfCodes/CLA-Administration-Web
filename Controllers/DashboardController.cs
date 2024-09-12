@@ -1,9 +1,7 @@
 using CLA_Administration_Web.Helpers.Constants;
 using CLA_Administration_Web.Helpers.Layout;
-using CLA_Administration_Web.Models;
 using CLA_Administration_Web.ViewModels.Layouts;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace CLA_Administration_Web.Controllers
 {
@@ -24,7 +22,17 @@ namespace CLA_Administration_Web.Controllers
         [HttpGet]
         public async Task<IActionResult> TopNavigation()
         {
-            return PartialView(AppPagesLinks.Layouts.TopNavigationPageLink);
+            string BaseAddress = LaunchSettingsHelper.IsLiveSite ? "/WebAdminTool" : "";
+            
+            var topNavViewModel = new TopNavigationViewModel
+            {
+                ProfilePictureUrl = $"{BaseAddress}/images/company/vodacom/ndhuvazim-nth-47852.png",
+                UserFullname = "Proficient Mkansi",
+                CompanyDepartment = "Accounting Department",
+                CompanyLogo = $"{BaseAddress}/images/company/vodacom/logo.png"
+            };
+
+            return PartialView(AppPagesLinks.Layouts.TopNavigationPageLink, topNavViewModel);
         }
 
         [HttpGet]
@@ -32,8 +40,13 @@ namespace CLA_Administration_Web.Controllers
         {
             var leftNavViewModel = new LeftNavigationViewModel
             {
-                ModuleNamesPages = LayoutsHelper.GetModuleNamesAndPages(),
-                SettingsNamesType = LayoutsHelper.GetSettingsNamesTypes(),
+                DashboardLeftNavigation = LayoutsHelper.GetDashboardNamesTypes(),
+                AdminLeftNavigation = LayoutsHelper.GetAdminNamesTypes(),
+                ModulesLeftNavigation = LayoutsHelper.GetModuleNamesAndPages(),
+                SettingsLeftNavigation = LayoutsHelper.GetSettingsNamesTypes(),
+                ReportsLeftNavigation = LayoutsHelper.GetReportsNamesTypes(),
+                SupportLeftNavigation = LayoutsHelper.GetSupportNamesTypes(),
+                AccountLeftNavigation = LayoutsHelper.GetAccountNamesTypes(),
             };
 
             return PartialView(AppPagesLinks.Layouts.LeftNavigationPageLink, leftNavViewModel);
@@ -41,12 +54,12 @@ namespace CLA_Administration_Web.Controllers
 
         public IActionResult Dashboard()
         {
-            return PartialView(AppPagesLinks.DashboardHomePageLink);
+            return PartialView(AppPagesLinks.Dashboard.DashboardHomePageLink);
         }
 
         public IActionResult Calendar()
         {
-            return PartialView(AppPagesLinks.DashboardCalendarPageLink);
+            return PartialView(AppPagesLinks.Dashboard.DashboardCalendarPageLink);
         }
     }
 }

@@ -4,7 +4,7 @@ namespace CLA_Administration_Web.Helpers.Enums.Shared
 {
     public enum SettingsNamesType
     {
-        [Display(Name = "", ShortName = "")]
+        [Display(Name = "", Description = "")]
         None,
 
         [Display(Name = "StagingUsers", Description = "Staging Users")]
@@ -27,6 +27,9 @@ namespace CLA_Administration_Web.Helpers.Enums.Shared
 
         [Display(Name = "SkinsOfflineImages", Description = "Skins & Offline Images")]
         SkinsOfflineImages,
+
+        [Display(Name = "DefaultFonts", Description = "DefaultFonts")]
+        DefaultFonts,
 
         [Display(Name = "DesktopInformation", Description = "Desktop Information")]
         DesktopInformation
