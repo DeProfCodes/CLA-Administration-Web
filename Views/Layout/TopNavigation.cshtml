@@ -265,20 +265,38 @@
 
     window.addEventListener('click', function (e)
     {
-        if (document.getElementById('ProfileDropdownContainer').contains(e.target))
+        ToggleUserProfileDropdown(e.target);
+        HideLeftMenuOnClickOutside(e.target);
+    });
+
+    function ToggleUserProfileDropdown(element)
+    {
+        if (document.getElementById('ProfileDropdownContainer').contains(element))
         {
             $("#ProfileDropdown").addClass('show');
-        } 
+        }
         else
         {
             $("#ProfileDropdown").removeClass('show');
         }
-    });
+    }
 
-    function ToggleLeftNavigationMenu()
+    function HideLeftMenuOnClickOutside(element)
     {
-        var isClosed = $("#TopNavigationBar").css('left') == '0px';
-        if(isClosed)
+        if (IsLeftMenuOpened() && IsTrayClosedByScreenSize() && !document.getElementById('LeftNavMenu').contains(element))
+        {
+            CloseMenuTray();
+        }
+    }
+
+    function IsTrayClosedByScreenSize()
+    {
+        return $(document).width() < 1025;
+    }
+
+    function OpenMenuTray()
+    {
+        if (!IsTrayClosedByScreenSize())
         {
             $("#TopNavigationBar").css('left', '260px');
             $("#PageArea").css('margin-left', '260px');
@@ -286,9 +304,42 @@
         }
         else
         {
+            $("#LeftNavMenu").css('left', '0');
+            $("#PageArea").addClass("dim-background");
+            $("#TopNavigationBar").addClass("theme-bg-dim");
+        }
+    }
+
+    function CloseMenuTray()
+    {
+        if (!IsTrayClosedByScreenSize())
+        {
             $("#TopNavigationBar").css('left', '0px');
             $("#PageArea").css('margin-left', '0px');
             $("#LeftNavMenu").css('left', '-300px');
+        }
+        else
+        {
+            $("#LeftNavMenu").css('left', '-300px');
+            $("#PageArea").removeClass("dim-background");
+            $("#TopNavigationBar").removeClass("theme-bg-dim");
+        }
+    }
+
+    function IsLeftMenuOpened()
+    {
+        return $("#LeftNavMenu").css('left') == '0px';
+    }
+
+    function ToggleLeftNavigationMenu()
+    {
+        if (!IsLeftMenuOpened())
+        {
+            OpenMenuTray();
+        }
+        else
+        {
+            CloseMenuTray();
         }
     }
 

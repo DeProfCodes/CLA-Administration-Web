@@ -2,6 +2,6 @@
 {
     public class LaunchSettingsHelper
     {
-        public const bool IsLiveSite = true;
+        public const bool IsLiveSite = false;
     }
 }
