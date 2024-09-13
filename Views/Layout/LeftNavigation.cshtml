@@ -359,6 +359,11 @@
     {
         SetLinkActive(`#${linkId}`);
         OpenPage(page);
+
+        if (IsTrayClosedByScreenSize())
+        {
+            CloseMenuTray();
+        }
     }
 
     function InitialPage()
