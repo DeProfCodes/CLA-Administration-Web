@@ -5,7 +5,7 @@ namespace CLA_Administration_Web.Helpers.Constants
 {
     public class AppPagesUrl
     {
-        public static string BaseAddress = LaunchSettingsHelper.IsLiveSite ? "WebAdminTool/" : "";
+        public static string BaseAddress = LaunchSettingsHelper.GetBaseAddressForControllers();
 
         public static string adminController = $"{BaseAddress}Admin";
         public static string accountController = $"{BaseAddress}Account";
@@ -38,6 +38,8 @@ namespace CLA_Administration_Web.Helpers.Constants
 
         public class Modules
         {
+            public static string AllModules = $"/{modulesController}/{ModulesPages.AllModules.GetDisplayName()}";
+
             public static string ContentLibraryCategories = $"/{modulesController}/{ModulesPages.ContentLibraryCategories.GetDisplayName()}";
             public static string ContentLibraryContent = $"/{modulesController}/{ModulesPages.ContentLibraryContent.GetDisplayName()}";
 

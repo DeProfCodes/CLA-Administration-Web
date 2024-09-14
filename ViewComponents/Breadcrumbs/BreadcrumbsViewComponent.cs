@@ -1,0 +1,30 @@
+﻿using CLA_Administration_Web.Helpers.Enums.AppPages;
+using CLA_Administration_Web.Helpers.Enums.Shared;
+using CLA_Administration_Web.Helpers.Layout;
+using CLA_Administration_Web.ViewModels.Modules;
+using Microsoft.AspNetCore.Mvc;
+
+namespace CLA_Administration_Web.ViewComponents.Modules
+{
+    [ViewComponent(Name = "Breadcrumbs")]
+    public class BreadcrumbsViewComponent : ViewComponent
+    {
+        public BreadcrumbsViewComponent()
+        {
+
+        }
+
+        public async Task<IViewComponentResult> InvokeAsync(Enum page)
+        {
+            if (page is ModulesPages)
+            {
+                var modulePage = (ModulesPages) page; 
+                
+                var breadcrumbViewModel = BreadcrumbsHelper.GetModuleBreadcrumbData(modulePage);
+
+                return View("ModuleBreadcrumbs", breadcrumbViewModel);
+            }
+            return View("Default");
+        }
+    }
+}

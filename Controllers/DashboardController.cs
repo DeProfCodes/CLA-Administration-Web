@@ -22,14 +22,12 @@ namespace CLA_Administration_Web.Controllers
         [HttpGet]
         public async Task<IActionResult> TopNavigation()
         {
-            string BaseAddress = LaunchSettingsHelper.IsLiveSite ? "/WebAdminTool" : "";
-            
             var topNavViewModel = new TopNavigationViewModel
             {
-                ProfilePictureUrl = $"{BaseAddress}/images/company/vodacom/ndhuvazim-nth-47852.png",
+                ProfilePictureUrl = $"{LaunchSettingsHelper.GetBaseAddressForImages()}/images/company/vodacom/ndhuvazim-nth-47852.png",
                 UserFullname = "Proficient Mkansi",
                 CompanyDepartment = "Accounting Department",
-                CompanyLogo = $"{BaseAddress}/images/company/vodacom/logo.png"
+                CompanyLogo = $"{LaunchSettingsHelper.GetBaseAddressForImages()}/images/company/vodacom/logo.png"
             };
 
             return PartialView(AppPagesLinks.Layouts.TopNavigationPageLink, topNavViewModel);
@@ -47,6 +45,7 @@ namespace CLA_Administration_Web.Controllers
                 ReportsLeftNavigation = LayoutsHelper.GetReportsNamesTypes(),
                 SupportLeftNavigation = LayoutsHelper.GetSupportNamesTypes(),
                 AccountLeftNavigation = LayoutsHelper.GetAccountNamesTypes(),
+                WhiteBorderIcon = $"{LaunchSettingsHelper.GetBaseAddressForImages()}/images/icons/border.png"
             };
 
             return PartialView(AppPagesLinks.Layouts.LeftNavigationPageLink, leftNavViewModel);

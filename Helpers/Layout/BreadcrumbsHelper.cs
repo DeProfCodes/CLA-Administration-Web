@@ -1,0 +1,208 @@
+﻿using CLA_Administration_Web.Helpers.Enums.AppPages;
+using CLA_Administration_Web.ViewModels.Modules;
+
+namespace CLA_Administration_Web.Helpers.Layout
+{
+    public class BreadcrumbsHelper
+    {
+        public static List<ModuleBreadcrumbViewModel> GetAllModulesBreadcrumbData()
+        {
+            var modulesBreadcrumbs = new List<ModuleBreadcrumbViewModel>()
+            {
+                new ModuleBreadcrumbViewModel()
+                {
+                    IsAllModulesBreadcrumb = true,
+                    ModulePage = ModulesPages.AllModules,
+                    ModulePageName = "Modules",
+                    ModuleSubPage = "Overview",
+                    HasActionButton = false,
+                    IsAddNewIcon = false,
+                },
+                new ModuleBreadcrumbViewModel()
+                {
+                    ModulePage = ModulesPages.PopupOverview,
+                    ModulePageName = "Popup Module",
+                    ModuleName = "Popup",
+                    ModuleSubPage = "Overview",
+                    HasActionButton = true,
+                    IsAddNewIcon = true,
+                    ActionButtonText = "Add New Popup",
+                    ActionButtonPage = ModulesPages.PopupAddNew
+                },
+                new ModuleBreadcrumbViewModel()
+                {
+                    ModulePage = ModulesPages.PopupAddNew,
+                    ModulePageName = "Popup Module",
+                    ModuleName = "Popup",
+                    ModuleSubPage = "Add New",
+                    HasActionButton = true,
+                    IsAddNewIcon = false,
+                    ActionButtonText = "Popups Overview",
+                    ActionButtonPage = ModulesPages.PopupOverview
+                },
+                new ModuleBreadcrumbViewModel()
+                {
+                    ModulePage = ModulesPages.ContentLibraryCategories,
+                    ModulePageName = "Content Library Module",
+                    ModuleName = "Content Library",
+                    ModuleSubPage = "Categories",
+                    HasActionButton = true,
+                    IsAddNewIcon = false,
+                    ActionButtonText = "Add New Category",
+                    ActionButtonPage = ModulesPages.ContentLibraryContent
+                },
+                new ModuleBreadcrumbViewModel()
+                {
+                    ModulePage = ModulesPages.ContentLibraryContent,
+                    ModulePageName = "Content Library Module",
+                    ModuleName = "Content Library",
+                    ModuleSubPage = "Content",
+                    HasActionButton = true,
+                    IsAddNewIcon = true,
+                    ActionButtonText = "Add New Content",
+                    ActionButtonPage = ModulesPages.ContentLibraryCategories
+                },
+                new ModuleBreadcrumbViewModel()
+                {
+                    ModulePage = ModulesPages.DesktopOverview,
+                    ModulePageName = "Desktop Module",
+                    ModuleName = "Desktop",
+                    ModuleSubPage = "Overview",
+                    HasActionButton = true,
+                    IsAddNewIcon = true,
+                    ActionButtonText = "Add New Desktop",
+                    ActionButtonPage = ModulesPages.DesktopAddNew
+                },
+                new ModuleBreadcrumbViewModel()
+                {
+                    ModulePage = ModulesPages.DesktopAddNew,
+                    ModulePageName = "Desktop Module",
+                    ModuleName = "Desktop",
+                    ModuleSubPage = "Add New",
+                    HasActionButton = true,
+                    IsAddNewIcon = true,
+                    ActionButtonText = "Desktop Overview",
+                    ActionButtonPage = ModulesPages.DesktopOverview
+                },
+                new ModuleBreadcrumbViewModel()
+                {
+                    ModulePage = ModulesPages.LockedDesktopAddNew,
+                    ModulePageName = "Locked Desktop Module",
+                    ModuleName = "Locked Desktop",
+                    ModuleSubPage = "Add New",
+                    HasActionButton = true,
+                    IsAddNewIcon = false,
+                    ActionButtonText = "Locked Desktop Overview",
+                    ActionButtonPage = ModulesPages.LockedDesktopOverview
+                },
+                new ModuleBreadcrumbViewModel()
+                {
+                    ModulePage = ModulesPages.LockedDesktopOverview,
+                    ModulePageName = "Locked Desktop Module",
+                    ModuleName = "Locked Desktop",
+                    ModuleSubPage = "Overview",
+                    HasActionButton = true,
+                    IsAddNewIcon = true,
+                    ActionButtonText = "Add New Locked Desktop",
+                    ActionButtonPage = ModulesPages.LockedDesktopAddNew
+                },
+                new ModuleBreadcrumbViewModel()
+                {
+                    ModulePage = ModulesPages.ScreensaverAddNew,
+                    ModulePageName = "Screensaver Module",
+                    ModuleName = "Screensaver",
+                    ModuleSubPage = "Add New",
+                    HasActionButton = true,
+                    IsAddNewIcon = false,
+                    ActionButtonText = "Screensaver Overview",
+                    ActionButtonPage = ModulesPages.ScreensaverOverview
+                },
+                new ModuleBreadcrumbViewModel()
+                {
+                    ModulePage = ModulesPages.ScreensaverOverview,
+                    ModulePageName = "Screensaver Module",
+                    ModuleName = "Screensaver",
+                    ModuleSubPage = "Overview",
+                    HasActionButton = true,
+                    IsAddNewIcon = true,
+                    ActionButtonText = "Add New Screensaver",
+                    ActionButtonPage = ModulesPages.ScreensaverAddNew
+                },
+                new ModuleBreadcrumbViewModel()
+                {
+                    ModulePage = ModulesPages.SurveyAddNew,
+                    ModulePageName = "Survey Module",
+                    ModuleName = "Survey",
+                    ModuleSubPage = "Add New",
+                    HasActionButton = true,
+                    IsAddNewIcon = false,
+                    ActionButtonText = "Survey Overview",
+                    ActionButtonPage = ModulesPages.SurveyOverview
+                },
+                new ModuleBreadcrumbViewModel()
+                {
+                    ModulePage = ModulesPages.SurveyOverview,
+                    ModulePageName = "Survey Module",
+                    ModuleName = "Survey",
+                    ModuleSubPage = "Overview",
+                    HasActionButton = true,
+                    IsAddNewIcon = true,
+                    ActionButtonText = "Add New Survey",
+                    ActionButtonPage = ModulesPages.SurveyAddNew
+                },
+                new ModuleBreadcrumbViewModel()
+                {
+                    ModulePage = ModulesPages.TickerAddNew,
+                    ModulePageName = "Ticker Module",
+                    ModuleName = "Ticker",
+                    ModuleSubPage = "Add New",
+                    HasActionButton = true,
+                    IsAddNewIcon = false,
+                    ActionButtonText = "Ticker Overview",
+                    ActionButtonPage = ModulesPages.TickerOverview
+                },
+                new ModuleBreadcrumbViewModel()
+                {
+                    ModulePage = ModulesPages.TickerOverview,
+                    ModulePageName = "Ticker Module",
+                    ModuleName = "Ticker",
+                    ModuleSubPage = "Overview",
+                    HasActionButton = true,
+                    IsAddNewIcon = true,
+                    ActionButtonText = "Add New Ticker",
+                    ActionButtonPage = ModulesPages.TickerAddNew
+                },
+                new ModuleBreadcrumbViewModel()
+                {
+                    ModulePage = ModulesPages.RSSAddNew,
+                    ModulePageName = "RSS Module",
+                    ModuleName = "RSS",
+                    ModuleSubPage = "Add New",
+                    HasActionButton = true,
+                    IsAddNewIcon = false,
+                    ActionButtonText = "RSS Overview",
+                    ActionButtonPage = ModulesPages.RSSOverview
+                },
+                new ModuleBreadcrumbViewModel()
+                {
+                    ModulePage = ModulesPages.RSSOverview,
+                    ModulePageName = "RSS Module",
+                    ModuleName = "RSS",
+                    ModuleSubPage = "Overview",
+                    HasActionButton = true,
+                    IsAddNewIcon = true,
+                    ActionButtonText = "Add New RSS",
+                    ActionButtonPage = ModulesPages.RSSAddNew
+                },
+            };
+            return modulesBreadcrumbs;
+        }
+        
+        public static ModuleBreadcrumbViewModel GetModuleBreadcrumbData(ModulesPages modulePage)
+        {
+            var allModulesBreadcrumbs = GetAllModulesBreadcrumbData();
+
+            return allModulesBreadcrumbs.FirstOrDefault(m => m.ModulePage == modulePage);
+        }
+    }
+}

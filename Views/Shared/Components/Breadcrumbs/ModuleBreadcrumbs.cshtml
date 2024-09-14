@@ -1,0 +1,49 @@
+﻿@model CLA_Administration_Web.ViewModels.Modules.ModuleBreadcrumbViewModel
+@using CLACommonFunctionsLibrary_NET.Helpers.Enums
+@using CLA_Administration_Web.Helpers.Enums.AppPages
+
+
+<div class="row mb-2">
+    <div class="w-auto">
+        <h2 class="theme-txt-clr breadcrumb-title">@Model.ModulePageName</h2>
+        @if (!Model.IsAllModulesBreadcrumb)
+        {
+            <p class="breadcrumb-nav-body">
+                <span class="breadcrumb-item-nav" onclick="OpenPageWithAnimations('Dashboard', null, '@DashboardPages.Dashboard', 'DashboardSubLink')">Dashboard</span> /
+                <span class="breadcrumb-item-nav" onclick="OpenPageWithAnimations('Modules', null, '@ModulesPages.AllModules', 'AllModulesLink', true)">Modules</span> /
+                <span class="breadcrumb-item">@Model.ModuleName</span> /
+                <span class="breadcrumb-item">@Model.ModuleSubPage</span>
+            </p>
+        }
+        else
+        {
+            <p>
+                <span class="breadcrumb-item-nav" onclick="OpenPageWithAnimations('Dashboard', null, '@DashboardPages.Dashboard', 'DashboardSubLink')">Dashboard</span> /
+                <span class="breadcrumb-item">Modules</span> 
+            </p>
+        }
+    </div>
+    @if (Model.HasActionButton)
+    {
+        var iconCss = Model.IsAddNewIcon ? "bi bi-plus-circle-fill" : "ri-menu-search-fill";
+
+        <div class="w-auto ms-auto">
+            <button class="custom-btn custom-btn-default" onclick="OpenBreadcrumbActionButton()"><i class="@iconCss custom-btn-icons"></i> @Model.ActionButtonText</button>
+        </div>
+    }
+</div>
+
+@{
+    var pageType = Model.ActionButtonPage;
+    var moduleName = pageType.GetDisplayShortName();
+    var navPageId = $"{pageType.GetDisplayName()}Link";
+}
+
+<script>
+
+    function OpenBreadcrumbActionButton(page)
+    {
+        OpenPageWithAnimations('Modules', '@moduleName', '@pageType', '@navPageId');
+    }
+
+</script>

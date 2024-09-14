@@ -1,4 +1,17 @@
-﻿
-<h1 class="text-center">
-    Ticker Overview
-</h1>
+﻿@using CLA_Administration_Web.Helpers.Enums.AppPages
+
+<!-- Top Page Navigation Breadcrumb -->
+<div class="row mb-2">
+    <div class="w-auto">
+        <h2 class="theme-txt-clr">Content Library</h2>
+        <p>
+            <span class="breadcrumb-item-nav" onclick="OpenPageWithAnimations('Dashboard', null, '@DashboardPages.Dashboard', 'DashboardSubLink')">Dashboard</span> /
+            <span class="breadcrumb-item-nav" onclick="OpenPageWithAnimations('Modules', null, '@ModulesPages.AllModules', 'AllModulesLink', true)">Modules</span> /
+            <span class="breadcrumb-item">Screensaver</span> /
+            <span class="breadcrumb-item">Overview</span>
+        </p>
+    </div>
+    <div class="w-auto ms-auto">
+        <button class="custom-btn custom-btn-default"><i class="bi bi-plus-circle-fill custom-btn-icons"></i> Ticker Overview</button>
+    </div>
+</div>

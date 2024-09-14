@@ -7,6 +7,9 @@ namespace CLA_Administration_Web.Helpers.Enums.Shared
         [Display(Name = "", Description = "")]
         None,
 
+        [Display(Name = "AllModules", Description = "All Modules")]
+        AllModules,
+
         [Display(Name = "ContentLibrary", Description = "Content Library")]
         ContentLibrary,
 

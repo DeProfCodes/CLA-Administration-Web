@@ -7,10 +7,8 @@ namespace CLA_Administration_Web.Helpers.Layout
 {
     public class LayoutsHelper
     {
-        public static string BaseAddress = LaunchSettingsHelper.IsLiveSite ? "/WebAdminTool" : "";
-
-        public static string WhiteIconsFolder = $"{BaseAddress}/images/icons/white";
-        public static string BlueIconsFolder = $"{BaseAddress}/images/icons/blue";
+        public static string WhiteIconsFolder = $"{LaunchSettingsHelper.GetBaseAddressForImages()}/images/icons/white";
+        public static string BlueIconsFolder = $"{LaunchSettingsHelper.GetBaseAddressForImages()}/images/icons/blue";
 
         public static List<DashboardLeftNavigationViewModel> GetDashboardNamesTypes()
         {

@@ -40,7 +40,7 @@ body
 
 a
 {
-    color: #923eb9;
+    color: #04316d;
     text-decoration: none;
 }
 
@@ -256,7 +256,7 @@ ion-icon
 .sidebar-wrapper .metismenu ul
 {
     background: rgb(255 255 255 / 0%);
-    border-left: 2px solid #f4ebf8;
+    border-left: 2px solid lime;
     margin-left:12px;
 }
 
@@ -277,7 +277,7 @@ ion-icon
 {
     color: #923eb9;
     text-decoration: none;
-    background-color: rgb(146 62 185 / 10%);
+    background-color: navy;/*rgb(146 62 185 / 10%);*/
 }
 
 .menu-label
@@ -806,7 +806,6 @@ ion-icon
 .breadcrumb-title
 {
     font-size: 20px;
-    border-right: 1.5px solid #ced3da;
 }
 
 .page-breadcrumb .breadcrumb li.breadcrumb-item

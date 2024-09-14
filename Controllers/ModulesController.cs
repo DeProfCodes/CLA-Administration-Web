@@ -14,6 +14,11 @@ namespace CLA_Administration_Web.Controllers
             _logger = logger;
         }
 
+        public IActionResult AllModules()
+        {
+            return PartialView(AppPagesLinks.Modules.AllModulesPageLink);
+        }
+
         public IActionResult ContentLibraryCategories()
         {
             return PartialView(AppPagesLinks.Modules.ContentLibraryCategoriesPageLink);
@@ -59,7 +64,7 @@ namespace CLA_Administration_Web.Controllers
             return PartialView(AppPagesLinks.Modules.PopupOverviewPageLink);
         }
 
-        public IActionResult PopupAddNew()
+        public IActionResult AddNewPopup()
         {
             return PartialView(AppPagesLinks.Modules.PopupAddNewPageLink);
         }

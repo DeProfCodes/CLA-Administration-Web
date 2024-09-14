@@ -1,5 +1,8 @@
-﻿
+﻿@using CLA_Administration_Web.Helpers.Enums.AppPages
 
-<h1 class="text-center">
-    Content Library Content 
-</h1>
+
+<div class="container-fluid">
+    <!-- Top Page Navigation Breadcrumb -->
+    @await Component.InvokeAsync("Breadcrumbs", new { page = ModulesPages.ContentLibraryContent })
+
+</div>

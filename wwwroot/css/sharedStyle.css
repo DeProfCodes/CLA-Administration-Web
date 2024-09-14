@@ -15,3 +15,59 @@
 {
     float:right !important;
 }
+
+/**========================= Breadcrumbs / Navigation =======================*/
+
+.breadcrumb-item-nav 
+{
+    color: blue !important;
+    cursor: pointer;
+}
+.breadcrumb-item
+{
+    color: black;
+}
+.breadcrumb-item + .breadcrumb-item::before
+{
+    content: "" !important;
+}
+.breadcrumb-title
+{
+    font-size: 25px !important;
+    margin-bottom: 0;
+}
+.breadcrumb-nav-body
+{
+    font-size: 14px;
+    margin-bottom:0;
+}
+
+/**========================= Controls =======================*/
+
+.custom-btn
+{
+    padding: 7px 15px;
+    font-size: 16px;
+    border-radius: 8px
+}
+.custom-btn:hover
+{
+    opacity: 0.8;
+}
+.custom-btn-default
+{
+    background-color: #04316d !important;
+    border: none;
+    color: white !important;
+}
+.custom-btn-default:hover
+{
+    opacity: 1 !important;
+    background-color: rgba(4, 49, 109, 0.9) !important;
+}
+.custom-btn-icons
+{
+    margin-right: 5px;
+}
+
+

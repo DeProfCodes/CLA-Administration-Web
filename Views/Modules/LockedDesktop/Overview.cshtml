@@ -1,4 +1,8 @@
-﻿
-<h1 class="text-center">
-    Locked Desktop Overview
-</h1>
+﻿@using CLA_Administration_Web.Helpers.Enums.AppPages
+
+
+<div class="container-fluid">
+    <!-- Top Page Navigation Breadcrumb -->
+    @await Component.InvokeAsync("Breadcrumbs", new { page = ModulesPages.LockedDesktopOverview })
+
+</div>

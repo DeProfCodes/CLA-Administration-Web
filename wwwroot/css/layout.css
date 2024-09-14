@@ -29,7 +29,7 @@
 }
 .left-nav-menu-active
 {
-    color: yellow !important;
+    color: lime !important;
 }
 .left-nav-menu-item
 {
@@ -60,7 +60,7 @@
 }
 .left-sub-nav-menu-active
 {
-    background: #e0bc00 !important;
+    background: lime !important;
     color: #04316d !important;
 }
 .active-sub-nav-link
@@ -69,8 +69,13 @@
 }
 .left-sub-nav-menu-active:hover
 {
-    background: #e0bc00 !important;
+    background: lime !important;
     color: #04316d !important;
+}
+.left-nav-sub-menu-dropdown
+{
+    margin-left: 0 !important;
+    margin-top: -5px !important;
 }
 #LeftNavigationActualMenu
 {

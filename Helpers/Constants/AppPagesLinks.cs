@@ -31,6 +31,8 @@
 
         public class Modules
         {
+            public const string AllModulesPageLink = "~/Views/Modules/AllModules.cshtml";
+
             public const string ContentLibraryCategoriesPageLink = "~/Views/Modules/ContentLibrary/Categories.cshtml";
             public const string ContentLibraryContentsPageLink = "~/Views/Modules/ContentLibrary/Contents.cshtml";
 
@@ -43,8 +45,8 @@
             public const string ScreensaverOverviewPageLink = "~/Views/Modules/Screensaver/Overview.cshtml";
             public const string ScreensaverAddNewPageLink = "~/Views/Modules/Screensaver/AddNew.cshtml";
 
-            public const string PopupOverviewPageLink = "~/Views/Modules/Popup/Overview.cshtml";
-            public const string PopupAddNewPageLink = "~/Views/Modules/Popup/AddNew.cshtml";
+            public const string PopupOverviewPageLink = "~/Views/Modules/Popup/PopupOverview.cshtml";
+            public const string PopupAddNewPageLink = "~/Views/Modules/Popup/AddNewPopup.cshtml";
 
             public const string SurveyOverviewPageLink = "~/Views/Modules/Survey/Overview.cshtml";
             public const string SurveyAddNewPageLink = "~/Views/Modules/Survey/AddNew.cshtml";
