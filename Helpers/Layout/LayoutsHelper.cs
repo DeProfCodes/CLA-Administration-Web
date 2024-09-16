@@ -1,6 +1,6 @@
 ﻿using CLA_Administration_Web.Helpers.Constants;
 using CLA_Administration_Web.Helpers.Enums.AppPages;
-using CLA_Administration_Web.Helpers.Enums.Shared;
+using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
 using CLA_Administration_Web.ViewModels.Layouts;
 
 namespace CLA_Administration_Web.Helpers.Layout

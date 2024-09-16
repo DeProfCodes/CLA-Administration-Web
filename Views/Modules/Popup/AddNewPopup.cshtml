@@ -1,13 +1,11 @@
 ﻿@using CLA_Administration_Web.Helpers.Enums.AppPages
-@{
-    ViewData["Title"] = "Popup Overview";
-}
+
 
 <div class=" container-fluid ">
     <!-- Breadcrumb Component -->
     @await Component.InvokeAsync("Breadcrumbs", new { page = ModulesPages.PopupAddNew })
 
-    <div class="card">
+    <div class="card hidden">
         <div class="card-body">
             <form id="popupForm">
                 <div class="container-fluid">

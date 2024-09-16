@@ -1,5 +1,7 @@
 using CLA_Administration_Web.Helpers.Constants;
+using CLA_Administration_Web.Helpers.Modules;
 using CLA_Administration_Web.Models;
+using CLA_Administration_Web.Services.Modules;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -7,10 +9,13 @@ namespace CLA_Administration_Web.Controllers
 {
     public class ModulesController : Controller
     {
+        private readonly IModuleService _moduleService;
+
         private readonly ILogger<ModulesController> _logger;
 
-        public ModulesController(ILogger<ModulesController> logger)
+        public ModulesController(IModuleService moduleService, ILogger<ModulesController> logger)
         {
+            _moduleService = moduleService;
             _logger = logger;
         }
 
@@ -59,15 +64,26 @@ namespace CLA_Administration_Web.Controllers
             return PartialView(AppPagesLinks.Modules.ScreensaverAddNewPageLink);
         }
 
-        public IActionResult PopupOverview()
+        #region Popup
+        
+        public async Task<IActionResult> PopupOverview()
         {
-            return PartialView(AppPagesLinks.Modules.PopupOverviewPageLink);
+            var popupDataViewModel = await _moduleService.GetAllPopupsData();
+
+            popupDataViewModel.ForEach(p => 
+            {
+                p.Status = ModulesHelper.GetModuleStatus(p.EffectiveFrom, p.EffectiveTo); 
+            });
+
+            return PartialView(AppPagesLinks.Modules.PopupOverviewPageLink, popupDataViewModel);
         }
 
         public IActionResult AddNewPopup()
         {
             return PartialView(AppPagesLinks.Modules.PopupAddNewPageLink);
         }
+
+        #endregion
 
         public IActionResult SurveyOverview()
         {

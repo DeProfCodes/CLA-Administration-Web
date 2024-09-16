@@ -1,7 +1,13 @@
+using CLA_Administration_Web.Services.Modules;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
+// Services
+builder.Services.AddScoped<IModuleService, ModuleService>();
+
 
 var app = builder.Build();
 

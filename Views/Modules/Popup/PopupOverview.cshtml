@@ -1,75 +1,60 @@
-﻿@using CLA_Administration_Web.Helpers.Enums.AppPages
+﻿@model List<CLA_Administration_Web.ViewModels.Modules.PopupViewModule>
+@using CLACommonFunctionsLibrary_NET.Helpers.Enums
+@using CLA_Administration_Web.Helpers.Enums.AppPages
 
 <div class="container-fluid">
-    
+
     <!-- Breadcrumb Component -->
     @await Component.InvokeAsync("Breadcrumbs", new { page = ModulesPages.PopupOverview })
-    
+
     <!-- ModuleFilter Component -->
     @await Component.InvokeAsync("OverviewDataFilters", new { page = ModulesPages.PopupOverview })
 
     <!-- Card for Table -->
-    <div class="card">
+    <div class="card" id="ModuleOverviewCard">
         <div class="card-body">
             <div class="table-responsive">
-                <table id="myTable" class="table table-striped table-bordered table-hover align-middle">
+                <h3 class="w-100 text-center theme-txt-clr overview-table-caption">Active Popups</h3>
+                <table id="PopupOverviewDataTable" class="table table-striped table-hover align-middle">
                     <thead>
                         <tr>
                             <th>ID</th>
                             <th>Header Text</th>
-                            <th>Body Text</th>
+                            <th class="text-center">Body Text</th>
                             <th>Effective From</th>
                             <th>Effective To</th>
-                            <th>Timeslot From</th>
-                            <th>Timeslot To</th>
+                            <th>From</th>
+                            <th>To</th>
                             <th>Status</th>
                             <th>Last Modified Date</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Image Popup</td>
-                            <td>Click this popup to open...</td>
-                            <td>2024/07/01</td>
-                            <td>2024/08/30</td>
-                            <td>08:00</td>
-                            <td>17:30</td>
-                            <td><span class="badge bg-success">Active</span></td>
-                            <td>2024/08/20 16:42</td>
-                            <td>
-                                <div class="btn-group" role="group">
-                                    <button class="btn btn-primary btn-sm mx-1" style="border: 1px solid ;">Open</button>
-                                    <button class="btn btn-secondary btn-sm mx-1" style="border: 1px solid;">Edit</button>
-                                    <button class="btn btn-danger btn-sm mx-1" style="border: 1px solid;">Expired</button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Another Popup</td>
-                            <td>Click this popup for details...</td>
-                            <td>2024/06/15</td>
-                            <td>2024/07/20</td>
-                            <td>09:00</td>
-                            <td>18:00</td>
-                            <td><span class="badge bg-danger">Expired</span></td>
-                            <td>2024/07/18 12:32</td>
-                            <td>
-                                <div class="btn-group" role="group">
-                                    <button class="btn btn-primary btn-sm mx-1" style="border: 1px solid ;">Open</button>
-                                    <button class="btn btn-secondary btn-sm mx-1" style="border: 1px solid;">Edit</button>
-                                    <button class="btn btn-danger btn-sm mx-1" style="border: 1px solid;">Expired</button>
-                                </div>
-                            </td>
-                        </tr>
+                        @foreach (var popup in Model)
+                        {
+                            <tr>
+                                <td class="text-center">@popup.Id</td>
+                                <td><p class="popup-dt-header-text">@popup.HeaderText</p></td>
+                                <td><p class="popup-dt-body-text">@popup.BodyText</p></td>
+                                <td>@popup.EffectiveFrom</td>
+                                <td>@popup.EffectiveTo</td>
+                                <td>@popup.TimeslotFrom</td>
+                                <td>@popup.TimeslotTo</td>
+                                <td><span class="@popup.Status.CssClass">@popup.Status.StatusType.GetDisplayName()</span></td>
+                                <td>@popup.LastModifiedDate</td>
+                                <td>
+                                    <button class="btn btn-info btn-sm mx-1">Open</button>
+                                    <button class="btn btn-secondary btn-sm mx-1">Edit</button>
+                                    <button class="btn btn-danger btn-sm mx-1">Expired</button>
+                                </td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-
 </div>
 
 
@@ -77,10 +62,10 @@
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
 
 <script>
-    
+
     $(document).ready(function ()
     {
-        $('#myTable').DataTable();
+        $('#PopupOverviewDataTable').DataTable();
     });
 
 </script>

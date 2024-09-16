@@ -210,11 +210,81 @@
 }
 #FilterModuleTitle
 {
-    font-size: 20px !important;
+    font-size: 22px !important;
 }
 .overview-filters-card .card-body
 {
     padding-bottom:0 !important;
+}
+#ModuleOverviewCard
+{
+    min-height: 500px;
+}
+.overview-table-caption
+{
+    font-size: 20px;
+    font-weight: bold;
+}
+.popup-dt-body-text
+{
+    max-width: 320px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    margin-bottom:0;
+}
+.popup-dt-header-text
+{
+    max-width: 120px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    margin-bottom:0;
+}
+#PopupOverviewDataTable
+{
+    /*border: 1px solid silver;*/
+}
+
+
+@media screen and (max-width:1950px)
+{
+    .popup-dt-body-text
+    {
+        max-width:410px;
+    }
+}
+
+@media screen and (max-width:1850px)
+{
+    .popup-dt-body-text
+    {
+        max-width:320px;
+    }
+}
+
+@media screen and (max-width:1800px)
+{
+    .popup-dt-body-text
+    {
+        max-width:270px;
+    }
+}
+
+@media screen and (max-width:1700px)
+{
+    .popup-dt-body-text
+    {
+        max-width:170px;
+    }
+}
+
+@media screen and (max-width:1450px)
+{
+    .popup-dt-body-text
+    {
+        max-width:200px;
+    }
 }
 
 @media screen and (max-width:1370px)
