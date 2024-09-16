@@ -4,46 +4,9 @@
     
     <!-- Breadcrumb Component -->
     @await Component.InvokeAsync("Breadcrumbs", new { page = ModulesPages.PopupOverview })
-
-    <!-- Card for Filters -->
-    <div class="card mb-4">
-        <div class="card-body">
-            <div class="row">
-                <h4 class="text-center mb-1 theme-txt-clr">Filter Popup Types</h4>
-                <div class="col-12 mb-4 d-flex flex-wrap justify-content-between align-items-center">
-                    <div class="mb-3 mb-md-0">
-                        <p class="text-left theme-txt-clr">Status</p>
-                        <div class="btn-group w-100" role="group" aria-label="Status filter">
-                            <button class="btn btn-primary">All</button>
-                            <button class="btn btn-outline-primary">Active</button>
-                            <button class="btn btn-outline-primary">Expired</button>
-                            <button class="btn btn-outline-primary">Pending</button>
-                            <button class="btn btn-outline-primary">Custom</button>
-                        </div>
-                    </div>
-                    <div class="d-flex flex-wrap align-items-center">
-                        <div class="mb-3 mb-md-0">
-                            <label for="userFilter" class="col-form-label fw-bold">User</label>
-                            <select class="form-select" id="userFilter">
-                                <option selected>All Users</option>
-                                <option value="1">User 1</option>
-                                <option value="2">User 2</option>
-                                <option value="3">User 3</option>
-                            </select>
-                        </div>
-                        <div class="mb-3 mb-md-0 ms-3">
-                            <label for="dateFrom" class="col-form-label fw-bold">From</label>
-                            <input type="date" class="form-control" id="dateFrom" value="2020-01-01">
-                        </div>
-                        <div class="mb-3 mb-md-0 ms-3">
-                            <label for="dateTo" class="col-form-label fw-bold">To</label>
-                            <input type="date" class="form-control" id="dateTo" value="2024-08-31">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    
+    <!-- ModuleFilter Component -->
+    @await Component.InvokeAsync("OverviewDataFilters", new { page = ModulesPages.PopupOverview })
 
     <!-- Card for Table -->
     <div class="card">
@@ -114,8 +77,10 @@
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
 
 <script>
+    
     $(document).ready(function ()
     {
         $('#myTable').DataTable();
     });
+
 </script>

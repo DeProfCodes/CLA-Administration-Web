@@ -36,26 +36,26 @@
             public const string ContentLibraryCategoriesPageLink = "~/Views/Modules/ContentLibrary/Categories.cshtml";
             public const string ContentLibraryContentsPageLink = "~/Views/Modules/ContentLibrary/Contents.cshtml";
 
-            public const string DesktopOverviewPageLink = "~/Views/Modules/Desktop/Overview.cshtml";
-            public const string DesktopAddNewPageLink = "~/Views/Modules/Desktop/AddNew.cshtml";
+            public const string DesktopOverviewPageLink = "~/Views/Modules/Desktop/DesktopOverview.cshtml";
+            public const string DesktopAddNewPageLink = "~/Views/Modules/Desktop/AddNewDesktop.cshtml";
 
-            public const string LockedDesktopOverviewPageLink = "~/Views/Modules/LockedDesktop/Overview.cshtml";
-            public const string LockedDesktopAddNewPageLink = "~/Views/Modules/LockedDesktop/AddNew.cshtml";
+            public const string LockedDesktopOverviewPageLink = "~/Views/Modules/LockedDesktop/LockedDesktopOverview.cshtml";
+            public const string LockedDesktopAddNewPageLink = "~/Views/Modules/LockedDesktop/AddNewLockedDesktop.cshtml";
 
-            public const string ScreensaverOverviewPageLink = "~/Views/Modules/Screensaver/Overview.cshtml";
-            public const string ScreensaverAddNewPageLink = "~/Views/Modules/Screensaver/AddNew.cshtml";
+            public const string ScreensaverOverviewPageLink = "~/Views/Modules/Screensaver/ScreensaverOverview.cshtml";
+            public const string ScreensaverAddNewPageLink = "~/Views/Modules/Screensaver/AddNewScreensaver.cshtml";
 
             public const string PopupOverviewPageLink = "~/Views/Modules/Popup/PopupOverview.cshtml";
             public const string PopupAddNewPageLink = "~/Views/Modules/Popup/AddNewPopup.cshtml";
 
-            public const string SurveyOverviewPageLink = "~/Views/Modules/Survey/Overview.cshtml";
-            public const string SurveyAddNewPageLink = "~/Views/Modules/Survey/AddNew.cshtml";
+            public const string SurveyOverviewPageLink = "~/Views/Modules/Survey/SurveyOverview.cshtml";
+            public const string SurveyAddNewPageLink = "~/Views/Modules/Survey/AddNewSurvey.cshtml";
 
-            public const string TickerOverviewPageLink = "~/Views/Modules/Ticker/Overview.cshtml";
-            public const string TickerAddNewPageLink = "~/Views/Modules/Ticker/AddNew.cshtml";
+            public const string TickerOverviewPageLink = "~/Views/Modules/Ticker/TickerOverview.cshtml";
+            public const string TickerAddNewPageLink = "~/Views/Modules/Ticker/AddNewTicker.cshtml";
 
-            public const string RSSOverviewPageLink = "~/Views/Modules/RSS/Overview.cshtml";
-            public const string RSSAddNewPageLink = "~/Views/Modules/RSS/AddNew.cshtml";
+            public const string RSSOverviewPageLink = "~/Views/Modules/RSS/RSSOverview.cshtml";
+            public const string RSSAddNewPageLink = "~/Views/Modules/RSS/AddNewRSS.cshtml";
         }
 
         public class Settings

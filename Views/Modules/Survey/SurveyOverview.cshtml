@@ -1,0 +1,10 @@
+﻿@using CLA_Administration_Web.Helpers.Enums.AppPages
+
+<div class="container-fluid">
+    <!-- Top Page Navigation Breadcrumb -->
+    @await Component.InvokeAsync("Breadcrumbs", new { page = ModulesPages.SurveyOverview })
+
+    <!-- ModuleFilter Component -->
+    @await Component.InvokeAsync("OverviewDataFilters", new { page = ModulesPages.SurveyOverview })
+
+</div>

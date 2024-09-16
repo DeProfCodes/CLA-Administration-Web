@@ -27,8 +27,8 @@
     {
         var iconCss = Model.IsAddNewIcon ? "bi bi-plus-circle-fill" : "ri-menu-search-fill";
 
-        <div class="w-auto ms-auto">
-            <button class="custom-btn custom-btn-default" onclick="OpenBreadcrumbActionButton()"><i class="@iconCss custom-btn-icons"></i> @Model.ActionButtonText</button>
+        <div class="w-auto ms-auto" id="BreadcrumbBtnContainer">
+            <button class="custom-btn custom-btn-default breadcrumb-btn" onclick="OpenBreadcrumbActionButton()"><i class="@iconCss custom-btn-icons breadcrumb-btn-icon"></i> @Model.ActionButtonText</button>
         </div>
     }
 </div>
