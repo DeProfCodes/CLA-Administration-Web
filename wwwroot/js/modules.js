@@ -16,7 +16,7 @@ function ModuleFilterButtonClick(filterBtnId, moduleType, status, username, star
 {
     $('.module-filter-btn-group').removeClass('btn-group-active');
     $(`#${filterBtnId}`).addClass('btn-group-active');
-
+    
     if(moduleType == AllModuleTypes.Popup)
     {
         ReloadFilteredModuleOverview(moduleType, status, username, startDate, endDate);
@@ -25,14 +25,20 @@ function ModuleFilterButtonClick(filterBtnId, moduleType, status, username, star
 
 function ModuleFilterUsersFilterChange(moduleName, selectListId)
 {
-    var name = $(`#${selectListId}`).val();
-    alert('Hello ' + name);
+    var statusBtn = $(`.module-filter-btn-group.btn-group-active.${moduleName}`); 
+    var status = statusBtn.text();
+    var btnId = statusBtn.attr("id");
+
+    FilterModuleDataOverviewByStatus(moduleName, btnId, status);
 }
 
 function ModuleFilterDatesFilterChange(moduleName, dateInputId)
 {
-    var newDate = $(`#${dateInputId}`).val();
-    alert('Date = ' + newDate);
+    var statusBtn = $(`.module-filter-btn-group.btn-group-active.${moduleName}`); 
+    var status = statusBtn.text();
+    var btnId = statusBtn.attr("id");
+
+    FilterModuleDataOverviewByStatus(moduleName, btnId, status);
 }
 
 function ModuleOverviewLoader(moduleType, status)
@@ -53,15 +59,26 @@ function ModuleOverviewLoader(moduleType, status)
         $("#SecondaryLoader").css("height", height);
         
         $("#SecondaryLoaderMessage").text(`Loading ${status} Popups...`);
-        //ShowLoader("Secondary", `Loading ${status} Popups...`);
     }
 }
 
 function ReloadFilteredModuleOverview(moduleType, status, username, startDate, endDate)
 {
+    if(popupsDataTable != null)
+        popupsDataTable.clear().draw();
+
     ModuleOverviewLoader(moduleType, status);
 
     var url = GetPageUrl('PopupOverviewFilter') + `?status=${status}&userType=${username}&startDate=${startDate}&endDate=${endDate}`;
 
     LoadPartialViewWithLoader(url, "#PopupOverviewTableContainer","#SecondaryLoader");
+}
+
+function FilterModuleDataOverviewByStatus(moduleName, buttonId, status)
+{
+    var username = $(`#${moduleName}UsersFilter`).val();
+    var startDate = $(`#${moduleName}DateFromFilter`).val();
+    var endDate = $(`#${moduleName}DateToFilter`).val();
+
+    ModuleFilterButtonClick(buttonId, moduleName, status, username, startDate, endDate);
 }

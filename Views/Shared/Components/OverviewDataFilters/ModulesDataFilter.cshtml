@@ -4,8 +4,7 @@
 
 @{
     var moduleName = Model.ModulePage.GetDisplayShortName();
-    moduleName = moduleName != "RSS" ? $"{moduleName}s" : moduleName;
-
+    
     var allFilterBtn = $"All{moduleName}BtnFilter";
     var activeFilterBtn = $"Active{moduleName}BtnFilter";
     var expiredFilterBtn = $"Expired{moduleName}BtnFilter";
@@ -16,22 +15,28 @@
 
     var dateFilterFrom = $"{moduleName}DateFromFilter";
     var dateFilterTo = $"{moduleName}DateToFilter";
+
+    var moduleDisplayName = moduleName != "RSS" ? $"{moduleName}s" : moduleName;
 }
 <!-- Card for Filters -->
 <div class="card mb-4 mt-2 overview-filters-card">
     <div class="card-body">
         <div class="row">
-            <h4 class="text-center mb-1 theme-txt-clr" id="FilterModuleTitle">Filter @moduleName Types</h4>
+            <h4 class="text-center mb-1 theme-txt-clr" id="FilterModuleTitle">Filter @moduleDisplayName Types</h4>
             <div class="col-12 mb-4 d-flex flex-wrap mt-3 module-overview-filters">
                 <div id="StatusFilterContainer">
                     <div class="row mb-3 mb-md-0">
                         <p class="theme-txt-clr overview-filter-title" id="StatusFilterTitle">Status</p>
                         <div class="btn-group w-auto overview-filter-btn-group" role="group" aria-label="Status filter">
-                            <button class="btn module-filter-btn-group" onclick="FilterData('@allFilterBtn', AllStatusTypes.All)" id="@allFilterBtn">All</button>
-                            <button class="btn module-filter-btn-group btn-group-active" onclick="FilterData('@activeFilterBtn', AllStatusTypes.Active)" id="@activeFilterBtn">Active</button>
-                            <button class="btn module-filter-btn-group" onclick="FilterData('@expiredFilterBtn', AllStatusTypes.Expired)" id="@expiredFilterBtn">Expired</button>
-                            <button class="btn module-filter-btn-group" onclick="FilterData('@pendingFilterBtn', AllStatusTypes.Pending)" id="@pendingFilterBtn">Pending</button>
-                            <button class="btn module-filter-btn-group hidden" onclick="" id="@customFilterBtn">Custom</button>
+                            <button class="btn module-filter-btn-group @moduleName" 
+                                    onclick="FilterModuleDataOverviewByStatus('@moduleName','@allFilterBtn', AllStatusTypes.All)" id="@allFilterBtn">All</button>
+                            <button class="btn module-filter-btn-group btn-group-active @moduleName"
+                                    onclick="FilterModuleDataOverviewByStatus('@moduleName','@activeFilterBtn', AllStatusTypes.Active)" id="@activeFilterBtn">Active</button>
+                            <button class="btn module-filter-btn-group @moduleName"
+                                    onclick="FilterModuleDataOverviewByStatus('@moduleName','@expiredFilterBtn', AllStatusTypes.Expired)" id="@expiredFilterBtn">Expired</button>
+                            <button class="btn module-filter-btn-group @moduleName"
+                                    onclick="FilterModuleDataOverviewByStatus('@moduleName','@pendingFilterBtn', AllStatusTypes.Pending)" id="@pendingFilterBtn">Pending</button>
+                            @* <button class="btn module-filter-btn-group hidden" onclick="" id="@customFilterBtn">Custom</button> *@
                         </div>
                     </div>
                 </div>
@@ -82,16 +87,16 @@
         return '@moduleName';
     }
 
-    function FilterData(buttonId, status)
-    {
-        var moduleName = GetModuleTypeFromPage();
-        var username = $('#@usersFilterSelectList').val();
-        var startDate = $('#@dateFilterFrom').val();
-        var endDate = $('#@dateFilterTo').val();
+    // function FilterData(buttonId, status)
+    // {
+    //     var moduleName = GetModuleTypeFromPage();
+    //     var username = $('#@usersFilterSelectList').val();
+    //     var startDate = $('#@dateFilterFrom').val();
+    //     var endDate = $('#@dateFilterTo').val();
 
-        console.log(`Okay we are here and the values are : moduleName=${moduleName}, username=${username}, startDate=${startDate}, endDate=${endDate}.`);
+    //     console.log(`Okay we are here and the values are : moduleName=${moduleName},status=${status}, username=${username}, startDate=${startDate}, endDate=${endDate}.`);
 
-        ModuleFilterButtonClick(buttonId, moduleName, status, username, startDate, endDate)";
-    }
+    //     ModuleFilterButtonClick(buttonId, moduleName, status, username, startDate, endDate);
+    // }
 
 </script>

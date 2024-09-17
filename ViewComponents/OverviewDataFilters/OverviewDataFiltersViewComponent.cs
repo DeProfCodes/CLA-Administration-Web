@@ -24,7 +24,7 @@ namespace CLA_Administration_Web.ViewComponents.OverviewDataFilters
 
                 if (modulePage == ModulesPages.PopupOverview)
                 {
-                    var usersFilter = LocalDataStorage.AllPopupData.Select(x => x.UserIdLastModified).ToList();
+                    var usersFilter = LocalDataStorage.AllPopupData.Select(x => x.UserIdLastModified).Distinct().ToList();
 
                     var filtersViewModel = new ModuleOverviewFilterViewModel
                     {

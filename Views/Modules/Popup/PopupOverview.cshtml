@@ -36,14 +36,14 @@
 
     function LoadDefaultPopups()
     {
-        var startDate = "2024/01/01";
-        var endDate = TodayDate('/');
+        //var startDate = "2024/01/01";
+        //var endDate = TodayDate('/');
 
-        var url = `@Url.Action("_FilterPopupsOverview", "Modules")?status=all&userType=all&startDate=${startDate}&endDate=${endDate}`;
+        //var url = `@Url.Action("_FilterPopupsOverview", "Modules")?status=all&userType=all&startDate=${startDate}&endDate=${endDate}`;
 
-        LoadPartialView(url, "#PopupOverviewTableContainer");
+        //LoadPartialView(url, "#PopupOverviewTableContainer");
 
-        FilterData("ActivePopupBtnFilter", AllStatusTypes.Active);
+        FilterModuleDataOverviewByStatus(AllModuleTypes.Popup,"ActivePopupBtnFilter", AllStatusTypes.Active);
     }
 
 </script>

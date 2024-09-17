@@ -61,8 +61,8 @@ namespace CLA_Administration_Web.Helpers.Modules
 
         public static string GetPopupOverviewText(string status, string user, string startDate, string endDate)
         {
-            var filterTitle = $"Showing {status.ToUpper()}";
-            filterTitle += " for " + (user == "all" ? "ALL Users" : user);
+            var filterTitle = $"Showing {status} Popups";
+            filterTitle += " for " + (user == "all" ? "All Users" : user);
             filterTitle += $" from {startDate} to {endDate}";
 
             return filterTitle;
@@ -77,9 +77,9 @@ namespace CLA_Administration_Web.Helpers.Modules
             user = user.ToLower();
 
             var filteredData = data.Where(
-                                            p => ((status != "all" && status != "") ? (p.Status.StatusType.GetDisplayName().ToLower() == status) : true) &&
+                                           p =>  ((status != "all" && status != "") ? (p.Status.StatusType.GetDisplayName().ToLower() == status) : true) &&
                                                  (startDateTime.Date.CompareTo(p.EffectiveFromDate) <= 0 && p.EffectiveToDate.Date.CompareTo(endDateTime) <= 0) &&
-                                                 (user != "all" ? (p.UserIdLastModified == user) : true)
+                                                 (user != "all" ? (p.UserIdLastModified.ToLower() == user) : true)
                                     ).ToList();
 
             return filteredData;

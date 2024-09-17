@@ -88,7 +88,6 @@ namespace CLA_Administration_Web.Controllers
 
         public async Task<IActionResult> _FilterPopupsOverview(string status, string userType, string startDate, string endDate)
         {
-            Thread.Sleep(2000);
             var popupFilterDataVm = new PopupFilterOverviewModel
             {
                 FilterTitle = ModulesHelper.GetPopupOverviewText(status, userType, startDate, endDate),
