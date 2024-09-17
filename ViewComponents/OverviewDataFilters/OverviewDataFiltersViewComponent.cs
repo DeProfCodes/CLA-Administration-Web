@@ -1,6 +1,7 @@
 ﻿using CLA_Administration_Web.Helpers.Enums.AppPages;
 using CLA_Administration_Web.Helpers.Enums.Shared;
 using CLA_Administration_Web.Helpers.Layout;
+using CLA_Administration_Web.Services;
 using CLA_Administration_Web.ViewModels.Modules;
 using CLACommonFunctionsLibrary_NET.Helpers.Enums;
 using Microsoft.AspNetCore.Mvc;
@@ -21,13 +22,17 @@ namespace CLA_Administration_Web.ViewComponents.OverviewDataFilters
             {
                 var modulePage = (ModulesPages) page;
 
-                var filtersViewModel = new ModuleOverviewFilterViewModel
+                if (modulePage == ModulesPages.PopupOverview)
                 {
-                    ModuleName = modulePage.GetDisplayShortName(),
-                    Usernames = new List<string> { "NdhuvaziM", "BertusB", "LeboC" }
-                };
+                    var usersFilter = LocalDataStorage.AllPopupData.Select(x => x.UserIdLastModified).ToList();
 
-                return View("ModulesDataFilter", filtersViewModel);
+                    var filtersViewModel = new ModuleOverviewFilterViewModel
+                    {
+                        ModulePage = modulePage,
+                        Usernames = usersFilter
+                    };
+                    return View("ModulesDataFilter", filtersViewModel);
+                }
             }
             return View("Default");
         }

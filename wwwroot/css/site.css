@@ -14,21 +14,43 @@
     font-size: 24px;
     color: #333;
     z-index: 1000;
-    visibility: hidden; /* Initially hidden */
-    margin-top: 62px;/* Adjust 50px to match top navigation height */
 }
 
-.loader-image
+#MainLoader, #SecondaryLoader
+{
+    visibility: hidden;
+}
+
+#MainLoader
+{
+    margin-top: 62px;
+}
+
+
+#MainLoaderImage
 {
     width: 70px;
     height: 70px;
-    visibility: hidden; /* Initially hidden */
+    visibility: hidden; 
+    margin-top:-160px;
+}
+#SecondaryLoaderImage
+{
+    width: 70px;
+    height: 70px;
+    visibility: hidden; 
     margin-top:-160px;
 }
 
-#loaderMessage
+#MainLoaderMessage
 {
-    margin-top: 20px; /* Space between image and text */
+    margin-top: 20px; 
+    color:#04316d;
+    font-weight: bold !important;
+}
+#SecondaryLoaderMessage
+{
+    margin-top: 20px; 
     color:#04316d;
     font-weight: bold !important;
 }

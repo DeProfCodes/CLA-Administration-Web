@@ -46,6 +46,7 @@
             public const string ScreensaverAddNewPageLink = "~/Views/Modules/Screensaver/AddNewScreensaver.cshtml";
 
             public const string PopupOverviewPageLink = "~/Views/Modules/Popup/PopupOverview.cshtml";
+            public const string PopupsFilterOverviewPageLink = "~/Views/Modules/Popup/_FilterPopupsOverview.cshtml";
             public const string PopupAddNewPageLink = "~/Views/Modules/Popup/AddNewPopup.cshtml";
 
             public const string SurveyOverviewPageLink = "~/Views/Modules/Survey/SurveyOverview.cshtml";

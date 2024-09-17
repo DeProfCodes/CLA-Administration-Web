@@ -53,6 +53,7 @@ namespace CLA_Administration_Web.Helpers.Constants
             public static string ScreensaverAddNew = $"/{modulesController}/{ModulesPages.ScreensaverAddNew.GetDisplayName()}";
 
             public static string PopupOverview = $"/{modulesController}/{ModulesPages.PopupOverview.GetDisplayName()}";
+            public static string PopupOverviewFilter = $"/{modulesController}/{ModulesPages.PopupOverviewFilter.GetDisplayName()}";
             public static string PopupAddNew = $"/{modulesController}/{ModulesPages.PopupAddNew.GetDisplayName()}";
 
             public static string SurveyOverview = $"/{modulesController}/{ModulesPages.SurveyOverview.GetDisplayName()}";

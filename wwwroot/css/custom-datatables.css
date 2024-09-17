@@ -4,16 +4,8 @@
     margin-bottom: 30px;
 }
 
-.paginate_button .current
+.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover 
 {
-    background: #04316d !important;
-}
-
-a.paginate_button,
-a.paginate_active {
-    display: inline-block;
-    background-color: red;
-    padding: 2px 6px;
-    margin-left: 2px;
-    cursor: pointer;
+   /* background: #04316d !important;
+    color: white !important;*/
 }

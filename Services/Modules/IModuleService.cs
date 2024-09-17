@@ -6,7 +6,7 @@ namespace CLA_Administration_Web.Services.Modules
     {
         #region Popups
         
-        public Task<List<PopupViewModule>> GetAllPopupsData();
+        public Task<List<PopupViewModel>> GetAllPopupsData();
         
         #endregion
     }

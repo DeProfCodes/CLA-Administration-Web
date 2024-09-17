@@ -16,13 +16,18 @@
     <div id="TopNavigation">
     </div>
     <!--end top header-->
-    <!-- Loader -->
     
-    <div id="loader" class="loader">
-        <!-- GIF Loader -->
-        <img src="~/images/others/loading-waiting.gif" alt="Loading..." id="loaderImage" class="loader-image" />
-        <!-- Loader Message -->
-        <p id="loaderMessage">Loading...</p>
+    <!-- Loader -->
+    <div id="MainLoader" class="loader">
+        <img src="~/images/others/loading-waiting.gif" alt="Loading..." id="MainLoaderImage" class="loader-image" />
+        <p id="MainLoaderMessage">Loading...</p>
+    </div>
+    <!--End Loader -->
+
+    <!-- Loader -->
+    <div id="SecondaryLoader" class="loader">
+        <img src="~/images/others/loading-waiting.gif" alt="Loading..." id="SecondaryLoaderImage" class="loader-image" />
+        <p id="SecondaryLoaderMessage">Loading...</p>
     </div>
     <!--End Loader -->
 
@@ -64,8 +69,8 @@
         var topNavUrl = '@Url.Action("TopNavigation", "Dashboard")';
         var leftNavUrl = '@Url.Action("LeftNavigation", "Dashboard")';
 
-        LoadPartialWithSpinner(topNavUrl, "#TopNavigation");
-        LoadPartialWithSpinner(leftNavUrl, "#LeftNavigation");
+        LoadPartialView(topNavUrl, "#TopNavigation");
+        LoadPartialView(leftNavUrl, "#LeftNavigation");
     }
 
     function OpenPage(page, id)
@@ -83,28 +88,14 @@
         
         var pageName = GetPageTitle(page);
         
-        ShowLoader("Loading " + pageName);
+        ShowLoader("Main", "Loading " + pageName);
 
         setTimeout(function ()
         {
-            HideLoader();
-            LoadPartialWithSpinner(url, "#DashboardMainArea");
+            HideLoader("Main");
+            LoadPartialView(url, "#DashboardMainArea");
 
         }, 0);
-    }
-
-    function ShowLoader(message)
-    {
-        $("#loaderMessage").text(message);
-        $(".loader").css("visibility", "visible");
-
-        $(".loader-image").css("visibility", "visible");
-    }
-
-    function HideLoader()
-    {
-        $(".loader").css("visibility", "hidden");
-        $(".loader-image").css("visibility", "hidden");
     }
 
     function Logout()

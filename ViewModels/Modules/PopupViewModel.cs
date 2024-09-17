@@ -3,7 +3,7 @@ using CLA_Administration_Web.ViewModels.Shared;
 
 namespace CLA_Administration_Web.ViewModels.Modules
 {
-    public class PopupViewModule
+    public class PopupViewModel
     {
         public int Id { get; set; }
 
@@ -15,6 +15,10 @@ namespace CLA_Administration_Web.ViewModels.Modules
 
         public string EffectiveTo { get; set; }
 
+        public DateTime EffectiveFromDate { get; set; }
+
+        public DateTime EffectiveToDate { get; set; }
+
         public string TimeslotFrom { get; set; }
 
         public string TimeslotTo { get; set; }
@@ -22,5 +26,7 @@ namespace CLA_Administration_Web.ViewModels.Modules
         public StatusViewModel Status { get; set; }
 
         public string LastModifiedDate { get; set; }
+
+        public string UserIdLastModified { get; set; }
     }
 }

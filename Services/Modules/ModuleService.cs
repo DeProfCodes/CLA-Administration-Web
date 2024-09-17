@@ -12,7 +12,7 @@ namespace CLA_Administration_Web.Services.Modules
 
         #region Popups 
         
-        public async Task<List<PopupViewModule>> GetAllPopupsData()
+        public async Task<List<PopupViewModel>> GetAllPopupsData()
         {
             return ModulesMockData.AllPopupsData;    
         }

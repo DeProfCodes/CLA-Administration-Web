@@ -1,7 +1,11 @@
 using CLA_Administration_Web.Helpers.Constants;
+using CLA_Administration_Web.Helpers.Enums.Shared;
 using CLA_Administration_Web.Helpers.Modules;
 using CLA_Administration_Web.Models;
+using CLA_Administration_Web.Services;
 using CLA_Administration_Web.Services.Modules;
+using CLA_Administration_Web.ViewModels.Modules;
+using CLACommonFunctionsLibrary_NET.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -73,9 +77,24 @@ namespace CLA_Administration_Web.Controllers
             popupDataViewModel.ForEach(p => 
             {
                 p.Status = ModulesHelper.GetModuleStatus(p.EffectiveFrom, p.EffectiveTo); 
+                p.EffectiveFromDate = TypesParserHelper.ParseDate(p.EffectiveFrom);
+                p.EffectiveToDate = TypesParserHelper.ParseDate(p.EffectiveTo);
             });
 
+            LocalDataStorage.UpdatePopupsData(popupDataViewModel);
+
             return PartialView(AppPagesLinks.Modules.PopupOverviewPageLink, popupDataViewModel);
+        }
+
+        public async Task<IActionResult> _FilterPopupsOverview(string status, string userType, string startDate, string endDate)
+        {
+            Thread.Sleep(2000);
+            var popupFilterDataVm = new PopupFilterOverviewModel
+            {
+                FilterTitle = ModulesHelper.GetPopupOverviewText(status, userType, startDate, endDate),
+                PopupsData = ModulesHelper.FilterPopupsData(LocalDataStorage.AllPopupData, status, userType, startDate, endDate)
+            };
+            return PartialView(AppPagesLinks.Modules.PopupsFilterOverviewPageLink, popupFilterDataVm);
         }
 
         public IActionResult AddNewPopup()

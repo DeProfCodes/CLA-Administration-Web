@@ -1,18 +1,21 @@
-﻿@model CLA_Administration_Web.ViewModels.Modules.ModuleOverviewFilterViewModel
+﻿@using CLACommonFunctionsLibrary_NET.Helpers.Enums
+@using CLA_Administration_Web.Helpers.Enums.AppPages
+@model CLA_Administration_Web.ViewModels.Modules.ModuleOverviewFilterViewModel
 
 @{
-    var moduleName = Model.ModuleName != "RSS" ? $"{Model.ModuleName}s" : Model.ModuleName;
+    var moduleName = Model.ModulePage.GetDisplayShortName();
+    moduleName = moduleName != "RSS" ? $"{moduleName}s" : moduleName;
 
-    var allFilterBtn = $"All{Model.ModuleName}BtnFilter";
-    var activeFilterBtn = $"Active{Model.ModuleName}BtnFilter";
-    var expiredFilterBtn = $"Expired{Model.ModuleName}BtnFilter";
-    var pendingFilterBtn = $"Pending{Model.ModuleName}BtnFilter";
-    var customFilterBtn = $"Custom{Model.ModuleName}BtnFilter";
+    var allFilterBtn = $"All{moduleName}BtnFilter";
+    var activeFilterBtn = $"Active{moduleName}BtnFilter";
+    var expiredFilterBtn = $"Expired{moduleName}BtnFilter";
+    var pendingFilterBtn = $"Pending{moduleName}BtnFilter";
+    var customFilterBtn = $"Custom{moduleName}BtnFilter";
 
-    var usersFilterSelectList = $"{Model.ModuleName}UsersFilter";
+    var usersFilterSelectList = $"{moduleName}UsersFilter";
 
-    var dateFilterFrom = $"{Model.ModuleName}DateFromFilter";
-    var dateFilterTo = $"{Model.ModuleName}DateToFilter";
+    var dateFilterFrom = $"{moduleName}DateFromFilter";
+    var dateFilterTo = $"{moduleName}DateToFilter";
 }
 <!-- Card for Filters -->
 <div class="card mb-4 mt-2 overview-filters-card">
@@ -24,18 +27,18 @@
                     <div class="row mb-3 mb-md-0">
                         <p class="theme-txt-clr overview-filter-title" id="StatusFilterTitle">Status</p>
                         <div class="btn-group w-auto overview-filter-btn-group" role="group" aria-label="Status filter">
-                            <button class="btn module-filter-btn-group" onclick="ModuleFilterButtonClick('@Model.ModuleName', '@allFilterBtn')" id="@allFilterBtn">All</button>
-                            <button class="btn module-filter-btn-group btn-group-active" onclick="ModuleFilterButtonClick('@Model.ModuleName', '@activeFilterBtn')" id="@activeFilterBtn">Active</button>
-                            <button class="btn module-filter-btn-group" onclick="ModuleFilterButtonClick('@Model.ModuleName', '@expiredFilterBtn')" id="@expiredFilterBtn">Expired</button>
-                            <button class="btn module-filter-btn-group" onclick="ModuleFilterButtonClick('@Model.ModuleName', '@pendingFilterBtn')" id="@pendingFilterBtn">Pending</button>
-                            <button class="btn module-filter-btn-group" onclick="ModuleFilterButtonClick('@Model.ModuleName', '@customFilterBtn')" id="@customFilterBtn">Custom</button>
+                            <button class="btn module-filter-btn-group" onclick="FilterData('@allFilterBtn', AllStatusTypes.All)" id="@allFilterBtn">All</button>
+                            <button class="btn module-filter-btn-group btn-group-active" onclick="FilterData('@activeFilterBtn', AllStatusTypes.Active)" id="@activeFilterBtn">Active</button>
+                            <button class="btn module-filter-btn-group" onclick="FilterData('@expiredFilterBtn', AllStatusTypes.Expired)" id="@expiredFilterBtn">Expired</button>
+                            <button class="btn module-filter-btn-group" onclick="FilterData('@pendingFilterBtn', AllStatusTypes.Pending)" id="@pendingFilterBtn">Pending</button>
+                            <button class="btn module-filter-btn-group hidden" onclick="" id="@customFilterBtn">Custom</button>
                         </div>
                     </div>
                 </div>
                 <div id="UsersFilterContainer" class="mx-auto">
                     <div class="row mb-3 mb-md-0">
                         <p class="theme-txt-clr overview-filter-title" id="UsersFilterTitle">User</p>
-                        <select class="form-select w-fit-content overview-users-select" id="@usersFilterSelectList" onchange="ModuleFilterUsersFilterChange('@Model.ModuleName','@usersFilterSelectList')">
+                        <select class="form-select w-fit-content overview-users-select" id="@usersFilterSelectList" onchange="ModuleFilterUsersFilterChange('@moduleName','@usersFilterSelectList')">
                             <option selected value="all">All Users</option>
                             @foreach (var username in Model.Usernames)
                             {
@@ -47,9 +50,9 @@
                 <div id="DatesFilterContainer" class="mx-auto">
                     <div class="row mb-3 mb-md-0">
                         <p class="theme-txt-clr overview-filter-title" id="DatesFilterTitle">Dates</p>
-                        <input type="date" class="form-control overview-dates-input" id="@dateFilterFrom" onchange="ModuleFilterDatesFilterChange('@Model.ModuleName', '@dateFilterFrom')" value="2020-01-01">
+                        <input type="date" class="form-control overview-dates-input" id="@dateFilterFrom" onchange="ModuleFilterDatesFilterChange('@moduleName', '@dateFilterFrom')" value="2020-01-01">
                         <p class="theme-txt-clr overview-filter-title">To</p>
-                        <input type="date" class="form-control overview-dates-input" id="@dateFilterTo" onchange="ModuleFilterDatesFilterChange('@Model.ModuleName', '@dateFilterTo')"  value="2024-09-30">
+                        <input type="date" class="form-control overview-dates-input" id="@dateFilterTo" onchange="ModuleFilterDatesFilterChange('@moduleName', '@dateFilterTo')" value="2024-09-30">
                     </div>
                 </div>
             </div>
@@ -67,11 +70,28 @@
 
     function SetDateToTodayDefault()
     {
-        var today = new Date();
-        var month = today.getMonth().toString();
-        var todayDate = today.getFullYear() + "-" + (month.length < 2 ? "0" + month : month) + "-" + today.getDate();
+        var today = TodayDate();
        
-        $("#@dateFilterTo").val(todayDate);
+        $("#@dateFilterTo").val(today);
+    }
+
+    function GetModuleTypeFromPage()
+    {
+        if('@Model.ModulePage' == '@ModulesPages.PopupOverview') return AllModuleTypes.Popup;
+
+        return '@moduleName';
+    }
+
+    function FilterData(buttonId, status)
+    {
+        var moduleName = GetModuleTypeFromPage();
+        var username = $('#@usersFilterSelectList').val();
+        var startDate = $('#@dateFilterFrom').val();
+        var endDate = $('#@dateFilterTo').val();
+
+        console.log(`Okay we are here and the values are : moduleName=${moduleName}, username=${username}, startDate=${startDate}, endDate=${endDate}.`);
+
+        ModuleFilterButtonClick(buttonId, moduleName, status, username, startDate, endDate)";
     }
 
 </script>

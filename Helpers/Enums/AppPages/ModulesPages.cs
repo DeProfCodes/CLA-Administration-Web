@@ -44,6 +44,9 @@ namespace CLA_Administration_Web.Helpers.Enums.AppPages
         [Display(Name = "PopupOverview", ShortName = "Popup")]
         PopupOverview,
 
+        [Display(Name = "_FilterPopupsOverview", ShortName = "Popup")]
+        PopupOverviewFilter,
+
         [Display(Name = "AddNewPopup", ShortName = "Popup")]
         PopupAddNew,
 

@@ -58,5 +58,31 @@ namespace CLA_Administration_Web.Helpers.Modules
             
             return null;
         }
+
+        public static string GetPopupOverviewText(string status, string user, string startDate, string endDate)
+        {
+            var filterTitle = $"Showing {status.ToUpper()}";
+            filterTitle += " for " + (user == "all" ? "ALL Users" : user);
+            filterTitle += $" from {startDate} to {endDate}";
+
+            return filterTitle;
+        }
+
+        public static List<PopupViewModel> FilterPopupsData(List<PopupViewModel> data, string status, string user, string startDate, string endDate)
+        {
+            var startDateTime = TypesParserHelper.ParseDate(startDate);
+            var endDateTime = TypesParserHelper.ParseDate(endDate);
+            
+            status = status.ToLower();
+            user = user.ToLower();
+
+            var filteredData = data.Where(
+                                            p => ((status != "all" && status != "") ? (p.Status.StatusType.GetDisplayName().ToLower() == status) : true) &&
+                                                 (startDateTime.Date.CompareTo(p.EffectiveFromDate) <= 0 && p.EffectiveToDate.Date.CompareTo(endDateTime) <= 0) &&
+                                                 (user != "all" ? (p.UserIdLastModified == user) : true)
+                                    ).ToList();
+
+            return filteredData;
+        }
     }
 }
