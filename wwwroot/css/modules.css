@@ -154,3 +154,208 @@
     background-color: #04316D;
     color: white;
 }
+
+.overview-filter-btn-group
+{
+    height: 30px !important;
+}
+.module-filter-btn-group
+{
+    width: 70px !important;
+    font-size: 14px !important;
+    padding: 0 !important;
+    border-color: #04316d !important;
+}
+.module-filter-btn-group-active
+{
+    width: 70px !important;
+    font-size: 14px !important;
+    padding: 0 !important;
+    color:white !important;
+    background: #04316d !important;
+}
+.btn-group-active
+{
+    color:white !important;
+    background: #04316d !important;
+}
+.overview-filter-btn-group button:hover
+{
+    background: #04316d !important;
+    border-color:  #04316d !important;
+    color:white !important;
+}
+.overview-filter-title
+{
+    font-weight: bold;
+    width: fit-content !important;
+    margin-bottom: 0 !important;
+    align-content: center;
+}
+.overview-users-select
+{
+    height: 30px !important;
+    font-size: 14px !important;
+    padding: 2px 40px !important;
+}
+.overview-dates-input
+{
+    width: 120px !important;
+    font-size: 14px !important;
+    height: 30px;
+}
+.overview-filters-card
+{
+    min-width: 310px;
+}
+#FilterModuleTitle
+{
+    font-size: 20px !important;
+}
+.overview-filters-card .card-body
+{
+    padding-bottom:0 !important;
+}
+
+@media screen and (max-width:1370px)
+{
+    .overview-filter-btn-group
+    {
+        margin-left: -20px;
+    }
+}
+
+@media screen and (max-width:1285px)
+{
+    #DatesFilterTitle
+    {
+        margin-left:40px;
+    }
+    #DatesFilterContainer
+    {
+        margin-top: 20px;
+    }
+}
+
+@media screen and (max-width:767px)
+{
+    #DatesFilterContainer, #UsersFilterContainer
+    {
+        width: 100% !important;
+    }
+    #DatesFilterTitle
+    {
+        margin-left:0;
+    }
+    #DatesFilterContainer
+    {
+        margin-top: 0px;
+    }
+    #StatusFilterTitle
+    {
+        margin-right: 10px;
+    }
+    #UsersFilterTitle
+    {
+        margin-right: 14px;
+    }
+    #DatesFilterTitle
+    {
+        margin-right: 7px;
+    }
+    .module-overview-filters
+    {
+        margin-left:auto;
+        margin-right: auto;
+        width: 430px !important;
+    }
+    #FilterModuleTitle
+    {
+        font-size: 16px !important;
+    }
+    .overview-filter-title
+    {
+        font-size: 12px !important;
+    }
+}
+@media screen and (max-width:530px)
+{
+    #StatusFilterTitle
+    {
+        text-align: center !important;
+        width:100% !important;
+    }
+    .overview-filter-btn-group
+    {
+        margin-left: auto;
+        margin-right:auto;
+    }
+    #UsersFilterTitle
+    {
+        margin-left:auto;
+    }
+    .overview-users-select
+    {
+        margin-right: auto;
+    }
+}
+@media screen and (max-width:510px)
+{
+    .overview-dates-input
+    {
+        width: 120px !important;
+    }
+}
+@media screen and (max-width:410px)
+{
+    .overview-filter-btn-group
+    {
+        margin-left: -10px;
+    }
+    #DatesFilterTitle
+    {
+        margin-left: -10px;
+        margin-right: 0;
+    }
+}
+@media screen and (max-width:390px)
+{
+    .overview-dates-input
+    {
+        width: 100px !important;
+        font-size: 11px !important;
+        height: 25px;
+    }
+    .overview-users-select
+    {
+        width: 100px !important;
+        font-size: 11px !important;
+        height: 25px !important;
+        padding-left: 15px !important;
+    }
+    .overview-filter-btn-group
+    {
+        height: 25px !important;
+        margin-left:auto
+    }
+    .module-filter-btn-group, .module-filter-btn-group-active
+    {
+        width: 60px !important;
+        font-size: 12px !important;
+    }
+    #DatesFilterTitle
+    {
+        margin-left: 15px;
+    }
+}
+@media screen and (max-width:350px)
+{
+    #DatesFilterTitle
+    {
+        margin-left: -5px;
+    }
+    .overview-filter-btn-group
+    {
+        margin-left: -5px;
+    }
+}

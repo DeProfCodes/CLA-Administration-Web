@@ -1,0 +1,77 @@
+﻿@model CLA_Administration_Web.ViewModels.Modules.ModuleOverviewFilterViewModel
+
+@{
+    var moduleName = Model.ModuleName != "RSS" ? $"{Model.ModuleName}s" : Model.ModuleName;
+
+    var allFilterBtn = $"All{Model.ModuleName}BtnFilter";
+    var activeFilterBtn = $"Active{Model.ModuleName}BtnFilter";
+    var expiredFilterBtn = $"Expired{Model.ModuleName}BtnFilter";
+    var pendingFilterBtn = $"Pending{Model.ModuleName}BtnFilter";
+    var customFilterBtn = $"Custom{Model.ModuleName}BtnFilter";
+
+    var usersFilterSelectList = $"{Model.ModuleName}UsersFilter";
+
+    var dateFilterFrom = $"{Model.ModuleName}DateFromFilter";
+    var dateFilterTo = $"{Model.ModuleName}DateToFilter";
+}
+<!-- Card for Filters -->
+<div class="card mb-4 mt-2 overview-filters-card">
+    <div class="card-body">
+        <div class="row">
+            <h4 class="text-center mb-1 theme-txt-clr" id="FilterModuleTitle">Filter @moduleName Types</h4>
+            <div class="col-12 mb-4 d-flex flex-wrap mt-3 module-overview-filters">
+                <div id="StatusFilterContainer">
+                    <div class="row mb-3 mb-md-0">
+                        <p class="theme-txt-clr overview-filter-title" id="StatusFilterTitle">Status</p>
+                        <div class="btn-group w-auto overview-filter-btn-group" role="group" aria-label="Status filter">
+                            <button class="btn module-filter-btn-group" onclick="ModuleFilterButtonClick('@Model.ModuleName', '@allFilterBtn')" id="@allFilterBtn">All</button>
+                            <button class="btn module-filter-btn-group btn-group-active" onclick="ModuleFilterButtonClick('@Model.ModuleName', '@activeFilterBtn')" id="@activeFilterBtn">Active</button>
+                            <button class="btn module-filter-btn-group" onclick="ModuleFilterButtonClick('@Model.ModuleName', '@expiredFilterBtn')" id="@expiredFilterBtn">Expired</button>
+                            <button class="btn module-filter-btn-group" onclick="ModuleFilterButtonClick('@Model.ModuleName', '@pendingFilterBtn')" id="@pendingFilterBtn">Pending</button>
+                            <button class="btn module-filter-btn-group" onclick="ModuleFilterButtonClick('@Model.ModuleName', '@customFilterBtn')" id="@customFilterBtn">Custom</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="UsersFilterContainer" class="mx-auto">
+                    <div class="row mb-3 mb-md-0">
+                        <p class="theme-txt-clr overview-filter-title" id="UsersFilterTitle">User</p>
+                        <select class="form-select w-fit-content overview-users-select" id="@usersFilterSelectList" onchange="ModuleFilterUsersFilterChange('@Model.ModuleName','@usersFilterSelectList')">
+                            <option selected value="all">All Users</option>
+                            @foreach (var username in Model.Usernames)
+                            {
+                                <option value="@username">@username</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div id="DatesFilterContainer" class="mx-auto">
+                    <div class="row mb-3 mb-md-0">
+                        <p class="theme-txt-clr overview-filter-title" id="DatesFilterTitle">Dates</p>
+                        <input type="date" class="form-control overview-dates-input" id="@dateFilterFrom" onchange="ModuleFilterDatesFilterChange('@Model.ModuleName', '@dateFilterFrom')" value="2020-01-01">
+                        <p class="theme-txt-clr overview-filter-title">To</p>
+                        <input type="date" class="form-control overview-dates-input" id="@dateFilterTo" onchange="ModuleFilterDatesFilterChange('@Model.ModuleName', '@dateFilterTo')"  value="2024-09-30">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    $(document).ready(function ()
+    {
+        SetDateToTodayDefault();
+    });
+
+    function SetDateToTodayDefault()
+    {
+        var today = new Date();
+        var month = today.getMonth().toString();
+        var todayDate = today.getFullYear() + "-" + (month.length < 2 ? "0" + month : month) + "-" + today.getDate();
+       
+        $("#@dateFilterTo").val(todayDate);
+    }
+
+</script>

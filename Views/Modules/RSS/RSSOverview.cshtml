@@ -5,4 +5,7 @@
     <!-- Top Page Navigation Breadcrumb -->
     @await Component.InvokeAsync("Breadcrumbs", new { page = ModulesPages.RSSOverview })
 
+    <!-- ModuleFilter Component -->
+    @await Component.InvokeAsync("OverviewDataFilters", new { page = ModulesPages.RSSOverview })
+
 </div>

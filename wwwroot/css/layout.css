@@ -12,17 +12,18 @@
 }
 .left-main-nav-icons
 {
-    font-size: 16px;
+    font-size: 14px;
     color: white;
+    padding-top:2px;
 }
 .left-nav-arrow-icons
 {
-    font-size: 16px;
+    font-size: 14px;
     color: white;
 }
 .left-nav-titles
 {
-    font-size: 18px;
+    font-size: 16px;
     margin-left:10px;
     color: white;
     font-weight:bold;
@@ -44,6 +45,7 @@
 .left-sub-nav-title
 {
     color: white;
+    font-size: 14px;
     margin-left: 8px;
 }
 .left-nav-sub-menu
@@ -119,6 +121,11 @@
     background-color: rgba(0, 0, 0, .4) !important;
 }
 
+#DashboardMainArea
+{
+    min-width: 344px !important;
+}
+
 @media screen and (max-width:1150px)
 {
     #TopNavSearchBar
@@ -172,6 +179,14 @@
     #UserCompanyImage, #UserCompanyImageSeparator
     {
         display:none;
+    }
+}
+@media screen and (max-width:460px)
+{
+    #DashboardMainArea
+    {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
     }
 }
 @media screen and (max-width:450px)
