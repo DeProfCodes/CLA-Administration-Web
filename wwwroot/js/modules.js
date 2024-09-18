@@ -100,7 +100,7 @@ function showPopup(popupNumber)
     if (backBtn && nextBtn && submitBtn && previewBox)
     {
         backBtn.style.display = popupNumber === 1 ? 'none' : 'inline-block';
-        previewBox.style.display = popupNumber === 1 ? 'none' : 'inline-block';
+        previewBox.style.display = popupNumber <= 1 ? 'none' : 'inline-block';
         nextBtn.style.display = popupNumber === totalPopups ? 'none' : 'inline-block';
         submitBtn.style.display = popupNumber === totalPopups ? 'inline-block' : 'none';
     }
@@ -156,51 +156,12 @@ function updatePopupSidebar(step)
     }
 }
 
-const uploadSection = document.getElementById('upload-section');
-const fileInput = document.getElementById('file-input');
-const fileNameDisplay = document.getElementById('fileName');
-
-uploadSection.addEventListener('dragover', (e) =>
-{
-    e.preventDefault();
-    uploadSection.classList.add('dragging');
-});
-
-uploadSection.addEventListener('dragleave', () =>
-{
-    uploadSection.classList.remove('dragging');
-});
-
-uploadSection.addEventListener('drop', (e) =>
-{
-    e.preventDefault();
-    uploadSection.classList.remove('dragging');
-    const files = e.dataTransfer.files;
-    handleFiles(files);
-});
-
-fileInput.addEventListener('change', (e) =>
-{
-    const files = e.target.files;
-    handleFiles(files);
-});
-
-function handleFiles(files)
-{
-    if (files.length > 0)
-    {
-        fileNameDisplay.textContent = files[0].name;
-    } else
-    {
-        fileNameDisplay.textContent = "No file selected";
-    }
-}
 
 document.addEventListener('DOMContentLoaded', () =>
 {
     showPopup(currentPopup);
     const previewBox = document.getElementById('preview-box');
-    if (currentPopup == 1)
+    if (currentPopup <= 1)
     {
 
         previewBox.style.display = 'none';
