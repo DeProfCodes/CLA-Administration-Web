@@ -5,287 +5,231 @@
     <!-- Breadcrumb Component -->
     @await Component.InvokeAsync("Breadcrumbs", new { page = ModulesPages.PopupAddNew })
 
-    <div class="card hidden">
+    <div class="header">
+        <h4>Add new popup</h4>
+       
+    </div>
+
+    <div class="card">
         <div class="card-body">
-            <form id="popupForm">
-                <div class="container-fluid">
-                    <div class="row">
-                        <!-- Sidebar -->
-                        <div class="col-12 col-md-3 mb-4">
-                            <div class="sidebar">
-                                <a href="#" id="sidebar-link-type" class="active">Link Type</a>
-                                <a href="#" id="sidebar-skin">Skin</a>
-                                <a href="#" id="sidebar-texts">Texts</a>
-                                <a href="#" id="sidebar-times">Times</a>
-                                <a href="#" id="sidebar-displays">Displays</a>
-                                <a href="#" id="sidebar-repeat">Repeat</a>
-                                <a href="#" id="sidebar-feedback">Feedback</a>
-                                <a href="#" id="sidebar-target-users">Target Users</a>
-                                <a href="#" id="sidebar-exposure-summary">Exposure Summary</a>
-                            </div>
-                        </div>
+            <div class="row">
+              
 
-                        <!-- Main content -->
-                        <div class="col-12 col-md-6 mb-4">
-                            <div class="text-center p-4" id="main-content">
-                                <!-- Popup 1 -->
-                                <div id="popup1" class="popup">
-                                    <h5 class="fw-bold mb-3">1. Popup Link Type</h5>
-                                    <p>Select what the popup will link to when clicked by the user.</p>
-                                    <div class="row mb-3">
-                                        <div class="col-12 col-md-4 fw-bold">
-                                            <label>Link Type:</label>
-                                        </div>
-                                        <div class="col-12 col-md-8">
-                                            <div class="btn-group mb-2 w-100">
-                                                <button type="button" class="btn btn-outline-primary">No Link</button>
-                                                <button type="button" class="btn active">Image</button>
-                                                <button type="button" class="btn btn-outline-primary">Audio</button>
-                                                <button type="button" class="btn btn-outline-primary">Video</button>
-                                                <button type="button" class="btn btn-outline-primary">Ticker</button>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-4 fw-bold">
-                                          
-                                        </div>
-                                        <div class="col-12 col-md-8">
-                                            <div class="btn-group mb-2 w-100">
-                                                <button type="button" class="btn btn-outline-primary">No Link</button>
-                                                <button type="button" class="btn ">Image</button>
-                                                <button type="button" class="btn btn-outline-primary">Audio</button>
-                                                <button type="button" class="btn btn-outline-primary">Video</button>
-                                                <button type="button" class="btn btn-outline-primary">Ticker</button>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-4 fw-bold">
-                                            <label>Attachment:</label>
-                                        </div>
-                                        <div class="col-12 col-md-8">
-                                            <p id="fileName" class="mb-2">No file selected</p>
-                                            <div class="upload-section mb-4" id="upload-section">
-                                                <i class="bi bi-cloud-arrow-up-fill"></i>
-                                                <p class="mt-2">Drag & Drop file here or</p>
-                                                <input type="file" id="file-input" hidden>
-                                                <button class="btn " type="button" onclick="document.getElementById('file-input').click();">Browse</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Popup 2 -->
-                                <div id="popup2" class="popup" style="display:none;">
-                                    <h5 class="fw-bold mb-3">2. Popup Skin</h5>
-                                    <p>Choose a skin for the popup.</p>
-                                    <!-- Add content for Popup 2 -->
-                                </div>
-
-                                <!-- Popup 3 -->
-                                <div id="popup3" class="popup" style="display: none;">
-                                    <h5 class="fw-bold mb-3">3. Popup Text</h5>
-                                    <p>Popup text options.</p>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" id="customSkin">
-                                        <label class="form-check-label" for="customSkin">Use Custom Skin</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" id="defaultSkin">
-                                        <label class="form-check-label" for="defaultSkin">Use Default Skin</label>
-                                    </div>
-                                </div>
-
-                                <!-- Popup 4 -->
-                                <div id="popup4" class="popup" style="display: none;">
-                                    <h5 class="fw-bold mb-3">4. Popup Times</h5>
-                                    <p>Select the times the popup will be displayed.</p>
-                                    <!-- Add content for Popup 4 -->
-                                </div>
-
-                                <!-- Popup 5 -->
-                                <div id="popup5" class="popup" style="display: none;">
-                                    <h5 class="fw-bold mb-3">5. Popup Displays</h5>
-                                    <p>Popup display settings.</p>
-                                    <!-- Add content for Popup 5 -->
-                                </div>
-
-                                <!-- Popup 6 -->
-                                <div id="popup6" class="popup" style="display: none;">
-                                    <h5 class="fw-bold mb-3">6. Popup Repeat</h5>
-                                    <p>Popup repeat settings.</p>
-                                    <!-- Add content for Popup 6 -->
-                                </div>
-
-                                <!-- Popup 7 -->
-                                <div id="popup7" class="popup" style="display: none;">
-                                    <h5 class="fw-bold mb-3">7. Popup Feedback Request</h5>
-                                    <p>Select popup feedback preferences: Like/Dislike and/or comment.</p>
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked1" checked>
-                                        <label class="form-check-label" for="flexSwitchCheckChecked1">Allow recipients to add comments</label>
-                                    </div>
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked2" checked>
-                                        <label class="form-check-label" for="flexSwitchCheckChecked2">Allow recipients to like or dislike</label>
-                                    </div>
-                                </div>
-
-                                <!-- Popup 8 -->
-                                <div id="popup8" class="popup" style="display: none;">
-                                    <h5 class="fw-bold mb-3">8. Popup Target Users</h5>
-                                    <p>Popup target user settings.</p>
-                                    <!-- Add content for Popup 8 -->
-                                </div>
-
-                                <!-- Popup 9 -->
-                                <div id="popup9" class="popup" style="display: none;">
-                                    <h5 class="fw-bold mb-3">9. Popup Exposure Summary</h5>
-                                    <p>Popup exposure summary settings.</p>
-                                    <!-- Add content for Popup 9 -->
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Right Bar Preview -->
-                        <div class="col-12 col-md-3">
-                            <div class="right-bar h-100">
-                                <h1 class="text-center">Preview</h1>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Pagination Section -->
-                    <div class="pagination-section mt-4  flex-column flex-md-row ">
-                        <button type="button" class="btn next-btn" id="backBtn" onclick="prevPopup()" style="display:none;">Back</button>
-                        <button type="button" class="btn next-btn" id="nextBtn" onclick="nextPopup()">Next</button>
-                        <button type="submit" class="btn btn-success" id="submitBtn" style="display:none;">Submit</button>
-                        <p class="mt-2" id="pageNumber">Page 1</p>
+                <div class="column side">
+                    <div class="sidebar">
+                        <a href="#" id="sidebar-link-type" class="active">Link Type</a>
+                        <a href="#" id="sidebar-skin">Skin</a>
+                        <a href="#" id="sidebar-texts">Texts</a>
+                        <a href="#" id="sidebar-times">Times</a>
+                        <a href="#" id="sidebar-displays">Displays</a>
+                        <a href="#" id="sidebar-repeat">Repeat</a>
+                        <a href="#" id="sidebar-feedback">Feedback</a>
+                        <a href="#" id="sidebar-target-users">Target Users</a>
+                        <a href="#" id="sidebar-exposure-summary">Exposure Summary</a>
                     </div>
                 </div>
-            </form>
+
+                <div class="column middle">
+                   
+
+                    <form class="form-horizontal" id="popupForm" action="/action_page.php">
+                       <div id="popup1" class="popup">
+                            <h5 class="fw-bold text-center">1. Popup Link Type</h5>
+                            <p class="text-center">Select what the popup will link to when clicked by the user.</p>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2 fw-bold" for="email">Link Type:</label>
+                            <div class="col-sm-10">
+                                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                                    <div class="btn-group w-100 p-1" role="group" aria-label="Button group example">
+                                        <button type="button" class="btn btn-outline-secondary">No Link</button>
+                                        <button type="button" class="btn btn-outline-secondary active">Image</button>
+                                        <button type="button" class="btn btn-outline-secondary">Audio</button>
+                                        <button type="button" class="btn btn-outline-secondary">Video</button>
+                                        <button type="button" class="btn btn-outline-secondary">Ticker</button>
+                                    </div>
+                                       <div class="btn-group w-100 p-1" role="group" aria-label="Button group example">
+                                        <button type="button" class="btn btn-outline-secondary">Document</button>
+                                        <button type="button" class="btn btn-outline-secondary">Website</button>
+                                        <button type="button" class="btn btn-outline-secondary">Email</button>
+                                        <button type="button" class="btn btn-outline-secondary">Survey</button>
+                                        <button type="button" class="btn btn-outline-secondary">Policy</button>
+                                    </div>
+
+
+                                 
+
+                                </div>                            
+                            </div>
+                        </div>
+                     
+                        <div class="form-group">
+                            <label class="control-label col-sm-2 fw-bold" for="pwd">Attachment:</label>
+                            <div class="col-sm-10">
+                                <p id="fileName" class="mb-2">No file selected</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" ></label>
+                               <div class="col-sm-10 ">
+                                
+                                <div class="upload-section mb-4" id="upload-section">
+                                    <i class="bi bi-cloud-arrow-up-fill"></i>
+                                    <p class="mt-2">Drag & Drop file here or</p>
+                                    <input type="file" id="file-input" hidden>
+                                    <button class="btn btn-upload" type="button" onclick="document.getElementById('file-input').click();">Browse</button>
+                                </div>
+                            </div>
+                        </div>
+
+                  
+                        </div>
+
+
+                          <!-- Popup 2 -->
+                        <div id="popup2" class="popup text-center " style="display:none;">
+                            <h5 class="fw-bold mb-3  text-center">2. Popup Skin</h5>
+                            <p class=" text-center">Please select the skin for this group</p>
+                            <p class=" text-center">If you import your own custom skin. please note that the image must be saved as a *.BMP file and must
+                                be 314x188 pixels in dimension.
+                            </p>
+
+                         
+
+                            <div class="form-group">
+                                <div class="col-sm-10 d-inline-flex justify-content-between align-items-center">
+                                    <div class="form-check mr-3">
+                                        <div class="d-inline">
+                                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                        </div>
+                                        <label class="form-check-label ml-2" for="exampleRadios1">
+                                            Use Custom Skin
+                                        </label>
+                                    </div>
+                                 
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-10 d-inline-flex justify-content-between align-items-center">
+                                    <div class="form-check mr-3">
+                                        <div class="d-inline">
+                                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                        </div>
+                                        <label class="form-check-label ml-2" for="exampleRadios1">
+                                           Use Default Skin
+                                        </label>
+                                    </div>
+                                    <select class="form-control ml-3 w-50">
+                                        <option>STMBackground.BPM</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <!-- Add content for Popup 2 -->
+                        </div>
+
+                        <!-- Popup 3 -->
+                        <div id="popup3" class="popup" style="display: none;">
+                            <h5 class="fw-bold mb-3  text-center">3. Popup Text</h5>
+                            <p class=" text-center">Popup text options.</p>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" id="customSkin">
+                                <label class="form-check-label" for="customSkin">Use Custom Skin</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" id="defaultSkin">
+                                <label class="form-check-label" for="defaultSkin">Use Default Skin</label>
+                            </div>
+                        </div>
+
+                        <!-- Popup 4 -->
+                        <div id="popup4" class="popup" style="display: none;">
+                            <h5 class="fw-bold mb-3  text-center">4. Popup Times</h5>
+                            <p>Select the times the popup will be displayed.</p>
+                            <!-- Add content for Popup 4 -->
+                        </div>
+
+                        <!-- Popup 5 -->
+                        <div id="popup5" class="popup" style="display: none;">
+                            <h5 class="fw-bold mb-3">5. Popup Displays</h5>
+                            <p>Popup display settings.</p>
+                            <!-- Add content for Popup 5 -->
+                        </div>
+
+                        <!-- Popup 6 -->
+                        <div id="popup6" class="popup" style="display: none;">
+                            <h5 class="fw-bold mb-3">6. Popup Repeat</h5>
+                            <p>Popup repeat settings.</p>
+                            <!-- Add content for Popup 6 -->
+                        </div>
+
+                        <!-- Popup 7 -->
+                        <div id="popup7" class="popup" style="display: none;">
+                            <h5 class="fw-bold mb-3">7. Popup Feedback Request</h5>
+                            <p>Select popup feedback preferences: Like/Dislike and/or comment.</p>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked1" checked>
+                                <label class="form-check-label" for="flexSwitchCheckChecked1">Allow recipients to add comments</label>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked2" checked>
+                                <label class="form-check-label" for="flexSwitchCheckChecked2">Allow recipients to like or dislike</label>
+                            </div>
+                        </div>
+
+                        <!-- Popup 8 -->
+                        <div id="popup8" class="popup" style="display: none;">
+                            <h5 class="fw-bold mb-3">8. Popup Target Users</h5>
+                            <p>Popup target user settings.</p>
+                            <!-- Add content for Popup 8 -->
+                        </div>
+
+                        <!-- Popup 9 -->
+                        <div id="popup9" class="popup" style="display: none;">
+                            <h5 class="fw-bold mb-3">9. Popup Exposure Summary</h5>
+                            <p>Popup exposure summary settings.</p>
+                            <!-- Add content for Popup 9 -->
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2"></label>
+                            <div class="col-sm-10 ">
+                                <div class="pagination-section mt-4  flex-column flex-md-row ">
+                                    <button type="button" class="btn next-btn text-white" id="backBtn" onclick="prevPopup()" style="display:none;">Back</button>
+                                    <button type="button" class="btn next-btn text-white" id="nextBtn" onclick="nextPopup()">Next</button>
+                                    <button type="submit" class="btn btn-success" id="submitBtn" style="display:none;">Submit</button>
+                                    <div id="pageNumber">Page 1</div>
+                                </div>
+                            </div>
+                        </div>
+
+                   </form>
+                                        
+                </div>
+
+                <div class="column side">
+                    <h5 class="fw-light">Preview</h5>
+                    <div class="form-group mt-4">
+                        <div class="preview-box" id="preview-box">
+                            <p class="skin-filename">Skin filename: STMBackground.BMP</p>
+                            <div alt="Skin Preview" style="width: 314px; height: 188px; border: 1px solid">
+                                <div class="title" style="width: 100%; height: 70px; border-bottom: 1px solid yellow; background-color:#000;">
+                                </div>
+                                <div class="body" style="width: 100%; height:118px; border: 1px solid yellow; background-color:yellow;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
+
+
 </div>
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-<script>
-
-    const sidebarLinks = document.querySelectorAll('.sidebar a');
-
-  
-    let currentPopup = 1;
-    const totalPopups = sidebarLinks.length;
-
-    // Show popup by number
-    function showPopup(popupNumber) {
-        for (let i = 1; i <= totalPopups; i++) {
-            document.getElementById(`popup${i}`).style.display = i === popupNumber ? 'block' : 'none';
-        }
-        document.getElementById('pageNumber').textContent = `Page ${popupNumber}`;
-        document.getElementById('backBtn').style.display = popupNumber === 1 ? 'none' : 'inline-block'; 
-        document.getElementById('nextBtn').style.display = popupNumber === totalPopups ? 'none' : 'inline-block'; 
-        document.getElementById('submitBtn').style.display = popupNumber === totalPopups ? 'inline-block' : 'none'; 
-        updatePopupSidebar(popupNumber);
-    }
-
-    // Go to the next popup
-    function nextPopup(event) {
-  
-        if (currentPopup < totalPopups) {
-            currentPopup++;
-            showPopup(currentPopup);
-            updatePopupSidebar(currentPopup)
-        }
-    }
-
-    // Go to the previous popup
-    function prevPopup(event) {
- 
-        if (currentPopup > 1) {
-            currentPopup--;
-            showPopup(currentPopup);
-            updatePopupSidebar(currentPopup)
-        }
-    }
-
-    // Drag and drop logic
-    const uploadSection = document.getElementById('upload-section');
-    const fileInput = document.getElementById('file-input');
-    const fileNameDisplay = document.getElementById('fileName');
-
-    uploadSection.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        uploadSection.classList.add('dragging');
-    });
-
-    uploadSection.addEventListener('dragleave', () => {
-        uploadSection.classList.remove('dragging');
-    });
-
-    uploadSection.addEventListener('drop', (e) => {
-        e.preventDefault();
-        uploadSection.classList.remove('dragging');
-        const files = e.dataTransfer.files;
-        handleFiles(files);
-    });
-
-    fileInput.addEventListener('change', (e) => {
-        const files = e.target.files;
-        handleFiles(files);
-    });
-
-    function handleFiles(files) {
-        if (files.length > 0) {
-            fileNameDisplay.textContent = files[0].name;
-        } else {
-            fileNameDisplay.textContent = "No file selected";
-        }
-    }
-
-    // Update the sidebar to reflect the current popup step
-    function updatePopupSidebar(step) {
-        sidebarLinks.forEach(link => link.classList.remove('active'));
-
-        switch (step) {
-            case 1:
-                document.getElementById('sidebar-link-type').classList.add('active');
-                break;
-            case 2:
-                document.getElementById('sidebar-skin').classList.add('active');
-                break;
-            case 3:
-                document.getElementById('sidebar-texts').classList.add('active');
-                break;
-            case 4:
-                document.getElementById('sidebar-times').classList.add('active');
-                break;
-            case 5:
-                document.getElementById('sidebar-displays').classList.add('active');
-                break;
-            case 6:
-                document.getElementById('sidebar-repeat').classList.add('active');
-                break;
-            case 7:
-                document.getElementById('sidebar-feedback').classList.add('active');
-                break;
-            case 8:
-                document.getElementById('sidebar-target-users').classList.add('active');
-                break;
-            case 9:
-                document.getElementById('sidebar-exposure-summary').classList.add('active');
-                break;
-            default:
-                console.log('Invalid step');
-                break;
-        }
-    }
-
-    // Initialize the first popup on page load
-    showPopup(currentPopup);
-    document.getElementById('backBtn').style.display = 'none'; // Hide back button on the first step
-
-
-
-
-
-</script>

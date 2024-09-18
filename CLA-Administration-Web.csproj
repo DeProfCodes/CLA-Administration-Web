@@ -41,10 +41,9 @@
   <ItemGroup>
     <TypeScriptCompile Remove="node_modules\**" />
   </ItemGroup>
-    
   <ItemGroup>
     <Reference Include="CLACommonFunctionsLibrary_NET">
-      <HintPath>..\..\..\Miscellaneous\# Utilities #\CLACommonFunctionsLibrary_NET.dll</HintPath>
+      <HintPath>bin\Debug\net8.0\CLACommonFunctionsLibrary_NET.dll</HintPath>
     </Reference>
   </ItemGroup>
 

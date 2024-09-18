@@ -65,3 +65,156 @@ function ReloadFilteredModuleOverview(moduleType, status, username, startDate, e
 
     LoadPartialViewWithLoader(url, "#PopupOverviewTableContainer","#SecondaryLoader");
 }
+
+
+
+//popup module js
+let currentPopup = 1;
+let totalPopups = 9;
+
+
+function showPopup(popupNumber)
+{
+    for (let i = 1; i <= totalPopups; i++)
+    {
+        const popupElement = document.getElementById(`popup${i}`);
+        if (popupElement)
+        {
+            popupElement.style.display = i === popupNumber ? 'block' : 'none';
+        } else {
+            console.warn(`Popup ${i} not found`);
+        }
+    }
+
+    const pageNumberElement = document.getElementById('pageNumber');
+    if (pageNumberElement)
+    {
+        pageNumberElement.textContent = `Page ${popupNumber}`;
+    }
+
+    const backBtn = document.getElementById('backBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const submitBtn = document.getElementById('submitBtn');
+    const previewBox = document.getElementById('preview-box');
+
+    if (backBtn && nextBtn && submitBtn && previewBox)
+    {
+        backBtn.style.display = popupNumber === 1 ? 'none' : 'inline-block';
+        previewBox.style.display = popupNumber === 1 ? 'none' : 'inline-block';
+        nextBtn.style.display = popupNumber === totalPopups ? 'none' : 'inline-block';
+        submitBtn.style.display = popupNumber === totalPopups ? 'inline-block' : 'none';
+    }
+
+    // Show or hide the preview based on the page number
+   
+    updatePopupSidebar(popupNumber);
+}
+
+// Go to the next popup
+function nextPopup()
+{
+    if (currentPopup < totalPopups)
+    {
+        currentPopup++;
+        showPopup(currentPopup);
+    }
+}
+
+// Go to the previous popup
+function prevPopup()
+{
+    if (currentPopup > 1)
+    {
+        currentPopup--;
+        showPopup(currentPopup);
+    }
+}
+
+// Sidebar update logic
+function updatePopupSidebar(step)
+{
+    const sidebarLinks = document.querySelectorAll('.sidebar a');
+    sidebarLinks.forEach(link => link.classList.remove('active'));
+
+    const sidebarMap =
+    {
+        1: 'sidebar-link-type',
+        2: 'sidebar-skin',
+        3: 'sidebar-texts',
+        4: 'sidebar-times',
+        5: 'sidebar-displays',
+        6: 'sidebar-repeat',
+        7: 'sidebar-feedback',
+        8: 'sidebar-target-users',
+        9: 'sidebar-exposure-summary'
+    };
+
+    const currentSidebarLink = document.getElementById(sidebarMap[step]);
+    if (currentSidebarLink)
+    {
+        currentSidebarLink.classList.add('active');
+    }
+}
+
+const uploadSection = document.getElementById('upload-section');
+const fileInput = document.getElementById('file-input');
+const fileNameDisplay = document.getElementById('fileName');
+
+uploadSection.addEventListener('dragover', (e) =>
+{
+    e.preventDefault();
+    uploadSection.classList.add('dragging');
+});
+
+uploadSection.addEventListener('dragleave', () =>
+{
+    uploadSection.classList.remove('dragging');
+});
+
+uploadSection.addEventListener('drop', (e) =>
+{
+    e.preventDefault();
+    uploadSection.classList.remove('dragging');
+    const files = e.dataTransfer.files;
+    handleFiles(files);
+});
+
+fileInput.addEventListener('change', (e) =>
+{
+    const files = e.target.files;
+    handleFiles(files);
+});
+
+function handleFiles(files)
+{
+    if (files.length > 0)
+    {
+        fileNameDisplay.textContent = files[0].name;
+    } else
+    {
+        fileNameDisplay.textContent = "No file selected";
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () =>
+{
+    showPopup(currentPopup);
+    const previewBox = document.getElementById('preview-box');
+    if (currentPopup == 1)
+    {
+
+        previewBox.style.display = 'none';
+    }
+    const backBtn = document.getElementById('backBtn');
+
+
+    if (backBtn)
+    {
+        backBtn.style.display = 'none';
+        previewBox.style.display = 'none';
+
+    }
+});
+
+
+
