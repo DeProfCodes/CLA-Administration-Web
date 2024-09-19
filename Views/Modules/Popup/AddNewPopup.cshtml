@@ -234,7 +234,7 @@
                                         <div id="bodyInput" contentEditable></div>
                                         <div class="form-check form-switch">
                                             <label class="form-check-label" for="flexSwitchCheckChecked2">Show</label>
-                                            <input class="form-check-input" id="showPreview" type="checkbox" role="switch" id="flexSwitchCheckChecked2">
+                                            <input class="form-check-input" id="showPreview" type="checkbox" role="switch">
                                         </div>
                                     </div>
                                 </div>
@@ -267,11 +267,11 @@
                             <h5 class="fw-bold mb-3">7. Popup Feedback Request</h5>
                             <p>Select popup feedback preferences: Like/Dislike and/or comment.</p>
                             <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked1" checked>
+                                <input class="form-check-input" type="checkbox" role="switch" id="showPreviewTitle" checked>
                                 <label class="form-check-label" for="flexSwitchCheckChecked1">Allow recipients to add comments</label>
                             </div>
                             <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked2" checked>
+                                <input class="form-check-input" type="checkbox" role="switch" id="showPreviewBody" checked>
                                 <label class="form-check-label" for="flexSwitchCheckChecked2">Allow recipients to like or dislike</label>
                             </div>
                         </div>
@@ -344,121 +344,138 @@
 <script>
 
 
-        let uploadSection = document.getElementById('upload-section');
+    let uploadSection = document.getElementById('upload-section');
 
     let fileInput = document.getElementById('file-input');
     let fileNameDisplay = document.getElementById('fileName');
 
-    uploadSection.addEventListener('dragover', (e) => {
+    uploadSection.addEventListener('dragover', (e) => 
+    {
         e.preventDefault();
         uploadSection.classList.add('dragging');
     });
 
-    uploadSection.addEventListener('dragleave', () => {
+    uploadSection.addEventListener('dragleave', () => 
+    {
         uploadSection.classList.remove('dragging');
     });
 
-    uploadSection.addEventListener('drop', (e) => {
+    uploadSection.addEventListener('drop', (e) =>
+    {
         e.preventDefault();
         uploadSection.classList.remove('dragging');
         const files = e.dataTransfer.files;
         handleFiles(files);
     });
 
-    fileInput.addEventListener('change', (e) => {
+    fileInput.addEventListener('change', (e) =>
+    {
         const files = e.target.files;
         handleFiles(files);
     });
 
-    function handleFiles(files) {
-        if (files.length > 0) {
+    function handleFiles(files)
+    {
+        if (files.length > 0)
+        {
             fileNameDisplay.textContent = files[0].name;
-        } else {
+        } else
+        {
             fileNameDisplay.textContent = "No file selected";
         }
     }
 
 
 
-    $(document).ready(function () {
+    $(document).ready(function ()
+    {
         // Execute commands (like bold, italic, etc.)
-        $('.btns button').click(function (event) {
-            event.preventDefault(); // Prevent form submission on button click
+        $('.btns button').click(function (event)
+        {
+            event.preventDefault(); 
 
             const cmd = $(this).data('cmd');
             let value = null;
 
-            // If the button has 'prompt' class, ask user for input
-            if ($(this).hasClass('prompt')) {
+            if ($(this).hasClass('prompt'))
+            {
                 value = prompt('Enter the link or image URL:', 'http://');
             }
             execCmd(cmd, value);
         });
 
-        // Change the selected options (like font size, font name)
-        $('.btns select').change(function () {
+        $('.btns select').change(function ()
+        {
             const cmd = $(this).data('cmd');
             const value = $(this).val();
             execCmd(cmd, value);
         });
 
-        // Change the color inputs (text color, background color)
-        $('.btns input').change(function () {
+        $('.btns input').change(function () 
+        {
             const cmd = $(this).data('cmd');
             const value = $(this).val();
             execCmd(cmd, value);
         });
 
-        // Toggle live preview when checkbox is clicked
-        $('#showPreview').change(function () {
+        $('#showPreview').change(function ()
+        {
             togglePreview();
         });
 
-        // Live typing updates for title and body
-        $('#titleInput').on('input', function () {
+        $('#titleInput').on('input', function () 
+        {
             updatePreview();
         });
 
-        $('#bodyInput').on('input', function () {
+        $('#bodyInput').on('input', function ()
+        {
             updatePreview();
         });
 
-        // Execute a command
-        function execCmd(cmd, value) {
+        function execCmd(cmd, value)
+        {
             document.execCommand(cmd, false, value);
             updatePreview();
         }
-        // Toggle live preview when checkbox is clicked
-        $('#showPreview').change(function () {
+      
+        $('#showPreview').change(function ()
+        {
             togglePreview();
         });
 
-        // Update the preview area
-        function updatePreview() {
-            if ($('#showPreview').is(':checked')) {
-                let title = $('#titleInput').html();  // Get HTML of the editable title div
-                let content = $('#bodyInput').html();  // Get HTML of the editable body div
+        function updatePreview()
+        {
+            if ($('#showPreview').is(':checked'))
+            {
+                let title = $('#titleInput').html();  
+                let content = $('#bodyInput').html();  
 
-                $('#previewTitle').html(title);  // Set preview title
-                $('#previewContent').html(content);  // Set preview content
-            } else {
-                // If preview is off, clear preview content
+                $('#previewTitle').html(title); 
+                $('#previewContent').html(content);  
+            } else
+            
+            {
+               
                 $('#previewTitle').html('');
                 $('#previewContent').html('');
             }
         }
 
-        // Toggle preview visibility
-        function togglePreview() {
-            if ($('#showPreview').is(':checked')) {
-                $('#preview').show();
+        function togglePreview()
+        {
+            if ($('#showPreview').is(':checked') )
+            {
+                $('#previewContent').show();
+                $('#previewTitle').show();
                 updatePreview();
-            } else {
-                $('#preview').hide();  // Hide the preview if switch is off
+            } else 
+            {
+                $('#previewContent').hide();
+                $('#previewTitle').hide();
             }
         }
 
-        // Initialize with preview hidden
         togglePreview();
     });
 
