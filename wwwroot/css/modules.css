@@ -467,7 +467,7 @@
 }
 
 .upload-section {
-    border: 1px dashed #ced4da;
+    border: 1px solid #ced4da;
     padding: 1rem;
     text-align: center;
     border-radius: 0.5rem;
@@ -581,20 +581,18 @@ input[type="color"]
 
 /*popup 3 css*/
 
-#titleInput 
-{
+#titleInput {
     padding: 20px;
-    background-color: #C5C8CD;
+    background-color: #f8f9fa;
     outline: none;
     border: none;
     resize: vertical;
     overflow: auto;
 }
 
-#bodyInput
-{
+#bodyInput {
     padding: 20px;
-    background-color: ##C5C8CD;
+    background-color: #f8f9fa;
     outline: none;
     border: none;
     resize: vertical;
