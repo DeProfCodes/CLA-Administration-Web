@@ -376,17 +376,23 @@
             color: white;
             border-radius: 20px;
         }
+. popup-link{
+    padding:0px 60px;
+    font-size:13px;
+}
 
+.btn-group.btn{
+    font-size:x-small;
+}
 /* Preview Box Styling */
 .preview-box {
-  
     padding: 10px;
     display: flex;
     flex-direction: column;
-    align-items: center; 
-    justify-content: center; 
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    margin:auto;
+    margin: auto;
 }
 
 .skin-filename {
@@ -435,7 +441,11 @@
         border-bottom: 1px solid #dee2e6;
     }
 }
-
+@media (max-width: 576px) {
+    .btn-group .btn {
+        margin-bottom: 5px;
+    }
+}
 
 .upload-section {
     border: 1px dashed #ced4da;
@@ -444,6 +454,7 @@
     border-radius: 0.5rem;
     position: relative;
     background-color: #f8f9fa;
+    width:75%;
 }
 
     .upload-section i {
@@ -470,6 +481,10 @@
 }
 
 
+.btn-toolbar {
+    padding-left: 60px;
+    padding-right: 60px;
+}
 
 
 
@@ -517,7 +532,7 @@
 button, select, input {
     background-color: white;
     border: none;
-    padding: 0.5em;
+    padding: 5px;
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
@@ -547,6 +562,16 @@ button, select, input {
     border: none;
     resize: vertical;
     overflow: auto;
+}
+
+#bodyInput {
+    padding: 20px;
+    background-color: #71797E;
+    outline: none;
+    border: none;
+    resize: vertical;
+    overflow: auto;
+    height:150px;
 }
 
 #preview {
