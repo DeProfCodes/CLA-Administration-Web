@@ -1,0 +1,22 @@
+﻿@model CLA_Administration_Web.ViewModels.Modules.ModuleDataViewModel
+@using CLA_Administration_Web.Helpers.Enums.AppPages
+
+
+<div class="container-fluid">
+
+    <!-- Breadcrumb Component -->
+    @await Component.InvokeAsync("Breadcrumbs", new { page = ModulesPages.PopupDetails, itemId = Model.Id })
+
+    <!-- Card for Filters -->
+    <div class="card mb-4 mt-5 overview-filters-card">
+        <div class="card-body">
+            <h4 class="w-100 text-center theme-txt-clr">Popup Details for Popup Id: @Model.Id</h4>
+            <div class="row">
+                
+            </div>
+            <h1 class="text-center w-100 theme-txt-clr" style="margin-top:15%; margin-bottom:15%">
+                To Be Added Soon
+            </h1>
+        </div>
+    </div>
+</div>

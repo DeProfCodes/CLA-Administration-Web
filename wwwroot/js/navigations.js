@@ -54,18 +54,47 @@ function LoadPartialViewWithLoader(url, destinationDiv, loaderDiv)
         contentType: 'application/json; charset=utf-8',
         beforeSend: function()
         {
+            $(destinationDiv).css("opacity", "0.3");
             $(loaderDiv).css("visibility", "visible");
         },
         success: function (res)
         {
             FinishedLoading(destinationDiv, res);   
             $(loaderDiv).css("visibility", "hidden");
+            $(destinationDiv).css("opacity", "1");
         },
         error: function (res)
         {
             toastr.error("Error");
             $(loaderDiv).css("visibility", "hidden");
+            $(destinationDiv).css("opacity", "1");
         }
     });
 }
+
+function OpenPage(page, id)
+{
+    LoadPageArea(page, id);
+
+    var pageTitle = GetPageTitle(page);
+
+    document.title = pageTitle;
+}
+
+function LoadPageArea(page, id)
+{
+    var url = GetPageUrl(page, id);
+    
+    var pageName = GetPageTitle(page);
+    
+    ShowLoader("Main", "Loading " + pageName);
+
+    setTimeout(function ()
+    {
+        HideLoader("Main");
+        LoadPartialView(url, "#DashboardMainArea");
+
+    }, 0);
+}
+
 

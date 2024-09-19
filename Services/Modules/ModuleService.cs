@@ -12,9 +12,19 @@ namespace CLA_Administration_Web.Services.Modules
 
         #region Popups 
         
-        public async Task<List<PopupViewModel>> GetAllPopupsData()
+        public async Task<List<ModuleDataViewModel>> GetAllPopupsData()
         {
             return ModulesMockData.AllPopupsData;    
+        }
+
+        public async Task<List<ModuleDataViewModel>> GetAllTickersData()
+        {
+            return ModulesMockData.AllTickersData;
+        }
+
+        public async Task<List<ModuleDataViewModel>> GetAllSurveysData()
+        {
+            return ModulesMockData.AllSurveysData;
         }
 
         #endregion

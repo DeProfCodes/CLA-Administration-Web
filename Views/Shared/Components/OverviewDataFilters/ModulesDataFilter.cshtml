@@ -55,7 +55,7 @@
                 <div id="DatesFilterContainer" class="mx-auto">
                     <div class="row mb-3 mb-md-0">
                         <p class="theme-txt-clr overview-filter-title" id="DatesFilterTitle">Dates</p>
-                        <input type="date" class="form-control overview-dates-input" id="@dateFilterFrom" onchange="ModuleFilterDatesFilterChange('@moduleName', '@dateFilterFrom')" value="2020-01-01">
+                        <input type="date" class="form-control overview-dates-input" id="@dateFilterFrom" onchange="ModuleFilterDatesFilterChange('@moduleName', '@dateFilterFrom')" value="2024-01-01">
                         <p class="theme-txt-clr overview-filter-title">To</p>
                         <input type="date" class="form-control overview-dates-input" id="@dateFilterTo" onchange="ModuleFilterDatesFilterChange('@moduleName', '@dateFilterTo')" value="2024-09-30">
                     </div>
@@ -80,23 +80,5 @@
         $("#@dateFilterTo").val(today);
     }
 
-    function GetModuleTypeFromPage()
-    {
-        if('@Model.ModulePage' == '@ModulesPages.PopupOverview') return AllModuleTypes.Popup;
-
-        return '@moduleName';
-    }
-
-    // function FilterData(buttonId, status)
-    // {
-    //     var moduleName = GetModuleTypeFromPage();
-    //     var username = $('#@usersFilterSelectList').val();
-    //     var startDate = $('#@dateFilterFrom').val();
-    //     var endDate = $('#@dateFilterTo').val();
-
-    //     console.log(`Okay we are here and the values are : moduleName=${moduleName},status=${status}, username=${username}, startDate=${startDate}, endDate=${endDate}.`);
-
-    //     ModuleFilterButtonClick(buttonId, moduleName, status, username, startDate, endDate);
-    // }
 
 </script>

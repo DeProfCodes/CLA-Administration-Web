@@ -6,8 +6,12 @@ namespace CLA_Administration_Web.Services.Modules
     {
         #region Popups
         
-        public Task<List<PopupViewModel>> GetAllPopupsData();
-        
+        public Task<List<ModuleDataViewModel>> GetAllPopupsData();
+
+        public Task<List<ModuleDataViewModel>> GetAllTickersData();
+
+        public Task<List<ModuleDataViewModel>> GetAllSurveysData();
+
         #endregion
     }
 }

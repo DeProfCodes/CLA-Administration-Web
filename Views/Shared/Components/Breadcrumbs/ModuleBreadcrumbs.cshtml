@@ -2,17 +2,35 @@
 @using CLACommonFunctionsLibrary_NET.Helpers.Enums
 @using CLA_Administration_Web.Helpers.Enums.AppPages
 
+@{
+    var pageType = Model.ActionButtonPage;
+    var moduleName = pageType.GetDisplayShortName();
+    var navPageId = $"{pageType.GetDisplayName()}Link";
+}
+
 
 <div class="row mb-2">
     <div class="w-auto">
         <h2 class="theme-txt-clr breadcrumb-title">@Model.ModulePageName</h2>
-        @if (!Model.IsAllModulesBreadcrumb)
+        @if (!Model.IsAllModulesBreadcrumb && !Model.IsDetailsPage)
         {
             <p class="breadcrumb-nav-body">
                 <span class="breadcrumb-item-nav" onclick="OpenPageWithAnimations('Dashboard', null, '@DashboardPages.Dashboard', 'DashboardSubLink')">Dashboard</span> /
                 <span class="breadcrumb-item-nav" onclick="OpenPageWithAnimations('Modules', null, '@ModulesPages.AllModules', 'AllModulesLink', true)">Modules</span> /
                 <span class="breadcrumb-item">@Model.ModuleName</span> /
                 <span class="breadcrumb-item">@Model.ModuleSubPage</span>
+            </p>
+        }
+        else if (Model.IsDetailsPage)
+        {
+            var overviewBtnId = $"{Model.ModulePreviewPage.GetDisplayName()}Link";
+            <p class="breadcrumb-nav-body">
+                <span class="breadcrumb-item-nav" onclick="OpenPageWithAnimations('Dashboard', null, '@DashboardPages.Dashboard', 'DashboardSubLink')">Dashboard</span> /
+                <span class="breadcrumb-item-nav" onclick="OpenPageWithAnimations('Modules', null, '@ModulesPages.AllModules', 'AllModulesLink', true)">Modules</span> /
+                <span class="breadcrumb-item-nav" onclick="OpenPageWithAnimations('Modules', '@moduleName', '@Model.ModulePreviewPage', '@overviewBtnId')">@Model.ModuleName</span> /
+                <span class="breadcrumb-item-nav" onclick="OpenPageWithAnimations('Modules', '@moduleName', '@Model.ModulePreviewPage', '@overviewBtnId')">Overview</span> /
+                <span class="breadcrumb-item">@Model.ModuleSubPage</span> /
+                <span class="breadcrumb-item">@Model.ModuleDetailsId</span>
             </p>
         }
         else
@@ -33,11 +51,6 @@
     }
 </div>
 
-@{
-    var pageType = Model.ActionButtonPage;
-    var moduleName = pageType.GetDisplayShortName();
-    var navPageId = $"{pageType.GetDisplayName()}Link";
-}
 
 <script>
 

@@ -3,7 +3,7 @@ using CLA_Administration_Web.ViewModels.Shared;
 
 namespace CLA_Administration_Web.ViewModels.Modules
 {
-    public class PopupViewModel
+    public class ModuleDataViewModel
     {
         public int Id { get; set; }
 

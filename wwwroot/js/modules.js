@@ -17,10 +17,7 @@ function ModuleFilterButtonClick(filterBtnId, moduleType, status, username, star
     $('.module-filter-btn-group').removeClass('btn-group-active');
     $(`#${filterBtnId}`).addClass('btn-group-active');
     
-    if(moduleType == AllModuleTypes.Popup)
-    {
-        ReloadFilteredModuleOverview(moduleType, status, username, startDate, endDate);
-    }
+    ReloadFilteredModuleOverview(moduleType, status, username, startDate, endDate);
 }
 
 function ModuleFilterUsersFilterChange(moduleName, selectListId)
@@ -64,14 +61,11 @@ function ModuleOverviewLoader(moduleType, status)
 
 function ReloadFilteredModuleOverview(moduleType, status, username, startDate, endDate)
 {
-    if(popupsDataTable != null)
-        popupsDataTable.clear().draw();
-
     ModuleOverviewLoader(moduleType, status);
 
-    var url = GetPageUrl('PopupOverviewFilter') + `?status=${status}&userType=${username}&startDate=${startDate}&endDate=${endDate}`;
+    var url = GetPageUrl('ModulesOverviewFilter') + `?moduleNameType=${moduleType}&status=${status}&userType=${username}&startDate=${startDate}&endDate=${endDate}`;
 
-    LoadPartialViewWithLoader(url, "#PopupOverviewTableContainer","#SecondaryLoader");
+    LoadPartialViewWithLoader(url, "#ModuleOverviewTableContainer","#SecondaryLoader");
 }
 
 function FilterModuleDataOverviewByStatus(moduleName, buttonId, status)

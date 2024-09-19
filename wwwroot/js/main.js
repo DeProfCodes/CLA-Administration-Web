@@ -7,3 +7,5 @@ let AllStatusTypes = new StatusType();
 /*============================= Module DataTables ====================================*/
 
 let popupsDataTable;
+let tickersDataTable;
+let surveysDataTable;

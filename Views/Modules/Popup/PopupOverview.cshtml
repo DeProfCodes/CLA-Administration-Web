@@ -1,4 +1,4 @@
-﻿@model List<CLA_Administration_Web.ViewModels.Modules.PopupViewModel>
+﻿@model List<CLA_Administration_Web.ViewModels.Modules.ModuleDataViewModel>
 @using CLACommonFunctionsLibrary_NET.Helpers.Enums
 @using CLA_Administration_Web.Helpers.Enums.AppPages
 @using CLA_Administration_Web.Helpers.Enums.Shared
@@ -12,38 +12,21 @@
     <!-- ModuleFilter Component -->
     @await Component.InvokeAsync("OverviewDataFilters", new { page = ModulesPages.PopupOverview })
 
-    <!-- Card for Table -->
-    <div class="card" id="ModuleOverviewCard">
-        <div class="card-body">
-            <div class="table-responsive" id="PopupOverviewTableContainer">
+    <!-- ModuleFilter Component -->
+    @await Component.InvokeAsync("OverviewDataTables", new { page = ModulesPages.PopupOverview })
 
-            </div>
-        </div>
-    </div>
 </div>
-
-
-<!-- DataTables JS -->
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
 
 <script>
 
     $(document).ready(function ()
     {
-        ModuleOverviewLoader("Popups");
-        LoadDefaultPopups();
+        LoadPopupDefaultOverviewData();
     });
 
-    function LoadDefaultPopups()
+    function LoadPopupDefaultOverviewData()
     {
-        //var startDate = "2024/01/01";
-        //var endDate = TodayDate('/');
-
-        //var url = `@Url.Action("_FilterPopupsOverview", "Modules")?status=all&userType=all&startDate=${startDate}&endDate=${endDate}`;
-
-        //LoadPartialView(url, "#PopupOverviewTableContainer");
-
-        FilterModuleDataOverviewByStatus(AllModuleTypes.Popup,"ActivePopupBtnFilter", AllStatusTypes.Active);
+        FilterModuleDataOverviewByStatus('Popup', `ActivePopupBtnFilter`, AllStatusTypes.Active);
     }
 
 </script>

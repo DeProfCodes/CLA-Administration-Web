@@ -5,7 +5,7 @@ namespace CLA_Administration_Web.Helpers.Layout
 {
     public class BreadcrumbsHelper
     {
-        public static List<ModuleBreadcrumbViewModel> GetAllModulesBreadcrumbData()
+        public static List<ModuleBreadcrumbViewModel> GetAllModulesBreadcrumbData(int moduleDetailsId = 0)
         {
             var modulesBreadcrumbs = new List<ModuleBreadcrumbViewModel>()
             {
@@ -27,6 +27,20 @@ namespace CLA_Administration_Web.Helpers.Layout
                     HasActionButton = true,
                     IsAddNewIcon = true,
                     ActionButtonText = "Add New Popup",
+                    ActionButtonPage = ModulesPages.PopupAddNew
+                },
+                new ModuleBreadcrumbViewModel()
+                {
+                    ModulePage = ModulesPages.PopupDetails,
+                    ModulePageName = "Popup Module",
+                    ModuleName = "Popup",
+                    ModuleSubPage = "Details",
+                    HasActionButton = true,
+                    IsDetailsPage = true,
+                    ModuleDetailsId = moduleDetailsId, 
+                    ModulePreviewPage = ModulesPages.PopupOverview,
+                    IsAddNewIcon = true,
+                    ActionButtonText = "Edit Popup",
                     ActionButtonPage = ModulesPages.PopupAddNew
                 },
                 new ModuleBreadcrumbViewModel()
@@ -198,9 +212,9 @@ namespace CLA_Administration_Web.Helpers.Layout
             return modulesBreadcrumbs;
         }
         
-        public static ModuleBreadcrumbViewModel GetModuleBreadcrumbData(ModulesPages modulePage)
+        public static ModuleBreadcrumbViewModel GetModuleBreadcrumbData(ModulesPages modulePage, int moduleDetailsId = 0)
         {
-            var allModulesBreadcrumbs = GetAllModulesBreadcrumbData();
+            var allModulesBreadcrumbs = GetAllModulesBreadcrumbData(moduleDetailsId);
 
             return allModulesBreadcrumbs.FirstOrDefault(m => m.ModulePage == modulePage);
         }

@@ -1,7 +1,6 @@
 ﻿using CLA_Administration_Web.Helpers.Enums.AppPages;
 using CLA_Administration_Web.Helpers.Enums.Shared;
 using CLA_Administration_Web.Helpers.Layout;
-using CLA_Administration_Web.Helpers.Modules;
 using CLA_Administration_Web.Services;
 using CLA_Administration_Web.ViewModels.Modules;
 using CLACommonFunctionsLibrary_NET.Helpers.Enums;
@@ -9,10 +8,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CLA_Administration_Web.ViewComponents.OverviewDataFilters
 {
-    [ViewComponent(Name = "OverviewDataFilters")]
-    public class OverviewDataFiltersViewComponent : ViewComponent
+    [ViewComponent(Name = "OverviewDataTables")]
+    public class OverviewDataTablesViewComponent : ViewComponent
     {
-        public OverviewDataFiltersViewComponent()
+        public OverviewDataTablesViewComponent()
         {
 
         }
@@ -23,20 +22,9 @@ namespace CLA_Administration_Web.ViewComponents.OverviewDataFilters
             {
                 var modulePage = (ModulesPages) page;
 
-                var moduleNameType = ModulesHelper.GetModuleNameTypeFromModulePage(modulePage);
-
                 if (modulePage == ModulesPages.PopupOverview || modulePage == ModulesPages.TickerOverview || modulePage == ModulesPages.SurveyOverview)
                 {
-                    var dataSource = LocalDataStorage.GetLocalModuleAllData(moduleNameType);
-
-                    var usersFilter = dataSource.Select(x => x.UserIdLastModified).Distinct().ToList();
-
-                    var filtersViewModel = new ModuleOverviewFilterViewModel
-                    {
-                        ModulePage = modulePage,
-                        Usernames = usersFilter
-                    };
-                    return View("ModulesDataFilter", filtersViewModel);
+                    return View("ModulesOverviewDataTable", modulePage);
                 }
             }
             return View("Default");

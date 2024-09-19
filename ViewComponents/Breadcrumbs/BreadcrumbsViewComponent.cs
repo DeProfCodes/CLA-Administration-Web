@@ -14,13 +14,13 @@ namespace CLA_Administration_Web.ViewComponents.Modules
 
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(Enum page)
+        public async Task<IViewComponentResult> InvokeAsync(Enum page, int itemId = 0)
         {
             if (page is ModulesPages)
             {
                 var modulePage = (ModulesPages) page; 
                 
-                var breadcrumbViewModel = BreadcrumbsHelper.GetModuleBreadcrumbData(modulePage);
+                var breadcrumbViewModel = BreadcrumbsHelper.GetModuleBreadcrumbData(modulePage, itemId);
 
                 return View("ModuleBreadcrumbs", breadcrumbViewModel);
             }

@@ -1,5 +1,6 @@
 using CLA_Administration_Web.Helpers.Constants;
 using CLA_Administration_Web.Helpers.Enums.Shared;
+using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
 using CLA_Administration_Web.Helpers.Modules;
 using CLA_Administration_Web.Models;
 using CLA_Administration_Web.Services;
@@ -26,6 +27,21 @@ namespace CLA_Administration_Web.Controllers
         public IActionResult AllModules()
         {
             return PartialView(AppPagesLinks.Modules.AllModulesPageLink);
+        }
+
+        public async Task<IActionResult> ModulesOverviewFilter(ModuleNamesType moduleNameType, string status, string userType, string startDate, string endDate)
+        {
+            var dataSource = LocalDataStorage.GetLocalModuleAllData(moduleNameType);
+
+            var moduleFilterDataVm = new ModuleFilterOverviewModel
+            {
+                ModuleName = moduleNameType,
+                ModuleDetailsPage = ModulesHelper.GetModuleDetailsPage(moduleNameType),
+                FilterTitle = ModulesHelper.GetModuleOverviewTitleText(moduleNameType, status, userType, startDate, endDate),
+                ModulesData = ModulesHelper.FilterModulesData(dataSource, status, userType, startDate, endDate)
+            };
+
+            return PartialView(AppPagesLinks.Modules.ModulesFilterOverviewPageLink, moduleFilterDataVm);
         }
 
         public IActionResult ContentLibraryCategories()
@@ -86,14 +102,11 @@ namespace CLA_Administration_Web.Controllers
             return PartialView(AppPagesLinks.Modules.PopupOverviewPageLink, popupDataViewModel);
         }
 
-        public async Task<IActionResult> _FilterPopupsOverview(string status, string userType, string startDate, string endDate)
+        public async Task<IActionResult> PopupDetails(int popupId)
         {
-            var popupFilterDataVm = new PopupFilterOverviewModel
-            {
-                FilterTitle = ModulesHelper.GetPopupOverviewText(status, userType, startDate, endDate),
-                PopupsData = ModulesHelper.FilterPopupsData(LocalDataStorage.AllPopupData, status, userType, startDate, endDate)
-            };
-            return PartialView(AppPagesLinks.Modules.PopupsFilterOverviewPageLink, popupFilterDataVm);
+            var popupDetails = LocalDataStorage.AllPopupData.Where(x => x.Id == popupId).FirstOrDefault();  
+
+            return PartialView(AppPagesLinks.Modules.PopupDetailsPageLink, popupDetails);
         }
 
         public IActionResult AddNewPopup()
@@ -103,24 +116,77 @@ namespace CLA_Administration_Web.Controllers
 
         #endregion
 
-        public IActionResult SurveyOverview()
+        #region Survey
+
+        public async Task<IActionResult> SurveyOverview()
         {
+            var surveyDataViewModel = await _moduleService.GetAllTickersData();
+
+            surveyDataViewModel.ForEach(s =>
+            {
+                s.Status = ModulesHelper.GetModuleStatus(s.EffectiveFrom, s.EffectiveTo);
+                s.EffectiveFromDate = TypesParserHelper.ParseDate(s.EffectiveFrom);
+                s.EffectiveToDate = TypesParserHelper.ParseDate(s.EffectiveTo);
+            });
+
+            LocalDataStorage.UpdateSurveysData(surveyDataViewModel);
+
             return PartialView(AppPagesLinks.Modules.SurveyOverviewPageLink);
         }
 
-        public IActionResult SurveyAddNew()
+        public async Task<IActionResult> SurveyDetails(int surveyId)
+        {
+            var surveyDetails = LocalDataStorage.AllSurveysData.Where(x => x.Id == surveyId).FirstOrDefault();
+
+            return PartialView(AppPagesLinks.Modules.SurveyDetailsPageLink, surveyDetails);
+        }
+
+        public IActionResult AddNewSurvey()
         {
             return PartialView(AppPagesLinks.Modules.SurveyAddNewPageLink);
         }
 
-        public IActionResult TickerOverview()
+        #endregion
+
+        #region Ticker
+        public async Task<IActionResult> TickerOverview()
         {
-            return PartialView(AppPagesLinks.Modules.TickerOverviewPageLink);
+            var tickerDataViewModel = await _moduleService.GetAllTickersData();
+
+            tickerDataViewModel.ForEach(t =>
+            {
+                t.Status = ModulesHelper.GetModuleStatus(t.EffectiveFrom, t.EffectiveTo);
+                t.EffectiveFromDate = TypesParserHelper.ParseDate(t.EffectiveFrom);
+                t.EffectiveToDate = TypesParserHelper.ParseDate(t.EffectiveTo);
+            });
+
+            LocalDataStorage.UpdateTickersData(tickerDataViewModel);
+
+            return PartialView(AppPagesLinks.Modules.TickerOverviewPageLink, tickerDataViewModel);
         }
 
-        public IActionResult TickerAddNew()
+        public async Task<IActionResult> TickerDetails(int tickerId)
+        {
+            var tickerDetails = LocalDataStorage.AllTickerData.Where(x => x.Id == tickerId).FirstOrDefault();
+
+            return PartialView(AppPagesLinks.Modules.TickerDetailsPageLink, tickerDetails);
+        }
+        
+        public IActionResult AddNewTicker()
         {
             return PartialView(AppPagesLinks.Modules.TickerAddNewPageLink);
+        }
+
+        #endregion
+
+        public IActionResult RSSOverview()
+        {
+            return PartialView(AppPagesLinks.Modules.RSSOverviewPageLink);
+        }
+
+        public IActionResult RSSAddNew()
+        {
+            return PartialView(AppPagesLinks.Modules.RSSAddNewPageLink);
         }
     }
 }

@@ -5,103 +5,97 @@ namespace CLA_Administration_Web.Helpers.MockData
 {
     public class ModulesMockData
     {
-        public static List<PopupViewModel> AllPopupsData { get; set; } = GeneratePopupsData();
+        public static List<ModuleDataViewModel> AllPopupsData { get; set; } = GenerateRandomData();
 
-        private static List<PopupViewModel> GeneratePopupsData()
+        public static List<ModuleDataViewModel> AllTickersData { get; set; } = GenerateRandomData();
+
+        public static List<ModuleDataViewModel> AllSurveysData { get; set; } = GenerateRandomData();
+
+        private static string RandomTime(Random random)
         {
-            var popupsData = new List<PopupViewModel>()
-            {
-                new PopupViewModel
-                {
-                    Id = 1,
-                    HeaderText = "Image Popup",
-                    BodyText = "Click this popup to open, the popup itself is a url that will force lauch your machine default application for viewing images.",
-                    EffectiveFrom = "2024/07/01",
-                    EffectiveTo = "2024/08/30",
-                    TimeslotFrom = "08:00",
-                    TimeslotTo = "17:30",
-                    LastModifiedDate = "2024/09/16 16:42",
-                    UserIdLastModified = "NdhuvaziM",
-                },
-                new PopupViewModel
-                {
-                    Id = 2,
-                    HeaderText = "WIP Status",
-                    BodyText = "The current monthly stats have been shown a positve change, and some text some text some text.",
-                    EffectiveFrom = "2024/09/05",
-                    EffectiveTo = "2024/09/26",
-                    TimeslotFrom = "11:00",
-                    TimeslotTo = "13:30",
-                    LastModifiedDate = "2024/09/16 16:42",
-                    UserIdLastModified = "NdhuvaziM"
-                },
-                new PopupViewModel
-                {
-                    Id = 3,
-                    HeaderText = "Special Announcement - Future",
-                    BodyText = "There is an urgent announcement that needs you attention and you have to click this popup to start a survey.",
-                    EffectiveFrom = "2024/11/05",
-                    EffectiveTo = "2024/11/26",
-                    TimeslotFrom = "11:00",
-                    TimeslotTo = "13:30",
-                    LastModifiedDate = "2024/09/16 16:42",
-                    UserIdLastModified = "BertusB"
-                },
-                new PopupViewModel
-                {
-                    Id = 4,
-                    HeaderText = "Special Announcement",
-                    BodyText = "There is an urgent announcement that needs you attention and you have to click this popup to start a survey.",
-                    EffectiveFrom = "2024/09/05",
-                    EffectiveTo = "2024/09/26",
-                    TimeslotFrom = "11:00",
-                    TimeslotTo = "13:30",
-                    LastModifiedDate = "2024/09/16 16:42",
-                    UserIdLastModified = "LeboC"
-                },
-                new PopupViewModel
-                {
-                    Id = 5,
-                    HeaderText = "Time Travel - Future",
-                    BodyText = "There is an urgent announcement that needs you attention and you have to click this popup to start a survey.",
-                    EffectiveFrom = "2024/11/05",
-                    EffectiveTo = "2024/11/26",
-                    TimeslotFrom = "11:00",
-                    TimeslotTo = "13:30",
-                    LastModifiedDate = "2024/09/16 16:42",
-                    UserIdLastModified = "BertusB"
-                },
-                new PopupViewModel
-                {
-                    Id = 6,
-                    HeaderText = "Some Header LO",
-                    BodyText = "Random Texting 101.",
-                    EffectiveFrom = "2014/09/05",
-                    EffectiveTo = "2014/12/26",
-                    TimeslotFrom = "11:00",
-                    TimeslotTo = "13:30",
-                    LastModifiedDate = "2024/09/16 16:42",
-                    UserIdLastModified = "LeboC"
-                },
-                new PopupViewModel
-                {
-                    Id = 7,
-                    HeaderText = "Because it is Title",
-                    BodyText = "The normal popup body text is meant to be in html format okay?.",
-                    EffectiveFrom = "2014/09/05",
-                    EffectiveTo = "2014/12/26",
-                    TimeslotFrom = "11:00",
-                    TimeslotTo = "13:30",
-                    LastModifiedDate = "2024/09/16 16:42",
-                    UserIdLastModified = "Administrator"
-                },
-            };
-            
-            popupsData.AddRange(popupsData);
-            popupsData.AddRange(popupsData);
-            popupsData.AddRange(popupsData);
+            return $"{random.Next(0, 24):D2}:{random.Next(0, 60):D2}";
+        }
 
-            return popupsData;
+        private static DateTime RandomDateInRange(DateTime start, DateTime end, Random random)
+        {
+            int range = (end - start).Days;
+            return start.AddDays(random.Next(range));
+        }
+
+        private static string RandomString(Random random, int minWords, int maxWords)
+        {
+            var wordList = new List<string>
+            {
+                "random", "survey", "data", "user", "information", "value", "result", "questionnaire", "response", "choice",
+                "valid", "invalid", "optional", "mandatory", "feedback", "evaluation", "completion", "rate", "option", "field",
+                "section", "page", "submit", "save", "progress", "time", "record", "analysis", "report", "summary", "point",
+                "critical", "flagged", "marked", "highlight", "understand", "decision", "query", "system", "entry", "method", "CLA",
+                "Corporate Voice", "Marketing Company", "Employee engagement", "Admin Tool", "Popups", "Surveys", "Tickers"
+            };
+
+            int wordCount = random.Next(minWords, maxWords + 1);
+            var words = Enumerable.Range(0, wordCount).Select(_ => wordList[random.Next(wordList.Count)]);
+
+            return string.Join(" ", words);
+        }
+
+        private static List<ModuleDataViewModel> GenerateRandomData()
+        {
+            var random = new Random();
+            var items = new List<ModuleDataViewModel>();
+
+            var today = DateTime.Today;
+
+            var usersList = new List<string> { "NdhuvaziM", "LegeB", "SinethembaS", "LeboC", "Administrator", "CathrineT", "LarryM", "Tarryn" };
+
+            for (int i = 1; i <= 50; i++)
+            {
+                // Choose randomization case for EffectiveFrom and EffectiveTo
+                DateTime effectiveFrom, effectiveTo;
+
+                int caseSelector = (i <= 17 ? 0 : (i <= 35 ? 1 : 2));
+                switch (caseSelector)
+                {
+                    // Case 1: EffectiveFrom and EffectiveTo both earlier than today
+                    case 0:
+                        effectiveFrom = RandomDateInRange(new DateTime(2024, 1, 1), today.AddDays(-1), random);
+                        effectiveTo = RandomDateInRange(effectiveFrom, today.AddDays(-1), random);
+                        break;
+
+                    // Case 2: EffectiveFrom earlier than today, and EffectiveTo is today or later
+                    case 1:
+                        effectiveFrom = RandomDateInRange(new DateTime(2024, 1, 1), today.AddDays(-1), random);
+                        effectiveTo = RandomDateInRange(today, new DateTime(2024, 12, 31), random);
+                        break;
+
+                    // Case 3: Both EffectiveFrom and EffectiveTo later than today
+                    case 2:
+                        effectiveFrom = RandomDateInRange(today.AddDays(1), new DateTime(2024, 12, 31), random);
+                        effectiveTo = RandomDateInRange(effectiveFrom, new DateTime(2024, 12, 31), random);
+                        break;
+
+                    default:
+                        effectiveFrom = today;
+                        effectiveTo = today;
+                        break;
+                }
+                
+                var item = new ModuleDataViewModel
+                {
+                    Id = i,
+                    HeaderText = RandomString(random, 5, 10),
+                    BodyText = RandomString(random, 20, 50),
+                    EffectiveFrom = effectiveFrom.ToString("yyyy/MM/dd"),
+                    EffectiveTo = effectiveTo.ToString("yyyy/MM/dd"),
+                    TimeslotFrom = RandomTime(random),
+                    TimeslotTo = RandomTime(random),
+                    LastModifiedDate = DateTime.Now.AddMinutes(-random.Next(0, 50000)).ToString("yyyy/MM/dd HH:mm"),
+                    UserIdLastModified = usersList[random.Next(0,7)],
+                };
+
+                items.Add(item);
+            }
+            return items;
         }
     }
 }

@@ -14,7 +14,8 @@
 
         // Modules Section
         if (page == '@ModulesPages.AllModules') url = '@AppPagesUrl.Modules.AllModules';
-
+        if (page == '@ModulesPages.ModulesOverviewFilter') url = '@AppPagesUrl.Modules.ModulesOverviewFilter';
+        //
         if (page == '@ModulesPages.ContentLibraryCategories') url = '@AppPagesUrl.Modules.ContentLibraryCategories';
         if (page == '@ModulesPages.ContentLibraryContent') url = '@AppPagesUrl.Modules.ContentLibraryContent';
         //
@@ -28,13 +29,15 @@
         if (page == '@ModulesPages.ScreensaverAddNew') url = '@AppPagesUrl.Modules.ScreensaverAddNew';
         //
         if (page == '@ModulesPages.PopupOverview') url = '@AppPagesUrl.Modules.PopupOverview';
-        if (page == '@ModulesPages.PopupOverviewFilter') url = '@AppPagesUrl.Modules.PopupOverviewFilter';
+        if (page == '@ModulesPages.PopupDetails') url = '@AppPagesUrl.Modules.PopupDetails' + `?popupId=${id}`;
         if (page == '@ModulesPages.PopupAddNew') url = '@AppPagesUrl.Modules.PopupAddNew';
         //
         if (page == '@ModulesPages.SurveyOverview') url = '@AppPagesUrl.Modules.SurveyOverview';
+        if (page == '@ModulesPages.SurveyDetails') url = '@AppPagesUrl.Modules.SurveyDetails';
         if (page == '@ModulesPages.SurveyAddNew') url = '@AppPagesUrl.Modules.SurveyAddNew';
         //
         if (page == '@ModulesPages.TickerOverview') url = '@AppPagesUrl.Modules.TickerOverview';
+        if (page == '@ModulesPages.TickerDetails') url = '@AppPagesUrl.Modules.TickerDetails';
         if (page == '@ModulesPages.TickerAddNew') url = '@AppPagesUrl.Modules.TickerAddNew';
         //
         if (page == '@ModulesPages.RSSOverview') url = '@AppPagesUrl.Modules.RSSOverview';
@@ -105,6 +108,7 @@
         if (page == '@ModulesPages.ScreensaverAddNew') title = "Add New Screensaver Sequence";
         //
         if (page == '@ModulesPages.PopupOverview') title = "Popups Overview";
+        if (page == '@ModulesPages.PopupDetails') title = "Popup Details";
         if (page == '@ModulesPages.PopupAddNew') title = "Add New Popup";
         //
         if (page == '@ModulesPages.SurveyOverview') title = "Surveys Overview";
