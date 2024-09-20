@@ -30,13 +30,13 @@
                     <div class="row mb-3 mb-md-0">
                         <p class="theme-txt-clr overview-filter-title" id="StatusFilterTitle">Status</p>
                         <div class="btn-group w-auto overview-filter-btn-group" role="group" aria-label="Status filter">
-                            <button class="btn module-filter-btn-group @moduleName" 
+                            <button class="btn module-filter-btn-group filter-status-btn @moduleName"
                                     onclick="FilterModuleDataOverviewByStatus('@moduleName','@allFilterBtn', AllStatusTypes.All)" id="@allFilterBtn">All</button>
-                            <button class="btn module-filter-btn-group btn-group-active @moduleName"
+                            <button class="btn module-filter-btn-group filter-status-btn btn-group-active @moduleName"
                                     onclick="FilterModuleDataOverviewByStatus('@moduleName','@activeFilterBtn', AllStatusTypes.Active)" id="@activeFilterBtn">Active</button>
-                            <button class="btn module-filter-btn-group @moduleName"
+                            <button class="btn module-filter-btn-group filter-status-btn @moduleName"
                                     onclick="FilterModuleDataOverviewByStatus('@moduleName','@expiredFilterBtn', AllStatusTypes.Expired)" id="@expiredFilterBtn">Expired</button>
-                            <button class="btn module-filter-btn-group @moduleName"
+                            <button class="btn module-filter-btn-group filter-status-btn @moduleName"
                                     onclick="FilterModuleDataOverviewByStatus('@moduleName','@pendingFilterBtn', AllStatusTypes.Pending)" id="@pendingFilterBtn">Pending</button>
                             @* <button class="btn module-filter-btn-group hidden" onclick="" id="@customFilterBtn">Custom</button> *@
                         </div>
@@ -57,9 +57,9 @@
                 <div id="DatesFilterContainer" class="mx-auto">
                     <div class="row mb-3 mb-md-0">
                         <p class="theme-txt-clr overview-filter-title" id="DatesFilterTitle">Dates</p>
-                        <input type="date" class="form-control overview-dates-input" id="@dateFilterFrom" onchange="ModuleFilterDatesFilterChange('@moduleName', '@dateFilterFrom')" value="2024-01-01">
+                        <input type="date" class="form-control overview-dates-input" id="@dateFilterFrom" onchange="ModuleFilterDatesFilterChange('@moduleName')" value="2024-01-01">
                         <p class="theme-txt-clr overview-filter-title">To</p>
-                        <input type="date" class="form-control overview-dates-input" id="@dateFilterTo" onchange="ModuleFilterDatesFilterChange('@moduleName', '@dateFilterTo')" value="2024-09-30">
+                        <input type="date" class="form-control overview-dates-input" id="@dateFilterTo" onchange="ModuleFilterDatesFilterChange('@moduleName')" value="2024-09-30">
                     </div>
                 </div>
             </div>

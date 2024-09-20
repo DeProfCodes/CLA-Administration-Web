@@ -26,6 +26,7 @@
     var ganttViewFilterBtn = $"{moduleName}GanttViewFilter";
 
     var moduleDisplayName = $"{moduleName}s";
+
 }
 <!-- Card for Filters -->
 <div class="card mb-4 mt-2 overview-filters-card">
@@ -37,20 +38,20 @@
                     <div class="row mb-0 mb-md-0">
                         <div id="FromDateFilter" class="w-fit-content d-flex mt-1">
                             <p class="theme-txt-clr overview-filter-title2 me-3" id="DatesFilterTitle">From</p>
-                            <input type="date" class="form-control overview-dates-input" id="@dateFilterFrom" onchange="ModuleFilterDatesFilterChange('@moduleName', '@dateFilterFrom')" value="2024-01-01">
+                            <input type="date" class="form-control overview-dates-input" id="@dateFilterFrom" onchange="ModuleFilterDatesFilterChange('@moduleName')" value="2024-01-01">
                         </div>
                         <div id="ToDateFilter" class="w-fit-content d-flex mt-1">
                             <p class="theme-txt-clr overview-filter-title2 me-3">to</p>
-                            <input type="date" class="form-control overview-dates-input" id="@dateFilterTo" onchange="ModuleFilterDatesFilterChange('@moduleName', '@dateFilterTo')" value="2024-09-30">
+                            <input type="date" class="form-control overview-dates-input" id="@dateFilterTo" onchange="ModuleFilterDatesFilterChange('@moduleName')" value="2024-09-30">
                         </div>
                     </div>
                     <div class="row mb-md-0 mt-2">
                         <p class="theme-txt-clr overview-filter-title2">Select Month & Year</p>
-                        <select class="form-select w-fit-content overview-users-select" id="@usersFilterSelectList" onchange="ModuleFilterUsersFilterChange('@moduleName','@usersFilterSelectList')">
-                            <option selected value="all">September, 2024</option>
-                            @foreach (var username in Model.MonthsAndYears)
+                        <select class="form-select w-fit-content overview-users-select" id="@usersFilterSelectList" onchange="ModuleFilterMonthYearFilterChange()">
+                            <option value="all">Please Select</option>
+                            @foreach (var month in Model.MonthsAndYears)
                             {
-                                <option value="@username">@username</option>
+                                <option value="@month.ToString("yyyy/MM/dd")">@month.ToString("MMMM, yyyy")</option>
                             }
                         </select>
                     </div>
@@ -107,6 +108,7 @@
     </div>
 </div>
 
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
 
 <script>
 
@@ -117,10 +119,34 @@
 
     function SetDateToTodayDefault()
     {
-        var today = TodayDate();
+        var today = TodayDate("/");
        
-        $("#@dateFilterTo").val(today);
+        $("#@dateFilterFrom").val(GetMonthStartAndEnd(today, 0, 1));
+        $("#@dateFilterTo").val(GetMonthStartAndEnd(today, 1, 0));
+        
+        $(`#@usersFilterSelectList option[value="${today}"]`).attr("selected", "selected");
     }
 
+    function ModuleFilterMonthYearFilterChange()
+    {
+        var selectDate = $("#@usersFilterSelectList").val();
+
+        $("#@dateFilterFrom").val(GetMonthStartAndEnd(selectDate,0,1));
+        $("#@dateFilterTo").val(GetMonthStartAndEnd(selectDate, 1,0));
+
+        ModuleFilterDatesFilterChange('@moduleName')
+    }
+
+    function GetMonthStartAndEnd(dateString, val, val2)
+    {
+        const date = new Date(dateString);
+        
+        const startOfMonth = new Date(date.getFullYear(), date.getMonth() + val, val2);
+        const endOfMonth = new Date(date.getFullYear(), date.getMonth() + val, val2);
+        
+        const formatDate = (d) => `${d.getFullYear()}-${(d.getMonth() + 1).toString().padStart(2, '0')}-${d.getDate().toString().padStart(2, '0')}`;
+
+        return formatDate(startOfMonth);
+    }
 
 </script>

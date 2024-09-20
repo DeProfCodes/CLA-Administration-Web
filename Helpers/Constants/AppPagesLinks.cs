@@ -31,36 +31,51 @@
 
         public class Modules
         {
+            //All
             public const string AllModulesPageLink = "~/Views/Modules/AllModules.cshtml";
-            public const string ModulesPSTRFilterOverviewPageLink = "~/Views/Modules/FilterPSTRModulesOverview.cshtml";
-            public const string ModulesLDSFilterOverviewPageLink = "~/Views/Modules/FilterLDSModulesOverview.cshtml";
 
+            //PSTR Modules: Popup, Survey, Ticker, RSS
+            public const string ModulePSTRTableOverviewPageLink = "~/Views/Shared/Components/Custom/Modules/Overviews/PSTR/ModulePSTRTableOverview.cshtml";
+            
+            //LDS Modules: Lockscreen, Desktop, Screensaver 
+            public const string ModuleLDSTableOverviewPageLink = "~/Views/Shared/Components/Custom/Modules/Overviews/LDS/ModuleLDSTableOverview.cshtml";
+            public const string ModuleLDSGanttOverviewPageLink = "~/Views/Shared/Components/Custom/Modules/Overviews/LDS/ModuleLDSGanttOverview.cshtml";
+            public const string ModuleLDSCalendarOverviewPageLink = "~/Views/Shared/Components/Custom/Modules/Overviews/LDS/ModuleLDSCalendarOverview.cshtml";
+
+            //Content Library
             public const string ContentLibraryCategoriesPageLink = "~/Views/Modules/ContentLibrary/Categories.cshtml";
             public const string ContentLibraryContentsPageLink = "~/Views/Modules/ContentLibrary/Contents.cshtml";
 
+            //Desktop
             public const string DesktopOverviewPageLink = "~/Views/Modules/Desktop/DesktopOverview.cshtml";
             public const string DesktopAddNewPageLink = "~/Views/Modules/Desktop/AddNewDesktop.cshtml";
 
+            //Locked Desktop
             public const string LockedDesktopOverviewPageLink = "~/Views/Modules/LockedDesktop/LockedDesktopOverview.cshtml";
             public const string LockedDesktopAddNewPageLink = "~/Views/Modules/LockedDesktop/AddNewLockedDesktop.cshtml";
 
+            //Screensaver
             public const string ScreensaverOverviewPageLink = "~/Views/Modules/Screensaver/ScreensaverOverview.cshtml";
             public const string ScreensaverAddNewPageLink = "~/Views/Modules/Screensaver/AddNewScreensaver.cshtml";
 
+            //Popup
             public const string PopupOverviewPageLink = "~/Views/Modules/Popup/PopupOverview.cshtml";
             public const string PopupDetailsPageLink = "~/Views/Modules/Popup/PopupDetails.cshtml";
             public const string PopupAddNewPageLink = "~/Views/Modules/Popup/AddNewPopup.cshtml";
 
+            //Survey
             public const string SurveyOverviewPageLink = "~/Views/Modules/Survey/SurveyOverview.cshtml";
             public const string SurveyDetailsPageLink = "~/Views/Modules/Survey/SurveyDetails.cshtml";
             public const string SurveyQuestionsOverviewPageLink = "~/Views/Modules/Survey/SurveyQuestionsOverview.cshtml";
             public const string SurveyQuestionDetailsPageLink = "~/Views/Modules/Survey/SurveyQuestionDetails.cshtml";
             public const string SurveyAddNewPageLink = "~/Views/Modules/Survey/AddNewSurvey.cshtml";
 
+            //Ticker
             public const string TickerOverviewPageLink = "~/Views/Modules/Ticker/TickerOverview.cshtml";
             public const string TickerDetailsPageLink = "~/Views/Modules/Ticker/TickerDetails.cshtml";
             public const string TickerAddNewPageLink = "~/Views/Modules/Ticker/AddNewTicker.cshtml";
 
+            //RSS
             public const string RSSOverviewPageLink = "~/Views/Modules/RSS/RSSOverview.cshtml";
             public const string RSSAddNewPageLink = "~/Views/Modules/RSS/AddNewRSS.cshtml";
         }

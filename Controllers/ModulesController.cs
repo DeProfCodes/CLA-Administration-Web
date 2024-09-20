@@ -33,7 +33,11 @@ namespace CLA_Administration_Web.Controllers
             return PartialView(AppPagesLinks.Modules.AllModulesPageLink);
         }
 
-        public async Task<IActionResult> ModulesOverviewFilterPSTR(ModuleNamesType moduleNameType, string status, string userType, string startDate, string endDate)
+        #endregion
+
+        #region Modules PSTR: Popups, Surveys, Tickers, RSS
+
+        public async Task<IActionResult> ModulePSTRTableOverview(ModuleNamesType moduleNameType, string status, string userType, string startDate, string endDate)
         {
             var dataSource = LocalDataStorage.GetLocalModulePSTRAllData(moduleNameType);
 
@@ -41,29 +45,42 @@ namespace CLA_Administration_Web.Controllers
             {
                 ModuleName = moduleNameType,
                 ModuleDetailsPage = ModulesHelper.GetModuleDetailsPage(moduleNameType),
-                FilterTitle = ModulesHelper.GetModuleOverviewTitleText(moduleNameType, status, userType, startDate, endDate),
+                FilterTitle = ModulesHelper.GetModuleOverviewTitleText(moduleNameType, status, StagingLiveType.Staging, userType, startDate, endDate),
                 ModulesData = ModulesHelper.FilterModulesPSTRData(dataSource, status, userType, startDate, endDate)
             };
 
-            return PartialView(AppPagesLinks.Modules.ModulesPSTRFilterOverviewPageLink, moduleFilterDataVm);
-        }
-
-        public async Task<IActionResult> ModulesOverviewFilterLDS(ModuleNamesType moduleNameType, string status, StagingLiveType stagingLive, string startDate, string endDate)
-        {
-            var dataSource = LocalDataStorage.GetLocalModuleLDSAllData(moduleNameType, stagingLive);
-
-            var moduleFilterDataVm = new ModuleLDSFilterOverviewModel
-            {
-                ModuleName = moduleNameType,
-                ModuleDetailsPage = ModulesHelper.GetModuleDetailsPage(moduleNameType),
-                FilterTitle = ModulesHelper.GetModuleOverviewTitleText(moduleNameType, status, null, startDate, endDate),
-                ModulesData = ModulesHelper.FilterModulesLDSData(dataSource, status, startDate, endDate)
-            };
-
-            return PartialView(AppPagesLinks.Modules.ModulesLDSFilterOverviewPageLink, moduleFilterDataVm);
+            return PartialView(AppPagesLinks.Modules.ModulePSTRTableOverviewPageLink, moduleFilterDataVm);
         }
 
         #endregion
+
+        #region Modules LDS: Lockscreen, Desktops, Screensavers
+
+        public async Task<IActionResult> ModuleLDSViewTypeOverview(ModuleNamesType moduleNameType, string status, StagingLiveType stagingLive, OverviewDisplayType viewType, string startDate, string endDate)
+        {
+            var viewPage = "";
+
+            if (viewType == OverviewDisplayType.Tabular)
+            {
+                viewPage = AppPagesLinks.Modules.ModuleLDSTableOverviewPageLink;
+            }
+            else if (viewType == OverviewDisplayType.Calendar)
+            {
+                viewPage = AppPagesLinks.Modules.ModuleLDSCalendarOverviewPageLink;
+            }
+            else if (viewType == OverviewDisplayType.Gantt)
+            {
+                viewPage = AppPagesLinks.Modules.ModuleLDSGanttOverviewPageLink;
+            }
+
+            var moduleFilterDataVm = ModulesHelper.GetModuleLDSFilterOverview(moduleNameType, stagingLive, status, startDate, endDate);
+
+            return PartialView(viewPage, moduleFilterDataVm);
+        }
+
+
+        #endregion
+
 
         public IActionResult ContentLibraryCategories()
         {

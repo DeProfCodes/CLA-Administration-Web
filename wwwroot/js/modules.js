@@ -12,12 +12,12 @@ function GetStatusFromButtonId(buttonId)
     return null;
 }
 
-function ModuleFilterButtonClick(filterBtnId, moduleType, status, username, startDate, endDate, stagingLiveFilter)
+function ModuleFilterButtonClick(filterBtnId, moduleType, status, username, startDate, endDate, stagingLiveFilter, viewType)
 {
     $('.filter-status-btn').removeClass('btn-group-active');
     $(`#${filterBtnId}`).addClass('btn-group-active');
     
-    ReloadFilteredModuleOverview(moduleType, status, username, startDate, endDate, stagingLiveFilter);
+    ReloadFilteredModuleOverview(moduleType, status, username, startDate, endDate, stagingLiveFilter, viewType);
 }
 
 function ModuleFilterUsersFilterChange(moduleName, selectListId)
@@ -29,7 +29,7 @@ function ModuleFilterUsersFilterChange(moduleName, selectListId)
     FilterModuleDataOverviewByStatus(moduleName, btnId, status);
 }
 
-function ModuleFilterDatesFilterChange(moduleName, dateInputId)
+function ModuleFilterDatesFilterChange(moduleName)
 {
     var statusBtn = $(`.filter-status-btn.btn-group-active.${moduleName}`); 
     var status = statusBtn.text();
@@ -59,17 +59,21 @@ function ModuleOverviewLoader(moduleType, status)
     }
 }
 
-function ReloadFilteredModuleOverview(moduleType, status, username, startDate, endDate, stagingLiveFilter)
+function ReloadFilteredModuleOverview(moduleType, status, username, startDate, endDate, stagingLiveFilter, viewType)
 {
     ModuleOverviewLoader(moduleType, status);
 
-    var url = "";
-    
-    if(moduleType == AllModuleTypes.Popup || moduleType == AllModuleTypes.Survey || moduleType == AllModuleTypes.Ticker || moduleType == AllModuleTypes.RSS)
-        url = GetPageUrl('ModulesOverviewFilterPSTR') + `?moduleNameType=${moduleType}&status=${status}&userType=${username}&startDate=${startDate}&endDate=${endDate}`;
+    var isPSTRModules = (moduleType == AllModuleTypes.Popup || moduleType == AllModuleTypes.Survey || moduleType == AllModuleTypes.Ticker || moduleType == AllModuleTypes.RSS);
+    var isLDSModules = (moduleType == AllModuleTypes.LockedDesktop || moduleType == AllModuleTypes.Desktop || moduleType == AllModuleTypes.Screensaver);
 
-    if(moduleType == AllModuleTypes.LockedDesktop || moduleType == AllModuleTypes.Desktop || moduleType == AllModuleTypes.Screensaver)
-        url = GetPageUrl('ModulesOverviewFilterLDS') + `?moduleNameType=${moduleType}&status=${status}&stagingLive=${stagingLiveFilter}&startDate=${startDate}&endDate=${endDate}`;
+    var url = "";
+    var pageName = 'ModuleLDSViewTypeOverview';
+
+    if(isPSTRModules)
+        url = GetPageUrl('ModulePSTRTableOverview') + `?moduleNameType=${moduleType}&status=${status}&userType=${username}&startDate=${startDate}&endDate=${endDate}`;
+
+    if(isLDSModules)
+        url = GetPageUrl('ModuleLDSViewTypeOverview') + `?moduleNameType=${moduleType}&status=${status}&stagingLive=${stagingLiveFilter}&viewType=${viewType}&startDate=${startDate}&endDate=${endDate}`;
 
     LoadPartialViewWithLoader(url, "#ModuleOverviewTableContainer","#SecondaryLoader");
 }
@@ -80,18 +84,31 @@ function FilterModuleDataOverviewByStatus(moduleName, buttonId, status)
     var startDate = $(`#${moduleName}DateFromFilter`).val();
     var endDate = $(`#${moduleName}DateToFilter`).val();
     var stagingLiveFilter = $(`.filter-type-btn.btn-group-active.${moduleName}`).text(); 
+    var viewType = $(`.filter-view-btn.btn-group-active.${moduleName}`).text();
 
-    ModuleFilterButtonClick(buttonId, moduleName, status, username, startDate, endDate, stagingLiveFilter);
+    ModuleFilterButtonClick(buttonId, moduleName, status, username, startDate, endDate, stagingLiveFilter, viewType);
 }
 
-function FilterModuleDataOverviewByStagingLive(moduleName, buttonId, stagingOrLive)
+function FilterModuleDataOverviewByStagingLive(moduleType, buttonId, stagingOrLive)
 {
     $('.filter-type-btn').removeClass('btn-group-active');
     $(`#${buttonId}`).addClass('btn-group-active');
+
+    var statusBtn = $(`.filter-status-btn.btn-group-active.${moduleType}`); 
+    var status = statusBtn.text();
+    var btnId = statusBtn.attr("id");
+
+    FilterModuleDataOverviewByStatus(moduleType, btnId, status);
 }
 
-function FilterModuleDataOverviewByViewType(moduleName, buttonId, viewType)
+function FilterModuleDataOverviewByViewType(moduleType, buttonId, viewType)
 {
     $('.filter-view-btn').removeClass('btn-group-active');
     $(`#${buttonId}`).addClass('btn-group-active');
+
+     var statusBtn = $(`.filter-status-btn.btn-group-active.${moduleType}`); 
+    var status = statusBtn.text();
+    var btnId = statusBtn.attr("id");
+
+    FilterModuleDataOverviewByStatus(moduleType, btnId, status);
 }

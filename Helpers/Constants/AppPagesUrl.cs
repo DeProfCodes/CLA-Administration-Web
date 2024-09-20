@@ -38,36 +38,49 @@ namespace CLA_Administration_Web.Helpers.Constants
 
         public class Modules
         {
+            //All
             public static string AllModules = $"/{modulesController}/{ModulesPages.AllModules.GetDisplayName()}";
-            public static string ModulesOverviewFilterPSTR = $"/{modulesController}/{ModulesPages.ModulesOverviewFilterPSTR.GetDisplayName()}";
-            public static string ModulesOverviewFilterLDS = $"/{modulesController}/{ModulesPages.ModulesOverviewFilterLDS.GetDisplayName()}";
 
+            //PSTR Modules: Popup, Survey, Ticker, RSS
+            public static string ModulePSTRTableOverview = $"/{modulesController}/{ModulesPages.ModulePSTRTableOverview.GetDisplayName()}";
+            
+            //LDS Modules: Lockscreen, Desktop, Screensaver
+            public static string ModuleLDSViewTypeOverview = $"/{modulesController}/{ModulesPages.ModuleLDSViewTypeOverview.GetDisplayName()}";
+            
+            //Content Library
             public static string ContentLibraryCategories = $"/{modulesController}/{ModulesPages.ContentLibraryCategories.GetDisplayName()}";
             public static string ContentLibraryContent = $"/{modulesController}/{ModulesPages.ContentLibraryContent.GetDisplayName()}";
 
+            //Desktop
             public static string DesktopOverview = $"/{modulesController}/{ModulesPages.DesktopOverview.GetDisplayName()}";
             public static string DesktopAddNew = $"/{modulesController}/{ModulesPages.DesktopAddNew.GetDisplayName()}";
 
+            //Locked Desktop
             public static string LockedDesktopOverview = $"/{modulesController}/{ModulesPages.LockedDesktopOverview.GetDisplayName()}";
             public static string LockedDesktopAddNew = $"/{modulesController}/{ModulesPages.LockedDesktopAddNew.GetDisplayName()}";
 
+            //Screensaver
             public static string ScreensaverOverview = $"/{modulesController}/{ModulesPages.ScreensaverOverview.GetDisplayName()}";
             public static string ScreensaverAddNew = $"/{modulesController}/{ModulesPages.ScreensaverAddNew.GetDisplayName()}";
 
+            //Popup
             public static string PopupOverview = $"/{modulesController}/{ModulesPages.PopupOverview.GetDisplayName()}";
             public static string PopupDetails = $"/{modulesController}/{ModulesPages.PopupDetails.GetDisplayName()}";
             public static string PopupAddNew = $"/{modulesController}/{ModulesPages.PopupAddNew.GetDisplayName()}";
 
+            //Survey
             public static string SurveyOverview = $"/{modulesController}/{ModulesPages.SurveyOverview.GetDisplayName()}";
             public static string SurveyDetails = $"/{modulesController}/{ModulesPages.SurveyDetails.GetDisplayName()}";
             public static string SurveyQuestionsOverview = $"/{modulesController}/{ModulesPages.SurveyQuestionsOverview.GetDisplayName()}";
             public static string SurveyQuestionDetails = $"/{modulesController}/{ModulesPages.SurveyQuestionDetails.GetDisplayName()}";
             public static string SurveyAddNew = $"/{modulesController}/{ModulesPages.SurveyAddNew.GetDisplayName()}";
 
+            //Ticker
             public static string TickerOverview = $"/{modulesController}/{ModulesPages.TickerOverview.GetDisplayName()}";
             public static string TickerDetails = $"/{modulesController}/{ModulesPages.TickerDetails.GetDisplayName()}";
             public static string TickerAddNew = $"/{modulesController}/{ModulesPages.TickerAddNew.GetDisplayName()}";
 
+            //RSS
             public static string RSSOverview = $"/{modulesController}/{ModulesPages.RSSOverview.GetDisplayName()}";
             public static string RSSAddNew = $"/{modulesController}/{ModulesPages.RSSAddNew.GetDisplayName()}";
         }
