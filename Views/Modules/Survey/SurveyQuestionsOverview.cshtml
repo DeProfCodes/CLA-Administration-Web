@@ -1,43 +1,88 @@
-﻿@model List<CLA_Administration_Web.ViewModels.Modules.SurveyQuestionViewModel>
+﻿@using CLA_Administration_Web.Helpers.Enums.AppPages
+@model CLA_Administration_Web.ViewModels.Modules.PSTR.SurveyQuestionsOverviewViewModel
 
-<h3 class="w-100 text-center theme-txt-clr overview-table-caption">
-    <span id="SurveyQuesitonsOverviewTableCaption">Survey Questions For Survey ID: 5</span>
-</h3>
-<table id="SurveyQuesitonsOverviewDataTable" class="table table-striped table-hover align-middle">
-    <thead>
-        <tr>
-            <th>No</th>
-            <th class="text-center">Question Text</th>
-            <th>Correct Answer</th>
-            <th>Dependencies</th>
-            <th>From</th>
-            <th>To</th>
-            <th>Status</th>
-            <th>Last Modified Date</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var surveyQuestion in Model)
-        {
-            <tr>
-                <td class="text-center">@surveyQuestion.QuestionNo</td>
-                <td><p class="popup-dt-header-text">@surveyQuestion.QuestionTitle</p></td>
-                <td><p class="popup-dt-body-text">@surveyQuestion.QuestionText</p></td>
-                <td>@surveyQuestion.IsScored</td>
-                <td>@surveyQuestion.CorrectAnswer</td>
-                <td>@surveyQuestion.Dependencies</td>
-                <td>@surveyQuestion.IsAnnonymouse</td>
-                <td>@surveyQuestion.Randomize</td>
-                <td>@surveyQuestion.ResponseType</td>
-                <td>@surveyQuestion.UserIdLastModified</td>
-                <td>@surveyQuestion.MachineLastModifiedDate</td>
-                <td>
-                    <button class="btn btn-info btn-sm mx-1" onclick="OpenModuleDetails('@surveyQuestion.Id')">Open</button>
-                    <button class="btn btn-secondary btn-sm mx-1">Edit</button>
-                    <button class="btn btn-danger btn-sm mx-1">Expire</button>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+
+<div class="container-fluid">
+
+    <!-- Breadcrumb Component -->
+    @await Component.InvokeAsync("Breadcrumbs", new { page = ModulesPages.SurveyQuestionsOverview, itemId = Model.SurveyId })
+
+    <!-- Card for Filters -->
+    <div class="card mb-4 mt-2 overview-filters-card">
+        <div class="card-body">
+            <div class="row">
+                <h4 class="text-center mb-1 theme-txt-clr fw-bold pb-5 pt-1" id="FilterModuleTitle">Survey Questions Overview</h4>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card for Table -->
+    <div class="card" id="SurveyQuestionsOverviewCard">
+        <div class="card-body">
+            <div class="table-responsive" id="SurveyQuestionsOverviewTableContainer">
+                <h3 class="w-100 text-center theme-txt-clr overview-table-caption">
+                    <span id="SurveyQuesitonsOverviewTableCaption">Questions For Survey ID: @Model.SurveyId</span>
+                </h3>
+                <table id="SurveyQuesitonsOverviewDataTable" class="table table-striped table-bordered table-hover align-middle" style="font-size:13px">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th class="text-center">Question Title</th>
+                            <th class="text-center">Question Text</th>
+                            <th class="text-center">Is Scored?</th>
+                            <th class="text-center">Correct Answer</th>
+                            <th class="text-center">Dependencies</th>
+                            <th class="text-center">Is Anonymous?</th>
+                            <th class="text-center">Randomize</th>
+                            <th class="text-center">Response Type</th>
+                            <th class="hidden">User </th>
+                            <th class="hidden">Machine </th>
+                            <th class="text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var surveyQuestion in Model.SurveyQuestions)
+                        {
+                            var cssIsScored = surveyQuestion.IsScored == "Yes" ? "badge bg-success text-upper" : "badge bg-danger text-upper";
+                            var cssIsAnnon = surveyQuestion.IsAnonymous == "Yes" ? "badge bg-success text-upper" : "badge bg-danger text-upper";
+                            var cssRandomize = surveyQuestion.Randomize == "Yes" ? "badge bg-success text-upper" : "badge bg-danger text-upper";
+
+                            <tr>
+                                <td class="text-center">@surveyQuestion.QuestionNo</td>
+                                <td><p class="module-dt-header-text">@surveyQuestion.QuestionTitle</p></td>
+                                <td><p class="survey-q-dt-body-text">@surveyQuestion.QuestionText</p></td>
+                                <td class="text-center"><span class="@cssIsScored">@surveyQuestion.IsScored</span></td>
+                                <td class="text-center">@surveyQuestion.CorrectAnswer</td>
+                                <td class="text-center">@surveyQuestion.Dependencies</td>
+                                <td class="text-center"><span class="@cssIsAnnon">@surveyQuestion.IsAnonymous</span></td>
+                                <td class="text-center"><span class="@cssRandomize">@surveyQuestion.Randomize</span></td>
+                                <td class="text-center">@surveyQuestion.ResponseType</td>
+                                <td class="hidden">@surveyQuestion.UserIdLastModified</td>
+                                <td class="hidden">@surveyQuestion.MachineLastModified</td>
+                                <td>
+                                    <button class="btn btn-info btn-sm mx-1" onclick="OpenSurveyQuestionDetails('@surveyQuestion.QuestionId')">Open</button>
+                                    <button class="btn btn-secondary btn-sm mx-1">Edit</button>
+                                    <button class="btn btn-danger btn-sm">Delete</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function ()
+    {
+        $('#SurveyQuesitonsOverviewDataTable').DataTable();
+    });
+
+    function OpenSurveyQuestionDetails(questionId)
+    {
+        OpenPage('@ModulesPages.SurveyQuestionDetails', '@Model.SurveyId', questionId);
+    }
+
+</script>

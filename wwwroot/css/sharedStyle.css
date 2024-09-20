@@ -9,7 +9,10 @@
 {
     display: none !important;
 }
-
+.text-upper
+{
+    text-transform: uppercase !important;
+}
 /**========================= Alignments =======================*/
 .fl-right
 {

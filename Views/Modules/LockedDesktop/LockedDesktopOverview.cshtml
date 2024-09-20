@@ -6,6 +6,23 @@
     @await Component.InvokeAsync("Breadcrumbs", new { page = ModulesPages.LockedDesktopOverview })
 
     <!-- ModuleFilter Component -->
-    @* @await Component.InvokeAsync("OverviewDataFilters", new { page = ModulesPages.LockedDesktopOverview }) *@
+    @await Component.InvokeAsync("OverviewDataFilters", new { page = ModulesPages.LockedDesktopOverview })
+
+    <!-- ModuleFilter Component -->
+    @await Component.InvokeAsync("OverviewDataTables", new { page = ModulesPages.LockedDesktopOverview })
 
 </div>
+
+<script>
+
+    $(document).ready(function ()
+    {
+        LoadLockedDesktopsDefaultOverviewData();
+    });
+
+    function LoadLockedDesktopsDefaultOverviewData()
+    {
+        FilterModuleDataOverviewByStatus('LockedDesktop', `ActiveLockedDesktopBtnFilter`, AllStatusTypes.Active);
+    }
+
+</script>

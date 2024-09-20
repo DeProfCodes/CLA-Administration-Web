@@ -9,6 +9,7 @@ namespace CLA_Administration_Web.Helpers.Layout
         {
             var modulesBreadcrumbs = new List<ModuleBreadcrumbViewModel>()
             {
+                //Popups
                 new ModuleBreadcrumbViewModel()
                 {
                     IsAllModulesBreadcrumb = true,
@@ -54,6 +55,7 @@ namespace CLA_Administration_Web.Helpers.Layout
                     ActionButtonText = "Popups Overview",
                     ActionButtonPage = ModulesPages.PopupOverview
                 },
+                //Content Library
                 new ModuleBreadcrumbViewModel()
                 {
                     ModulePage = ModulesPages.ContentLibraryCategories,
@@ -76,6 +78,7 @@ namespace CLA_Administration_Web.Helpers.Layout
                     ActionButtonText = "Add New Content",
                     ActionButtonPage = ModulesPages.ContentLibraryCategories
                 },
+                //Desktops
                 new ModuleBreadcrumbViewModel()
                 {
                     ModulePage = ModulesPages.DesktopOverview,
@@ -98,6 +101,7 @@ namespace CLA_Administration_Web.Helpers.Layout
                     ActionButtonText = "Desktop Overview",
                     ActionButtonPage = ModulesPages.DesktopOverview
                 },
+                //Locked Desktops
                 new ModuleBreadcrumbViewModel()
                 {
                     ModulePage = ModulesPages.LockedDesktopAddNew,
@@ -120,6 +124,7 @@ namespace CLA_Administration_Web.Helpers.Layout
                     ActionButtonText = "Add New Locked Desktop",
                     ActionButtonPage = ModulesPages.LockedDesktopAddNew
                 },
+                //Screensavers
                 new ModuleBreadcrumbViewModel()
                 {
                     ModulePage = ModulesPages.ScreensaverAddNew,
@@ -142,6 +147,18 @@ namespace CLA_Administration_Web.Helpers.Layout
                     ActionButtonText = "Add New Screensaver",
                     ActionButtonPage = ModulesPages.ScreensaverAddNew
                 },
+                //Surveys
+                new ModuleBreadcrumbViewModel()
+                {
+                    ModulePage = ModulesPages.SurveyOverview,
+                    ModulePageName = "Survey Module",
+                    ModuleName = "Survey",
+                    ModuleSubPage = "Overview",
+                    HasActionButton = true,
+                    IsAddNewIcon = true,
+                    ActionButtonText = "Add New Survey",
+                    ActionButtonPage = ModulesPages.SurveyAddNew
+                },
                 new ModuleBreadcrumbViewModel()
                 {
                     ModulePage = ModulesPages.SurveyAddNew,
@@ -155,15 +172,44 @@ namespace CLA_Administration_Web.Helpers.Layout
                 },
                 new ModuleBreadcrumbViewModel()
                 {
-                    ModulePage = ModulesPages.SurveyOverview,
+                    ModulePage = ModulesPages.SurveyAddNew,
                     ModulePageName = "Survey Module",
                     ModuleName = "Survey",
-                    ModuleSubPage = "Overview",
+                    ModuleSubPage = "Add New",
                     HasActionButton = true,
+                    IsAddNewIcon = false,
+                    ActionButtonText = "Survey Overview",
+                    ActionButtonPage = ModulesPages.SurveyOverview
+                },
+                new ModuleBreadcrumbViewModel()
+                {
+                    ModulePage = ModulesPages.SurveyDetails,
+                    ModulePageName = "Survey Module",
+                    ModuleName = "Survey",
+                    ModuleSubPage = "Details",
+                    HasActionButton = true,
+                    IsDetailsPage = true,
+                    ModuleDetailsId = moduleDetailsId,
+                    ModulePreviewPage = ModulesPages.SurveyOverview,
                     IsAddNewIcon = true,
-                    ActionButtonText = "Add New Survey",
+                    ActionButtonText = "Edit Survey",
                     ActionButtonPage = ModulesPages.SurveyAddNew
                 },
+                new ModuleBreadcrumbViewModel()
+                {
+                    ModulePage = ModulesPages.SurveyQuestionsOverview,
+                    ModulePageName = "Survey Module",
+                    ModuleName = "Survey",
+                    ModuleSubPage = "Questions Overview",
+                    HasActionButton = true,
+                    IsDetailsPage = true,
+                    ModuleDetailsId = moduleDetailsId,
+                    ModulePreviewPage = ModulesPages.SurveyOverview,
+                    IsAddNewIcon = false,
+                    ActionButtonText = "Surveys Overview",
+                    ActionButtonPage = ModulesPages.SurveyOverview
+                },
+                //Tickers
                 new ModuleBreadcrumbViewModel()
                 {
                     ModulePage = ModulesPages.TickerAddNew,
@@ -186,6 +232,21 @@ namespace CLA_Administration_Web.Helpers.Layout
                     ActionButtonText = "Add New Ticker",
                     ActionButtonPage = ModulesPages.TickerAddNew
                 },
+                new ModuleBreadcrumbViewModel()
+                {
+                    ModulePage = ModulesPages.TickerDetails,
+                    ModulePageName = "Ticker Module",
+                    ModuleName = "Ticker",
+                    ModuleSubPage = "Details",
+                    HasActionButton = true,
+                    IsDetailsPage = true,
+                    ModuleDetailsId = moduleDetailsId,
+                    ModulePreviewPage = ModulesPages.TickerOverview,
+                    IsAddNewIcon = true,
+                    ActionButtonText = "Edit Survey",
+                    ActionButtonPage = ModulesPages.TickerAddNew
+                },
+                //RSS
                 new ModuleBreadcrumbViewModel()
                 {
                     ModulePage = ModulesPages.RSSAddNew,

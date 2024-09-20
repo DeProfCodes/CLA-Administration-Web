@@ -1,11 +1,11 @@
 ﻿using CLA_Administration_Web.Helpers.Enums.Shared;
 using CLA_Administration_Web.ViewModels.Shared;
 
-namespace CLA_Administration_Web.ViewModels.Modules
+namespace CLA_Administration_Web.ViewModels.Modules.PSTR
 {
     public class SurveyQuestionViewModel
     {
-        public int Id { get; set; }
+        public int QuestionId { get; set; }
 
         public string QuestionNo { get; set; }
 
@@ -19,7 +19,7 @@ namespace CLA_Administration_Web.ViewModels.Modules
 
         public string Dependencies { get; set; }
 
-        public string IsAnnonymouse { get; set; }
+        public string IsAnonymous { get; set; }
 
         public string IsScored { get; set; }
 
@@ -27,13 +27,12 @@ namespace CLA_Administration_Web.ViewModels.Modules
 
         public string ResponseType { get; set; }
 
-        public string TimeslotTo { get; set; }
 
         public StatusViewModel Status { get; set; }
 
         public string LastModifiedDate { get; set; }
 
-        public string MachineLastModifiedDate { get; set; }
+        public string MachineLastModified { get; set; }
 
         public string UserIdLastModified { get; set; }
     }

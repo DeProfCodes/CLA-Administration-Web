@@ -72,18 +72,18 @@ function LoadPartialViewWithLoader(url, destinationDiv, loaderDiv)
     });
 }
 
-function OpenPage(page, id)
+function OpenPage(page, id = null, id2 = null)
 {
-    LoadPageArea(page, id);
+    LoadPageArea(page, id, id2);
 
     var pageTitle = GetPageTitle(page);
 
     document.title = pageTitle;
 }
 
-function LoadPageArea(page, id)
+function LoadPageArea(page, id = null, id2 = null)
 {
-    var url = GetPageUrl(page, id);
+    var url = GetPageUrl(page, id, id2);
     
     var pageName = GetPageTitle(page);
     

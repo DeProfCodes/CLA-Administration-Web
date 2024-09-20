@@ -1,10 +1,13 @@
-﻿@using CLACommonFunctionsLibrary_NET.Helpers.Enums
+﻿<!-- Modules Data Table Component for PSTR Modules : Popups, Surveys, Tickers, RSS -->
+@using CLACommonFunctionsLibrary_NET.Helpers.Enums
 @using CLA_Administration_Web.Helpers.Enums.AppPages
 @using CLA_Administration_Web.Helpers.Enums.Shared.PageNames
-@model CLA_Administration_Web.ViewModels.Modules.ModuleFilterOverviewModel
+
+@model CLA_Administration_Web.ViewModels.Modules.PSTR.ModulePSTRFilterOverviewModel
 
 @{
     var moduleName = Model.ModuleName.GetDisplayName();
+    //FilterPSTRModulesOverview
 }
 
 <h3 class="w-100 text-center theme-txt-clr overview-table-caption">
@@ -25,7 +28,7 @@
             <th>To</th>
             <th>Status</th>
             <th>Last Modified Date</th>
-            <th>Action</th>
+            <th class="text-center">Action</th>
         </tr>
     </thead>
     <tbody>
@@ -35,9 +38,9 @@
                 <td class="text-center">@module.Id</td>
                 @if (Model.ModuleName != ModuleNamesType.Ticker)
                 {
-                    <td><p class="popup-dt-header-text">@module.HeaderText</p></td>
+                    <td><p class="module-dt-header-text">@module.HeaderText</p></td>
                 }
-                <td><p class="popup-dt-body-text">@module.BodyText</p></td>
+                <td><p class="module-dt-body-text">@module.BodyText</p></td>
                 <td>@module.EffectiveFrom</td>
                 <td>@module.EffectiveTo</td>
                 <td>@module.TimeslotFrom</td>
@@ -79,7 +82,7 @@
         {
             tickersDataTable = $('#ModuleOverviewDataTable').DataTable();
         }
-        else if ('@Model.ModuleName' == '@ModuleNamesType.Ticker')
+        else if ('@Model.ModuleName' == '@ModuleNamesType.Survey')
         {
             surveysDataTable = $('#ModuleOverviewDataTable').DataTable();
         }
@@ -92,7 +95,7 @@
 
     function OpenSurveyQuestions(surveyId)
     {
-
+        OpenPage('@ModulesPages.SurveyQuestionsOverview', surveyId);
     }
 
 </script>

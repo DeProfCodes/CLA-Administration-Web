@@ -22,9 +22,13 @@ namespace CLA_Administration_Web.ViewComponents.OverviewDataFilters
             {
                 var modulePage = (ModulesPages) page;
 
-                if (modulePage == ModulesPages.PopupOverview || modulePage == ModulesPages.TickerOverview || modulePage == ModulesPages.SurveyOverview)
+                if (modulePage == ModulesPages.PopupOverview || modulePage == ModulesPages.TickerOverview || modulePage == ModulesPages.SurveyOverview || modulePage == ModulesPages.RSSOverview)
                 {
-                    return View("ModulesOverviewDataTable", modulePage);
+                    return View("ModulesOverviewDataTablePSTR", modulePage);
+                }
+                else if (modulePage == ModulesPages.LockedDesktopOverview || modulePage == ModulesPages.DesktopOverview || modulePage == ModulesPages.ScreensaverOverview)
+                {
+                    return View("ModulesOverviewDataTableLDS", modulePage);
                 }
             }
             return View("Default");

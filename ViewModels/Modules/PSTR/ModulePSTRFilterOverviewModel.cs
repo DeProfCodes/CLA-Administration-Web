@@ -1,9 +1,12 @@
 ﻿using CLA_Administration_Web.Helpers.Enums.AppPages;
 using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
 
-namespace CLA_Administration_Web.ViewModels.Modules
+namespace CLA_Administration_Web.ViewModels.Modules.PSTR
 {
-    public class ModuleFilterOverviewModel
+    /// <summary>
+    /// Module View Model for the modules: Popup, Survey, Ticker, RSS (PSTR)
+    /// </summary>
+    public class ModulePSTRFilterOverviewModel
     {
         public ModuleNamesType ModuleName { get; set; }
 
@@ -12,7 +15,7 @@ namespace CLA_Administration_Web.ViewModels.Modules
         public string FilterTitle { get; set; }
 
         public List<string> ColumnNames { get; set; }
-    
-        public List<ModuleDataViewModel> ModulesData { get; set; }
+
+        public List<ModulePSTRDataViewModel> ModulesData { get; set; }
     }
 }

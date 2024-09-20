@@ -9,3 +9,7 @@ let AllStatusTypes = new StatusType();
 let popupsDataTable;
 let tickersDataTable;
 let surveysDataTable;
+
+let screensaversDataTable;
+let lockedDestopsDataTable;
+let desktopsDataTable;

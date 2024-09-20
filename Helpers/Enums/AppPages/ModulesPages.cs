@@ -12,8 +12,11 @@ namespace CLA_Administration_Web.Helpers.Enums.AppPages
         [Display(Name = "AllModules", ShortName = "")]
         AllModules,
 
-        [Display(Name = "ModulesOverviewFilter", ShortName = "")]
-        ModulesOverviewFilter,
+        [Display(Name = "ModulesOverviewFilterPSTR", ShortName = "")]
+        ModulesOverviewFilterPSTR,
+
+        [Display(Name = "ModulesOverviewFilterLDS", ShortName = "")]
+        ModulesOverviewFilterLDS,
 
         //Content Library
         [Display(Name = "ContentLibraryCategories", ShortName = "ContentLibrary")]
@@ -69,6 +72,12 @@ namespace CLA_Administration_Web.Helpers.Enums.AppPages
 
         [Display(Name = "SurveyDetails", ShortName = "Survey")]
         SurveyDetails,
+
+        [Display(Name = "SurveyQuestionsOverview", ShortName = "Survey")]
+        SurveyQuestionsOverview,
+
+        [Display(Name = "SurveyQuestionDetails", ShortName = "Survey")]
+        SurveyQuestionDetails,
 
         [Display(Name = "AddNewSurvey", ShortName = "Survey")]
         SurveyAddNew,

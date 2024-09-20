@@ -192,6 +192,12 @@
     margin-bottom: 0 !important;
     align-content: center;
 }
+.overview-filter-title2
+{
+    width: fit-content !important;
+    margin-bottom: 0 !important;
+    align-content: center;
+}
 .overview-users-select
 {
     height: 30px !important;
@@ -224,7 +230,7 @@
 {
     font-size: 20px;
 }
-.popup-dt-body-text
+.module-dt-body-text
 {
     max-width: 320px;
     text-overflow: ellipsis;
@@ -232,7 +238,15 @@
     overflow: hidden;
     margin-bottom:0;
 }
-.popup-dt-header-text
+.survey-q-dt-body-text
+{
+    max-width: 250px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    margin-bottom:0;
+}
+.module-dt-header-text
 {
     max-width: 120px;
     text-overflow: ellipsis;
@@ -244,11 +258,22 @@
 {
     border: 0px solid silver;
 }
-
+#SurveyQuesitonsOverviewDataTable
+{
+    border-top: 1px solid silver;
+}
+#TypeStagingLiveBtns
+{
+    margin-left: 10px;
+}
+#ViewFilterBtns
+{
+    margin-left: 9px;
+}
 
 @media screen and (max-width:1950px)
 {
-    .popup-dt-body-text
+    .module-dt-body-text
     {
         max-width:410px;
     }
@@ -256,7 +281,7 @@
 
 @media screen and (max-width:1850px)
 {
-    .popup-dt-body-text
+    .module-dt-body-text
     {
         max-width:320px;
     }
@@ -264,7 +289,7 @@
 
 @media screen and (max-width:1800px)
 {
-    .popup-dt-body-text
+    .module-dt-body-text
     {
         max-width:270px;
     }
@@ -272,7 +297,7 @@
 
 @media screen and (max-width:1700px)
 {
-    .popup-dt-body-text
+    .module-dt-body-text
     {
         max-width:170px;
     }
@@ -280,7 +305,7 @@
 
 @media screen and (max-width:1450px)
 {
-    .popup-dt-body-text
+    .module-dt-body-text
     {
         max-width:200px;
     }

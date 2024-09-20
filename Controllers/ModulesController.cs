@@ -6,6 +6,8 @@ using CLA_Administration_Web.Models;
 using CLA_Administration_Web.Services;
 using CLA_Administration_Web.Services.Modules;
 using CLA_Administration_Web.ViewModels.Modules;
+using CLA_Administration_Web.ViewModels.Modules.LDS;
+using CLA_Administration_Web.ViewModels.Modules.PSTR;
 using CLACommonFunctionsLibrary_NET.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -24,25 +26,44 @@ namespace CLA_Administration_Web.Controllers
             _logger = logger;
         }
 
+        #region All
+
         public IActionResult AllModules()
         {
             return PartialView(AppPagesLinks.Modules.AllModulesPageLink);
         }
 
-        public async Task<IActionResult> ModulesOverviewFilter(ModuleNamesType moduleNameType, string status, string userType, string startDate, string endDate)
+        public async Task<IActionResult> ModulesOverviewFilterPSTR(ModuleNamesType moduleNameType, string status, string userType, string startDate, string endDate)
         {
-            var dataSource = LocalDataStorage.GetLocalModuleAllData(moduleNameType);
+            var dataSource = LocalDataStorage.GetLocalModulePSTRAllData(moduleNameType);
 
-            var moduleFilterDataVm = new ModuleFilterOverviewModel
+            var moduleFilterDataVm = new ModulePSTRFilterOverviewModel
             {
                 ModuleName = moduleNameType,
                 ModuleDetailsPage = ModulesHelper.GetModuleDetailsPage(moduleNameType),
                 FilterTitle = ModulesHelper.GetModuleOverviewTitleText(moduleNameType, status, userType, startDate, endDate),
-                ModulesData = ModulesHelper.FilterModulesData(dataSource, status, userType, startDate, endDate)
+                ModulesData = ModulesHelper.FilterModulesPSTRData(dataSource, status, userType, startDate, endDate)
             };
 
-            return PartialView(AppPagesLinks.Modules.ModulesFilterOverviewPageLink, moduleFilterDataVm);
+            return PartialView(AppPagesLinks.Modules.ModulesPSTRFilterOverviewPageLink, moduleFilterDataVm);
         }
+
+        public async Task<IActionResult> ModulesOverviewFilterLDS(ModuleNamesType moduleNameType, string status, StagingLiveType stagingLive, string startDate, string endDate)
+        {
+            var dataSource = LocalDataStorage.GetLocalModuleLDSAllData(moduleNameType, stagingLive);
+
+            var moduleFilterDataVm = new ModuleLDSFilterOverviewModel
+            {
+                ModuleName = moduleNameType,
+                ModuleDetailsPage = ModulesHelper.GetModuleDetailsPage(moduleNameType),
+                FilterTitle = ModulesHelper.GetModuleOverviewTitleText(moduleNameType, status, null, startDate, endDate),
+                ModulesData = ModulesHelper.FilterModulesLDSData(dataSource, status, startDate, endDate)
+            };
+
+            return PartialView(AppPagesLinks.Modules.ModulesLDSFilterOverviewPageLink, moduleFilterDataVm);
+        }
+
+        #endregion
 
         public IActionResult ContentLibraryCategories()
         {
@@ -54,8 +75,27 @@ namespace CLA_Administration_Web.Controllers
             return PartialView(AppPagesLinks.Modules.ContentLibraryContentsPageLink);
         }
 
-        public IActionResult DesktopOverview()
+        public async Task<IActionResult> DesktopOverview()
         {
+            var desktopStaging = await _moduleService.GetAllDesktopsData(StagingLiveType.Staging);
+            var desktopLive = await _moduleService.GetAllDesktopsData(StagingLiveType.Live);
+
+            desktopStaging.ForEach(s =>
+            {
+                s.Status = ModulesHelper.GetModuleStatus(s.EffectiveFrom, s.EffectiveTo);
+                s.EffectiveFromDate = TypesParserHelper.ParseDate(s.EffectiveFrom);
+                s.EffectiveToDate = TypesParserHelper.ParseDate(s.EffectiveTo);
+            });
+            desktopLive.ForEach(s =>
+            {
+                s.Status = ModulesHelper.GetModuleStatus(s.EffectiveFrom, s.EffectiveTo);
+                s.EffectiveFromDate = TypesParserHelper.ParseDate(s.EffectiveFrom);
+                s.EffectiveToDate = TypesParserHelper.ParseDate(s.EffectiveTo);
+            });
+
+            LocalDataStorage.UpdateDesktopsData(desktopStaging, StagingLiveType.Staging);
+            LocalDataStorage.UpdateDesktopsData(desktopLive, StagingLiveType.Live);
+
             return PartialView(AppPagesLinks.Modules.DesktopOverviewPageLink);
         }
 
@@ -64,8 +104,27 @@ namespace CLA_Administration_Web.Controllers
             return PartialView(AppPagesLinks.Modules.DesktopAddNewPageLink);
         }
 
-        public IActionResult LockedDesktopOverview()
+        public async Task<IActionResult> LockedDesktopOverview()
         {
+            var lockedDesktopStaging = await _moduleService.GetAllLockedDesktopsData(StagingLiveType.Staging);
+            var lockedDesktopLive = await _moduleService.GetAllLockedDesktopsData(StagingLiveType.Live);
+
+            lockedDesktopStaging.ForEach(s =>
+            {
+                s.Status = ModulesHelper.GetModuleStatus(s.EffectiveFrom, s.EffectiveTo);
+                s.EffectiveFromDate = TypesParserHelper.ParseDate(s.EffectiveFrom);
+                s.EffectiveToDate = TypesParserHelper.ParseDate(s.EffectiveTo);
+            });
+            lockedDesktopLive.ForEach(s =>
+            {
+                s.Status = ModulesHelper.GetModuleStatus(s.EffectiveFrom, s.EffectiveTo);
+                s.EffectiveFromDate = TypesParserHelper.ParseDate(s.EffectiveFrom);
+                s.EffectiveToDate = TypesParserHelper.ParseDate(s.EffectiveTo);
+            });
+
+            LocalDataStorage.UpdateLockedDesktopsData(lockedDesktopStaging, StagingLiveType.Staging);
+            LocalDataStorage.UpdateLockedDesktopsData(lockedDesktopLive, StagingLiveType.Live);
+
             return PartialView(AppPagesLinks.Modules.LockedDesktopOverviewPageLink);
         }
 
@@ -74,8 +133,27 @@ namespace CLA_Administration_Web.Controllers
             return PartialView(AppPagesLinks.Modules.LockedDesktopAddNewPageLink);
         }
 
-        public IActionResult ScreensaverOverview()
+        public async Task<IActionResult> ScreensaverOverview()
         {
+            var screensaversStaging = await _moduleService.GetAllScreensaversData(StagingLiveType.Staging);
+            var screensaversLive = await _moduleService.GetAllScreensaversData(StagingLiveType.Live);
+            
+            screensaversStaging.ForEach(s =>
+            {
+                s.Status = ModulesHelper.GetModuleStatus(s.EffectiveFrom, s.EffectiveTo);
+                s.EffectiveFromDate = TypesParserHelper.ParseDate(s.EffectiveFrom);
+                s.EffectiveToDate = TypesParserHelper.ParseDate(s.EffectiveTo);
+            });
+            screensaversLive.ForEach(s =>
+            {
+                s.Status = ModulesHelper.GetModuleStatus(s.EffectiveFrom, s.EffectiveTo);
+                s.EffectiveFromDate = TypesParserHelper.ParseDate(s.EffectiveFrom);
+                s.EffectiveToDate = TypesParserHelper.ParseDate(s.EffectiveTo);
+            });
+
+            LocalDataStorage.UpdateScreensaversData(screensaversStaging, StagingLiveType.Staging);
+            LocalDataStorage.UpdateScreensaversData(screensaversLive, StagingLiveType.Live);
+
             return PartialView(AppPagesLinks.Modules.ScreensaverOverviewPageLink);
         }
 
@@ -104,7 +182,7 @@ namespace CLA_Administration_Web.Controllers
 
         public async Task<IActionResult> PopupDetails(int popupId)
         {
-            var popupDetails = LocalDataStorage.AllPopupData.Where(x => x.Id == popupId).FirstOrDefault();  
+            var popupDetails = LocalDataStorage.StagingData.AllPopupData.Where(x => x.Id == popupId).FirstOrDefault();  
 
             return PartialView(AppPagesLinks.Modules.PopupDetailsPageLink, popupDetails);
         }
@@ -121,6 +199,7 @@ namespace CLA_Administration_Web.Controllers
         public async Task<IActionResult> SurveyOverview()
         {
             var surveyDataViewModel = await _moduleService.GetAllTickersData();
+            var allSurveyQuestions = await _moduleService.GetAllSurveysQuestions();
 
             surveyDataViewModel.ForEach(s =>
             {
@@ -130,15 +209,33 @@ namespace CLA_Administration_Web.Controllers
             });
 
             LocalDataStorage.UpdateSurveysData(surveyDataViewModel);
+            LocalDataStorage.UpdateSurveysQuestions(allSurveyQuestions);
 
             return PartialView(AppPagesLinks.Modules.SurveyOverviewPageLink);
         }
 
         public async Task<IActionResult> SurveyDetails(int surveyId)
         {
-            var surveyDetails = LocalDataStorage.AllSurveysData.Where(x => x.Id == surveyId).FirstOrDefault();
+            var surveyDetails = LocalDataStorage.StagingData.AllSurveysData.Where(x => x.Id == surveyId).FirstOrDefault();
 
             return PartialView(AppPagesLinks.Modules.SurveyDetailsPageLink, surveyDetails);
+        }
+
+        public IActionResult SurveyQuestionsOverview(int surveyId)
+        {
+            var surveyQuestionsOverviewVM = new SurveyQuestionsOverviewViewModel
+            {
+                SurveyId = surveyId,
+                SurveyQuestions = LocalDataStorage.StagingData.AllSurveyQuestions.Where(x => x.SurveyId == surveyId).ToList(),
+            };
+            return PartialView(AppPagesLinks.Modules.SurveyQuestionsOverviewPageLink, surveyQuestionsOverviewVM);
+        }
+
+        public IActionResult SurveyQuestionDetails(int surveyId, int questionId)
+        {
+            var surveyQuestionInfo = LocalDataStorage.StagingData.AllSurveyQuestions.FirstOrDefault(x => x.SurveyId == surveyId && x.QuestionId == questionId);
+
+            return PartialView(AppPagesLinks.Modules.SurveyQuestionDetailsPageLink, surveyQuestionInfo);
         }
 
         public IActionResult AddNewSurvey()
@@ -167,7 +264,7 @@ namespace CLA_Administration_Web.Controllers
 
         public async Task<IActionResult> TickerDetails(int tickerId)
         {
-            var tickerDetails = LocalDataStorage.AllTickerData.Where(x => x.Id == tickerId).FirstOrDefault();
+            var tickerDetails = LocalDataStorage.StagingData.AllTickerData.Where(x => x.Id == tickerId).FirstOrDefault();
 
             return PartialView(AppPagesLinks.Modules.TickerDetailsPageLink, tickerDetails);
         }

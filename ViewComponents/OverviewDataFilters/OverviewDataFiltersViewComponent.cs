@@ -4,6 +4,8 @@ using CLA_Administration_Web.Helpers.Layout;
 using CLA_Administration_Web.Helpers.Modules;
 using CLA_Administration_Web.Services;
 using CLA_Administration_Web.ViewModels.Modules;
+using CLA_Administration_Web.ViewModels.Modules.LDS;
+using CLA_Administration_Web.ViewModels.Modules.PSTR;
 using CLACommonFunctionsLibrary_NET.Helpers.Enums;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,18 +27,27 @@ namespace CLA_Administration_Web.ViewComponents.OverviewDataFilters
 
                 var moduleNameType = ModulesHelper.GetModuleNameTypeFromModulePage(modulePage);
 
-                if (modulePage == ModulesPages.PopupOverview || modulePage == ModulesPages.TickerOverview || modulePage == ModulesPages.SurveyOverview)
+                var dataSource = LocalDataStorage.GetLocalModulePSTRAllData(moduleNameType);
+                var usersFilter = dataSource.Select(x => x.UserIdLastModified).Distinct().ToList();
+
+                if (modulePage == ModulesPages.ScreensaverOverview || modulePage == ModulesPages.DesktopOverview || modulePage == ModulesPages.LockedDesktopOverview)
                 {
-                    var dataSource = LocalDataStorage.GetLocalModuleAllData(moduleNameType);
-
-                    var usersFilter = dataSource.Select(x => x.UserIdLastModified).Distinct().ToList();
-
-                    var filtersViewModel = new ModuleOverviewFilterViewModel
+                    var filtersViewModel = new ModuleLDSOverviewFilterViewModel
+                    {
+                        ModulePage = modulePage,
+                        MonthsAndYears = ModulesHelper.GetMonthsAndYears()
+                    };
+                    return View("ModulesDataFilterLDS", filtersViewModel);
+                }
+                else if (modulePage == ModulesPages.PopupOverview || modulePage == ModulesPages.TickerOverview || modulePage == ModulesPages.SurveyOverview ||
+                         modulePage == ModulesPages.RSSOverview)
+                {
+                    var filtersViewModel = new ModulePSTROverviewFilterViewModel
                     {
                         ModulePage = modulePage,
                         Usernames = usersFilter
                     };
-                    return View("ModulesDataFilter", filtersViewModel);
+                    return View("ModulesDataFilterPSTR", filtersViewModel);
                 }
             }
             return View("Default");

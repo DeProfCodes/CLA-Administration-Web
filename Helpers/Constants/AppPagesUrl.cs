@@ -39,7 +39,8 @@ namespace CLA_Administration_Web.Helpers.Constants
         public class Modules
         {
             public static string AllModules = $"/{modulesController}/{ModulesPages.AllModules.GetDisplayName()}";
-            public static string ModulesOverviewFilter = $"/{modulesController}/{ModulesPages.ModulesOverviewFilter.GetDisplayName()}";
+            public static string ModulesOverviewFilterPSTR = $"/{modulesController}/{ModulesPages.ModulesOverviewFilterPSTR.GetDisplayName()}";
+            public static string ModulesOverviewFilterLDS = $"/{modulesController}/{ModulesPages.ModulesOverviewFilterLDS.GetDisplayName()}";
 
             public static string ContentLibraryCategories = $"/{modulesController}/{ModulesPages.ContentLibraryCategories.GetDisplayName()}";
             public static string ContentLibraryContent = $"/{modulesController}/{ModulesPages.ContentLibraryContent.GetDisplayName()}";
@@ -59,6 +60,8 @@ namespace CLA_Administration_Web.Helpers.Constants
 
             public static string SurveyOverview = $"/{modulesController}/{ModulesPages.SurveyOverview.GetDisplayName()}";
             public static string SurveyDetails = $"/{modulesController}/{ModulesPages.SurveyDetails.GetDisplayName()}";
+            public static string SurveyQuestionsOverview = $"/{modulesController}/{ModulesPages.SurveyQuestionsOverview.GetDisplayName()}";
+            public static string SurveyQuestionDetails = $"/{modulesController}/{ModulesPages.SurveyQuestionDetails.GetDisplayName()}";
             public static string SurveyAddNew = $"/{modulesController}/{ModulesPages.SurveyAddNew.GetDisplayName()}";
 
             public static string TickerOverview = $"/{modulesController}/{ModulesPages.TickerOverview.GetDisplayName()}";
