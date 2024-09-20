@@ -51,7 +51,6 @@
 <!--end wrapper-->
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="~/js/site.js" asp-append-version="true"></script>
 
 @{ 
     await Html.RenderPartialAsync("~/Views/Shared/Helpers/HtmlHelpers/AppUrlsHelper.cshtml"); 
@@ -71,31 +70,6 @@
 
         LoadPartialView(topNavUrl, "#TopNavigation");
         LoadPartialView(leftNavUrl, "#LeftNavigation");
-    }
-
-    function OpenPage(page, id)
-    {
-        LoadPageArea(page, id);
-
-        var pageTitle = GetPageTitle(page);
-
-        document.title = pageTitle;
-    }
-
-    function LoadPageArea(page, id)
-    {
-        var url = GetPageUrl(page, id);
-        
-        var pageName = GetPageTitle(page);
-        
-        ShowLoader("Main", "Loading " + pageName);
-
-        setTimeout(function ()
-        {
-            HideLoader("Main");
-            LoadPartialView(url, "#DashboardMainArea");
-
-        }, 0);
     }
 
     function Logout()

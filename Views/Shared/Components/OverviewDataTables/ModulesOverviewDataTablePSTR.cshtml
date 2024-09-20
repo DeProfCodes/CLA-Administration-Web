@@ -1,0 +1,17 @@
+﻿<!-- Modules Data Table Component for PSTR Modules : Popups, Surveys, Tickers, RSS -->
+
+@using CLACommonFunctionsLibrary_NET.Helpers.Enums
+@model CLA_Administration_Web.Helpers.Enums.AppPages.ModulesPages
+
+@{
+    var moduleName = Model.GetDisplayShortName();
+}
+
+<!-- Card for Table -->
+<div class="card" id="ModuleOverviewCard">
+    <div class="card-body">
+        <div class="table-responsive" id="ModuleOverviewTableContainer">
+
+        </div>
+    </div>
+</div>

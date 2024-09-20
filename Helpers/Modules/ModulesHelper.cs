@@ -1,6 +1,8 @@
-﻿using CLA_Administration_Web.Helpers.Enums.Shared;
+﻿using CLA_Administration_Web.Helpers.Enums.AppPages;
+using CLA_Administration_Web.Helpers.Enums.Shared;
 using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
-using CLA_Administration_Web.ViewModels.Modules;
+using CLA_Administration_Web.ViewModels.Modules.LDS;
+using CLA_Administration_Web.ViewModels.Modules.PSTR;
 using CLA_Administration_Web.ViewModels.Shared;
 using CLACommonFunctionsLibrary_NET.Helpers;
 using CLACommonFunctionsLibrary_NET.Helpers.Enums;
@@ -59,16 +61,47 @@ namespace CLA_Administration_Web.Helpers.Modules
             return null;
         }
 
-        public static string GetPopupOverviewText(string status, string user, string startDate, string endDate)
+        public static ModulesPages GetModuleDetailsPage(ModuleNamesType moduleNameType)
         {
-            var filterTitle = $"Showing {status.ToUpper()}";
-            filterTitle += " for " + (user == "all" ? "ALL Users" : user);
+            switch (moduleNameType)
+            {
+                case ModuleNamesType.Popup: return ModulesPages.PopupDetails;
+                case ModuleNamesType.Ticker: return ModulesPages.TickerDetails;
+                case ModuleNamesType.Survey: return ModulesPages.SurveyDetails;
+                default: return ModulesPages.None;
+            }
+        }
+
+        public static List<string> GetMonthsAndYears()
+        {
+            var result = new List<string>();
+            var today = DateTime.Now;
+
+            for (int i = 0; i < 12; i++)
+            {
+                result.Add(today.ToString("MMMM, yyyy"));
+                today = today.AddMonths(-1);
+            }
+            return result;
+        }
+
+        public static string GetModuleOverviewTitleText(ModuleNamesType moduleNameType, string status, string user, string startDate, string endDate)
+        {
+            var filterTitle = $"Showing {status} {moduleNameType.GetDisplayDescription()}s";
+            filterTitle += user != null ? " for " + (user == "all" ? "All Users" : user) : "";
             filterTitle += $" from {startDate} to {endDate}";
 
             return filterTitle;
         }
 
-        public static List<PopupViewModel> FilterPopupsData(List<PopupViewModel> data, string status, string user, string startDate, string endDate)
+        public static ModuleNamesType GetModuleNameTypeFromModulePage(ModulesPages modulePage)
+        {
+            var allModuleNameTypes = Enum.GetValues(typeof(ModuleNamesType)).Cast<ModuleNamesType>().ToList();
+
+            return allModuleNameTypes?.FirstOrDefault(x => x.GetDisplayName() == modulePage.GetDisplayShortName()) ?? ModuleNamesType.None;
+        }
+
+        public static List<ModulePSTRDataViewModel> FilterModulesPSTRData(List<ModulePSTRDataViewModel> data, string status, string user, string startDate, string endDate)
         {
             var startDateTime = TypesParserHelper.ParseDate(startDate);
             var endDateTime = TypesParserHelper.ParseDate(endDate);
@@ -77,9 +110,24 @@ namespace CLA_Administration_Web.Helpers.Modules
             user = user.ToLower();
 
             var filteredData = data.Where(
-                                            p => ((status != "all" && status != "") ? (p.Status.StatusType.GetDisplayName().ToLower() == status) : true) &&
-                                                 (startDateTime.Date.CompareTo(p.EffectiveFromDate) <= 0 && p.EffectiveToDate.Date.CompareTo(endDateTime) <= 0) &&
-                                                 (user != "all" ? (p.UserIdLastModified == user) : true)
+                                           p =>  ((status != "all" && status != "") ? (p.Status.StatusType.GetDisplayName().ToLower() == status) : true) &&
+                                                 (startDateTime.Date.CompareTo(p.EffectiveFromDate) <= 0 || p.EffectiveToDate.Date.CompareTo(endDateTime) <= 0) &&
+                                                 (user != "all" ? (p.UserIdLastModified.ToLower() == user) : true)
+                                    ).ToList();
+
+            return filteredData;
+        }
+
+        public static List<ModuleLDSDataViewModel> FilterModulesLDSData(List<ModuleLDSDataViewModel> data, string status, string startDate, string endDate)
+        {
+            var startDateTime = TypesParserHelper.ParseDate(startDate);
+            var endDateTime = TypesParserHelper.ParseDate(endDate);
+
+            status = status.ToLower();
+            
+            var filteredData = data.Where(
+                                           p => ((status != "all" && status != "") ? (p.Status.StatusType.GetDisplayName().ToLower() == status) : true) &&
+                                                 (startDateTime.Date.CompareTo(p.EffectiveFromDate) <= 0 || p.EffectiveToDate.Date.CompareTo(endDateTime) <= 0) 
                                     ).ToList();
 
             return filteredData;

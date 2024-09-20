@@ -1,0 +1,126 @@
+﻿<!-- Modules Data Filters Component for LDS Modules : Lockscreen, Desktops, Screensavers -->
+
+@using CLACommonFunctionsLibrary_NET.Helpers.Enums
+@using CLA_Administration_Web.Helpers.Enums.AppPages
+@model CLA_Administration_Web.ViewModels.Modules.LDS.ModuleLDSOverviewFilterViewModel
+
+@{
+    var moduleName = Model.ModulePage.GetDisplayShortName();
+
+    var allFilterBtn = $"All{moduleName}BtnFilter";
+    var activeFilterBtn = $"Active{moduleName}BtnFilter";
+    var expiredFilterBtn = $"Expired{moduleName}BtnFilter";
+    var pendingFilterBtn = $"Pending{moduleName}BtnFilter";
+    var customFilterBtn = $"Custom{moduleName}BtnFilter";
+
+    var usersFilterSelectList = $"{moduleName}UsersFilter";
+
+    var dateFilterFrom = $"{moduleName}DateFromFilter";
+    var dateFilterTo = $"{moduleName}DateToFilter";
+
+    var stagingFilterBtn = $"{moduleName}StagingFilter";
+    var liveFilterBtn = $"{moduleName}LiveFilter";
+
+    var tabularViewFilterBtn = $"{moduleName}TabularViewFilter";
+    var calendarViewFilterBtn = $"{moduleName}CalendarViewFilter";
+    var ganttViewFilterBtn = $"{moduleName}GanttViewFilter";
+
+    var moduleDisplayName = $"{moduleName}s";
+}
+<!-- Card for Filters -->
+<div class="card mb-4 mt-2 overview-filters-card">
+    <div class="card-body pt-0 pb-0">
+        <div class="row">
+            <div class="row col-12 mb-2 d-flex flex-wrap mt-3 module-overview-filters">
+                <div class="col-md-4 mx-auto" >
+                    <p class="theme-txt-clr fw-bold text-center">Dates</p>
+                    <div class="row mb-0 mb-md-0">
+                        <div id="FromDateFilter" class="w-fit-content d-flex mt-1">
+                            <p class="theme-txt-clr overview-filter-title2 me-3" id="DatesFilterTitle">From</p>
+                            <input type="date" class="form-control overview-dates-input" id="@dateFilterFrom" onchange="ModuleFilterDatesFilterChange('@moduleName', '@dateFilterFrom')" value="2024-01-01">
+                        </div>
+                        <div id="ToDateFilter" class="w-fit-content d-flex mt-1">
+                            <p class="theme-txt-clr overview-filter-title2 me-3">to</p>
+                            <input type="date" class="form-control overview-dates-input" id="@dateFilterTo" onchange="ModuleFilterDatesFilterChange('@moduleName', '@dateFilterTo')" value="2024-09-30">
+                        </div>
+                    </div>
+                    <div class="row mb-md-0 mt-2">
+                        <p class="theme-txt-clr overview-filter-title2">Select Month & Year</p>
+                        <select class="form-select w-fit-content overview-users-select" id="@usersFilterSelectList" onchange="ModuleFilterUsersFilterChange('@moduleName','@usersFilterSelectList')">
+                            <option selected value="all">September, 2024</option>
+                            @foreach (var username in Model.MonthsAndYears)
+                            {
+                                <option value="@username">@username</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4" id="StatusFilterContainer">
+                    <p class="theme-txt-clr fw-bold text-center mb-1">Filters</p>
+                    <div class="row mb-3 mb-md-0 mx-auto">  
+                        <p class="theme-txt-clr overview-filter-title2" id="StatusFilterTitle">Status</p>
+                        <div class="btn-group w-auto overview-filter-btn-group" role="group" aria-label="Status filter">
+                            <button class="btn module-filter-btn-group filter-status-btn @moduleName" 
+                                    onclick="FilterModuleDataOverviewByStatus('@moduleName','@allFilterBtn', AllStatusTypes.All)" id="@allFilterBtn">All</button>
+                            <button class="btn module-filter-btn-group filter-status-btn btn-group-active @moduleName"
+                                    onclick="FilterModuleDataOverviewByStatus('@moduleName','@activeFilterBtn', AllStatusTypes.Active)" id="@activeFilterBtn">Active</button>
+                            <button class="btn module-filter-btn-group filter-status-btn @moduleName"
+                                    onclick="FilterModuleDataOverviewByStatus('@moduleName','@expiredFilterBtn', AllStatusTypes.Expired)" id="@expiredFilterBtn">Expired</button>
+                            <button class="btn module-filter-btn-group filter-status-btn @moduleName"
+                                    onclick="FilterModuleDataOverviewByStatus('@moduleName','@pendingFilterBtn', AllStatusTypes.Pending)" id="@pendingFilterBtn">Pending</button>
+                        </div>
+                    </div>
+                    <div class="row mb-3 mb-md-0 mx-auto mt-1">  
+                        <p class="theme-txt-clr overview-filter-title2" id="TypeFilterTitle">Type</p>
+                        <div class="btn-group w-auto overview-filter-btn-group" role="group" aria-label="Status filter" id="TypeStagingLiveBtns">
+                            <button class="btn module-filter-btn-group filter-type-btn btn-group-active @moduleName"
+                                    onclick="FilterModuleDataOverviewByStagingLive('@moduleName','@stagingFilterBtn', 'staging')" id="@stagingFilterBtn">Staging</button>
+                            <button class="btn module-filter-btn-group filter-type-btn @moduleName"
+                                    onclick="FilterModuleDataOverviewByStagingLive('@moduleName','@liveFilterBtn', 'live')" id="@liveFilterBtn">Live</button>
+                        </div>
+                    </div>
+                    <div class="row mb-3 mb-md-0 mx-auto mt-1">  
+                        <p class="theme-txt-clr overview-filter-title2" id="StatusFilterTitle">View</p>
+                        <div class="btn-group w-auto overview-filter-btn-group" role="group" aria-label="Status filter" id="ViewFilterBtns">
+                            <button class="btn module-filter-btn-group btn-group-active filter-view-btn @moduleName"
+                                    onclick="FilterModuleDataOverviewByViewType('@moduleName','@tabularViewFilterBtn', 'tabular')" id="@tabularViewFilterBtn">Tabular</button>
+                            <button class="btn module-filter-btn-group filter-view-btn @moduleName"
+                                    onclick="FilterModuleDataOverviewByViewType('@moduleName','@calendarViewFilterBtn', 'calendar')" id="@calendarViewFilterBtn">Calendar</button>
+                            <button class="btn module-filter-btn-group filter-view-btn @moduleName"
+                                    onclick="FilterModuleDataOverviewByViewType('@moduleName','@ganttViewFilterBtn', 'gant')" id="@ganttViewFilterBtn">Gantt</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mx-auto" id="UsersFilterContainer">
+                    <p class="theme-txt-clr fw-bold text-center mb-2" id="UsersFilterTitle">Action Buttons</p>
+                    <div class="row mb-3 mb-md-0 w-fit-content mx-auto">
+                        <button class="btn btn-sm btn-success w-fit-content" id="PromoteBtn">Promote to Live</button>
+                        <button class="btn btn-sm btn-primary w-fit-content ms-4" id="TransitionBtn">Transitions</button>
+                    </div>
+                    <div class="row mb-3 mb-md-0 mt-2 w-fit-content mx-auto">
+                        <button class="btn btn-sm theme-bg text-white w-fit-content" id="DuplicateBtn">Duplicate Selected</button>
+                        <button class="btn btn-sm btn-danger w-fit-content ms-3" id="RemoveBtn">Remove Selected</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    $(document).ready(function ()
+    {
+        SetDateToTodayDefault();
+    });
+
+    function SetDateToTodayDefault()
+    {
+        var today = TodayDate();
+       
+        $("#@dateFilterTo").val(today);
+    }
+
+
+</script>

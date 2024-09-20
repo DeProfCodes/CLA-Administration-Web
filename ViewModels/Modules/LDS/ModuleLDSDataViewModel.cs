@@ -1,15 +1,24 @@
 ﻿using CLA_Administration_Web.Helpers.Enums.Shared;
 using CLA_Administration_Web.ViewModels.Shared;
 
-namespace CLA_Administration_Web.ViewModels.Modules
+namespace CLA_Administration_Web.ViewModels.Modules.LDS
 {
-    public class PopupViewModel
+    /// <summary>
+    /// Module View Model for the modules: Lockscreen, Desktop, Screensaver (LDS)
+    /// </summary>
+    public class ModuleLDSDataViewModel
     {
         public int Id { get; set; }
 
-        public string HeaderText { get; set; }
+        public string CategoryName { get; set; }
 
-        public string BodyText { get; set; }
+        public string CategoryDescription { get; set; }
+
+        public string ContentType { get; set; }
+
+        public string ContentDescription { get; set; }
+
+        public int Duration { get; set; }
 
         public string EffectiveFrom { get; set; }
 
@@ -28,5 +37,7 @@ namespace CLA_Administration_Web.ViewModels.Modules
         public string LastModifiedDate { get; set; }
 
         public string UserIdLastModified { get; set; }
+
+        public string MachineIdLastModified { get; set; }
     }
 }

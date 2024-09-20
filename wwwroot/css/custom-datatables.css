@@ -9,3 +9,8 @@
    /* background: #04316d !important;
     color: white !important;*/
 }
+
+.dataTables_length
+{
+    margin-bottom: 30px;
+}

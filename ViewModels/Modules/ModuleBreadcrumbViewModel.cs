@@ -15,6 +15,12 @@ namespace CLA_Administration_Web.ViewModels.Modules
 
         public bool IsAllModulesBreadcrumb { get; set; }
 
+        public bool IsDetailsPage {get; set; }
+
+        public int ModuleDetailsId { get; set; }
+
+        public ModulesPages ModulePreviewPage { get; set; }
+
         public bool HasActionButton { get; set; }
 
         public bool IsAddNewIcon { get; set; }

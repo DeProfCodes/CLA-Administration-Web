@@ -32,6 +32,8 @@
         public class Modules
         {
             public const string AllModulesPageLink = "~/Views/Modules/AllModules.cshtml";
+            public const string ModulesPSTRFilterOverviewPageLink = "~/Views/Modules/FilterPSTRModulesOverview.cshtml";
+            public const string ModulesLDSFilterOverviewPageLink = "~/Views/Modules/FilterLDSModulesOverview.cshtml";
 
             public const string ContentLibraryCategoriesPageLink = "~/Views/Modules/ContentLibrary/Categories.cshtml";
             public const string ContentLibraryContentsPageLink = "~/Views/Modules/ContentLibrary/Contents.cshtml";
@@ -46,13 +48,17 @@
             public const string ScreensaverAddNewPageLink = "~/Views/Modules/Screensaver/AddNewScreensaver.cshtml";
 
             public const string PopupOverviewPageLink = "~/Views/Modules/Popup/PopupOverview.cshtml";
-            public const string PopupsFilterOverviewPageLink = "~/Views/Modules/Popup/_FilterPopupsOverview.cshtml";
+            public const string PopupDetailsPageLink = "~/Views/Modules/Popup/PopupDetails.cshtml";
             public const string PopupAddNewPageLink = "~/Views/Modules/Popup/AddNewPopup.cshtml";
 
             public const string SurveyOverviewPageLink = "~/Views/Modules/Survey/SurveyOverview.cshtml";
+            public const string SurveyDetailsPageLink = "~/Views/Modules/Survey/SurveyDetails.cshtml";
+            public const string SurveyQuestionsOverviewPageLink = "~/Views/Modules/Survey/SurveyQuestionsOverview.cshtml";
+            public const string SurveyQuestionDetailsPageLink = "~/Views/Modules/Survey/SurveyQuestionDetails.cshtml";
             public const string SurveyAddNewPageLink = "~/Views/Modules/Survey/AddNewSurvey.cshtml";
 
             public const string TickerOverviewPageLink = "~/Views/Modules/Ticker/TickerOverview.cshtml";
+            public const string TickerDetailsPageLink = "~/Views/Modules/Ticker/TickerDetails.cshtml";
             public const string TickerAddNewPageLink = "~/Views/Modules/Ticker/AddNewTicker.cshtml";
 
             public const string RSSOverviewPageLink = "~/Views/Modules/RSS/RSSOverview.cshtml";
