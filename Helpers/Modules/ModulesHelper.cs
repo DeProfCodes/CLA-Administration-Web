@@ -1,6 +1,8 @@
 ﻿using CLA_Administration_Web.Helpers.Enums.AppPages;
 using CLA_Administration_Web.Helpers.Enums.Shared;
 using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
+using CLA_Administration_Web.Services;
+using CLA_Administration_Web.ViewModels.Modules;
 using CLA_Administration_Web.ViewModels.Modules.LDS;
 using CLA_Administration_Web.ViewModels.Modules.PSTR;
 using CLA_Administration_Web.ViewModels.Shared;
@@ -72,26 +74,32 @@ namespace CLA_Administration_Web.Helpers.Modules
             }
         }
 
-        public static List<string> GetMonthsAndYears()
+        public static List<DateTime> GetMonthsAndYears()
         {
-            var result = new List<string>();
-            var today = DateTime.Now;
+            var result = new List<DateTime>();
+            var startDate = DateTime.Now.AddMonths(-12);
+            var endDate = DateTime.Now.AddMonths(6);
 
-            for (int i = 0; i < 12; i++)
+            while (startDate.Date.CompareTo(endDate) < 0)
             {
-                result.Add(today.ToString("MMMM, yyyy"));
-                today = today.AddMonths(-1);
+                result.Add(endDate);
+                endDate = endDate.AddMonths(-1);
             }
+            result = result.OrderByDescending(x => x).ToList(); 
             return result;
         }
 
-        public static string GetModuleOverviewTitleText(ModuleNamesType moduleNameType, string status, string user, string startDate, string endDate)
+        public static ModuleFilterTitle GetModuleOverviewTitleText(ModuleNamesType moduleNameType, string status, StagingLiveType stagingLive, string user, string startDate, string endDate)
         {
-            var filterTitle = $"Showing {status} {moduleNameType.GetDisplayDescription()}s";
-            filterTitle += user != null ? " for " + (user == "all" ? "All Users" : user) : "";
-            filterTitle += $" from {startDate} to {endDate}";
-
-            return filterTitle;
+            var filterInfo = new ModuleFilterTitle
+            {
+                Status = status,
+                User = user,
+                StartDate = startDate,
+                StagingLiveFilter = stagingLive.GetDisplayName(),
+                EndDate = endDate
+            };
+            return filterInfo;
         }
 
         public static ModuleNamesType GetModuleNameTypeFromModulePage(ModulesPages modulePage)
@@ -111,7 +119,7 @@ namespace CLA_Administration_Web.Helpers.Modules
 
             var filteredData = data.Where(
                                            p =>  ((status != "all" && status != "") ? (p.Status.StatusType.GetDisplayName().ToLower() == status) : true) &&
-                                                 (startDateTime.Date.CompareTo(p.EffectiveFromDate) <= 0 || p.EffectiveToDate.Date.CompareTo(endDateTime) <= 0) &&
+                                                 (startDateTime.Date.CompareTo(p.EffectiveFromDate) <= 0 && p.EffectiveToDate.Date.CompareTo(endDateTime) <= 0) &&
                                                  (user != "all" ? (p.UserIdLastModified.ToLower() == user) : true)
                                     ).ToList();
 
@@ -127,10 +135,25 @@ namespace CLA_Administration_Web.Helpers.Modules
             
             var filteredData = data.Where(
                                            p => ((status != "all" && status != "") ? (p.Status.StatusType.GetDisplayName().ToLower() == status) : true) &&
-                                                 (startDateTime.Date.CompareTo(p.EffectiveFromDate) <= 0 || p.EffectiveToDate.Date.CompareTo(endDateTime) <= 0) 
+                                                 startDateTime.Date.CompareTo(p.EffectiveFromDate) <= 0 && p.EffectiveToDate.Date.CompareTo(endDateTime) <= 0 
                                     ).ToList();
 
             return filteredData;
+        }
+
+        public static ModuleLDSFilterOverviewModel GetModuleLDSFilterOverview(ModuleNamesType moduleNameType, StagingLiveType stagingLive, string status, string startDate, string endDate)
+        {
+            var dataSource = LocalDataStorage.GetLocalModuleLDSAllData(moduleNameType, stagingLive);
+
+            var moduleFilterDataVm = new ModuleLDSFilterOverviewModel
+            {
+                ModuleName = moduleNameType,
+                ModuleDetailsPage = GetModuleDetailsPage(moduleNameType),
+                FilterTitle = GetModuleOverviewTitleText(moduleNameType, status, stagingLive, "all", startDate, endDate),
+                ModulesData = FilterModulesLDSData(dataSource, status, startDate, endDate)
+            };
+
+            return moduleFilterDataVm;
         }
     }
 }

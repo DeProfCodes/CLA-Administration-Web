@@ -2,6 +2,7 @@
 using CLA_Administration_Web.ViewModels.Modules.LDS;
 using CLA_Administration_Web.ViewModels.Modules.PSTR;
 using CLA_Administration_Web.ViewModels.Shared;
+using System;
 using System.Net.Mime;
 
 namespace CLA_Administration_Web.Helpers.MockData
@@ -51,37 +52,14 @@ namespace CLA_Administration_Web.Helpers.MockData
             var random = new Random();
             var items = new List<ModulePSTRDataViewModel>();
 
-            var today = DateTime.Today;
-
             var usersList = new List<string> { "NdhuvaziM", "LegeB", "SinethembaS", "LeboC", "Administrator", "CathrineT", "LarryM", "Tarryn" };
 
-            for (int i = 1; i <= 50; i++)
+            DateTime effectiveFrom = new();
+            DateTime effectiveTo = new();
+
+            for (int i = 1; i <= 250; i++)
             {
-                DateTime effectiveFrom, effectiveTo;
-
-                int caseSelector = (i <= 17 ? 0 : (i <= 35 ? 1 : 2));
-                switch (caseSelector)
-                {
-                    case 0:
-                        effectiveFrom = RandomDateInRange(new DateTime(2024, 1, 1), today.AddDays(-1), random);
-                        effectiveTo = RandomDateInRange(effectiveFrom, today.AddDays(-1), random);
-                        break;
-
-                    case 1:
-                        effectiveFrom = RandomDateInRange(new DateTime(2024, 1, 1), today.AddDays(-1), random);
-                        effectiveTo = RandomDateInRange(today, new DateTime(2024, 12, 31), random);
-                        break;
-
-                    case 2:
-                        effectiveFrom = RandomDateInRange(today.AddDays(1), new DateTime(2024, 12, 31), random);
-                        effectiveTo = RandomDateInRange(effectiveFrom, new DateTime(2024, 12, 31), random);
-                        break;
-
-                    default:
-                        effectiveFrom = today;
-                        effectiveTo = today;
-                        break;
-                }
+                GetEffectiveDates(ref effectiveFrom, ref effectiveTo, i);
 
                 var item = new ModulePSTRDataViewModel
                 {
@@ -249,43 +227,78 @@ namespace CLA_Administration_Web.Helpers.MockData
             return options[random.Next(options.Count)];
         }
 
+        private static DateTime RandomDateInSameMonth(DateTime effectiveFrom, Random random)
+        {
+            int daysInMonth = DateTime.DaysInMonth(effectiveFrom.Year, effectiveFrom.Month);
+            int day = random.Next(effectiveFrom.Day, daysInMonth + 1); 
+            return new DateTime(effectiveFrom.Year, effectiveFrom.Month, day);
+        }
+
+        static void GetEffectiveDates(ref DateTime effectiveFrom, ref DateTime effectiveTo, int index)
+        {
+            var random = new Random();
+            var today = DateTime.Today;
+            double sameMonthProbability = 0.5;
+
+            var startDate = DateTime.Now.AddMonths(-9);
+            var endDate = DateTime.Now.AddMonths(9);
+
+            int caseSelector = (index <= 17 ? 0 : (index <= 35 ? 1 : 2));
+
+            switch (caseSelector)
+            {
+                case 0:
+                    effectiveFrom = RandomDateInRange(startDate, today.AddDays(-1), random);
+                    effectiveTo = RandomDateInRange(effectiveFrom, today.AddDays(-1), random);
+                    break;
+
+                case 1:
+                    effectiveFrom = RandomDateInRange(startDate, today.AddDays(-1), random);
+
+                    if (random.NextDouble() <= sameMonthProbability)
+                    {
+                        effectiveTo = RandomDateInSameMonth(effectiveFrom, random);
+                    }
+                    else
+                    {
+                        effectiveTo = RandomDateInRange(today, endDate, random);
+                    }
+                    break;
+
+                case 2:
+                    effectiveFrom = RandomDateInRange(today.AddDays(1), endDate, random);
+
+                    if (random.NextDouble() <= sameMonthProbability)
+                    {
+                        effectiveTo = RandomDateInSameMonth(effectiveFrom, random);
+                    }
+                    else
+                    {
+                        effectiveTo = RandomDateInRange(effectiveFrom, endDate, random);
+                    }
+                    break;
+
+                default:
+                    effectiveFrom = today;
+                    effectiveTo = today;
+                    break;
+            }
+        }
+
         private static List<ModuleLDSDataViewModel> GenerateLDSRandomData()
         {
             var random = new Random();
             var items = new List<ModuleLDSDataViewModel>();
 
-            var today = DateTime.Today;
-
             var usersList = new List<string> { "NdhuvaziM", "LegeB", "SinethembaS", "LeboC", "Administrator", "CathrineT", "LarryM", "Tarryn" };
             var contentType = new List<string> { "Picture", "Audio", "Video", "URL" };
 
-            for (int i = 1; i <= 50; i++)
+            DateTime effectiveFrom = new();
+            DateTime effectiveTo = new();
+
+            for (int i = 1; i <= 250; i++)
             {
-                DateTime effectiveFrom, effectiveTo;
-
-                int caseSelector = (i <= 17 ? 0 : (i <= 35 ? 1 : 2));
-                switch (caseSelector)
-                {
-                    case 0:
-                        effectiveFrom = RandomDateInRange(new DateTime(2024, 1, 1), today.AddDays(-1), random);
-                        effectiveTo = RandomDateInRange(effectiveFrom, today.AddDays(-1), random);
-                        break;
-
-                    case 1:
-                        effectiveFrom = RandomDateInRange(new DateTime(2024, 1, 1), today.AddDays(-1), random);
-                        effectiveTo = RandomDateInRange(today, new DateTime(2024, 12, 31), random);
-                        break;
-
-                    case 2:
-                        effectiveFrom = RandomDateInRange(today.AddDays(1), new DateTime(2024, 12, 31), random);
-                        effectiveTo = RandomDateInRange(effectiveFrom, new DateTime(2024, 12, 31), random);
-                        break;
-
-                    default:
-                        effectiveFrom = today;
-                        effectiveTo = today;
-                        break;
-                }
+                GetEffectiveDates(ref effectiveFrom, ref effectiveTo, i);
 
                 var item = new ModuleLDSDataViewModel
                 {
@@ -307,6 +320,5 @@ namespace CLA_Administration_Web.Helpers.MockData
             }
             return items;
         }
-
     }
 }

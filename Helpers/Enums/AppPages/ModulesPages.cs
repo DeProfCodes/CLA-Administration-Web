@@ -12,11 +12,11 @@ namespace CLA_Administration_Web.Helpers.Enums.AppPages
         [Display(Name = "AllModules", ShortName = "")]
         AllModules,
 
-        [Display(Name = "ModulesOverviewFilterPSTR", ShortName = "")]
-        ModulesOverviewFilterPSTR,
+        [Display(Name = "ModulePSTRTableOverview", ShortName = "")]
+        ModulePSTRTableOverview,
 
-        [Display(Name = "ModulesOverviewFilterLDS", ShortName = "")]
-        ModulesOverviewFilterLDS,
+        [Display(Name = "ModuleLDSViewTypeOverview", ShortName = "")]
+        ModuleLDSViewTypeOverview,
 
         //Content Library
         [Display(Name = "ContentLibraryCategories", ShortName = "ContentLibrary")]

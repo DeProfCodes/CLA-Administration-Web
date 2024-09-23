@@ -13,36 +13,49 @@
         if (page == '@DashboardPages.Calendar') url = '@AppPagesUrl.Dashboard.Calendar';
 
         // Modules Section
+        // All
         if (page == '@ModulesPages.AllModules') url = '@AppPagesUrl.Modules.AllModules';
-        if (page == '@ModulesPages.ModulesOverviewFilterPSTR') url = '@AppPagesUrl.Modules.ModulesOverviewFilterPSTR';
-        if (page == '@ModulesPages.ModulesOverviewFilterLDS') url = '@AppPagesUrl.Modules.ModulesOverviewFilterLDS';
-        //
+        
+        // PSTR Modules: Popup, Survey, Ticker, RSS
+        if (page == '@ModulesPages.ModulePSTRTableOverview') url = '@AppPagesUrl.Modules.ModulePSTRTableOverview';
+        
+        // LDS Modules: Lockscreen, Desktop, Screensaver
+        if (page == '@ModulesPages.ModuleLDSViewTypeOverview') url = '@AppPagesUrl.Modules.ModuleLDSViewTypeOverview';
+        
+        // Content Library
         if (page == '@ModulesPages.ContentLibraryCategories') url = '@AppPagesUrl.Modules.ContentLibraryCategories';
         if (page == '@ModulesPages.ContentLibraryContent') url = '@AppPagesUrl.Modules.ContentLibraryContent';
-        //
+
+        // Desktop
         if (page == '@ModulesPages.DesktopOverview') url = '@AppPagesUrl.Modules.DesktopOverview';
         if (page == '@ModulesPages.DesktopAddNew') url = '@AppPagesUrl.Modules.DesktopAddNew';
-        //
+        
+        // Locked Desktop
         if (page == '@ModulesPages.LockedDesktopOverview') url = '@AppPagesUrl.Modules.LockedDesktopOverview';
         if (page == '@ModulesPages.LockedDesktopAddNew') url = '@AppPagesUrl.Modules.LockedDesktopAddNew';
-        //
+        
+        // Screensaver
         if (page == '@ModulesPages.ScreensaverOverview') url = '@AppPagesUrl.Modules.ScreensaverOverview';
         if (page == '@ModulesPages.ScreensaverAddNew') url = '@AppPagesUrl.Modules.ScreensaverAddNew';
-        //
+        
+        // Popup
         if (page == '@ModulesPages.PopupOverview') url = '@AppPagesUrl.Modules.PopupOverview';
         if (page == '@ModulesPages.PopupDetails') url = '@AppPagesUrl.Modules.PopupDetails' + `?popupId=${id}`;
         if (page == '@ModulesPages.PopupAddNew') url = '@AppPagesUrl.Modules.PopupAddNew';
-        //
+        
+        // Survey
         if (page == '@ModulesPages.SurveyOverview') url = '@AppPagesUrl.Modules.SurveyOverview';
         if (page == '@ModulesPages.SurveyDetails') url = '@AppPagesUrl.Modules.SurveyDetails' + `?surveyId=${id}`;
         if (page == '@ModulesPages.SurveyQuestionsOverview') url = '@AppPagesUrl.Modules.SurveyQuestionsOverview' + `?surveyId=${id}`;;
         if (page == '@ModulesPages.SurveyQuestionDetails') url = '@AppPagesUrl.Modules.SurveyQuestionDetails' + `?surveyId=${id}&questionId=${id2}`;
         if (page == '@ModulesPages.SurveyAddNew') url = '@AppPagesUrl.Modules.SurveyAddNew';
-        //
+        
+        // Ticker
         if (page == '@ModulesPages.TickerOverview') url = '@AppPagesUrl.Modules.TickerOverview';
         if (page == '@ModulesPages.TickerDetails') url = '@AppPagesUrl.Modules.TickerDetails' + `?tickerId=${id}`;;
         if (page == '@ModulesPages.TickerAddNew') url = '@AppPagesUrl.Modules.TickerAddNew';
-        //
+       
+        // RSS
         if (page == '@ModulesPages.RSSOverview') url = '@AppPagesUrl.Modules.RSSOverview';
         if (page == '@ModulesPages.RSSAddNew') url = '@AppPagesUrl.Modules.RSSAddNew';
         

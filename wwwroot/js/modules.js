@@ -12,12 +12,12 @@ function GetStatusFromButtonId(buttonId)
     return null;
 }
 
-function ModuleFilterButtonClick(filterBtnId, moduleType, status, username, startDate, endDate, stagingLiveFilter)
+function ModuleFilterButtonClick(filterBtnId, moduleType, status, username, startDate, endDate, stagingLiveFilter, viewType)
 {
     $('.filter-status-btn').removeClass('btn-group-active');
     $(`#${filterBtnId}`).addClass('btn-group-active');
     
-    ReloadFilteredModuleOverview(moduleType, status, username, startDate, endDate, stagingLiveFilter);
+    ReloadFilteredModuleOverview(moduleType, status, username, startDate, endDate, stagingLiveFilter, viewType);
 }
 
 function ModuleFilterUsersFilterChange(moduleName, selectListId)
@@ -29,7 +29,7 @@ function ModuleFilterUsersFilterChange(moduleName, selectListId)
     FilterModuleDataOverviewByStatus(moduleName, btnId, status);
 }
 
-function ModuleFilterDatesFilterChange(moduleName, dateInputId)
+function ModuleFilterDatesFilterChange(moduleName)
 {
     var statusBtn = $(`.filter-status-btn.btn-group-active.${moduleName}`); 
     var status = statusBtn.text();
@@ -59,17 +59,21 @@ function ModuleOverviewLoader(moduleType, status)
     }
 }
 
-function ReloadFilteredModuleOverview(moduleType, status, username, startDate, endDate, stagingLiveFilter)
+function ReloadFilteredModuleOverview(moduleType, status, username, startDate, endDate, stagingLiveFilter, viewType)
 {
     ModuleOverviewLoader(moduleType, status);
 
-    var url = "";
-    
-    if(moduleType == AllModuleTypes.Popup || moduleType == AllModuleTypes.Survey || moduleType == AllModuleTypes.Ticker || moduleType == AllModuleTypes.RSS)
-        url = GetPageUrl('ModulesOverviewFilterPSTR') + `?moduleNameType=${moduleType}&status=${status}&userType=${username}&startDate=${startDate}&endDate=${endDate}`;
+    var isPSTRModules = (moduleType == AllModuleTypes.Popup || moduleType == AllModuleTypes.Survey || moduleType == AllModuleTypes.Ticker || moduleType == AllModuleTypes.RSS);
+    var isLDSModules = (moduleType == AllModuleTypes.LockedDesktop || moduleType == AllModuleTypes.Desktop || moduleType == AllModuleTypes.Screensaver);
 
-    if(moduleType == AllModuleTypes.LockedDesktop || moduleType == AllModuleTypes.Desktop || moduleType == AllModuleTypes.Screensaver)
-        url = GetPageUrl('ModulesOverviewFilterLDS') + `?moduleNameType=${moduleType}&status=${status}&stagingLive=${stagingLiveFilter}&startDate=${startDate}&endDate=${endDate}`;
+    var url = "";
+    var pageName = 'ModuleLDSViewTypeOverview';
+
+    if(isPSTRModules)
+        url = GetPageUrl('ModulePSTRTableOverview') + `?moduleNameType=${moduleType}&status=${status}&userType=${username}&startDate=${startDate}&endDate=${endDate}`;
+
+    if(isLDSModules)
+        url = GetPageUrl('ModuleLDSViewTypeOverview') + `?moduleNameType=${moduleType}&status=${status}&stagingLive=${stagingLiveFilter}&viewType=${viewType}&startDate=${startDate}&endDate=${endDate}`;
 
     LoadPartialViewWithLoader(url, "#ModuleOverviewTableContainer","#SecondaryLoader");
 }
@@ -80,126 +84,31 @@ function FilterModuleDataOverviewByStatus(moduleName, buttonId, status)
     var startDate = $(`#${moduleName}DateFromFilter`).val();
     var endDate = $(`#${moduleName}DateToFilter`).val();
     var stagingLiveFilter = $(`.filter-type-btn.btn-group-active.${moduleName}`).text(); 
+    var viewType = $(`.filter-view-btn.btn-group-active.${moduleName}`).text();
 
-    ModuleFilterButtonClick(buttonId, moduleName, status, username, startDate, endDate, stagingLiveFilter);
+    ModuleFilterButtonClick(buttonId, moduleName, status, username, startDate, endDate, stagingLiveFilter, viewType);
 }
 
-function FilterModuleDataOverviewByStagingLive(moduleName, buttonId, stagingOrLive)
+function FilterModuleDataOverviewByStagingLive(moduleType, buttonId, stagingOrLive)
 {
     $('.filter-type-btn').removeClass('btn-group-active');
     $(`#${buttonId}`).addClass('btn-group-active');
+
+    var statusBtn = $(`.filter-status-btn.btn-group-active.${moduleType}`); 
+    var status = statusBtn.text();
+    var btnId = statusBtn.attr("id");
+
+    FilterModuleDataOverviewByStatus(moduleType, btnId, status);
 }
 
-
-
-//popup module js
-let currentPopup = 1;
-let totalPopups = 9;
-
-
-function showPopup(popupNumber)
+function FilterModuleDataOverviewByViewType(moduleType, buttonId, viewType)
 {
-    for (let i = 1; i <= totalPopups; i++)
-    {
-        const popupElement = document.getElementById(`popup${i}`);
-        if (popupElement)
-        {
-            popupElement.style.display = i === popupNumber ? 'block' : 'none';
-        } else {
-            console.warn(`Popup ${i} not found`);
-        }
-    }
+    $('.filter-view-btn').removeClass('btn-group-active');
+    $(`#${buttonId}`).addClass('btn-group-active');
 
-    const pageNumberElement = document.getElementById('pageNumber');
-    if (pageNumberElement)
-    {
-        pageNumberElement.textContent = `Page ${popupNumber}`;
-    }
+     var statusBtn = $(`.filter-status-btn.btn-group-active.${moduleType}`); 
+    var status = statusBtn.text();
+    var btnId = statusBtn.attr("id");
 
-    const backBtn = document.getElementById('backBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const submitBtn = document.getElementById('submitBtn');
-    const previewBox = document.getElementById('preview-box');
-
-    if (backBtn && nextBtn && submitBtn && previewBox)
-    {
-        backBtn.style.display = popupNumber === 1 ? 'none' : 'inline-block';
-        previewBox.style.display = popupNumber <= 1 ? 'none' : 'inline-block';
-        nextBtn.style.display = popupNumber === totalPopups ? 'none' : 'inline-block';
-        submitBtn.style.display = popupNumber === totalPopups ? 'inline-block' : 'none';
-    }
-
-    // Show or hide the preview based on the page number
-   
-    updatePopupSidebar(popupNumber);
-}
-
-// Go to the next popup
-function nextPopup()
-{
-    if (currentPopup < totalPopups)
-    {
-        currentPopup++;
-        showPopup(currentPopup);
-    }
-}
-
-// Go to the previous popup
-function prevPopup()
-{
-    if (currentPopup > 1)
-    {
-        currentPopup--;
-        showPopup(currentPopup);
-    }
-}
-
-// Sidebar update logic
-function updatePopupSidebar(step)
-{
-    const sidebarLinks = document.querySelectorAll('.sidebar a');
-    sidebarLinks.forEach(link => link.classList.remove('active'));
-
-    const sidebarMap =
-    {
-        1: 'sidebar-link-type',
-        2: 'sidebar-skin',
-        3: 'sidebar-texts',
-        4: 'sidebar-times',
-        5: 'sidebar-displays',
-        6: 'sidebar-repeat',
-        7: 'sidebar-feedback',
-        8: 'sidebar-target-users',
-        9: 'sidebar-exposure-summary'
-    };
-
-    const currentSidebarLink = document.getElementById(sidebarMap[step]);
-    if (currentSidebarLink)
-    {
-        currentSidebarLink.classList.add('active');
-    }
-}
-
-
-document.addEventListener('DOMContentLoaded', () =>
-{
-    showPopup(currentPopup);
-    const previewBox = document.getElementById('preview-box');
-    if (currentPopup <= 1)
-    {
-
-        previewBox.style.display = 'none';
-    }
-    const backBtn = document.getElementById('backBtn');
-
-
-    if (backBtn)
-    {
-        backBtn.style.display = 'none';
-        previewBox.style.display = 'none';
-
-    }
-});
-
-    LoadPartialViewWithLoader(url, "#PopupOverviewTableContainer","#SecondaryLoader");
+    FilterModuleDataOverviewByStatus(moduleType, btnId, status);
 }

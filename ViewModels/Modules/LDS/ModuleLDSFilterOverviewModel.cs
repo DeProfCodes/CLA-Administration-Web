@@ -13,7 +13,7 @@ namespace CLA_Administration_Web.ViewModels.Modules.LDS
 
         public ModulesPages ModuleDetailsPage { get; set; }
 
-        public string FilterTitle { get; set; }
+        public ModuleFilterTitle FilterTitle { get; set; }
 
         public List<string> ColumnNames { get; set; }
 
