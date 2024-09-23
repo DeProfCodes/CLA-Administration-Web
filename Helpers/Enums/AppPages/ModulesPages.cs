@@ -12,11 +12,19 @@ namespace CLA_Administration_Web.Helpers.Enums.AppPages
         [Display(Name = "AllModules", ShortName = "")]
         AllModules,
 
-        [Display(Name = "ModulePSTRTableOverview", ShortName = "")]
+        //PSTR Modules: Popup, Survey, Tikcer, RSS
+        [Display(Name = "ModulePSTRTableOverview", ShortName = "PSTR")]
         ModulePSTRTableOverview,
 
-        [Display(Name = "ModuleLDSViewTypeOverview", ShortName = "")]
-        ModuleLDSViewTypeOverview,
+        //LDS Modules: Lockscreen, Desktop, Screensaver
+        [Display(Name = "ModuleLDSTableOverview", ShortName = "LDS")]
+        ModuleLDSTableOverview,
+
+        [Display(Name = "ModuleLDSCalendarOverview", ShortName = "LDS")]
+        ModuleLDSCalendarOverview,
+
+        [Display(Name = "ModuleLDSGanttOverview", ShortName = "LDS")]
+        ModuleLDSGanttOverview,
 
         //Content Library
         [Display(Name = "ContentLibraryCategories", ShortName = "ContentLibrary")]

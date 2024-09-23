@@ -1,6 +1,7 @@
 ﻿using CLA_Administration_Web.Helpers.Enums.AppPages;
 using CLA_Administration_Web.Helpers.Enums.Shared;
 using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
+using CLA_Administration_Web.Helpers.Shared;
 using CLA_Administration_Web.Services;
 using CLA_Administration_Web.ViewModels.Modules;
 using CLA_Administration_Web.ViewModels.Modules.LDS;
@@ -154,6 +155,57 @@ namespace CLA_Administration_Web.Helpers.Modules
             };
 
             return moduleFilterDataVm;
+        }
+
+        private static string GetGanttBarBackgroundColor(string effectiveDateFrom, string effectiveDateTo)
+        {
+            var startDate = TypesParserHelper.ParseDate(effectiveDateFrom);
+            var endDate = TypesParserHelper.ParseDate(effectiveDateTo);
+
+            var difference = (endDate.Date - startDate.Date).Days;
+
+            var cssBg = "";
+            
+            if (difference <= 5) cssBg = "#ff3131";
+            if (difference > 5 && difference <= 10) cssBg = "#ffff00";
+            if (difference > 10 && difference <= 15) cssBg = "#ffa500";
+            if (difference > 15 && difference <= 20) cssBg = "#1a9df1";
+            if (difference > 20 && difference <= 31) cssBg = "#16a637";
+
+            return cssBg;
+        }
+
+        public static int GetGanttChartHeight(int dataRowsCount)
+        {
+            double height = dataRowsCount * 40.0;
+
+            return (int)height;    
+        }
+
+        public static List<GanttChartDataModel> GetGanttChartData(List<ModuleLDSDataViewModel> filteredData)
+        {
+            var ganttData = new List<GanttChartDataModel>();
+            int count = 40;
+            
+            foreach (var data in filteredData)
+            {
+                var gantModel = new GanttChartDataModel
+                {
+                    x = SharedFunctions.StringTruncate(data.ContentDescription, 20),
+                    y = new List<long> 
+                    { 
+                        SharedFunctions.GetTimeInMilliseconds($"{data.EffectiveFrom} {data.TimeslotFrom}"), 
+                        SharedFunctions.GetTimeInMilliseconds($"{data.EffectiveTo} {data.TimeslotTo}") 
+                    },
+                    fillColor = GetGanttBarBackgroundColor(data.EffectiveFrom, data.EffectiveTo)
+                };
+                ganttData.Add(gantModel);
+
+                count--;
+                if (count == 0) break;
+            }
+
+            return ganttData;
         }
     }
 }

@@ -67,14 +67,23 @@ function ReloadFilteredModuleOverview(moduleType, status, username, startDate, e
     var isLDSModules = (moduleType == AllModuleTypes.LockedDesktop || moduleType == AllModuleTypes.Desktop || moduleType == AllModuleTypes.Screensaver);
 
     var url = "";
-    var pageName = 'ModuleLDSViewTypeOverview';
-
+    var pageName = 'ModuleLDSTableOverview';
+    
+    viewType = viewType.trim().toLowerCase();
+    
+    if(isLDSModules)
+    {
+        if(viewType == "tabular") pageName = "ModuleLDSTableOverview";
+        if(viewType == "calendar") pageName = "ModuleLDSCalendarOverview";
+        if(viewType == "gantt") pageName = "ModuleLDSGanttOverview";
+    }
+    
     if(isPSTRModules)
         url = GetPageUrl('ModulePSTRTableOverview') + `?moduleNameType=${moduleType}&status=${status}&userType=${username}&startDate=${startDate}&endDate=${endDate}`;
 
     if(isLDSModules)
-        url = GetPageUrl('ModuleLDSViewTypeOverview') + `?moduleNameType=${moduleType}&status=${status}&stagingLive=${stagingLiveFilter}&viewType=${viewType}&startDate=${startDate}&endDate=${endDate}`;
-
+        url = GetPageUrl(pageName) + `?moduleNameType=${moduleType}&status=${status}&stagingLive=${stagingLiveFilter}&startDate=${startDate}&endDate=${endDate}`;
+    
     LoadPartialViewWithLoader(url, "#ModuleOverviewTableContainer","#SecondaryLoader");
 }
 
@@ -101,15 +110,15 @@ function FilterModuleDataOverviewByStagingLive(moduleType, buttonId, stagingOrLi
     FilterModuleDataOverviewByStatus(moduleType, btnId, status);
 }
 
-function FilterModuleDataOverviewByViewType(moduleType, buttonId, viewType)
+function FilterModuleDataOverviewByViewType(moduleType, buttonId)
 {
     $('.filter-view-btn').removeClass('btn-group-active');
     $(`#${buttonId}`).addClass('btn-group-active');
 
-     var statusBtn = $(`.filter-status-btn.btn-group-active.${moduleType}`); 
+    var statusBtn = $(`.filter-status-btn.btn-group-active.${moduleType}`); 
     var status = statusBtn.text();
     var btnId = statusBtn.attr("id");
-
+    
     FilterModuleDataOverviewByStatus(moduleType, btnId, status);
 }
 

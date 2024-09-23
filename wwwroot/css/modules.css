@@ -189,6 +189,32 @@
 {
     margin-left: 9px;
 }
+#GanttChartLegend
+{
+    border:1px solid grey;
+    padding: 3px;
+}
+.gantt-color-block
+{
+    padding:1px;
+    border:1px solid black;
+    width:15px;
+    height:15px;
+}
+.gantt-color-block-text
+{
+    color:gray;
+    font-style:italic;
+    font-size:12px;
+    margin-top: -1px;
+    margin-left:2px;
+}
+.gantt-legend-separator
+{
+    margin-left:5px;
+    margin-right:5px;
+    margin-top: -4px;
+}
 
 @media screen and (max-width:1950px)
 {

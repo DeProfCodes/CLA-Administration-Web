@@ -7,6 +7,9 @@ namespace CLA_Administration_Web.Helpers.Enums.Shared
         [Display(Name = "")]
         None,
 
+        [Display(Name = "All")]
+        All,
+
         [Display(Name = "Active")]
         Active,
 
@@ -14,9 +17,6 @@ namespace CLA_Administration_Web.Helpers.Enums.Shared
         Expired,
 
         [Display(Name = "Pending")]
-        Pending,
-
-        [Display(Name = "Custom")]
-        Custom,
+        Pending
     }
 }

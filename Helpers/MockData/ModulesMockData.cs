@@ -1,4 +1,5 @@
 ﻿using CLA_Administration_Web.Helpers.Enums.Shared;
+using CLA_Administration_Web.Helpers.Shared;
 using CLA_Administration_Web.ViewModels.Modules.LDS;
 using CLA_Administration_Web.ViewModels.Modules.PSTR;
 using CLA_Administration_Web.ViewModels.Shared;
@@ -238,12 +239,12 @@ namespace CLA_Administration_Web.Helpers.MockData
         {
             var random = new Random();
             var today = DateTime.Today;
-            double sameMonthProbability = 0.5;
+            double sameMonthProbability = 1.00;
 
             var startDate = DateTime.Now.AddMonths(-9);
             var endDate = DateTime.Now.AddMonths(9);
 
-            int caseSelector = (index <= 17 ? 0 : (index <= 35 ? 1 : 2));
+            int caseSelector = random.Next(3);
 
             switch (caseSelector)
             {
@@ -296,17 +297,17 @@ namespace CLA_Administration_Web.Helpers.MockData
             DateTime effectiveFrom = new();
             DateTime effectiveTo = new();
 
-            for (int i = 1; i <= 250; i++)
+            for (int i = 1; i <= 1000; i++)
             {
                 GetEffectiveDates(ref effectiveFrom, ref effectiveTo, i);
 
                 var item = new ModuleLDSDataViewModel
                 {
                     Id = i,
-                    CategoryName = RandomString(random, 1, 2),
-                    CategoryDescription = RandomString(random, 3, 5),
-                    ContentType = contentType[random.Next(contentType.Count)],
-                    ContentDescription = RandomString(random, 1, 2),
+                    CategoryName = SharedFunctions.CapitalizeFirst(RandomString(random, 1, 2)),
+                    CategoryDescription = SharedFunctions.CapitalizeFirst(RandomString(random, 3, 5)),
+                    ContentType = SharedFunctions.CapitalizeFirst(contentType[random.Next(contentType.Count)]),
+                    ContentDescription = SharedFunctions.CapitalizeFirst(RandomString(random, 1, 2)),
                     Duration = random.Next(0,61),
                     EffectiveFrom = effectiveFrom.ToString("yyyy/MM/dd"),
                     EffectiveTo = effectiveTo.ToString("yyyy/MM/dd"),

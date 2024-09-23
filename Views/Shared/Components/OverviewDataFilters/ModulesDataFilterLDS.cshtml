@@ -2,6 +2,7 @@
 
 @using CLACommonFunctionsLibrary_NET.Helpers.Enums
 @using CLA_Administration_Web.Helpers.Enums.AppPages
+@using CLA_Administration_Web.Helpers.Enums.Shared
 @model CLA_Administration_Web.ViewModels.Modules.LDS.ModuleLDSOverviewFilterViewModel
 
 @{
@@ -75,20 +76,30 @@
                         <p class="theme-txt-clr overview-filter-title2" id="TypeFilterTitle">Type</p>
                         <div class="btn-group w-auto overview-filter-btn-group" role="group" aria-label="Status filter" id="TypeStagingLiveBtns">
                             <button class="btn module-filter-btn-group filter-type-btn btn-group-active @moduleName"
-                                    onclick="FilterModuleDataOverviewByStagingLive('@moduleName','@stagingFilterBtn', 'staging')" id="@stagingFilterBtn">Staging</button>
+                                    onclick="FilterModuleDataOverviewByStagingLive('@moduleName','@stagingFilterBtn', '@StagingLiveType.Staging')" id="@stagingFilterBtn">
+                                Staging
+                            </button>
                             <button class="btn module-filter-btn-group filter-type-btn @moduleName"
-                                    onclick="FilterModuleDataOverviewByStagingLive('@moduleName','@liveFilterBtn', 'live')" id="@liveFilterBtn">Live</button>
+                                    onclick="FilterModuleDataOverviewByStagingLive('@moduleName','@liveFilterBtn', '@StagingLiveType.Live')" id="@liveFilterBtn">
+                                Live
+                            </button>
                         </div>
                     </div>
                     <div class="row mb-3 mb-md-0 mx-auto mt-1">  
                         <p class="theme-txt-clr overview-filter-title2" id="StatusFilterTitle">View</p>
                         <div class="btn-group w-auto overview-filter-btn-group" role="group" aria-label="Status filter" id="ViewFilterBtns">
                             <button class="btn module-filter-btn-group btn-group-active filter-view-btn @moduleName"
-                                    onclick="FilterModuleDataOverviewByViewType('@moduleName','@tabularViewFilterBtn', 'tabular')" id="@tabularViewFilterBtn">Tabular</button>
+                                    onclick="FilterModuleDataOverviewByViewType('@moduleName','@tabularViewFilterBtn')" id="@tabularViewFilterBtn">
+                                Tabular
+                            </button>
                             <button class="btn module-filter-btn-group filter-view-btn @moduleName"
-                                    onclick="FilterModuleDataOverviewByViewType('@moduleName','@calendarViewFilterBtn', 'calendar')" id="@calendarViewFilterBtn">Calendar</button>
+                                    onclick="FilterModuleDataOverviewByViewType('@moduleName','@calendarViewFilterBtn')" id="@calendarViewFilterBtn">
+                                Calendar
+                            </button>
                             <button class="btn module-filter-btn-group filter-view-btn @moduleName"
-                                    onclick="FilterModuleDataOverviewByViewType('@moduleName','@ganttViewFilterBtn', 'gant')" id="@ganttViewFilterBtn">Gantt</button>
+                                    onclick="FilterModuleDataOverviewByViewType('@moduleName','@ganttViewFilterBtn')" id="@ganttViewFilterBtn"> 
+                                Gantt
+                            </button>
                         </div>
                     </div>
                 </div>
