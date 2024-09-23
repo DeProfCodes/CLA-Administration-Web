@@ -4,8 +4,10 @@ let apexChart;
 function CreateGanttChart(chartId, data, height)
 {
     if(apexChart != null)
+    {
         apexChart.destroy();
-
+        apexChart = null;
+    }
     var options = 
     {
         series: 
