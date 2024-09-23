@@ -2,6 +2,7 @@ using CLA_Administration_Web.Helpers.Constants;
 using CLA_Administration_Web.Helpers.Enums.Shared;
 using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
 using CLA_Administration_Web.Helpers.Modules;
+using CLA_Administration_Web.Helpers.Shared;
 using CLA_Administration_Web.Models;
 using CLA_Administration_Web.Services;
 using CLA_Administration_Web.Services.Modules;
@@ -9,6 +10,7 @@ using CLA_Administration_Web.ViewModels.Modules;
 using CLA_Administration_Web.ViewModels.Modules.LDS;
 using CLA_Administration_Web.ViewModels.Modules.PSTR;
 using CLACommonFunctionsLibrary_NET.Helpers;
+using CLACommonFunctionsLibrary_NET.Helpers.Enums;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -56,26 +58,38 @@ namespace CLA_Administration_Web.Controllers
 
         #region Modules LDS: Lockscreen, Desktops, Screensavers
 
-        public async Task<IActionResult> ModuleLDSViewTypeOverview(ModuleNamesType moduleNameType, string status, StagingLiveType stagingLive, OverviewDisplayType viewType, string startDate, string endDate)
+        public async Task<IActionResult> ModuleLDSTableOverview(ModuleNamesType moduleNameType, string status, StagingLiveType stagingLive, string startDate, string endDate)
         {
-            var viewPage = "";
-
-            if (viewType == OverviewDisplayType.Tabular)
-            {
-                viewPage = AppPagesLinks.Modules.ModuleLDSTableOverviewPageLink;
-            }
-            else if (viewType == OverviewDisplayType.Calendar)
-            {
-                viewPage = AppPagesLinks.Modules.ModuleLDSCalendarOverviewPageLink;
-            }
-            else if (viewType == OverviewDisplayType.Gantt)
-            {
-                viewPage = AppPagesLinks.Modules.ModuleLDSGanttOverviewPageLink;
-            }
-
             var moduleFilterDataVm = ModulesHelper.GetModuleLDSFilterOverview(moduleNameType, stagingLive, status, startDate, endDate);
 
-            return PartialView(viewPage, moduleFilterDataVm);
+            return PartialView(AppPagesLinks.Modules.ModuleLDSTableOverviewPageLink, moduleFilterDataVm);
+        }
+
+        public async Task<IActionResult> ModuleLDSCalendarOverview(ModuleNamesType moduleNameType, string status, StagingLiveType stagingLive, string startDate, string endDate)
+        {
+            var moduleFilterDataVm = ModulesHelper.GetModuleLDSFilterOverview(moduleNameType, stagingLive, status, startDate, endDate);
+
+            return PartialView(AppPagesLinks.Modules.ModuleLDSCalendarOverviewPageLink, moduleFilterDataVm);
+        }
+
+        public async Task<IActionResult> ModuleLDSGanttOverview(ModuleNamesType moduleNameType, string status, StagingLiveType stagingLive, string startDate, string endDate)
+        {
+            var moduleFilterDataVm = ModulesHelper.GetModuleLDSFilterOverview(moduleNameType, stagingLive, status, startDate, endDate);
+
+            var data = LocalDataStorage.GetLocalModuleLDSAllData(moduleNameType, stagingLive);
+
+            var filteredData = ModulesHelper.FilterModulesLDSData(data, status, startDate, endDate);
+
+            var ganttData = ModulesHelper.GetGanttChartData(filteredData);
+            var ganttChartVM = new GanttChartDataViewModel
+            {
+                ModuleName = moduleNameType,
+                FilterTitle = ModulesHelper.GetModuleOverviewTitleText(moduleNameType, status, stagingLive, "All", startDate, endDate),
+                GanttData = ganttData,
+                GanttChartHeight = ModulesHelper.GetGanttChartHeight(ganttData.Count)
+            };
+
+            return PartialView(AppPagesLinks.Modules.ModuleLDSGanttOverviewPageLink, ganttChartVM);
         }
 
 

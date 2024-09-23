@@ -45,8 +45,10 @@ namespace CLA_Administration_Web.Helpers.Constants
             public static string ModulePSTRTableOverview = $"/{modulesController}/{ModulesPages.ModulePSTRTableOverview.GetDisplayName()}";
             
             //LDS Modules: Lockscreen, Desktop, Screensaver
-            public static string ModuleLDSViewTypeOverview = $"/{modulesController}/{ModulesPages.ModuleLDSViewTypeOverview.GetDisplayName()}";
-            
+            public static string ModuleLDSTableOverview = $"/{modulesController}/{ModulesPages.ModuleLDSTableOverview.GetDisplayName()}";
+            public static string ModuleLDSCalendarOverview = $"/{modulesController}/{ModulesPages.ModuleLDSCalendarOverview.GetDisplayName()}";
+            public static string ModuleLDSGanttOverview = $"/{modulesController}/{ModulesPages.ModuleLDSGanttOverview.GetDisplayName()}";
+
             //Content Library
             public static string ContentLibraryCategories = $"/{modulesController}/{ModulesPages.ContentLibraryCategories.GetDisplayName()}";
             public static string ContentLibraryContent = $"/{modulesController}/{ModulesPages.ContentLibraryContent.GetDisplayName()}";
