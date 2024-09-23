@@ -5,7 +5,24 @@
     <!-- Top Page Navigation Breadcrumb -->
     @await Component.InvokeAsync("Breadcrumbs", new { page = ModulesPages.DesktopOverview })
 
+      <!-- ModuleFilter Component -->
+    @await Component.InvokeAsync("OverviewDataFilters", new { page = ModulesPages.DesktopOverview })
+
     <!-- ModuleFilter Component -->
-    @await Component.InvokeAsync("OverviewDataFilters", new { page = ModulesPages.DesktopAddNew })
+    @await Component.InvokeAsync("OverviewDataTables", new { page = ModulesPages.DesktopOverview })
 
 </div>
+
+<script>
+
+    $(document).ready(function ()
+    {
+        LoadDesktopsDefaultOverviewData();
+    });
+
+    function LoadDesktopsDefaultOverviewData()
+    {
+        FilterModuleDataOverviewByStatus('Desktop', `ActiveDesktopBtnFilter`, AllStatusTypes.Active);
+    }
+
+</script>

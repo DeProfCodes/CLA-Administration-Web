@@ -1,4 +1,6 @@
-﻿using CLA_Administration_Web.ViewModels.Modules;
+﻿using CLA_Administration_Web.Helpers.Enums.Shared;
+using CLA_Administration_Web.ViewModels.Modules.LDS;
+using CLA_Administration_Web.ViewModels.Modules.PSTR;
 
 namespace CLA_Administration_Web.Services.Modules
 {
@@ -6,8 +8,31 @@ namespace CLA_Administration_Web.Services.Modules
     {
         #region Popups
         
-        public Task<List<PopupViewModel>> GetAllPopupsData();
-        
+        public Task<List<ModulePSTRDataViewModel>> GetAllPopupsData();
+
         #endregion
+
+        #region Tickers
+        
+        public Task<List<ModulePSTRDataViewModel>> GetAllTickersData();
+
+
+        #endregion
+
+        #region Survey
+        
+        public Task<List<ModulePSTRDataViewModel>> GetAllSurveysData();
+
+        public Task<List<SurveyQuestionViewModel>> GetAllSurveysQuestions();
+
+        public Task<List<SurveyQuestionViewModel>> GetSurveyAllQuestions(int surveyId);
+
+        #endregion
+
+        public Task<List<ModuleLDSDataViewModel>> GetAllScreensaversData(StagingLiveType stagingLiveType);
+
+        public Task<List<ModuleLDSDataViewModel>> GetAllLockedDesktopsData(StagingLiveType stagingLiveType);
+
+        public Task<List<ModuleLDSDataViewModel>> GetAllDesktopsData(StagingLiveType stagingLiveType);
     }
 }

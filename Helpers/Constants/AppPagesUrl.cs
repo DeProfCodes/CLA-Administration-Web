@@ -39,6 +39,8 @@ namespace CLA_Administration_Web.Helpers.Constants
         public class Modules
         {
             public static string AllModules = $"/{modulesController}/{ModulesPages.AllModules.GetDisplayName()}";
+            public static string ModulesOverviewFilterPSTR = $"/{modulesController}/{ModulesPages.ModulesOverviewFilterPSTR.GetDisplayName()}";
+            public static string ModulesOverviewFilterLDS = $"/{modulesController}/{ModulesPages.ModulesOverviewFilterLDS.GetDisplayName()}";
 
             public static string ContentLibraryCategories = $"/{modulesController}/{ModulesPages.ContentLibraryCategories.GetDisplayName()}";
             public static string ContentLibraryContent = $"/{modulesController}/{ModulesPages.ContentLibraryContent.GetDisplayName()}";
@@ -53,13 +55,17 @@ namespace CLA_Administration_Web.Helpers.Constants
             public static string ScreensaverAddNew = $"/{modulesController}/{ModulesPages.ScreensaverAddNew.GetDisplayName()}";
 
             public static string PopupOverview = $"/{modulesController}/{ModulesPages.PopupOverview.GetDisplayName()}";
-            public static string PopupOverviewFilter = $"/{modulesController}/{ModulesPages.PopupOverviewFilter.GetDisplayName()}";
+            public static string PopupDetails = $"/{modulesController}/{ModulesPages.PopupDetails.GetDisplayName()}";
             public static string PopupAddNew = $"/{modulesController}/{ModulesPages.PopupAddNew.GetDisplayName()}";
 
             public static string SurveyOverview = $"/{modulesController}/{ModulesPages.SurveyOverview.GetDisplayName()}";
+            public static string SurveyDetails = $"/{modulesController}/{ModulesPages.SurveyDetails.GetDisplayName()}";
+            public static string SurveyQuestionsOverview = $"/{modulesController}/{ModulesPages.SurveyQuestionsOverview.GetDisplayName()}";
+            public static string SurveyQuestionDetails = $"/{modulesController}/{ModulesPages.SurveyQuestionDetails.GetDisplayName()}";
             public static string SurveyAddNew = $"/{modulesController}/{ModulesPages.SurveyAddNew.GetDisplayName()}";
 
             public static string TickerOverview = $"/{modulesController}/{ModulesPages.TickerOverview.GetDisplayName()}";
+            public static string TickerDetails = $"/{modulesController}/{ModulesPages.TickerDetails.GetDisplayName()}";
             public static string TickerAddNew = $"/{modulesController}/{ModulesPages.TickerAddNew.GetDisplayName()}";
 
             public static string RSSOverview = $"/{modulesController}/{ModulesPages.RSSOverview.GetDisplayName()}";

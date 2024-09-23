@@ -1,0 +1,100 @@
+﻿<!-- Modules Data Table Component for PSTR Modules : Popups, Surveys, Tickers, RSS -->
+
+
+@using CLACommonFunctionsLibrary_NET.Helpers.Enums
+@using CLA_Administration_Web.Helpers.Enums.AppPages
+@using CLA_Administration_Web.Helpers.Enums.Shared.PageNames
+
+@model CLA_Administration_Web.ViewModels.Modules.LDS.ModuleLDSFilterOverviewModel
+
+@{
+    var moduleName = Model.ModuleName.GetDisplayName();
+}
+
+<h3 class="w-100 text-center theme-txt-clr overview-table-caption">
+    <span id="ModuleOverviewTableCaption">@Model.FilterTitle</span>
+</h3>
+<table id="ModuleOverviewDataTable" class="table table-striped table-hover align-middle" style="font-size:12px">
+    <thead>
+        <tr>
+            <th class="text-center">Category Name</th>
+            <th class="text-center">Category Description</th>
+            <th class="text-center">Content Type</th>
+            <th class="text-center">View</th>
+            <th class="text-center">Content Description</th>
+            <th class="text-center">Duration</th>
+            <th class="text-center">Eff From</th>
+            <th class="text-center">Eff To</th>
+            <th class="text-center">From</th>
+            <th class="text-center">To</th>
+            <th class="text-center">Status</th>
+            <th class="text-center">Users</th>
+            <th class="text-center">Targeting</th>
+            <th class="text-center">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var module in Model.ModulesData)
+        {
+            <tr>
+                <td class="text-center"><p class="module-dt-header-text">@module.CategoryName</p></td>
+                <td class="text-center"><p class="module-dt-header-text">@module.CategoryDescription</p></td>
+                <td class="text-center">@module.ContentType</td>
+                <td><button class="btn btn-sm btn-primary">Open</button></td>
+                <td class="text-center"><p class="module-dt-header-text">@module.ContentDescription</p></td>
+                <td class="text-center">@module.Duration</td>
+                <td>@module.EffectiveFrom</td>
+                <td>@module.EffectiveTo</td>
+                <td>@module.TimeslotFrom</td>
+                <td>@module.TimeslotTo</td>
+                <td><span class="@module.Status.CssClass">@module.Status.StatusType.GetDisplayName()</span></td>
+                <td><button class="btn btn-sm btn-info">View</button></td>
+                <td><button class="btn btn-sm btn-success">View</button></td>
+                <td>
+                    <button class="btn btn-info btn-sm mx-1" onclick="OpenModuleDetails('@module.Id')">Open</button>
+                    <button class="btn btn-secondary btn-sm mx-1">Edit</button>
+                    <button class="btn btn-danger btn-sm mx-1">Remove</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<!-- DataTables JS -->
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+
+<script>
+
+    $(document).ready(function ()
+    {
+        SetDataTableData();
+    });
+
+    function SetDataTableData()
+    {
+        if ('@Model.ModuleName' == '@ModuleNamesType.Screensaver')
+        {
+            screensaversDataTable = $('#ModuleOverviewDataTable').DataTable();
+        }
+        else if ('@Model.ModuleName' == '@ModuleNamesType.LockedDesktop')
+        {
+            lockedDesktopsDataTable = $('#ModuleOverviewDataTable').DataTable();
+        }
+        else if ('@Model.ModuleName' == '@ModuleNamesType.Desktop')
+        {
+            desktopsDataTable = $('#ModuleOverviewDataTable').DataTable();
+        }
+    }
+
+    function OpenModuleDetails(itemId)
+    {
+        OpenPage('@Model.ModuleDetailsPage', itemId);
+    }
+
+    function OpenSurveyQuestions(surveyId)
+    {
+        OpenPage('@ModulesPages.SurveyQuestionsOverview', surveyId);
+    }
+
+</script>

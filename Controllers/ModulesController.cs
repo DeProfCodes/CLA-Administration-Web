@@ -1,10 +1,13 @@
 using CLA_Administration_Web.Helpers.Constants;
 using CLA_Administration_Web.Helpers.Enums.Shared;
+using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
 using CLA_Administration_Web.Helpers.Modules;
 using CLA_Administration_Web.Models;
 using CLA_Administration_Web.Services;
 using CLA_Administration_Web.Services.Modules;
 using CLA_Administration_Web.ViewModels.Modules;
+using CLA_Administration_Web.ViewModels.Modules.LDS;
+using CLA_Administration_Web.ViewModels.Modules.PSTR;
 using CLACommonFunctionsLibrary_NET.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -23,10 +26,44 @@ namespace CLA_Administration_Web.Controllers
             _logger = logger;
         }
 
+        #region All
+
         public IActionResult AllModules()
         {
             return PartialView(AppPagesLinks.Modules.AllModulesPageLink);
         }
+
+        public async Task<IActionResult> ModulesOverviewFilterPSTR(ModuleNamesType moduleNameType, string status, string userType, string startDate, string endDate)
+        {
+            var dataSource = LocalDataStorage.GetLocalModulePSTRAllData(moduleNameType);
+
+            var moduleFilterDataVm = new ModulePSTRFilterOverviewModel
+            {
+                ModuleName = moduleNameType,
+                ModuleDetailsPage = ModulesHelper.GetModuleDetailsPage(moduleNameType),
+                FilterTitle = ModulesHelper.GetModuleOverviewTitleText(moduleNameType, status, userType, startDate, endDate),
+                ModulesData = ModulesHelper.FilterModulesPSTRData(dataSource, status, userType, startDate, endDate)
+            };
+
+            return PartialView(AppPagesLinks.Modules.ModulesPSTRFilterOverviewPageLink, moduleFilterDataVm);
+        }
+
+        public async Task<IActionResult> ModulesOverviewFilterLDS(ModuleNamesType moduleNameType, string status, StagingLiveType stagingLive, string startDate, string endDate)
+        {
+            var dataSource = LocalDataStorage.GetLocalModuleLDSAllData(moduleNameType, stagingLive);
+
+            var moduleFilterDataVm = new ModuleLDSFilterOverviewModel
+            {
+                ModuleName = moduleNameType,
+                ModuleDetailsPage = ModulesHelper.GetModuleDetailsPage(moduleNameType),
+                FilterTitle = ModulesHelper.GetModuleOverviewTitleText(moduleNameType, status, null, startDate, endDate),
+                ModulesData = ModulesHelper.FilterModulesLDSData(dataSource, status, startDate, endDate)
+            };
+
+            return PartialView(AppPagesLinks.Modules.ModulesLDSFilterOverviewPageLink, moduleFilterDataVm);
+        }
+
+        #endregion
 
         public IActionResult ContentLibraryCategories()
         {
@@ -38,8 +75,27 @@ namespace CLA_Administration_Web.Controllers
             return PartialView(AppPagesLinks.Modules.ContentLibraryContentsPageLink);
         }
 
-        public IActionResult DesktopOverview()
+        public async Task<IActionResult> DesktopOverview()
         {
+            var desktopStaging = await _moduleService.GetAllDesktopsData(StagingLiveType.Staging);
+            var desktopLive = await _moduleService.GetAllDesktopsData(StagingLiveType.Live);
+
+            desktopStaging.ForEach(s =>
+            {
+                s.Status = ModulesHelper.GetModuleStatus(s.EffectiveFrom, s.EffectiveTo);
+                s.EffectiveFromDate = TypesParserHelper.ParseDate(s.EffectiveFrom);
+                s.EffectiveToDate = TypesParserHelper.ParseDate(s.EffectiveTo);
+            });
+            desktopLive.ForEach(s =>
+            {
+                s.Status = ModulesHelper.GetModuleStatus(s.EffectiveFrom, s.EffectiveTo);
+                s.EffectiveFromDate = TypesParserHelper.ParseDate(s.EffectiveFrom);
+                s.EffectiveToDate = TypesParserHelper.ParseDate(s.EffectiveTo);
+            });
+
+            LocalDataStorage.UpdateDesktopsData(desktopStaging, StagingLiveType.Staging);
+            LocalDataStorage.UpdateDesktopsData(desktopLive, StagingLiveType.Live);
+
             return PartialView(AppPagesLinks.Modules.DesktopOverviewPageLink);
         }
 
@@ -48,8 +104,27 @@ namespace CLA_Administration_Web.Controllers
             return PartialView(AppPagesLinks.Modules.DesktopAddNewPageLink);
         }
 
-        public IActionResult LockedDesktopOverview()
+        public async Task<IActionResult> LockedDesktopOverview()
         {
+            var lockedDesktopStaging = await _moduleService.GetAllLockedDesktopsData(StagingLiveType.Staging);
+            var lockedDesktopLive = await _moduleService.GetAllLockedDesktopsData(StagingLiveType.Live);
+
+            lockedDesktopStaging.ForEach(s =>
+            {
+                s.Status = ModulesHelper.GetModuleStatus(s.EffectiveFrom, s.EffectiveTo);
+                s.EffectiveFromDate = TypesParserHelper.ParseDate(s.EffectiveFrom);
+                s.EffectiveToDate = TypesParserHelper.ParseDate(s.EffectiveTo);
+            });
+            lockedDesktopLive.ForEach(s =>
+            {
+                s.Status = ModulesHelper.GetModuleStatus(s.EffectiveFrom, s.EffectiveTo);
+                s.EffectiveFromDate = TypesParserHelper.ParseDate(s.EffectiveFrom);
+                s.EffectiveToDate = TypesParserHelper.ParseDate(s.EffectiveTo);
+            });
+
+            LocalDataStorage.UpdateLockedDesktopsData(lockedDesktopStaging, StagingLiveType.Staging);
+            LocalDataStorage.UpdateLockedDesktopsData(lockedDesktopLive, StagingLiveType.Live);
+
             return PartialView(AppPagesLinks.Modules.LockedDesktopOverviewPageLink);
         }
 
@@ -58,8 +133,27 @@ namespace CLA_Administration_Web.Controllers
             return PartialView(AppPagesLinks.Modules.LockedDesktopAddNewPageLink);
         }
 
-        public IActionResult ScreensaverOverview()
+        public async Task<IActionResult> ScreensaverOverview()
         {
+            var screensaversStaging = await _moduleService.GetAllScreensaversData(StagingLiveType.Staging);
+            var screensaversLive = await _moduleService.GetAllScreensaversData(StagingLiveType.Live);
+            
+            screensaversStaging.ForEach(s =>
+            {
+                s.Status = ModulesHelper.GetModuleStatus(s.EffectiveFrom, s.EffectiveTo);
+                s.EffectiveFromDate = TypesParserHelper.ParseDate(s.EffectiveFrom);
+                s.EffectiveToDate = TypesParserHelper.ParseDate(s.EffectiveTo);
+            });
+            screensaversLive.ForEach(s =>
+            {
+                s.Status = ModulesHelper.GetModuleStatus(s.EffectiveFrom, s.EffectiveTo);
+                s.EffectiveFromDate = TypesParserHelper.ParseDate(s.EffectiveFrom);
+                s.EffectiveToDate = TypesParserHelper.ParseDate(s.EffectiveTo);
+            });
+
+            LocalDataStorage.UpdateScreensaversData(screensaversStaging, StagingLiveType.Staging);
+            LocalDataStorage.UpdateScreensaversData(screensaversLive, StagingLiveType.Live);
+
             return PartialView(AppPagesLinks.Modules.ScreensaverOverviewPageLink);
         }
 
@@ -86,15 +180,11 @@ namespace CLA_Administration_Web.Controllers
             return PartialView(AppPagesLinks.Modules.PopupOverviewPageLink, popupDataViewModel);
         }
 
-        public async Task<IActionResult> _FilterPopupsOverview(string status, string userType, string startDate, string endDate)
+        public async Task<IActionResult> PopupDetails(int popupId)
         {
-            Thread.Sleep(2000);
-            var popupFilterDataVm = new PopupFilterOverviewModel
-            {
-                FilterTitle = ModulesHelper.GetPopupOverviewText(status, userType, startDate, endDate),
-                PopupsData = ModulesHelper.FilterPopupsData(LocalDataStorage.AllPopupData, status, userType, startDate, endDate)
-            };
-            return PartialView(AppPagesLinks.Modules.PopupsFilterOverviewPageLink, popupFilterDataVm);
+            var popupDetails = LocalDataStorage.StagingData.AllPopupData.Where(x => x.Id == popupId).FirstOrDefault();  
+
+            return PartialView(AppPagesLinks.Modules.PopupDetailsPageLink, popupDetails);
         }
 
         public IActionResult AddNewPopup()
@@ -104,24 +194,96 @@ namespace CLA_Administration_Web.Controllers
 
         #endregion
 
-        public IActionResult SurveyOverview()
+        #region Survey
+
+        public async Task<IActionResult> SurveyOverview()
         {
+            var surveyDataViewModel = await _moduleService.GetAllTickersData();
+            var allSurveyQuestions = await _moduleService.GetAllSurveysQuestions();
+
+            surveyDataViewModel.ForEach(s =>
+            {
+                s.Status = ModulesHelper.GetModuleStatus(s.EffectiveFrom, s.EffectiveTo);
+                s.EffectiveFromDate = TypesParserHelper.ParseDate(s.EffectiveFrom);
+                s.EffectiveToDate = TypesParserHelper.ParseDate(s.EffectiveTo);
+            });
+
+            LocalDataStorage.UpdateSurveysData(surveyDataViewModel);
+            LocalDataStorage.UpdateSurveysQuestions(allSurveyQuestions);
+
             return PartialView(AppPagesLinks.Modules.SurveyOverviewPageLink);
         }
 
-        public IActionResult SurveyAddNew()
+        public async Task<IActionResult> SurveyDetails(int surveyId)
+        {
+            var surveyDetails = LocalDataStorage.StagingData.AllSurveysData.Where(x => x.Id == surveyId).FirstOrDefault();
+
+            return PartialView(AppPagesLinks.Modules.SurveyDetailsPageLink, surveyDetails);
+        }
+
+        public IActionResult SurveyQuestionsOverview(int surveyId)
+        {
+            var surveyQuestionsOverviewVM = new SurveyQuestionsOverviewViewModel
+            {
+                SurveyId = surveyId,
+                SurveyQuestions = LocalDataStorage.StagingData.AllSurveyQuestions.Where(x => x.SurveyId == surveyId).ToList(),
+            };
+            return PartialView(AppPagesLinks.Modules.SurveyQuestionsOverviewPageLink, surveyQuestionsOverviewVM);
+        }
+
+        public IActionResult SurveyQuestionDetails(int surveyId, int questionId)
+        {
+            var surveyQuestionInfo = LocalDataStorage.StagingData.AllSurveyQuestions.FirstOrDefault(x => x.SurveyId == surveyId && x.QuestionId == questionId);
+
+            return PartialView(AppPagesLinks.Modules.SurveyQuestionDetailsPageLink, surveyQuestionInfo);
+        }
+
+        public IActionResult AddNewSurvey()
         {
             return PartialView(AppPagesLinks.Modules.SurveyAddNewPageLink);
         }
 
-        public IActionResult TickerOverview()
+        #endregion
+
+        #region Ticker
+        public async Task<IActionResult> TickerOverview()
         {
-            return PartialView(AppPagesLinks.Modules.TickerOverviewPageLink);
+            var tickerDataViewModel = await _moduleService.GetAllTickersData();
+
+            tickerDataViewModel.ForEach(t =>
+            {
+                t.Status = ModulesHelper.GetModuleStatus(t.EffectiveFrom, t.EffectiveTo);
+                t.EffectiveFromDate = TypesParserHelper.ParseDate(t.EffectiveFrom);
+                t.EffectiveToDate = TypesParserHelper.ParseDate(t.EffectiveTo);
+            });
+
+            LocalDataStorage.UpdateTickersData(tickerDataViewModel);
+
+            return PartialView(AppPagesLinks.Modules.TickerOverviewPageLink, tickerDataViewModel);
         }
 
-        public IActionResult TickerAddNew()
+        public async Task<IActionResult> TickerDetails(int tickerId)
+        {
+            var tickerDetails = LocalDataStorage.StagingData.AllTickerData.Where(x => x.Id == tickerId).FirstOrDefault();
+
+            return PartialView(AppPagesLinks.Modules.TickerDetailsPageLink, tickerDetails);
+        }
+        
+        public IActionResult AddNewTicker()
         {
             return PartialView(AppPagesLinks.Modules.TickerAddNewPageLink);
+        }
+
+        #endregion
+
+        public IActionResult RSSOverview()
+        {
+            return PartialView(AppPagesLinks.Modules.RSSOverviewPageLink);
+        }
+
+        public IActionResult RSSAddNew()
+        {
+            return PartialView(AppPagesLinks.Modules.RSSAddNewPageLink);
         }
     }
 }

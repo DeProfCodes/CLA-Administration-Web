@@ -9,7 +9,10 @@
 {
     display: none !important;
 }
-
+.text-upper
+{
+    text-transform: uppercase !important;
+}
 /**========================= Alignments =======================*/
 .fl-right
 {
@@ -36,12 +39,12 @@
 }
 .breadcrumb-title
 {
-    font-size: 22px !important;
+    font-size: 24px !important;
     margin-bottom: 0;
 }
 .breadcrumb-nav-body
 {
-    font-size: 12px;
+    font-size: 13px;
     margin-bottom:0;
 }
 

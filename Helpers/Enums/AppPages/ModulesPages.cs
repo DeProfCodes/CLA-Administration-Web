@@ -12,6 +12,12 @@ namespace CLA_Administration_Web.Helpers.Enums.AppPages
         [Display(Name = "AllModules", ShortName = "")]
         AllModules,
 
+        [Display(Name = "ModulesOverviewFilterPSTR", ShortName = "")]
+        ModulesOverviewFilterPSTR,
+
+        [Display(Name = "ModulesOverviewFilterLDS", ShortName = "")]
+        ModulesOverviewFilterLDS,
+
         //Content Library
         [Display(Name = "ContentLibraryCategories", ShortName = "ContentLibrary")]
         ContentLibraryCategories,
@@ -44,8 +50,8 @@ namespace CLA_Administration_Web.Helpers.Enums.AppPages
         [Display(Name = "PopupOverview", ShortName = "Popup")]
         PopupOverview,
 
-        [Display(Name = "_FilterPopupsOverview", ShortName = "Popup")]
-        PopupOverviewFilter,
+        [Display(Name = "PopupDetails", ShortName = "Popup")]
+        PopupDetails,
 
         [Display(Name = "AddNewPopup", ShortName = "Popup")]
         PopupAddNew,
@@ -54,14 +60,26 @@ namespace CLA_Administration_Web.Helpers.Enums.AppPages
         [Display(Name = "TickerOverview", ShortName = "Ticker")]
         TickerOverview,
 
-        [Display(Name = "TickerAddNew", ShortName = "Ticker")]
+        [Display(Name = "TickerDetails", ShortName = "Ticker")]
+        TickerDetails,
+
+        [Display(Name = "AddNewTicker", ShortName = "Ticker")]
         TickerAddNew,
 
         //Survey
         [Display(Name = "SurveyOverview", ShortName = "Survey")]
         SurveyOverview,
 
-        [Display(Name = "SurveyAddNew", ShortName = "Survey")]
+        [Display(Name = "SurveyDetails", ShortName = "Survey")]
+        SurveyDetails,
+
+        [Display(Name = "SurveyQuestionsOverview", ShortName = "Survey")]
+        SurveyQuestionsOverview,
+
+        [Display(Name = "SurveyQuestionDetails", ShortName = "Survey")]
+        SurveyQuestionDetails,
+
+        [Display(Name = "AddNewSurvey", ShortName = "Survey")]
         SurveyAddNew,
 
         //RSS

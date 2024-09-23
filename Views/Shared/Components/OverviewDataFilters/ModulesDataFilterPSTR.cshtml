@@ -1,11 +1,12 @@
-﻿@using CLACommonFunctionsLibrary_NET.Helpers.Enums
+﻿<!-- Modules Data Filters Component for PSTR Modules : Popups, Surveys, Tickers, RSS -->
+
+@using CLACommonFunctionsLibrary_NET.Helpers.Enums
 @using CLA_Administration_Web.Helpers.Enums.AppPages
-@model CLA_Administration_Web.ViewModels.Modules.ModuleOverviewFilterViewModel
+@model CLA_Administration_Web.ViewModels.Modules.PSTR.ModulePSTROverviewFilterViewModel
 
 @{
     var moduleName = Model.ModulePage.GetDisplayShortName();
-    moduleName = moduleName != "RSS" ? $"{moduleName}s" : moduleName;
-
+    
     var allFilterBtn = $"All{moduleName}BtnFilter";
     var activeFilterBtn = $"Active{moduleName}BtnFilter";
     var expiredFilterBtn = $"Expired{moduleName}BtnFilter";
@@ -16,22 +17,28 @@
 
     var dateFilterFrom = $"{moduleName}DateFromFilter";
     var dateFilterTo = $"{moduleName}DateToFilter";
+
+    var moduleDisplayName = moduleName != "RSS" ? $"{moduleName}s" : moduleName;
 }
 <!-- Card for Filters -->
 <div class="card mb-4 mt-2 overview-filters-card">
     <div class="card-body">
         <div class="row">
-            <h4 class="text-center mb-1 theme-txt-clr" id="FilterModuleTitle">Filter @moduleName Types</h4>
+            <h4 class="text-center mb-1 theme-txt-clr" id="FilterModuleTitle">Filter @moduleDisplayName Types</h4>
             <div class="col-12 mb-4 d-flex flex-wrap mt-3 module-overview-filters">
                 <div id="StatusFilterContainer">
                     <div class="row mb-3 mb-md-0">
                         <p class="theme-txt-clr overview-filter-title" id="StatusFilterTitle">Status</p>
                         <div class="btn-group w-auto overview-filter-btn-group" role="group" aria-label="Status filter">
-                            <button class="btn module-filter-btn-group" onclick="FilterData('@allFilterBtn', AllStatusTypes.All)" id="@allFilterBtn">All</button>
-                            <button class="btn module-filter-btn-group btn-group-active" onclick="FilterData('@activeFilterBtn', AllStatusTypes.Active)" id="@activeFilterBtn">Active</button>
-                            <button class="btn module-filter-btn-group" onclick="FilterData('@expiredFilterBtn', AllStatusTypes.Expired)" id="@expiredFilterBtn">Expired</button>
-                            <button class="btn module-filter-btn-group" onclick="FilterData('@pendingFilterBtn', AllStatusTypes.Pending)" id="@pendingFilterBtn">Pending</button>
-                            <button class="btn module-filter-btn-group hidden" onclick="" id="@customFilterBtn">Custom</button>
+                            <button class="btn module-filter-btn-group @moduleName" 
+                                    onclick="FilterModuleDataOverviewByStatus('@moduleName','@allFilterBtn', AllStatusTypes.All)" id="@allFilterBtn">All</button>
+                            <button class="btn module-filter-btn-group btn-group-active @moduleName"
+                                    onclick="FilterModuleDataOverviewByStatus('@moduleName','@activeFilterBtn', AllStatusTypes.Active)" id="@activeFilterBtn">Active</button>
+                            <button class="btn module-filter-btn-group @moduleName"
+                                    onclick="FilterModuleDataOverviewByStatus('@moduleName','@expiredFilterBtn', AllStatusTypes.Expired)" id="@expiredFilterBtn">Expired</button>
+                            <button class="btn module-filter-btn-group @moduleName"
+                                    onclick="FilterModuleDataOverviewByStatus('@moduleName','@pendingFilterBtn', AllStatusTypes.Pending)" id="@pendingFilterBtn">Pending</button>
+                            @* <button class="btn module-filter-btn-group hidden" onclick="" id="@customFilterBtn">Custom</button> *@
                         </div>
                     </div>
                 </div>
@@ -50,7 +57,7 @@
                 <div id="DatesFilterContainer" class="mx-auto">
                     <div class="row mb-3 mb-md-0">
                         <p class="theme-txt-clr overview-filter-title" id="DatesFilterTitle">Dates</p>
-                        <input type="date" class="form-control overview-dates-input" id="@dateFilterFrom" onchange="ModuleFilterDatesFilterChange('@moduleName', '@dateFilterFrom')" value="2020-01-01">
+                        <input type="date" class="form-control overview-dates-input" id="@dateFilterFrom" onchange="ModuleFilterDatesFilterChange('@moduleName', '@dateFilterFrom')" value="2024-01-01">
                         <p class="theme-txt-clr overview-filter-title">To</p>
                         <input type="date" class="form-control overview-dates-input" id="@dateFilterTo" onchange="ModuleFilterDatesFilterChange('@moduleName', '@dateFilterTo')" value="2024-09-30">
                     </div>
@@ -75,23 +82,5 @@
         $("#@dateFilterTo").val(today);
     }
 
-    function GetModuleTypeFromPage()
-    {
-        if('@Model.ModulePage' == '@ModulesPages.PopupOverview') return AllModuleTypes.Popup;
-
-        return '@moduleName';
-    }
-
-    function FilterData(buttonId, status)
-    {
-        var moduleName = GetModuleTypeFromPage();
-        var username = $('#@usersFilterSelectList').val();
-        var startDate = $('#@dateFilterFrom').val();
-        var endDate = $('#@dateFilterTo').val();
-
-        console.log(`Okay we are here and the values are : moduleName=${moduleName}, username=${username}, startDate=${startDate}, endDate=${endDate}.`);
-
-        ModuleFilterButtonClick(buttonId, moduleName, status, username, startDate, endDate)";
-    }
 
 </script>

@@ -4,7 +4,7 @@
 
 <script>
 
-    function GetPageUrl(page, id)
+    function GetPageUrl(page, id = null, id2 = null)
     {
         var url = "";
 
@@ -14,7 +14,9 @@
 
         // Modules Section
         if (page == '@ModulesPages.AllModules') url = '@AppPagesUrl.Modules.AllModules';
-
+        if (page == '@ModulesPages.ModulesOverviewFilterPSTR') url = '@AppPagesUrl.Modules.ModulesOverviewFilterPSTR';
+        if (page == '@ModulesPages.ModulesOverviewFilterLDS') url = '@AppPagesUrl.Modules.ModulesOverviewFilterLDS';
+        //
         if (page == '@ModulesPages.ContentLibraryCategories') url = '@AppPagesUrl.Modules.ContentLibraryCategories';
         if (page == '@ModulesPages.ContentLibraryContent') url = '@AppPagesUrl.Modules.ContentLibraryContent';
         //
@@ -28,13 +30,17 @@
         if (page == '@ModulesPages.ScreensaverAddNew') url = '@AppPagesUrl.Modules.ScreensaverAddNew';
         //
         if (page == '@ModulesPages.PopupOverview') url = '@AppPagesUrl.Modules.PopupOverview';
-        if (page == '@ModulesPages.PopupOverviewFilter') url = '@AppPagesUrl.Modules.PopupOverviewFilter';
+        if (page == '@ModulesPages.PopupDetails') url = '@AppPagesUrl.Modules.PopupDetails' + `?popupId=${id}`;
         if (page == '@ModulesPages.PopupAddNew') url = '@AppPagesUrl.Modules.PopupAddNew';
         //
         if (page == '@ModulesPages.SurveyOverview') url = '@AppPagesUrl.Modules.SurveyOverview';
+        if (page == '@ModulesPages.SurveyDetails') url = '@AppPagesUrl.Modules.SurveyDetails' + `?surveyId=${id}`;
+        if (page == '@ModulesPages.SurveyQuestionsOverview') url = '@AppPagesUrl.Modules.SurveyQuestionsOverview' + `?surveyId=${id}`;;
+        if (page == '@ModulesPages.SurveyQuestionDetails') url = '@AppPagesUrl.Modules.SurveyQuestionDetails' + `?surveyId=${id}&questionId=${id2}`;
         if (page == '@ModulesPages.SurveyAddNew') url = '@AppPagesUrl.Modules.SurveyAddNew';
         //
         if (page == '@ModulesPages.TickerOverview') url = '@AppPagesUrl.Modules.TickerOverview';
+        if (page == '@ModulesPages.TickerDetails') url = '@AppPagesUrl.Modules.TickerDetails' + `?tickerId=${id}`;;
         if (page == '@ModulesPages.TickerAddNew') url = '@AppPagesUrl.Modules.TickerAddNew';
         //
         if (page == '@ModulesPages.RSSOverview') url = '@AppPagesUrl.Modules.RSSOverview';
@@ -105,12 +111,16 @@
         if (page == '@ModulesPages.ScreensaverAddNew') title = "Add New Screensaver Sequence";
         //
         if (page == '@ModulesPages.PopupOverview') title = "Popups Overview";
+        if (page == '@ModulesPages.PopupDetails') title = "Popup Details";
         if (page == '@ModulesPages.PopupAddNew') title = "Add New Popup";
         //
         if (page == '@ModulesPages.SurveyOverview') title = "Surveys Overview";
+        if (page == '@ModulesPages.SurveyQuestionsOverview') title = "Survey Questions Overview";
+        if (page == '@ModulesPages.SurveyQuestionDetails') title = "Survey Questions Details";
         if (page == '@ModulesPages.SurveyAddNew') title = "Add New Survey";
         //
         if (page == '@ModulesPages.TickerOverview') title = "Tickers Overview";
+        if (page == '@ModulesPages.TickerDetails') title = "Ticker Details";
         if (page == '@ModulesPages.TickerAddNew') title = "Add New Ticker";
         //
         if (page == '@ModulesPages.RSSOverview') title = "RSS Overview";

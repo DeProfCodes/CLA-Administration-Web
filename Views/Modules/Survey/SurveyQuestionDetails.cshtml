@@ -1,0 +1,35 @@
+﻿@model CLA_Administration_Web.ViewModels.Modules.PSTR.SurveyQuestionViewModel
+@using CLA_Administration_Web.Helpers.Enums.AppPages
+
+
+<div class="container-fluid">
+
+    <!-- Breadcrumb -->
+    <div class="row mb-2">
+        <div class="w-auto">
+            <h2 class="theme-txt-clr breadcrumb-title">Survey Module</h2>
+            <p class="breadcrumb-nav-body">
+                <span class="breadcrumb-item-nav" onclick="OpenPageWithAnimations('Dashboard', null, '@DashboardPages.Dashboard', 'DashboardSubLink')">Dashboard</span> /
+                <span class="breadcrumb-item-nav" onclick="OpenPageWithAnimations('Modules', null, '@ModulesPages.AllModules', 'AllModulesLink', true)">Modules</span> /
+                <span class="breadcrumb-item-nav" onclick="OpenPageWithAnimations('Modules', 'Survey', '@ModulesPages.SurveyOverview', 'SurveyLink')">Survey</span> /
+                <span class="breadcrumb-item-nav" onclick="OpenPageWithAnimations('Modules', 'Survey', '@ModulesPages.SurveyOverview', 'SurveyLink')">Overview</span> /
+                <span class="breadcrumb-item-nav" onclick="OpenPage('@ModulesPages.SurveyDetails', '@Model.SurveyId');">@Model.SurveyId</span> /
+                <span class="breadcrumb-item-nav" onclick="OpenPage('@ModulesPages.SurveyQuestionsOverview', '@Model.SurveyId')">Questions</span> /
+                <span class="breadcrumb-item">@Model.QuestionId</span>
+            </p>
+        </div>
+    </div>
+
+    <!-- Card for Filters -->
+    <div class="card mb-4 mt-5 overview-filters-card">
+        <div class="card-body">
+            <h4 class="w-100 text-center theme-txt-clr">Survey Question Details for Survey Question Id: @Model.QuestionId</h4>
+            <div class="row">
+            </div>
+            <h1 class="text-center w-100 theme-txt-clr" style="margin-top:15%; margin-bottom:15%">
+                To Be Added Soon
+            </h1>
+        </div>
+    </div>
+
+</div>

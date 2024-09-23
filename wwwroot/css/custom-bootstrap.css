@@ -1,0 +1,23 @@
+﻿.btn-bs:not(:disabled):not(.disabled)
+{
+    cursor: pointer;
+}
+
+.btn-success
+{
+    color: #fff !important;
+    background-color: #28a745 !important;
+    border-color: #28a745 !important;
+}
+.btn-primary 
+{
+    color: #fff;
+    background-color: #007bff !important;
+    border-color: #007bff !important;
+}
+.btn-info 
+{
+    color: #fff !important;
+    background-color: #17a2b8 !important;
+    border-color: #17a2b8 !important;
+}
