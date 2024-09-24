@@ -127,65 +127,53 @@ function FilterModuleDataOverviewByViewType(moduleType, buttonId)
 let currentPopup = 1;
 let totalPopups = 9;
 
-function showPopup(popupNumber)
-{
-    for (let i = 1; i <= totalPopups; i++)
-    {
-        const popupElement = document.getElementById(`popup${i}`);
-        if (popupElement)
-        {
+function showPopup(popupNumber) {
+    for (let i = 1; i <= totalPopups; i++) {
+        var popupElement = document.getElementById(`popup${i}`);
+        if (popupElement) {
             popupElement.style.display = i === popupNumber ? 'block' : 'none';
-        } else
-        {
-            console.warn(`Popup ${i} not found`);
         }
     }
 
     var pageNumberElement = document.getElementById('pageNumber');
-    if (pageNumberElement)
-    {
+    if (pageNumberElement) {
         pageNumberElement.textContent = `Page ${popupNumber}`;
     }
 
     var backBtn = document.getElementById('backBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const submitBtn = document.getElementById('submitBtn');
-    const previewBox = document.getElementById('preview-box');
+    var nextBtn = document.getElementById('nextBtn');
+    var submitBtn = document.getElementById('submitBtn');
+    var previewBox = document.getElementById('preview-box');
 
-    if (backBtn && nextBtn && submitBtn && previewBox)
-    {
+    if (backBtn && nextBtn && submitBtn && previewBox) {
         backBtn.style.display = popupNumber === 1 ? 'none' : 'inline-block';
-        previewBox.style.display = popupNumber <= 1 ? 'none' : 'inline-block';
+        previewBox.style.display = popupNumber === 1 ? 'none' : 'inline-block';
         nextBtn.style.display = popupNumber === totalPopups ? 'none' : 'inline-block';
         submitBtn.style.display = popupNumber === totalPopups ? 'inline-block' : 'none';
     }
 
-
-
     updatePopupSidebar(popupNumber);
 }
-function nextPopup()
-{
+
+function nextPopup() {
     if (currentPopup < totalPopups) {
         currentPopup++;
         showPopup(currentPopup);
     }
 }
-function prevPopup()
-{
-    if (currentPopup > 1)
-    {
+
+function prevPopup() {
+    if (currentPopup > 1) {
         currentPopup--;
         showPopup(currentPopup);
     }
 }
-function updatePopupSidebar(step)
-{
-    const sidebarLinks = document.querySelectorAll('.sidebar a');
+
+function updatePopupSidebar(step) {
+    var sidebarLinks = document.querySelectorAll('.module-leftsidebar-link a');
     sidebarLinks.forEach(link => link.classList.remove('active'));
 
-    const sidebarMap =
-    {
+    var sidebarMap = {
         1: 'sidebar-link-type',
         2: 'sidebar-skin',
         3: 'sidebar-texts',
@@ -197,30 +185,24 @@ function updatePopupSidebar(step)
         9: 'sidebar-exposure-summary'
     };
 
-    const currentSidebarLink = document.getElementById(sidebarMap[step]);
-    if (currentSidebarLink)
-    {
+    var currentSidebarLink = document.getElementById(sidebarMap[step]);
+    if (currentSidebarLink) {
         currentSidebarLink.classList.add('active');
     }
 }
 
-document.addEventListener('DOMContentLoaded', () =>
-{
-    showPopup(currentPopup);
-    const previewBox = document.getElementById('preview-box');
-    if (currentPopup <= 1)
-    {
+document.addEventListener('DOMContentLoaded', () => {
+    showPopup(currentPopup); // Show the current popup
 
-        previewBox.style.display = 'none';
+ 
+   
+    var previewBox = document.getElementById('preview-box');
+    if (previewBox) {
+        previewBox.style.display = 'none'; // Hide back button if on the first page
     }
     const backBtn = document.getElementById('backBtn');
-
-
-    if (backBtn)
-    {
-        backBtn.style.display = 'none';
-        previewBox.style.display = 'none';
-
+    if (backBtn) {
+        backBtn.style.display = 'none'; // Hide back button if on the first page
     }
 });
 
