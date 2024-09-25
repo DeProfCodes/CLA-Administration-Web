@@ -72,15 +72,15 @@
 
     $(document).ready(function ()
     {
-        SetDateToTodayDefault();
+        SetDateToTodayDefaultPTS();
     });
 
-    function SetDateToTodayDefault()
+    function SetDateToTodayDefaultPTS()
     {
         var today = TodayDate();
        
-        $("#@dateFilterTo").val(today);
+        $("#@dateFilterFrom").val(GetMonthStartAndEnd(today, 0, 1));
+        $("#@dateFilterTo").val(GetMonthStartAndEnd(today, 1, 0));
     }
-
 
 </script>

@@ -31,5 +31,7 @@ namespace CLA_Administration_Web.ViewModels.Modules.PSTR
         public string LastModifiedDate { get; set; }
 
         public string UserIdLastModified { get; set; }
+
+        public string MachineLastModified { get; set; }
     }
 }

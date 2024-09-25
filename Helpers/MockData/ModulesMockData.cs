@@ -67,11 +67,12 @@ namespace CLA_Administration_Web.Helpers.MockData
             var items = new List<ModulePSTRDataViewModel>();
 
             var usersList = new List<string> { "NdhuvaziM", "LegeB", "SinethembaS", "LeboC", "Administrator", "CathrineT", "LarryM", "Tarryn" };
+            var machinesList = new List<string> { "NdhuvaziM-PC", "LegeB-PC", "Sinethemba-PC", "LeboC-PC", "Administrator-PC", "CathrineT-PC", "LarryM-PC", "Tarryn-PC" };
 
             DateTime effectiveFrom = new();
             DateTime effectiveTo = new();
 
-            for (int i = 1; i <= 250; i++)
+            for (int i = 1; i <= 1000; i++)
             {
                 GetEffectiveDates(ref effectiveFrom, ref effectiveTo, i);
 
@@ -85,7 +86,8 @@ namespace CLA_Administration_Web.Helpers.MockData
                     TimeslotFrom = RandomTime(random),
                     TimeslotTo = RandomTime(random),
                     LastModifiedDate = DateTime.Now.AddMinutes(-random.Next(0, 50000)).ToString("yyyy/MM/dd HH:mm"),
-                    UserIdLastModified = usersList[random.Next(0, 8)],
+                    UserIdLastModified = usersList[random.Next(usersList.Count)],
+                    MachineLastModified = machinesList[random.Next(machinesList.Count)]
                 };
 
                 items.Add(item);
@@ -390,7 +392,7 @@ namespace CLA_Administration_Web.Helpers.MockData
             var usersList = new List<string> { "NdhuvaziM", "LegeB", "SinethembaS", "LeboC", "Administrator", "CathrineT", "LarryM", "Tarryn" };
             var machinesList = new List<string> { "NdhuvaziM-PC", "LegeB-PC", "Sinethemba-PC", "LeboC-PC", "Administrator-PC", "CathrineT-PC", "LarryM-PC", "Tarryn-PC" };
 
-            for (int i = 1; i <= 10; i++)
+            for (int i = 1; i <= 50; i++)
             {
                 var contentLibCat = new ContentLibraryCategoryModel
                 {
@@ -413,27 +415,24 @@ namespace CLA_Administration_Web.Helpers.MockData
 
             if (currentDepth > maxDepth) return null;
 
-            // Create a new category
             var category = new ContentLibraryCategoryTree
             {
                 CategoryId = currentCategoryId,
                 CategoryName = SharedFunctions.CapitalizeFirst(RandomString(random, 1, 1)),
                 CategoryDescription = SharedFunctions.CapitalizeFirst(RandomString(random, 1, 7)),
-                ContentsCount = random.Next(0, 100),  // Random number of contents
+                ContentsCount = random.Next(0, 100), 
                 _children = null,
             };
 
-            // Randomly decide how many children (0 to 5)
-            int childrenCount = random.Next(0, 6);  // Upper bound is exclusive, so 6 gives 0 to 5
+            int childrenCount = random.Next(0, 6);  
 
             for (int i = 0; i < childrenCount; i++)
             {
-                // Recursively create children categories
                 var childCategory = PopulateCategoryTree(currentCategoryId * 10 + (i + 1), maxDepth, currentDepth + 1);
                 if (childCategory != null)
                 {
                     if (category._children == null)
-                        category._children = new();
+                        category._children = new List<ContentLibraryCategoryTree>();
 
                     category._children.Add(childCategory);
                 }
@@ -449,7 +448,9 @@ namespace CLA_Administration_Web.Helpers.MockData
             for (int i = 1; i <= 100; i++)
             {
                 var treeCategory = PopulateCategoryTree(i, random.Next(0, 5));
-                items.Add(treeCategory);
+                
+                if(treeCategory != null)
+                    items.Add(treeCategory);
             }
             return items;
         }

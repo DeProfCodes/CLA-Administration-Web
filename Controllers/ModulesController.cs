@@ -14,6 +14,7 @@ using CLA_Administration_Web.ViewModels.Modules.LDS;
 using CLA_Administration_Web.ViewModels.Modules.PSTR;
 using CLACommonFunctionsLibrary_NET.Helpers;
 using CLACommonFunctionsLibrary_NET.Helpers.Enums;
+using CLACommonFunctionsLibrary_NET.Helpers.Logs;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -26,10 +27,14 @@ namespace CLA_Administration_Web.Controllers
 
         private readonly ILogger<ModulesController> _logger;
 
+        public readonly EventLoggerHelper eventLogger;
+
         public ModulesController(IModuleService moduleService, ILogger<ModulesController> logger)
         {
             _moduleService = moduleService;
             _logger = logger;
+
+            eventLogger = new EventLoggerHelper("CLA Web Admin Tool");
         }
 
         #region All
@@ -104,32 +109,41 @@ namespace CLA_Administration_Web.Controllers
 
         public IActionResult ContentLibraryCategories()
         {
-            var data = new ContentLibraryCategoryViewModel
+            var data = new ContentLibraryCategoryViewModel();
+
+            try
             {
-                CategoriesTrees = new List<ContentLibraryCategoryTree>
+                data = new ContentLibraryCategoryViewModel
                 {
-                   new ContentLibraryCategoryTree
-                   {
-                       CategoryId = 1,
-                       CategoryName = "ABSA TEST 1",
-                       CategoryDescription = "<button class='btn btn-success'>Fuck</button>",
-                       ContentsCount = 19,
-                       _children = new List<ContentLibraryCategoryTree>
+                    CategoriesTrees = new List<ContentLibraryCategoryTree>
+                    {
+                       new ContentLibraryCategoryTree
                        {
-                            new ContentLibraryCategoryTree
-                            {
-                                CategoryId = 2,
-                                CategoryName = "ABSA 9999",
-                                CategoryDescription = "Small testing category for Cape Town divisions",
-                                ContentsCount = 4,
-                            }
+                           CategoryId = 1,
+                           CategoryName = "ABSA TEST 1",
+                           CategoryDescription = "<button class='btn btn-success'>Fuck</button>",
+                           ContentsCount = 19,
+                           _children = new List<ContentLibraryCategoryTree>
+                           {
+                                new ContentLibraryCategoryTree
+                                {
+                                    CategoryId = 2,
+                                    CategoryName = "ABSA 9999",
+                                    CategoryDescription = "Small testing category for Cape Town divisions",
+                                    ContentsCount = 4,
+                                }
+                           }
                        }
-                   }
-                }
-            };
+                    }
+                };
 
-            data.CategoriesTrees = ModulesMockData.GenerateDummyDataContentLibraryCategories();
-
+                data.CategoriesTrees = ModulesMockData.GenerateDummyDataContentLibraryCategories();
+            }
+            catch(Exception ex)
+            {
+                eventLogger.WriteToEventLog($"Failed to read, details ContentLibraryCategories \n Error: {ex.Message}\n Stacktrace: {ex.StackTrace}\n Full Exception Details: {ex}");
+                _logger.LogError($"Settings file was not read properly, details: {ex.Message}", ex);
+            }
             return PartialView(AppPagesLinks.Modules.ContentLibraryCategoriesPageLink, data);
         }
 

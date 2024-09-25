@@ -232,7 +232,7 @@
 }
 .module-dt-body-text
 {
-    max-width: 320px;
+    max-width: 380px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -318,7 +318,7 @@
 {
     .module-dt-body-text
     {
-        max-width:410px;
+        max-width:490px;
     }
 }
 
@@ -326,7 +326,7 @@
 {
     .module-dt-body-text
     {
-        max-width:320px;
+        max-width:380px;
     }
 }
 
@@ -334,7 +334,7 @@
 {
     .module-dt-body-text
     {
-        max-width:270px;
+        max-width:380px;
     }
 }
 
