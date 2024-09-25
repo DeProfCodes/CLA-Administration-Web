@@ -22,16 +22,20 @@
 <table id="ModuleOverviewDataTable" class="table table-striped table-hover align-middle" style="font-size:12px">
     <thead>
         <tr>
+            <th class="text-center">Select</th>
             <th class="text-center">Category Name</th>
             <th class="text-center">Category Description</th>
             <th class="text-center">Content Type</th>
             <th class="text-center">View</th>
             <th class="text-center">Content Description</th>
-            <th class="text-center">Duration</th>
+            @if (Model.ModuleName == ModuleNamesType.Screensaver || Model.ModuleName == ModuleNamesType.LockedDesktop)
+            {
+                <th class="text-center">Duration</th>
+            }
             <th class="text-center">Eff From</th>
             <th class="text-center">Eff To</th>
-            <th class="text-center">From</th>
-            <th class="text-center">To</th>
+            <th class="text-center hidden">From</th>
+            <th class="text-center hidden">To</th>
             <th class="text-center">Status</th>
             <th class="text-center">Users</th>
             <th class="text-center">Targeting</th>
@@ -41,34 +45,52 @@
     <tbody>
         @foreach (var module in Model.ModulesData)
         {
+            var checkBoxId = $"{module.Id}TableRowSelect";
             <tr>
+                <td class="text-center"><i class="bi bi-grip-vertical me-2" style="cursor:pointer" id="ReTableRowOrderIcon"></i><input type="checkbox" id="@checkBoxId" /></td>
                 <td class="text-center"><p class="module-dt-header-text">@module.CategoryName</p></td>
                 <td class="text-center"><p class="module-dt-header-text">@module.CategoryDescription</p></td>
                 <td class="text-center">@module.ContentType</td>
-                <td><button class="btn btn-sm btn-primary">Open</button></td>
+                <td><button class="btn btn-sm btn-primary custom-btn-sm">Open</button></td>
                 <td class="text-center"><p class="module-dt-header-text">@module.ContentDescription</p></td>
-                <td class="text-center">@module.Duration</td>
+                @if (Model.ModuleName == ModuleNamesType.Screensaver || Model.ModuleName == ModuleNamesType.LockedDesktop)
+                {
+                    <td class="text-center">@module.Duration</td>
+                }
                 <td>@module.EffectiveFrom</td>
                 <td>@module.EffectiveTo</td>
-                <td>@module.TimeslotFrom</td>
-                <td>@module.TimeslotTo</td>
+                <td class="hidden">@module.TimeslotFrom</td>
+                <td class="hidden">@module.TimeslotTo</td>
                 <td><span class="@module.Status.CssClass">@module.Status.StatusType.GetDisplayName()</span></td>
-                <td><button class="btn btn-sm btn-info">View</button></td>
-                <td><button class="btn btn-sm btn-success">View</button></td>
+                <td><button class="btn btn-sm btn-info custom-btn-sm">View</button></td>
+                <td><button class="btn btn-sm btn-success custom-btn-sm">View</button></td>
                 <td>
-                    <button class="btn btn-info btn-sm mx-1" onclick="OpenModuleDetails('@module.Id')">Open</button>
-                    <button class="btn btn-secondary btn-sm mx-1">Edit</button>
-                    <button class="btn btn-danger btn-sm mx-1">Remove</button>
+                    <button class="btn btn-info btn-sm mx-1 custom-btn-sm" onclick="OpenModuleDetails('@module.Id')">Open</button>
+                    <button class="btn btn-secondary btn-sm mx-1 custom-btn-sm">Edit</button>
+                    <button class="btn btn-danger btn-sm mx-1 custom-btn-sm">Remove</button>
                 </td>
             </tr>
         }
     </tbody>
 </table>
 
+@if (Model.ModuleName == ModuleNamesType.Screensaver)
+{
+   @*  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/rowreorder/1.3.1/css/rowReorder.dataTables.css" />
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.bundle.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/rowreorder/1.3.1/js/dataTables.rowReorder.js"></script> *@
+}
 <script>
 
     $(document).ready(function ()
     {
+        $("#ModuleFilterActionButtonsContainer").show();
         SetDataTableData();
     });
 
@@ -76,7 +98,13 @@
     {
         if ('@Model.ModuleName' == '@ModuleNamesType.Screensaver')
         {
-            screensaversDataTable = $('#ModuleOverviewDataTable').DataTable();
+            screensaversDataTable = $('#ModuleOverviewDataTable').DataTable(
+            {
+                rowReorder: 
+                {
+                    selector: '#ReTableRowOrderIcon'
+                }
+            });
         }
         else if ('@Model.ModuleName' == '@ModuleNamesType.LockedDesktop')
         {

@@ -76,7 +76,10 @@
             public const string TickerAddNewPageLink = "~/Views/Modules/Ticker/AddNewTicker.cshtml";
 
             //RSS
-            public const string RSSOverviewPageLink = "~/Views/Modules/RSS/RSSOverview.cshtml";
+            public const string RssCategoryOverviewPageLink = "~/Views/Modules/RSS/RssCategoryOverview.cshtml";
+            public const string RssCategoryDetailsPageLink = "~/Views/Modules/RSS/RssCategoryDetails.cshtml";
+            public const string RssFeedOverviewPageLink = "~/Views/Modules/RSS/RssFeedOverview.cshtml";
+            public const string RssFeedDetailsPageLink = "~/Views/Modules/RSS/RssFeedDetails.cshtml";
             public const string RSSAddNewPageLink = "~/Views/Modules/RSS/AddNewRSS.cshtml";
         }
 

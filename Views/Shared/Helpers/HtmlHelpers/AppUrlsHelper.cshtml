@@ -58,7 +58,10 @@
         if (page == '@ModulesPages.TickerAddNew') url = '@AppPagesUrl.Modules.TickerAddNew';
        
         // RSS
-        if (page == '@ModulesPages.RSSOverview') url = '@AppPagesUrl.Modules.RSSOverview';
+        if (page == '@ModulesPages.RSSCategoryOverview') url = '@AppPagesUrl.Modules.RSSCategoryOverview';
+        if (page == '@ModulesPages.RSSCategoryDetails') url = '@AppPagesUrl.Modules.RSSCategoryDetails' + `?rssCategoryId=${id}`;
+        if (page == '@ModulesPages.RSSFeedOverview') url = '@AppPagesUrl.Modules.RSSFeedOverview' + `?rssCategoryId=${id}`;
+        if (page == '@ModulesPages.RSSFeedDetails') url = '@AppPagesUrl.Modules.RSSFeedDetails' + `?rssCategoryId=${id}&rssFeedId=${id2}`;
         if (page == '@ModulesPages.RSSAddNew') url = '@AppPagesUrl.Modules.RSSAddNew';
         
         // Settings Section
@@ -138,7 +141,7 @@
         if (page == '@ModulesPages.TickerDetails') title = "Ticker Details";
         if (page == '@ModulesPages.TickerAddNew') title = "Add New Ticker";
         //
-        if (page == '@ModulesPages.RSSOverview') title = "RSS Overview";
+        if (page == '@ModulesPages.RSSCategoryOverview') title = "RSS Overview";
         if (page == '@ModulesPages.RSSAddNew') title = "Add New RSS";
 
         // Settings Section

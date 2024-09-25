@@ -1,6 +1,7 @@
 ﻿using CLA_Administration_Web.Helpers.Enums.AppPages;
 using CLA_Administration_Web.Helpers.Enums.Shared;
 using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
+using CLA_Administration_Web.ViewModels.Modules;
 using CLA_Administration_Web.ViewModels.Modules.LDS;
 using CLA_Administration_Web.ViewModels.Modules.PSTR;
 
@@ -26,6 +27,10 @@ namespace CLA_Administration_Web.Services
             public static List<ModuleLDSDataViewModel> AllDesktops { get; set; }
 
             public static List<ModuleLDSDataViewModel> AllScreensavers { get; set; }
+
+            public static List<RssCategoryOverviewViewModel> AllRSSCategories { get; set; }
+
+            public static List<RssFeedOverviewViewModel> AllRSSFeed { get; set; }
         }
 
         public static class LiveData
@@ -45,6 +50,10 @@ namespace CLA_Administration_Web.Services
             public static List<ModuleLDSDataViewModel> AllDesktops { get; set; }
 
             public static List<ModuleLDSDataViewModel> AllScreensavers { get; set; }
+
+            public static List<RssCategoryOverviewViewModel> AllRSSCategories { get; set; }
+
+            public static List<RssFeedOverviewViewModel> AllRSSFeed { get; set; } 
         }
 
         public static List<ModulePSTRDataViewModel> GetLocalModulePSTRAllData(ModuleNamesType moduleName)
@@ -138,6 +147,30 @@ namespace CLA_Administration_Web.Services
             else if (stagingLiveType == StagingLiveType.Live)
             {
                 LiveData.AllScreensavers = data;
+            }
+        }
+
+        public static void UpdateRSSCategoriesData(List<RssCategoryOverviewViewModel> data, StagingLiveType stagingLiveType)
+        {
+            if (stagingLiveType == StagingLiveType.Staging)
+            {
+                StagingData.AllRSSCategories = data;
+            }
+            else if (stagingLiveType == StagingLiveType.Live)
+            {
+                LiveData.AllRSSCategories = data;
+            }
+        }
+
+        public static void UpdateRSSFeedData(List<RssFeedOverviewViewModel> data, StagingLiveType stagingLiveType)
+        {
+            if (stagingLiveType == StagingLiveType.Staging)
+            {
+                StagingData.AllRSSFeed = data;
+            }
+            else if (stagingLiveType == StagingLiveType.Live)
+            {
+                LiveData.AllRSSFeed = data;
             }
         }
     }

@@ -81,12 +81,14 @@ namespace CLA_Administration_Web.Controllers
             var filteredData = ModulesHelper.FilterModulesLDSData(data, status, startDate, endDate);
 
             var ganttData = ModulesHelper.GetGanttChartData(filteredData);
+
             var ganttChartVM = new GanttChartDataViewModel
             {
                 ModuleName = moduleNameType,
                 FilterTitle = ModulesHelper.GetModuleOverviewTitleText(moduleNameType, status, stagingLive, "All", startDate, endDate),
                 GanttData = ganttData,
-                GanttChartHeight = ModulesHelper.GetGanttChartHeight(ganttData.Count)
+                GanttChartHeight = ModulesHelper.GetGanttChartHeight(ganttData.Count),
+                GanttChartToolTip = ModulesHelper.GetGanttToolTipDetailsLDS(filteredData)
             };
 
             return PartialView(AppPagesLinks.Modules.ModuleLDSGanttOverviewPageLink, ganttChartVM);
@@ -307,9 +309,38 @@ namespace CLA_Administration_Web.Controllers
 
         #endregion
 
-        public IActionResult RSSOverview()
+        public async Task<IActionResult> RssCategoryOverview()
         {
-            return PartialView(AppPagesLinks.Modules.RSSOverviewPageLink);
+            var rssCategories = await _moduleService.GetAllRssCategories(StagingLiveType.Staging);
+
+            LocalDataStorage.UpdateRSSCategoriesData(rssCategories, StagingLiveType.Staging);
+
+            return PartialView(AppPagesLinks.Modules.RssCategoryOverviewPageLink, rssCategories);
+        }
+
+        public async Task<IActionResult> RssCategoryDetails(int rssCategoryId)
+        {
+            var rssCategoryInfo = LocalDataStorage.StagingData.AllRSSCategories.FirstOrDefault(x => x.CategoryId == rssCategoryId);
+
+            return PartialView(AppPagesLinks.Modules.RssCategoryDetailsPageLink, rssCategoryInfo);
+        }
+
+        public async Task<IActionResult> RssFeedOverview(int rssCategoryId)
+        {
+            var rssFeedsData = await _moduleService.GetAllRssFeeds(StagingLiveType.Staging);
+
+            LocalDataStorage.UpdateRSSFeedData(rssFeedsData, StagingLiveType.Staging);
+
+            rssFeedsData = rssFeedsData.Where(x => x.CategoryId == rssCategoryId).ToList();
+
+            return PartialView(AppPagesLinks.Modules.RssFeedOverviewPageLink, rssFeedsData);
+        }
+
+        public async Task<IActionResult> RssFeedDetails(int rssCategoryId, int rssFeedId)
+        {
+            var rssCategoryInfo = LocalDataStorage.StagingData.AllRSSFeed.FirstOrDefault(x => x.CategoryId == rssCategoryId && x.FeedId == rssFeedId);
+
+            return PartialView(AppPagesLinks.Modules.RssFeedDetailsPageLink, rssCategoryInfo);
         }
 
         public IActionResult RSSAddNew()

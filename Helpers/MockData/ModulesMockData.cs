@@ -1,5 +1,6 @@
 ﻿using CLA_Administration_Web.Helpers.Enums.Shared;
 using CLA_Administration_Web.Helpers.Shared;
+using CLA_Administration_Web.ViewModels.Modules;
 using CLA_Administration_Web.ViewModels.Modules.LDS;
 using CLA_Administration_Web.ViewModels.Modules.PSTR;
 using CLA_Administration_Web.ViewModels.Shared;
@@ -27,6 +28,10 @@ namespace CLA_Administration_Web.Helpers.MockData
             public static List<ModuleLDSDataViewModel> AllLockedDesktopsData { get; set; } = GenerateLDSRandomData();
 
             public static List<ModuleLDSDataViewModel> AllDesktopsData { get; set; } = GenerateLDSRandomData();
+
+            public static List<RssCategoryOverviewViewModel> AllRSSCategories { get; set; } = GenerateRSSCategoriesRandomData();
+
+            public static List<RssFeedOverviewViewModel> AllRSSFeed { get; set; } = GenerateRSSFeedRandomData();
         }
 
         public static class LiveData
@@ -45,6 +50,10 @@ namespace CLA_Administration_Web.Helpers.MockData
             public static List<ModuleLDSDataViewModel> AllLockedDesktopsData { get; set; } = GenerateLDSRandomData();
 
             public static List<ModuleLDSDataViewModel> AllDesktopsData { get; set; } = GenerateLDSRandomData();
+
+            public static List<RssCategoryOverviewViewModel> AllRSSCategories { get; set; } = GenerateRSSCategoriesRandomData();
+
+            public static List<RssFeedOverviewViewModel> AllRSSFeed { get; set; } = GenerateRSSFeedRandomData();
         }
 
         // Generate Module Data for Popups, Tickers, Surveys
@@ -96,7 +105,7 @@ namespace CLA_Administration_Web.Helpers.MockData
             var wordList = new List<string>
             {
                 "random", "survey", "data", "user", "information", "value", "result", "questionnaire", "response", "choice",
-                "valid", "invalid", "optional", "mandatory", "feedback", "evaluation", "completion", "rate", "option", "field",
+                "lift", "happiness", "optional", "mandatory", "feedback", "evaluation", "completion", "rate", "option", "field",
                 "section", "page", "submit", "save", "progress", "time", "record", "analysis", "report", "summary", "point",
                 "critical", "flagged", "marked", "highlight", "understand", "decision", "query", "system", "entry", "method", "CLA",
                 "Corporate Voice", "Marketing Company", "Employee engagement", "Admin Tool", "Popups", "Surveys", "Tickers"
@@ -297,9 +306,18 @@ namespace CLA_Administration_Web.Helpers.MockData
             DateTime effectiveFrom = new();
             DateTime effectiveTo = new();
 
+            var savedContent = new List<string>();
+
             for (int i = 1; i <= 1000; i++)
             {
                 GetEffectiveDates(ref effectiveFrom, ref effectiveTo, i);
+
+                var content = SharedFunctions.CapitalizeFirst(RandomString(random, 3, 5));
+
+                while(savedContent.Contains(content))
+                    content = SharedFunctions.CapitalizeFirst(RandomString(random, 3, 5));
+
+                savedContent.Add(content);
 
                 var item = new ModuleLDSDataViewModel
                 {
@@ -307,7 +325,7 @@ namespace CLA_Administration_Web.Helpers.MockData
                     CategoryName = SharedFunctions.CapitalizeFirst(RandomString(random, 1, 2)),
                     CategoryDescription = SharedFunctions.CapitalizeFirst(RandomString(random, 3, 5)),
                     ContentType = SharedFunctions.CapitalizeFirst(contentType[random.Next(contentType.Count)]),
-                    ContentDescription = SharedFunctions.CapitalizeFirst(RandomString(random, 1, 2)),
+                    ContentDescription = content,
                     Duration = random.Next(0,61),
                     EffectiveFrom = effectiveFrom.ToString("yyyy/MM/dd"),
                     EffectiveTo = effectiveTo.ToString("yyyy/MM/dd"),
@@ -318,6 +336,44 @@ namespace CLA_Administration_Web.Helpers.MockData
                 };
 
                 items.Add(item);
+            }
+            return items;
+        }
+
+        private static List<RssCategoryOverviewViewModel> GenerateRSSCategoriesRandomData()
+        {
+            var random = new Random();
+            var items = new List<RssCategoryOverviewViewModel>();
+
+            for (int i = 1; i <= 10; i++)
+            {
+                var rssCat = new RssCategoryOverviewViewModel
+                {
+                    CategoryId = i,
+                    CategoryName = SharedFunctions.CapitalizeFirst(RandomString(random, 1, 2)),
+                    CategoryDescription = SharedFunctions.CapitalizeFirst(RandomString(random, 3, 5)),
+                };
+                items.Add(rssCat);
+            }
+            return items;
+        }
+
+        private static List<RssFeedOverviewViewModel> GenerateRSSFeedRandomData()
+        {
+            var random = new Random();
+            var items = new List<RssFeedOverviewViewModel>();
+
+            for (int i = 1; i <= 10; i++)
+            {
+                var rssCat = new RssFeedOverviewViewModel
+                {
+                    CategoryId = i,
+                    FeedId = i,
+                    CategoryName = SharedFunctions.CapitalizeFirst(RandomString(random, 1, 2)),
+                    FeedName = SharedFunctions.CapitalizeFirst(RandomString(random, 1, 2)),
+                    FeedURL = $"https://www.{RandomString(random, 1,1)}.com",
+                };
+                items.Add(rssCat);
             }
             return items;
         }

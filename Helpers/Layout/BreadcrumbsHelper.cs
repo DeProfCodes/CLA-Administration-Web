@@ -256,17 +256,42 @@ namespace CLA_Administration_Web.Helpers.Layout
                     HasActionButton = true,
                     IsAddNewIcon = false,
                     ActionButtonText = "RSS Overview",
-                    ActionButtonPage = ModulesPages.RSSOverview
+                    ActionButtonPage = ModulesPages.RSSCategoryOverview
                 },
                 new ModuleBreadcrumbViewModel()
                 {
-                    ModulePage = ModulesPages.RSSOverview,
+                    ModulePage = ModulesPages.RSSCategoryOverview,
                     ModulePageName = "RSS Module",
                     ModuleName = "RSS",
-                    ModuleSubPage = "Overview",
+                    ModuleSubPage = "Categories",
                     HasActionButton = true,
                     IsAddNewIcon = true,
                     ActionButtonText = "Add New RSS",
+                    ActionButtonPage = ModulesPages.RSSAddNew
+                },
+                new ModuleBreadcrumbViewModel()
+                {
+                    ModulePage = ModulesPages.RSSCategoryDetails,
+                    ModulePageName = "RSS Module",
+                    ModuleName = "RSS",
+                    ModuleSubPage = "Details",
+                    HasActionButton = true,
+                    IsDetailsPage = true,
+                    ModuleDetailsId = moduleDetailsId,
+                    ModulePreviewPage = ModulesPages.RSSCategoryOverview,
+                    IsAddNewIcon = true,
+                    ActionButtonText = "Edit RSS Category",
+                    ActionButtonPage = ModulesPages.RSSAddNew
+                },
+                new ModuleBreadcrumbViewModel()
+                {
+                    ModulePage = ModulesPages.RSSFeedOverview,
+                    ModulePageName = "RSS Module",
+                    ModuleName = "RSS",
+                    ModuleSubPage = "Feeds",
+                    HasActionButton = true,
+                    IsAddNewIcon = true,
+                    ActionButtonText = "Add New Feed",
                     ActionButtonPage = ModulesPages.RSSAddNew
                 },
             };

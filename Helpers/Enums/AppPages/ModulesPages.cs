@@ -91,8 +91,17 @@ namespace CLA_Administration_Web.Helpers.Enums.AppPages
         SurveyAddNew,
 
         //RSS
-        [Display(Name = "RSSOverview", ShortName = "RSS")]
-        RSSOverview,
+        [Display(Name = "RssCategoryOverview", ShortName = "RSS")]
+        RSSCategoryOverview,
+
+        [Display(Name = "RssCategoryDetails", ShortName = "RSS")]
+        RSSCategoryDetails,
+
+        [Display(Name = "RssFeedOverview", ShortName = "RSS")]
+        RSSFeedOverview,
+
+        [Display(Name = "RssFeedDetails", ShortName = "RSS")]
+        RSSFeedDetails,
 
         [Display(Name = "RSSAddNew", ShortName = "RSS")]
         RSSAddNew

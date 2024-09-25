@@ -52,11 +52,16 @@
 
 <script>
 
+    $("#ModuleFilterActionButtonsContainer").hide();
+
+    var seriesName = "@Model.FilterTitle.Status @moduleName";
     
     CreateGanttChart(
         "#ModuleGanttChart",
         @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.GanttData)), 
-        '@Model.GanttChartHeight'
+        '@Model.GanttChartHeight',
+        seriesName,
+        @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(@Model.GanttChartToolTip))
     );
 
 </script>

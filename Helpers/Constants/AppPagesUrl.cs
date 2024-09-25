@@ -83,7 +83,10 @@ namespace CLA_Administration_Web.Helpers.Constants
             public static string TickerAddNew = $"/{modulesController}/{ModulesPages.TickerAddNew.GetDisplayName()}";
 
             //RSS
-            public static string RSSOverview = $"/{modulesController}/{ModulesPages.RSSOverview.GetDisplayName()}";
+            public static string RSSCategoryOverview = $"/{modulesController}/{ModulesPages.RSSCategoryOverview.GetDisplayName()}";
+            public static string RSSCategoryDetails = $"/{modulesController}/{ModulesPages.RSSCategoryDetails.GetDisplayName()}";
+            public static string RSSFeedOverview = $"/{modulesController}/{ModulesPages.RSSFeedOverview.GetDisplayName()}";
+            public static string RSSFeedDetails = $"/{modulesController}/{ModulesPages.RSSFeedDetails.GetDisplayName()}";
             public static string RSSAddNew = $"/{modulesController}/{ModulesPages.RSSAddNew.GetDisplayName()}";
         }
 

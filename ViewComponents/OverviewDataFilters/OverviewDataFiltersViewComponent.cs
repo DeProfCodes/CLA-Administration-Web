@@ -35,12 +35,13 @@ namespace CLA_Administration_Web.ViewComponents.OverviewDataFilters
                     var filtersViewModel = new ModuleLDSOverviewFilterViewModel
                     {
                         ModulePage = modulePage,
+                        ModuleName = ModulesHelper.GetModuleNameTypeFromModulePage(modulePage),
                         MonthsAndYears = ModulesHelper.GetMonthsAndYears()
                     };
                     return View("ModulesDataFilterLDS", filtersViewModel);
                 }
                 else if (modulePage == ModulesPages.PopupOverview || modulePage == ModulesPages.TickerOverview || modulePage == ModulesPages.SurveyOverview ||
-                         modulePage == ModulesPages.RSSOverview)
+                         modulePage == ModulesPages.RSSCategoryOverview)
                 {
                     var filtersViewModel = new ModulePSTROverviewFilterViewModel
                     {

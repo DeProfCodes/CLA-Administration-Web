@@ -272,6 +272,10 @@
 }
 #GanttChartLegend
 {
+     overflow: hidden !important;
+}
+#GanttChartLegend
+{
     border:1px solid grey;
     padding: 3px;
 }
@@ -295,6 +299,16 @@
     margin-left:5px;
     margin-right:5px;
     margin-top: -4px;
+}
+.gantt-tooltip-container
+{
+    padding: 5px 10px;
+    font-size: 10px;
+}
+.gantt-tooltip-value
+{
+    font-weight:bold;
+    color: #04316d;
 }
 
 @media screen and (max-width:1950px)

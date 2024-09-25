@@ -177,21 +177,64 @@ namespace CLA_Administration_Web.Helpers.Modules
 
         public static int GetGanttChartHeight(int dataRowsCount)
         {
-            double height = dataRowsCount * 40.0;
+            double height = dataRowsCount > 5 ?  dataRowsCount * 40.0 : 200;
 
             return (int)height;    
+        }
+
+        public static List<GanttChartToolTipViewModel> GetGanttToolTipDetailsLDS(List<ModuleLDSDataViewModel> filteredData)
+        {
+            var result = new List<GanttChartToolTipViewModel>();
+
+            foreach (var item in filteredData)
+            {
+                var tooltip = new GanttChartToolTipViewModel
+                {
+                    Property1 = new KeyVal
+                    {
+                        ColumnName = "Category",
+                        ColumnValue = item.CategoryName
+                    },
+                    Property2 = new KeyVal
+                    {
+                        ColumnName = "Content",
+                        ColumnValue = item.ContentDescription
+                    },
+                    Property3 = new KeyVal
+                    {
+                        ColumnName = "Dates",
+                        ColumnValue = $" {item.EffectiveFrom} - {item.EffectiveTo}"
+                    },
+                    Property4 = new KeyVal
+                    {
+                        ColumnName = "Timeslots",
+                        ColumnValue = $" {item.TimeslotFrom} - {item.TimeslotTo}"
+                    },
+                };
+                result.Add(tooltip);
+            }
+            return result;
         }
 
         public static List<GanttChartDataModel> GetGanttChartData(List<ModuleLDSDataViewModel> filteredData)
         {
             var ganttData = new List<GanttChartDataModel>();
-            int count = 40;
-            
+            var random = new Random();
+
+            var savedXVals = new List<string>();
+
             foreach (var data in filteredData)
             {
+                var x = SharedFunctions.StringTruncate(data.ContentDescription, 10);
+
+                while (savedXVals.Contains(x))
+                    x = $"{SharedFunctions.StringTruncate(data.ContentDescription, 10)}-{random.Next(10)}";
+
+                savedXVals.Add(x);
+                
                 var gantModel = new GanttChartDataModel
                 {
-                    x = SharedFunctions.StringTruncate(data.ContentDescription, 20),
+                    x = x,
                     y = new List<long> 
                     { 
                         SharedFunctions.GetTimeInMilliseconds($"{data.EffectiveFrom} {data.TimeslotFrom}"), 
@@ -200,11 +243,7 @@ namespace CLA_Administration_Web.Helpers.Modules
                     fillColor = GetGanttBarBackgroundColor(data.EffectiveFrom, data.EffectiveTo)
                 };
                 ganttData.Add(gantModel);
-
-                count--;
-                if (count == 0) break;
             }
-
             return ganttData;
         }
     }

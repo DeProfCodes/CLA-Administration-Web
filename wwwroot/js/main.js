@@ -13,3 +13,6 @@ let surveysDataTable;
 let screensaversDataTable;
 let lockedDestopsDataTable;
 let desktopsDataTable;
+
+let rssCategoryDataTable;
+let rssFeedDataTable;

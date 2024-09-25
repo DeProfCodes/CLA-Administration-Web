@@ -1,5 +1,6 @@
 ﻿using CLA_Administration_Web.Helpers.Enums.Shared;
 using CLA_Administration_Web.Helpers.MockData;
+using CLA_Administration_Web.ViewModels.Modules;
 using CLA_Administration_Web.ViewModels.Modules.LDS;
 using CLA_Administration_Web.ViewModels.Modules.PSTR;
 
@@ -55,10 +56,41 @@ namespace CLA_Administration_Web.Services.Modules
 
         #endregion
 
+        #region RSS
+
+        public async Task<List<RssCategoryOverviewViewModel>> GetAllRssCategories(StagingLiveType stagingLiveType)
+        {
+            if (stagingLiveType == StagingLiveType.Staging)
+            {
+                return ModulesMockData.StagingData.AllRSSCategories;
+            }
+            else if (stagingLiveType == StagingLiveType.Live)
+            {
+                return ModulesMockData.LiveData.AllRSSCategories;
+            }
+            return null;
+        }
+
+        public async Task<List<RssFeedOverviewViewModel>> GetAllRssFeeds(StagingLiveType stagingLiveType)
+        {
+            if (stagingLiveType == StagingLiveType.Staging)
+            {
+                return ModulesMockData.StagingData.AllRSSFeed;
+            }
+            else if (stagingLiveType == StagingLiveType.Live)
+            {
+                return ModulesMockData.LiveData.AllRSSFeed;
+            }
+            return null;
+        }
+
+        #endregion
+
+
         #region LDS Modules
 
         #region Screensavers
-        
+
         public async Task<List<ModuleLDSDataViewModel>> GetAllScreensaversData(StagingLiveType stagingLiveType)
         {
             if (stagingLiveType == StagingLiveType.Staging)
