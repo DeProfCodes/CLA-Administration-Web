@@ -1,18 +1,22 @@
 using CLA_Administration_Web.Helpers.Constants;
 using CLA_Administration_Web.Helpers.Enums.Shared;
 using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
+using CLA_Administration_Web.Helpers.MockData;
 using CLA_Administration_Web.Helpers.Modules;
 using CLA_Administration_Web.Helpers.Shared;
 using CLA_Administration_Web.Models;
 using CLA_Administration_Web.Services;
 using CLA_Administration_Web.Services.Modules;
 using CLA_Administration_Web.ViewModels.Modules;
+using CLA_Administration_Web.ViewModels.Modules.ContentLibrary;
+using CLA_Administration_Web.ViewModels.Modules.GanttChart;
 using CLA_Administration_Web.ViewModels.Modules.LDS;
 using CLA_Administration_Web.ViewModels.Modules.PSTR;
 using CLACommonFunctionsLibrary_NET.Helpers;
 using CLACommonFunctionsLibrary_NET.Helpers.Enums;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CLA_Administration_Web.Controllers
 {
@@ -100,7 +104,41 @@ namespace CLA_Administration_Web.Controllers
 
         public IActionResult ContentLibraryCategories()
         {
-            return PartialView(AppPagesLinks.Modules.ContentLibraryCategoriesPageLink);
+            var data = new ContentLibraryCategoryViewModel
+            {
+                CategoriesTrees = new List<ContentLibraryCategoryTree>
+                {
+                   new ContentLibraryCategoryTree
+                   {
+                       CategoryId = 1,
+                       CategoryName = "ABSA TEST 1",
+                       CategoryDescription = "<button class='btn btn-success'>Fuck</button>",
+                       ContentsCount = 19,
+                       _children = new List<ContentLibraryCategoryTree>
+                       {
+                            new ContentLibraryCategoryTree
+                            {
+                                CategoryId = 2,
+                                CategoryName = "ABSA 9999",
+                                CategoryDescription = "Small testing category for Cape Town divisions",
+                                ContentsCount = 4,
+                            }
+                       }
+                   }
+                }
+            };
+
+            data.CategoriesTrees = ModulesMockData.GenerateDummyDataContentLibraryCategories();
+
+            return PartialView(AppPagesLinks.Modules.ContentLibraryCategoriesPageLink, data);
+        }
+
+        public IActionResult ContentLibraryCategoryDetails(int categoryId)
+        {
+            var data = ModulesMockData.AllContentLibraryCategories.FirstOrDefault();
+            data.CategoryId = categoryId;
+
+            return PartialView(AppPagesLinks.Modules.ContentLibraryCategoryDetailsPageLink, data);
         }
 
         public IActionResult ContentLibraryContent()

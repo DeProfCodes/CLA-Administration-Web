@@ -1,8 +1,9 @@
 ﻿using CLA_Administration_Web.Helpers.Enums.Shared;
 using CLA_Administration_Web.Helpers.Shared;
-using CLA_Administration_Web.ViewModels.Modules;
+using CLA_Administration_Web.ViewModels.Modules.ContentLibrary;
 using CLA_Administration_Web.ViewModels.Modules.LDS;
 using CLA_Administration_Web.ViewModels.Modules.PSTR;
+using CLA_Administration_Web.ViewModels.Modules.Rss;
 using CLA_Administration_Web.ViewModels.Shared;
 using System;
 using System.Net.Mime;
@@ -55,6 +56,9 @@ namespace CLA_Administration_Web.Helpers.MockData
 
             public static List<RssFeedOverviewViewModel> AllRSSFeed { get; set; } = GenerateRSSFeedRandomData();
         }
+
+        public static List<ContentLibraryCategoryModel> AllContentLibraryCategories { get; set; } = GenerateContentLibraryRandomData();
+
 
         // Generate Module Data for Popups, Tickers, Surveys
         private static List<ModulePSTRDataViewModel> GeneratePSTRRandomData()
@@ -374,6 +378,78 @@ namespace CLA_Administration_Web.Helpers.MockData
                     FeedURL = $"https://www.{RandomString(random, 1,1)}.com",
                 };
                 items.Add(rssCat);
+            }
+            return items;
+        }
+
+        private static List<ContentLibraryCategoryModel> GenerateContentLibraryRandomData()
+        {
+            var random = new Random();
+            var items = new List<ContentLibraryCategoryModel>();
+
+            var usersList = new List<string> { "NdhuvaziM", "LegeB", "SinethembaS", "LeboC", "Administrator", "CathrineT", "LarryM", "Tarryn" };
+            var machinesList = new List<string> { "NdhuvaziM-PC", "LegeB-PC", "Sinethemba-PC", "LeboC-PC", "Administrator-PC", "CathrineT-PC", "LarryM-PC", "Tarryn-PC" };
+
+            for (int i = 1; i <= 10; i++)
+            {
+                var contentLibCat = new ContentLibraryCategoryModel
+                {
+                    CategoryId = i,
+                    CategoryName = SharedFunctions.CapitalizeFirst(RandomString(random, 1, 3)),
+                    CategoryDescription = SharedFunctions.CapitalizeFirst(RandomString(random, 1, 5)),
+                    ContentsCount = random.Next(320),
+                    UserLastModified = usersList[random.Next(usersList.Count)],
+                    MachineLastModified = machinesList[random.Next(machinesList.Count)]
+                };
+                items.Add(contentLibCat);
+            }
+
+            return items;
+        }
+
+        private static ContentLibraryCategoryTree PopulateCategoryTree(int currentCategoryId, int maxDepth, int currentDepth = 1)
+        {
+            Random random = new Random();
+
+            if (currentDepth > maxDepth) return null;
+
+            // Create a new category
+            var category = new ContentLibraryCategoryTree
+            {
+                CategoryId = currentCategoryId,
+                CategoryName = SharedFunctions.CapitalizeFirst(RandomString(random, 1, 1)),
+                CategoryDescription = SharedFunctions.CapitalizeFirst(RandomString(random, 1, 7)),
+                ContentsCount = random.Next(0, 100),  // Random number of contents
+                _children = null,
+            };
+
+            // Randomly decide how many children (0 to 5)
+            int childrenCount = random.Next(0, 6);  // Upper bound is exclusive, so 6 gives 0 to 5
+
+            for (int i = 0; i < childrenCount; i++)
+            {
+                // Recursively create children categories
+                var childCategory = PopulateCategoryTree(currentCategoryId * 10 + (i + 1), maxDepth, currentDepth + 1);
+                if (childCategory != null)
+                {
+                    if (category._children == null)
+                        category._children = new();
+
+                    category._children.Add(childCategory);
+                }
+            }
+            return category;
+        }
+
+        public static List<ContentLibraryCategoryTree> GenerateDummyDataContentLibraryCategories()
+        {
+            var items = new List<ContentLibraryCategoryTree>();
+            var random = new Random();
+
+            for (int i = 1; i <= 100; i++)
+            {
+                var treeCategory = PopulateCategoryTree(i, random.Next(0, 5));
+                items.Add(treeCategory);
             }
             return items;
         }

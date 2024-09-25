@@ -69,6 +69,20 @@ namespace CLA_Administration_Web.Helpers.Layout
                 },
                 new ModuleBreadcrumbViewModel()
                 {
+                    ModulePage = ModulesPages.ContentLibraryCategoryDetails,
+                    ModulePageName = "Content Library Module",
+                    ModuleName = "Content Library",
+                    ModuleSubPage = "Details",
+                    HasActionButton = true,
+                    IsDetailsPage = true,
+                    ModuleDetailsId = moduleDetailsId,
+                    ModulePreviewPage = ModulesPages.ContentLibraryCategories,
+                    IsAddNewIcon = true,
+                    ActionButtonText = "Edit Category",
+                    ActionButtonPage = ModulesPages.PopupAddNew
+                },
+                new ModuleBreadcrumbViewModel()
+                {
                     ModulePage = ModulesPages.ContentLibraryContent,
                     ModulePageName = "Content Library Module",
                     ModuleName = "Content Library",

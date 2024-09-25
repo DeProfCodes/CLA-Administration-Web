@@ -1,9 +1,10 @@
 ﻿using CLA_Administration_Web.Helpers.Enums.AppPages;
 using CLA_Administration_Web.Helpers.Enums.Shared;
 using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
-using CLA_Administration_Web.ViewModels.Modules;
+using CLA_Administration_Web.ViewModels.Modules.ContentLibrary;
 using CLA_Administration_Web.ViewModels.Modules.LDS;
 using CLA_Administration_Web.ViewModels.Modules.PSTR;
+using CLA_Administration_Web.ViewModels.Modules.Rss;
 
 namespace CLA_Administration_Web.Services
 {
@@ -55,6 +56,8 @@ namespace CLA_Administration_Web.Services
 
             public static List<RssFeedOverviewViewModel> AllRSSFeed { get; set; } 
         }
+
+        public static List<ContentLibraryCategoryModel> AllContentLibraryCategories {get; set; }
 
         public static List<ModulePSTRDataViewModel> GetLocalModulePSTRAllData(ModuleNamesType moduleName)
         {
@@ -172,6 +175,11 @@ namespace CLA_Administration_Web.Services
             {
                 LiveData.AllRSSFeed = data;
             }
+        }
+
+        public static void UpdateContentLibraryCategoriesFeedData(List<ContentLibraryCategoryModel> data)
+        {
+            AllContentLibraryCategories = data;
         }
     }
 }

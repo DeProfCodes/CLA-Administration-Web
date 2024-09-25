@@ -1,16 +1,16 @@
-﻿@model CLA_Administration_Web.ViewModels.Modules.Rss.RssCategoryOverviewViewModel
+﻿@model CLA_Administration_Web.ViewModels.Modules.ContentLibrary.ContentLibraryCategoryModel
 @using CLA_Administration_Web.Helpers.Enums.AppPages
 
 
 <div class="container-fluid">
 
     <!-- Breadcrumb Component -->
-    @await Component.InvokeAsync("Breadcrumbs", new { page = ModulesPages.RSSCategoryDetails, itemId = Model.CategoryId })
+    @await Component.InvokeAsync("Breadcrumbs", new { page = ModulesPages.ContentLibraryCategoryDetails, itemId = Model.CategoryId })
 
     <!-- Card for Filters -->
     <div class="card mb-4 mt-5 overview-filters-card">
         <div class="card-body">
-            <h4 class="w-100 text-center theme-txt-clr">RSS Category Details for Category Id: @Model.CategoryId</h4>
+            <h4 class="w-100 text-center theme-txt-clr">Content Library Category Details for Category Id: @Model.CategoryId</h4>
             <div class="row">
                 
             </div>

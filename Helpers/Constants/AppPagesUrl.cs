@@ -51,6 +51,7 @@ namespace CLA_Administration_Web.Helpers.Constants
 
             //Content Library
             public static string ContentLibraryCategories = $"/{modulesController}/{ModulesPages.ContentLibraryCategories.GetDisplayName()}";
+            public static string ContentLibraryCategoryDetails = $"/{modulesController}/{ModulesPages.ContentLibraryCategoryDetails.GetDisplayName()}";
             public static string ContentLibraryContent = $"/{modulesController}/{ModulesPages.ContentLibraryContent.GetDisplayName()}";
 
             //Desktop

@@ -1,7 +1,7 @@
 ﻿using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
 using CLA_Administration_Web.ViewModels.Modules.LDS;
 
-namespace CLA_Administration_Web.ViewModels.Modules
+namespace CLA_Administration_Web.ViewModels.Modules.GanttChart
 {
     public class GanttChartDataViewModel
     {

@@ -1,7 +1,8 @@
 ﻿using CLA_Administration_Web.Helpers.Enums.Shared;
-using CLA_Administration_Web.ViewModels.Modules;
+using CLA_Administration_Web.ViewModels.Modules.ContentLibrary;
 using CLA_Administration_Web.ViewModels.Modules.LDS;
 using CLA_Administration_Web.ViewModels.Modules.PSTR;
+using CLA_Administration_Web.ViewModels.Modules.Rss;
 
 namespace CLA_Administration_Web.Services.Modules
 {
@@ -36,7 +37,13 @@ namespace CLA_Administration_Web.Services.Modules
 
         public Task<List<RssFeedOverviewViewModel>> GetAllRssFeeds(StagingLiveType stagingLiveType);
 
-        #endregion 
+        #endregion
+
+        #region Content Library
+
+        public Task<List<ContentLibraryCategoryModel>> GetAllContentLibraryCategories();
+
+        #endregion
 
 
         public Task<List<ModuleLDSDataViewModel>> GetAllScreensaversData(StagingLiveType stagingLiveType);

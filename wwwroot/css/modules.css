@@ -310,7 +310,10 @@
     font-weight:bold;
     color: #04316d;
 }
-
+.tabulator
+{
+    font-size: 12px !important;
+}
 @media screen and (max-width:1950px)
 {
     .module-dt-body-text

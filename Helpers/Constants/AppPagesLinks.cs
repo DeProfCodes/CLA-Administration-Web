@@ -43,7 +43,8 @@
             public const string ModuleLDSCalendarOverviewPageLink = "~/Views/Shared/Components/Custom/Modules/Overviews/LDS/ModuleLDSCalendarOverview.cshtml";
 
             //Content Library
-            public const string ContentLibraryCategoriesPageLink = "~/Views/Modules/ContentLibrary/Categories.cshtml";
+            public const string ContentLibraryCategoriesPageLink = "~/Views/Modules/ContentLibrary/ContentLibraryCategories.cshtml";
+            public const string ContentLibraryCategoryDetailsPageLink = "~/Views/Modules/ContentLibrary/ContentLibraryCategoryDetails.cshtml";
             public const string ContentLibraryContentsPageLink = "~/Views/Modules/ContentLibrary/Contents.cshtml";
 
             //Desktop

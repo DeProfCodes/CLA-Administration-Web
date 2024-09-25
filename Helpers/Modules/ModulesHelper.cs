@@ -4,6 +4,7 @@ using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
 using CLA_Administration_Web.Helpers.Shared;
 using CLA_Administration_Web.Services;
 using CLA_Administration_Web.ViewModels.Modules;
+using CLA_Administration_Web.ViewModels.Modules.GanttChart;
 using CLA_Administration_Web.ViewModels.Modules.LDS;
 using CLA_Administration_Web.ViewModels.Modules.PSTR;
 using CLA_Administration_Web.ViewModels.Shared;

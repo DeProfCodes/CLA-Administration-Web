@@ -1,8 +1,9 @@
 ﻿using CLA_Administration_Web.Helpers.Enums.Shared;
 using CLA_Administration_Web.Helpers.MockData;
-using CLA_Administration_Web.ViewModels.Modules;
+using CLA_Administration_Web.ViewModels.Modules.ContentLibrary;
 using CLA_Administration_Web.ViewModels.Modules.LDS;
 using CLA_Administration_Web.ViewModels.Modules.PSTR;
+using CLA_Administration_Web.ViewModels.Modules.Rss;
 
 namespace CLA_Administration_Web.Services.Modules
 {
@@ -10,7 +11,7 @@ namespace CLA_Administration_Web.Services.Modules
     {
         public ModuleService()
         {
-         
+
         }
 
         #region PSTR Modules
@@ -19,7 +20,7 @@ namespace CLA_Administration_Web.Services.Modules
 
         public async Task<List<ModulePSTRDataViewModel>> GetAllPopupsData()
         {
-            return ModulesMockData.StagingData.AllPopupsData;    
+            return ModulesMockData.StagingData.AllPopupsData;
         }
 
         #endregion
@@ -34,7 +35,7 @@ namespace CLA_Administration_Web.Services.Modules
         #endregion
 
         #region Surveys
-        
+
         public async Task<List<ModulePSTRDataViewModel>> GetAllSurveysData()
         {
             return ModulesMockData.StagingData.AllSurveysData;
@@ -86,6 +87,14 @@ namespace CLA_Administration_Web.Services.Modules
 
         #endregion
 
+        #region Content Library
+
+        public async Task<List<ContentLibraryCategoryModel>> GetAllContentLibraryCategories()
+        {
+            return ModulesMockData.AllContentLibraryCategories;
+        }
+
+        #endregion
 
         #region LDS Modules
 
@@ -123,7 +132,7 @@ namespace CLA_Administration_Web.Services.Modules
 
         #endregion
 
-        #region LockedDesktops
+        #region Desktops
 
         public async Task<List<ModuleLDSDataViewModel>> GetAllDesktopsData(StagingLiveType stagingLiveType)
         {

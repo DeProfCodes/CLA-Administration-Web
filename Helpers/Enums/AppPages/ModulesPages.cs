@@ -30,6 +30,9 @@ namespace CLA_Administration_Web.Helpers.Enums.AppPages
         [Display(Name = "ContentLibraryCategories", ShortName = "ContentLibrary")]
         ContentLibraryCategories,
 
+        [Display(Name = "ContentLibraryCategoryDetails", ShortName = "ContentLibrary")]
+        ContentLibraryCategoryDetails,
+
         [Display(Name = "ContentLibraryContent", ShortName = "ContentLibrary")]
         ContentLibraryContent,
 
