@@ -1,6 +1,14 @@
 ﻿@model CLA_Administration_Web.ViewModels.Modules.PSTR.ModulePSTRDataViewModel
 @using CLA_Administration_Web.Helpers.Enums.AppPages
 
+@{
+    var testPopupTitle = "<p class='mb-0' style='color:blue;font-size:16px;'>Popup Title HTML</p>";
+
+    var testPopupBody = @"
+                            <font color=""#000000"" size=""3"" face=""Arial""><table style=""WIDTH: 148pt; BORDER-COLLAPSE: collapse"" cellspacing=""0"" cellpadding=""0"" width=""198"" border=""0""><colgroup><col style=""WIDTH: 101pt; mso-width-source: userset; mso-width-alt: 4937"" width=""135""><col style=""WIDTH: 47pt; mso-width-source: userset; mso-width-alt: 2304"" width=""63""><tbody><tr style=""HEIGHT: 12pt"" height=""16""><td class=""xl68"" style=""BORDER-TOP: windowtext 0.5pt solid; HEIGHT: 12pt; BORDER-RIGHT: windowtext 0.5pt solid; WIDTH: 148pt; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext 0.5pt solid; BACKGROUND-COLOR: transparent"" height=""16"" width=""198"" colspan=""2""><strong><font size=""2"" face=""Calibri"">WIP Status</font></strong></td></tr><tr style=""HEIGHT: 12pt"" height=""16""><td class=""xl66"" style=""BORDER-TOP: windowtext; HEIGHT: 12pt; BORDER-RIGHT: windowtext 0.5pt solid; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext 0.5pt solid; BACKGROUND-COLOR: transparent"" height=""16""><font size=""2"" face=""Calibri"">Opening prior</font></td><td class=""xl67"" style=""BORDER-TOP: windowtext; BORDER-RIGHT: windowtext 0.5pt solid; WIDTH: 47pt; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext; BACKGROUND-COLOR: transparent"" width=""63"" align=""right""><font size=""2"" face=""Segoe UI"">880 222</font></td></tr><tr style=""HEIGHT: 12pt"" height=""16""><td class=""xl66"" style=""BORDER-TOP: windowtext; HEIGHT: 12pt; BORDER-RIGHT: windowtext 0.5pt solid; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext 0.5pt solid; BACKGROUND-COLOR: transparent"" height=""16""><font face=""Calibri""><font size=""2"">In-Cycle Prior month&nbsp; </font></font></td><td class=""xl67"" style=""BORDER-TOP: windowtext; BORDER-RIGHT: windowtext 0.5pt solid; WIDTH: 47pt; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext; BACKGROUND-COLOR: transparent"" width=""63"" align=""right""><font size=""2"" face=""Segoe UI"">644 868</font></td></tr><tr style=""HEIGHT: 12pt"" height=""16""><td class=""xl66"" style=""BORDER-TOP: windowtext; HEIGHT: 12pt; BORDER-RIGHT: windowtext 0.5pt solid; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext 0.5pt solid; BACKGROUND-COLOR: transparent"" height=""16""><font size=""2"" face=""Calibri"">% in-cycle</font></td><td class=""xl69"" style=""BORDER-TOP: windowtext; BORDER-RIGHT: windowtext 0.5pt solid; WIDTH: 47pt; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext; BACKGROUND-COLOR: #00b050"" width=""63"" align=""right""><font size=""2"" face=""Segoe UI"">73%</font></td></tr><tr style=""HEIGHT: 12pt"" height=""16""><td class=""xl66"" style=""BORDER-TOP: windowtext; HEIGHT: 12pt; BORDER-RIGHT: windowtext 0.5pt solid; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext 0.5pt solid; BACKGROUND-COLOR: transparent"" height=""16""><font size=""2"" face=""Calibri"">Out-Cycle Prior</font></td><td class=""xl67"" style=""BORDER-TOP: windowtext; BORDER-RIGHT: windowtext 0.5pt solid; WIDTH: 47pt; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext; BACKGROUND-COLOR: transparent"" width=""63"" align=""right""><font size=""2"" face=""Segoe UI"">141 710</font></td></tr><tr style=""HEIGHT: 12pt"" height=""16""><td class=""xl66"" style=""BORDER-TOP: windowtext; HEIGHT: 12pt; BORDER-RIGHT: windowtext 0.5pt solid; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext 0.5pt solid; BACKGROUND-COLOR: transparent"" height=""16""><font size=""2"" face=""Calibri"">Opening Current</font></td><td class=""xl67"" style=""BORDER-TOP: windowtext; BORDER-RIGHT: windowtext 0.5pt solid; WIDTH: 47pt; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext; BACKGROUND-COLOR: transparent"" width=""63"" align=""right""><font size=""2"" face=""Segoe UI"">786 466</font></td></tr><tr style=""HEIGHT: 12pt"" height=""16""><td class=""xl66"" style=""BORDER-TOP: windowtext; HEIGHT: 12pt; BORDER-RIGHT: windowtext 0.5pt solid; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext 0.5pt solid; BACKGROUND-COLOR: transparent"" height=""16""><font size=""2"" face=""Calibri"">Target</font></td><td class=""xl67"" style=""BORDER-TOP: windowtext; BORDER-RIGHT: windowtext 0.5pt solid; WIDTH: 47pt; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext; BACKGROUND-COLOR: transparent"" width=""63"" align=""right""><font size=""2"" face=""Segoe UI"">393 233</font></td></tr></tbody></colgroup></table></font>
+                            ";
+
+}
 
 <div class="container-fluid">
 
@@ -15,13 +23,33 @@
     </div>
 
     <!-- Card for Body -->
-    <div class="card mb-4 mt-2 overview-filters-card">
-        <div class="card-body">
-            <div class="col-md-6">
-                <div class="row">
-                    <p class="fw-bold theme-txt-clr">Popup Title</p>
-                    <div>
-
+    <div class="card mb-4 mt-2 overview-filters-card p-4">
+        <div class="card-body p-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4 class="w-100 text-center theme-txt-clr">Popup Texts</h4>
+                    <div class="row mt-3">
+                        <p class="custom-p-bold ps-0">Popup Title</p>
+                        <div class="mt-1" id="PopupDetailsTitlePreview">
+                            @Html.Raw(testPopupTitle)
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <p class="custom-p-bold ps-0">Popup Text</p>
+                        <div class="mt-1" id="PopupDetailsBodyPreview">
+                            @Html.Raw(testPopupBody)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h4 class="w-100 text-center theme-txt-clr">Popup Details</h4>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <p class="custom-p-bold fl-right">Link Type</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="custom-p">:No Link</p>
+                        </div>
                     </div>
                 </div>
             </div>

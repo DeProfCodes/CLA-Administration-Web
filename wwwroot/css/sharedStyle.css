@@ -80,6 +80,18 @@
     padding: 1px 5px !important;
     font-size: 12px !important;
 }
+.custom-p
+{
+    margin-bottom: 0 !important;
+    color: #04316d !important; 
+}
+
+.custom-p-bold
+{
+    margin-bottom: 0 !important;
+    color: #04316d !important; 
+    font-weight: bold;
+}
 
 /**======================================================= Scaling ====================================================*/
 

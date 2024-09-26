@@ -4,6 +4,7 @@
 
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
 <script src="~/js/modules/fullCalendar.js"></script>
+<script src="~/js/calendaDataTest.js"></script>
 
 <script>
 
@@ -12,62 +13,7 @@
         $("#ModuleFilterActionButtonsContainer").hide();
     });
 
-    var data =
-        [
-            {
-                title: 'All Day Event',
-                start: '2024-08-01'
-            },
-            {
-                title: 'Long Event',
-                start: '2024-08-07',
-                end: '2024-08-10'
-            },
-            {
-                groupId: '999',
-                title: 'Repeating Event',
-                start: '2024-08-09T16:00:00'
-            },
-            {
-                groupId: '999',
-                title: 'Repeating Event',
-                start: '2024-08-16T16:00:00'
-            },
-            {
-                title: 'Conference',
-                start: '2024-08-11',
-                end: '2024-08-13'
-            },
-            {
-                title: 'Meeting',
-                start: '2024-08-12T10:30:00',
-                end: '2024-08-12T12:30:00'
-            },
-            {
-                title: 'Lunch',
-                start: '2024-08-12T12:00:00'
-            },
-            {
-                title: 'Meeting',
-                start: '2024-08-12T14:30:00'
-            },
-            {
-                title: 'Birthday Party',
-                start: '2024-08-13T07:00:00',
-                end: '2024-08-13T12:30:00'
-            },
-            {
-                title: 'Birthday Party 2',
-                start: '2024-08-13T07:00:00',
-                end: '2024-08-13T12:30:00'
-            },
-            {
-                title: 'Click for Google',
-                url: 'https://google.com/',
-                start: '2024-08-28'
-            }
-        ];
-
-    CreateModuleCalendarView("ModuleCalendar", data);
+    
+    CreateModuleCalendarView("ModuleCalendar", calendarData);
 
 </script>
