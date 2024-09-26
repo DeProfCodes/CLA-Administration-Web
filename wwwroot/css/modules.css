@@ -331,6 +331,135 @@
     padding: 8px 8px;
     overflow:auto;
 }
+.popup-icon
+{
+    width: 35px;
+    height: 35px;
+}
+.popup-info-headings
+{
+    float: right;
+}
+.popup-info-attachment-icon
+{
+     color: #04316d;
+     font-size: 20px;
+     display: contents;
+}
+.popup-info-attachment-text
+{
+    color: #04316d;
+    font-style: italic;
+    text-decoration: underline;
+    margin-bottom:0;
+    cursor: pointer;
+}
+#PopupBodyPreview
+{
+    width: 314px;
+    height: 188px;
+}
+#PopupBodyPreviewTitle
+{
+    height: 58px;
+    padding:0;
+    margin-left:0;
+    width:314px;
+}
+#PopupBodyPreviewTitleIcon
+{
+    width: 55px;
+}
+#PopupBodyPreviewTitleIcon img
+{
+    margin: 3px;
+    width: 49px;
+    height: 44px;
+}
+#PopupBodyPreviewTitleText
+{
+    padding: 10px;
+    height: 40px;
+    width:100%;
+}
+#PopupBodyPreviewTitleDismiss
+{
+    width:20px;
+}
+#PopupBodyPreviewTitleDismiss img
+{
+    height: 10px;
+    width: 10px;
+    margin: 3px 7px 3px 3px;
+}
+#PopupBodyPreviewTextBody
+{
+    height: 88px;
+    padding: 0 5px 0 0;
+    margin: 5px 0 0 16px;
+    overflow:auto;
+}
+#PopupBodyPreviewTextBodyFooter
+{
+    height: 37px;
+}
+#PopupBodyPreviewText
+{
+    width:314px;
+    margin-left:0;
+    padding:0;
+    display: inline-block;
+}
+#PopupBodyPreviewTextBodyFooter .btn
+{
+    height: fit-content;
+    width: 90px;
+    font-size: 10px;
+    margin: 5px 0 0 14px;
+    border: 1px solid navy;
+    padding: 0;
+    background: white;
+    cursor: default;
+}
+#PopupFeedbackContents
+{
+    width: 314px;
+    height: 188px;
+    margin-top:-190px;
+    position:absolute;
+}
+.popup-feedback-icons
+{
+    width: 45px;
+    height: 60px;
+}
+#PopupFeedbackText
+{
+    margin-left:auto;
+    margin-right: auto;
+    border: 2px solid black;
+    border-radius: 10px;
+    width: 90%;
+    font-size: 12px;
+    cursor:default;
+    background:white;
+}
+#PopupFeedbackBtn
+{
+    background:black;
+    color:white;
+    border-radius:0;
+    height:fit-content;
+    padding:2px 3px;
+    font-size:12px;
+    width: 120px;
+    margin-left:auto;
+    cursor:default;
+}
+#PopupDetailsContainer
+{
+    padding: 1.5rem;
+}
 
 @media screen and (max-width:1950px)
 {
@@ -432,6 +561,10 @@
     {
         font-size: 12px !important;
     }
+    .popup-info-headings
+    {
+        float: none;
+    }
 }
 @media screen and (max-width:530px)
 {
@@ -459,6 +592,10 @@
     .overview-dates-input
     {
         width: 120px !important;
+    }
+    #PopupDetailsContainer
+    {
+        padding: 10px;
     }
 }
 @media screen and (max-width:410px)
@@ -501,6 +638,10 @@
     #DatesFilterTitle
     {
         margin-left: 15px;
+    }
+    #PopupDetailsContainer
+    {
+        padding: 0;
     }
 }
 @media screen and (max-width:350px)
