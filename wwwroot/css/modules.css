@@ -525,6 +525,12 @@
 {
     width: 100%;
 }
+#ContentLibraryCategoryDetailsContainer
+{
+    width: 60%;
+    margin-left:auto;
+    margin-right:auto;
+}
 #LockedDesktopDetailsContainer
 {
 
@@ -765,6 +771,10 @@
     .overview-users-select
     {
         margin-right: auto;
+    }
+    #ContentLibraryCategoryDetailsContainer
+    {
+        width: 100% !important;
     }
 }
 

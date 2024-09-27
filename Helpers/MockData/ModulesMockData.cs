@@ -403,6 +403,7 @@ namespace CLA_Administration_Web.Helpers.MockData
                     CategoryName = SharedFunctions.CapitalizeFirst(RandomString(random, 1, 3)),
                     CategoryDescription = SharedFunctions.CapitalizeFirst(RandomString(random, 1, 5)),
                     ContentsCount = random.Next(320),
+                    DateLastModified = DateTime.Now.AddMinutes(-random.Next(0, 50000)).ToString("yyyy/MM/dd HH:mm"),
                     UserLastModified = usersList[random.Next(usersList.Count)],
                     MachineLastModified = machinesList[random.Next(machinesList.Count)]
                 };

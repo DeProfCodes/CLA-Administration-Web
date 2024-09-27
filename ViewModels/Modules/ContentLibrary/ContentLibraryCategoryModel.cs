@@ -10,6 +10,8 @@
 
         public int ContentsCount { get; set; }
 
+        public string DateLastModified { get; set; }
+
         public string UserLastModified { get; set; }
 
         public string MachineLastModified { get; set; }

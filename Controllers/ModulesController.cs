@@ -103,7 +103,6 @@ namespace CLA_Administration_Web.Controllers
             return PartialView(AppPagesLinks.Modules.ModuleLDSGanttOverviewPageLink, ganttChartVM);
         }
 
-
         #endregion
 
 
@@ -113,30 +112,6 @@ namespace CLA_Administration_Web.Controllers
 
             try
             {
-                data = new ContentLibraryCategoryViewModel
-                {
-                    CategoriesTrees = new List<ContentLibraryCategoryTree>
-                    {
-                       new ContentLibraryCategoryTree
-                       {
-                           CategoryId = 1,
-                           CategoryName = "ABSA TEST 1",
-                           CategoryDescription = "<button class='btn btn-success'>Fuck</button>",
-                           ContentsCount = 19,
-                           _children = new List<ContentLibraryCategoryTree>
-                           {
-                                new ContentLibraryCategoryTree
-                                {
-                                    CategoryId = 2,
-                                    CategoryName = "ABSA 9999",
-                                    CategoryDescription = "Small testing category for Cape Town divisions",
-                                    ContentsCount = 4,
-                                }
-                           }
-                       }
-                    }
-                };
-
                 data.CategoriesTrees = ModulesMockData.GenerateDummyDataContentLibraryCategories();
             }
             catch(Exception ex)
