@@ -308,6 +308,7 @@ namespace CLA_Administration_Web.Helpers.MockData
             var items = new List<ModuleLDSDataViewModel>();
 
             var usersList = new List<string> { "NdhuvaziM", "LegeB", "SinethembaS", "LeboC", "Administrator", "CathrineT", "LarryM", "Tarryn" };
+            var machinesList = new List<string> { "NdhuvaziM-PC", "LegeB-PC", "Sinethemba-PC", "LeboC-PC", "Administrator-PC", "CathrineT-PC", "LarryM-PC", "Tarryn-PC" };
             var contentType = new List<string> { "Picture", "Audio", "Video", "URL" };
 
             DateTime effectiveFrom = new();
@@ -340,6 +341,7 @@ namespace CLA_Administration_Web.Helpers.MockData
                     TimeslotTo = RandomTime(random),
                     LastModifiedDate = DateTime.Now.AddMinutes(-random.Next(0, 50000)).ToString("yyyy/MM/dd HH:mm"),
                     UserIdLastModified = usersList[random.Next(0, 8)],
+                    MachineIdLastModified = machinesList[random.Next(machinesList.Count)]
                 };
 
                 items.Add(item);

@@ -121,3 +121,14 @@ function FilterModuleDataOverviewByViewType(moduleType, buttonId)
     
     FilterModuleDataOverviewByStatus(moduleType, btnId, status);
 }
+
+function LoadContentPreviewer(containerDivId)
+{
+    var url = GetPageUrl("ModuleContentPreviewer");
+    LoadPartialView(url, containerDivId);
+}
+
+function PreviewImage()
+{
+    OpenImagePreviewModal();
+}

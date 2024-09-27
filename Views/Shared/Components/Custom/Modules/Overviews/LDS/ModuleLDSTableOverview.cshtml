@@ -51,7 +51,7 @@
                 <td class="text-center"><p class="module-dt-header-text">@module.CategoryName</p></td>
                 <td class="text-center"><p class="module-dt-header-text">@module.CategoryDescription</p></td>
                 <td class="text-center">@module.ContentType</td>
-                <td><button class="btn btn-sm btn-primary custom-btn-sm">Open</button></td>
+                <td><button class="btn btn-sm btn-primary custom-btn-sm" onclick="PreviewImage()">Open</button></td>
                 <td class="text-center"><p class="module-dt-header-text">@module.ContentDescription</p></td>
                 @if (Model.ModuleName == ModuleNamesType.Screensaver || Model.ModuleName == ModuleNamesType.LockedDesktop)
                 {
@@ -73,6 +73,8 @@
         }
     </tbody>
 </table>
+<div id="ImagePreviwer">
+</div>
 
 @if (Model.ModuleName == ModuleNamesType.Screensaver)
 {
@@ -92,6 +94,7 @@
     {
         $("#ModuleFilterActionButtonsContainer").show();
         SetDataTableData();
+        LoadContentPreviewer("#ImagePreviwer");
     });
 
     function SetDataTableData()

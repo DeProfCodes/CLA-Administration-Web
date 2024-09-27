@@ -184,11 +184,19 @@ namespace CLA_Administration_Web.Controllers
             return PartialView(AppPagesLinks.Modules.DesktopOverviewPageLink);
         }
 
+        public async Task<IActionResult> DesktopDetails(int desktopId)
+        {
+            var desktopVm = LocalDataStorage.StagingData.AllDesktops.FirstOrDefault(x => x.Id == desktopId);
+
+            return PartialView(AppPagesLinks.Modules.DesktopDetailsPageLink, desktopVm);
+        }
+
         public IActionResult DesktopAddNew()
         {
             return PartialView(AppPagesLinks.Modules.DesktopAddNewPageLink);
         }
 
+        #region LockedDesktop
         public async Task<IActionResult> LockedDesktopOverview()
         {
             var lockedDesktopStaging = await _moduleService.GetAllLockedDesktopsData(StagingLiveType.Staging);
@@ -213,11 +221,21 @@ namespace CLA_Administration_Web.Controllers
             return PartialView(AppPagesLinks.Modules.LockedDesktopOverviewPageLink);
         }
 
+        public async Task<IActionResult> LockedDesktopDetails(int lockedDesktopId)
+        {
+            var lockeddesktopVm = LocalDataStorage.StagingData.AllLockedDesktops.FirstOrDefault(x => x.Id == lockedDesktopId);
+
+            return PartialView(AppPagesLinks.Modules.LockedDesktopDetailsPageLink, lockeddesktopVm);
+        }
+
         public IActionResult LockedDesktopAddNew()
         {
             return PartialView(AppPagesLinks.Modules.LockedDesktopAddNewPageLink);
         }
 
+        #endregion
+
+        #region Screensaver
         public async Task<IActionResult> ScreensaverOverview()
         {
             var screensaversStaging = await _moduleService.GetAllScreensaversData(StagingLiveType.Staging);
@@ -242,13 +260,22 @@ namespace CLA_Administration_Web.Controllers
             return PartialView(AppPagesLinks.Modules.ScreensaverOverviewPageLink);
         }
 
+        public async Task<IActionResult> ScreensaverDetails(int screensaverId)
+        {
+            var screensaverVm = LocalDataStorage.StagingData.AllScreensavers.FirstOrDefault(x => x.Id == screensaverId);
+
+            return PartialView(AppPagesLinks.Modules.ScreensaverDetailsPageLink, screensaverVm);
+        }
+
         public IActionResult ScreensaverAddNew()
         {
             return PartialView(AppPagesLinks.Modules.ScreensaverAddNewPageLink);
         }
 
+        #endregion
+
         #region Popup
-        
+
         public async Task<IActionResult> PopupOverview()
         {
             var popupDataViewModel = await _moduleService.GetAllPopupsData();
@@ -361,6 +388,7 @@ namespace CLA_Administration_Web.Controllers
 
         #endregion
 
+        #region RSS
         public async Task<IActionResult> RssCategoryOverview()
         {
             var rssCategories = await _moduleService.GetAllRssCategories(StagingLiveType.Staging);
@@ -399,6 +427,22 @@ namespace CLA_Administration_Web.Controllers
         {
             return PartialView(AppPagesLinks.Modules.RSSAddNewPageLink);
         }
+
+        #endregion
+
+        #region Module Additional Components
+
+        public async Task<IActionResult> ModuleContentPreviewer()
+        {
+            var imagePreviewer = new ContentPreviewerViewModel
+            {
+                ImageUrl = $"{LaunchSettingsHelper.GetBaseAddressForImages()}/images/others/modules/skins/Popup_Skin_Default.png",
+            };
+
+            return PartialView(AppPagesLinks.Modules.ModuleImagePreviewerPageLink, imagePreviewer);
+        }
+
+        #endregion
     }
 }
  

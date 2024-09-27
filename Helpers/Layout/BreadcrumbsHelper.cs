@@ -106,6 +106,20 @@ namespace CLA_Administration_Web.Helpers.Layout
                 },
                 new ModuleBreadcrumbViewModel()
                 {
+                    ModulePage = ModulesPages.DesktopDetails,
+                    ModulePageName = "Desktop Module",
+                    ModuleName = "Locked Desktop",
+                    ModuleSubPage = "Details",
+                    HasActionButton = true,
+                    IsDetailsPage = true,
+                    ModuleDetailsId = moduleDetailsId,
+                    ModulePreviewPage = ModulesPages.DesktopOverview,
+                    IsAddNewIcon = true,
+                    ActionButtonText = "Edit Desktop",
+                    ActionButtonPage = ModulesPages.DesktopAddNew
+                },
+                new ModuleBreadcrumbViewModel()
+                {
                     ModulePage = ModulesPages.DesktopAddNew,
                     ModulePageName = "Desktop Module",
                     ModuleName = "Desktop",
@@ -129,6 +143,20 @@ namespace CLA_Administration_Web.Helpers.Layout
                 },
                 new ModuleBreadcrumbViewModel()
                 {
+                    ModulePage = ModulesPages.LockedDesktopDetails,
+                    ModulePageName = "Locked Desktop Module",
+                    ModuleName = "Locked Desktop",
+                    ModuleSubPage = "Details",
+                    HasActionButton = true,
+                    IsDetailsPage = true,
+                    ModuleDetailsId = moduleDetailsId,
+                    ModulePreviewPage = ModulesPages.LockedDesktopOverview,
+                    IsAddNewIcon = true,
+                    ActionButtonText = "Edit Locked Desktop",
+                    ActionButtonPage = ModulesPages.LockedDesktopAddNew
+                },
+                new ModuleBreadcrumbViewModel()
+                {
                     ModulePage = ModulesPages.LockedDesktopOverview,
                     ModulePageName = "Locked Desktop Module",
                     ModuleName = "Locked Desktop",
@@ -149,6 +177,20 @@ namespace CLA_Administration_Web.Helpers.Layout
                     IsAddNewIcon = false,
                     ActionButtonText = "Screensaver Overview",
                     ActionButtonPage = ModulesPages.ScreensaverOverview
+                },
+                new ModuleBreadcrumbViewModel()
+                {
+                    ModulePage = ModulesPages.ScreensaverDetails,
+                    ModulePageName = "Screensaver Module",
+                    ModuleName = "Screensaver",
+                    ModuleSubPage = "Details",
+                    HasActionButton = true,
+                    IsDetailsPage = true,
+                    ModuleDetailsId = moduleDetailsId,
+                    ModulePreviewPage = ModulesPages.ScreensaverOverview,
+                    IsAddNewIcon = true,
+                    ActionButtonText = "Edit Screensaver",
+                    ActionButtonPage = ModulesPages.ScreensaverAddNew
                 },
                 new ModuleBreadcrumbViewModel()
                 {

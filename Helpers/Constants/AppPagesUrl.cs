@@ -56,14 +56,17 @@ namespace CLA_Administration_Web.Helpers.Constants
 
             //Desktop
             public static string DesktopOverview = $"/{modulesController}/{ModulesPages.DesktopOverview.GetDisplayName()}";
+            public static string DesktopDetails = $"/{modulesController}/{ModulesPages.DesktopDetails.GetDisplayName()}";
             public static string DesktopAddNew = $"/{modulesController}/{ModulesPages.DesktopAddNew.GetDisplayName()}";
 
             //Locked Desktop
             public static string LockedDesktopOverview = $"/{modulesController}/{ModulesPages.LockedDesktopOverview.GetDisplayName()}";
+            public static string LockedDesktopDetails = $"/{modulesController}/{ModulesPages.LockedDesktopDetails.GetDisplayName()}";
             public static string LockedDesktopAddNew = $"/{modulesController}/{ModulesPages.LockedDesktopAddNew.GetDisplayName()}";
 
             //Screensaver
             public static string ScreensaverOverview = $"/{modulesController}/{ModulesPages.ScreensaverOverview.GetDisplayName()}";
+            public static string ScreensaverDetails = $"/{modulesController}/{ModulesPages.ScreensaverDetails.GetDisplayName()}";
             public static string ScreensaverAddNew = $"/{modulesController}/{ModulesPages.ScreensaverAddNew.GetDisplayName()}";
 
             //Popup
@@ -89,6 +92,9 @@ namespace CLA_Administration_Web.Helpers.Constants
             public static string RSSFeedOverview = $"/{modulesController}/{ModulesPages.RSSFeedOverview.GetDisplayName()}";
             public static string RSSFeedDetails = $"/{modulesController}/{ModulesPages.RSSFeedDetails.GetDisplayName()}";
             public static string RSSAddNew = $"/{modulesController}/{ModulesPages.RSSAddNew.GetDisplayName()}";
+
+            //Additional Components
+            public static string ModuleContentPreviewer = $"/{modulesController}/{ModulesPages.ModuleContentPreviewer.GetDisplayName()}";
         }
 
         public class Setttings

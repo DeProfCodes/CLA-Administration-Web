@@ -40,6 +40,9 @@ namespace CLA_Administration_Web.Helpers.Enums.AppPages
         [Display(Name = "DesktopOverview", ShortName = "Desktop")]
         DesktopOverview,
 
+        [Display(Name = "DesktopDetails", ShortName = "Desktop")]
+        DesktopDetails,
+
         [Display(Name = "DesktopAddNew", ShortName = "Desktop")]
         DesktopAddNew,
 
@@ -47,12 +50,18 @@ namespace CLA_Administration_Web.Helpers.Enums.AppPages
         [Display(Name = "LockedDesktopOverview", ShortName = "LockedDesktop")]
         LockedDesktopOverview,
 
+        [Display(Name = "LockedDesktopDetails", ShortName = "LockedDesktop")]
+        LockedDesktopDetails,
+
         [Display(Name = "LockedDesktopAddNew", ShortName = "LockedDesktop")]
         LockedDesktopAddNew,
 
         //Screensaver
         [Display(Name = "ScreensaverOverview", ShortName = "Screensaver")]
         ScreensaverOverview,
+
+        [Display(Name = "ScreensaverDetails", ShortName = "Screensaver")]
+        ScreensaverDetails,
 
         [Display(Name = "ScreensaverAddNew", ShortName = "Screensaver")]
         ScreensaverAddNew,
@@ -107,6 +116,10 @@ namespace CLA_Administration_Web.Helpers.Enums.AppPages
         RSSFeedDetails,
 
         [Display(Name = "RSSAddNew", ShortName = "RSS")]
-        RSSAddNew
+        RSSAddNew,
+
+        [Display(Name = "ModuleContentPreviewer", ShortName = "Component")]
+        ModuleContentPreviewer,
+
     }
 }

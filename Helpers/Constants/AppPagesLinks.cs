@@ -49,14 +49,17 @@
 
             //Desktop
             public const string DesktopOverviewPageLink = "~/Views/Modules/Desktop/DesktopOverview.cshtml";
+            public const string DesktopDetailsPageLink = "~/Views/Modules/Desktop/DesktopDetails.cshtml";
             public const string DesktopAddNewPageLink = "~/Views/Modules/Desktop/AddNewDesktop.cshtml";
 
             //Locked Desktop
             public const string LockedDesktopOverviewPageLink = "~/Views/Modules/LockedDesktop/LockedDesktopOverview.cshtml";
+            public const string LockedDesktopDetailsPageLink = "~/Views/Modules/LockedDesktop/LockedDesktopDetails.cshtml";
             public const string LockedDesktopAddNewPageLink = "~/Views/Modules/LockedDesktop/AddNewLockedDesktop.cshtml";
 
             //Screensaver
             public const string ScreensaverOverviewPageLink = "~/Views/Modules/Screensaver/ScreensaverOverview.cshtml";
+            public const string ScreensaverDetailsPageLink = "~/Views/Modules/Screensaver/ScreensaverDetails.cshtml";
             public const string ScreensaverAddNewPageLink = "~/Views/Modules/Screensaver/AddNewScreensaver.cshtml";
 
             //Popup
@@ -82,6 +85,10 @@
             public const string RssFeedOverviewPageLink = "~/Views/Modules/RSS/RssFeedOverview.cshtml";
             public const string RssFeedDetailsPageLink = "~/Views/Modules/RSS/RssFeedDetails.cshtml";
             public const string RSSAddNewPageLink = "~/Views/Modules/RSS/AddNewRSS.cshtml";
+
+            //Previewer Components
+            public const string ModuleImagePreviewerPageLink = "~/Views/Shared/Components/Custom/Modules/ContentPreviewers/ImagePreviewer.cshtml";
+
         }
 
         public class Settings

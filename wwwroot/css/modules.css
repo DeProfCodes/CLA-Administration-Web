@@ -159,6 +159,7 @@
 {
     height: 30px !important;
 }
+
 .module-filter-btn-group
 {
     width: 70px !important;
@@ -166,25 +167,29 @@
     padding: 0 !important;
     border-color: #04316d !important;
 }
+
 .module-filter-btn-group-active
 {
     width: 70px !important;
     font-size: 14px !important;
     padding: 0 !important;
-    color:white !important;
+    color: white !important;
     background: #04316d !important;
 }
+
 .btn-group-active
 {
-    color:white !important;
+    color: white !important;
     background: #04316d !important;
 }
+
 .overview-filter-btn-group button:hover
 {
     background: #04316d !important;
-    border-color:  #04316d !important;
-    color:white !important;
+    border-color: #04316d !important;
+    color: white !important;
 }
+
 .overview-filter-title
 {
     font-weight: bold;
@@ -192,128 +197,152 @@
     margin-bottom: 0 !important;
     align-content: center;
 }
+
 .overview-filter-title2
 {
     width: fit-content !important;
     margin-bottom: 0 !important;
     align-content: center;
 }
+
 .overview-users-select
 {
     height: 30px !important;
     font-size: 14px !important;
     padding: 2px 40px !important;
 }
+
 .overview-dates-input
 {
     width: 120px !important;
     font-size: 14px !important;
     height: 30px;
 }
+
 .overview-filters-card
 {
     min-width: 310px;
 }
+
 #FilterModuleTitle
 {
     font-size: 22px !important;
 }
+
 .overview-filters-card .card-body
 {
-    padding-bottom:0 !important;
+    padding-bottom: 0 !important;
 }
+
 #ModuleOverviewCard
 {
     min-height: 500px;
 }
+
 .overview-table-caption
 {
     font-size: 20px;
 }
+
 .module-dt-body-text
 {
     max-width: 380px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    margin-bottom:0;
+    margin-bottom: 0;
 }
+
 .survey-q-dt-body-text
 {
     max-width: 250px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    margin-bottom:0;
+    margin-bottom: 0;
 }
+
 .module-dt-header-text
 {
     max-width: 120px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    margin-bottom:0;
+    margin-bottom: 0;
 }
+
 #PopupOverviewDataTable
 {
     border: 0px solid silver;
 }
+
 #SurveyQuesitonsOverviewDataTable
 {
     border-top: 1px solid silver;
 }
+
 #TypeStagingLiveBtns
 {
     margin-left: 10px;
 }
+
 #ViewFilterBtns
 {
     margin-left: 9px;
 }
+
 #GanttChartLegend
 {
-     overflow: hidden !important;
+    overflow: hidden !important;
 }
+
 #GanttChartLegend
 {
-    border:1px solid grey;
+    border: 1px solid grey;
     padding: 3px;
 }
+
 .gantt-color-block
 {
-    padding:1px;
-    border:1px solid black;
-    width:15px;
-    height:15px;
+    padding: 1px;
+    border: 1px solid black;
+    width: 15px;
+    height: 15px;
 }
+
 .gantt-color-block-text
 {
-    color:gray;
-    font-style:italic;
-    font-size:12px;
+    color: gray;
+    font-style: italic;
+    font-size: 12px;
     margin-top: -1px;
-    margin-left:2px;
+    margin-left: 2px;
 }
+
 .gantt-legend-separator
 {
-    margin-left:5px;
-    margin-right:5px;
+    margin-left: 5px;
+    margin-right: 5px;
     margin-top: -4px;
 }
+
 .gantt-tooltip-container
 {
     padding: 5px 10px;
     font-size: 10px;
 }
+
 .gantt-tooltip-value
 {
-    font-weight:bold;
+    font-weight: bold;
     color: #04316d;
 }
+
 .tabulator
 {
     font-size: 12px !important;
 }
+
 #PopupDetailsTitlePreview
 {
     height: fit-content;
@@ -322,6 +351,7 @@
     border-radius: 5px;
     padding: 8px 8px;
 }
+
 #PopupDetailsBodyPreview
 {
     height: 200px;
@@ -329,87 +359,102 @@
     border: 1px solid silver;
     border-radius: 5px;
     padding: 8px 8px;
-    overflow:auto;
+    overflow: auto;
 }
+
 .popup-icon
 {
     width: 35px;
     height: 35px;
 }
+
 .popup-info-headings
 {
     float: right;
 }
+
 .popup-info-attachment-icon
 {
-     color: #04316d;
-     font-size: 20px;
-     display: contents;
+    color: #04316d;
+    font-size: 20px;
+    display: contents;
 }
+
 .popup-info-attachment-text
 {
     color: #04316d;
     font-style: italic;
     text-decoration: underline;
-    margin-bottom:0;
+    margin-bottom: 0;
     cursor: pointer;
 }
+
 #PopupBodyPreview
 {
     width: 314px;
     height: 188px;
 }
+
 #PopupBodyPreviewTitle
 {
     height: 58px;
-    padding:0;
-    margin-left:0;
-    width:314px;
+    padding: 0;
+    margin-left: 0;
+    width: 314px;
 }
+
 #PopupBodyPreviewTitleIcon
 {
     width: 55px;
 }
+
 #PopupBodyPreviewTitleIcon img
 {
     margin: 3px;
     width: 49px;
     height: 44px;
 }
+
 #PopupBodyPreviewTitleText
 {
     padding: 10px;
     height: 40px;
-    width:100%;
+    width: 100%;
 }
+
 #PopupBodyPreviewTitleDismiss
 {
-    width:20px;
+    width: 20px;
 }
+
 #PopupBodyPreviewTitleDismiss img
 {
     height: 10px;
     width: 10px;
     margin: 3px 7px 3px 3px;
 }
+
 #PopupBodyPreviewTextBody
 {
     height: 88px;
     padding: 0 5px 0 0;
     margin: 5px 0 0 16px;
-    overflow:auto;
+    overflow: auto;
 }
+
 #PopupBodyPreviewTextBodyFooter
 {
     height: 37px;
 }
+
 #PopupBodyPreviewText
 {
-    width:314px;
-    margin-left:0;
-    padding:0;
+    width: 314px;
+    margin-left: 0;
+    padding: 0;
     display: inline-block;
 }
+
 #PopupBodyPreviewTextBodyFooter .btn
 {
     height: fit-content;
@@ -421,63 +466,161 @@
     background: white;
     cursor: default;
 }
+
 #PopupFeedbackContents
 {
     width: 314px;
     height: 188px;
-    margin-top:-190px;
-    position:absolute;
+    margin-top: -190px;
+    position: absolute;
 }
+
 .popup-feedback-icons
 {
     width: 45px;
     height: 60px;
 }
+
 #PopupFeedbackText
 {
-    margin-left:auto;
+    margin-left: auto;
     margin-right: auto;
     border: 2px solid black;
     border-radius: 10px;
     width: 90%;
     font-size: 12px;
-    cursor:default;
-    background:white;
+    cursor: default;
+    background: white;
 }
+
 #PopupFeedbackBtn
 {
-    background:black;
-    color:white;
-    border-radius:0;
-    height:fit-content;
-    padding:2px 3px;
-    font-size:12px;
+    background: black;
+    color: white;
+    border-radius: 0;
+    height: fit-content;
+    padding: 2px 3px;
+    font-size: 12px;
     width: 120px;
-    margin-left:auto;
-    cursor:default;
+    margin-left: auto;
+    cursor: default;
 }
+
 #PopupDetailsContainer
 {
     padding: 1.5rem;
 }
+
 #RSSCategoryDetailsContainer
 {
     margin-left: 5%;
 }
+
 .module-details-targeting-btns
 {
     width: 150px;
 }
+
 #TickerDetailsContainer
 {
     width: 100%;
+}
+#LockedDesktopDetailsContainer
+{
+
+}
+/* Style the Image Used to Trigger the Modal */
+#myImg
+{
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#myImg:hover
+{
+    opacity: 0.7;
+}
+
+.modal
+{
+    display: none; 
+    position: fixed;
+    z-index: 4000; 
+    padding-top: 100px; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.9); 
+}
+
+/* Modal Content (Image) */
+.modal-content
+{
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+/* Caption of Modal Image (Image Text) - Same Width as the Image */
+#caption
+{
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+
+/* Add Animation - Zoom in the Modal */
+.modal-content, #caption
+{
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@keyframes zoom
+{
+    from
+    {
+        transform: scale(0)
+    }
+
+    to
+    {
+        transform: scale(1)
+    }
+}
+.close
+{
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover, .close:focus
+{
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 @media screen and (max-width:1950px)
 {
     .module-dt-body-text
     {
-        max-width:490px;
+        max-width: 490px;
     }
 }
 
@@ -485,7 +628,7 @@
 {
     .module-dt-body-text
     {
-        max-width:380px;
+        max-width: 380px;
     }
 }
 
@@ -493,7 +636,7 @@
 {
     .module-dt-body-text
     {
-        max-width:380px;
+        max-width: 380px;
     }
 }
 
@@ -501,8 +644,9 @@
 {
     .module-dt-body-text
     {
-        max-width:170px;
+        max-width: 170px;
     }
+
     #TickerDetailsContainer
     {
         width: 100%;
@@ -513,7 +657,7 @@
 {
     .module-dt-body-text
     {
-        max-width:200px;
+        max-width: 200px;
     }
 }
 
@@ -529,8 +673,9 @@
 {
     #DatesFilterTitle
     {
-        margin-left:40px;
+        margin-left: 40px;
     }
+
     #DatesFilterContainer
     {
         margin-top: 20px;
@@ -543,43 +688,59 @@
     {
         width: 100% !important;
     }
+
     #DatesFilterTitle
     {
-        margin-left:0;
+        margin-left: 0;
     }
+
     #DatesFilterContainer
     {
         margin-top: 0px;
     }
+
     #StatusFilterTitle
     {
         margin-right: 10px;
     }
+
     #UsersFilterTitle
     {
         margin-right: 14px;
     }
+
     #DatesFilterTitle
     {
         margin-right: 7px;
     }
+
     .module-overview-filters
     {
-        margin-left:auto;
+        margin-left: auto;
         margin-right: auto;
         width: 430px !important;
     }
+
     #FilterModuleTitle
     {
         font-size: 16px !important;
     }
+
     .overview-filter-title
     {
         font-size: 12px !important;
     }
+
     .popup-info-headings
     {
         float: none;
+    }
+}
+@media only screen and (max-width: 700px)
+{
+    .modal-content
+    {
+        width: 100%;
     }
 }
 @media screen and (max-width:530px)
@@ -587,45 +748,53 @@
     #StatusFilterTitle
     {
         text-align: center !important;
-        width:100% !important;
+        width: 100% !important;
     }
+
     .overview-filter-btn-group
     {
         margin-left: auto;
-        margin-right:auto;
+        margin-right: auto;
     }
+
     #UsersFilterTitle
     {
-        margin-left:auto;
+        margin-left: auto;
     }
+
     .overview-users-select
     {
         margin-right: auto;
     }
 }
+
 @media screen and (max-width:510px)
 {
     .overview-dates-input
     {
         width: 120px !important;
     }
+
     #PopupDetailsContainer
     {
         padding: 10px;
     }
 }
+
 @media screen and (max-width:410px)
 {
     .overview-filter-btn-group
     {
         margin-left: -10px;
     }
+
     #DatesFilterTitle
     {
         margin-left: -10px;
         margin-right: 0;
     }
 }
+
 @media screen and (max-width:390px)
 {
     .overview-dates-input
@@ -634,6 +803,7 @@
         font-size: 11px !important;
         height: 25px;
     }
+
     .overview-users-select
     {
         width: 100px !important;
@@ -641,31 +811,37 @@
         height: 25px !important;
         padding-left: 15px !important;
     }
+
     .overview-filter-btn-group
     {
         height: 25px !important;
-        margin-left:auto
+        margin-left: auto
     }
+
     .module-filter-btn-group, .module-filter-btn-group-active
     {
         width: 60px !important;
         font-size: 12px !important;
     }
+
     #DatesFilterTitle
     {
         margin-left: 15px;
     }
+
     #PopupDetailsContainer
     {
         padding: 0;
     }
 }
+
 @media screen and (max-width:350px)
 {
     #DatesFilterTitle
     {
         margin-left: -5px;
     }
+
     .overview-filter-btn-group
     {
         margin-left: -5px;

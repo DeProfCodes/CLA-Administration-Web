@@ -53,7 +53,7 @@
                             <div class="mb-0 d-flex">
                                 <span class="custom-p-bold me-2">Image | </span> 
                                 <i class="bi bi-card-image popup-info-attachment-icon"></i>
-                                <p class="popup-info-attachment-text ms-1">testImage101.png</p>
+                                <p class="popup-info-attachment-text ms-1" onclick="PreviewImage()">testImage101.png</p>
                             </div>
                         </div>
                     </div>
@@ -260,4 +260,16 @@
             </div>
         </div>
     </div>
+    <div id="ImagePreviwer">
+    </div>
 </div>
+
+
+<script>
+
+    $(document).ready(function ()
+    {
+        LoadContentPreviewer("#ImagePreviwer");
+    });
+
+</script>
