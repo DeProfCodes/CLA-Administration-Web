@@ -257,7 +257,7 @@ namespace CLA_Administration_Web.Helpers.Layout
                     ModuleDetailsId = moduleDetailsId,
                     ModulePreviewPage = ModulesPages.TickerOverview,
                     IsAddNewIcon = true,
-                    ActionButtonText = "Edit Survey",
+                    ActionButtonText = "Edit Ticker",
                     ActionButtonPage = ModulesPages.TickerAddNew
                 },
                 //RSS

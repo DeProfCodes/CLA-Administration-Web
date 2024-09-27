@@ -26,9 +26,10 @@
     <div class="card mb-4 mt-2 overview-filters-card p-4">
         <div class="card-body" id="PopupDetailsContainer">
             <div class="row">
+                <!-- Popup Texts -->
                 <div class="col-md-6 mb-3">
                     <h4 class="w-100 text-center theme-txt-clr fw-bold">Popup Texts</h4>
-                    <div class="row mt-5">
+                    <div class="row mt-4">
                         <p class="custom-p-bold ps-0">Popup Title <span class="fst-italic fw-normal">(Display: Yes)</span></p>
                         <div class="mt-1" id="PopupDetailsTitlePreview">
                             @Html.Raw(testPopupTitle)
@@ -41,9 +42,10 @@
                         </div>
                     </div>
                 </div>
+                <!-- Popup Details -->
                 <div class="col-md-6">
                     <h4 class="w-100 text-center theme-txt-clr fw-bold">Popup Details</h4>
-                    <div class="row mt-5">
+                    <div class="row mt-4">
                         <div class="col-md-6">
                             <p class="custom-p popup-info-headings">Link Type</p>
                         </div>
@@ -114,6 +116,7 @@
                 </div>
             </div>
             <div class="row mt-5">
+                <!-- Popup Preview -->
                 <div class="col-md-6 mb-3">
                     <h4 class="w-100 text-center theme-txt-clr fw-bold">Popup Preview</h4>
                     <div class="row mt-3 d-flex">
@@ -180,14 +183,15 @@
                         </div>
                     </div>
                 </div>
+                <!-- Times & Targeting Settings -->
                 <div class="col-md-6">
                     <h4 class="w-100 text-center theme-txt-clr fw-bold">Times & Targeting Settings</h4>
-                    <div class="row mt-5">
+                    <div class="row mt-3">
                         <div class="col-md-6">
                             <p class="custom-p popup-info-headings">Effective From</p>
                         </div>
                         <div class="col-md-6">
-                            <p class="custom-p-bold">From Thursday, 26 September 2024</p>
+                            <p class="custom-p-bold">Thursday, 26 September 2024</p>
                         </div>
                     </div>
                     <div class="row mt-3">
@@ -211,7 +215,7 @@
                             <p class="custom-p popup-info-headings">Target Users</p>
                         </div>
                         <div class="col-md-6">
-                            <btn class="btn btn-sm btn-success">Open</btn>
+                            <btn class="btn btn-sm btn-success module-details-targeting-btns">Targeting</btn>
                         </div>
                     </div>
                     <div class="row mt-3">
@@ -219,7 +223,37 @@
                             <p class="custom-p popup-info-headings">Who Is Targeted</p>
                         </div>
                         <div class="col-md-6">
-                            <btn class="btn btn-sm btn-primary">Open</btn>
+                            <btn class="btn btn-sm btn-primary module-details-targeting-btns">Targeting Exposure</btn>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modification Details -->
+            <div class="row mt-3" style="">
+                <div class="col-md-6">
+                    <h4 class="w-100 text-center theme-txt-clr fw-bold">Modifications Details</h4>
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <p class="custom-p popup-info-headings">Date Last Modified</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="custom-p-bold">@Model.LastModifiedDate</p>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <p class="custom-p popup-info-headings">User Id Last Modified</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="custom-p-bold">@Model.UserIdLastModified</p>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <p class="custom-p popup-info-headings">Machine Id Last Modified</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="custom-p-bold">@Model.MachineLastModified</p>
                         </div>
                     </div>
                 </div>

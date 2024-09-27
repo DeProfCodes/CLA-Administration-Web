@@ -464,6 +464,15 @@
 {
     margin-left: 5%;
 }
+.module-details-targeting-btns
+{
+    width: 150px;
+}
+#TickerDetailsContainer
+{
+    width: 100%;
+}
+
 @media screen and (max-width:1950px)
 {
     .module-dt-body-text
@@ -493,6 +502,10 @@
     .module-dt-body-text
     {
         max-width:170px;
+    }
+    #TickerDetailsContainer
+    {
+        width: 100%;
     }
 }
 
