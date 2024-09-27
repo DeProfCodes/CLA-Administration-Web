@@ -11,7 +11,7 @@ using CLA_Administration_Web.ViewModels.Modules;
 using CLA_Administration_Web.ViewModels.Modules.ContentLibrary;
 using CLA_Administration_Web.ViewModels.Modules.GanttChart;
 using CLA_Administration_Web.ViewModels.Modules.LDS;
-using CLA_Administration_Web.ViewModels.Modules.PSTR;
+using CLA_Administration_Web.ViewModels.Modules.PST;
 using CLACommonFunctionsLibrary_NET.Helpers;
 using CLACommonFunctionsLibrary_NET.Helpers.Enums;
 using CLACommonFunctionsLibrary_NET.Helpers.Logs;
@@ -46,21 +46,21 @@ namespace CLA_Administration_Web.Controllers
 
         #endregion
 
-        #region Modules PSTR: Popups, Surveys, Tickers, RSS
+        #region Modules PST: Popups, Surveys, Tickers
 
-        public async Task<IActionResult> ModulePSTRTableOverview(ModuleNamesType moduleNameType, string status, string userType, string startDate, string endDate)
+        public async Task<IActionResult> ModulePSTTableOverview(ModuleNamesType moduleNameType, string status, string userType, string startDate, string endDate)
         {
-            var dataSource = LocalDataStorage.GetLocalModulePSTRAllData(moduleNameType);
+            var dataSource = LocalDataStorage.GetLocalModulePSTAllData(moduleNameType);
 
-            var moduleFilterDataVm = new ModulePSTRFilterOverviewModel
+            var moduleFilterDataVm = new ModulePSTFilterOverviewModel
             {
                 ModuleName = moduleNameType,
                 ModuleDetailsPage = ModulesHelper.GetModuleDetailsPage(moduleNameType),
                 FilterTitle = ModulesHelper.GetModuleOverviewTitleText(moduleNameType, status, StagingLiveType.Staging, userType, startDate, endDate),
-                ModulesData = ModulesHelper.FilterModulesPSTRData(dataSource, status, userType, startDate, endDate)
+                ModulesData = ModulesHelper.FilterModulesPSTData(dataSource, status, userType, startDate, endDate)
             };
 
-            return PartialView(AppPagesLinks.Modules.ModulePSTRTableOverviewPageLink, moduleFilterDataVm);
+            return PartialView(AppPagesLinks.Modules.ModulePSTTableOverviewPageLink, moduleFilterDataVm);
         }
 
         #endregion

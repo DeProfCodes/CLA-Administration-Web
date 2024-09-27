@@ -5,7 +5,7 @@ using CLA_Administration_Web.Helpers.Modules;
 using CLA_Administration_Web.Services;
 using CLA_Administration_Web.ViewModels.Modules;
 using CLA_Administration_Web.ViewModels.Modules.LDS;
-using CLA_Administration_Web.ViewModels.Modules.PSTR;
+using CLA_Administration_Web.ViewModels.Modules.PST;
 using CLACommonFunctionsLibrary_NET.Helpers.Enums;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,7 +27,7 @@ namespace CLA_Administration_Web.ViewComponents.OverviewDataFilters
 
                 var moduleNameType = ModulesHelper.GetModuleNameTypeFromModulePage(modulePage);
 
-                var dataSource = LocalDataStorage.GetLocalModulePSTRAllData(moduleNameType);
+                var dataSource = LocalDataStorage.GetLocalModulePSTAllData(moduleNameType);
                 var usersFilter = dataSource.Select(x => x.UserIdLastModified).Distinct().ToList();
 
                 if (modulePage == ModulesPages.ScreensaverOverview || modulePage == ModulesPages.DesktopOverview || modulePage == ModulesPages.LockedDesktopOverview)
@@ -43,12 +43,12 @@ namespace CLA_Administration_Web.ViewComponents.OverviewDataFilters
                 else if (modulePage == ModulesPages.PopupOverview || modulePage == ModulesPages.TickerOverview || modulePage == ModulesPages.SurveyOverview ||
                          modulePage == ModulesPages.RSSCategoryOverview)
                 {
-                    var filtersViewModel = new ModulePSTROverviewFilterViewModel
+                    var filtersViewModel = new ModulePSTOverviewFilterViewModel
                     {
                         ModulePage = modulePage,
                         Usernames = usersFilter
                     };
-                    return View("ModulesDataFilterPSTR", filtersViewModel);
+                    return View("ModulesDataFilterPST", filtersViewModel);
                 }
             }
             return View("Default");

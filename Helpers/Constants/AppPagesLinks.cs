@@ -34,8 +34,8 @@
             //All
             public const string AllModulesPageLink = "~/Views/Modules/AllModules.cshtml";
 
-            //PSTR Modules: Popup, Survey, Ticker, RSS
-            public const string ModulePSTRTableOverviewPageLink = "~/Views/Shared/Components/Custom/Modules/Overviews/PSTR/ModulePSTRTableOverview.cshtml";
+            //PST Modules: Popup, Survey, Ticker
+            public const string ModulePSTTableOverviewPageLink = "~/Views/Shared/Components/Custom/Modules/Overviews/PST/ModulePSTTableOverview.cshtml";
             
             //LDS Modules: Lockscreen, Desktop, Screensaver 
             public const string ModuleLDSTableOverviewPageLink = "~/Views/Shared/Components/Custom/Modules/Overviews/LDS/ModuleLDSTableOverview.cshtml";

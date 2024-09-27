@@ -6,7 +6,7 @@ using CLA_Administration_Web.Services;
 using CLA_Administration_Web.ViewModels.Modules;
 using CLA_Administration_Web.ViewModels.Modules.GanttChart;
 using CLA_Administration_Web.ViewModels.Modules.LDS;
-using CLA_Administration_Web.ViewModels.Modules.PSTR;
+using CLA_Administration_Web.ViewModels.Modules.PST;
 using CLA_Administration_Web.ViewModels.Shared;
 using CLACommonFunctionsLibrary_NET.Helpers;
 using CLACommonFunctionsLibrary_NET.Helpers.Enums;
@@ -111,7 +111,7 @@ namespace CLA_Administration_Web.Helpers.Modules
             return allModuleNameTypes?.FirstOrDefault(x => x.GetDisplayName() == modulePage.GetDisplayShortName()) ?? ModuleNamesType.None;
         }
 
-        public static List<ModulePSTRDataViewModel> FilterModulesPSTRData(List<ModulePSTRDataViewModel> data, string status, string user, string startDate, string endDate)
+        public static List<ModulePSTDataViewModel> FilterModulesPSTData(List<ModulePSTDataViewModel> data, string status, string user, string startDate, string endDate)
         {
             var startDateTime = TypesParserHelper.ParseDate(startDate);
             var endDateTime = TypesParserHelper.ParseDate(endDate);

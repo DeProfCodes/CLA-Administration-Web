@@ -460,7 +460,10 @@
 {
     padding: 1.5rem;
 }
-
+#RSSCategoryDetailsContainer
+{
+    margin-left: 5%;
+}
 @media screen and (max-width:1950px)
 {
     .module-dt-body-text

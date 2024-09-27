@@ -1,7 +1,7 @@
 ﻿using CLA_Administration_Web.Helpers.Enums.Shared;
 using CLA_Administration_Web.ViewModels.Shared;
 
-namespace CLA_Administration_Web.ViewModels.Modules.PSTR
+namespace CLA_Administration_Web.ViewModels.Modules.PST
 {
     public class SurveyQuestionViewModel
     {

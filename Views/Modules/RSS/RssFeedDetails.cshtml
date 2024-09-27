@@ -20,16 +20,48 @@
         </div>
     </div>
 
-    <!-- Card for Filters -->
-    <div class="card mb-4 mt-5 overview-filters-card">
+    <!-- Card for Title -->
+    <div class="card mb-4 mt-2 overview-filters-card">
         <div class="card-body">
-            <h4 class="w-100 text-center theme-txt-clr">RSS Feed Details for Feed Id: @Model.FeedId</h4>
-            <div class="row">
-                
+            <h4 class="w-100 text-center theme-txt-clr">RSS Category Details for Category Id: @Model.CategoryId</h4>
+        </div>
+    </div>
+
+    <!-- Card for Body -->
+    <div class="card mb-4 mt-2 overview-filters-card">
+        <div class="card-body p-4">
+            <div class="row mb-3">
+                <div class="w-fit-content" id="RSSCategoryDetailsContainer">
+                    <h4 class="w-100 theme-txt-clr fw-bold">RSS Feed Details</h4>
+                    <div class="row mt-3">
+                        <table>
+                            <tr>
+                                <td><p class="custom-p popup-info-headings mt-3">RSS Category Id</p></td>
+                                <td><p class="custom-p-bold ms-3 mt-3">@Model.CategoryId</p></td>
+                            </tr>
+                            <tr class="mt-3">
+                                <td><p class="custom-p popup-info-headings mt-3">Category Name</p></td>
+                                <td><p class="custom-p-bold ms-3 mt-3">@Model.CategoryName</p></td>
+                            </tr>
+                            <tr>
+                                <td><p class="custom-p popup-info-headings mt-3">Feed Id</p></td>
+                                <td><p class="custom-p-bold ms-3 mt-3">@Model.FeedId</p></td>
+                            </tr>
+                            <tr>
+                                <td><p class="custom-p popup-info-headings mt-3">Feed Name</p></td>
+                                <td><p class="custom-p-bold ms-3 mt-3">@Model.FeedName</p></td>
+                            </tr>
+                            <tr>
+                                <td><p class="custom-p popup-info-headings mt-3">Feed URL</p></td>
+                                <td><p class="custom-p-bold ms-3 mt-3 text-decoration-underline"><a href="@Model.FeedURL">@Model.FeedURL</a></p></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="mt-4 ms-3">
+                        <button class="btn btn-primary" onclick="OpenPage('@ModulesPages.RSSCategoryDetails', '@Model.CategoryId');">Open Feed Category</button>
+                    </div>
+                </div>
             </div>
-            <h1 class="text-center w-100 theme-txt-clr" style="margin-top:15%; margin-bottom:15%">
-                To Be Added Soon
-            </h1>
         </div>
     </div>
 </div>

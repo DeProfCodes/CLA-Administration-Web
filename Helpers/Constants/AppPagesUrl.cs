@@ -41,8 +41,8 @@ namespace CLA_Administration_Web.Helpers.Constants
             //All
             public static string AllModules = $"/{modulesController}/{ModulesPages.AllModules.GetDisplayName()}";
 
-            //PSTR Modules: Popup, Survey, Ticker, RSS
-            public static string ModulePSTRTableOverview = $"/{modulesController}/{ModulesPages.ModulePSTRTableOverview.GetDisplayName()}";
+            //PST Modules: Popup, Survey, Ticker
+            public static string ModulePSTTableOverview = $"/{modulesController}/{ModulesPages.ModulePSTTableOverview.GetDisplayName()}";
             
             //LDS Modules: Lockscreen, Desktop, Screensaver
             public static string ModuleLDSTableOverview = $"/{modulesController}/{ModulesPages.ModuleLDSTableOverview.GetDisplayName()}";

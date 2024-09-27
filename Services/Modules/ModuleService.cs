@@ -2,7 +2,7 @@
 using CLA_Administration_Web.Helpers.MockData;
 using CLA_Administration_Web.ViewModels.Modules.ContentLibrary;
 using CLA_Administration_Web.ViewModels.Modules.LDS;
-using CLA_Administration_Web.ViewModels.Modules.PSTR;
+using CLA_Administration_Web.ViewModels.Modules.PST;
 using CLA_Administration_Web.ViewModels.Modules.Rss;
 
 namespace CLA_Administration_Web.Services.Modules
@@ -14,11 +14,11 @@ namespace CLA_Administration_Web.Services.Modules
 
         }
 
-        #region PSTR Modules
+        #region PST Modules
 
         #region Popups 
 
-        public async Task<List<ModulePSTRDataViewModel>> GetAllPopupsData()
+        public async Task<List<ModulePSTDataViewModel>> GetAllPopupsData()
         {
             return ModulesMockData.StagingData.AllPopupsData;
         }
@@ -27,7 +27,7 @@ namespace CLA_Administration_Web.Services.Modules
 
         #region Tickers
 
-        public async Task<List<ModulePSTRDataViewModel>> GetAllTickersData()
+        public async Task<List<ModulePSTDataViewModel>> GetAllTickersData()
         {
             return ModulesMockData.StagingData.AllTickersData;
         }
@@ -36,7 +36,7 @@ namespace CLA_Administration_Web.Services.Modules
 
         #region Surveys
 
-        public async Task<List<ModulePSTRDataViewModel>> GetAllSurveysData()
+        public async Task<List<ModulePSTDataViewModel>> GetAllSurveysData()
         {
             return ModulesMockData.StagingData.AllSurveysData;
         }

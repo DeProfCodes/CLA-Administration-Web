@@ -63,7 +63,7 @@ function ReloadFilteredModuleOverview(moduleType, status, username, startDate, e
 {
     ModuleOverviewLoader(moduleType, status);
 
-    var isPSTRModules = (moduleType == AllModuleTypes.Popup || moduleType == AllModuleTypes.Survey || moduleType == AllModuleTypes.Ticker || moduleType == AllModuleTypes.RSS);
+    var isPSTModules = (moduleType == AllModuleTypes.Popup || moduleType == AllModuleTypes.Survey || moduleType == AllModuleTypes.Ticker);
     var isLDSModules = (moduleType == AllModuleTypes.LockedDesktop || moduleType == AllModuleTypes.Desktop || moduleType == AllModuleTypes.Screensaver);
 
     var url = "";
@@ -78,8 +78,8 @@ function ReloadFilteredModuleOverview(moduleType, status, username, startDate, e
         if(viewType == "gantt") pageName = "ModuleLDSGanttOverview";
     }
     
-    if(isPSTRModules)
-        url = GetPageUrl('ModulePSTRTableOverview') + `?moduleNameType=${moduleType}&status=${status}&userType=${username}&startDate=${startDate}&endDate=${endDate}`;
+    if(isPSTModules)
+        url = GetPageUrl('ModulePSTTableOverview') + `?moduleNameType=${moduleType}&status=${status}&userType=${username}&startDate=${startDate}&endDate=${endDate}`;
 
     if(isLDSModules)
         url = GetPageUrl(pageName) + `?moduleNameType=${moduleType}&status=${status}&stagingLive=${stagingLiveFilter}&startDate=${startDate}&endDate=${endDate}`;

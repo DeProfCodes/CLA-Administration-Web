@@ -3,21 +3,21 @@ using CLA_Administration_Web.Helpers.Enums.Shared;
 using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
 using CLA_Administration_Web.ViewModels.Modules.ContentLibrary;
 using CLA_Administration_Web.ViewModels.Modules.LDS;
-using CLA_Administration_Web.ViewModels.Modules.PSTR;
+using CLA_Administration_Web.ViewModels.Modules.PST;
 using CLA_Administration_Web.ViewModels.Modules.Rss;
 
 namespace CLA_Administration_Web.Services
 {
     public class LocalDataStorage
     {
-        // PSTR Modules
         public static class StagingData
         {
-            public static List<ModulePSTRDataViewModel> AllPopupData { get; set; }
+            // PST Modules
+            public static List<ModulePSTDataViewModel> AllPopupData { get; set; }
 
-            public static List<ModulePSTRDataViewModel> AllTickerData { get; set; }
+            public static List<ModulePSTDataViewModel> AllTickerData { get; set; }
 
-            public static List<ModulePSTRDataViewModel> AllSurveysData { get; set; }
+            public static List<ModulePSTDataViewModel> AllSurveysData { get; set; }
 
             public static List<SurveyQuestionViewModel> AllSurveyQuestions { get; set; }
 
@@ -36,11 +36,11 @@ namespace CLA_Administration_Web.Services
 
         public static class LiveData
         {
-            public static List<ModulePSTRDataViewModel> AllPopupData { get; set; }
+            public static List<ModulePSTDataViewModel> AllPopupData { get; set; }
 
-            public static List<ModulePSTRDataViewModel> AllTickerData { get; set; }
+            public static List<ModulePSTDataViewModel> AllTickerData { get; set; }
 
-            public static List<ModulePSTRDataViewModel> AllSurveysData { get; set; }
+            public static List<ModulePSTDataViewModel> AllSurveysData { get; set; }
 
             public static List<SurveyQuestionViewModel> AllSurveyQuestions { get; set; }
 
@@ -59,7 +59,7 @@ namespace CLA_Administration_Web.Services
 
         public static List<ContentLibraryCategoryModel> AllContentLibraryCategories {get; set; }
 
-        public static List<ModulePSTRDataViewModel> GetLocalModulePSTRAllData(ModuleNamesType moduleName)
+        public static List<ModulePSTDataViewModel> GetLocalModulePSTAllData(ModuleNamesType moduleName)
         {
             switch (moduleName)
             {
@@ -95,18 +95,18 @@ namespace CLA_Administration_Web.Services
             return new();
         }
 
-        // Update PSTR Modules Data
-        public static void UpdatePopupsData(List<ModulePSTRDataViewModel> data)
+        // Update PST Modules Data
+        public static void UpdatePopupsData(List<ModulePSTDataViewModel> data)
         {
             StagingData.AllPopupData = data;
         }
 
-        public static void UpdateTickersData(List<ModulePSTRDataViewModel> data)
+        public static void UpdateTickersData(List<ModulePSTDataViewModel> data)
         {
             StagingData.AllTickerData = data;
         }
 
-        public static void UpdateSurveysData(List<ModulePSTRDataViewModel> data)
+        public static void UpdateSurveysData(List<ModulePSTDataViewModel> data)
         {
             StagingData.AllSurveysData = data;
         }

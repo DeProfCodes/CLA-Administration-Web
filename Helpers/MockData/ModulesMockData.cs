@@ -2,7 +2,7 @@
 using CLA_Administration_Web.Helpers.Shared;
 using CLA_Administration_Web.ViewModels.Modules.ContentLibrary;
 using CLA_Administration_Web.ViewModels.Modules.LDS;
-using CLA_Administration_Web.ViewModels.Modules.PSTR;
+using CLA_Administration_Web.ViewModels.Modules.PST;
 using CLA_Administration_Web.ViewModels.Modules.Rss;
 using CLA_Administration_Web.ViewModels.Shared;
 using System;
@@ -12,14 +12,14 @@ namespace CLA_Administration_Web.Helpers.MockData
 {
     public class ModulesMockData
     {
-        //PSTR
         public static class StagingData
         {
-            public static List<ModulePSTRDataViewModel> AllPopupsData { get; set; } = GeneratePSTRRandomData();
+            //PST
+            public static List<ModulePSTDataViewModel> AllPopupsData { get; set; } = GeneratePSTRandomData();
 
-            public static List<ModulePSTRDataViewModel> AllTickersData { get; set; } = GeneratePSTRRandomData();
+            public static List<ModulePSTDataViewModel> AllTickersData { get; set; } = GeneratePSTRandomData();
 
-            public static List<ModulePSTRDataViewModel> AllSurveysData { get; set; } = GeneratePSTRRandomData();
+            public static List<ModulePSTDataViewModel> AllSurveysData { get; set; } = GeneratePSTRandomData();
 
             public static List<SurveyQuestionViewModel> AllSurveyQuestions { get; set; } = GenerateSurveyQuestions();
 
@@ -37,11 +37,12 @@ namespace CLA_Administration_Web.Helpers.MockData
 
         public static class LiveData
         {
-            public static List<ModulePSTRDataViewModel> AllPopupsData { get; set; } = GeneratePSTRRandomData();
+            //PST
+            public static List<ModulePSTDataViewModel> AllPopupsData { get; set; } = GeneratePSTRandomData();
 
-            public static List<ModulePSTRDataViewModel> AllTickersData { get; set; } = GeneratePSTRRandomData();
+            public static List<ModulePSTDataViewModel> AllTickersData { get; set; } = GeneratePSTRandomData();
 
-            public static List<ModulePSTRDataViewModel> AllSurveysData { get; set; } = GeneratePSTRRandomData();
+            public static List<ModulePSTDataViewModel> AllSurveysData { get; set; } = GeneratePSTRandomData();
 
             public static List<SurveyQuestionViewModel> AllSurveyQuestions { get; set; } = GenerateSurveyQuestions();
 
@@ -61,10 +62,10 @@ namespace CLA_Administration_Web.Helpers.MockData
 
 
         // Generate Module Data for Popups, Tickers, Surveys
-        private static List<ModulePSTRDataViewModel> GeneratePSTRRandomData()
+        private static List<ModulePSTDataViewModel> GeneratePSTRandomData()
         {
             var random = new Random();
-            var items = new List<ModulePSTRDataViewModel>();
+            var items = new List<ModulePSTDataViewModel>();
 
             var usersList = new List<string> { "NdhuvaziM", "LegeB", "SinethembaS", "LeboC", "Administrator", "CathrineT", "LarryM", "Tarryn" };
             var machinesList = new List<string> { "NdhuvaziM-PC", "LegeB-PC", "Sinethemba-PC", "LeboC-PC", "Administrator-PC", "CathrineT-PC", "LarryM-PC", "Tarryn-PC" };
@@ -76,7 +77,7 @@ namespace CLA_Administration_Web.Helpers.MockData
             {
                 GetEffectiveDates(ref effectiveFrom, ref effectiveTo, i);
 
-                var item = new ModulePSTRDataViewModel
+                var item = new ModulePSTDataViewModel
                 {
                     Id = i,
                     HeaderText = RandomString(random, 5, 10),
