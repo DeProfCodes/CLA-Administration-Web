@@ -94,6 +94,11 @@ namespace CLA_Administration_Web.Services.Modules
             return ModulesMockData.AllContentLibraryCategories;
         }
 
+        public async Task<List<ContentLibraryContentModel>> GetAllContentLibraryContents()
+        {
+            return ModulesMockData.AllContentLibraryContents;
+        }
+
         #endregion
 
         #region LDS Modules

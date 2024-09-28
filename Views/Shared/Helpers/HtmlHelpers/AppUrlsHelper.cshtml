@@ -27,7 +27,8 @@
         // Content Library
         if (page == '@ModulesPages.ContentLibraryCategories') url = '@AppPagesUrl.Modules.ContentLibraryCategories';
         if (page == '@ModulesPages.ContentLibraryCategoryDetails') url = '@AppPagesUrl.Modules.ContentLibraryCategoryDetails' + `?categoryId=${id}`;
-        if (page == '@ModulesPages.ContentLibraryContent') url = '@AppPagesUrl.Modules.ContentLibraryContent';
+        if (page == '@ModulesPages.ContentLibraryContent') url = '@AppPagesUrl.Modules.ContentLibraryContent' + `?categoryId=${id}`;
+        if (page == '@ModulesPages.ContentLibraryContentDetails') url = '@AppPagesUrl.Modules.ContentLibraryContentDetails' + `?contentId=${id}`;
 
         // Desktop
         if (page == '@ModulesPages.DesktopOverview') url = '@AppPagesUrl.Modules.DesktopOverview';
@@ -127,6 +128,7 @@
         if (page == '@ModulesPages.ContentLibraryCategories') title = "Content Library Categories";
         if (page == '@ModulesPages.ContentLibraryCategoryDetails') title = "Category Details";
         if (page == '@ModulesPages.ContentLibraryContent') title = "Content Library Contents";
+        if (page == '@ModulesPages.ContentLibraryContentDetails') title = "Contents Details";
         //
         if (page == '@ModulesPages.LockedDesktopOverview') title = "Locked Desktops Overview";
         if (page == '@ModulesPages.LockedDesktopDetails') title = "Locked Desktops Details";

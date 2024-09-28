@@ -59,6 +59,8 @@ namespace CLA_Administration_Web.Services
 
         public static List<ContentLibraryCategoryModel> AllContentLibraryCategories {get; set; }
 
+        public static List<ContentLibraryContentModel> AllContentLibraryContents { get; set; }
+
         public static List<ModulePSTDataViewModel> GetLocalModulePSTAllData(ModuleNamesType moduleName)
         {
             switch (moduleName)
@@ -177,9 +179,14 @@ namespace CLA_Administration_Web.Services
             }
         }
 
-        public static void UpdateContentLibraryCategoriesFeedData(List<ContentLibraryCategoryModel> data)
+        public static void UpdateContentLibraryCategoriesData(List<ContentLibraryCategoryModel> data)
         {
             AllContentLibraryCategories = data;
+        }
+
+        public static void UpdateContentLibraryContentsData(List<ContentLibraryContentModel> data)
+        {
+            AllContentLibraryContents = data;
         }
     }
 }

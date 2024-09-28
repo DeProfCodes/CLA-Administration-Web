@@ -247,5 +247,21 @@ namespace CLA_Administration_Web.Helpers.Modules
             }
             return ganttData;
         }
+
+        public static string ConvertTargetedModulesToFullNames(string input)
+        {
+            Dictionary<string, string> nameMap = new Dictionary<string, string>
+            {
+                { "LCK", "Lockscreen" },
+                { "SCR", "Screensaver" },
+                { "DSK", "Desktop" }
+            };
+
+            string[] parts = input.Split(';');
+
+            string[] fullNames = parts.Select(part => nameMap.ContainsKey(part) ? nameMap[part] : part).ToArray();
+
+            return string.Join(" | ", fullNames);
+        }
     }
 }

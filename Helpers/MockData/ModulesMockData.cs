@@ -60,6 +60,7 @@ namespace CLA_Administration_Web.Helpers.MockData
 
         public static List<ContentLibraryCategoryModel> AllContentLibraryCategories { get; set; } = GenerateContentLibraryRandomData();
 
+        public static List<ContentLibraryContentModel> AllContentLibraryContents { get; set; } = GenerateContentLibraryContents();
 
         // Generate Module Data for Popups, Tickers, Surveys
         private static List<ModulePSTDataViewModel> GeneratePSTRandomData()
@@ -456,6 +457,55 @@ namespace CLA_Administration_Web.Helpers.MockData
                 if(treeCategory != null)
                     items.Add(treeCategory);
             }
+            return items;
+        }
+
+        private static List<ContentLibraryContentModel> GenerateContentLibraryContents()
+        {
+            var items = new List<ContentLibraryContentModel>();
+
+            var random = new Random();
+            
+            var usersList = new List<string> { "NdhuvaziM", "LegeB", "SinethembaS", "LeboC", "Administrator", "CathrineT", "LarryM", "Tarryn" };
+            var machinesList = new List<string> { "NdhuvaziM-PC", "LegeB-PC", "Sinethemba-PC", "LeboC-PC", "Administrator-PC", "CathrineT-PC", "LarryM-PC", "Tarryn-PC" };
+            var contentType = new List<string> { "Picture", "Audio", "Video", "URL" };
+
+            List<string> options = new List<string> { "SCR", "DSK", "LCK" };
+            int numberOfOptions = random.Next(1, options.Count + 1);
+
+            DateTime effectiveFrom = new();
+            DateTime effectiveTo = new();
+
+            for (int i = 1; i <= 10; i++)
+            {
+                GetEffectiveDates(ref effectiveFrom, ref effectiveTo, i);
+
+                string[] selectedOptions = options.OrderBy(x => random.Next())
+                                          .Take(numberOfOptions)
+                                          .ToArray();
+
+                var item = new ContentLibraryContentModel
+                {
+                    ContentId = i,
+                    AdvertId = random.Next(101),
+                    ProductId = random.Next(101),
+                    CategoryName = SharedFunctions.CapitalizeFirst(RandomString(random, 1, 2)),
+                    AdvertDescription = SharedFunctions.CapitalizeFirst(RandomString(random, 3, 5)),
+                    ContentType = SharedFunctions.CapitalizeFirst(contentType[random.Next(contentType.Count)]),
+                    ContentPath = "C:\\Users\\Resources\\Data\\Urgent\\",
+                    Duration = random.Next(0, 61),
+                    EffectiveFrom = effectiveFrom.ToString("yyyy/MM/dd"),
+                    EffectiveTo = effectiveTo.ToString("yyyy/MM/dd"),
+                    Archive = (random.Next(2) == 0 ? "No" : "Yes"),
+                    TargetedModules = string.Join(";", selectedOptions),
+                    DateLastModified = DateTime.Now.AddMinutes(-random.Next(0, 50000)).ToString("yyyy/MM/dd HH:mm"),
+                    UserIdLastModified = usersList[random.Next(0, 8)],
+                    MachineIdLastModified = machinesList[random.Next(machinesList.Count)]
+                };
+
+                items.Add(item);
+            }
+
             return items;
         }
     }

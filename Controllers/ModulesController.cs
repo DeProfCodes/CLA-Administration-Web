@@ -130,9 +130,35 @@ namespace CLA_Administration_Web.Controllers
             return PartialView(AppPagesLinks.Modules.ContentLibraryCategoryDetailsPageLink, data);
         }
 
-        public IActionResult ContentLibraryContent()
+        public async Task<IActionResult> ContentLibraryContent(int categoryId)
         {
-            return PartialView(AppPagesLinks.Modules.ContentLibraryContentsPageLink);
+            var contents = await _moduleService.GetAllContentLibraryContents();
+
+            contents.ForEach(s =>
+            {
+                s.Status = ModulesHelper.GetModuleStatus(s.EffectiveFrom, s.EffectiveTo);
+                s.EffectiveFromDate = TypesParserHelper.ParseDate(s.EffectiveFrom);
+                s.EffectiveToDate = TypesParserHelper.ParseDate(s.EffectiveTo);
+            });
+
+            var contentsViewModel = new ContentLibraryContentsViewModel
+            {
+                CategoryId = categoryId,
+                ContentLibraryContents = contents
+            };
+
+            LocalDataStorage.UpdateContentLibraryContentsData(contents);
+
+            return PartialView(AppPagesLinks.Modules.ContentLibraryContentsPageLink, contentsViewModel);
+        }
+
+        public async Task<IActionResult> ContentLibraryContentDetails(int contentId)
+        {
+            var contentInfo = ModulesMockData.AllContentLibraryContents.FirstOrDefault(x => x.ContentId == contentId);
+            
+            contentInfo.TargetedModulesFullName = ModulesHelper.ConvertTargetedModulesToFullNames(contentInfo.TargetedModules);
+
+            return PartialView(AppPagesLinks.Modules.ContentLibraryContentDetailsPageLink, contentInfo);
         }
 
         public async Task<IActionResult> DesktopOverview()

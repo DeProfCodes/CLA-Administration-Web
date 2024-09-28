@@ -53,6 +53,7 @@ namespace CLA_Administration_Web.Helpers.Constants
             public static string ContentLibraryCategories = $"/{modulesController}/{ModulesPages.ContentLibraryCategories.GetDisplayName()}";
             public static string ContentLibraryCategoryDetails = $"/{modulesController}/{ModulesPages.ContentLibraryCategoryDetails.GetDisplayName()}";
             public static string ContentLibraryContent = $"/{modulesController}/{ModulesPages.ContentLibraryContent.GetDisplayName()}";
+            public static string ContentLibraryContentDetails = $"/{modulesController}/{ModulesPages.ContentLibraryContentDetails.GetDisplayName()}";
 
             //Desktop
             public static string DesktopOverview = $"/{modulesController}/{ModulesPages.DesktopOverview.GetDisplayName()}";

@@ -43,6 +43,8 @@ namespace CLA_Administration_Web.Services.Modules
 
         public Task<List<ContentLibraryCategoryModel>> GetAllContentLibraryCategories();
 
+        public Task<List<ContentLibraryContentModel>> GetAllContentLibraryContents();
+
         #endregion
 
 
