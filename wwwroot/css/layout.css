@@ -124,6 +124,7 @@
 #DashboardMainArea
 {
     min-width: 344px !important;
+    padding-bottom: 0;
 }
 
 @media screen and (max-width:1150px)

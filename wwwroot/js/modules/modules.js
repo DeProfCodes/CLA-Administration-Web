@@ -132,3 +132,101 @@ function PreviewImage()
 {
     OpenImagePreviewModal();
 }
+
+
+//popup module js
+let currentPopup = 1;
+let totalPopups = 9;
+
+function showPopup(popupNumber)
+{
+    for (let i = 1; i <= totalPopups; i++)
+    {
+        var popupElement = document.getElementById(`popup${i}`);
+        if (popupElement)
+        {
+            popupElement.style.display = i === popupNumber ? 'block' : 'none';
+        }
+    }
+
+    var pageNumberElement = document.getElementById('pageNumber');
+    if (pageNumberElement)
+    {
+        pageNumberElement.textContent = `Page ${popupNumber}`;
+    }
+
+    var backBtn = document.getElementById('backBtn');
+    var nextBtn = document.getElementById('nextBtn');
+    var submitBtn = document.getElementById('submitBtn');
+    var previewBox = document.getElementById('preview-box');
+
+    if (backBtn && nextBtn && submitBtn && previewBox)
+    {
+        backBtn.style.display = popupNumber === 1 ? 'none' : 'inline-block';
+        previewBox.style.display = popupNumber === 1 ? 'none' : 'inline-block';
+        nextBtn.style.display = popupNumber === totalPopups ? 'none' : 'inline-block';
+        submitBtn.style.display = popupNumber === totalPopups ? 'inline-block' : 'none';
+    }
+
+    updatePopupSidebar(popupNumber);
+}
+
+function nextPopup()
+{
+    if (currentPopup < totalPopups)
+    {
+        currentPopup++;
+        showPopup(currentPopup);
+    }
+}
+
+function prevPopup()
+{
+    if (currentPopup > 1)
+    {
+        currentPopup--;
+        showPopup(currentPopup);
+    }
+}
+
+function updatePopupSidebar(step)
+{
+    var sidebarLinks = document.querySelectorAll('.module-leftsidebar-link a');
+    sidebarLinks.forEach(link => link.classList.remove('active'));
+
+    var sidebarMap = {
+        1: 'sidebar-link-type',
+        2: 'sidebar-skin',
+        3: 'sidebar-texts',
+        4: 'sidebar-times',
+        5: 'sidebar-displays',
+        6: 'sidebar-repeat',
+        7: 'sidebar-feedback',
+        8: 'sidebar-target-users',
+        9: 'sidebar-exposure-summary'
+    };
+
+    var currentSidebarLink = document.getElementById(sidebarMap[step]);
+    if (currentSidebarLink)
+    {
+        currentSidebarLink.classList.add('active');
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () =>
+{
+    showPopup(currentPopup); // Show the current popup
+
+
+
+    var previewBox = document.getElementById('preview-box');
+    if (previewBox)
+    {
+        previewBox.style.display = 'none'; // Hide back button if on the first page
+    }
+    const backBtn = document.getElementById('backBtn');
+    if (backBtn)
+    {
+        backBtn.style.display = 'none'; // Hide back button if on the first page
+    }
+});

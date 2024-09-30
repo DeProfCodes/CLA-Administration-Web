@@ -44,20 +44,20 @@
     color: white;
     border-radius: 20px;
 }
-
+/*
 .main-content .btn-group .btn
 {
     padding: 0.5rem;
     border: 1px solid black;
     color: black;
     border-radius: 0.375rem;
-}
-
+}*/
+/*
 .main-content .btn-group .btn.active
 {
     background-color: #04316D;
     color: white;
-}
+}*/
 
 .upload-section
 {
@@ -139,7 +139,7 @@
 {
     flex: 1;
 }
-
+/*
 .btn-group .btn
 {
     padding: 0.5rem;
@@ -153,8 +153,9 @@
 {
     background-color: #04316D;
     color: white;
-}
+}*/
 
+/*#region Module Filters*/
 .overview-filter-btn-group
 {
     height: 30px !important;
@@ -238,7 +239,9 @@
 {
     min-height: 500px;
 }
+/*#endregion*/
 
+/*#region Module Overviews*/
 .overview-table-caption
 {
     font-size: 20px;
@@ -342,7 +345,9 @@
 {
     font-size: 12px !important;
 }
+/*#endregion ModuleOverviews*/
 
+/*#region Module Details*/
 #PopupDetailsTitlePreview, #SurveyDetailsTitlePreview
 {
     height: fit-content;
@@ -654,7 +659,113 @@
     width: 100%;
     margin-left:180px;
 }
+/*#endregion ModuleDetails*/
 
+/*#region Module Wizard*/
+.module-wizard-link-nav 
+{
+    border-right: 1px solid #dee2e6;
+}
+#ModuleLeftNavLinksContainer
+{
+    padding: 0;
+    border-radius: 8px;
+}
+#ModuleLeftNavLinkCol
+{
+    max-width: 175px;
+}
+#ModuleWizardMain
+{
+   flex-grow: 1;
+   min-width: 500px;
+}
+#ModulePreviewSection
+{
+    max-width: 320px;
+    border-left: 1px solid #dee2e6;
+    height: 100%;
+    padding-left:5px;
+}
+.module-left-nav-link
+{
+    display: block;
+    padding: 5px !important;
+    color: var(--dark-blue);
+    text-decoration: none;
+    text-align: center;
+    margin-top: 8px;
+ }
+
+.module-left-nav-link.active
+{
+    background-color: var(--dark-blue);
+    color: var(--text-color-light);
+    border-radius: 20px;
+}
+.module-left-nav-link:hover
+{
+    background-color: var(--theme-blue-clr);
+    color: var(--text-color-light);
+    border-radius: 20px;
+}
+.module-link-type-btn-group 
+{
+    width: 80px !important;
+    font-size: 14px !important;
+    padding: 0 !important;
+    border-color: #04316d !important;
+    border-radius: 15px;
+}
+#ModuleLinkTypeContainer
+{
+    padding: 0;
+    font-size: 13px;
+}
+#UploadFileContainer
+{
+    border: 1px solid #ced4da;
+    padding: 1rem;
+    text-align: center;
+    position: relative;
+    background-color: var(--light-blue);
+    width: 396px !important;
+}
+#UploadFileContainer i
+{
+    font-size: 30px;
+    color: #ced4da;
+}
+#UploadFileContainer.dragging 
+{
+    background-color: #e9ecef;
+    border-color: var(--dark-blue);
+}
+#UploadFileContainer button
+{
+    border: 2px solid var(--theme-blue-clr);
+    padding: 0 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+#UploadFileContainer button:hover
+{
+    background: var(--theme-blue-clr);
+    color: white;
+}
+.module-wizard-nav-btns
+{
+    background-color: #04316D !important;
+    color: white;
+    border-radius: 10px;
+    padding: 2px 5px;
+    width: 80px;
+}
+
+/*#endregion*/
+
+/*#region Modules Scaling*/
 @media screen and (max-width:1950px)
 {
     .module-dt-body-text
@@ -714,6 +825,10 @@
     {
         margin-left: -20px;
     }
+    #UploadFileContainer
+    {
+        margin-left: -20px;
+    }
 }
 
 @media screen and (max-width:1285px)
@@ -733,6 +848,17 @@
     }
 }
 
+@media screen and (max-width:991px)
+{
+    #ModuleLinkTypeContainer
+    {
+        padding-left: 60px;
+    }
+    #UploadFileContainer, #ModuleContentUploadFileName
+    {
+        margin-left: 40px;
+    }
+}
 @media screen and (max-width:767px)
 {
     #DatesFilterContainer, #UsersFilterContainer
@@ -902,3 +1028,4 @@
         margin-left: -5px;
     }
 }
+/*#endregion*/

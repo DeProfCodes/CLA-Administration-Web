@@ -1,291 +1,749 @@
-﻿@using CLA_Administration_Web.Helpers.Enums.AppPages
+﻿@using CLA_Administration_Web.Helpers.Constants
+@using CLA_Administration_Web.Helpers.Enums.AppPages
 
 
-<div class=" container-fluid ">
+<style>
+
+
+
+
+.module-heading-theme {
+    color: var(--dark-blue);
+    text-align: center;
+}
+
+.module-subheading-theme {
+    color: var(--dark-blue);
+    text-align: center;
+}
+
+
+/* 
+.btn-group.btn {
+    font-size: x-small;
+}
+ */
+.form-check-input:checked
+{
+    background-color: var(--dark-blue);
+    border-color: var(--dark-blue);
+}
+
+/* Preview Box Styling */
+.preview-box {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: auto;
+}
+
+.skin-filename {
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.preview-box{
+    width:100%;
+}
+#previewContent{
+    overflow:auto;
+}
+
+.preview-box div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    width: 100%;
+    height: 100% ;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align: justify;
+}
+
+.preview-box img,
+.preview-box .title,
+.preview-box .body {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.pagination-section {
+    align-items: center;
+}
+
+
+
+    
+.popup {
+    color: var(--navy-blue);
+}
+
+.btn-toolbar {
+    padding-left: 60px;
+    padding-right: 60px;
+}
+
+/*wyswig*/
+#wysiwyg {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+}
+
+.title-section,
+.toggle-preview {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.toggle-preview {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+/* 
+.btns {
+    padding: 0.3em;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    border-bottom: 1px solid #EFEFEF;
+} */
+
+.category {
+    display: flex;
+    align-items: center;
+    padding: 0 4px;
+    border-right: 1px solid #EFEFEF;
+}
+/* 
+button,
+select,
+input {
+    background-color: white;
+    border: none;
+    padding: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 5px;
+}
+
+    input[type="color"] {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+    }
+ */
+.option {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+    .option label {
+        font-size: 16px;
+        color: var(--dark-blue);
+    }
+
+.toggle-switch {
+    width: 50px;
+    height: 24px;
+    position: relative;
+    appearance: none;
+    background-color: var(--navy-blue);
+    border-radius: 15px;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s;
+}
+
+/*popup 3 css*/
+#titleInput {
+    padding: 20px;
+    background-color: var(--light-blue);
+    outline: none;
+    border: none;
+    resize: vertical;
+    overflow: auto;
+}
+
+#bodyInput {
+    padding: 20px;
+    background-color: var(--light-blue);
+    outline: none;
+    border: none;
+    resize: vertical;
+    overflow: auto;
+    height: 150px;
+}
+
+#preview {
+    border: 1px solid #EFEFEF;
+    border-radius: 4px;
+}
+
+    
+    
+    
+</style>
+
+
+@{
+    var testPopupTitle = "<p class='mb-0' style='color:yellow;font-size:16px;'>Popup Title HTML</p>";
+
+    var testPopupBody = @"
+                            <font color=""#000000"" size=""3"" face=""Arial""><table style=""WIDTH: 148pt; BORDER-COLLAPSE: collapse"" cellspacing=""0"" cellpadding=""0"" width=""198"" border=""0""><colgroup><col style=""WIDTH: 101pt; mso-width-source: userset; mso-width-alt: 4937"" width=""135""><col style=""WIDTH: 47pt; mso-width-source: userset; mso-width-alt: 2304"" width=""63""><tbody><tr style=""HEIGHT: 12pt"" height=""16""><td class=""xl68"" style=""BORDER-TOP: windowtext 0.5pt solid; HEIGHT: 12pt; BORDER-RIGHT: windowtext 0.5pt solid; WIDTH: 148pt; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext 0.5pt solid; BACKGROUND-COLOR: transparent"" height=""16"" width=""198"" colspan=""2""><strong><font size=""2"" face=""Calibri"">WIP Status</font></strong></td></tr><tr style=""HEIGHT: 12pt"" height=""16""><td class=""xl66"" style=""BORDER-TOP: windowtext; HEIGHT: 12pt; BORDER-RIGHT: windowtext 0.5pt solid; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext 0.5pt solid; BACKGROUND-COLOR: transparent"" height=""16""><font size=""2"" face=""Calibri"">Opening prior</font></td><td class=""xl67"" style=""BORDER-TOP: windowtext; BORDER-RIGHT: windowtext 0.5pt solid; WIDTH: 47pt; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext; BACKGROUND-COLOR: transparent"" width=""63"" align=""right""><font size=""2"" face=""Segoe UI"">880 222</font></td></tr><tr style=""HEIGHT: 12pt"" height=""16""><td class=""xl66"" style=""BORDER-TOP: windowtext; HEIGHT: 12pt; BORDER-RIGHT: windowtext 0.5pt solid; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext 0.5pt solid; BACKGROUND-COLOR: transparent"" height=""16""><font face=""Calibri""><font size=""2"">In-Cycle Prior month&nbsp; </font></font></td><td class=""xl67"" style=""BORDER-TOP: windowtext; BORDER-RIGHT: windowtext 0.5pt solid; WIDTH: 47pt; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext; BACKGROUND-COLOR: transparent"" width=""63"" align=""right""><font size=""2"" face=""Segoe UI"">644 868</font></td></tr><tr style=""HEIGHT: 12pt"" height=""16""><td class=""xl66"" style=""BORDER-TOP: windowtext; HEIGHT: 12pt; BORDER-RIGHT: windowtext 0.5pt solid; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext 0.5pt solid; BACKGROUND-COLOR: transparent"" height=""16""><font size=""2"" face=""Calibri"">% in-cycle</font></td><td class=""xl69"" style=""BORDER-TOP: windowtext; BORDER-RIGHT: windowtext 0.5pt solid; WIDTH: 47pt; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext; BACKGROUND-COLOR: #00b050"" width=""63"" align=""right""><font size=""2"" face=""Segoe UI"">73%</font></td></tr><tr style=""HEIGHT: 12pt"" height=""16""><td class=""xl66"" style=""BORDER-TOP: windowtext; HEIGHT: 12pt; BORDER-RIGHT: windowtext 0.5pt solid; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext 0.5pt solid; BACKGROUND-COLOR: transparent"" height=""16""><font size=""2"" face=""Calibri"">Out-Cycle Prior</font></td><td class=""xl67"" style=""BORDER-TOP: windowtext; BORDER-RIGHT: windowtext 0.5pt solid; WIDTH: 47pt; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext; BACKGROUND-COLOR: transparent"" width=""63"" align=""right""><font size=""2"" face=""Segoe UI"">141 710</font></td></tr><tr style=""HEIGHT: 12pt"" height=""16""><td class=""xl66"" style=""BORDER-TOP: windowtext; HEIGHT: 12pt; BORDER-RIGHT: windowtext 0.5pt solid; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext 0.5pt solid; BACKGROUND-COLOR: transparent"" height=""16""><font size=""2"" face=""Calibri"">Opening Current</font></td><td class=""xl67"" style=""BORDER-TOP: windowtext; BORDER-RIGHT: windowtext 0.5pt solid; WIDTH: 47pt; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext; BACKGROUND-COLOR: transparent"" width=""63"" align=""right""><font size=""2"" face=""Segoe UI"">786 466</font></td></tr><tr style=""HEIGHT: 12pt"" height=""16""><td class=""xl66"" style=""BORDER-TOP: windowtext; HEIGHT: 12pt; BORDER-RIGHT: windowtext 0.5pt solid; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext 0.5pt solid; BACKGROUND-COLOR: transparent"" height=""16""><font size=""2"" face=""Calibri"">Target</font></td><td class=""xl67"" style=""BORDER-TOP: windowtext; BORDER-RIGHT: windowtext 0.5pt solid; WIDTH: 47pt; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext; BACKGROUND-COLOR: transparent"" width=""63"" align=""right""><font size=""2"" face=""Segoe UI"">393 233</font></td></tr></tbody></colgroup></table></font>
+                            ";
+
+    var popupSkin = $"{LaunchSettingsHelper.GetBaseAddressForImages()}/images/others/modules/skins/Popup_Skin_Default.png";
+
+}
+
+<div class="container-fluid">
     <!-- Breadcrumb Component -->
     @await Component.InvokeAsync("Breadcrumbs", new { page = ModulesPages.PopupAddNew })
 
-    <div class="card hidden">
+    <!-- Card for Title -->
+    <div class="card mb-4 mt-2" style="min-width:940px;">
+        <div class="card-body pb-0">
+            <h4 class="w-100 text-center theme-txt-clr">Add New Popup</h4>
+        </div>
+    </div>
+
+    <div class="card" style="min-width:940px;">
         <div class="card-body">
-            <form id="popupForm">
-                <div class="container-fluid">
-                    <div class="row">
-                        <!-- Sidebar -->
-                        <div class="col-12 col-md-3 mb-4">
-                            <div class="sidebar">
-                                <a href="#" id="sidebar-link-type" class="active">Link Type</a>
-                                <a href="#" id="sidebar-skin">Skin</a>
-                                <a href="#" id="sidebar-texts">Texts</a>
-                                <a href="#" id="sidebar-times">Times</a>
-                                <a href="#" id="sidebar-displays">Displays</a>
-                                <a href="#" id="sidebar-repeat">Repeat</a>
-                                <a href="#" id="sidebar-feedback">Feedback</a>
-                                <a href="#" id="sidebar-target-users">Target Users</a>
-                                <a href="#" id="sidebar-exposure-summary">Exposure Summary</a>
-                            </div>
-                        </div>
-
-                        <!-- Main content -->
-                        <div class="col-12 col-md-6 mb-4">
-                            <div class="text-center p-4" id="main-content">
-                                <!-- Popup 1 -->
-                                <div id="popup1" class="popup">
-                                    <h5 class="fw-bold mb-3">1. Popup Link Type</h5>
-                                    <p>Select what the popup will link to when clicked by the user.</p>
-                                    <div class="row mb-3">
-                                        <div class="col-12 col-md-4 fw-bold">
-                                            <label>Link Type:</label>
-                                        </div>
-                                        <div class="col-12 col-md-8">
-                                            <div class="btn-group mb-2 w-100">
-                                                <button type="button" class="btn btn-outline-primary">No Link</button>
-                                                <button type="button" class="btn active">Image</button>
-                                                <button type="button" class="btn btn-outline-primary">Audio</button>
-                                                <button type="button" class="btn btn-outline-primary">Video</button>
-                                                <button type="button" class="btn btn-outline-primary">Ticker</button>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-4 fw-bold">
-                                          
-                                        </div>
-                                        <div class="col-12 col-md-8">
-                                            <div class="btn-group mb-2 w-100">
-                                                <button type="button" class="btn btn-outline-primary">No Link</button>
-                                                <button type="button" class="btn ">Image</button>
-                                                <button type="button" class="btn btn-outline-primary">Audio</button>
-                                                <button type="button" class="btn btn-outline-primary">Video</button>
-                                                <button type="button" class="btn btn-outline-primary">Ticker</button>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-4 fw-bold">
-                                            <label>Attachment:</label>
-                                        </div>
-                                        <div class="col-12 col-md-8">
-                                            <p id="fileName" class="mb-2">No file selected</p>
-                                            <div class="upload-section mb-4" id="upload-section">
-                                                <i class="bi bi-cloud-arrow-up-fill"></i>
-                                                <p class="mt-2">Drag & Drop file here or</p>
-                                                <input type="file" id="file-input" hidden>
-                                                <button class="btn " type="button" onclick="document.getElementById('file-input').click();">Browse</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Popup 2 -->
-                                <div id="popup2" class="popup" style="display:none;">
-                                    <h5 class="fw-bold mb-3">2. Popup Skin</h5>
-                                    <p>Choose a skin for the popup.</p>
-                                    <!-- Add content for Popup 2 -->
-                                </div>
-
-                                <!-- Popup 3 -->
-                                <div id="popup3" class="popup" style="display: none;">
-                                    <h5 class="fw-bold mb-3">3. Popup Text</h5>
-                                    <p>Popup text options.</p>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" id="customSkin">
-                                        <label class="form-check-label" for="customSkin">Use Custom Skin</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" id="defaultSkin">
-                                        <label class="form-check-label" for="defaultSkin">Use Default Skin</label>
-                                    </div>
-                                </div>
-
-                                <!-- Popup 4 -->
-                                <div id="popup4" class="popup" style="display: none;">
-                                    <h5 class="fw-bold mb-3">4. Popup Times</h5>
-                                    <p>Select the times the popup will be displayed.</p>
-                                    <!-- Add content for Popup 4 -->
-                                </div>
-
-                                <!-- Popup 5 -->
-                                <div id="popup5" class="popup" style="display: none;">
-                                    <h5 class="fw-bold mb-3">5. Popup Displays</h5>
-                                    <p>Popup display settings.</p>
-                                    <!-- Add content for Popup 5 -->
-                                </div>
-
-                                <!-- Popup 6 -->
-                                <div id="popup6" class="popup" style="display: none;">
-                                    <h5 class="fw-bold mb-3">6. Popup Repeat</h5>
-                                    <p>Popup repeat settings.</p>
-                                    <!-- Add content for Popup 6 -->
-                                </div>
-
-                                <!-- Popup 7 -->
-                                <div id="popup7" class="popup" style="display: none;">
-                                    <h5 class="fw-bold mb-3">7. Popup Feedback Request</h5>
-                                    <p>Select popup feedback preferences: Like/Dislike and/or comment.</p>
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked1" checked>
-                                        <label class="form-check-label" for="flexSwitchCheckChecked1">Allow recipients to add comments</label>
-                                    </div>
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked2" checked>
-                                        <label class="form-check-label" for="flexSwitchCheckChecked2">Allow recipients to like or dislike</label>
-                                    </div>
-                                </div>
-
-                                <!-- Popup 8 -->
-                                <div id="popup8" class="popup" style="display: none;">
-                                    <h5 class="fw-bold mb-3">8. Popup Target Users</h5>
-                                    <p>Popup target user settings.</p>
-                                    <!-- Add content for Popup 8 -->
-                                </div>
-
-                                <!-- Popup 9 -->
-                                <div id="popup9" class="popup" style="display: none;">
-                                    <h5 class="fw-bold mb-3">9. Popup Exposure Summary</h5>
-                                    <p>Popup exposure summary settings.</p>
-                                    <!-- Add content for Popup 9 -->
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Right Bar Preview -->
-                        <div class="col-12 col-md-3">
-                            <div class="right-bar h-100">
-                                <h1 class="text-center">Preview</h1>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Pagination Section -->
-                    <div class="pagination-section mt-4  flex-column flex-md-row ">
-                        <button type="button" class="btn next-btn" id="backBtn" onclick="prevPopup()" style="display:none;">Back</button>
-                        <button type="button" class="btn next-btn" id="nextBtn" onclick="nextPopup()">Next</button>
-                        <button type="submit" class="btn btn-success" id="submitBtn" style="display:none;">Submit</button>
-                        <p class="mt-2" id="pageNumber">Page 1</p>
+            <div class="row flex-sm-nowrap">
+                <!-- Left Navigation Side -->
+                <div class="col module-wizard-link-nav" id="ModuleLeftNavLinkCol">
+                    <div id="ModuleLeftNavLinksContainer" class="mt-4">
+                        <a class="module-left-nav-link active" href="#" id="sidebar-link-type">Link Type</a>
+                        <a class="module-left-nav-link" href="#" id="sidebar-skin">Skin</a>
+                        <a class="module-left-nav-link" href="#" id="sidebar-texts">Texts</a>
+                        <a class="module-left-nav-link" href="#" id="sidebar-times">Times</a>
+                        <a class="module-left-nav-link" href="#" id="sidebar-displays">Displays</a>
+                        <a class="module-left-nav-link" href="#" id="sidebar-repeat">Repeat</a>
+                        <a class="module-left-nav-link" href="#" id="sidebar-feedback">Feedback</a>
+                        <a class="module-left-nav-link" href="#" id="sidebar-target-users">Target Users</a>
+                        <a class="module-left-nav-link" href="#" id="sidebar-exposure-summary">Exposure Summary</a>
                     </div>
                 </div>
-            </form>
+                <!-- Main Content -->
+                <div class="col main-content flex-wrap" id="ModuleWizardMain">
+                    <div class="form-horizontal" id="popupForm">
+                        <!-- Link Type Tab -->
+                        <div id="popup1" class="popup flex-wrap align-content-center justify-content-center mb-3">
+                            <h5 class="fw-bold module-heading-theme mt-4">1. Popup Link Type</h5>
+                            <p class="custom-p mt-2 fs-13 text-center">Select what the popup will link to when clicked by the user.</p>
+                            <p class="custom-p fs-13 text-center">The popup can launch any of the below options when clicked on or be linked to nothing.</p>
+                            <div class="row mt-5">
+                                <div class="col-lg-3 align-content-center">
+                                    <p class="fw-bold text-center theme-txt-clr">Link Type:</p>
+                                </div>
+                                <div class="col-lg-9" id="ModuleLinkTypeContainer">
+                                    <div class="btn-group mb-2 w-auto overview-filter-btn-group">
+                                        <button class="btn module-link-type-btn-group  btn-group-active">No Link</button>
+                                        <button class="btn module-link-type-btn-group">Image</button>
+                                        <button class="btn module-link-type-btn-group">Audio</button>
+                                        <button class="btn module-link-type-btn-group">Video</button>
+                                        <button class="btn module-link-type-btn-group">Ticker</button>
+                                    </div>
+                                    <div class="btn-group w-auto overview-filter-btn-group">
+                                        <button class="btn module-link-type-btn-group">Document</button>
+                                        <button class="btn module-link-type-btn-group">Website</button>
+                                        <button class="btn module-link-type-btn-group">Email</button>
+                                        <button class="btn module-link-type-btn-group">Survey</button>
+                                        <button class="btn module-link-type-btn-group">Policy</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <p class="col-lg-3 fw-bold text-center theme-txt-clr mb-0">Attachment:</p>
+                                <div class="col-lg-9 p-0">
+                                    <p id="ModuleContentUploadFileName" class="mb-0 custom-p fst-italic">No file selected</p>
+                                </div>
+                            </div>
+                            <div class="row p-0 mt-2">
+                                <label class="col-lg-3"></label>
+                                <div class="col-lg-8 p-0">
+                                    <div class="w-100 mb-4 p-0" id="UploadFileContainer">
+                                        <i class="bi bi-cloud-arrow-up-fill"></i>
+                                        <p class="mb-0 text-silver fs-12" style="margin-top:-5px">Drag & Drop file here</p>
+                                        <p class="mb-0 text-silver fs-12">or</p>
+                                        <input type="file" id="file-input" hidden>
+                                        <button class="btn btn-upload"onclick="document.getElementById('file-input').click();">Browse</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- Popup 2 -->
+                        <div id="popup2" class="popup flex-wrap  text-center align-content-center justify-content-center mb-3" style="display:none;">
+                            <h5 class="fw-bold mb-3 text-center module-heading-theme">2. Popup Skin</h5>
+                            <p class="text-center module-subheading-theme">Please select the skin for this group</p>
+                            <p class="text-center module-subheading-theme">
+                                If you import your own custom skin, please note that the image must be saved as a *.BMP file and must be 314x188 pixels in dimension.
+                            </p>
+
+                            <div class="form-group">
+                                <div class="col-sm-10 d-inline-flex justify-content-between align-items-center">
+                                    <div class="form-check mr-3">
+                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                        <label class="form-check-label ml-2" for="exampleRadios1">
+                                            Use Custom Skin
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-10 d-inline-flex justify-content-between align-items-center">
+                                    <div class="form-check mr-3">
+                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                                        <label class="form-check-label ml-2" for="exampleRadios2">
+                                            Use Default Skin
+                                        </label>
+                                    </div>
+                                    <select class="form-control ml-3 w-50">
+                                        <option>STMBackground.BMP</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- Popup 3 -->
+                        <div id="popup3" class="popup flex-wrap  text-center align-content-center justify-content-center mb-3" style="display:none;">
+                            <h5 class="fw-bold mb-3 text-center module-heading-theme">3. Popup Title & Body Texts</h5>
+                            <p class="text-center module-subheading-theme">Enter popup title and body texts.</p>
+                            <div class="form-group row">
+                                <label class="col-sm-2 fw-bold text-center">Title:</label>
+                                <div class="col-sm-10">
+                                    <div id="wysiwyg">
+                                        <div class="btns">
+                                            <div class="category">
+                                                <button data-cmd="undo"><i class="fas fa-undo"></i></button>
+                                                <button data-cmd="redo"><i class="fas fa-redo"></i></button>
+                                            </div>
+                                            <div class="category">
+                                                <select data-cmd="formatBlock">
+                                                    <option value="p">Paragraph</option>
+                                                    <option value="h1">Title 1</option>
+                                                    <option value="h2">Title 2</option>
+                                                    <option value="h3">Title 3</option>
+                                                </select>
+                                                <select data-cmd="fontSize">
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                    <option value="7">7</option>
+                                                </select>
+                                                <select data-cmd="fontName">
+                                                    <option value="Arial">Arial</option>
+                                                    <option value="Roboto">Roboto</option>
+                                                    <option value="serif">Serif</option>
+                                                    <option value="sans-serif">Sans-serif</option>
+                                                </select>
+                                            </div>
+                                            <div class="category">
+                                                <button data-cmd="bold"><i class="fas fa-bold"></i></button>
+                                                <button data-cmd="italic"><i class="fas fa-italic"></i></button>
+                                                <button data-cmd="underline"><i class="fas fa-underline"></i></button>
+                                            </div>
+                                            <div class="category">
+                                                <input data-cmd="forecolor" type="color" value="#000000" title="Text Color">
+                                                <input data-cmd="backcolor" type="color" value="#FFFFFF" title="Background Color">
+                                            </div>
+                                            <div class="category">
+                                                <button data-cmd="justifyLeft"><i class="fas fa-align-left"></i></button>
+                                                <button data-cmd="justifyCenter"><i class="fas fa-align-center"></i></button>
+                                                <button data-cmd="justifyRight"><i class="fas fa-align-right"></i></button>
+                                                <button data-cmd="justifyFull"><i class="fas fa-align-justify"></i></button>
+                                            </div>
+                                        </div>
+
+                                        <div id="titleInput" contentEditable></div>
+                                        <div class="form-check form-switch">
+                                            <label class="form-check-label" for="flexSwitchCheckChecked2">Show</label>
+                                            <input class="form-check-input" id="showPreview" type="checkbox" role="switch" id="flexSwitchCheckChecked2" checked>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Body input-->
+                            <div class="form-group row">
+                                <label class="col-sm-2 fw-bold  text-center">Body:</label>
+                                <div class="col-sm-10">
+                                    <div id="wysiwyg">
+                                        <div class="btns">
+                                            <div class="category">
+                                                <button data-cmd="undo"><i class="fas fa-undo"></i></button>
+                                                <button data-cmd="redo"><i class="fas fa-redo"></i></button>
+                                            </div>
+                                            <div class="category">
+                                                <select data-cmd="formatBlock">
+                                                    <option value="p">Paragraph</option>
+                                                    <option value="h1">Title 1</option>
+                                                    <option value="h2">Title 2</option>
+                                                    <option value="h3">Title 3</option>
+                                                </select>
+                                                <select data-cmd="fontSize">
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                    <option value="7">7</option>
+                                                </select>
+                                                <select data-cmd="fontName">
+                                                    <option value="Arial">Arial</option>
+                                                    <option value="Roboto">Roboto</option>
+                                                    <option value="serif">Serif</option>
+                                                    <option value="sans-serif">Sans-serif</option>
+                                                </select>
+                                            </div>
+                                            <div class="category">
+                                                <button data-cmd="bold"><i class="fas fa-bold"></i></button>
+                                                <button data-cmd="italic"><i class="fas fa-italic"></i></button>
+                                                <button data-cmd="underline"><i class="fas fa-underline"></i></button>
+                                            </div>
+                                            <div class="category">
+                                                <input data-cmd="forecolor" type="color" value="#000000" title="Text Color">
+                                                <input data-cmd="backcolor" type="color" value="#FFFFFF" title="Background Color">
+                                            </div>
+                                            <div class="category">
+                                                <button data-cmd="justifyLeft"><i class="fas fa-align-left"></i></button>
+                                                <button data-cmd="justifyCenter"><i class="fas fa-align-center"></i></button>
+                                                <button data-cmd="justifyRight"><i class="fas fa-align-right"></i></button>
+                                                <button data-cmd="justifyFull"><i class="fas fa-align-justify"></i></button>
+                                            </div>
+                                        </div>
+
+                                        <div id="bodyInput" contentEditable></div>
+                                        <div class="form-check form-switch">
+                                            <label class="form-check-label" for="flexSwitchCheckChecked2">Show</label>
+                                            <input class="form-check-input" id="showPreview" type="checkbox" role="switch">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Popup 4 -->
+                        <div id="popup4" class="popup flex-wrap  text-center align-content-center justify-content-center mb-3" style="display:none;">
+
+
+                            <div class="row text-center align-content-center justify-content-center">
+                                <div class="col-12">
+                                    <h5 class="fw-bold mb-3 module-heading-theme">4. Popup Preview</h5>
+                                    <p class="module-subheading-theme">This is what the preview will look like based on the information you have entered.</p>
+                                </div>
+                                <div class="col-lg-2 ">
+                                    col 1
+                                </div>
+                                <div class="col-lg-10"> col2 </div>
+
+
+                            </div>
+
+                            <!-- Preview content -->
+                        </div>
+
+                        <!-- Popup 5 -->
+                        <div id="popup5" class="popup flex-wrap  text-center align-content-center justify-content-center mb-3" style="display: none;">
+                            <h5 class="fw-bold mb-3 module-heading-theme">5. Popup Displays</h5>
+                            <p class="module-subheading-theme">Popup display settings.</p>
+                            <!-- Add content for Popup 5 -->
+                        </div>
+
+                        <!-- Popup 6 -->
+                        <div id="popup6" class="popup flex-wrap  text-center align-content-center justify-content-center mb-3" style="display: none;">
+                            <h5 class="fw-bold mb-3 module-heading-theme">6. Popup Repeat</h5>
+                            <p class="module-subheading-theme">Popup repeat settings.</p>
+                            <!-- Add content for Popup 6 -->
+                        </div>
+
+                        <!-- Popup 7 -->
+                        <div id="popup7" class="popup flex-wrap text-center align-items-center justify-content-center mb-3 mt-2" style="display: none;">
+                            <h5 class="fw-bold mb-3 module-heading-theme">7. Popup Feedback Request</h5>
+                            <p class="module-subheading-theme">Select popup feedback preferences: Like/Dislike and/or comment.</p>
+
+                            <div class="form-group row justify-content-center">
+                                <div class="option form-check form-switch">
+                                    <label for="likeDislikeToggle">Allow recipients to <strong>LIKE or DISLIKE</strong> the popup</label>
+                                    <input type="checkbox" id="commentToggle" class="form-check-input">
+
+                                </div>
+                                <div class="option form-check form-switch">
+                                    <label for="commentToggle">Allow recipients to add <strong>COMMENT</strong> to the popup</label>
+                                    <input type="checkbox" id="commentToggle" class="form-check-input">
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Popup 8 -->
+                        <div id="popup8" class="popup flex-wrap  text-center align-content-center justify-content-center mb-3" style="display: none;">
+                            <h5 class="fw-bold mb-3 module-heading-theme">8. Popup Target Users</h5>
+                            <p class="module-heading-theme">Popup target user settings.</p>
+                            <!-- Add content for Popup 8 -->
+                        </div>
+
+                        <!-- Popup 9 -->
+                        <div id="popup9" class="popup flex-wrap  text-center align-content-center justify-content-center mb-3" style="display: none;">
+                            <h5 class="fw-bold mb-3 module-heading-theme">9. Popup Exposure Summary</h5>
+                            <p class="module-heading-theme">Popup exposure summary settings.</p>
+                            <!-- Add content for Popup 9 -->
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 ">
+                                <div class="pagination-section mt-4  flex-column flex-md-row  text-center align-content-center justify-content-center ">
+                                    <button class="btn module-wizard-nav-btns hidden" id="backBtn" onclick="prevPopup()">Back</button>
+                                    <button class="btn module-wizard-nav-btns" id="nextBtn" onclick="nextPopup()">Next</button>
+                                    <button class="btn module-wizard-nav-btns hidden" id="submitBtn">Submit</button>
+                                    <div id="pageNumber">Page 1</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Preview Side -->
+                <div class="col" id="ModulePreviewSection">
+                    <p class="fst-italic mt-4" style="color:silver">Preview</p>
+                    <p class="theme-txt-clr mb-0 mt-2">Skin filename: <span class="fw-bold">STMBackground.BMP</span></p>
+                    <div class="mt-1" id="PopupBodyPreview" style="background-image: url('@popupSkin')">
+                        <div class="d-flex" id="PopupBodyPreviewTitle">
+                            <div id="PopupBodyPreviewTitleIcon">
+                                <img src="~/images/icons/modules/popup/icon-info.png" />
+                            </div>
+                            <div id="PopupBodyPreviewTitleText">
+                                @Html.Raw(testPopupTitle)
+                            </div>
+                            <div id="PopupBodyPreviewTitleDismiss">
+                                <img src="~/images/icons/modules/popup/icon-error.png" />
+                            </div>
+                        </div>
+                        <div id="PopupBodyPreviewText">
+                            <div id="PopupBodyPreviewTextBody">
+                                @Html.Raw(testPopupBody)
+                            </div>
+                            <div id="PopupBodyPreviewTextBodyFooter">
+                                <button class="btn">Remind Me Later</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-3 p-0">
+                        <p class="custom-p">Feedback Skin with:</p>
+                        <ul class="mb-0" style="font-size:10px">
+                            <li>Like/Dislike</li> 
+                            <li>Comment</li>
+                        </ul>
+                        <div class="mt-0" id="PopupBodyPreview" style="background-image: url('@popupSkin'); opacity:0.4">
+                            <div class="d-flex" id="PopupBodyPreviewTitle">
+                                <div id="PopupBodyPreviewTitleIcon">
+                                    <img src="~/images/icons/modules/popup/icon-info.png" />
+                                </div>
+                                <div id="PopupBodyPreviewTitleText">
+                                    @Html.Raw(testPopupTitle)
+                                </div>
+                                <div id="PopupBodyPreviewTitleDismiss">
+                                    <img src="~/images/icons/modules/popup/icon-error.png" />
+                                </div>
+                            </div>
+                            <div id="PopupBodyPreviewText">
+                                <div id="PopupBodyPreviewTextBody">
+                                    @Html.Raw(testPopupBody)
+                                </div>
+                                <div id="PopupBodyPreviewTextBodyFooter">
+                                    <button class="btn">Remind Me Later</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="PopupFeedbackContents">
+                            <p class="pt-1 mb-0 w-100 text-center" style="font-size:11px">Please provide feedback on this popup</p>
+                            <div class="d-flex mt-1">
+                                <img src="~/images/icons/modules/popup/Like-icon.png" class="popup-feedback-icons ms-auto" />
+                                <img src="~/images/icons/modules/popup/Dislike-icon.png" class="popup-feedback-icons me-auto" />
+                            </div>
+                            <div class="mt-1 text-center">
+                                <textarea rows="3" id="PopupFeedbackText" disabled></textarea>
+                            </div>
+                            <div class="text-center">
+                                <button class="btn" id="PopupFeedbackBtn">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
 
+
+
+
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 
 <script>
 
-    const sidebarLinks = document.querySelectorAll('.sidebar a');
 
-  
-    let currentPopup = 1;
-    const totalPopups = sidebarLinks.length;
+    let uploadSection = document.getElementById('UploadFileContainer');
 
-    // Show popup by number
-    function showPopup(popupNumber) {
-        for (let i = 1; i <= totalPopups; i++) {
-            document.getElementById(`popup${i}`).style.display = i === popupNumber ? 'block' : 'none';
-        }
-        document.getElementById('pageNumber').textContent = `Page ${popupNumber}`;
-        document.getElementById('backBtn').style.display = popupNumber === 1 ? 'none' : 'inline-block'; 
-        document.getElementById('nextBtn').style.display = popupNumber === totalPopups ? 'none' : 'inline-block'; 
-        document.getElementById('submitBtn').style.display = popupNumber === totalPopups ? 'inline-block' : 'none'; 
-        updatePopupSidebar(popupNumber);
-    }
+    let fileInput = document.getElementById('file-input');
+    let fileNameDisplay = document.getElementById('ModuleContentUploadFileName');
 
-    // Go to the next popup
-    function nextPopup(event) {
-  
-        if (currentPopup < totalPopups) {
-            currentPopup++;
-            showPopup(currentPopup);
-            updatePopupSidebar(currentPopup)
-        }
-    }
-
-    // Go to the previous popup
-    function prevPopup(event) {
- 
-        if (currentPopup > 1) {
-            currentPopup--;
-            showPopup(currentPopup);
-            updatePopupSidebar(currentPopup)
-        }
-    }
-
-    // Drag and drop logic
-    const uploadSection = document.getElementById('upload-section');
-    const fileInput = document.getElementById('file-input');
-    const fileNameDisplay = document.getElementById('fileName');
-
-    uploadSection.addEventListener('dragover', (e) => {
+    uploadSection.addEventListener('dragover', (e) =>
+    {
         e.preventDefault();
         uploadSection.classList.add('dragging');
     });
 
-    uploadSection.addEventListener('dragleave', () => {
+    uploadSection.addEventListener('dragleave', () =>
+    {
         uploadSection.classList.remove('dragging');
     });
 
-    uploadSection.addEventListener('drop', (e) => {
+    uploadSection.addEventListener('drop', (e) =>
+    {
         e.preventDefault();
         uploadSection.classList.remove('dragging');
         const files = e.dataTransfer.files;
         handleFiles(files);
     });
 
-    fileInput.addEventListener('change', (e) => {
+    fileInput.addEventListener('change', (e) =>
+    {
         const files = e.target.files;
         handleFiles(files);
     });
 
-    function handleFiles(files) {
-        if (files.length > 0) {
+    function handleFiles(files)
+    {
+        if (files.length > 0)
+        {
             fileNameDisplay.textContent = files[0].name;
-        } else {
+        } else
+        {
             fileNameDisplay.textContent = "No file selected";
         }
     }
 
-    // Update the sidebar to reflect the current popup step
-    function updatePopupSidebar(step) {
-        sidebarLinks.forEach(link => link.classList.remove('active'));
 
-        switch (step) {
-            case 1:
-                document.getElementById('sidebar-link-type').classList.add('active');
-                break;
-            case 2:
-                document.getElementById('sidebar-skin').classList.add('active');
-                break;
-            case 3:
-                document.getElementById('sidebar-texts').classList.add('active');
-                break;
-            case 4:
-                document.getElementById('sidebar-times').classList.add('active');
-                break;
-            case 5:
-                document.getElementById('sidebar-displays').classList.add('active');
-                break;
-            case 6:
-                document.getElementById('sidebar-repeat').classList.add('active');
-                break;
-            case 7:
-                document.getElementById('sidebar-feedback').classList.add('active');
-                break;
-            case 8:
-                document.getElementById('sidebar-target-users').classList.add('active');
-                break;
-            case 9:
-                document.getElementById('sidebar-exposure-summary').classList.add('active');
-                break;
-            default:
-                console.log('Invalid step');
-                break;
+
+    $(document).ready(function ()
+    {
+        // Execute commands (like bold, italic, etc.)
+        $('.btns button').click(function (event)
+        {
+            event.preventDefault();
+
+            const cmd = $(this).data('cmd');
+            let value = null;
+
+            if ($(this).hasClass('prompt'))
+            {
+                value = prompt('Enter the link or image URL:', 'http://');
+            }
+            execCmd(cmd, value);
+        });
+
+        $('.btns select').change(function ()
+        {
+            const cmd = $(this).data('cmd');
+            const value = $(this).val();
+            execCmd(cmd, value);
+        });
+
+        $('.btns input').change(function ()
+        {
+            const cmd = $(this).data('cmd');
+            const value = $(this).val();
+            execCmd(cmd, value);
+        });
+
+        $('#showPreview').change(function ()
+        {
+            togglePreview();
+        });
+
+        $('#titleInput').on('input', function ()
+        {
+            updatePreview();
+        });
+
+        $('#bodyInput').on('input', function ()
+        {
+            updatePreview();
+        });
+
+        function execCmd(cmd, value)
+        {
+            document.execCommand(cmd, false, value);
+            updatePreview();
         }
-    }
 
-    // Initialize the first popup on page load
-    showPopup(currentPopup);
-    document.getElementById('backBtn').style.display = 'none'; // Hide back button on the first step
+        $('#showPreview').change(function ()
+        {
+            togglePreview();
+        });
 
+        function updatePreview()
+        {
+            if ($('#showPreview').is(':checked'))
+            {
+                let title = $('#titleInput').html();
+                let content = $('#bodyInput').html();
 
+                $('#previewTitle').html(title);
+                $('#previewContent').html(content);
+            } else
+            {
 
+                $('#previewTitle').html('');
+                $('#previewContent').html('');
+            }
+        }
 
+        function togglePreview()
+        {
+            if ($('#showPreview').is(':checked'))
+            {
+                $('#previewContent').show();
+                $('#previewTitle').show();
+                updatePreview();
+            } else
+            {
+                $('#previewContent').hide();
+                $('#previewTitle').hide();
+            }
+        }
+
+        togglePreview();
+    });
 
 </script>

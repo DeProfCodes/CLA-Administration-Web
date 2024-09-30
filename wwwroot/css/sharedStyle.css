@@ -1,4 +1,16 @@
 ﻿
+/*root colors */
+:root 
+{
+    --theme-blue-clr: #04316d !important;
+    --dark-blue: #04316D;
+    --navy-blue: #002855; 
+    --light-blue: #f8f9fa; 
+    --text-color-light: white;
+    --border-radius-small: 0.5rem;
+    --border-radius-large: 10px;
+}
+
 
 /*#LeftNavMenu ::-webkit-scrollbar 
 {
@@ -92,6 +104,21 @@
     margin-bottom: 0 !important;
     color: #04316d !important; 
     font-weight: bold;
+}
+
+/* ======================================================= Texts =======================================================*/
+
+.fs-12
+{
+    font-size: 12px !important;
+}
+.fs-13
+{
+    font-size: 12px !important;
+}
+.text-silver
+{
+    color: silver !important;
 }
 
 /**======================================================= Scaling ====================================================*/
