@@ -638,15 +638,16 @@
     background: white;
     margin-top: 100px;
 }
-.survey-preview-btns
+.survey-preview-btns, survey-preview-btns:hover
 {
     width:85px; 
     height:20px; 
     border-radius:inherit; 
-    background:whitesmoke;
-    color:black;
+    background:whitesmoke !important;
+    color:black !important;
     padding:0;
     font-size:12px;
+    cursor: default !important;
 }
 #SurveyPreviewDetails
 {
