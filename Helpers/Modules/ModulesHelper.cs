@@ -72,6 +72,9 @@ namespace CLA_Administration_Web.Helpers.Modules
                 case ModuleNamesType.Popup: return ModulesPages.PopupDetails;
                 case ModuleNamesType.Ticker: return ModulesPages.TickerDetails;
                 case ModuleNamesType.Survey: return ModulesPages.SurveyDetails;
+                case ModuleNamesType.LockedDesktop: return ModulesPages.LockedDesktopDetails;
+                case ModuleNamesType.Desktop: return ModulesPages.DesktopDetails;
+                case ModuleNamesType.Screensaver: return ModulesPages.ScreensaverDetails;
                 default: return ModulesPages.None;
             }
         }

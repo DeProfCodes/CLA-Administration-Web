@@ -228,17 +228,6 @@ namespace CLA_Administration_Web.Helpers.Layout
                 },
                 new ModuleBreadcrumbViewModel()
                 {
-                    ModulePage = ModulesPages.SurveyAddNew,
-                    ModulePageName = "Survey Module",
-                    ModuleName = "Survey",
-                    ModuleSubPage = "Add New",
-                    HasActionButton = true,
-                    IsAddNewIcon = false,
-                    ActionButtonText = "Survey Overview",
-                    ActionButtonPage = ModulesPages.SurveyOverview
-                },
-                new ModuleBreadcrumbViewModel()
-                {
                     ModulePage = ModulesPages.SurveyDetails,
                     ModulePageName = "Survey Module",
                     ModuleName = "Survey",

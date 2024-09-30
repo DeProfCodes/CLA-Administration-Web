@@ -23,7 +23,7 @@
                 <h3 class="w-100 text-center theme-txt-clr overview-table-caption">
                     <span id="SurveyQuesitonsOverviewTableCaption">Questions For Survey ID: @Model.SurveyId</span>
                 </h3>
-                <table id="SurveyQuesitonsOverviewDataTable" class="table table-striped table-bordered table-hover align-middle" style="font-size:13px">
+                <table id="SurveyQuesitonsOverviewDataTable" class="table table-striped table-bordered table-hover align-middle" style="font-size:12px">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -60,9 +60,9 @@
                                 <td class="hidden">@surveyQuestion.UserIdLastModified</td>
                                 <td class="hidden">@surveyQuestion.MachineLastModified</td>
                                 <td>
-                                    <button class="btn btn-info btn-sm mx-1" onclick="OpenSurveyQuestionDetails('@surveyQuestion.QuestionId')">Open</button>
-                                    <button class="btn btn-secondary btn-sm mx-1">Edit</button>
-                                    <button class="btn btn-danger btn-sm">Delete</button>
+                                    <button class="btn btn-info btn-sm mx-1 custom-btn-sm" onclick="OpenSurveyQuestionDetails('@surveyQuestion.QuestionId')">Open</button>
+                                    <button class="btn btn-secondary btn-sm mx-1 custom-btn-sm">Edit</button>
+                                    <button class="btn btn-danger btn-sm custom-btn-sm">Delete</button>
                                 </td>
                             </tr>
                         }
