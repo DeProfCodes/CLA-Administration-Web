@@ -12,9 +12,9 @@ namespace CLA_Administration_Web.Helpers.Enums.AppPages
         [Display(Name = "AllModules", ShortName = "")]
         AllModules,
 
-        //PSTR Modules: Popup, Survey, Tikcer, RSS
-        [Display(Name = "ModulePSTRTableOverview", ShortName = "PSTR")]
-        ModulePSTRTableOverview,
+        //PST Modules: Popup, Survey, Tikcer
+        [Display(Name = "ModulePSTTableOverview", ShortName = "PST")]
+        ModulePSTTableOverview,
 
         //LDS Modules: Lockscreen, Desktop, Screensaver
         [Display(Name = "ModuleLDSTableOverview", ShortName = "LDS")]
@@ -30,12 +30,21 @@ namespace CLA_Administration_Web.Helpers.Enums.AppPages
         [Display(Name = "ContentLibraryCategories", ShortName = "ContentLibrary")]
         ContentLibraryCategories,
 
+        [Display(Name = "ContentLibraryCategoryDetails", ShortName = "ContentLibrary")]
+        ContentLibraryCategoryDetails,
+
         [Display(Name = "ContentLibraryContent", ShortName = "ContentLibrary")]
         ContentLibraryContent,
+
+        [Display(Name = "ContentLibraryContentDetails", ShortName = "ContentLibrary")]
+        ContentLibraryContentDetails,
 
         //Desktop
         [Display(Name = "DesktopOverview", ShortName = "Desktop")]
         DesktopOverview,
+
+        [Display(Name = "DesktopDetails", ShortName = "Desktop")]
+        DesktopDetails,
 
         [Display(Name = "DesktopAddNew", ShortName = "Desktop")]
         DesktopAddNew,
@@ -44,12 +53,18 @@ namespace CLA_Administration_Web.Helpers.Enums.AppPages
         [Display(Name = "LockedDesktopOverview", ShortName = "LockedDesktop")]
         LockedDesktopOverview,
 
+        [Display(Name = "LockedDesktopDetails", ShortName = "LockedDesktop")]
+        LockedDesktopDetails,
+
         [Display(Name = "LockedDesktopAddNew", ShortName = "LockedDesktop")]
         LockedDesktopAddNew,
 
         //Screensaver
         [Display(Name = "ScreensaverOverview", ShortName = "Screensaver")]
         ScreensaverOverview,
+
+        [Display(Name = "ScreensaverDetails", ShortName = "Screensaver")]
+        ScreensaverDetails,
 
         [Display(Name = "ScreensaverAddNew", ShortName = "Screensaver")]
         ScreensaverAddNew,
@@ -91,10 +106,23 @@ namespace CLA_Administration_Web.Helpers.Enums.AppPages
         SurveyAddNew,
 
         //RSS
-        [Display(Name = "RSSOverview", ShortName = "RSS")]
-        RSSOverview,
+        [Display(Name = "RssCategoryOverview", ShortName = "RSS")]
+        RSSCategoryOverview,
+
+        [Display(Name = "RssCategoryDetails", ShortName = "RSS")]
+        RSSCategoryDetails,
+
+        [Display(Name = "RssFeedOverview", ShortName = "RSS")]
+        RSSFeedOverview,
+
+        [Display(Name = "RssFeedDetails", ShortName = "RSS")]
+        RSSFeedDetails,
 
         [Display(Name = "RSSAddNew", ShortName = "RSS")]
-        RSSAddNew
+        RSSAddNew,
+
+        [Display(Name = "ModuleContentPreviewer", ShortName = "Component")]
+        ModuleContentPreviewer,
+
     }
 }

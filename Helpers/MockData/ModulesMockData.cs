@@ -1,7 +1,9 @@
 ﻿using CLA_Administration_Web.Helpers.Enums.Shared;
 using CLA_Administration_Web.Helpers.Shared;
+using CLA_Administration_Web.ViewModels.Modules.ContentLibrary;
 using CLA_Administration_Web.ViewModels.Modules.LDS;
-using CLA_Administration_Web.ViewModels.Modules.PSTR;
+using CLA_Administration_Web.ViewModels.Modules.PST;
+using CLA_Administration_Web.ViewModels.Modules.Rss;
 using CLA_Administration_Web.ViewModels.Shared;
 using System;
 using System.Net.Mime;
@@ -10,14 +12,14 @@ namespace CLA_Administration_Web.Helpers.MockData
 {
     public class ModulesMockData
     {
-        //PSTR
         public static class StagingData
         {
-            public static List<ModulePSTRDataViewModel> AllPopupsData { get; set; } = GeneratePSTRRandomData();
+            //PST
+            public static List<ModulePSTDataViewModel> AllPopupsData { get; set; } = GeneratePSTRandomData();
 
-            public static List<ModulePSTRDataViewModel> AllTickersData { get; set; } = GeneratePSTRRandomData();
+            public static List<ModulePSTDataViewModel> AllTickersData { get; set; } = GeneratePSTRandomData();
 
-            public static List<ModulePSTRDataViewModel> AllSurveysData { get; set; } = GeneratePSTRRandomData();
+            public static List<ModulePSTDataViewModel> AllSurveysData { get; set; } = GeneratePSTRandomData();
 
             public static List<SurveyQuestionViewModel> AllSurveyQuestions { get; set; } = GenerateSurveyQuestions();
 
@@ -27,15 +29,20 @@ namespace CLA_Administration_Web.Helpers.MockData
             public static List<ModuleLDSDataViewModel> AllLockedDesktopsData { get; set; } = GenerateLDSRandomData();
 
             public static List<ModuleLDSDataViewModel> AllDesktopsData { get; set; } = GenerateLDSRandomData();
+
+            public static List<RssCategoryOverviewViewModel> AllRSSCategories { get; set; } = GenerateRSSCategoriesRandomData();
+
+            public static List<RssFeedOverviewViewModel> AllRSSFeed { get; set; } = GenerateRSSFeedRandomData();
         }
 
         public static class LiveData
         {
-            public static List<ModulePSTRDataViewModel> AllPopupsData { get; set; } = GeneratePSTRRandomData();
+            //PST
+            public static List<ModulePSTDataViewModel> AllPopupsData { get; set; } = GeneratePSTRandomData();
 
-            public static List<ModulePSTRDataViewModel> AllTickersData { get; set; } = GeneratePSTRRandomData();
+            public static List<ModulePSTDataViewModel> AllTickersData { get; set; } = GeneratePSTRandomData();
 
-            public static List<ModulePSTRDataViewModel> AllSurveysData { get; set; } = GeneratePSTRRandomData();
+            public static List<ModulePSTDataViewModel> AllSurveysData { get; set; } = GeneratePSTRandomData();
 
             public static List<SurveyQuestionViewModel> AllSurveyQuestions { get; set; } = GenerateSurveyQuestions();
 
@@ -45,24 +52,33 @@ namespace CLA_Administration_Web.Helpers.MockData
             public static List<ModuleLDSDataViewModel> AllLockedDesktopsData { get; set; } = GenerateLDSRandomData();
 
             public static List<ModuleLDSDataViewModel> AllDesktopsData { get; set; } = GenerateLDSRandomData();
+
+            public static List<RssCategoryOverviewViewModel> AllRSSCategories { get; set; } = GenerateRSSCategoriesRandomData();
+
+            public static List<RssFeedOverviewViewModel> AllRSSFeed { get; set; } = GenerateRSSFeedRandomData();
         }
 
+        public static List<ContentLibraryCategoryModel> AllContentLibraryCategories { get; set; } = GenerateContentLibraryRandomData();
+
+        public static List<ContentLibraryContentModel> AllContentLibraryContents { get; set; } = GenerateContentLibraryContents();
+
         // Generate Module Data for Popups, Tickers, Surveys
-        private static List<ModulePSTRDataViewModel> GeneratePSTRRandomData()
+        private static List<ModulePSTDataViewModel> GeneratePSTRandomData()
         {
             var random = new Random();
-            var items = new List<ModulePSTRDataViewModel>();
+            var items = new List<ModulePSTDataViewModel>();
 
             var usersList = new List<string> { "NdhuvaziM", "LegeB", "SinethembaS", "LeboC", "Administrator", "CathrineT", "LarryM", "Tarryn" };
+            var machinesList = new List<string> { "NdhuvaziM-PC", "LegeB-PC", "Sinethemba-PC", "LeboC-PC", "Administrator-PC", "CathrineT-PC", "LarryM-PC", "Tarryn-PC" };
 
             DateTime effectiveFrom = new();
             DateTime effectiveTo = new();
 
-            for (int i = 1; i <= 250; i++)
+            for (int i = 1; i <= 1000; i++)
             {
                 GetEffectiveDates(ref effectiveFrom, ref effectiveTo, i);
 
-                var item = new ModulePSTRDataViewModel
+                var item = new ModulePSTDataViewModel
                 {
                     Id = i,
                     HeaderText = RandomString(random, 5, 10),
@@ -72,7 +88,8 @@ namespace CLA_Administration_Web.Helpers.MockData
                     TimeslotFrom = RandomTime(random),
                     TimeslotTo = RandomTime(random),
                     LastModifiedDate = DateTime.Now.AddMinutes(-random.Next(0, 50000)).ToString("yyyy/MM/dd HH:mm"),
-                    UserIdLastModified = usersList[random.Next(0, 8)],
+                    UserIdLastModified = usersList[random.Next(usersList.Count)],
+                    MachineLastModified = machinesList[random.Next(machinesList.Count)]
                 };
 
                 items.Add(item);
@@ -96,7 +113,7 @@ namespace CLA_Administration_Web.Helpers.MockData
             var wordList = new List<string>
             {
                 "random", "survey", "data", "user", "information", "value", "result", "questionnaire", "response", "choice",
-                "valid", "invalid", "optional", "mandatory", "feedback", "evaluation", "completion", "rate", "option", "field",
+                "lift", "happiness", "optional", "mandatory", "feedback", "evaluation", "completion", "rate", "option", "field",
                 "section", "page", "submit", "save", "progress", "time", "record", "analysis", "report", "summary", "point",
                 "critical", "flagged", "marked", "highlight", "understand", "decision", "query", "system", "entry", "method", "CLA",
                 "Corporate Voice", "Marketing Company", "Employee engagement", "Admin Tool", "Popups", "Surveys", "Tickers"
@@ -292,14 +309,24 @@ namespace CLA_Administration_Web.Helpers.MockData
             var items = new List<ModuleLDSDataViewModel>();
 
             var usersList = new List<string> { "NdhuvaziM", "LegeB", "SinethembaS", "LeboC", "Administrator", "CathrineT", "LarryM", "Tarryn" };
+            var machinesList = new List<string> { "NdhuvaziM-PC", "LegeB-PC", "Sinethemba-PC", "LeboC-PC", "Administrator-PC", "CathrineT-PC", "LarryM-PC", "Tarryn-PC" };
             var contentType = new List<string> { "Picture", "Audio", "Video", "URL" };
 
             DateTime effectiveFrom = new();
             DateTime effectiveTo = new();
 
+            var savedContent = new List<string>();
+
             for (int i = 1; i <= 1000; i++)
             {
                 GetEffectiveDates(ref effectiveFrom, ref effectiveTo, i);
+
+                var content = SharedFunctions.CapitalizeFirst(RandomString(random, 3, 5));
+
+                while(savedContent.Contains(content))
+                    content = SharedFunctions.CapitalizeFirst(RandomString(random, 3, 5));
+
+                savedContent.Add(content);
 
                 var item = new ModuleLDSDataViewModel
                 {
@@ -307,7 +334,7 @@ namespace CLA_Administration_Web.Helpers.MockData
                     CategoryName = SharedFunctions.CapitalizeFirst(RandomString(random, 1, 2)),
                     CategoryDescription = SharedFunctions.CapitalizeFirst(RandomString(random, 3, 5)),
                     ContentType = SharedFunctions.CapitalizeFirst(contentType[random.Next(contentType.Count)]),
-                    ContentDescription = SharedFunctions.CapitalizeFirst(RandomString(random, 1, 2)),
+                    ContentDescription = content,
                     Duration = random.Next(0,61),
                     EffectiveFrom = effectiveFrom.ToString("yyyy/MM/dd"),
                     EffectiveTo = effectiveTo.ToString("yyyy/MM/dd"),
@@ -315,10 +342,170 @@ namespace CLA_Administration_Web.Helpers.MockData
                     TimeslotTo = RandomTime(random),
                     LastModifiedDate = DateTime.Now.AddMinutes(-random.Next(0, 50000)).ToString("yyyy/MM/dd HH:mm"),
                     UserIdLastModified = usersList[random.Next(0, 8)],
+                    MachineIdLastModified = machinesList[random.Next(machinesList.Count)]
                 };
 
                 items.Add(item);
             }
+            return items;
+        }
+
+        private static List<RssCategoryOverviewViewModel> GenerateRSSCategoriesRandomData()
+        {
+            var random = new Random();
+            var items = new List<RssCategoryOverviewViewModel>();
+
+            for (int i = 1; i <= 10; i++)
+            {
+                var rssCat = new RssCategoryOverviewViewModel
+                {
+                    CategoryId = i,
+                    CategoryName = SharedFunctions.CapitalizeFirst(RandomString(random, 1, 2)),
+                    CategoryDescription = SharedFunctions.CapitalizeFirst(RandomString(random, 3, 5)),
+                };
+                items.Add(rssCat);
+            }
+            return items;
+        }
+
+        private static List<RssFeedOverviewViewModel> GenerateRSSFeedRandomData()
+        {
+            var random = new Random();
+            var items = new List<RssFeedOverviewViewModel>();
+
+            for (int i = 1; i <= 10; i++)
+            {
+                var rssCat = new RssFeedOverviewViewModel
+                {
+                    CategoryId = i,
+                    FeedId = i,
+                    CategoryName = SharedFunctions.CapitalizeFirst(RandomString(random, 1, 2)),
+                    FeedName = SharedFunctions.CapitalizeFirst(RandomString(random, 1, 2)),
+                    FeedURL = $"https://www.{RandomString(random, 1,1)}.com",
+                };
+                items.Add(rssCat);
+            }
+            return items;
+        }
+
+        private static List<ContentLibraryCategoryModel> GenerateContentLibraryRandomData()
+        {
+            var random = new Random();
+            var items = new List<ContentLibraryCategoryModel>();
+
+            var usersList = new List<string> { "NdhuvaziM", "LegeB", "SinethembaS", "LeboC", "Administrator", "CathrineT", "LarryM", "Tarryn" };
+            var machinesList = new List<string> { "NdhuvaziM-PC", "LegeB-PC", "Sinethemba-PC", "LeboC-PC", "Administrator-PC", "CathrineT-PC", "LarryM-PC", "Tarryn-PC" };
+
+            for (int i = 1; i <= 50; i++)
+            {
+                var contentLibCat = new ContentLibraryCategoryModel
+                {
+                    CategoryId = i,
+                    CategoryName = SharedFunctions.CapitalizeFirst(RandomString(random, 1, 3)),
+                    CategoryDescription = SharedFunctions.CapitalizeFirst(RandomString(random, 1, 5)),
+                    ContentsCount = random.Next(320),
+                    DateLastModified = DateTime.Now.AddMinutes(-random.Next(0, 50000)).ToString("yyyy/MM/dd HH:mm"),
+                    UserLastModified = usersList[random.Next(usersList.Count)],
+                    MachineLastModified = machinesList[random.Next(machinesList.Count)]
+                };
+                items.Add(contentLibCat);
+            }
+
+            return items;
+        }
+
+        private static ContentLibraryCategoryTree PopulateCategoryTree(int currentCategoryId, int maxDepth, int currentDepth = 1)
+        {
+            Random random = new Random();
+
+            if (currentDepth > maxDepth) return null;
+
+            var category = new ContentLibraryCategoryTree
+            {
+                CategoryId = currentCategoryId,
+                CategoryName = SharedFunctions.CapitalizeFirst(RandomString(random, 1, 1)),
+                CategoryDescription = SharedFunctions.CapitalizeFirst(RandomString(random, 1, 7)),
+                ContentsCount = random.Next(0, 100), 
+                _children = null,
+            };
+
+            int childrenCount = random.Next(0, 6);  
+
+            for (int i = 0; i < childrenCount; i++)
+            {
+                var childCategory = PopulateCategoryTree(currentCategoryId * 10 + (i + 1), maxDepth, currentDepth + 1);
+                if (childCategory != null)
+                {
+                    if (category._children == null)
+                        category._children = new List<ContentLibraryCategoryTree>();
+
+                    category._children.Add(childCategory);
+                }
+            }
+            return category;
+        }
+
+        public static List<ContentLibraryCategoryTree> GenerateDummyDataContentLibraryCategories()
+        {
+            var items = new List<ContentLibraryCategoryTree>();
+            var random = new Random();
+
+            for (int i = 1; i <= 100; i++)
+            {
+                var treeCategory = PopulateCategoryTree(i, random.Next(0, 5));
+                
+                if(treeCategory != null)
+                    items.Add(treeCategory);
+            }
+            return items;
+        }
+
+        private static List<ContentLibraryContentModel> GenerateContentLibraryContents()
+        {
+            var items = new List<ContentLibraryContentModel>();
+
+            var random = new Random();
+            
+            var usersList = new List<string> { "NdhuvaziM", "LegeB", "SinethembaS", "LeboC", "Administrator", "CathrineT", "LarryM", "Tarryn" };
+            var machinesList = new List<string> { "NdhuvaziM-PC", "LegeB-PC", "Sinethemba-PC", "LeboC-PC", "Administrator-PC", "CathrineT-PC", "LarryM-PC", "Tarryn-PC" };
+            var contentType = new List<string> { "Picture", "Audio", "Video", "URL" };
+
+            List<string> options = new List<string> { "SCR", "DSK", "LCK" };
+            int numberOfOptions = random.Next(1, options.Count + 1);
+
+            DateTime effectiveFrom = new();
+            DateTime effectiveTo = new();
+
+            for (int i = 1; i <= 10; i++)
+            {
+                GetEffectiveDates(ref effectiveFrom, ref effectiveTo, i);
+
+                string[] selectedOptions = options.OrderBy(x => random.Next())
+                                          .Take(numberOfOptions)
+                                          .ToArray();
+
+                var item = new ContentLibraryContentModel
+                {
+                    ContentId = i,
+                    AdvertId = random.Next(101),
+                    ProductId = random.Next(101),
+                    CategoryName = SharedFunctions.CapitalizeFirst(RandomString(random, 1, 2)),
+                    AdvertDescription = SharedFunctions.CapitalizeFirst(RandomString(random, 3, 5)),
+                    ContentType = SharedFunctions.CapitalizeFirst(contentType[random.Next(contentType.Count)]),
+                    ContentPath = "C:\\Users\\Resources\\Data\\Urgent\\",
+                    Duration = random.Next(0, 61),
+                    EffectiveFrom = effectiveFrom.ToString("yyyy/MM/dd"),
+                    EffectiveTo = effectiveTo.ToString("yyyy/MM/dd"),
+                    Archive = (random.Next(2) == 0 ? "No" : "Yes"),
+                    TargetedModules = string.Join(";", selectedOptions),
+                    DateLastModified = DateTime.Now.AddMinutes(-random.Next(0, 50000)).ToString("yyyy/MM/dd HH:mm"),
+                    UserIdLastModified = usersList[random.Next(0, 8)],
+                    MachineIdLastModified = machinesList[random.Next(machinesList.Count)]
+                };
+
+                items.Add(item);
+            }
+
             return items;
         }
     }

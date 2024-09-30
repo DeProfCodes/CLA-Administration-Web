@@ -4,8 +4,9 @@ using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
 using CLA_Administration_Web.Helpers.Shared;
 using CLA_Administration_Web.Services;
 using CLA_Administration_Web.ViewModels.Modules;
+using CLA_Administration_Web.ViewModels.Modules.GanttChart;
 using CLA_Administration_Web.ViewModels.Modules.LDS;
-using CLA_Administration_Web.ViewModels.Modules.PSTR;
+using CLA_Administration_Web.ViewModels.Modules.PST;
 using CLA_Administration_Web.ViewModels.Shared;
 using CLACommonFunctionsLibrary_NET.Helpers;
 using CLACommonFunctionsLibrary_NET.Helpers.Enums;
@@ -71,6 +72,9 @@ namespace CLA_Administration_Web.Helpers.Modules
                 case ModuleNamesType.Popup: return ModulesPages.PopupDetails;
                 case ModuleNamesType.Ticker: return ModulesPages.TickerDetails;
                 case ModuleNamesType.Survey: return ModulesPages.SurveyDetails;
+                case ModuleNamesType.LockedDesktop: return ModulesPages.LockedDesktopDetails;
+                case ModuleNamesType.Desktop: return ModulesPages.DesktopDetails;
+                case ModuleNamesType.Screensaver: return ModulesPages.ScreensaverDetails;
                 default: return ModulesPages.None;
             }
         }
@@ -110,7 +114,7 @@ namespace CLA_Administration_Web.Helpers.Modules
             return allModuleNameTypes?.FirstOrDefault(x => x.GetDisplayName() == modulePage.GetDisplayShortName()) ?? ModuleNamesType.None;
         }
 
-        public static List<ModulePSTRDataViewModel> FilterModulesPSTRData(List<ModulePSTRDataViewModel> data, string status, string user, string startDate, string endDate)
+        public static List<ModulePSTDataViewModel> FilterModulesPSTData(List<ModulePSTDataViewModel> data, string status, string user, string startDate, string endDate)
         {
             var startDateTime = TypesParserHelper.ParseDate(startDate);
             var endDateTime = TypesParserHelper.ParseDate(endDate);
@@ -177,21 +181,64 @@ namespace CLA_Administration_Web.Helpers.Modules
 
         public static int GetGanttChartHeight(int dataRowsCount)
         {
-            double height = dataRowsCount * 40.0;
+            double height = dataRowsCount > 5 ?  dataRowsCount * 40.0 : 200;
 
             return (int)height;    
+        }
+
+        public static List<GanttChartToolTipViewModel> GetGanttToolTipDetailsLDS(List<ModuleLDSDataViewModel> filteredData)
+        {
+            var result = new List<GanttChartToolTipViewModel>();
+
+            foreach (var item in filteredData)
+            {
+                var tooltip = new GanttChartToolTipViewModel
+                {
+                    Property1 = new KeyVal
+                    {
+                        ColumnName = "Category",
+                        ColumnValue = item.CategoryName
+                    },
+                    Property2 = new KeyVal
+                    {
+                        ColumnName = "Content",
+                        ColumnValue = item.ContentDescription
+                    },
+                    Property3 = new KeyVal
+                    {
+                        ColumnName = "Dates",
+                        ColumnValue = $" {item.EffectiveFrom} - {item.EffectiveTo}"
+                    },
+                    Property4 = new KeyVal
+                    {
+                        ColumnName = "Timeslots",
+                        ColumnValue = $" {item.TimeslotFrom} - {item.TimeslotTo}"
+                    },
+                };
+                result.Add(tooltip);
+            }
+            return result;
         }
 
         public static List<GanttChartDataModel> GetGanttChartData(List<ModuleLDSDataViewModel> filteredData)
         {
             var ganttData = new List<GanttChartDataModel>();
-            int count = 40;
-            
+            var random = new Random();
+
+            var savedXVals = new List<string>();
+
             foreach (var data in filteredData)
             {
+                var x = SharedFunctions.StringTruncate(data.ContentDescription, 10);
+
+                while (savedXVals.Contains(x))
+                    x = $"{SharedFunctions.StringTruncate(data.ContentDescription, 10)}-{random.Next(10)}";
+
+                savedXVals.Add(x);
+                
                 var gantModel = new GanttChartDataModel
                 {
-                    x = SharedFunctions.StringTruncate(data.ContentDescription, 20),
+                    x = x,
                     y = new List<long> 
                     { 
                         SharedFunctions.GetTimeInMilliseconds($"{data.EffectiveFrom} {data.TimeslotFrom}"), 
@@ -200,12 +247,24 @@ namespace CLA_Administration_Web.Helpers.Modules
                     fillColor = GetGanttBarBackgroundColor(data.EffectiveFrom, data.EffectiveTo)
                 };
                 ganttData.Add(gantModel);
-
-                count--;
-                if (count == 0) break;
             }
-
             return ganttData;
+        }
+
+        public static string ConvertTargetedModulesToFullNames(string input)
+        {
+            Dictionary<string, string> nameMap = new Dictionary<string, string>
+            {
+                { "LCK", "Lockscreen" },
+                { "SCR", "Screensaver" },
+                { "DSK", "Desktop" }
+            };
+
+            string[] parts = input.Split(';');
+
+            string[] fullNames = parts.Select(part => nameMap.ContainsKey(part) ? nameMap[part] : part).ToArray();
+
+            return string.Join(" | ", fullNames);
         }
     }
 }

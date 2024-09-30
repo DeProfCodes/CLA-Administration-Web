@@ -55,6 +55,7 @@
     padding: 5px 10px;
     font-size: 14px;
     border-radius: 8px;
+    cursor: pointer;
 }
 .custom-btn:hover
 {
@@ -75,7 +76,23 @@
 {
     margin-right: 5px;
 }
+.custom-btn-sm
+{
+    padding: 1px 5px !important;
+    font-size: 12px !important;
+}
+.custom-p
+{
+    margin-bottom: 0 !important;
+    color: #04316d !important; 
+}
 
+.custom-p-bold
+{
+    margin-bottom: 0 !important;
+    color: #04316d !important; 
+    font-weight: bold;
+}
 
 /**======================================================= Scaling ====================================================*/
 

@@ -22,9 +22,9 @@ namespace CLA_Administration_Web.ViewComponents.OverviewDataFilters
             {
                 var modulePage = (ModulesPages) page;
 
-                if (modulePage == ModulesPages.PopupOverview || modulePage == ModulesPages.TickerOverview || modulePage == ModulesPages.SurveyOverview || modulePage == ModulesPages.RSSOverview)
+                if (modulePage == ModulesPages.PopupOverview || modulePage == ModulesPages.TickerOverview || modulePage == ModulesPages.SurveyOverview || modulePage == ModulesPages.RSSCategoryOverview)
                 {
-                    return View("ModulesOverviewDataTablePSTR", modulePage);
+                    return View("ModulesOverviewDataTablePST", modulePage);
                 }
                 else if (modulePage == ModulesPages.LockedDesktopOverview || modulePage == ModulesPages.DesktopOverview || modulePage == ModulesPages.ScreensaverOverview)
                 {

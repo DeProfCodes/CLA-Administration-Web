@@ -2,5 +2,9 @@
 {
     public class BaseService
     {
+        public BaseService()
+        {
+                
+        }
     }
 }

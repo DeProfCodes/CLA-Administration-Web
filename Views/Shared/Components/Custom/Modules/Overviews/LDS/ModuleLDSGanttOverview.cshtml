@@ -1,9 +1,10 @@
-﻿<!-- Modules Data Table Component for PSTR Modules : Popups, Surveys, Tickers, RSS -->
+﻿<!-- Modules Data Table Component for LDS Modules : Lockscreen, Desktop, Screensaver -->
 @using CLACommonFunctionsLibrary_NET.Helpers.Enums
 @using CLA_Administration_Web.Helpers.Enums.AppPages
 @using CLA_Administration_Web.Helpers.Enums.Shared.PageNames
+@using Newtonsoft.Json
 
-@model CLA_Administration_Web.ViewModels.Modules.GanttChartDataViewModel
+@model CLA_Administration_Web.ViewModels.Modules.GanttChart.GanttChartDataViewModel
 
 @{
     var moduleName = Model.ModuleName.GetDisplayName();
@@ -52,11 +53,16 @@
 
 <script>
 
+    $("#ModuleFilterActionButtonsContainer").hide();
+
+    var seriesName = "@Model.FilterTitle.Status @moduleName";
     
     CreateGanttChart(
         "#ModuleGanttChart",
         @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.GanttData)), 
-        '@Model.GanttChartHeight'
+        '@Model.GanttChartHeight',
+        seriesName,
+        @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(@Model.GanttChartToolTip))
     );
 
 </script>

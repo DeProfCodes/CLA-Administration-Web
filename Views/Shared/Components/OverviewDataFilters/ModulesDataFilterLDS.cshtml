@@ -28,6 +28,8 @@
 
     var moduleDisplayName = $"{moduleName}s";
 
+    var isScreensaverModule = Model.ModulePage == ModulesPages.ScreensaverOverview;
+
 }
 <!-- Card for Filters -->
 <div class="card mb-4 mt-2 overview-filters-card">
@@ -103,16 +105,22 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 mx-auto" id="UsersFilterContainer">
-                    <p class="theme-txt-clr fw-bold text-center mb-2" id="UsersFilterTitle">Action Buttons</p>
+                <div class="col-md-4 mx-auto" id="ModuleFilterActionButtonsContainer">
+                    <p class="theme-txt-clr fw-bold text-center mb-2" id="ModuleActionBtsFilterTitle">Action Buttons</p>
                     <div class="row mb-3 mb-md-0 w-fit-content mx-auto">
-                        <button class="btn btn-sm btn-success w-fit-content" id="PromoteBtn">Promote to Live</button>
-                        <button class="btn btn-sm btn-primary w-fit-content ms-4" id="TransitionBtn">Transitions</button>
+                        <button class="btn btn-sm btn-success w-fit-content" id="PromoteModuleBtn">Promote to Live</button>
+                        <button class="btn btn-warning btn-sm w-fit-content ms-3" id="RepeatModuleBtn">Repeat @Model.ModuleName.GetDisplayDescription() </button>
                     </div>
                     <div class="row mb-3 mb-md-0 mt-2 w-fit-content mx-auto">
-                        <button class="btn btn-sm theme-bg text-white w-fit-content" id="DuplicateBtn">Duplicate Selected</button>
-                        <button class="btn btn-sm btn-danger w-fit-content ms-3" id="RemoveBtn">Remove Selected</button>
+                        <button class="btn btn-sm theme-bg text-white w-fit-content" id="DuplicateModuleBtn">Duplicate Selected</button>
+                        <button class="btn btn-sm btn-danger w-fit-content ms-3" id="RemoveModuleBtn">Remove Selected</button>
                     </div>
+                    @if (isScreensaverModule)
+                    {
+                        <div class="row mb-3 mb-md-0 mt-2 w-fit-content mx-auto">
+                            <button class="btn btn-sm btn-primary w-fit-content ms-4" id="ScreensaverTransitionBtn">Transitions</button>
+                        </div>
+                    }
                 </div>
             </div>
         </div>

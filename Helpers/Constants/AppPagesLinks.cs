@@ -34,8 +34,8 @@
             //All
             public const string AllModulesPageLink = "~/Views/Modules/AllModules.cshtml";
 
-            //PSTR Modules: Popup, Survey, Ticker, RSS
-            public const string ModulePSTRTableOverviewPageLink = "~/Views/Shared/Components/Custom/Modules/Overviews/PSTR/ModulePSTRTableOverview.cshtml";
+            //PST Modules: Popup, Survey, Ticker
+            public const string ModulePSTTableOverviewPageLink = "~/Views/Shared/Components/Custom/Modules/Overviews/PST/ModulePSTTableOverview.cshtml";
             
             //LDS Modules: Lockscreen, Desktop, Screensaver 
             public const string ModuleLDSTableOverviewPageLink = "~/Views/Shared/Components/Custom/Modules/Overviews/LDS/ModuleLDSTableOverview.cshtml";
@@ -43,19 +43,24 @@
             public const string ModuleLDSCalendarOverviewPageLink = "~/Views/Shared/Components/Custom/Modules/Overviews/LDS/ModuleLDSCalendarOverview.cshtml";
 
             //Content Library
-            public const string ContentLibraryCategoriesPageLink = "~/Views/Modules/ContentLibrary/Categories.cshtml";
-            public const string ContentLibraryContentsPageLink = "~/Views/Modules/ContentLibrary/Contents.cshtml";
+            public const string ContentLibraryCategoriesPageLink = "~/Views/Modules/ContentLibrary/ContentLibraryCategories.cshtml";
+            public const string ContentLibraryCategoryDetailsPageLink = "~/Views/Modules/ContentLibrary/ContentLibraryCategoryDetails.cshtml";
+            public const string ContentLibraryContentsPageLink = "~/Views/Modules/ContentLibrary/ContentLibraryContentsOverview.cshtml";
+            public const string ContentLibraryContentDetailsPageLink = "~/Views/Modules/ContentLibrary/ContentLibraryContentDetails.cshtml";
 
             //Desktop
             public const string DesktopOverviewPageLink = "~/Views/Modules/Desktop/DesktopOverview.cshtml";
+            public const string DesktopDetailsPageLink = "~/Views/Modules/Desktop/DesktopDetails.cshtml";
             public const string DesktopAddNewPageLink = "~/Views/Modules/Desktop/AddNewDesktop.cshtml";
 
             //Locked Desktop
             public const string LockedDesktopOverviewPageLink = "~/Views/Modules/LockedDesktop/LockedDesktopOverview.cshtml";
+            public const string LockedDesktopDetailsPageLink = "~/Views/Modules/LockedDesktop/LockedDesktopDetails.cshtml";
             public const string LockedDesktopAddNewPageLink = "~/Views/Modules/LockedDesktop/AddNewLockedDesktop.cshtml";
 
             //Screensaver
             public const string ScreensaverOverviewPageLink = "~/Views/Modules/Screensaver/ScreensaverOverview.cshtml";
+            public const string ScreensaverDetailsPageLink = "~/Views/Modules/Screensaver/ScreensaverDetails.cshtml";
             public const string ScreensaverAddNewPageLink = "~/Views/Modules/Screensaver/AddNewScreensaver.cshtml";
 
             //Popup
@@ -76,8 +81,15 @@
             public const string TickerAddNewPageLink = "~/Views/Modules/Ticker/AddNewTicker.cshtml";
 
             //RSS
-            public const string RSSOverviewPageLink = "~/Views/Modules/RSS/RSSOverview.cshtml";
+            public const string RssCategoryOverviewPageLink = "~/Views/Modules/RSS/RssCategoryOverview.cshtml";
+            public const string RssCategoryDetailsPageLink = "~/Views/Modules/RSS/RssCategoryDetails.cshtml";
+            public const string RssFeedOverviewPageLink = "~/Views/Modules/RSS/RssFeedOverview.cshtml";
+            public const string RssFeedDetailsPageLink = "~/Views/Modules/RSS/RssFeedDetails.cshtml";
             public const string RSSAddNewPageLink = "~/Views/Modules/RSS/AddNewRSS.cshtml";
+
+            //Previewer Components
+            public const string ModuleImagePreviewerPageLink = "~/Views/Shared/Components/Custom/Modules/ContentPreviewers/ImagePreviewer.cshtml";
+
         }
 
         public class Settings

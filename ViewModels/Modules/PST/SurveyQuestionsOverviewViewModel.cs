@@ -1,4 +1,4 @@
-﻿namespace CLA_Administration_Web.ViewModels.Modules.PSTR
+﻿namespace CLA_Administration_Web.ViewModels.Modules.PST
 {
     public class SurveyQuestionsOverviewViewModel
     {

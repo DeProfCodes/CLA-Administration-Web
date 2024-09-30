@@ -140,7 +140,7 @@ namespace CLA_Administration_Web.Helpers.Layout
                 new ModulesLeftNavigationViewModel
                 {
                     ModuleName = ModuleNamesType.RSS,
-                    OverviewPage = ModulesPages.RSSOverview,
+                    OverviewPage = ModulesPages.RSSCategoryOverview,
                     AddNewPage = ModulesPages.RSSAddNew,
                     IconWhiteUrl = $"{whiteModuleIcons}/rss.png",
                     IconBlueUrl = $"{blueModuleIcons}/rss.png"

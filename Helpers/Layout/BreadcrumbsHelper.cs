@@ -69,6 +69,20 @@ namespace CLA_Administration_Web.Helpers.Layout
                 },
                 new ModuleBreadcrumbViewModel()
                 {
+                    ModulePage = ModulesPages.ContentLibraryCategoryDetails,
+                    ModulePageName = "Content Library Module",
+                    ModuleName = "Content Library",
+                    ModuleSubPage = "Details",
+                    HasActionButton = true,
+                    IsDetailsPage = true,
+                    ModuleDetailsId = moduleDetailsId,
+                    ModulePreviewPage = ModulesPages.ContentLibraryCategories,
+                    IsAddNewIcon = true,
+                    ActionButtonText = "Edit Category",
+                    ActionButtonPage = ModulesPages.PopupAddNew
+                },
+                new ModuleBreadcrumbViewModel()
+                {
                     ModulePage = ModulesPages.ContentLibraryContent,
                     ModulePageName = "Content Library Module",
                     ModuleName = "Content Library",
@@ -88,6 +102,20 @@ namespace CLA_Administration_Web.Helpers.Layout
                     HasActionButton = true,
                     IsAddNewIcon = true,
                     ActionButtonText = "Add New Desktop",
+                    ActionButtonPage = ModulesPages.DesktopAddNew
+                },
+                new ModuleBreadcrumbViewModel()
+                {
+                    ModulePage = ModulesPages.DesktopDetails,
+                    ModulePageName = "Desktop Module",
+                    ModuleName = "Locked Desktop",
+                    ModuleSubPage = "Details",
+                    HasActionButton = true,
+                    IsDetailsPage = true,
+                    ModuleDetailsId = moduleDetailsId,
+                    ModulePreviewPage = ModulesPages.DesktopOverview,
+                    IsAddNewIcon = true,
+                    ActionButtonText = "Edit Desktop",
                     ActionButtonPage = ModulesPages.DesktopAddNew
                 },
                 new ModuleBreadcrumbViewModel()
@@ -115,6 +143,20 @@ namespace CLA_Administration_Web.Helpers.Layout
                 },
                 new ModuleBreadcrumbViewModel()
                 {
+                    ModulePage = ModulesPages.LockedDesktopDetails,
+                    ModulePageName = "Locked Desktop Module",
+                    ModuleName = "Locked Desktop",
+                    ModuleSubPage = "Details",
+                    HasActionButton = true,
+                    IsDetailsPage = true,
+                    ModuleDetailsId = moduleDetailsId,
+                    ModulePreviewPage = ModulesPages.LockedDesktopOverview,
+                    IsAddNewIcon = true,
+                    ActionButtonText = "Edit Locked Desktop",
+                    ActionButtonPage = ModulesPages.LockedDesktopAddNew
+                },
+                new ModuleBreadcrumbViewModel()
+                {
                     ModulePage = ModulesPages.LockedDesktopOverview,
                     ModulePageName = "Locked Desktop Module",
                     ModuleName = "Locked Desktop",
@@ -138,6 +180,20 @@ namespace CLA_Administration_Web.Helpers.Layout
                 },
                 new ModuleBreadcrumbViewModel()
                 {
+                    ModulePage = ModulesPages.ScreensaverDetails,
+                    ModulePageName = "Screensaver Module",
+                    ModuleName = "Screensaver",
+                    ModuleSubPage = "Details",
+                    HasActionButton = true,
+                    IsDetailsPage = true,
+                    ModuleDetailsId = moduleDetailsId,
+                    ModulePreviewPage = ModulesPages.ScreensaverOverview,
+                    IsAddNewIcon = true,
+                    ActionButtonText = "Edit Screensaver",
+                    ActionButtonPage = ModulesPages.ScreensaverAddNew
+                },
+                new ModuleBreadcrumbViewModel()
+                {
                     ModulePage = ModulesPages.ScreensaverOverview,
                     ModulePageName = "Screensaver Module",
                     ModuleName = "Screensaver",
@@ -158,17 +214,6 @@ namespace CLA_Administration_Web.Helpers.Layout
                     IsAddNewIcon = true,
                     ActionButtonText = "Add New Survey",
                     ActionButtonPage = ModulesPages.SurveyAddNew
-                },
-                new ModuleBreadcrumbViewModel()
-                {
-                    ModulePage = ModulesPages.SurveyAddNew,
-                    ModulePageName = "Survey Module",
-                    ModuleName = "Survey",
-                    ModuleSubPage = "Add New",
-                    HasActionButton = true,
-                    IsAddNewIcon = false,
-                    ActionButtonText = "Survey Overview",
-                    ActionButtonPage = ModulesPages.SurveyOverview
                 },
                 new ModuleBreadcrumbViewModel()
                 {
@@ -243,7 +288,7 @@ namespace CLA_Administration_Web.Helpers.Layout
                     ModuleDetailsId = moduleDetailsId,
                     ModulePreviewPage = ModulesPages.TickerOverview,
                     IsAddNewIcon = true,
-                    ActionButtonText = "Edit Survey",
+                    ActionButtonText = "Edit Ticker",
                     ActionButtonPage = ModulesPages.TickerAddNew
                 },
                 //RSS
@@ -256,17 +301,42 @@ namespace CLA_Administration_Web.Helpers.Layout
                     HasActionButton = true,
                     IsAddNewIcon = false,
                     ActionButtonText = "RSS Overview",
-                    ActionButtonPage = ModulesPages.RSSOverview
+                    ActionButtonPage = ModulesPages.RSSCategoryOverview
                 },
                 new ModuleBreadcrumbViewModel()
                 {
-                    ModulePage = ModulesPages.RSSOverview,
+                    ModulePage = ModulesPages.RSSCategoryOverview,
                     ModulePageName = "RSS Module",
                     ModuleName = "RSS",
-                    ModuleSubPage = "Overview",
+                    ModuleSubPage = "Categories",
                     HasActionButton = true,
                     IsAddNewIcon = true,
                     ActionButtonText = "Add New RSS",
+                    ActionButtonPage = ModulesPages.RSSAddNew
+                },
+                new ModuleBreadcrumbViewModel()
+                {
+                    ModulePage = ModulesPages.RSSCategoryDetails,
+                    ModulePageName = "RSS Module",
+                    ModuleName = "RSS",
+                    ModuleSubPage = "Details",
+                    HasActionButton = true,
+                    IsDetailsPage = true,
+                    ModuleDetailsId = moduleDetailsId,
+                    ModulePreviewPage = ModulesPages.RSSCategoryOverview,
+                    IsAddNewIcon = true,
+                    ActionButtonText = "Edit RSS Category",
+                    ActionButtonPage = ModulesPages.RSSAddNew
+                },
+                new ModuleBreadcrumbViewModel()
+                {
+                    ModulePage = ModulesPages.RSSFeedOverview,
+                    ModulePageName = "RSS Module",
+                    ModuleName = "RSS",
+                    ModuleSubPage = "Feeds",
+                    HasActionButton = true,
+                    IsAddNewIcon = true,
+                    ActionButtonText = "Add New Feed",
                     ActionButtonPage = ModulesPages.RSSAddNew
                 },
             };

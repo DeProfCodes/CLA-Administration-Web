@@ -10,6 +10,8 @@ namespace CLA_Administration_Web.ViewModels.Modules.LDS
     {
         public ModulesPages ModulePage { get; set; }
 
+        public ModuleNamesType ModuleName { get; set; }
+
         public List<DateTime> MonthsAndYears { get; set; }
     }
 }

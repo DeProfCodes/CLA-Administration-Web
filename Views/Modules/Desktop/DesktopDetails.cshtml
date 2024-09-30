@@ -1,0 +1,135 @@
+﻿@model CLA_Administration_Web.ViewModels.Modules.LDS.ModuleLDSDataViewModel
+@using CLA_Administration_Web.Helpers.Enums.AppPages
+
+
+<div class="container-fluid">
+
+    <!-- Breadcrumb Component -->
+    @await Component.InvokeAsync("Breadcrumbs", new { page = ModulesPages.DesktopDetails, itemId = Model.Id })
+
+    <!-- Card for Title -->
+    <div class="card mb-4 mt-2 overview-filters-card">
+        <div class="card-body">
+            <h4 class="w-100 text-center theme-txt-clr">Desktop Details for Category Id: @Model.Id</h4>
+        </div>
+    </div>
+
+    <!-- Card for Body -->
+    <div class="card mb-4 mt-2 overview-filters-card p-3">
+        <div class="card-body" id="DesktopDetailsContainer">
+            <div class="row">
+                <h4 class="w-100 text-center theme-txt-clr fw-bold">Desktop Details</h4>
+                <div class="col-md-6">
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <p class="custom-p popup-info-headings">Desktop Id</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="custom-p-bold">@Model.Id</p>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <p class="custom-p popup-info-headings">Category Name</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="custom-p-bold">@Model.CategoryName</p>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <p class="custom-p popup-info-headings">Content Link Type</p>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-0 d-flex">
+                                <i class="bi bi-card-image popup-info-attachment-icon"></i>
+                                <span class="custom-p-bold ms-2">Picture</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <p class="custom-p popup-info-headings">Effective From</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="custom-p-bold">@Model.EffectiveFromDate.ToString("dddd, dd MMMM yyyy")</p>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <p class="custom-p popup-info-headings">Effective To</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="custom-p-bold">@Model.EffectiveToDate.ToString("dddd, dd MMMM yyyy")</p>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <p class="custom-p popup-info-headings">Timeslots</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="custom-p-bold">@Model.TimeslotFrom - @Model.TimeslotTo</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <p class="custom-p popup-info-headings">Date Last Modified</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="custom-p-bold">@Model.LastModifiedDate</p>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <p class="custom-p popup-info-headings">User Id Last Modified</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="custom-p-bold">@Model.UserIdLastModified</p>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <p class="custom-p popup-info-headings">Machine Id Last Modified</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="custom-p-bold">@Model.MachineIdLastModified</p>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6 align-content-center">
+                            <p class="custom-p popup-info-headings">Target Users</p>
+                        </div>
+                        <div class="col-md-6">
+                            <btn class="btn btn-sm btn-success module-details-targeting-btns">Targeting</btn>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6 align-content-center">
+                            <p class="custom-p popup-info-headings">Who Is Targeted</p>
+                        </div>
+                        <div class="col-md-6">
+                            <btn class="btn btn-sm btn-primary module-details-targeting-btns">Targeting Exposure</btn>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <btn class="custom-btn custom-btn-default mt-4 px-5" onclick="PreviewImage()">Preview Content</btn>
+            </div>
+        </div>
+    </div>
+
+    <div id="ImagePreviwer">
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function ()
+    {
+        LoadContentPreviewer("#ImagePreviwer");
+    });
+
+</script>

@@ -1,8 +1,8 @@
-﻿<!-- Modules Data Filters Component for PSTR Modules : Popups, Surveys, Tickers, RSS -->
+﻿<!-- Modules Data Filters Component for PST Modules : Popups, Surveys, Tickers -->
 
 @using CLACommonFunctionsLibrary_NET.Helpers.Enums
 @using CLA_Administration_Web.Helpers.Enums.AppPages
-@model CLA_Administration_Web.ViewModels.Modules.PSTR.ModulePSTROverviewFilterViewModel
+@model CLA_Administration_Web.ViewModels.Modules.PST.ModulePSTOverviewFilterViewModel
 
 @{
     var moduleName = Model.ModulePage.GetDisplayShortName();
@@ -72,15 +72,15 @@
 
     $(document).ready(function ()
     {
-        SetDateToTodayDefault();
+        SetDateToTodayDefaultPTS();
     });
 
-    function SetDateToTodayDefault()
+    function SetDateToTodayDefaultPTS()
     {
         var today = TodayDate();
        
-        $("#@dateFilterTo").val(today);
+        $("#@dateFilterFrom").val(GetMonthStartAndEnd(today, 0, 1));
+        $("#@dateFilterTo").val(GetMonthStartAndEnd(today, 1, 0));
     }
-
 
 </script>

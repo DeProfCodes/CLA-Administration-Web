@@ -1,22 +1,133 @@
-﻿@model CLA_Administration_Web.ViewModels.Modules.PSTR.ModulePSTRDataViewModel
+﻿@model CLA_Administration_Web.ViewModels.Modules.PST.ModulePSTDataViewModel
 @using CLA_Administration_Web.Helpers.Enums.AppPages
 
 
 <div class="container-fluid">
 
     <!-- Breadcrumb Component -->
-    @await Component.InvokeAsync("Breadcrumbs", new { page = ModulesPages.SurveyDetails, itemId = Model.Id })
+    @await Component.InvokeAsync("Breadcrumbs", new { page = ModulesPages.TickerDetails, itemId = Model.Id })
 
-    <!-- Card for Filters -->
-    <div class="card mb-4 mt-5 overview-filters-card">
+    <!-- Card for Title -->
+    <div class="card mb-4 mt-2 overview-filters-card">
         <div class="card-body">
             <h4 class="w-100 text-center theme-txt-clr">Ticker Details for Ticker Id: @Model.Id</h4>
-            <div class="row">
-                
-            </div>
-            <h1 class="text-center w-100 theme-txt-clr" style="margin-top:15%; margin-bottom:15%">
-                To Be Added Soon
-            </h1>
         </div>
     </div>
+
+    <!-- Card for Body -->
+    <div class="card mb-4 mt-2 overview-filters-card p-3">
+        <div class="card-body" id="TickerDetailsContainer">
+            <div class="row">
+                <h4 class="w-100 text-center theme-txt-clr fw-bold">Ticker Detail</h4>
+                <div class="col-md-6">
+                    <div class="row mt-3">
+                        <div class="col-md-3">
+                            <p class="custom-p popup-info-headings">Ticker Id</p>
+                        </div>
+                        <div class="col-md-9">
+                            <p class="custom-p-bold">@Model.Id</p>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-3">
+                            <p class="custom-p popup-info-headings">Ticker Text</p>
+                        </div>
+                        <div class="col-md-9">
+                            <p class="custom-p-bold">@Model.BodyText</p>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-3">
+                            <p class="custom-p popup-info-headings">Ticker Link Type</p>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="mb-0 d-flex">
+                                <span class="custom-p-bold me-2">Image | </span>
+                                <i class="bi bi-card-image popup-info-attachment-icon"></i>
+                                <p class="popup-info-attachment-text ms-1" onclick="PreviewImage()">testImage101.png</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <p class="custom-p popup-info-headings">Effective From</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="custom-p-bold">@Model.EffectiveFromDate.ToString("dddd, dd MMMM yyyy")</p>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <p class="custom-p popup-info-headings">Effective To</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="custom-p-bold">@Model.EffectiveToDate.ToString("dddd, dd MMMM yyyy")</p>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <p class="custom-p popup-info-headings">Timeslots</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="custom-p-bold">07:00 - 16:30</p>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <p class="custom-p popup-info-headings">Date Last Modified</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="custom-p-bold">@Model.LastModifiedDate</p>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <p class="custom-p popup-info-headings">User Id Last Modified</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="custom-p-bold">@Model.UserIdLastModified</p>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <p class="custom-p popup-info-headings">Machine Id Last Modified</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="custom-p-bold">@Model.MachineLastModified</p>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6 align-content-center">
+                            <p class="custom-p popup-info-headings">Target Users</p>
+                        </div>
+                        <div class="col-md-6">
+                            <btn class="btn btn-sm btn-success module-details-targeting-btns">Targeting</btn>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6 align-content-center">
+                            <p class="custom-p popup-info-headings">Who Is Targeted</p>
+                        </div>
+                        <div class="col-md-6">
+                            <btn class="btn btn-sm btn-primary module-details-targeting-btns">Targeting Exposure</btn>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="ImagePreviwer">
+    </div>
 </div>
+
+<script>
+
+    $(document).ready(function ()
+    {
+        LoadContentPreviewer("#ImagePreviwer");
+    });
+
+</script>

@@ -226,7 +226,6 @@
 </aside>
 <!--end sidebar -->
 
-<script src="~/assets/plugins/metismenu/js/metisMenu.min.js"></script>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 
 <script>
@@ -238,8 +237,9 @@
 
     function InitialPage()
     {
-        OpenPageWithAnimations('Modules', 'Screensaver', '@ModulesPages.ScreensaverOverview', 'ScreensaverOverviewLink');
-        //OpenPage('@ModulesPages.SurveyQuestionsOverview', 1);
+        OpenPageWithAnimations('Modules', 'Survey', '@ModulesPages.SurveyOverview', 'SurveyOverviewLink');
+        //OpenPage('@ModulesPages.ContentLibraryContent', 1);
+        OpenPage('@ModulesPages.SurveyDetails', 1); 
     }
 
 </script>
