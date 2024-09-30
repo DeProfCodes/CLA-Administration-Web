@@ -762,7 +762,21 @@
     padding: 2px 5px;
     width: 80px;
 }
-
+.module-wizard-nav-btns:hover
+{
+    background-color: #04316D !important;
+    color: white;
+    opacity: 0.7;
+}
+.fix-content-bottom
+{
+    margin-top: auto;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+}
 /*#endregion*/
 
 /*#region Modules Scaling*/
