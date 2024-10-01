@@ -15,3 +15,15 @@ function TodayDate(seperator = '-')
 
     return todayDate;
 }
+
+function HideShowElement(selector, hideShow)
+{
+    if(hideShow == HideShow.HIDE)
+    {
+        $(selector).addClass("hidden");
+    }
+    else if(hideShow == HideShow.SHOW)
+    {
+        $(selector).removeClass("hidden");
+    }
+}

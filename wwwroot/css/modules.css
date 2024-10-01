@@ -578,10 +578,15 @@
 {
     margin: auto;
     display: block;
-    width: 80%;
-    max-width: 700px;
+    width: 70%;
+    max-height: 80vh;
+    /*max-width: 700px;*/
 }
 
+#ImagePreviewer
+{
+    object-fit: contain;
+}
 /* Caption of Modal Image (Image Text) - Same Width as the Image */
 #caption
 {
@@ -697,7 +702,7 @@
     margin-top: 8px;
  }
 
-.module-left-nav-link.active
+.module-left-nav-link.active, .module-left-nav-link.active:hover
 {
     background-color: var(--dark-blue);
     color: var(--text-color-light);
@@ -705,17 +710,30 @@
 }
 .module-left-nav-link:hover
 {
-    background-color: var(--theme-blue-clr);
-    color: var(--text-color-light);
+    background-color: white;
+    color: var(--theme-blue);
+    cursor: default;
     border-radius: 20px;
 }
-.module-link-type-btn-group 
+.link-type-btn
 {
     width: 80px !important;
     font-size: 14px !important;
-    padding: 0 !important;
-    border-color: #04316d !important;
-    border-radius: 15px;
+}
+#SurveyType
+{
+    border: 1px solid silver;
+    border-radius: 5px;
+    padding:10px 20px !important;
+    width:396px;
+    background: var(--light-blue);
+}
+.module-link-type
+{
+    font-size: 12px;
+    height: 20px;
+    margin-top:5px;
+    width: 60px;
 }
 #ModuleLinkTypeContainer
 {
@@ -768,6 +786,18 @@
     color: white;
     opacity: 0.7;
 }
+#AddPopupSubmitBtn
+{
+    background-color: #28a745 !important;
+    color: white;
+    border-radius: 10px;
+    padding: 2px 5px;
+    width: 80px;
+}
+#AddPopupSubmitBtn:hover
+{
+    opacity: 0.7;
+}
 .fix-content-bottom
 {
     margin-top: auto;
@@ -776,6 +806,32 @@
     left: 0;
     right: 0;
     padding: 10px;
+}
+#LinkTypeUrlInput
+{
+    width:300px;
+    height: 30px;
+    border-radius: 5px;
+    color: var(--theme-blue-clr);
+    padding-left: 5px;
+    border: 1px solid var(--theme-blue-clr) !important;
+}
+#LinkTypeUrlInput:focus-visible
+{
+    border: 2px solid var(--theme-blue-clr) !important;
+}
+#SelectSurveyLinkType
+{
+    width: 120px;
+    font-size:12px;
+    padding:0 3px;
+}
+#SelectSurveyLinkTypeText 
+{
+  width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 /*#endregion*/
 
@@ -839,7 +895,7 @@
     {
         margin-left: -20px;
     }
-    #UploadFileContainer
+    #UploadFileContainer, #SurveyType, #LinkTypeUrl
     {
         margin-left: -20px;
     }

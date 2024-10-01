@@ -89,7 +89,9 @@
 
             //Previewer Components
             public const string ModuleImagePreviewerPageLink = "~/Views/Shared/Components/Custom/Modules/ContentPreviewers/ImagePreviewer.cshtml";
-
+            public const string ModuleAudioPreviewerPageLink = "~/Views/Shared/Components/Custom/Modules/ContentPreviewers/AudioPreviewer.cshtml";
+            public const string ModuleVideoPreviewerPageLink = "~/Views/Shared/Components/Custom/Modules/ContentPreviewers/VideoPreviewer.cshtml";
+            public const string ModuleDocumentPreviewerPageLink = "~/Views/Shared/Components/Custom/Modules/ContentPreviewers/DocumentPreviewer.cshtml";
         }
 
         public class Settings

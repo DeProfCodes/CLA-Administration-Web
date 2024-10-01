@@ -7,8 +7,8 @@ namespace CLA_Administration_Web.Helpers.Enums.Shared
         [Display(Name = "")]
         None,
 
-        [Display(Name = "Picture")]
-        Picture,
+        [Display(Name = "Image")]
+        Image,
 
         [Display(Name = "Video")]
         Video,

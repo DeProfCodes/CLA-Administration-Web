@@ -433,14 +433,24 @@ namespace CLA_Administration_Web.Controllers
 
         #region Module Additional Components
 
-        public async Task<IActionResult> ModuleContentPreviewer()
+        public async Task<IActionResult> ModuleContentPreviewer(ModuleContentType contentPreviewType)
         {
-            var imagePreviewer = new ContentPreviewerViewModel
-            {
-                ImageUrl = $"{LaunchSettingsHelper.GetBaseAddressForImages()}/images/others/modules/skins/Popup_Skin_Default.png",
-            };
+            var page = "";
 
-            return PartialView(AppPagesLinks.Modules.ModuleImagePreviewerPageLink, imagePreviewer);
+            if (contentPreviewType == ModuleContentType.Image)
+                page = AppPagesLinks.Modules.ModuleImagePreviewerPageLink;
+
+            if (contentPreviewType == ModuleContentType.Audio)
+                page = AppPagesLinks.Modules.ModuleAudioPreviewerPageLink;
+
+
+            if (contentPreviewType == ModuleContentType.Video)
+                page = AppPagesLinks.Modules.ModuleVideoPreviewerPageLink;
+
+            if (contentPreviewType == ModuleContentType.Document)
+                page = AppPagesLinks.Modules.ModuleDocumentPreviewerPageLink;
+
+            return PartialView(page);
         }
 
         #endregion

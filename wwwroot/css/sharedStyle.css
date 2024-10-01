@@ -88,6 +88,13 @@
 {
     margin-right: 5px;
 }
+.custom-btn-group
+{
+    ortant;
+    padding: 0 !important;
+    border-color: #04316d !important;
+    border-radius: 15px;
+}
 .custom-btn-sm
 {
     padding: 1px 5px !important;
