@@ -348,6 +348,12 @@
 /*#endregion ModuleOverviews*/
 
 /*#region Module Details*/
+.html-text-editor
+{
+    background: #c5c8cd;
+    border: 1px solid silver;
+    padding: 8px 8px;
+}
 #PopupDetailsTitlePreview, #SurveyDetailsTitlePreview
 {
     height: fit-content;
@@ -399,7 +405,7 @@
     cursor: pointer;
 }
 
-#PopupBodyPreview
+#PopupBodyPreview, #PopupBodyPreviewFeedback
 {
     width: 314px;
     height: 188px;
@@ -425,7 +431,7 @@
     height: 44px;
 }
 
-#PopupBodyPreviewTitleText
+.poup-body-preview-title-text
 {
     padding: 10px;
     height: 40px;
@@ -444,7 +450,7 @@
     margin: 3px 7px 3px 3px;
 }
 
-#PopupBodyPreviewTextBody
+.popup-body-preview-text-body
 {
     height: 88px;
     padding: 0 5px 0 0;
@@ -810,17 +816,12 @@
 #LinkTypeUrlInput
 {
     width:300px;
-    height: 30px;
-    border-radius: 5px;
-    color: var(--theme-blue-clr);
-    padding-left: 5px;
-    border: 1px solid var(--theme-blue-clr) !important;
 }
 #LinkTypeUrlInput:focus-visible
 {
     border: 2px solid var(--theme-blue-clr) !important;
 }
-#SelectSurveyLinkType
+#SelectSurveyLinkType1, #SelectSurveyLinkType2
 {
     width: 120px;
     font-size:12px;
@@ -832,6 +833,13 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.content-preview-btn
+{
+    border: none;
+    width: 60px;
+    font-size: 12px !important;
+    border-radius: 20px;
 }
 /*#endregion*/
 
@@ -924,9 +932,10 @@
     {
         padding-left: 60px;
     }
-    #UploadFileContainer, #ModuleContentUploadFileName
+    #UploadFileContainer, #ModuleContentUploadFileName, #LinkTypeEmail, #LinkTypeUrl, #SurveyType
     {
         margin-left: 40px;
+        width: 400px !important;
     }
 }
 @media screen and (max-width:767px)

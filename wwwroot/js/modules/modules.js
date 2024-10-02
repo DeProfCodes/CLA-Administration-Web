@@ -217,7 +217,7 @@ function NextPopupTab()
 {
     if (currentPopupTab < totalPopupTabs)
     {
-        if(!ValidateTab())
+        if(!ValidateTab(currentPopupTab))
             return;
 
         currentPopupTab++;

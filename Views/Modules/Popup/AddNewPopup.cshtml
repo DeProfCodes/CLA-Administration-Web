@@ -1,6 +1,9 @@
-﻿@using CLA_Administration_Web.Helpers.Constants
+﻿@model CLA_Administration_Web.ViewModels.Modules.PST.AddNewPopupViewModel
+
+@using CLA_Administration_Web.Helpers.Constants
 @using CLA_Administration_Web.Helpers.Enums.AppPages
 @using CLA_Administration_Web.Helpers.Enums.Shared
+@using CLA_Administration_Web.ViewModels.Modules.Components.Form
 @using CLA_Administration_Web.ViewModels.Modules.PST
 
 
@@ -197,8 +200,7 @@ input {
     border-radius: 4px;
 }
 
-   
-    
+
 </style>
 
 
@@ -220,6 +222,11 @@ input {
 
 
 }
+
+<script>
+    const popupTitleEditor = document.getElementById('PopupTextHeader');
+    const popupBodyEditor = document.getElementById('PopupTextBody');
+</script>
 
 <div class="container-fluid">
     <!-- Breadcrumb Component -->
@@ -255,7 +262,7 @@ input {
                         <!-- Link Type Tab -->
                         <div id="LinkTypeTab-1" class="add-new-popup popup flex-wrap align-content-center justify-content-center mb-3">
                             <h5 class="fw-bold module-heading-theme mt-4">1. Popup Link Type</h5>
-                            <p class="custom-p mt-2 fs-13 text-center">Select what the popup will link to when clicked by the user.</p>
+                            <p class="custom-p mt-4 fs-13 text-center">Select what the popup will link to when clicked by the user.</p>
                             <p class="custom-p fs-13 text-center">The popup can launch any of the below options when clicked on or be linked to nothing.</p>
                             <!-- Links Options -->
                             <div class="row mt-5">
@@ -281,24 +288,42 @@ input {
                             </div>
                             <!-- Attachment -->
                             <div class="row mt-3 " id="LinkTypeAttachment">
-                                <p class="col-lg-3 fw-bold text-center theme-txt-clr mb-0" id="UploadFileTitle">Attachment</p>
+                                <p class="col-lg-3 fw-bold text-center theme-txt-clr mb-0" id="UploadFileTitle"></p>
                                 <div class="col-lg-9 p-0">
-                                    <div id="ContentUploadComponent" class="hidden">
-                                        <p class="mb-0 custom-p fst-italic">
-                                            <span id="ModuleContentUploadFileName">No file selected</span>
-                                            <button class="btn custom-btn-default custom-btn-sm ms-3 hidden" id="ModuleContentPreviewUpload" onclick="PreviewContent()">Preview</button>
-                                        </p>
-                                        <div class="w-100 mt-2 p-0" id="UploadFileContainer">
-                                            <i class="bi bi-cloud-arrow-up-fill"></i>
-                                            <p class="mb-0 text-silver fs-12" style="margin-top:-5px">Drag & Drop file here</p>
-                                            <p class="mb-0 text-silver fs-12">or</p>
-                                            <input type="file" id="ContentUploadInput" hidden>
-                                            <button class="btn btn-upload" onclick="document.getElementById('ContentUploadInput').click();">Browse</button>
+                                    <!-- Uploader Component -->
+                                    @{
+                                        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Form/FileUploader.cshtml", 
+                                            new FileUploaderModel { InputId = "ContentUploadInput", ShowPreviewButton = true, InitialHidden = true, WidthPx = "396px" });
+                                    }
+                                    <!-- Website Textbox -->
+                                    <div class="w-100 mt-2 p-0 d-flex hidden" id="LinkTypeUrl">
+                                        <input type="text" class="custom-input-text" id="LinkTypeUrlInput" />
+                                        <button class="btn btn-success content-preview-btn custom-btn-sm ms-3" id="ModuleContentPreviewUpload" onclick="PreviewWebsite()">Preview</button>
+                                    </div>
+                                    <!-- Email Inputs Section -->
+                                    <div class="w-fit-content border border-light-1 p-3 pe-5 mb-3 hidden" id="LinkTypeEmail">
+                                        <div>
+                                            <p class="mb-0">Emails <span class="fst-italic me-1 fs-11 text-silver">seperated by ";" </span></p>
+                                            <input type="email" class="custom-input-text w-300p" placeholder="Enter Recipients Emails" id="LinkTypeEmailInput"/>
+                                            <p class="mb-0 fs-12 text-danger fst-italic ps-1" id="LinkTypeEmailValid"></p>
+                                        </div>
+                                        <div>
+                                            <p class="mb-0">CC <span class="fst-italic me-1 fs-11 text-silver">seperated by ";" </span></p>
+                                            <input type="email" class="custom-input-text w-300p" placeholder="Enter CC Emails" id="LinkTypeCCEmailInput" />
+                                            <p class="mb-0 fs-12 text-danger fst-italic ps-1" id="LinkTypeCCEmailValid"></p>
+                                        </div>
+                                        <div>
+                                            <p class="mb-0">Subject</p>
+                                            <input type="text" class="custom-input-text w-300p" placeholder="Enter Subject" id="LinkTypeEmailSubjectInput"/>
+                                            <p class="mb-0 fs-12 text-danger fst-italic ps-1" id="LinkTypeEmailSubjectValid"></p>
+                                        </div>
+                                        <div>
+                                            <p class="mb-0 mt-1">Message</p>
+                                            <textarea class="w-300p" rows="5" id="LinkTypeEmailMessageInput"></textarea>
+                                            <p class="mb-0 fs-12 text-danger fst-italic ps-1" id="LinkTypeEmailMessageValid"></p>
                                         </div>
                                     </div>
-                                    <div class="w-100 mt-2 p-0 hidden" id="LinkTypeUrl">
-                                        <input type="text" class="input-group" id="LinkTypeUrlInput"/>
-                                    </div>
+                                    <!-- Survey Type -->
                                     <div class="mt-2 p-0 hidden" id="SurveyType">
                                         <div class="row">
                                             <p class="col-md-4 mb-0 align-content-center fs-12 ps-2">Survey Type</p>
@@ -308,12 +333,20 @@ input {
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <p class="col-md-4 mb-0 align-content-center fs-12 ps-2">Select Survey</p>
+                                            <p class="col-md-4 mb-0 align-content-center fs-12">Select Survey</p>
                                             <div class="col-md-8">
-                                                <select class="form-select-sm" id="SelectSurveyLinkType">
-                                                    @foreach (var survey in Surveys)
+                                                <select class="form-select-sm" id="SelectSurveyLinkType1">
+                                                    <option value="0" selected>Please select survey</option>
+                                                    @foreach (var survey in Model.ActiveSurveys)
                                                     {
-                                                        <option value="@survey.Id"><p class="mb-0" id="SelectSurveyLinkTypeText">@survey.HeaderText</p></option>
+                                                        <option value="@survey.Id">@survey.HeaderText</option>
+                                                    }
+                                                </select>
+                                                <select class="form-select-sm hidden" id="SelectSurveyLinkType2">
+                                                    <option value="0" selected>Please select survey</option>
+                                                    @foreach (var survey in Model.PendingSurveys)
+                                                    {
+                                                        <option value="@survey.Id">@survey.HeaderText</option>
                                                     }
                                                 </select>
                                             </div>
@@ -324,96 +357,44 @@ input {
                         </div>
                         <!-- Skins Tab -->
                         <div id="SkinsTab-2" class="add-new-popup popup flex-wrap  text-center align-content-center justify-content-center mb-3">
-                            <h5 class="fw-bold mb-3 text-center module-heading-theme">2. Popup Skin</h5>
-                            <p class="text-center module-subheading-theme">Please select the skin for this group</p>
-                            <p class="text-center module-subheading-theme">
+                            <h5 class="fw-bold module-heading-theme mt-4">2. Popup Skin</h5>
+                            <p class="custom-p mt-4 fs-13 text-center">Please select the skin for this group</p>
+                            <p class="custom-p fs-13 text-center">
                                 If you import your own custom skin, please note that the image must be saved as a *.BMP file and must be 314x188 pixels in dimension.
                             </p>
-
-                            <div class="form-group">
-                                <div class="col-sm-10 d-inline-flex justify-content-between align-items-center">
-                                    <div class="form-check mr-3">
-                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                                        <label class="form-check-label ml-2" for="exampleRadios1">
-                                            Use Custom Skin
-                                        </label>
-                                    </div>
+                            <div class="mt-4 p-5">
+                                <div class="form-group">
+                                    <input class="form-check-input" type="radio" name="PopupSkinOption" id="PopupDefaultSkinOption" value="option2" onchange="PopupSkinTypeSelect(this.id)">
+                                    <label class="form-check-label ms-2" for="exampleRadios2">Use Default Skin</label>
                                 </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-sm-10 d-inline-flex justify-content-between align-items-center">
-                                    <div class="form-check mr-3">
-                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                                        <label class="form-check-label ml-2" for="exampleRadios2">
-                                            Use Default Skin
-                                        </label>
+                                <div class="form-group mt-5">
+                                    <div class="col-sm-10 d-inline-flex justify-content-between align-items-center">
+                                        <div class="form-check mr-3">
+                                            <input class="form-check-input" type="radio" name="PopupSkinOption" id="PopupCustomSkinOption" value="option2" onchange="PopupSkinTypeSelect(this.id)">
+                                            <label class="form-check-label ml-2" for="exampleRadios2">Use Custom Skin</label>
+                                        </div>
+                                        <select class="form-control ml-3 w-50 hidden" id="PopupSkinImage" onchange="UpdatePopupSkinPreview()" style="appearance:menulist">
+                                            <option value="0" selected>Please select skin</option>
+                                            @foreach (var popupSkin2 in Model.CustomSkins)
+                                            {
+                                                <option value="@popupSkin2.FileURL">@popupSkin2.Filename</option>
+                                            }
+                                        </select>
                                     </div>
-                                    <select class="form-control ml-3 w-50">
-                                        <option>STMBackground.BMP</option>
-                                    </select>
                                 </div>
                             </div>
                         </div>
                         <!-- Texts Tab -->
                         <div id="TextsTab-3" class="add-new-popup popup flex-wrap  text-center align-content-center justify-content-center mb-3">
-                            <h5 class="fw-bold mb-3 text-center module-heading-theme">3. Popup Title & Body Texts</h5>
-                            <p class="text-center module-subheading-theme">Enter popup title and body texts.</p>
+                            <h5 class="fw-bold module-heading-theme mt-4">3. Popup Title & Body Texts</h5>
+                            <p class="custom-p mt-4 fs-13 text-center">Enter popup title and body texts.</p>
                             <div class="form-group row">
                                 <label class="col-sm-2 fw-bold text-center">Title:</label>
                                 <div class="col-sm-10">
-                                    <div id="wysiwyg">
-                                        <div class="btns">
-                                            <div class="category">
-                                                <button data-cmd="undo"><i class="fas fa-undo"></i></button>
-                                                <button data-cmd="redo"><i class="fas fa-redo"></i></button>
-                                            </div>
-                                            <div class="category">
-                                                <select data-cmd="formatBlock">
-                                                    <option value="p">Paragraph</option>
-                                                    <option value="h1">Title 1</option>
-                                                    <option value="h2">Title 2</option>
-                                                    <option value="h3">Title 3</option>
-                                                </select>
-                                                <select data-cmd="fontSize">
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
-                                                    <option value="6">6</option>
-                                                    <option value="7">7</option>
-                                                </select>
-                                                <select data-cmd="fontName">
-                                                    <option value="Arial">Arial</option>
-                                                    <option value="Roboto">Roboto</option>
-                                                    <option value="serif">Serif</option>
-                                                    <option value="sans-serif">Sans-serif</option>
-                                                </select>
-                                            </div>
-                                            <div class="category">
-                                                <button data-cmd="bold"><i class="fas fa-bold"></i></button>
-                                                <button data-cmd="italic"><i class="fas fa-italic"></i></button>
-                                                <button data-cmd="underline"><i class="fas fa-underline"></i></button>
-                                            </div>
-                                            <div class="category">
-                                                <input data-cmd="forecolor" type="color" value="#000000" title="Text Color">
-                                                <input data-cmd="backcolor" type="color" value="#FFFFFF" title="Background Color">
-                                            </div>
-                                            <div class="category">
-                                                <button data-cmd="justifyLeft"><i class="fas fa-align-left"></i></button>
-                                                <button data-cmd="justifyCenter"><i class="fas fa-align-center"></i></button>
-                                                <button data-cmd="justifyRight"><i class="fas fa-align-right"></i></button>
-                                                <button data-cmd="justifyFull"><i class="fas fa-align-justify"></i></button>
-                                            </div>
-                                        </div>
-
-                                        <div id="titleInput" contentEditable></div>
-                                        <div class="form-check form-switch">
-                                            <label class="form-check-label" for="flexSwitchCheckChecked2">Show</label>
-                                            <input class="form-check-input" id="showPreview" type="checkbox" role="switch" id="flexSwitchCheckChecked2" checked>
-                                        </div>
-                                    </div>
+                                    @{
+                                        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Form/HtmlEditor.cshtml",
+                                        new HtmlEditorModel { EditorId = "PopupTextHeader", HeightPx = "55px", WriteToDesitnationOnInput = true, DestinationTextDivId = "PopupBodyPreviewTitleText" });
+                                    }
                                 </div>
                             </div>
 
@@ -421,58 +402,10 @@ input {
                             <div class="form-group row">
                                 <label class="col-sm-2 fw-bold  text-center">Body:</label>
                                 <div class="col-sm-10">
-                                    <div id="wysiwyg">
-                                        <div class="btns">
-                                            <div class="category">
-                                                <button data-cmd="undo"><i class="fas fa-undo"></i></button>
-                                                <button data-cmd="redo"><i class="fas fa-redo"></i></button>
-                                            </div>
-                                            <div class="category">
-                                                <select data-cmd="formatBlock">
-                                                    <option value="p">Paragraph</option>
-                                                    <option value="h1">Title 1</option>
-                                                    <option value="h2">Title 2</option>
-                                                    <option value="h3">Title 3</option>
-                                                </select>
-                                                <select data-cmd="fontSize">
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
-                                                    <option value="6">6</option>
-                                                    <option value="7">7</option>
-                                                </select>
-                                                <select data-cmd="fontName">
-                                                    <option value="Arial">Arial</option>
-                                                    <option value="Roboto">Roboto</option>
-                                                    <option value="serif">Serif</option>
-                                                    <option value="sans-serif">Sans-serif</option>
-                                                </select>
-                                            </div>
-                                            <div class="category">
-                                                <button data-cmd="bold"><i class="fas fa-bold"></i></button>
-                                                <button data-cmd="italic"><i class="fas fa-italic"></i></button>
-                                                <button data-cmd="underline"><i class="fas fa-underline"></i></button>
-                                            </div>
-                                            <div class="category">
-                                                <input data-cmd="forecolor" type="color" value="#000000" title="Text Color">
-                                                <input data-cmd="backcolor" type="color" value="#FFFFFF" title="Background Color">
-                                            </div>
-                                            <div class="category">
-                                                <button data-cmd="justifyLeft"><i class="fas fa-align-left"></i></button>
-                                                <button data-cmd="justifyCenter"><i class="fas fa-align-center"></i></button>
-                                                <button data-cmd="justifyRight"><i class="fas fa-align-right"></i></button>
-                                                <button data-cmd="justifyFull"><i class="fas fa-align-justify"></i></button>
-                                            </div>
-                                        </div>
-
-                                        <div id="bodyInput" contentEditable></div>
-                                        <div class="form-check form-switch">
-                                            <label class="form-check-label" for="flexSwitchCheckChecked2">Show</label>
-                                            <input class="form-check-input" id="showPreview" type="checkbox" role="switch">
-                                        </div>
-                                    </div>
+                                    @{
+                                        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Form/HtmlEditor.cshtml",
+                                        new HtmlEditorModel { EditorId = "PopupTextBody", HeightPx = "150px", WriteToDesitnationOnInput = true, DestinationTextDivId = "PopupBodyPreviewTextBody" });
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -548,14 +481,14 @@ input {
                 <!-- Preview Side -->
                 <div class="col" id="ModulePreviewSection">
                     <p class="fst-italic mt-4" style="color:silver">Preview</p>
-                    <p class="theme-txt-clr mb-0 mt-2">Skin filename: <span class="fw-bold">STMBackground.BMP</span></p>
+                    <p class="theme-txt-clr mb-0 mt-2">Skin filename: <span class="fw-bold" id="SkinFileName">STMBackground.BMP</span></p>
                     <!-- Popup Preview-->
-                    <div class="mt-1" id="PopupBodyPreview" style="background-image: url('@popupSkin')">
+                    <div class="mt-1 border border-light-1" id="PopupBodyPreview">
                         <div class="d-flex" id="PopupBodyPreviewTitle">
                             <div id="PopupBodyPreviewTitleIcon">
                                 <img src="~/images/icons/modules/popup/icon-info.png" />
                             </div>
-                            <div id="PopupBodyPreviewTitleText">
+                            <div id="PopupBodyPreviewTitleText" class="poup-body-preview-title-text">
                                 @Html.Raw(testPopupTitle)
                             </div>
                             <div id="PopupBodyPreviewTitleDismiss">
@@ -563,7 +496,7 @@ input {
                             </div>
                         </div>
                         <div id="PopupBodyPreviewText">
-                            <div id="PopupBodyPreviewTextBody">
+                            <div id="PopupBodyPreviewTextBody" class="popup-body-preview-text-body">
                                 @Html.Raw(testPopupBody)
                             </div>
                             <div id="PopupBodyPreviewTextBodyFooter">
@@ -578,12 +511,12 @@ input {
                             <li>Like/Dislike</li> 
                             <li>Comment</li>
                         </ul>
-                        <div class="mt-0" id="PopupBodyPreview" style="background-image: url('@popupSkin'); opacity:0.4">
+                        <div class="mt-0 border border-light-1" id="PopupBodyPreviewFeedback" style="background-image: url('@popupSkin'); opacity:0.4">
                             <div class="d-flex" id="PopupBodyPreviewTitle">
                                 <div id="PopupBodyPreviewTitleIcon">
                                     <img src="~/images/icons/modules/popup/icon-info.png" />
                                 </div>
-                                <div id="PopupBodyPreviewTitleText">
+                                <div id="PopupBodyPreviewTitleTextFeedback" class="poup-body-preview-title-text">
                                     @Html.Raw(testPopupTitle)
                                 </div>
                                 <div id="PopupBodyPreviewTitleDismiss">
@@ -591,7 +524,7 @@ input {
                                 </div>
                             </div>
                             <div id="PopupBodyPreviewText">
-                                <div id="PopupBodyPreviewTextBody">
+                                <div id="PopupBodyPreviewTextBodyFeedback" class="popup-body-preview-text-body">
                                     @Html.Raw(testPopupBody)
                                 </div>
                                 <div id="PopupBodyPreviewTextBodyFooter">
@@ -619,52 +552,37 @@ input {
     </div>
 </div>
 
-<div id="ContentPreviewer">
-    <div id="ImagePreviewerContainer"></div>
-    <div id="AudioPreviewerContainer"></div>
-    <div id="VideoPreviewerContainer"></div>
-    <div id="DocumentPreviewerContainer"></div>
-</div>
+@{
+    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/ContentPreviewers/AllContentPreviewer.cshtml");
+}
 
 <script>
 
     let linkTypeFile = null;
-
+    
     $(document).ready(function ()
     {
         HideAllTabs();
-        LoadPreviewers();
+        LoadDefaultSkinPreview();
     });
 
-    function LoadPreviewers()
+    function LoadDefaultSkinPreview()
     {
-        LoadContentPreviewer("#ImagePreviewerContainer", "@ModuleContentType.Image");
-        LoadContentPreviewer("#AudioPreviewerContainer", "@ModuleContentType.Audio");
-        LoadContentPreviewer("#VideoPreviewerContainer", "@ModuleContentType.Video");
-        LoadContentPreviewer("#DocumentPreviewerContainer", "@ModuleContentType.Document");
+        $("#PopupBodyPreview").css("background", "url(@popupSkin)"); 
+        $("#PopupBodyPreviewFeedback").css("background", "url(@popupSkin)");
     }
 
-    function PreviewContent()
+    function PreviewWebsite()
     {
-        var linkTypeBtn = $(".link-type-btn.btn-group-active");
+        var url = $("#LinkTypeUrlInput").val();
 
-        var btnId = linkTypeBtn.attr("id").toLowerCase();
-
-        if (btnId.includes("image"))
-        { 
-            OpenImagePreviewModal(popupLinkUploadFileUrl);
-        }
-        else if (btnId.includes("audio"))
+        if (url == null || url.length == 0)
         {
-            OpenAudioPreviewModal(popupLinkUploadFileUrl);
+            swal("Preview Error", `Please upload enter website URL`, "error");
         }
-        else if (btnId.includes("video"))
+        else
         {
-            OpenVideoPreviewModal(popupLinkUploadFileUrl);
-        }
-        else if (btnId.includes("document") || btnId.includes("policy"))
-        {
-            OpenDocumentPreviewModal(popupLinkUploadFileUrl);
+            window.open(url);
         }
     }
 
@@ -673,11 +591,15 @@ input {
         HideShowElement(".add-new-popup", HideShow.HIDE);
         HideShowElement("#LinkTypeTab-1", HideShow.SHOW);
     }
+
     function PopupLinkTypeClick(linkBtnId)
     {
         HideShowElement("#ContentUploadComponent", HideShow.HIDE);
         HideShowElement("#LinkTypeUrl", HideShow.HIDE);
+        HideShowElement("#LinkTypeEmail", HideShow.HIDE);
         HideShowElement("#SurveyType", HideShow.HIDE);
+
+        ClearFileUpload();
 
         $(".link-type-btn").removeClass("btn-group-active");
         $(`#${linkBtnId}`).addClass("btn-group-active");
@@ -691,6 +613,7 @@ input {
         else
         { 
             HideShowElement("#LinkTypeAttachment", HideShow.SHOW);
+            $("#UploadFileTitle").removeClass("align-content-center");
 
             var isAttachmentType = btnType.includes("image") || btnType.includes("audio") || btnType.includes("video") || btnType.includes("document") || btnType.includes("policy");
             var isUrlType = btnType.includes("website") || btnType.includes("email");
@@ -726,19 +649,17 @@ input {
                     $("#ContentUploadInput").attr("accept", ".pdf");
                 }
             }
-            else if (isUrlType)
+            else if (btnType.includes("website"))
             {
                 HideShowElement("#LinkTypeUrl", HideShow.SHOW);
+                $("#UploadFileTitle").text("Website")
                 $("#UploadFileTitle").addClass("align-content-center");
 
-                if (btnType.includes("website"))
-                {
-                    $("#UploadFileTitle").text("Website");
-                }
-                else if (btnType.includes("email"))
-                {
-                    $("#UploadFileTitle").text("Email");
-                }
+            }
+            else if(btnType.includes("email"))
+            {
+                HideShowElement("#LinkTypeEmail", HideShow.SHOW);
+                $("#UploadFileTitle").text("Email")
             }
             else if (btnType.includes("survey"))
             {
@@ -752,6 +673,30 @@ input {
     {
         $(".module-link-type").removeClass("btn-group-active");
         $(`#${btnId}`).addClass("btn-group-active");
+
+        btnId = btnId.toLowerCase();
+        
+        if (btnId.includes("active"))
+        {
+            HideShowElement("#SelectSurveyLinkType1", HideShow.SHOW);
+            HideShowElement("#SelectSurveyLinkType2", HideShow.HIDE);
+        }
+        else if (btnId.includes("pending"))
+        {
+            HideShowElement("#SelectSurveyLinkType1", HideShow.HIDE);
+            HideShowElement("#SelectSurveyLinkType2", HideShow.SHOW);
+        }
+    }
+
+    function CheckAllEmailsListValid(emailList)
+    {
+        var emails = emailList.split(";");
+        for(let i=0; i < emails.length; i++)
+        {
+            if(!CheckEmail(emails[i]))
+                return false;
+        }
+        return true;
     }
 
     function IsLinksTabValid()
@@ -769,16 +714,68 @@ input {
         }
         else if(isAttachmentType)
         {
-            if (linkTypeFile == null)
+            if (StringNullOrEmpty(UploadFileUrl))
             {
                 swal("Popup Link Error", `Please upload ${btnText} file`, "error");
                 return false;
             }
             return true;
         }
+        else if (btnId.includes("website"))
+        {
+            if (IsEmptyInput("#LinkTypeUrlInput"))
+            {
+                swal("Popup Link Error", `Please upload enter website URL`, "error");
+                return false;
+            }
+        }
+        else if (btnId.includes("email"))
+        {
+            $("#LinkTypeEmailValid").text("");
+            $("#LinkTypeCCEmailValid").text("");
+            $("#LinkTypeEmailSubjectValid").text("");
+            $("#LinkTypeEmailMessageValid").text("");
+
+            var emails = $("#LinkTypeEmailInput").val();
+            var ccEmails = $("#LinkTypeCCEmailInput").val();
+            var emailsValid = true;
+
+            if (IsEmptyInput("#LinkTypeEmailInput") || !CheckAllEmailsListValid(emails))
+            {
+                $("#LinkTypeEmailValid").text("please enter valid emails!");
+                emailsValid = false;
+            }
+            if (!IsEmptyInput("#LinkTypeCCEmailInput") && !CheckAllEmailsListValid(ccEmails))
+            {
+                $("#LinkTypeCCEmailValid").text("please enter valid emails!");
+                emailsValid = false;
+            }
+            if (IsEmptyInput("#LinkTypeEmailSubjectInput"))
+            {
+                $("#LinkTypeEmailSubjectValid").text("please enter subject!");
+                emailsValid = false;
+            }
+            if (IsEmptyInput("#LinkTypeEmailMessageInput"))
+            {
+                $("#LinkTypeEmailMessageValid").text("please enter email message!");
+                emailsValid = false;
+            }
+
+            if (!emailsValid)
+            {
+                swal("Popup Link Error", `Please enter valid emails information.`, "error");
+                return false;
+            }
+            return true;
+        }
         else if (btnId.includes("survey"))
         {
-            if ($("#SelectSurveyLinkType").val() == null)
+            var surveyTypeTxt = $(".module-link-type.btn-group-active").text().toLowerCase();
+
+            var invalidSurvey = (surveyTypeTxt.includes("active")) ? ($("#SelectSurveyLinkType1").val() == null || $("#SelectSurveyLinkType1").val() == 0) :
+                                                                     ($("#SelectSurveyLinkType2").val() == null || $("#SelectSurveyLinkType2").val() == 0);
+
+            if (invalidSurvey)
             {
                 swal("Popup Link Error", `Please select an existing survey to link this Popup to.`, "error");
                 return false;
@@ -788,60 +785,33 @@ input {
         return false;
     }
 
-    let uploadSection = document.getElementById('UploadFileContainer');
-
-    let fileInput = document.getElementById('ContentUploadInput');
-    let fileNameDisplay = document.getElementById('ModuleContentUploadFileName');
-    let popupLinkUploadFileUrl = '';
-
-    uploadSection.addEventListener('dragover', (e) =>
+    function PopupSkinTypeSelect(id)
     {
-        e.preventDefault();
-        uploadSection.classList.add('dragging');
-    });
-
-    uploadSection.addEventListener('dragleave', () =>
-    {
-        uploadSection.classList.remove('dragging');
-    });
-
-    uploadSection.addEventListener('drop', (e) =>
-    {
-        e.preventDefault();
-        uploadSection.classList.remove('dragging');
-        const files = e.dataTransfer.files;
-        handleFiles(files);
-    });
-
-    fileInput.addEventListener('change', (e) =>
-    {
-        const files = e.target.files;
-        handleFiles(files);
-    });
-
-    function handleFiles(files)
-    {
-        if (files.length > 0)
+        id = id.toLowerCase();
+        if (id.includes("defaultskin"))
         {
-            fileNameDisplay.textContent = files[0].name;
-            
-            linkTypeFile = files[0];
-
-            HideShowElement("#ModuleContentPreviewUpload", HideShow.SHOW);
-
-            var imagePath = URL.createObjectURL(files[0]);
-            popupLinkUploadFileUrl = imagePath;
-
-        } 
+            LoadDefaultSkinPreview();
+            HideShowElement("#PopupSkinImage", HideShow.HIDE);
+        }
         else
         {
-            fileNameDisplay.textContent = "No file selected";
-
-            HideShowElement("#ModuleContentPreviewUpload", HideShow.HIDE);
-
+            HideShowElement("#PopupSkinImage", HideShow.SHOW);
+            UpdatePopupSkinPreview();
+            //$(`#PopupSkinImage option[value="0"]`).attr("selected", "selected");
         }
     }
 
+    function UpdatePopupSkinPreview()
+    {
+        var skinImgSrc = $("#PopupSkinImage").val();
+
+        if(skinImgSrc != "0")
+        {
+            $("#PopupBodyPreview").css("background", `url(${skinImgSrc})`); 
+            $("#PopupBodyPreviewFeedback").css("background", `url(${skinImgSrc})`);
+            $("#SkinFileName").text($("#PopupSkinImage option:selected").text());
+        }
+    }
 
 
     $(document).ready(function ()

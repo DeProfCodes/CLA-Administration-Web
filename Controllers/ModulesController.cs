@@ -105,6 +105,7 @@ namespace CLA_Administration_Web.Controllers
 
         #endregion
 
+        #region Content Library
 
         public IActionResult ContentLibraryCategories()
         {
@@ -161,6 +162,10 @@ namespace CLA_Administration_Web.Controllers
             return PartialView(AppPagesLinks.Modules.ContentLibraryContentDetailsPageLink, contentInfo);
         }
 
+        #endregion
+
+        #region Desktop
+
         public async Task<IActionResult> DesktopOverview()
         {
             var desktopStaging = await _moduleService.GetAllDesktopsData(StagingLiveType.Staging);
@@ -196,6 +201,8 @@ namespace CLA_Administration_Web.Controllers
         {
             return PartialView(AppPagesLinks.Modules.DesktopAddNewPageLink);
         }
+        
+        #endregion
 
         #region LockedDesktop
         public async Task<IActionResult> LockedDesktopOverview()
@@ -300,9 +307,44 @@ namespace CLA_Administration_Web.Controllers
             return PartialView(AppPagesLinks.Modules.PopupDetailsPageLink, popupDetails);
         }
 
-        public IActionResult AddNewPopup()
+        public async Task<IActionResult> AddNewPopup()
         {
-            return PartialView(AppPagesLinks.Modules.PopupAddNewPageLink);
+            var allSurveys = await _moduleService.GetAllTickersData();
+            allSurveys.ForEach(s =>
+            {
+                s.Status = ModulesHelper.GetModuleStatus(s.EffectiveFrom, s.EffectiveTo);
+            });
+
+            var addNewPopupVm = new AddNewPopupViewModel
+            {
+                ActiveSurveys = allSurveys.Where(s => s.Status.StatusType == StatusType.Active).ToList(),
+                PendingSurveys = allSurveys.Where(s => s.Status.StatusType == StatusType.Pending).ToList(),
+                CustomSkins = new List<ModuleSkinViewModel>
+                {
+                    new ModuleSkinViewModel
+                    {
+                        Filename = "Default",
+                        FileURL = $"{LaunchSettingsHelper.GetBaseAddressForImages()}/images/others/modules/skins/Popup_Skin_Default.png"
+                    },
+                    new ModuleSkinViewModel
+                    {
+                        Filename = "Popup_Skin_90_456_654",
+                        FileURL = $"{LaunchSettingsHelper.GetBaseAddressForImages()}/images/others/modules/skins/Popup_Skin_Test_1.BMP"
+                    },
+                    new ModuleSkinViewModel
+                    {
+                        Filename = "Pick_N_Pay_June_Skin",
+                        FileURL = $"{LaunchSettingsHelper.GetBaseAddressForImages()}/images/others/modules/skins/Popup_Skin_Test_2.BMP"
+                    },
+                    new ModuleSkinViewModel
+                    {
+                        Filename = "INC_Default_Skin",
+                        FileURL = $"{LaunchSettingsHelper.GetBaseAddressForImages()}/images/others/modules/skins/Popup_Skin_Test_3.BMP"
+                    },
+                }
+            };
+
+            return PartialView(AppPagesLinks.Modules.PopupAddNewPageLink, addNewPopupVm);
         }
 
         #endregion
@@ -311,7 +353,7 @@ namespace CLA_Administration_Web.Controllers
 
         public async Task<IActionResult> SurveyOverview()
         {
-            var surveyDataViewModel = await _moduleService.GetAllTickersData();
+            var surveyDataViewModel = await _moduleService.GetAllSurveysData();
             var allSurveyQuestions = await _moduleService.GetAllSurveysQuestions();
 
             surveyDataViewModel.ForEach(s =>
@@ -390,6 +432,7 @@ namespace CLA_Administration_Web.Controllers
         #endregion
 
         #region RSS
+       
         public async Task<IActionResult> RssCategoryOverview()
         {
             var rssCategories = await _moduleService.GetAllRssCategories(StagingLiveType.Staging);

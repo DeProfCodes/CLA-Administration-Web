@@ -1,0 +1,44 @@
+﻿
+/*#region HTML Editor*/
+.editor-toolbar
+{
+    background-color: #f1f1f1;
+    padding: 0 5px;
+    border: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.editor-toolbar button,
+.editor-toolbar select,
+.editor-toolbar input
+{
+    margin-right: 5px;
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-size: 14px;
+    padding: 5px;
+}
+
+.editor-font-family-selector
+{
+    width: 100px !important;
+    border: 1px solid silver !important;
+    padding: 0 4px !important;
+}
+
+.editor-toolbar input[type="color"]
+{
+    width: 20px;
+    height: 20px;
+    padding: 0;
+}
+
+.editor-toolbar button:hover,
+.editor-toolbar select:hover
+{
+    color: #007bff;
+}
+/*#endregion*/

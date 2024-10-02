@@ -81,7 +81,7 @@ namespace CLA_Administration_Web.Helpers.MockData
                 var item = new ModulePSTDataViewModel
                 {
                     Id = i,
-                    HeaderText = RandomString(random, 5, 10),
+                    HeaderText = RandomString(random, 1, 5),
                     BodyText = RandomString(random, 20, 50),
                     EffectiveFrom = effectiveFrom.ToString("yyyy/MM/dd"),
                     EffectiveTo = effectiveTo.ToString("yyyy/MM/dd"),

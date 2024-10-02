@@ -27,3 +27,45 @@ function HideShowElement(selector, hideShow)
         $(selector).removeClass("hidden");
     }
 }
+
+function EnsureJQueryId(Id)
+{
+    Id = (Id != null && Id.length > 0 && Id[0] != "#") ? `#${Id}` : "invalid";
+
+    return Id;
+}
+
+function StringNullOrEmpty(value)
+{
+    return value == null || value.length == 0;
+}
+
+function IsEmptyInput(textBoxId)
+{
+    textBoxId = EnsureJQueryId(textBoxId);
+
+    var value = $(textBoxId).val();
+
+    return StringNullOrEmpty(value);  
+}
+
+
+
+function CheckEmail(email)
+{
+    if (email == null || email == "")
+        return false;
+
+    var emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+    return email.match(emailRegex);
+}
+
+function CheckInputEmail(emailInputId)
+{
+    emailInputId = EnsureJQueryId(emailInputId);
+
+    var email = $(emailInputId).val();
+
+    return CheckEmail(emailRegex);
+}

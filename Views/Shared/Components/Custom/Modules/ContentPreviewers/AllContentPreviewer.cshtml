@@ -1,0 +1,33 @@
+﻿
+<div id="ContentPreviewer">
+    @{
+        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/ContentPreviewers/ImagePreviewer.cshtml");
+        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/ContentPreviewers/AudioPreviewer.cshtml");
+        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/ContentPreviewers/VideoPreviewer.cshtml");
+        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/ContentPreviewers/DocumentPreviewer.cshtml");
+     }
+</div>
+
+<script>
+
+    function PreviewContentType(contentType, contentURL)
+    {
+        if (contentType == ContentTypes.IMAGE)
+        {
+            OpenImagePreviewModal(contentURL);
+        }
+        else if (contentType == ContentTypes.AUDIO)
+        {
+            OpenAudioPreviewModal(contentURL);
+        }
+        else if (contentType == ContentTypes.VIDEO)
+        {
+            OpenVideoPreviewModal(contentURL);
+        }
+        else if (contentType == ContentTypes.DOCUMENT)
+        {
+            OpenDocumentPreviewModal(contentURL);
+        }
+    }
+
+</script>
