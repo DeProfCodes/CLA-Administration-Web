@@ -1,0 +1,139 @@
+﻿
+
+
+<div class="row time-picker d-flex">
+    <div class="d-flex">
+        <div class="col-md-4 align-content-center">
+            <p class="custom-p">Start Time</p>
+        </div>
+        <div id="timeRange"></div>
+        <div class="col-md-8 d-flex">
+            <i class="fas fa-clock calendar-icon-date-box" onclick="$('#StartTime').click()" style="margin-right: -25px; margin-top: 5px;"></i>
+            <input type="text" class="custom-input-text" id="startTime" readonly onclick="openStartTimePicker()" hidden/>
+            <select class="custom-input-text" id="StartTime" style="width: 100px;padding-left: 30px;" onchange="ValidateEndTime()">
+               
+            </select>
+        </div>
+    </div>
+    <div class="d-flex">
+        <div class="col-md-4 align-content-center">
+            <p class="custom-p">End Time</p>
+        </div>
+        <div class="col-md-8 d-flex">
+            <i class="fas fa-clock calendar-icon-date-box" onclick="$('#EndTime').click()" style="margin-right: -25px; margin-top: 5px;"></i>
+            <input type="text" class="custom-input-text" id="endTime" readonly onclick="openEndTimePicker()" hidden/>
+            <select class="custom-input-text" id="EndTime" style="width: 100px;padding-left: 30px;">
+               
+            </select>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/timepicker/jquery.timepicker.min.js"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+<script>
+    
+    $(document).ready(function ()
+    {
+        initializeTimePickers();
+
+        SetDefaultStartTime();
+    });
+
+    function SetDefaultStartTime()
+    {
+        $('#startTime').val("07:00");
+        $('#endTime').val("16:30");
+    }
+
+    function initializeTimePickers()
+    {
+        // Start time picker initialization
+        $('#startTime').timepicker({
+            timeFormat: 'HH:mm',
+            interval: 15,
+            dropdown: true,
+            scrollbar: true
+        });
+
+        // End time picker initialization
+        $('#endTime').timepicker({
+            timeFormat: 'HH:mm',
+            interval: 15,
+            dropdown: true,
+            scrollbar: true
+        });
+    }
+
+    // Function to open start time picker
+    function openStartTimePicker()
+    {
+        $('#startTime').timepicker('show');
+    }
+
+    // Function to open end time picker
+    function openEndTimePicker()
+    {
+        $('#endTime').timepicker('show');
+    }
+
+    function GenerateTimeOptions(id)
+    {
+        const select = document.getElementById(id);
+        const startTime = 0; // 00:00 in hours
+        const endTime = 23; // 23:00 in hours
+        const stepMinutes = 30; // Step in minutes (30 mins)
+
+        // Loop through each hour and minute
+        for (let hour = startTime; hour <= endTime; hour++)
+        {
+            for (let minutes = 0; minutes < 60; minutes += stepMinutes)
+            {
+                const option = document.createElement("option");
+
+                // Pad hours and minutes to ensure two digits (e.g., "08:00", "14:30")
+                const hourString = String(hour).padStart(2, '0');
+                const minuteString = String(minutes).padStart(2, '0');
+
+                option.value = `${hourString}:${minuteString}`;
+                option.text = `${hourString}:${minuteString}`;
+                select.appendChild(option);
+            }
+        }
+    }
+
+    GenerateTimeOptions("StartTime");
+    GenerateTimeOptions("EndTime");
+
+    function ValidateEndTime()
+    {
+        const startTime = document.getElementById("StartTime").value;
+        const endTimeSelect = document.getElementById("EndTime");
+
+        // Disable end time options that are earlier than start time
+        for (let i = 0; i < endTimeSelect.options.length; i++)
+        {
+            if (endTimeSelect.options[i].value <= startTime)
+            {
+                endTimeSelect.options[i].disabled = true;
+            } else
+            {
+                endTimeSelect.options[i].disabled = false;
+            }
+        }
+
+        // If the selected end time is earlier than the start time, reset it
+        if (endTimeSelect.value <= startTime)
+        {
+            endTimeSelect.value = startTime;
+        }
+    }
+
+    window.onload = function ()
+    {
+        ValidateEndTime();
+    };
+    
+
+</script>

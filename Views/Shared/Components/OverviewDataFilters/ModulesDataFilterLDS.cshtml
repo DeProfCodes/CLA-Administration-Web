@@ -156,16 +156,4 @@
         ModuleFilterDatesFilterChange('@moduleName')
     }
 
-    function GetMonthStartAndEnd(dateString, val, val2)
-    {
-        const date = new Date(dateString);
-        
-        const startOfMonth = new Date(date.getFullYear(), date.getMonth() + val, val2);
-        const endOfMonth = new Date(date.getFullYear(), date.getMonth() + val, val2);
-        
-        const formatDate = (d) => `${d.getFullYear()}-${(d.getMonth() + 1).toString().padStart(2, '0')}-${d.getDate().toString().padStart(2, '0')}`;
-
-        return formatDate(startOfMonth);
-    }
-
 </script>

@@ -10,19 +10,6 @@
 <style>
 
 
-
-
-.module-heading-theme {
-    color: var(--dark-blue);
-    text-align: center;
-}
-
-.module-subheading-theme {
-    color: var(--dark-blue);
-    text-align: center;
-}
-
-
 /* 
 .btn-group.btn {
     font-size: x-small;
@@ -245,23 +232,41 @@ input {
                 <!-- Left Navigation Side -->
                 <div class="col module-wizard-link-nav" id="ModuleLeftNavLinkCol">
                     <div id="ModuleLeftNavLinksContainer" class="mt-4">
-                        <a class="module-left-nav-link active" id="LinkTabLink-1">Link Type</a>
-                        <a class="module-left-nav-link" id="SkinTabLink-2">Skin</a>
-                        <a class="module-left-nav-link" id="TextsTabLink-3">Texts</a>
-                        <a class="module-left-nav-link" id="TimesTabLink-4">Times</a>
-                        <a class="module-left-nav-link" id="DisplaysTabLink-5">Displays</a>
-                        <a class="module-left-nav-link" id="RepeatTabLink-6">Repeat</a>
-                        <a class="module-left-nav-link" id="FeedbackTabLink-7">Feedback</a>
-                        <a class="module-left-nav-link" id="TargetUsersTabLink-8">Target Users</a>
-                        <a class="module-left-nav-link" id="ExposureSummaryTabLink-9">Exposure Summary</a>
+                        <a class="module-left-nav-link T-1 active" id="LinkTabLink-1" onclick="NavigateToTab(this.id, 1)">
+                            Link Type<i class="bi bi-dot popup-nav-link-dot T-1 hidden"></i>
+                        </a>
+                        <a class="module-left-nav-link T-2" id="SkinTabLink-2" onclick="NavigateToTab(this.id, 2)">
+                            Skin & Icons<i class="bi bi-dot popup-nav-link-dot T-2 hidden"></i>
+                        </a>
+                        <a class="module-left-nav-link T-3" id="TextsTabLink-3" onclick="NavigateToTab(this.id, 3)">
+                            Texts<i class="bi bi-dot popup-nav-link-dot T-3 hidden"></i>
+                        </a>
+                        <a class="module-left-nav-link T-4" id="TimesTabLink-4" onclick="NavigateToTab(this.id, 4)">
+                            Times<i class="bi bi-dot popup-nav-link-dot T-4 hidden"></i>
+                        </a>
+                        <a class="module-left-nav-link T-5" id="DisplaysTabLink-5" onclick="NavigateToTab(this.id, 5)">
+                            Displays<i class="bi bi-dot popup-nav-link-dot T-5 hidden"></i>
+                        </a>
+                        <a class="module-left-nav-link T-6" id="RepeatTabLink-6" onclick="NavigateToTab(this.id, 6)">
+                            Repeat<i class="bi bi-dot popup-nav-link-dot T-6 hidden"></i>
+                        </a>
+                        <a class="module-left-nav-link T-7" id="FeedbackTabLink-7" onclick="NavigateToTab(this.id, 7)">
+                            Feedback<i class="bi bi-dot popup-nav-link-dot T-7 hidden"></i>
+                        </a>
+                        <a class="module-left-nav-link T-8" id="TargetUsersTabLink-8" onclick="NavigateToTab(this.id, 8)">
+                            Target Users<i class="bi bi-dot popup-nav-link-dot T-8 hidden"></i>
+                        </a>
+                        <a class="module-left-nav-link T-9" id="ExposureSummaryTabLink-9" onclick="NavigateToTab(this.id, 8)">
+                            Exposure Summary<i class="bi bi-dot popup-nav-link-dot T-9 hidden"></i>
+                        </a>
                     </div>
                 </div>
                 <!-- Main Content -->
                 <div class="col main-content flex-wrap" id="ModuleWizardMain">
                     <div class="form-horizontal" id="popupForm">
                         <!-- Link Type Tab -->
-                        <div id="LinkTypeTab-1" class="add-new-popup popup flex-wrap align-content-center justify-content-center mb-3">
-                            <h5 class="fw-bold module-heading-theme mt-4">1. Popup Link Type</h5>
+                        <div id="LinkTypeTab-1" class="add-new-popup popup flex-wrap align-content-center justify-content-center mb-3 hidden">
+                            <h5 class="fw-bold mt-4 text-center">1. Popup Link Type</h5>
                             <p class="custom-p mt-4 fs-13 text-center">Select what the popup will link to when clicked by the user.</p>
                             <p class="custom-p fs-13 text-center">The popup can launch any of the below options when clicked on or be linked to nothing.</p>
                             <!-- Links Options -->
@@ -292,8 +297,8 @@ input {
                                 <div class="col-lg-9 p-0">
                                     <!-- Uploader Component -->
                                     @{
-                                        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Form/FileUploader.cshtml", 
-                                            new FileUploaderModel { InputId = "ContentUploadInput", ShowPreviewButton = true, InitialHidden = true, WidthPx = "396px" });
+                                        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Form/FileUploader.cshtml",
+                                        new FileUploaderModel { ComponentId = "PopupLinkType", InputId = "PopupLinkTypeUploadInput", ShowPreviewButton = true, InitialHidden = true, WidthPx = "396px",OnFileUploadCallback = null });
                                     }
                                     <!-- Website Textbox -->
                                     <div class="w-100 mt-2 p-0 d-flex hidden" id="LinkTypeUrl">
@@ -355,19 +360,21 @@ input {
                                 </div>
                             </div>
                         </div>
-                        <!-- Skins Tab -->
-                        <div id="SkinsTab-2" class="add-new-popup popup flex-wrap  text-center align-content-center justify-content-center mb-3">
-                            <h5 class="fw-bold module-heading-theme mt-4">2. Popup Skin</h5>
-                            <p class="custom-p mt-4 fs-13 text-center">Please select the skin for this group</p>
-                            <p class="custom-p fs-13 text-center">
-                                If you import your own custom skin, please note that the image must be saved as a *.BMP file and must be 314x188 pixels in dimension.
-                            </p>
-                            <div class="mt-4 p-5">
-                                <div class="form-group">
-                                    <input class="form-check-input" type="radio" name="PopupSkinOption" id="PopupDefaultSkinOption" value="option2" onchange="PopupSkinTypeSelect(this.id)">
-                                    <label class="form-check-label ms-2" for="exampleRadios2">Use Default Skin</label>
-                                </div>
-                                <div class="form-group mt-5">
+                        <!-- Skins & Icons Tab -->
+                        <div id="SkinsTab-2" class="add-new-popup popup flex-wrap justify-content-center mb-4 ps-2">
+                            <h5 class="fw-bold mt-4 text-center">2. Popup Skin & Icons</h5>
+                            <p class="custom-p mt-4 fs-13 text-center">Please select the skin & icons for this popup</p>
+                            <div class="mt-3" id="PopupSkinContainer">
+                                <p class="custom-p fw-bold w-fit-content fs-16">Popup Skin</p>
+                                <p class="custom-p fs-12 w-fit-content mt-2">
+                                    If you import your own custom skin, please note that the image must be saved as a *.BMP file and must be 314x188 pixels in dimension.
+                                </p>
+                                <div class="mt-2 p-2">
+                                    <div class="form-group">
+                                        <input class="form-check-input" type="radio" name="PopupSkinOption" id="PopupDefaultSkinOption" value="option2" onchange="PopupSkinTypeSelect(this.id)">
+                                        <label class="form-check-label ms-2" for="exampleRadios2">Use Default Skin</label>
+                                    </div>
+                                    <div class="form-group mt-3">
                                     <div class="col-sm-10 d-inline-flex justify-content-between align-items-center">
                                         <div class="form-check mr-3">
                                             <input class="form-check-input" type="radio" name="PopupSkinOption" id="PopupCustomSkinOption" value="option2" onchange="PopupSkinTypeSelect(this.id)">
@@ -382,77 +389,257 @@ input {
                                         </select>
                                     </div>
                                 </div>
+                                </div>
+                            </div>
+                            <div class="mt-3" id="PopupIconsContainer">
+                                <p class="custom-p fw-bold w-fit-content fs-16">Popup Icons</p>
+                                <p class="custom-p fs-12 w-fit-content mt-2">
+                                    If you import your own custom icon, please note that the image must be 48x48 pixels in dimension.
+                                </p>
+                                <div class="mt-2 p-2">
+                                    <div class="row form-group">
+                                        <div class="w-fit-content">
+                                            <input class="form-check-input" type="radio" name="PopupIconOption" id="PopupStandardIcons" value="option2" onchange="PopupIconOptionSelect(this.id)">
+                                            <label class="form-check-label ms-1" for="exampleRadios2">Use Standard Icons</label>
+                                        </div>
+                                        <div class="row w-fit-content hidden ms-5 border border-light-1 p-1" id="PopupStandardIconsContainer">
+                                            <div class="col p-0 popup-icon-container">
+                                                <input class="form-check-input popup-icon-radio" type="radio" name="PopupStandardIconOption" id="PopupStandardIconInfo" value="option2" onchange="PopupStandardIconSelect(this.id)">
+                                                <img class="popup-icon-img" src="~/images/icons/modules/popup/icon-info.png" />
+                                            </div>
+                                            <div class="col p-0 popup-icon-container ms-2">
+                                                <input class="form-check-input popup-icon-radio" type="radio" name="PopupStandardIconOption" id="PopupStandardIconWarning" value="option2" onchange="PopupStandardIconSelect(this.id)">
+                                                <img class="popup-icon-img" src="~/images/icons/modules/popup/icon-warning.png" />
+                                            </div>
+                                            <div class="col p-0 popup-icon-container ms-2">
+                                                <input class="form-check-input popup-icon-radio" type="radio" name="PopupStandardIconOption" id="PopupStandardIconError" value="option2" onchange="PopupStandardIconSelect(this.id)">
+                                                <img class="popup-icon-img" src="~/images/icons/modules/popup/icon-error.png" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mt-3">
+                                        <div class="col form-group mb-0">
+                                            <div class="form-check w-fit-content">
+                                                <input class="form-check-input" type="radio" name="PopupIconOption" id="PopupCustomIconsOption" value="option2" onchange="PopupIconOptionSelect(this.id)">
+                                                <label class="form-check-label" for="exampleRadios2">Use Custom Icon</label>
+                                            </div>
+                                            <div class="col w-fit-content hidden ms-5" id="PopupCustomIconsContainer">
+                                                <!-- Uploader Component -->
+                                                @{
+                                                    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Form/FileUploader.cshtml",
+                                                    new FileUploaderModel 
+                                                    { 
+                                                        ComponentId = "PopupCustomIcon", 
+                                                        InputId = "CustomIconInput", 
+                                                        ShowPreviewButton = true, 
+                                                        InitialHidden = false, 
+                                                        WidthCss = "w-50",
+                                                        OnFileUploadCallback = "UpdatePopupIconCustom"
+                                                    });
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mt-3 mb-3">
+                                        <div class="col form-check mr-3">
+                                            <input class="form-check-input" type="radio" name="PopupIconOption" id="PopupNONEIconsOption" value="option2" onchange="PopupIconOptionSelect(this.id)">
+                                            <label class="form-check-label ml-2" for="exampleRadios2">Do Not Show Icon</label>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <!-- Texts Tab -->
                         <div id="TextsTab-3" class="add-new-popup popup flex-wrap  text-center align-content-center justify-content-center mb-3">
-                            <h5 class="fw-bold module-heading-theme mt-4">3. Popup Title & Body Texts</h5>
-                            <p class="custom-p mt-4 fs-13 text-center">Enter popup title and body texts.</p>
-                            <div class="form-group row">
+                            <h5 class="fw-bold mt-4">3. Popup Title & Body Texts</h5>
+                            <p class="custom-p mt-2 fs-13 text-center">Enter popup title and body texts.</p>
+                            <!-- Title input-->
+                            <div class="row mt-4">
                                 <label class="col-sm-2 fw-bold text-center">Title:</label>
                                 <div class="col-sm-10">
                                     @{
                                         await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Form/HtmlEditor.cshtml",
                                         new HtmlEditorModel { EditorId = "PopupTextHeader", HeightPx = "55px", WriteToDesitnationOnInput = true, DestinationTextDivId = "PopupBodyPreviewTitleText" });
                                     }
+                                    <p class="mb-0 fs-12 text-danger fst-italic ps-1 w-fit-content" id="LinkTypeTextsTitleError"></p>
+                                    <div class="form-check form-switch w-fit-content mb-0">
+                                        <label class="form-check-label fs-12" for="ShowHidePopupTitle">Show</label>
+                                        <input class="form-check-input" type="checkbox" id="ShowHidePopupTitle" onchange="ShowHidePopupText(this.id,'title')" checked>
+                                    </div>
+                                    
                                 </div>
                             </div>
-
                             <!-- Body input-->
-                            <div class="form-group row">
+                            <div class="row">
                                 <label class="col-sm-2 fw-bold  text-center">Body:</label>
                                 <div class="col-sm-10">
                                     @{
                                         await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Form/HtmlEditor.cshtml",
                                         new HtmlEditorModel { EditorId = "PopupTextBody", HeightPx = "150px", WriteToDesitnationOnInput = true, DestinationTextDivId = "PopupBodyPreviewTextBody" });
                                     }
+                                    <p class="mb-0 fs-12 text-danger fst-italic ps-1 w-fit-content" id="LinkTypeTextsBodyError"></p>
+                                    <div class="form-check form-switch w-fit-content mb-0">
+                                        <label class="form-check-label fs-12" for="ShowHidePopupBody">Show</label>
+                                        <input class="form-check-input" type="checkbox" id="ShowHidePopupBody" onchange="ShowHidePopupText(this.id,'body')" checked>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <!-- Times Tab -->
                         <div id="TimesTab-4" class="add-new-popup popup flex-wrap  text-center align-content-center justify-content-center mb-3">
-                            <div class="row text-center align-content-center justify-content-center">
-                                <div class="col-12">
-                                    <h5 class="fw-bold mb-3 module-heading-theme">4. Popup Preview</h5>
-                                    <p class="module-subheading-theme">This is what the preview will look like based on the information you have entered.</p>
+                            <h5 class="fw-bold module-heading-theme mt-4">4. Popup Effective Dates & Timeslots</h5>
+                            <p class="custom-p mt-2 fs-13 text-center">Please define the date and time range that the Popup must display</p>
+                            <p class="custom-p mt-4 fs-13 text-center">
+                                Tip:In order to maximize exposure, we recommend that the date range span over multiple calendar weeks (Thursday to Thursday) and setting the time
+                                to be as long as possible (e.g 07h00 to 19h00).
+                            </p>
+                            <div class="row mt-5 p-4">
+                                <div class="col-md-6">
+                                    <p class="fw-bold fs-16 text-center">Effective Dates</p>
+                                    <div class="mt-4">
+                                    @{
+                                        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Form/DateRangePicker.cshtml");
+                                    }
+                                    </div>
                                 </div>
-                                <div class="col-lg-2 ">
-                                    col 1
+                                <div class="col-md-6">
+                                    <p class="fw-bold fs-16 text-center">Timeslots</p>
+                                    <div class="mt-4">
+                                    @{
+                                        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Form/TimePicker.cshtml");
+                                    }
+                                    </div>
                                 </div>
-                                <div class="col-lg-10"> col2 </div>
                             </div>
+                            
                         </div>
                         <!-- Displays Tab -->
-                        <div id="DisplaysTab-5" class="add-new-popup popup flex-wrap  text-center align-content-center justify-content-center mb-3">
-                            <h5 class="fw-bold mb-3 module-heading-theme">5. Popup Displays</h5>
-                            <p class="module-subheading-theme">Popup display settings.</p>
-                            <!-- Add content for Popup 5 -->
+                        <div id="DisplaysTab-5" class="add-new-popup popup flex-wrap  text-center align-content-center justify-content-center mb-5">
+                            <h5 class="fw-bold mt-4">5. Popup Displays</h5>
+                            <p class="custom-p mt-4 fs-13 text-center">Please define how much flexibilitythe user is allowed when the Popup arrives.</p>
+                            <div class="row mt-5">
+                                <div class="popup-display-settings-titles">
+                                    <div class="form-check form-switch w-fit-content mb-0">
+                                        <label class="form-check-label fs-14" for="AutoHidePopup">Auto Hide</label>
+                                        <input class="form-check-input" type="checkbox" id="AutoHidePopupToggle">
+                                    </div>
+                                </div>
+                                <div class="popup-display-settings-info">
+                                    <p class="mb-0">Select this option if you want Popup to AUTOMATICALLY hide after appearing on the screen.</p>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="popup-display-settings-titles">
+                                    <div class="form-check form-switch w-fit-content mb-0">
+                                        <label class="form-check-label fs-14" for="ShowHidePopupTitle">Dismissable</label>
+                                        <input class="form-check-input" type="checkbox" id="DismissablePopupToggle" onchange="TogglePopupDisplaySettings()">
+                                    </div>
+                                </div>
+                                <div class="popup-display-settings-info">
+                                    <p class="mb-0">Select this option if you want the user to CLOSE the Popup without viewing the attachment.</p>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="popup-display-settings-titles">
+                                    <div class="form-check form-switch w-fit-content mb-0">
+                                        <label class="form-check-label fs-14" for="ShowHidePopupTitle">Snoozable</label>
+                                        <input class="form-check-input" type="checkbox" id="SnoozePopupToggle" onchange="TogglePopupDisplaySettings()">
+                                    </div>
+                                </div>
+                                <div class="popup-display-settings-info">
+                                    <p class="mb-0">Select this option if you want the user to SNOOZE the Popup for later viewing</p>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="popup-display-settings-titles w-fit-content" style="margin-left:45px;margin-right:-45px;">
+                                    <div class="form-check form-switch w-fit-content mb-0">
+                                       <p class="mb-0 fw-bold fs-14">Popup Position</p>
+                                    </div>
+                                </div>
+                                <div class="popup-display-settings-info popup-pos-container">
+                                    <div class="grid-container">
+                                        <div class="popup-pos grid-item" id="PopupPositionTL" onclick="SetPopupPosition(this.id)">Top Left</div>
+                                        <div class="popup-pos grid-item" id="PopupPositionTC" onclick="SetPopupPosition(this.id)">Top Center</div>
+                                        <div class="popup-pos grid-item" id="PopupPositionTR" onclick="SetPopupPosition(this.id)">Top Right</div>
+                                        <div class="popup-pos grid-item" id="PopupPositionML" onclick="SetPopupPosition(this.id)">Middle Left</div>
+                                        <div class="popup-pos grid-item" id="PopupPositionC" onclick="SetPopupPosition(this.id)">Center</div>
+                                        <div class="popup-pos grid-item" id="PopupPositionMR" onclick="SetPopupPosition(this.id)">Middle Right</div>
+                                        <div class="popup-pos grid-item" id="PopupPositionBL" onclick="SetPopupPosition(this.id)">Bottom Left</div>
+                                        <div class="popup-pos grid-item" id="PopupPositionBC" onclick="SetPopupPosition(this.id)">Bottom Center</div>
+                                        <div class="popup-pos grid-item active" id="PopupPositionBR" onclick="SetPopupPosition(this.id)">Bottom Right</div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <!-- Repeat Tab -->
-                        <div id="RepeatTab-6" class="add-new-popup popup flex-wrap  text-center align-content-center justify-content-center mb-3">
-                            <h5 class="fw-bold mb-3 module-heading-theme">6. Popup Repeat</h5>
-                            <p class="module-subheading-theme">Popup repeat settings.</p>
-                            <!-- Add content for Popup 6 -->
+                        <div id="RepeatTab-6" class="add-new-popup popup flex-wrap  text-center align-content-center justify-content-center mb-3 p-5">
+                            <h5 class="fw-bold mt-4">6. Popup Repeat</h5>
+                            <p class="custom-p mt-4 fs-13 text-center">Please select repeate frequency of the Popup.</p>
+                            <p class="custom-p mt-4 fs-13 text-center">
+                                If you want this same popup to repeat either a Daily or Weekly basis. Please select the relevant option below. as well as expiry date
+                                at which point you want Popup to STOP repeating
+                            </p>
+                            <div class="w-fit-content mt-3">
+                                <div class="form-group mt-4 w-fit-content">
+                                    <div class="col form-check">
+                                        <input class="form-check-input" type="radio" name="PopupRepeatOption" id="PopupNoRepeatOption" value="option2" onchange="PopupRepeatOptionSelect(this.id)">
+                                        <label class="form-check-labelfor="exampleRadios2">Do Not Repeat</label>
+                                    </div>
+                                </div>
+                                <div class="row w-fit-content d-flex mt-3 align-content-center">
+                                    <div class="form-group w-fit-content" style="position:fixed">
+                                        <div class="col form-check mr-3">
+                                            <input class="form-check-input" type="radio" name="PopupRepeatOption" id="PopupRepeatDailyOption" value="option2" onchange="PopupRepeatOptionSelect(this.id)">
+                                            <label class="form-check-label" for="exampleRadios2">Repeat Daily</label>
+                                        </div>
+                                    </div>
+                                    <div class="w-fit-content hidden" style="margin-left: 150px;" id="PopupRepeatDailyContainer">
+                                        <p class="mb-0 text fs-13 fw-bold mb-1">Expiry Date</p>
+                                        <input type="date" class="custom-input-text fs-14 cursor-pointer" style="width:200px" id="DailyRepeatExpiryDate" onchange="OnPopupRepeatExpiryDateChange(this.id)" />
+                                        @* @{
+                                            await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Form/DatePicker.cshtml",
+                                            new CommonModel
+                                            {
+                                                ElementId = "DailyRepeatExpiryDate", Css = "custom-input-text", Style = "width:200px"
+                                            });
+                                        } *@
+                                    </div>
+                                </div>
+                                <div class="row w-fit-content d-flex align-content-center" style="margin-top:60px">
+                                    <div class="form-group w-fit-content" style="position:fixed">
+                                        <div class="col form-check mr-3">
+                                            <input class="form-check-input" type="radio" name="PopupRepeatOption" id="PopupRepeatWeeklyOption" value="option2" onchange="PopupRepeatOptionSelect(this.id)">
+                                            <label class="form-check-label" for="exampleRadios2">Repeat Weekly</label>
+                                        </div>
+                                    </div>
+                                    <div class="w-fit-content hidden" style="margin-left: 150px;" id="PopupRepeatWeeklyContainer">
+                                        <p class="mb-0 text fs-13 fw-bold mb-1">Expiry Date</p>
+                                        <input type="date" class="custom-input-text fs-14 cursor-pointer" style="width:200px" id="WeeklyRepeatExpiryDate" onchange="OnPopupRepeatExpiryDateChange(this.id)" />
+                                        @* @{
+                                            await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Form/DatePicker.cshtml",
+                                            new CommonModel
+                                            {
+                                                ElementId = "WeeklyRepeatExpiryDate", Css = "custom-input-text", Style = "width:200px"
+                                            });
+                                        } *@
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <!-- Feedback Tab -->
                         <div id="FeedbackTab-7" class="add-new-popup popup flex-wrap text-center align-items-center justify-content-center mb-3 mt-2">
-                            <h5 class="fw-bold mb-3 module-heading-theme">7. Popup Feedback Request</h5>
-                            <p class="module-subheading-theme">Select popup feedback preferences: Like/Dislike and/or comment.</p>
-
-                            <div class="form-group row justify-content-center">
+                            <h5 class="fw-bold mt-4">7. Popup Feedback Request</h5>
+                            <p class="custom-p mt-4 fs-13 text-center">Select popup feedback preferences: Like/Dislike and/or comment.</p>
+                            <div class="form-group row justify-content-center mt-5">
                                 <div class="option form-check form-switch">
-                                    <label for="likeDislikeToggle">Allow recipients to <strong>LIKE or DISLIKE</strong> the popup</label>
-                                    <input type="checkbox" id="commentToggle" class="form-check-input">
-
+                                    <label class="fs-14" for="likeDislikeToggle">Allow recipients to <strong>LIKE or DISLIKE</strong> the popup</label>
+                                    <input type="checkbox" id="FeedbackLikeDislikeToggle" class="form-check-input" onchange="UpdatePopupFeedback()">
                                 </div>
                                 <div class="option form-check form-switch">
-                                    <label for="commentToggle">Allow recipients to add <strong>COMMENT</strong> to the popup</label>
-                                    <input type="checkbox" id="commentToggle" class="form-check-input">
-
+                                    <label class="fs-14" for="commentToggle">Allow recipients to add <strong>COMMENT</strong> to the popup</label>
+                                    <input type="checkbox" id="FeedbackCommentToggle" class="form-check-input" onchange="UpdatePopupFeedback()">
                                 </div>
-
                             </div>
-
                         </div>
                         <!-- Target Users -->
                         <div id="TargetUserTab-8" class="add-new-popup popup flex-wrap  text-center align-content-center justify-content-center mb-3">
@@ -467,6 +654,7 @@ input {
                             <!-- Add content for Popup 9 -->
                         </div>
 
+                        <!-- Navigation Buttons -->
                         <div class="row fix-content-bottom">
                             <div class="col-12 ">
                                 <div class="pagination-section mt-4  flex-column flex-md-row  text-center align-content-center justify-content-center ">
@@ -481,64 +669,62 @@ input {
                 <!-- Preview Side -->
                 <div class="col" id="ModulePreviewSection">
                     <p class="fst-italic mt-4" style="color:silver">Preview</p>
-                    <p class="theme-txt-clr mb-0 mt-2">Skin filename: <span class="fw-bold" id="SkinFileName">STMBackground.BMP</span></p>
                     <!-- Popup Preview-->
-                    <div class="mt-1 border border-light-1" id="PopupBodyPreview">
-                        <div class="d-flex" id="PopupBodyPreviewTitle">
-                            <div id="PopupBodyPreviewTitleIcon">
-                                <img src="~/images/icons/modules/popup/icon-info.png" />
+                    <div id="PopupSkinPreview">
+                        <p class="theme-txt-clr mb-0 mt-2">Skin filename: <span class="fw-bold" id="SkinFileName"></span></p>
+                        <div class="mt-1 border border-light-1" id="PopupBodyPreview">
+                            <div class="d-flex" id="PopupBodyPreviewTitle">
+                                <div id="PopupBodyPreviewTitleIcon">
+                                    <img class="hidden" src="" id="PopupIconImg"/>
+                                </div>
+                                <div id="PopupBodyPreviewTitleText" class="poup-body-preview-title-text">
+                                </div>
+                                <div id="PopupBodyPreviewTitleDismiss">
+                                    <img class="hidden" src="~/images/icons/modules/popup/icon-error.png" id="PopupDismissIcon"/>
+                                </div>
                             </div>
-                            <div id="PopupBodyPreviewTitleText" class="poup-body-preview-title-text">
-                                @Html.Raw(testPopupTitle)
-                            </div>
-                            <div id="PopupBodyPreviewTitleDismiss">
-                                <img src="~/images/icons/modules/popup/icon-error.png" />
-                            </div>
-                        </div>
-                        <div id="PopupBodyPreviewText">
-                            <div id="PopupBodyPreviewTextBody" class="popup-body-preview-text-body">
-                                @Html.Raw(testPopupBody)
-                            </div>
-                            <div id="PopupBodyPreviewTextBodyFooter">
-                                <button class="btn">Remind Me Later</button>
+                            <div id="PopupBodyPreviewText">
+                                <div id="PopupBodyPreviewTextBody" class="popup-body-preview-text-body">
+                                </div>
+                                <div id="PopupBodyPreviewTextBodyFooter">
+                                    <button class="btn hidden" id="PopupSnoozeBtn">Remind Me Later</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <!-- Feedback -->
-                    <div class="mt-3 p-0">
+                    <div class="mt-3 p-0" id="PopupFeedbackWindow">
                         <p class="custom-p">Feedback Skin with:</p>
                         <ul class="mb-0" style="font-size:10px">
-                            <li>Like/Dislike</li> 
-                            <li>Comment</li>
+                            <li id="FeedbackLikeDislikeTxt">Like/Dislike</li> 
+                            <li id="FeedbackCommentTxt">Comment</li>
                         </ul>
-                        <div class="mt-0 border border-light-1" id="PopupBodyPreviewFeedback" style="background-image: url('@popupSkin'); opacity:0.4">
+                        <div class="mt-0 border border-light-1" id="PopupBodyPreviewFeedback" style="opacity:0.4">
                             <div class="d-flex" id="PopupBodyPreviewTitle">
                                 <div id="PopupBodyPreviewTitleIcon">
-                                    <img src="~/images/icons/modules/popup/icon-info.png" />
+                                    <img src="" id="PopupIconImgFeedback" />
                                 </div>
                                 <div id="PopupBodyPreviewTitleTextFeedback" class="poup-body-preview-title-text">
-                                    @Html.Raw(testPopupTitle)
                                 </div>
                                 <div id="PopupBodyPreviewTitleDismiss">
-                                    <img src="~/images/icons/modules/popup/icon-error.png" />
+                                    <img class="hidden" src="~/images/icons/modules/popup/icon-error.png" id="PopupDismissIconFeedback" />
                                 </div>
                             </div>
                             <div id="PopupBodyPreviewText">
                                 <div id="PopupBodyPreviewTextBodyFeedback" class="popup-body-preview-text-body">
-                                    @Html.Raw(testPopupBody)
                                 </div>
                                 <div id="PopupBodyPreviewTextBodyFooter">
-                                    <button class="btn">Remind Me Later</button>
+                                    <button class="btn" id="PopupSnoozeBtnFeedback">Remind Me Later</button>
                                 </div>
                             </div>
                         </div>
                         <div id="PopupFeedbackContents">
                             <p class="pt-1 mb-0 w-100 text-center" style="font-size:11px">Please provide feedback on this popup</p>
-                            <div class="d-flex mt-1">
+                            <div class="d-flex mt-1" id="PopupFeedbackLikeDislikeIcons">
                                 <img src="~/images/icons/modules/popup/Like-icon.png" class="popup-feedback-icons ms-auto" />
                                 <img src="~/images/icons/modules/popup/Dislike-icon.png" class="popup-feedback-icons me-auto" />
                             </div>
-                            <div class="mt-1 text-center">
+                            <div class="mt-1 text-center" id="PopupFeedbackComment">
                                 <textarea rows="3" id="PopupFeedbackText" disabled></textarea>
                             </div>
                             <div class="text-center">
@@ -556,20 +742,43 @@ input {
     await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/ContentPreviewers/AllContentPreviewer.cshtml");
 }
 
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script>
 
-    let linkTypeFile = null;
-    
+    let currentPopupTab = 1;
+    let totalPopupTabs = 9;
+
     $(document).ready(function ()
     {
         HideAllTabs();
-        LoadDefaultSkinPreview();
+        IntilizeSkinsPreview();
+        PopupRepeatInitailExpirationDate();
     });
+    
+    function IntilizeSkinsPreview()
+    {
+        HideShowElementVisibity("#PopupSkinPreview", HideShow.HIDE);
+
+        HideShowElementVisibity("#PopupFeedbackContents", HideShow.HIDE);
+        HideShowElementVisibity("#PopupFeedbackWindow", HideShow.HIDE);
+    }
 
     function LoadDefaultSkinPreview()
     {
         $("#PopupBodyPreview").css("background", "url(@popupSkin)"); 
+        $("#SkinFileName").text("Popup_Skin_Default.png");
         $("#PopupBodyPreviewFeedback").css("background", "url(@popupSkin)");
+    }
+
+    function NavigateToTab(navLinkId, tabLinkNumber)
+    {
+        var canNavigate = !$(`#${navLinkId}`).hasClass("active") && $(`#${navLinkId}`).hasClass("visited-nav-link");
+        if(canNavigate)
+        {
+            CustomNavigateToTab(tabLinkNumber);
+            currentPopupTab = tabLinkNumber;
+        }
     }
 
     function PreviewWebsite()
@@ -589,7 +798,7 @@ input {
     function HideAllTabs()
     {
         HideShowElement(".add-new-popup", HideShow.HIDE);
-        HideShowElement("#LinkTypeTab-1", HideShow.SHOW);
+        HideShowElement("#TimesTab-4", HideShow.SHOW);
     }
 
     function PopupLinkTypeClick(linkBtnId)
@@ -599,7 +808,7 @@ input {
         HideShowElement("#LinkTypeEmail", HideShow.HIDE);
         HideShowElement("#SurveyType", HideShow.HIDE);
 
-        ClearFileUpload();
+        ClearFileUpload("PopupLinkType");
 
         $(".link-type-btn").removeClass("btn-group-active");
         $(`#${linkBtnId}`).addClass("btn-group-active");
@@ -626,27 +835,27 @@ input {
                 if(btnType.includes("image"))
                 {
                     $("#UploadFileTitle").text("Image");
-                    $("#ContentUploadInput").attr("accept", "image/*");
+                    $("#PopupLinkTypeUploadInput").attr("accept", "image/*");
                 }
                 else if (btnType.includes("audio"))
                 {
                     $("#UploadFileTitle").text("Audio");
-                    $("#ContentUploadInput").attr("accept", "audio/*");
+                    $("#PopupLinkTypeUploadInput").attr("accept", "audio/*");
                 }
                 else if (btnType.includes("video"))
                 {
                     $("#UploadFileTitle").text("Video");
-                    $("#ContentUploadInput").attr("accept", "video/*");
+                    $("#PopupLinkTypeUploadInput").attr("accept", "video/*");
                 }
                 else if (btnType.includes("document"))
                 {
                     $("#UploadFileTitle").text("Document");
-                    $("#ContentUploadInput").attr("accept", ".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf");
+                    $("#PopupLinkTypeUploadInput").attr("accept", ".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf");
                 }
                 else if (btnType.includes("policy"))
                 {
                     $("#UploadFileTitle").text("Policy (PDF)");
-                    $("#ContentUploadInput").attr("accept", ".pdf");
+                    $("#PopupLinkTypeUploadInput").attr("accept", ".pdf");
                 }
             }
             else if (btnType.includes("website"))
@@ -714,7 +923,8 @@ input {
         }
         else if(isAttachmentType)
         {
-            if (StringNullOrEmpty(UploadFileUrl))
+            var uploadFileUrl = $("#PopupLinkType_UploadFileURL").val();
+            if (StringNullOrEmpty(uploadFileUrl))
             {
                 swal("Popup Link Error", `Please upload ${btnText} file`, "error");
                 return false;
@@ -791,6 +1001,7 @@ input {
         if (id.includes("defaultskin"))
         {
             LoadDefaultSkinPreview();
+            HideShowElementVisibity("#PopupSkinPreview", HideShow.SHOW);
             HideShowElement("#PopupSkinImage", HideShow.HIDE);
         }
         else
@@ -813,96 +1024,296 @@ input {
         }
     }
 
-
-    $(document).ready(function ()
+    function PopupIconOptionSelect(iconTypeId)
     {
-        // Execute commands (like bold, italic, etc.)
-        $('.btns button').click(function (event)
+        HideShowElement("#PopupStandardIconsContainer", HideShow.HIDE);
+        HideShowElement("#PopupCustomIconsContainer", HideShow.HIDE);
+        HideShowElement("#PopupIconImg", HideShow.SHOW);
+        HideShowElement("#PopupIconImgFeedback", HideShow.SHOW);
+
+        iconTypeId = iconTypeId.toLowerCase();
+        if (iconTypeId.includes("standard"))
         {
-            event.preventDefault();
-
-            const cmd = $(this).data('cmd');
-            let value = null;
-
-            if ($(this).hasClass('prompt'))
+            HideShowElement("#PopupStandardIconsContainer", HideShow.SHOW);
+            
+            if($('input:radio[name="PopupStandardIconOption"]:checked').length == 0)
             {
-                value = prompt('Enter the link or image URL:', 'http://');
-            }
-            execCmd(cmd, value);
-        });
-
-        $('.btns select').change(function ()
-        {
-            const cmd = $(this).data('cmd');
-            const value = $(this).val();
-            execCmd(cmd, value);
-        });
-
-        $('.btns input').change(function ()
-        {
-            const cmd = $(this).data('cmd');
-            const value = $(this).val();
-            execCmd(cmd, value);
-        });
-
-        $('#showPreview').change(function ()
-        {
-            togglePreview();
-        });
-
-        $('#titleInput').on('input', function ()
-        {
-            updatePreview();
-        });
-
-        $('#bodyInput').on('input', function ()
-        {
-            updatePreview();
-        });
-
-        function execCmd(cmd, value)
-        {
-            document.execCommand(cmd, false, value);
-            updatePreview();
-        }
-
-        $('#showPreview').change(function ()
-        {
-            togglePreview();
-        });
-
-        function updatePreview()
-        {
-            if ($('#showPreview').is(':checked'))
-            {
-                let title = $('#titleInput').html();
-                let content = $('#bodyInput').html();
-
-                $('#previewTitle').html(title);
-                $('#previewContent').html(content);
-            } else
-            {
-
-                $('#previewTitle').html('');
-                $('#previewContent').html('');
+                $("#PopupStandardIconInfo").prop("checked", true);
+                PopupStandardIconSelect("PopupStandardIconInfo");
             }
         }
-
-        function togglePreview()
+        else if (iconTypeId.includes("custom"))
         {
-            if ($('#showPreview').is(':checked'))
+            HideShowElement("#PopupCustomIconsContainer", HideShow.SHOW);
+            $("#CustomIconInput").attr("accept", "image/*");
+
+            var customIconUrl = $("#PopupCustomIconUploadFileURL").val();
+            SetPopupIcon(customIconUrl);
+        }
+        else if (iconTypeId.includes("none"))
+        {
+            HideShowElement("#PopupIconImg", HideShow.HIDE);
+            HideShowElement("#PopupIconImgFeedback", HideShow.HIDE);
+        }
+    }
+
+    function SetPopupIcon(iconImgUrl)
+    {
+        if (!StringNullOrEmpty(iconImgUrl))
+        {
+            $("#PopupIconImg").attr("src", iconImgUrl);
+            $("#PopupIconImgFeedback").attr("src", iconImgUrl);
+        }
+    }
+
+    function PopupStandardIconSelect(iconId)
+    {
+        iconId = iconId.toLowerCase();
+        
+        var iconUrl = "";
+        var baseAddress = "@LaunchSettingsHelper.GetBaseAddressForImages()";
+
+        if (iconId.includes("info")) iconUrl = `${baseAddress}/images/icons/modules/popup/icon-info.png`;
+        if (iconId.includes("warning")) iconUrl = `${baseAddress}/images/icons/modules/popup/icon-warning.png`;
+        if (iconId.includes("error")) iconUrl = `${baseAddress}/images/icons/modules/popup/icon-error.png`;
+
+        SetPopupIcon(iconUrl);
+    }
+
+    function UpdatePopupIconCustom(customImgUrl, fileData)
+    {
+        GetImageDimensions(fileData).then(dimensions =>
+        {
+            if (dimensions.Width == 48 && dimensions.Width == 48)
             {
-                $('#previewContent').show();
-                $('#previewTitle').show();
-                updatePreview();
-            } else
+                SetPopupIcon(customImgUrl);
+            }
+            else
             {
-                $('#previewContent').hide();
-                $('#previewTitle').hide();
+                swal("Popup Icon Error", "Please upload image that is 48x48 pixels in dimension.", "error");
+                ClearFileUpload("PopupCustomIcon");
+            }
+        })
+        .catch(error =>
+        {
+                console.error('Error getting image dimensions:', error);
+                ClearFileUpload("PopupCustomIcon");
+        });
+        
+    }
+
+    function IsSkinsTabValid()
+    {
+        var atLeastOneSkinOptionSelect = $('input:radio[name="PopupSkinOption"]:checked').length > 0;
+        var atLeastOneIconOptionSelect = $('input:radio[name="PopupIconOption"]:checked').length > 0;
+        if (!atLeastOneSkinOptionSelect || !atLeastOneIconOptionSelect)
+        {
+            if (!atLeastOneSkinOptionSelect && atLeastOneIconOptionSelect)
+                swal("Popup Skins Error", "Please select default or custom skin option.", "error");
+            
+            else if (atLeastOneSkinOptionSelect && !atLeastOneIconOptionSelect)
+                swal("Popup Icon Error", "Please select at least one icon option.", "error");
+
+            else if (!atLeastOneSkinOptionSelect && !atLeastOneIconOptionSelect)
+                swal("Popup Skin & Icon Error", "Please select popup skin and popup icon.", "error");
+
+            return false;
+        }
+        else
+        {
+            var selectedSkinOptionId = $('input:radio[name="PopupSkinOption"]:checked').attr("id").toLowerCase();
+            var selectedIconOptionId = $('input:radio[name="PopupIconOption"]:checked').attr("id").toLowerCase();
+
+            var errorsCount = 0;
+            var combinedErrorMessage = "";
+            if (selectedSkinOptionId.includes("customskin"))
+            {
+                var selectedSkinValue = $("#PopupSkinImage option:selected").val();
+                if(selectedSkinValue == 0)
+                {
+                    combinedErrorMessage = "Please select custom skin.";
+                    errorsCount++;
+                }
+            }
+            if (selectedIconOptionId.includes("custom"))
+            {
+                if (StringNullOrEmpty($("#PopupCustomIcon_UploadFileURL").val()))
+                {
+                    combinedErrorMessage += "Please select custom Icon.";
+                    errorsCount++;
+                }
+            }
+            if (errorsCount > 0)
+            {
+                swal("Popup Skin & Icon Error", combinedErrorMessage, "error");
+                return false;
             }
         }
+        return true;
+    }
 
-        togglePreview();
-    });
+    function ShowHidePopupText(sliderId, textType)
+    {
+        var divPopupTextId = (textType == "title") ? "#PopupBodyPreviewTitleText" : "#PopupBodyPreviewTextBody";
+        var htmlEditorId = (textType == "title") ? "PopupTextHeader" : "PopupTextBody";
+
+        if ($(`#${sliderId}`).is(':checked'))
+        {
+            UpdatePreviews(htmlEditorId, "True", divPopupTextId);
+        }
+        else
+        {
+            $(divPopupTextId).html("");
+            $(`${divPopupTextId}Feedback`).html("");
+        }
+    }
+
+    function IsPopupTextsTabValid()
+    {
+        $("#LinkTypeTextsTitleError").text("");
+        $("#LinkTypeTextsBodyError").text("");
+
+        var titleText = $("#PopupTextHeader").text();
+        var bodyText = $("#PopupTextBody").text();
+
+        var isValid = true;
+
+        if(StringNullOrEmpty(titleText))
+        {
+            $("#LinkTypeTextsTitleError").text("enter popup title text");
+            isValid = false;
+        }
+        if (StringNullOrEmpty(bodyText))
+        {
+            $("#LinkTypeTextsBodyError").text("enter popup title body");
+            isValid = false;
+        }
+
+        if (!isValid)
+        {
+            swal("Popup Texts Error", "Enter Popup Texts", "error");
+        }
+
+        return isValid;
+    }
+
+    function TogglePopupDisplaySettings()
+    {
+        if (IsCheckboxChecked("DismissablePopupToggle"))
+        {
+            HideShowElement("#PopupDismissIcon", HideShow.SHOW);
+            HideShowElement("#PopupDismissIconFeedback", HideShow.SHOW);
+        }
+        else
+        {
+            HideShowElement("#PopupDismissIcon", HideShow.HIDE);
+            HideShowElement("#PopupDismissIconFeedback", HideShow.HIDE);
+        }
+        if (IsCheckboxChecked("SnoozePopupToggle"))
+        {
+            HideShowElement("#PopupSnoozeBtn", HideShow.SHOW);
+            HideShowElement("#PopupSnoozeBtnFeedback", HideShow.SHOW);
+        }
+        else
+        {
+            HideShowElement("#PopupSnoozeBtn", HideShow.HIDE);
+            HideShowElement("#PopupSnoozeBtnFeedback", HideShow.HIDE);
+        }
+    }
+
+    function SetPopupPosition(popupPosId)
+    {
+        $(".popup-pos").removeClass("active");
+        $(`#${popupPosId}`).addClass("active");
+    }
+
+    function PopupRepeatInitailExpirationDate()
+    {
+        $("#DailyRepeatExpiryDate").flatpickr({
+            dateFormat: "Y-m-d", // Internal format (ISO 8601)
+            altInput: true,      // Display formatted date
+            altFormat: "l, d F Y", // Custom display format (e.g., Thursday, 03 October 2024)
+            minDate: "today",    // Disable past dates
+            defaultDate: "today",  // Set initial date to today
+            allowInput: true
+        });
+
+        $("#WeeklyRepeatExpiryDate").flatpickr({
+            dateFormat: "Y-m-d", // Internal format (ISO 8601)
+            altInput: true,      // Display formatted date
+            altFormat: "l, d F Y", // Custom display format (e.g., Thursday, 03 October 2024)
+            minDate: "today",    // Disable past dates
+            defaultDate: "today",  // Set initial date to today
+            allowInput: true
+        });
+    }
+
+    function PopupRepeatOptionSelect(id)
+    {
+        HideShowElement("#PopupRepeatDailyContainer", HideShow.HIDE);
+        HideShowElement("#PopupRepeatWeeklyContainer", HideShow.HIDE);
+        
+        id = id.toLowerCase();
+        if(id.includes("daily"))
+        {
+            HideShowElement("#PopupRepeatDailyContainer", HideShow.SHOW);
+        }
+        else if(id.includes("weekly"))
+        {
+            HideShowElement("#PopupRepeatWeeklyContainer", HideShow.SHOW);
+        }
+    }
+
+    function IsPopupRepeatTabValid()
+    {
+        var atLeastOneSelected = $('input:radio[name="PopupRepeatOption"]:checked').length > 0;
+
+        if (!atLeastOneSelected)
+        {
+            swal("Popup Repeat Error", "Please select at least one Popup repeat setting.", "error");
+            return false;
+        }
+        else
+        {
+            var selectedRepeatOptionId = $('input:radio[name="PopupRepeatOption"]:checked').attr("id").toLowerCase();
+            if (selectedRepeatOptionId.includes("daily") || selectedRepeatOptionId.includes("weekly"))
+            {
+                if (selectedRepeatOptionId.includes("daily") && StringNullOrEmpty($("#DailyRepeatExpiryDate").val()))
+                {
+                    swal("Popup Repeat Error", "Please select enter expiration date.", "error");
+                    return false;
+                }
+                if (selectedRepeatOptionId.includes("weekly") && StringNullOrEmpty($("#WeeklyRepeatExpiryDate").val()))
+                {
+                    swal("Popup Repeat Error", "Please select enter expiration date.", "error");
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    function UpdatePopupFeedback()
+    {
+        
+        if (IsCheckboxChecked("FeedbackLikeDislikeToggle") || IsCheckboxChecked("FeedbackCommentToggle"))
+        {
+            HideShowElementVisibity("#PopupFeedbackContents", HideShow.SHOW);
+            HideShowElementVisibity("#PopupFeedbackWindow", HideShow.SHOW);
+            
+            let hideShowDislike = IsCheckboxChecked("FeedbackLikeDislikeToggle") ? HideShow.SHOW : HideShow.HIDE;
+            HideShowElementVisibity("#PopupFeedbackLikeDislikeIcons", hideShowDislike);
+            HideShowElement("#FeedbackLikeDislikeTxt", hideShowDislike);
+
+            let hideShowComment = IsCheckboxChecked("FeedbackCommentToggle") ? HideShow.SHOW : HideShow.HIDE;
+            HideShowElementVisibity("#PopupFeedbackComment", hideShowComment);
+            HideShowElement("#FeedbackCommentTxt", hideShowComment)
+        }
+        else
+        {
+            HideShowElementVisibity("#PopupFeedbackContents", HideShow.HIDE);
+            HideShowElementVisibity("#PopupFeedbackWindow", HideShow.HIDE);
+        }
+    }
 
 </script>

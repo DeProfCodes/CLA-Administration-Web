@@ -69,8 +69,8 @@
         if (writeToDestination == "True")
         {
             const data = document.getElementById(editorDivId).innerHTML;
-
-            var destinationDivId = EnsureJQueryId(destinationDivId);
+            destinationDivId = EnsureJQueryId(destinationDivId);
+            
             var destinationDiv2 = `${destinationDivId}Feedback`;
 
             $(destinationDivId).html(data);

@@ -21,6 +21,10 @@
 {
     display: none !important;
 }
+.invisble
+{
+    visibility: hidden !important;
+}
 .text-upper
 {
     text-transform: uppercase !important;
@@ -152,13 +156,44 @@
 }
 .fs-13
 {
-    font-size: 12px !important;
+    font-size: 13px !important;
+}
+.fs-14
+{
+    font-size: 14px !important;
+}
+.fs-15
+{
+    font-size: 15px !important;
+}
+.fs-16
+{
+    font-size: 16px !important;
+}
+.fs-17
+{
+    font-size: 17px !important;
+}
+.fs-18
+{
+    font-size: 18px !important;
+}
+.fs-19
+{
+    font-size: 19px !important;
+}
+.fs-20
+{
+    font-size: 20px !important;
 }
 .text-silver
 {
     color: silver !important;
 }
-
+.cursor-pointer
+{
+    cursor:pointer !important;
+}
 /**======================================================= Scaling ====================================================*/
 
 @media screen and (max-width:767px)

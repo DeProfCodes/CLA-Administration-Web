@@ -138,11 +138,34 @@ function PreviewImage2(imgSrc)
     OpenImagePreviewModal2(imgSrc);
 }
 
+function EnablePopupTabForNavigating(popupTabNo)
+{
+    var popupTabs = $(".add-new-popup");
+    HideShowElement(".add-new-popup", HideShow.HIDE);
 
-//popup module js
-let currentTabDiv = "#LinkTypes-1";
-let currentPopupTab = 1;
-let totalPopupTabs = 9;
+    for (let i = 0; i < popupTabs.length; i++)
+    {
+        var tabElementId = `#${popupTabs[i].getAttribute("id")}`;
+        var data = tabElementId.split("-");
+        
+        if(data != null && data.length >= 2)
+        {
+            var tabNumber = data[1];
+            if (tabNumber == popupTabNo)
+            {
+                var linkTab = `.module-left-nav-link.T-${tabNumber}`;
+                var dotOnTabLink = `.popup-nav-link-dot.T-${tabNumber}`;
+                
+                $(linkTab).addClass("visited-nav-link");
+                $(dotOnTabLink).removeClass("hidden");
+
+                HideShowElement(tabElementId, HideShow.SHOW);
+
+                break;
+            }
+        }
+    }
+}
 
 function SwitchPopupTab(popupTabNo)
 {
@@ -159,7 +182,14 @@ function SwitchPopupTab(popupTabNo)
             var tabNumber = data[1];
             if (tabNumber == popupTabNo)
             {
+                var linkTab = `.module-left-nav-link.T-${tabNumber}`;
+                var dotOnTabLink = `.popup-nav-link-dot.T-${tabNumber}`;
+                
+                $(linkTab).removeClass("visited-nav-link");
+                $(dotOnTabLink).addClass("hidden");
+
                 HideShowElement(tabElementId, HideShow.SHOW);
+
                 break;
             }
         }
@@ -209,8 +239,19 @@ function UpdatePopupTabButtons(popupTabNo)
 function ValidateTab(currentTab)
 {
     if(currentTab == 1) return IsLinksTabValid();
+    if(currentTab == 2) return IsSkinsTabValid();
+    if(currentTab == 3) return IsPopupTextsTabValid();
+    if(currentTab == 6) return IsPopupRepeatTabValid();
 
     return true;
+}
+
+function CustomNavigateToTab(popupTabNo)
+{
+    EnablePopupTabForNavigating(currentPopupTab);
+    SwitchPopupTab(popupTabNo);
+    UpdatePopupTabsNavigation(popupTabNo);
+    UpdatePopupTabButtons(popupTabNo);
 }
 
 function NextPopupTab()
@@ -219,6 +260,8 @@ function NextPopupTab()
     {
         if(!ValidateTab(currentPopupTab))
             return;
+
+        EnablePopupTabForNavigating(currentPopupTab);
 
         currentPopupTab++;
 
@@ -232,6 +275,8 @@ function PreviousPopupTab()
 {
     if (currentPopupTab > 1)
     {
+        EnablePopupTabForNavigating(currentPopupTab);
+
         currentPopupTab--;
 
         SwitchPopupTab(currentPopupTab);
@@ -239,22 +284,3 @@ function PreviousPopupTab()
         UpdatePopupTabButtons(currentPopupTab);
     }
 }
-
-
-document.addEventListener('DOMContentLoaded', () =>
-{
-    SwitchPopupTab(currentPopupTab); // Show the current popup
-
-
-
-    var previewBox = document.getElementById('preview-box');
-    if (previewBox)
-    {
-        previewBox.style.display = 'none'; // Hide back button if on the first page
-    }
-    const backBtn = document.getElementById('backBtn');
-    if (backBtn)
-    {
-        backBtn.style.display = 'none'; // Hide back button if on the first page
-    }
-});

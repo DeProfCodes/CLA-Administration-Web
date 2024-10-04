@@ -28,16 +28,36 @@ function HideShowElement(selector, hideShow)
     }
 }
 
-function EnsureJQueryId(Id)
+function HideShowElementVisibity(selector, hideShow)
 {
-    Id = (Id != null && Id.length > 0 && Id[0] != "#") ? `#${Id}` : "invalid";
-
-    return Id;
+    if(hideShow == HideShow.HIDE)
+    {
+        $(selector).addClass("invisble");
+    }
+    else if(hideShow == HideShow.SHOW)
+    {
+        $(selector).removeClass("invisble");
+    }
 }
 
 function StringNullOrEmpty(value)
 {
-    return value == null || value.length == 0;
+    return value == null || value.trim().length == 0;
+}
+
+function IsNotEmptyString(value)
+{
+    return value != null && value.length > 0;
+}
+
+function EnsureJQueryId(Id)
+{
+    if(IsNotEmptyString(Id) && Id[0] == "#")
+        return Id;
+
+    Id = (IsNotEmptyString(Id) && Id[0] != "#") ? `#${Id}` : "invalid";
+
+    return Id;
 }
 
 function IsEmptyInput(textBoxId)
@@ -48,8 +68,6 @@ function IsEmptyInput(textBoxId)
 
     return StringNullOrEmpty(value);  
 }
-
-
 
 function CheckEmail(email)
 {
@@ -68,4 +86,11 @@ function CheckInputEmail(emailInputId)
     var email = $(emailInputId).val();
 
     return CheckEmail(emailRegex);
+}
+
+function IsCheckboxChecked(checkboxId)
+{
+    checkboxId = EnsureJQueryId(checkboxId);
+
+    return $(checkboxId).is(':checked');
 }
