@@ -7,214 +7,6 @@
 @using CLA_Administration_Web.ViewModels.Modules.PST
 
 
-<style>
-
-
-/* 
-.btn-group.btn {
-    font-size: x-small;
-}
- */
-.form-check-input:checked
-{
-    background-color: var(--dark-blue);
-    border-color: var(--dark-blue);
-}
-
-/* Preview Box Styling */
-.preview-box {
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    margin: auto;
-}
-
-.skin-filename {
-    font-weight: bold;
-    margin-bottom: 15px;
-}
-
-.preview-box{
-    width:100%;
-}
-#previewContent{
-    overflow:auto;
-}
-
-.preview-box div {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    overflow: hidden;
-    width: 100%;
-    height: 100% ;
-    overflow-x: hidden;
-    overflow-y: auto;
-    text-align: justify;
-}
-
-.preview-box img,
-.preview-box .title,
-.preview-box .body {
-    display: block;
-    margin: 0 auto;
-    width: 100%;
-}
-
-.pagination-section {
-    align-items: center;
-}
-
-
-
-    
-.popup {
-    color: var(--navy-blue);
-}
-
-.btn-toolbar {
-    padding-left: 60px;
-    padding-right: 60px;
-}
-
-/*wyswig*/
-#wysiwyg {
-    max-width: 600px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
-}
-
-.title-section,
-.toggle-preview {
-    padding: 10px;
-    display: flex;
-    align-items: center;
-}
-
-.toggle-preview {
-    padding: 10px;
-    display: flex;
-    align-items: center;
-}
-/* 
-.btns {
-    padding: 0.3em;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    border-bottom: 1px solid #EFEFEF;
-} */
-
-.category {
-    display: flex;
-    align-items: center;
-    padding: 0 4px;
-    border-right: 1px solid #EFEFEF;
-}
-/* 
-button,
-select,
-input {
-    background-color: white;
-    border: none;
-    padding: 5px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-right: 5px;
-}
-
-    input[type="color"] {
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-    }
- */
-.option {
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-}
-
-    .option label {
-        font-size: 16px;
-        color: var(--dark-blue);
-    }
-
-.toggle-switch {
-    width: 50px;
-    height: 24px;
-    position: relative;
-    appearance: none;
-    background-color: var(--navy-blue);
-    border-radius: 15px;
-    cursor: pointer;
-    outline: none;
-    transition: background-color 0.3s;
-}
-
-/*popup 3 css*/
-#titleInput {
-    padding: 20px;
-    background-color: var(--light-blue);
-    outline: none;
-    border: none;
-    resize: vertical;
-    overflow: auto;
-}
-
-#bodyInput {
-    padding: 20px;
-    background-color: var(--light-blue);
-    outline: none;
-    border: none;
-    resize: vertical;
-    overflow: auto;
-    height: 150px;
-}
-
-#preview {
-    border: 1px solid #EFEFEF;
-    border-radius: 4px;
-}
-
-
-</style>
-
-
-@{
-    var testPopupTitle = "<p class='mb-0' style='color:yellow;font-size:16px;'>Popup Title HTML</p>";
-
-    var testPopupBody = @"
-                            <font color=""#000000"" size=""3"" face=""Arial""><table style=""WIDTH: 148pt; BORDER-COLLAPSE: collapse"" cellspacing=""0"" cellpadding=""0"" width=""198"" border=""0""><colgroup><col style=""WIDTH: 101pt; mso-width-source: userset; mso-width-alt: 4937"" width=""135""><col style=""WIDTH: 47pt; mso-width-source: userset; mso-width-alt: 2304"" width=""63""><tbody><tr style=""HEIGHT: 12pt"" height=""16""><td class=""xl68"" style=""BORDER-TOP: windowtext 0.5pt solid; HEIGHT: 12pt; BORDER-RIGHT: windowtext 0.5pt solid; WIDTH: 148pt; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext 0.5pt solid; BACKGROUND-COLOR: transparent"" height=""16"" width=""198"" colspan=""2""><strong><font size=""2"" face=""Calibri"">WIP Status</font></strong></td></tr><tr style=""HEIGHT: 12pt"" height=""16""><td class=""xl66"" style=""BORDER-TOP: windowtext; HEIGHT: 12pt; BORDER-RIGHT: windowtext 0.5pt solid; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext 0.5pt solid; BACKGROUND-COLOR: transparent"" height=""16""><font size=""2"" face=""Calibri"">Opening prior</font></td><td class=""xl67"" style=""BORDER-TOP: windowtext; BORDER-RIGHT: windowtext 0.5pt solid; WIDTH: 47pt; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext; BACKGROUND-COLOR: transparent"" width=""63"" align=""right""><font size=""2"" face=""Segoe UI"">880 222</font></td></tr><tr style=""HEIGHT: 12pt"" height=""16""><td class=""xl66"" style=""BORDER-TOP: windowtext; HEIGHT: 12pt; BORDER-RIGHT: windowtext 0.5pt solid; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext 0.5pt solid; BACKGROUND-COLOR: transparent"" height=""16""><font face=""Calibri""><font size=""2"">In-Cycle Prior month&nbsp; </font></font></td><td class=""xl67"" style=""BORDER-TOP: windowtext; BORDER-RIGHT: windowtext 0.5pt solid; WIDTH: 47pt; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext; BACKGROUND-COLOR: transparent"" width=""63"" align=""right""><font size=""2"" face=""Segoe UI"">644 868</font></td></tr><tr style=""HEIGHT: 12pt"" height=""16""><td class=""xl66"" style=""BORDER-TOP: windowtext; HEIGHT: 12pt; BORDER-RIGHT: windowtext 0.5pt solid; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext 0.5pt solid; BACKGROUND-COLOR: transparent"" height=""16""><font size=""2"" face=""Calibri"">% in-cycle</font></td><td class=""xl69"" style=""BORDER-TOP: windowtext; BORDER-RIGHT: windowtext 0.5pt solid; WIDTH: 47pt; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext; BACKGROUND-COLOR: #00b050"" width=""63"" align=""right""><font size=""2"" face=""Segoe UI"">73%</font></td></tr><tr style=""HEIGHT: 12pt"" height=""16""><td class=""xl66"" style=""BORDER-TOP: windowtext; HEIGHT: 12pt; BORDER-RIGHT: windowtext 0.5pt solid; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext 0.5pt solid; BACKGROUND-COLOR: transparent"" height=""16""><font size=""2"" face=""Calibri"">Out-Cycle Prior</font></td><td class=""xl67"" style=""BORDER-TOP: windowtext; BORDER-RIGHT: windowtext 0.5pt solid; WIDTH: 47pt; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext; BACKGROUND-COLOR: transparent"" width=""63"" align=""right""><font size=""2"" face=""Segoe UI"">141 710</font></td></tr><tr style=""HEIGHT: 12pt"" height=""16""><td class=""xl66"" style=""BORDER-TOP: windowtext; HEIGHT: 12pt; BORDER-RIGHT: windowtext 0.5pt solid; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext 0.5pt solid; BACKGROUND-COLOR: transparent"" height=""16""><font size=""2"" face=""Calibri"">Opening Current</font></td><td class=""xl67"" style=""BORDER-TOP: windowtext; BORDER-RIGHT: windowtext 0.5pt solid; WIDTH: 47pt; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext; BACKGROUND-COLOR: transparent"" width=""63"" align=""right""><font size=""2"" face=""Segoe UI"">786 466</font></td></tr><tr style=""HEIGHT: 12pt"" height=""16""><td class=""xl66"" style=""BORDER-TOP: windowtext; HEIGHT: 12pt; BORDER-RIGHT: windowtext 0.5pt solid; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext 0.5pt solid; BACKGROUND-COLOR: transparent"" height=""16""><font size=""2"" face=""Calibri"">Target</font></td><td class=""xl67"" style=""BORDER-TOP: windowtext; BORDER-RIGHT: windowtext 0.5pt solid; WIDTH: 47pt; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext; BACKGROUND-COLOR: transparent"" width=""63"" align=""right""><font size=""2"" face=""Segoe UI"">393 233</font></td></tr></tbody></colgroup></table></font>
-                            ";
-
-    var popupSkin = $"{LaunchSettingsHelper.GetBaseAddressForImages()}/images/others/modules/skins/Popup_Skin_Default.png";
-
-
-    var Surveys = new List<ModulePSTDataViewModel>()
-    {
-        new ModulePSTDataViewModel{ Id = 1, HeaderText = "Survey 1"},
-        new ModulePSTDataViewModel{ Id = 1, HeaderText = "Survey 2 but long long long text here!!! Just long"},
-    };
-
-
-}
-
-<script>
-    const popupTitleEditor = document.getElementById('PopupTextHeader');
-    const popupBodyEditor = document.getElementById('PopupTextBody');
-</script>
-
 <div class="container-fluid">
     <!-- Breadcrumb Component -->
     @await Component.InvokeAsync("Breadcrumbs", new { page = ModulesPages.PopupAddNew })
@@ -232,40 +24,40 @@ input {
                 <!-- Left Navigation Side -->
                 <div class="col module-wizard-link-nav" id="ModuleLeftNavLinkCol">
                     <div id="ModuleLeftNavLinksContainer" class="mt-4">
-                        <a class="module-left-nav-link T-1 active" id="LinkTabLink-1" onclick="NavigateToTab(this.id, 1)">
-                            Link Type<i class="bi bi-dot popup-nav-link-dot T-1 hidden"></i>
+                        <a class="module-left-nav-link T-1 active" id="LinkTabLink-1" onclick="NavigateToPopupTab(this.id, 1)">
+                            Link Type<i class="bi bi-dot module-nav-link-dot T-1 hidden"></i>
                         </a>
-                        <a class="module-left-nav-link T-2" id="SkinTabLink-2" onclick="NavigateToTab(this.id, 2)">
-                            Skin & Icons<i class="bi bi-dot popup-nav-link-dot T-2 hidden"></i>
+                        <a class="module-left-nav-link T-2" id="SkinTabLink-2" onclick="NavigateToPopupTab(this.id, 2)">
+                            Skin & Icons<i class="bi bi-dot module-nav-link-dot T-2 hidden"></i>
                         </a>
-                        <a class="module-left-nav-link T-3" id="TextsTabLink-3" onclick="NavigateToTab(this.id, 3)">
-                            Texts<i class="bi bi-dot popup-nav-link-dot T-3 hidden"></i>
+                        <a class="module-left-nav-link T-3" id="TextsTabLink-3" onclick="NavigateToPopupTab(this.id, 3)">
+                            Texts<i class="bi bi-dot module-nav-link-dot T-3 hidden"></i>
                         </a>
-                        <a class="module-left-nav-link T-4" id="TimesTabLink-4" onclick="NavigateToTab(this.id, 4)">
-                            Times<i class="bi bi-dot popup-nav-link-dot T-4 hidden"></i>
+                        <a class="module-left-nav-link T-4" id="TimesTabLink-4" onclick="NavigateToPopupTab(this.id, 4)">
+                            Times<i class="bi bi-dot module-nav-link-dot T-4 hidden"></i>
                         </a>
-                        <a class="module-left-nav-link T-5" id="DisplaysTabLink-5" onclick="NavigateToTab(this.id, 5)">
-                            Displays<i class="bi bi-dot popup-nav-link-dot T-5 hidden"></i>
+                        <a class="module-left-nav-link T-5" id="DisplaysTabLink-5" onclick="NavigateToPopupTab(this.id, 5)">
+                            Displays<i class="bi bi-dot module-nav-link-dot T-5 hidden"></i>
                         </a>
-                        <a class="module-left-nav-link T-6" id="RepeatTabLink-6" onclick="NavigateToTab(this.id, 6)">
-                            Repeat<i class="bi bi-dot popup-nav-link-dot T-6 hidden"></i>
+                        <a class="module-left-nav-link T-6" id="RepeatTabLink-6" onclick="NavigateToPopupTab(this.id, 6)">
+                            Repeat<i class="bi bi-dot module-nav-link-dot T-6 hidden"></i>
                         </a>
-                        <a class="module-left-nav-link T-7" id="FeedbackTabLink-7" onclick="NavigateToTab(this.id, 7)">
-                            Feedback<i class="bi bi-dot popup-nav-link-dot T-7 hidden"></i>
+                        <a class="module-left-nav-link T-7" id="FeedbackTabLink-7" onclick="NavigateToPopupTab(this.id, 7)">
+                            Feedback<i class="bi bi-dot module-nav-link-dot T-7 hidden"></i>
                         </a>
-                        <a class="module-left-nav-link T-8" id="TargetUsersTabLink-8" onclick="NavigateToTab(this.id, 8)">
-                            Target Users<i class="bi bi-dot popup-nav-link-dot T-8 hidden"></i>
+                        <a class="module-left-nav-link T-8" id="TargetUsersTabLink-8" onclick="NavigateToPopupTab(this.id, 8)">
+                            Target Users<i class="bi bi-dot module-nav-link-dot T-8 hidden"></i>
                         </a>
-                        <a class="module-left-nav-link T-9" id="ExposureSummaryTabLink-9" onclick="NavigateToTab(this.id, 8)">
-                            Exposure Summary<i class="bi bi-dot popup-nav-link-dot T-9 hidden"></i>
+                        <a class="module-left-nav-link T-9" id="ExposureSummaryTabLink-9" onclick="NavigateToPopupTab(this.id, 8)">
+                            Exposure Summary<i class="bi bi-dot module-nav-link-dot T-9 hidden"></i>
                         </a>
                     </div>
                 </div>
                 <!-- Main Content -->
                 <div class="col main-content flex-wrap" id="ModuleWizardMain">
-                    <div class="form-horizontal" id="popupForm">
+                    <div class="form-horizontal theme-txt-clr" id="popupForm">
                         <!-- Link Type Tab -->
-                        <div id="LinkTypeTab-1" class="add-new-popup popup flex-wrap align-content-center justify-content-center mb-3 hidden">
+                        <div id="LinkTypeTab-1" class="popup-wizard-tabs flex-wrap align-content-center justify-content-center mb-3 hidden">
                             <h5 class="fw-bold mt-4 text-center">1. Popup Link Type</h5>
                             <p class="custom-p mt-4 fs-13 text-center">Select what the popup will link to when clicked by the user.</p>
                             <p class="custom-p fs-13 text-center">The popup can launch any of the below options when clicked on or be linked to nothing.</p>
@@ -274,7 +66,7 @@ input {
                                 <div class="col-lg-3 align-content-center">
                                     <p class="fw-bold text-center theme-txt-clr">Link Type</p>
                                 </div>
-                                <div class="col-lg-9" id="ModuleLinkTypeContainer">
+                                <div class="col-lg-9" id="ModuleLinkTypeContainer" style="max-width:700px;">
                                     <div class="btn-group mb-2 w-auto overview-filter-btn-group">
                                         <button class="btn custom-btn-group link-type-btn btn-group-active" onclick="PopupLinkTypeClick(this.id)" id="NoLink">No Link</button>
                                         <button class="btn custom-btn-group link-type-btn" onclick="PopupLinkTypeClick(this.id)" id="ImageLink">Image</button>
@@ -303,7 +95,7 @@ input {
                                     <!-- Website Textbox -->
                                     <div class="w-100 mt-2 p-0 d-flex hidden" id="LinkTypeUrl">
                                         <input type="text" class="custom-input-text" id="LinkTypeUrlInput" />
-                                        <button class="btn btn-success content-preview-btn custom-btn-sm ms-3" id="ModuleContentPreviewUpload" onclick="PreviewWebsite()">Preview</button>
+                                        <button class="btn btn-success content-preview-btn custom-btn-sm ms-3" id="ModuleContentPreviewUpload" onclick="PreviewWebsite('LinkTypeUrlInput')">Preview</button>
                                     </div>
                                     <!-- Email Inputs Section -->
                                     <div class="w-fit-content border border-light-1 p-3 pe-5 mb-3 hidden" id="LinkTypeEmail">
@@ -361,7 +153,7 @@ input {
                             </div>
                         </div>
                         <!-- Skins & Icons Tab -->
-                        <div id="SkinsTab-2" class="add-new-popup popup flex-wrap justify-content-center mb-4 ps-2">
+                        <div id="SkinsTab-2" class="popup-wizard-tabs flex-wrap justify-content-center mb-4 ps-2">
                             <h5 class="fw-bold mt-4 text-center">2. Popup Skin & Icons</h5>
                             <p class="custom-p mt-4 fs-13 text-center">Please select the skin & icons for this popup</p>
                             <div class="mt-3" id="PopupSkinContainer">
@@ -450,7 +242,7 @@ input {
                             </div>
                         </div>
                         <!-- Texts Tab -->
-                        <div id="TextsTab-3" class="add-new-popup popup flex-wrap  text-center align-content-center justify-content-center mb-3">
+                        <div id="TextsTab-3" class="popup-wizard-tabs flex-wrap  text-center align-content-center justify-content-center mb-3">
                             <h5 class="fw-bold mt-4">3. Popup Title & Body Texts</h5>
                             <p class="custom-p mt-2 fs-13 text-center">Enter popup title and body texts.</p>
                             <!-- Title input-->
@@ -486,7 +278,7 @@ input {
                             </div>
                         </div>
                         <!-- Times Tab -->
-                        <div id="TimesTab-4" class="add-new-popup popup flex-wrap  text-center align-content-center justify-content-center mb-3">
+                        <div id="TimesTab-4" class="popup-wizard-tabs flex-wrap  text-center align-content-center justify-content-center mb-3">
                             <h5 class="fw-bold module-heading-theme mt-4">4. Popup Effective Dates & Timeslots</h5>
                             <p class="custom-p mt-2 fs-13 text-center">Please define the date and time range that the Popup must display</p>
                             <p class="custom-p mt-4 fs-13 text-center">
@@ -506,7 +298,7 @@ input {
                                     <p class="fw-bold fs-16 text-center">Timeslots</p>
                                     <div class="mt-4">
                                     @{
-                                        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Form/TimePicker.cshtml");
+                                        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Form/TimeRangePicker.cshtml");
                                     }
                                     </div>
                                 </div>
@@ -514,7 +306,7 @@ input {
                             
                         </div>
                         <!-- Displays Tab -->
-                        <div id="DisplaysTab-5" class="add-new-popup popup flex-wrap  text-center align-content-center justify-content-center mb-5">
+                        <div id="DisplaysTab-5" class="popup-wizard-tabs flex-wrap  text-center align-content-center justify-content-center mb-5">
                             <h5 class="fw-bold mt-4">5. Popup Displays</h5>
                             <p class="custom-p mt-4 fs-13 text-center">Please define how much flexibilitythe user is allowed when the Popup arrives.</p>
                             <div class="row mt-5">
@@ -572,7 +364,7 @@ input {
                             </div>
                         </div>
                         <!-- Repeat Tab -->
-                        <div id="RepeatTab-6" class="add-new-popup popup flex-wrap  text-center align-content-center justify-content-center mb-3 p-5">
+                        <div id="RepeatTab-6" class="popup-wizard-tabs flex-wrap  text-center align-content-center justify-content-center mb-3 p-5">
                             <h5 class="fw-bold mt-4">6. Popup Repeat</h5>
                             <p class="custom-p mt-4 fs-13 text-center">Please select repeate frequency of the Popup.</p>
                             <p class="custom-p mt-4 fs-13 text-center">
@@ -627,7 +419,7 @@ input {
                             </div>
                         </div>
                         <!-- Feedback Tab -->
-                        <div id="FeedbackTab-7" class="add-new-popup popup flex-wrap text-center align-items-center justify-content-center mb-3 mt-2">
+                        <div id="FeedbackTab-7" class="popup-wizard-tabs flex-wrap text-center align-items-center justify-content-center mb-3 mt-2">
                             <h5 class="fw-bold mt-4">7. Popup Feedback Request</h5>
                             <p class="custom-p mt-4 fs-13 text-center">Select popup feedback preferences: Like/Dislike and/or comment.</p>
                             <div class="form-group row justify-content-center mt-5">
@@ -642,13 +434,13 @@ input {
                             </div>
                         </div>
                         <!-- Target Users -->
-                        <div id="TargetUserTab-8" class="add-new-popup popup flex-wrap  text-center align-content-center justify-content-center mb-3">
+                        <div id="TargetUserTab-8" class="popup-wizard-tabs flex-wrap  text-center align-content-center justify-content-center mb-3">
                             <h5 class="fw-bold mb-3 module-heading-theme">8. Popup Target Users</h5>
                             <p class="module-heading-theme">Popup target user settings.</p>
                             <!-- Add content for Popup 8 -->
                         </div>
                         <!-- Exposure Summary Tab -->
-                        <div id="ExposureSummaryTab-9" class="add-new-popup popup flex-wrap  text-center align-content-center justify-content-center mb-3">
+                        <div id="ExposureSummaryTab-9" class="popup-wizard-tabs flex-wrap  text-center align-content-center justify-content-center mb-3">
                             <h5 class="fw-bold mb-3 module-heading-theme">9. Popup Exposure Summary</h5>
                             <p class="module-heading-theme">Popup exposure summary settings.</p>
                             <!-- Add content for Popup 9 -->
@@ -660,7 +452,7 @@ input {
                                 <div class="pagination-section mt-4  flex-column flex-md-row  text-center align-content-center justify-content-center ">
                                     <button class="btn module-wizard-nav-btns hidden" id="PopupPrevTabBtn" onclick="PreviousPopupTab()">Back</button>
                                     <button class="btn module-wizard-nav-btns" id="PopupNextTabBtn" onclick="NextPopupTab()">Next</button>
-                                    <button class="btn hidden" id="AddPopupSubmitBtn">Submit</button>
+                                    <button class="btn module-new-submit-btn hidden" id="AddPopupSubmitBtn">Submit</button>
                                 </div>
                             </div>
                         </div>
@@ -744,576 +536,15 @@ input {
 
 
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<script>
+<script src="~/js/modules/popup.js"></script>
 
-    let currentPopupTab = 1;
-    let totalPopupTabs = 9;
+<script>
 
     $(document).ready(function ()
     {
-        HideAllTabs();
+        HideAllPopupTabs();
         IntilizeSkinsPreview();
         PopupRepeatInitailExpirationDate();
     });
     
-    function IntilizeSkinsPreview()
-    {
-        HideShowElementVisibity("#PopupSkinPreview", HideShow.HIDE);
-
-        HideShowElementVisibity("#PopupFeedbackContents", HideShow.HIDE);
-        HideShowElementVisibity("#PopupFeedbackWindow", HideShow.HIDE);
-    }
-
-    function LoadDefaultSkinPreview()
-    {
-        $("#PopupBodyPreview").css("background", "url(@popupSkin)"); 
-        $("#SkinFileName").text("Popup_Skin_Default.png");
-        $("#PopupBodyPreviewFeedback").css("background", "url(@popupSkin)");
-    }
-
-    function NavigateToTab(navLinkId, tabLinkNumber)
-    {
-        var canNavigate = !$(`#${navLinkId}`).hasClass("active") && $(`#${navLinkId}`).hasClass("visited-nav-link");
-        if(canNavigate)
-        {
-            CustomNavigateToTab(tabLinkNumber);
-            currentPopupTab = tabLinkNumber;
-        }
-    }
-
-    function PreviewWebsite()
-    {
-        var url = $("#LinkTypeUrlInput").val();
-
-        if (url == null || url.length == 0)
-        {
-            swal("Preview Error", `Please upload enter website URL`, "error");
-        }
-        else
-        {
-            window.open(url);
-        }
-    }
-
-    function HideAllTabs()
-    {
-        HideShowElement(".add-new-popup", HideShow.HIDE);
-        HideShowElement("#TimesTab-4", HideShow.SHOW);
-    }
-
-    function PopupLinkTypeClick(linkBtnId)
-    {
-        HideShowElement("#ContentUploadComponent", HideShow.HIDE);
-        HideShowElement("#LinkTypeUrl", HideShow.HIDE);
-        HideShowElement("#LinkTypeEmail", HideShow.HIDE);
-        HideShowElement("#SurveyType", HideShow.HIDE);
-
-        ClearFileUpload("PopupLinkType");
-
-        $(".link-type-btn").removeClass("btn-group-active");
-        $(`#${linkBtnId}`).addClass("btn-group-active");
-
-        var btnType = linkBtnId.toLowerCase();
-
-        if (btnType == "nolink" || btnType.includes("ticker"))
-        {
-            HideShowElement("#LinkTypeAttachment", HideShow.HIDE);
-        }
-        else
-        { 
-            HideShowElement("#LinkTypeAttachment", HideShow.SHOW);
-            $("#UploadFileTitle").removeClass("align-content-center");
-
-            var isAttachmentType = btnType.includes("image") || btnType.includes("audio") || btnType.includes("video") || btnType.includes("document") || btnType.includes("policy");
-            var isUrlType = btnType.includes("website") || btnType.includes("email");
-            
-            if (isAttachmentType)
-            {
-                HideShowElement("#ContentUploadComponent", HideShow.SHOW);
-                $("#UploadFileTitle").removeClass("align-content-center");
-
-                if(btnType.includes("image"))
-                {
-                    $("#UploadFileTitle").text("Image");
-                    $("#PopupLinkTypeUploadInput").attr("accept", "image/*");
-                }
-                else if (btnType.includes("audio"))
-                {
-                    $("#UploadFileTitle").text("Audio");
-                    $("#PopupLinkTypeUploadInput").attr("accept", "audio/*");
-                }
-                else if (btnType.includes("video"))
-                {
-                    $("#UploadFileTitle").text("Video");
-                    $("#PopupLinkTypeUploadInput").attr("accept", "video/*");
-                }
-                else if (btnType.includes("document"))
-                {
-                    $("#UploadFileTitle").text("Document");
-                    $("#PopupLinkTypeUploadInput").attr("accept", ".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf");
-                }
-                else if (btnType.includes("policy"))
-                {
-                    $("#UploadFileTitle").text("Policy (PDF)");
-                    $("#PopupLinkTypeUploadInput").attr("accept", ".pdf");
-                }
-            }
-            else if (btnType.includes("website"))
-            {
-                HideShowElement("#LinkTypeUrl", HideShow.SHOW);
-                $("#UploadFileTitle").text("Website")
-                $("#UploadFileTitle").addClass("align-content-center");
-
-            }
-            else if(btnType.includes("email"))
-            {
-                HideShowElement("#LinkTypeEmail", HideShow.SHOW);
-                $("#UploadFileTitle").text("Email")
-            }
-            else if (btnType.includes("survey"))
-            {
-                HideShowElement("#SurveyType", HideShow.SHOW);
-                $("#UploadFileTitle").text("Survey");
-            }
-        }
-    }
-
-    function SurveyLinkTypeClick(btnId)
-    {
-        $(".module-link-type").removeClass("btn-group-active");
-        $(`#${btnId}`).addClass("btn-group-active");
-
-        btnId = btnId.toLowerCase();
-        
-        if (btnId.includes("active"))
-        {
-            HideShowElement("#SelectSurveyLinkType1", HideShow.SHOW);
-            HideShowElement("#SelectSurveyLinkType2", HideShow.HIDE);
-        }
-        else if (btnId.includes("pending"))
-        {
-            HideShowElement("#SelectSurveyLinkType1", HideShow.HIDE);
-            HideShowElement("#SelectSurveyLinkType2", HideShow.SHOW);
-        }
-    }
-
-    function CheckAllEmailsListValid(emailList)
-    {
-        var emails = emailList.split(";");
-        for(let i=0; i < emails.length; i++)
-        {
-            if(!CheckEmail(emails[i]))
-                return false;
-        }
-        return true;
-    }
-
-    function IsLinksTabValid()
-    {
-        var linkTypeBtn = $(".link-type-btn.btn-group-active");
-
-        var btnId = linkTypeBtn.attr("id").toLowerCase();
-        var btnText = $(linkTypeBtn).text();
-        
-        var isAttachmentType = btnId.includes("image") || btnId.includes("audio") || btnId.includes("video") || btnId.includes("document") || btnId.includes("policy");
-
-        if (btnId.includes("nolink") || btnId.includes("ticker"))
-        {
-            return true;
-        }
-        else if(isAttachmentType)
-        {
-            var uploadFileUrl = $("#PopupLinkType_UploadFileURL").val();
-            if (StringNullOrEmpty(uploadFileUrl))
-            {
-                swal("Popup Link Error", `Please upload ${btnText} file`, "error");
-                return false;
-            }
-            return true;
-        }
-        else if (btnId.includes("website"))
-        {
-            if (IsEmptyInput("#LinkTypeUrlInput"))
-            {
-                swal("Popup Link Error", `Please upload enter website URL`, "error");
-                return false;
-            }
-        }
-        else if (btnId.includes("email"))
-        {
-            $("#LinkTypeEmailValid").text("");
-            $("#LinkTypeCCEmailValid").text("");
-            $("#LinkTypeEmailSubjectValid").text("");
-            $("#LinkTypeEmailMessageValid").text("");
-
-            var emails = $("#LinkTypeEmailInput").val();
-            var ccEmails = $("#LinkTypeCCEmailInput").val();
-            var emailsValid = true;
-
-            if (IsEmptyInput("#LinkTypeEmailInput") || !CheckAllEmailsListValid(emails))
-            {
-                $("#LinkTypeEmailValid").text("please enter valid emails!");
-                emailsValid = false;
-            }
-            if (!IsEmptyInput("#LinkTypeCCEmailInput") && !CheckAllEmailsListValid(ccEmails))
-            {
-                $("#LinkTypeCCEmailValid").text("please enter valid emails!");
-                emailsValid = false;
-            }
-            if (IsEmptyInput("#LinkTypeEmailSubjectInput"))
-            {
-                $("#LinkTypeEmailSubjectValid").text("please enter subject!");
-                emailsValid = false;
-            }
-            if (IsEmptyInput("#LinkTypeEmailMessageInput"))
-            {
-                $("#LinkTypeEmailMessageValid").text("please enter email message!");
-                emailsValid = false;
-            }
-
-            if (!emailsValid)
-            {
-                swal("Popup Link Error", `Please enter valid emails information.`, "error");
-                return false;
-            }
-            return true;
-        }
-        else if (btnId.includes("survey"))
-        {
-            var surveyTypeTxt = $(".module-link-type.btn-group-active").text().toLowerCase();
-
-            var invalidSurvey = (surveyTypeTxt.includes("active")) ? ($("#SelectSurveyLinkType1").val() == null || $("#SelectSurveyLinkType1").val() == 0) :
-                                                                     ($("#SelectSurveyLinkType2").val() == null || $("#SelectSurveyLinkType2").val() == 0);
-
-            if (invalidSurvey)
-            {
-                swal("Popup Link Error", `Please select an existing survey to link this Popup to.`, "error");
-                return false;
-            }
-            return true;
-        }
-        return false;
-    }
-
-    function PopupSkinTypeSelect(id)
-    {
-        id = id.toLowerCase();
-        if (id.includes("defaultskin"))
-        {
-            LoadDefaultSkinPreview();
-            HideShowElementVisibity("#PopupSkinPreview", HideShow.SHOW);
-            HideShowElement("#PopupSkinImage", HideShow.HIDE);
-        }
-        else
-        {
-            HideShowElement("#PopupSkinImage", HideShow.SHOW);
-            UpdatePopupSkinPreview();
-            //$(`#PopupSkinImage option[value="0"]`).attr("selected", "selected");
-        }
-    }
-
-    function UpdatePopupSkinPreview()
-    {
-        var skinImgSrc = $("#PopupSkinImage").val();
-
-        if(skinImgSrc != "0")
-        {
-            $("#PopupBodyPreview").css("background", `url(${skinImgSrc})`); 
-            $("#PopupBodyPreviewFeedback").css("background", `url(${skinImgSrc})`);
-            $("#SkinFileName").text($("#PopupSkinImage option:selected").text());
-        }
-    }
-
-    function PopupIconOptionSelect(iconTypeId)
-    {
-        HideShowElement("#PopupStandardIconsContainer", HideShow.HIDE);
-        HideShowElement("#PopupCustomIconsContainer", HideShow.HIDE);
-        HideShowElement("#PopupIconImg", HideShow.SHOW);
-        HideShowElement("#PopupIconImgFeedback", HideShow.SHOW);
-
-        iconTypeId = iconTypeId.toLowerCase();
-        if (iconTypeId.includes("standard"))
-        {
-            HideShowElement("#PopupStandardIconsContainer", HideShow.SHOW);
-            
-            if($('input:radio[name="PopupStandardIconOption"]:checked').length == 0)
-            {
-                $("#PopupStandardIconInfo").prop("checked", true);
-                PopupStandardIconSelect("PopupStandardIconInfo");
-            }
-        }
-        else if (iconTypeId.includes("custom"))
-        {
-            HideShowElement("#PopupCustomIconsContainer", HideShow.SHOW);
-            $("#CustomIconInput").attr("accept", "image/*");
-
-            var customIconUrl = $("#PopupCustomIconUploadFileURL").val();
-            SetPopupIcon(customIconUrl);
-        }
-        else if (iconTypeId.includes("none"))
-        {
-            HideShowElement("#PopupIconImg", HideShow.HIDE);
-            HideShowElement("#PopupIconImgFeedback", HideShow.HIDE);
-        }
-    }
-
-    function SetPopupIcon(iconImgUrl)
-    {
-        if (!StringNullOrEmpty(iconImgUrl))
-        {
-            $("#PopupIconImg").attr("src", iconImgUrl);
-            $("#PopupIconImgFeedback").attr("src", iconImgUrl);
-        }
-    }
-
-    function PopupStandardIconSelect(iconId)
-    {
-        iconId = iconId.toLowerCase();
-        
-        var iconUrl = "";
-        var baseAddress = "@LaunchSettingsHelper.GetBaseAddressForImages()";
-
-        if (iconId.includes("info")) iconUrl = `${baseAddress}/images/icons/modules/popup/icon-info.png`;
-        if (iconId.includes("warning")) iconUrl = `${baseAddress}/images/icons/modules/popup/icon-warning.png`;
-        if (iconId.includes("error")) iconUrl = `${baseAddress}/images/icons/modules/popup/icon-error.png`;
-
-        SetPopupIcon(iconUrl);
-    }
-
-    function UpdatePopupIconCustom(customImgUrl, fileData)
-    {
-        GetImageDimensions(fileData).then(dimensions =>
-        {
-            if (dimensions.Width == 48 && dimensions.Width == 48)
-            {
-                SetPopupIcon(customImgUrl);
-            }
-            else
-            {
-                swal("Popup Icon Error", "Please upload image that is 48x48 pixels in dimension.", "error");
-                ClearFileUpload("PopupCustomIcon");
-            }
-        })
-        .catch(error =>
-        {
-                console.error('Error getting image dimensions:', error);
-                ClearFileUpload("PopupCustomIcon");
-        });
-        
-    }
-
-    function IsSkinsTabValid()
-    {
-        var atLeastOneSkinOptionSelect = $('input:radio[name="PopupSkinOption"]:checked').length > 0;
-        var atLeastOneIconOptionSelect = $('input:radio[name="PopupIconOption"]:checked').length > 0;
-        if (!atLeastOneSkinOptionSelect || !atLeastOneIconOptionSelect)
-        {
-            if (!atLeastOneSkinOptionSelect && atLeastOneIconOptionSelect)
-                swal("Popup Skins Error", "Please select default or custom skin option.", "error");
-            
-            else if (atLeastOneSkinOptionSelect && !atLeastOneIconOptionSelect)
-                swal("Popup Icon Error", "Please select at least one icon option.", "error");
-
-            else if (!atLeastOneSkinOptionSelect && !atLeastOneIconOptionSelect)
-                swal("Popup Skin & Icon Error", "Please select popup skin and popup icon.", "error");
-
-            return false;
-        }
-        else
-        {
-            var selectedSkinOptionId = $('input:radio[name="PopupSkinOption"]:checked').attr("id").toLowerCase();
-            var selectedIconOptionId = $('input:radio[name="PopupIconOption"]:checked').attr("id").toLowerCase();
-
-            var errorsCount = 0;
-            var combinedErrorMessage = "";
-            if (selectedSkinOptionId.includes("customskin"))
-            {
-                var selectedSkinValue = $("#PopupSkinImage option:selected").val();
-                if(selectedSkinValue == 0)
-                {
-                    combinedErrorMessage = "Please select custom skin.";
-                    errorsCount++;
-                }
-            }
-            if (selectedIconOptionId.includes("custom"))
-            {
-                if (StringNullOrEmpty($("#PopupCustomIcon_UploadFileURL").val()))
-                {
-                    combinedErrorMessage += "Please select custom Icon.";
-                    errorsCount++;
-                }
-            }
-            if (errorsCount > 0)
-            {
-                swal("Popup Skin & Icon Error", combinedErrorMessage, "error");
-                return false;
-            }
-        }
-        return true;
-    }
-
-    function ShowHidePopupText(sliderId, textType)
-    {
-        var divPopupTextId = (textType == "title") ? "#PopupBodyPreviewTitleText" : "#PopupBodyPreviewTextBody";
-        var htmlEditorId = (textType == "title") ? "PopupTextHeader" : "PopupTextBody";
-
-        if ($(`#${sliderId}`).is(':checked'))
-        {
-            UpdatePreviews(htmlEditorId, "True", divPopupTextId);
-        }
-        else
-        {
-            $(divPopupTextId).html("");
-            $(`${divPopupTextId}Feedback`).html("");
-        }
-    }
-
-    function IsPopupTextsTabValid()
-    {
-        $("#LinkTypeTextsTitleError").text("");
-        $("#LinkTypeTextsBodyError").text("");
-
-        var titleText = $("#PopupTextHeader").text();
-        var bodyText = $("#PopupTextBody").text();
-
-        var isValid = true;
-
-        if(StringNullOrEmpty(titleText))
-        {
-            $("#LinkTypeTextsTitleError").text("enter popup title text");
-            isValid = false;
-        }
-        if (StringNullOrEmpty(bodyText))
-        {
-            $("#LinkTypeTextsBodyError").text("enter popup title body");
-            isValid = false;
-        }
-
-        if (!isValid)
-        {
-            swal("Popup Texts Error", "Enter Popup Texts", "error");
-        }
-
-        return isValid;
-    }
-
-    function TogglePopupDisplaySettings()
-    {
-        if (IsCheckboxChecked("DismissablePopupToggle"))
-        {
-            HideShowElement("#PopupDismissIcon", HideShow.SHOW);
-            HideShowElement("#PopupDismissIconFeedback", HideShow.SHOW);
-        }
-        else
-        {
-            HideShowElement("#PopupDismissIcon", HideShow.HIDE);
-            HideShowElement("#PopupDismissIconFeedback", HideShow.HIDE);
-        }
-        if (IsCheckboxChecked("SnoozePopupToggle"))
-        {
-            HideShowElement("#PopupSnoozeBtn", HideShow.SHOW);
-            HideShowElement("#PopupSnoozeBtnFeedback", HideShow.SHOW);
-        }
-        else
-        {
-            HideShowElement("#PopupSnoozeBtn", HideShow.HIDE);
-            HideShowElement("#PopupSnoozeBtnFeedback", HideShow.HIDE);
-        }
-    }
-
-    function SetPopupPosition(popupPosId)
-    {
-        $(".popup-pos").removeClass("active");
-        $(`#${popupPosId}`).addClass("active");
-    }
-
-    function PopupRepeatInitailExpirationDate()
-    {
-        $("#DailyRepeatExpiryDate").flatpickr({
-            dateFormat: "Y-m-d", // Internal format (ISO 8601)
-            altInput: true,      // Display formatted date
-            altFormat: "l, d F Y", // Custom display format (e.g., Thursday, 03 October 2024)
-            minDate: "today",    // Disable past dates
-            defaultDate: "today",  // Set initial date to today
-            allowInput: true
-        });
-
-        $("#WeeklyRepeatExpiryDate").flatpickr({
-            dateFormat: "Y-m-d", // Internal format (ISO 8601)
-            altInput: true,      // Display formatted date
-            altFormat: "l, d F Y", // Custom display format (e.g., Thursday, 03 October 2024)
-            minDate: "today",    // Disable past dates
-            defaultDate: "today",  // Set initial date to today
-            allowInput: true
-        });
-    }
-
-    function PopupRepeatOptionSelect(id)
-    {
-        HideShowElement("#PopupRepeatDailyContainer", HideShow.HIDE);
-        HideShowElement("#PopupRepeatWeeklyContainer", HideShow.HIDE);
-        
-        id = id.toLowerCase();
-        if(id.includes("daily"))
-        {
-            HideShowElement("#PopupRepeatDailyContainer", HideShow.SHOW);
-        }
-        else if(id.includes("weekly"))
-        {
-            HideShowElement("#PopupRepeatWeeklyContainer", HideShow.SHOW);
-        }
-    }
-
-    function IsPopupRepeatTabValid()
-    {
-        var atLeastOneSelected = $('input:radio[name="PopupRepeatOption"]:checked').length > 0;
-
-        if (!atLeastOneSelected)
-        {
-            swal("Popup Repeat Error", "Please select at least one Popup repeat setting.", "error");
-            return false;
-        }
-        else
-        {
-            var selectedRepeatOptionId = $('input:radio[name="PopupRepeatOption"]:checked').attr("id").toLowerCase();
-            if (selectedRepeatOptionId.includes("daily") || selectedRepeatOptionId.includes("weekly"))
-            {
-                if (selectedRepeatOptionId.includes("daily") && StringNullOrEmpty($("#DailyRepeatExpiryDate").val()))
-                {
-                    swal("Popup Repeat Error", "Please select enter expiration date.", "error");
-                    return false;
-                }
-                if (selectedRepeatOptionId.includes("weekly") && StringNullOrEmpty($("#WeeklyRepeatExpiryDate").val()))
-                {
-                    swal("Popup Repeat Error", "Please select enter expiration date.", "error");
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    function UpdatePopupFeedback()
-    {
-        
-        if (IsCheckboxChecked("FeedbackLikeDislikeToggle") || IsCheckboxChecked("FeedbackCommentToggle"))
-        {
-            HideShowElementVisibity("#PopupFeedbackContents", HideShow.SHOW);
-            HideShowElementVisibity("#PopupFeedbackWindow", HideShow.SHOW);
-            
-            let hideShowDislike = IsCheckboxChecked("FeedbackLikeDislikeToggle") ? HideShow.SHOW : HideShow.HIDE;
-            HideShowElementVisibity("#PopupFeedbackLikeDislikeIcons", hideShowDislike);
-            HideShowElement("#FeedbackLikeDislikeTxt", hideShowDislike);
-
-            let hideShowComment = IsCheckboxChecked("FeedbackCommentToggle") ? HideShow.SHOW : HideShow.HIDE;
-            HideShowElementVisibity("#PopupFeedbackComment", hideShowComment);
-            HideShowElement("#FeedbackCommentTxt", hideShowComment)
-        }
-        else
-        {
-            HideShowElementVisibity("#PopupFeedbackContents", HideShow.HIDE);
-            HideShowElementVisibity("#PopupFeedbackWindow", HideShow.HIDE);
-        }
-    }
-
 </script>

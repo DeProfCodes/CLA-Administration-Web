@@ -424,9 +424,21 @@ namespace CLA_Administration_Web.Controllers
             return PartialView(AppPagesLinks.Modules.TickerDetailsPageLink, tickerDetails);
         }
         
-        public IActionResult AddNewTicker()
+        public async Task<IActionResult> AddNewTicker()
         {
-            return PartialView(AppPagesLinks.Modules.TickerAddNewPageLink);
+            var allSurveys = await _moduleService.GetAllTickersData();
+            allSurveys.ForEach(s =>
+            {
+                s.Status = ModulesHelper.GetModuleStatus(s.EffectiveFrom, s.EffectiveTo);
+            });
+
+            var addNewTickerVm = new AddNewTickerViewModel
+            {
+                ActiveSurveys = allSurveys.Where(s => s.Status.StatusType == StatusType.Active).ToList(),
+                PendingSurveys = allSurveys.Where(s => s.Status.StatusType == StatusType.Pending).ToList()
+            };
+
+            return PartialView(AppPagesLinks.Modules.TickerAddNewPageLink, addNewTickerVm);
         }
 
         #endregion

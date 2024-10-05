@@ -4,7 +4,9 @@
     var editorId = Model.EditorId;
 
     var height = !string.IsNullOrEmpty(Model.HeightPx) ? $"height:{Model.HeightPx}" : "";
+    var width = !string.IsNullOrEmpty(Model.WidthPx) ? $"width:{Model.WidthPx}" : "";
 }
+
 <!-- Toolbar -->
 <div class="editor-toolbar">
     <!-- Font Family Dropdown -->
@@ -58,7 +60,7 @@
 </div>
 
 <!-- Editable Area -->
-<div class="editor-area html-text-editor" id="@editorId" contenteditable="true" style="text-align: left;@height" oninput="UpdatePreviews(this.id, '@Model.WriteToDesitnationOnInput', '@Model.DestinationTextDivId')">
+<div class="editor-area html-text-editor" id="@editorId" contenteditable="true" style="text-align: left;@height;@width" oninput="UpdatePreviews(this.id, '@Model.WriteToDesitnationOnInput', '@Model.DestinationTextDivId')">
     
 </div>
 

@@ -138,149 +138,29 @@ function PreviewImage2(imgSrc)
     OpenImagePreviewModal2(imgSrc);
 }
 
-function EnablePopupTabForNavigating(popupTabNo)
+function CheckAllEmailsListValid(emailList)
 {
-    var popupTabs = $(".add-new-popup");
-    HideShowElement(".add-new-popup", HideShow.HIDE);
-
-    for (let i = 0; i < popupTabs.length; i++)
+    var emails = emailList.split(";");
+    for (let i = 0; i < emails.length; i++)
     {
-        var tabElementId = `#${popupTabs[i].getAttribute("id")}`;
-        var data = tabElementId.split("-");
-        
-        if(data != null && data.length >= 2)
-        {
-            var tabNumber = data[1];
-            if (tabNumber == popupTabNo)
-            {
-                var linkTab = `.module-left-nav-link.T-${tabNumber}`;
-                var dotOnTabLink = `.popup-nav-link-dot.T-${tabNumber}`;
-                
-                $(linkTab).addClass("visited-nav-link");
-                $(dotOnTabLink).removeClass("hidden");
-
-                HideShowElement(tabElementId, HideShow.SHOW);
-
-                break;
-            }
-        }
+        if (!CheckEmail(emails[i]))
+            return false;
     }
-}
-
-function SwitchPopupTab(popupTabNo)
-{
-    var popupTabs = $(".add-new-popup");
-    HideShowElement(".add-new-popup", HideShow.HIDE);
-
-    for (let i = 0; i < popupTabs.length; i++)
-    {
-        var tabElementId = `#${popupTabs[i].getAttribute("id")}`;
-        var data = tabElementId.split("-");
-        
-        if(data != null && data.length >= 2)
-        {
-            var tabNumber = data[1];
-            if (tabNumber == popupTabNo)
-            {
-                var linkTab = `.module-left-nav-link.T-${tabNumber}`;
-                var dotOnTabLink = `.popup-nav-link-dot.T-${tabNumber}`;
-                
-                $(linkTab).removeClass("visited-nav-link");
-                $(dotOnTabLink).addClass("hidden");
-
-                HideShowElement(tabElementId, HideShow.SHOW);
-
-                break;
-            }
-        }
-    }
-}
-
-function UpdatePopupTabsNavigation(popupTabNo)
-{
-    var popupLinkTabsNav = $(".module-left-nav-link");
-    $(".module-left-nav-link").removeClass("active");
-
-    for (let i = 0; i < popupLinkTabsNav.length; i++)
-    {
-        var tabLinkElementId = `#${popupLinkTabsNav[i].getAttribute("id")}`;
-        var data = tabLinkElementId.split("-");
-        
-        if(data != null && data.length >= 2)
-        {
-            var tabNumber = data[1];
-            if (tabNumber == popupTabNo)
-            {
-                $(tabLinkElementId).addClass("active");
-                break;
-            }
-        }
-    }
-}
-
-function UpdatePopupTabButtons(popupTabNo)
-{
-    var tabsCount = $(".module-left-nav-link").length;
-    if(popupTabNo == 1)
-    {
-        HideShowElement("#PopupPrevTabBtn", HideShow.HIDE);
-    }
-    if(popupTabNo > 1 && popupTabNo < tabsCount)
-    {
-        HideShowElement("#PopupPrevTabBtn", HideShow.SHOW);
-    }
-    if(popupTabNo == tabsCount)
-    {
-         HideShowElement("#PopupNextTabBtn", HideShow.HIDE);
-         HideShowElement("#AddPopupSubmitBtn", HideShow.SHOW);
-    }
-}
-
-function ValidateTab(currentTab)
-{
-    if(currentTab == 1) return IsLinksTabValid();
-    if(currentTab == 2) return IsSkinsTabValid();
-    if(currentTab == 3) return IsPopupTextsTabValid();
-    if(currentTab == 6) return IsPopupRepeatTabValid();
-
     return true;
 }
 
-function CustomNavigateToTab(popupTabNo)
+function PreviewWebsite(id)
 {
-    EnablePopupTabForNavigating(currentPopupTab);
-    SwitchPopupTab(popupTabNo);
-    UpdatePopupTabsNavigation(popupTabNo);
-    UpdatePopupTabButtons(popupTabNo);
-}
+    var url = $(`#${id}`).val();
 
-function NextPopupTab()
-{
-    if (currentPopupTab < totalPopupTabs)
+    if (url == null || url.length == 0)
     {
-        if(!ValidateTab(currentPopupTab))
-            return;
-
-        EnablePopupTabForNavigating(currentPopupTab);
-
-        currentPopupTab++;
-
-        SwitchPopupTab(currentPopupTab);
-        UpdatePopupTabsNavigation(currentPopupTab);
-        UpdatePopupTabButtons(currentPopupTab);
+        swal("Preview Error", `Please upload enter website URL`, "error");
+    }
+    else
+    {
+        window.open(url);
     }
 }
 
-function PreviousPopupTab()
-{
-    if (currentPopupTab > 1)
-    {
-        EnablePopupTabForNavigating(currentPopupTab);
 
-        currentPopupTab--;
-
-        SwitchPopupTab(currentPopupTab);
-        UpdatePopupTabsNavigation(currentPopupTab);
-        UpdatePopupTabButtons(currentPopupTab);
-    }
-}

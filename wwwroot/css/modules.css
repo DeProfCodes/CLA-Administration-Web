@@ -80,25 +80,17 @@
     border-color: #04316D;
 }
 
-.pagination-section
-{
-    text-align: center;
-    margin-top: 20px;
-}
-
-.pagination-section .page-link
-{
-    background-color: #04316D !;
-    color: white;
-    border-radius: 0.5rem;
-}
-
 .next-btn
 {
     background-color: #04316D !important;
     color: white;
     border-radius: 10px;
     padding: 0.75rem 2rem;
+}
+
+.popup 
+{
+    color: var(--navy-blue);
 }
 
 .add-btn
@@ -138,6 +130,10 @@
 .form-label-left .btn-group
 {
     flex: 1;
+}
+.ticker-wizard-tabs
+{
+    min-height: 450px;
 }
 /*
 .btn-group .btn
@@ -715,7 +711,7 @@
 .module-left-nav-link.active, .module-left-nav-link.active:hover
 {
     background-color: var(--dark-blue);
-    color: var(--text-color-light);
+    color: var(--text-color-light) !important;
     border-radius: 20px;
 }
 .module-left-nav-link:hover
@@ -765,7 +761,7 @@
     color: white;
     opacity: 0.7;
 }
-#AddPopupSubmitBtn
+.module-new-submit-btn
 {
     background-color: #28a745 !important;
     color: white;
@@ -773,7 +769,7 @@
     padding: 2px 5px;
     width: 80px;
 }
-#AddPopupSubmitBtn:hover
+.module-new-submit-btn:hover
 {
     opacity: 0.7;
 }
@@ -881,7 +877,7 @@
     width: fit-content !important;
     border: none;
 }
-.popup-nav-link-dot
+.module-nav-link-dot
 {
     font-size:40px;
     position: absolute;
@@ -903,6 +899,107 @@
     font-weight: normal;
 }
 
+/* Container for the ticker */
+.ticker-container
+{
+    width: 100%; /* Full width */
+    height: 100px;
+    border: 1px solid #ddd;
+    position: relative;
+    overflow: hidden; /* Hide overflowing text */
+    background-color: #f0f0f0;
+    padding-bottom: 40px; /* Leave space for the ticker */
+}
+
+/* The ticker area at the bottom */
+.ticker-tape
+{
+    width: 100%;
+    position: absolute;
+    bottom: 0; /* Align at the bottom */
+    background-color: #000;
+    color: #fff;
+    font-size: 20px;
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    height: 50px;
+}
+
+/* Left icon that text goes under */
+.ticker-left-icon
+{
+    margin-right: 20px;
+    position: relative;
+    z-index: 10; /* Higher z-index to ensure text goes underneath */
+    margin-top: -11px;
+    height: 43px;
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+    background:black;
+}
+
+.ticker-right-icons
+{
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 10;
+    padding: 0;
+    margin-top: -11px;
+    height: 43px;
+    padding-top: 10px;
+    background: black;
+    padding-right:10px;
+}
+
+.ticker-right-icon
+{
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+/* Adjusted ticker content */
+.ticker-content
+{
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    flex-grow: 1; /* Fills available space */
+    padding-left: 10px; /* Adds spacing after the right icons */
+    padding-right: 10px; /* Adds spacing before the left icon */
+    position: relative;
+    z-index: 1; /* Lower z-index to ensure it scrolls under icons */
+}
+
+.ticker-text
+{
+    display: inline-block;
+    padding-right: 50px; /* Space between repeated text */
+}
+
+/* Animation for continuous scrolling */
+@keyframes ticker
+{
+    0%
+    {
+        transform: translateX(100%);
+    }
+
+    100%
+    {
+        transform: translateX(-100%);
+    }
+}
+
+/* Apply animation to both instances of text */
+.ticker-content
+{
+    animation: ticker 10s linear infinite;
+}
 /*#endregion*/
 
 
