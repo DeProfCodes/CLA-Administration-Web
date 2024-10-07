@@ -10,7 +10,7 @@
         <div class="col-md-8 d-flex">
             <i class="fas fa-clock calendar-icon-date-box" onclick="$('#StartTime').click()" style="margin-right: -25px; margin-top: 5px;"></i>
             <input type="text" class="custom-input-text" id="startTime" readonly onclick="openStartTimePicker()" hidden/>
-            <select class="custom-input-text" id="StartTime" style="width: 100px;padding-left: 30px;" onchange="ValidateEndTime()">
+            <select class="custom-input-text" id="TimePickerStartTime" style="width: 100px;padding-left: 30px;" onchange="ValidateEndTime()">
                
             </select>
         </div>
@@ -22,7 +22,7 @@
         <div class="col-md-8 d-flex">
             <i class="fas fa-clock calendar-icon-date-box" onclick="$('#EndTime').click()" style="margin-right: -25px; margin-top: 5px;"></i>
             <input type="text" class="custom-input-text" id="endTime" readonly onclick="openEndTimePicker()" hidden/>
-            <select class="custom-input-text" id="EndTime" style="width: 100px;padding-left: 30px;">
+            <select class="custom-input-text" id="TimePickerEndTime" style="width: 100px;padding-left: 30px;">
                
             </select>
         </div>
@@ -78,38 +78,13 @@
         $('#endTime').timepicker('show');
     }
 
-    function GenerateTimeOptions(id)
-    {
-        const select = document.getElementById(id);
-        const startTime = 0; // 00:00 in hours
-        const endTime = 23; // 23:00 in hours
-        const stepMinutes = 30; // Step in minutes (30 mins)
-
-        // Loop through each hour and minute
-        for (let hour = startTime; hour <= endTime; hour++)
-        {
-            for (let minutes = 0; minutes < 60; minutes += stepMinutes)
-            {
-                const option = document.createElement("option");
-
-                // Pad hours and minutes to ensure two digits (e.g., "08:00", "14:30")
-                const hourString = String(hour).padStart(2, '0');
-                const minuteString = String(minutes).padStart(2, '0');
-
-                option.value = `${hourString}:${minuteString}`;
-                option.text = `${hourString}:${minuteString}`;
-                select.appendChild(option);
-            }
-        }
-    }
-
-    GenerateTimeOptions("StartTime");
-    GenerateTimeOptions("EndTime");
+    GenerateTimeOptions("TimePickerStartTime");
+    GenerateTimeOptions("TimePickerEndTime");
 
     function ValidateEndTime()
     {
-        const startTime = document.getElementById("StartTime").value;
-        const endTimeSelect = document.getElementById("EndTime");
+        const startTime = document.getElementById("TimePickerStartTime").value;
+        const endTimeSelect = document.getElementById("TimePickerEndTime");
 
         // Disable end time options that are earlier than start time
         for (let i = 0; i < endTimeSelect.options.length; i++)

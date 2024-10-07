@@ -69,6 +69,15 @@ function IsEmptyInput(textBoxId)
     return StringNullOrEmpty(value);  
 }
 
+function IsEmptyText(textBoxId)
+{
+    textBoxId = EnsureJQueryId(textBoxId);
+
+    var value = $(textBoxId).text();
+
+    return StringNullOrEmpty(value);  
+}
+
 function CheckEmail(email)
 {
     if (email == null || email == "")
@@ -93,4 +102,10 @@ function IsCheckboxChecked(checkboxId)
     checkboxId = EnsureJQueryId(checkboxId);
 
     return $(checkboxId).is(':checked');
+}
+
+function CheckOrUncheckInput(checkboxId, check)
+{
+    checkboxId = EnsureJQueryId(checkboxId);
+    $(checkboxId).prop( "checked", check);
 }

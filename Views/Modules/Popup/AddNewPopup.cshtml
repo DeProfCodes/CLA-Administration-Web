@@ -162,15 +162,15 @@
                                     If you import your own custom skin, please note that the image must be saved as a *.BMP file and must be 314x188 pixels in dimension.
                                 </p>
                                 <div class="mt-2 p-2">
-                                    <div class="form-group">
+                                    <div class="form-check form-switch w-fit-content mb-0 align-content-center">
                                         <input class="form-check-input" type="radio" name="PopupSkinOption" id="PopupDefaultSkinOption" value="option2" onchange="PopupSkinTypeSelect(this.id)">
-                                        <label class="form-check-label ms-2" for="exampleRadios2">Use Default Skin</label>
+                                        <label class="form-check-label ms-2 cursor-pointer" for="PopupDefaultSkinOption">Use Default Skin</label>
                                     </div>
                                     <div class="form-group mt-3">
                                     <div class="col-sm-10 d-inline-flex justify-content-between align-items-center">
-                                        <div class="form-check mr-3">
+                                        <div class="form-check form-switch w-fit-content mb-0 align-content-center">
                                             <input class="form-check-input" type="radio" name="PopupSkinOption" id="PopupCustomSkinOption" value="option2" onchange="PopupSkinTypeSelect(this.id)">
-                                            <label class="form-check-label ml-2" for="exampleRadios2">Use Custom Skin</label>
+                                            <label class="form-check-label ml-2 cursor-pointer" for="PopupCustomSkinOption">Use Custom Skin</label>
                                         </div>
                                         <select class="form-control ml-3 w-50 hidden" id="PopupSkinImage" onchange="UpdatePopupSkinPreview()" style="appearance:menulist">
                                             <option value="0" selected>Please select skin</option>
@@ -189,10 +189,10 @@
                                     If you import your own custom icon, please note that the image must be 48x48 pixels in dimension.
                                 </p>
                                 <div class="mt-2 p-2">
-                                    <div class="row form-group">
-                                        <div class="w-fit-content">
+                                    <div class="form-group">
+                                        <div class="form-check form-switch w-fit-content mb-0 align-content-center">
                                             <input class="form-check-input" type="radio" name="PopupIconOption" id="PopupStandardIcons" value="option2" onchange="PopupIconOptionSelect(this.id)">
-                                            <label class="form-check-label ms-1" for="exampleRadios2">Use Standard Icons</label>
+                                            <label class="form-check-label ms-1 cursor-pointer" for="PopupStandardIcons">Use Standard Icons</label>
                                         </div>
                                         <div class="row w-fit-content hidden ms-5 border border-light-1 p-1" id="PopupStandardIconsContainer">
                                             <div class="col p-0 popup-icon-container">
@@ -211,9 +211,9 @@
                                     </div>
                                     <div class="form-group mt-3">
                                         <div class="col form-group mb-0">
-                                            <div class="form-check w-fit-content">
+                                            <div class="form-check form-switch w-fit-content mb-0 align-content-center">
                                                 <input class="form-check-input" type="radio" name="PopupIconOption" id="PopupCustomIconsOption" value="option2" onchange="PopupIconOptionSelect(this.id)">
-                                                <label class="form-check-label" for="exampleRadios2">Use Custom Icon</label>
+                                                <label class="form-check-label cursor-pointer" for="PopupCustomIconsOption">Use Custom Icon</label>
                                             </div>
                                             <div class="col w-fit-content hidden ms-5" id="PopupCustomIconsContainer">
                                                 <!-- Uploader Component -->
@@ -233,9 +233,9 @@
                                         </div>
                                     </div>
                                     <div class="form-group mt-3 mb-3">
-                                        <div class="col form-check mr-3">
+                                        <div class="col form-check form-switch w-fit-content mb-0 align-content-center">
                                             <input class="form-check-input" type="radio" name="PopupIconOption" id="PopupNONEIconsOption" value="option2" onchange="PopupIconOptionSelect(this.id)">
-                                            <label class="form-check-label ml-2" for="exampleRadios2">Do Not Show Icon</label>
+                                            <label class="form-check-label cursor-pointer" for="PopupNONEIconsOption">Do Not Show Icon</label>
                                         </div>
                                     </div>
                                 </div>
@@ -251,7 +251,14 @@
                                 <div class="col-sm-10">
                                     @{
                                         await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Form/HtmlEditor.cshtml",
-                                        new HtmlEditorModel { EditorId = "PopupTextHeader", HeightPx = "55px", WriteToDesitnationOnInput = true, DestinationTextDivId = "PopupBodyPreviewTitleText" });
+                                        new HtmlEditorModel 
+                                        { 
+                                            EditorId = "PopupTextHeader", 
+                                            HeightPx = "55px", 
+                                            WriteToDesitnationOnInput = true, 
+                                            MaxCharacterCount = 25,
+                                            DestinationTextDivId = "PopupBodyPreviewTitleText" 
+                                        });
                                     }
                                     <p class="mb-0 fs-12 text-danger fst-italic ps-1 w-fit-content" id="LinkTypeTextsTitleError"></p>
                                     <div class="form-check form-switch w-fit-content mb-0">
@@ -312,7 +319,7 @@
                             <div class="row mt-5">
                                 <div class="popup-display-settings-titles">
                                     <div class="form-check form-switch w-fit-content mb-0">
-                                        <label class="form-check-label fs-14" for="AutoHidePopup">Auto Hide</label>
+                                        <label class="form-check-label fs-14" for="AutoHidePopupToggle">Auto Hide</label>
                                         <input class="form-check-input" type="checkbox" id="AutoHidePopupToggle">
                                     </div>
                                 </div>
@@ -323,7 +330,7 @@
                             <div class="row mt-3">
                                 <div class="popup-display-settings-titles">
                                     <div class="form-check form-switch w-fit-content mb-0">
-                                        <label class="form-check-label fs-14" for="ShowHidePopupTitle">Dismissable</label>
+                                        <label class="form-check-label fs-14" for="DismissablePopupToggle">Dismissable</label>
                                         <input class="form-check-input" type="checkbox" id="DismissablePopupToggle" onchange="TogglePopupDisplaySettings()">
                                     </div>
                                 </div>
@@ -334,7 +341,7 @@
                             <div class="row mt-3">
                                 <div class="popup-display-settings-titles">
                                     <div class="form-check form-switch w-fit-content mb-0">
-                                        <label class="form-check-label fs-14" for="ShowHidePopupTitle">Snoozable</label>
+                                        <label class="form-check-label fs-14" for="SnoozePopupToggle">Snoozable</label>
                                         <input class="form-check-input" type="checkbox" id="SnoozePopupToggle" onchange="TogglePopupDisplaySettings()">
                                     </div>
                                 </div>
@@ -373,16 +380,16 @@
                             </p>
                             <div class="w-fit-content mt-3">
                                 <div class="form-group mt-4 w-fit-content">
-                                    <div class="col form-check">
+                                    <div class="col form-check form-switch w-fit-content mb-0 align-content-center">
                                         <input class="form-check-input" type="radio" name="PopupRepeatOption" id="PopupNoRepeatOption" value="option2" onchange="PopupRepeatOptionSelect(this.id)">
-                                        <label class="form-check-labelfor="exampleRadios2">Do Not Repeat</label>
+                                        <label class="form-check-label cursor-pointer" for="PopupNoRepeatOption">Do Not Repeat</label>
                                     </div>
                                 </div>
                                 <div class="row w-fit-content d-flex mt-3 align-content-center">
                                     <div class="form-group w-fit-content" style="position:fixed">
-                                        <div class="col form-check mr-3">
+                                        <div class="col form-check form-switch w-fit-content mb-0 align-content-center">
                                             <input class="form-check-input" type="radio" name="PopupRepeatOption" id="PopupRepeatDailyOption" value="option2" onchange="PopupRepeatOptionSelect(this.id)">
-                                            <label class="form-check-label" for="exampleRadios2">Repeat Daily</label>
+                                            <label class="form-check-label cursor-pointer" for="PopupRepeatDailyOption">Repeat Daily</label>
                                         </div>
                                     </div>
                                     <div class="w-fit-content hidden" style="margin-left: 150px;" id="PopupRepeatDailyContainer">
@@ -399,9 +406,9 @@
                                 </div>
                                 <div class="row w-fit-content d-flex align-content-center" style="margin-top:60px">
                                     <div class="form-group w-fit-content" style="position:fixed">
-                                        <div class="col form-check mr-3">
+                                        <div class="col form-check form-switch w-fit-content mb-0 align-content-center">
                                             <input class="form-check-input" type="radio" name="PopupRepeatOption" id="PopupRepeatWeeklyOption" value="option2" onchange="PopupRepeatOptionSelect(this.id)">
-                                            <label class="form-check-label" for="exampleRadios2">Repeat Weekly</label>
+                                            <label class="form-check-label cursor-pointer" for="PopupRepeatWeeklyOption">Repeat Weekly</label>
                                         </div>
                                     </div>
                                     <div class="w-fit-content hidden" style="margin-left: 150px;" id="PopupRepeatWeeklyContainer">

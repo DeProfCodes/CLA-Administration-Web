@@ -70,6 +70,7 @@
         if (page == '@ModulesPages.RSSFeedOverview') url = '@AppPagesUrl.Modules.RSSFeedOverview' + `?rssCategoryId=${id}`;
         if (page == '@ModulesPages.RSSFeedDetails') url = '@AppPagesUrl.Modules.RSSFeedDetails' + `?rssCategoryId=${id}&rssFeedId=${id2}`;
         if (page == '@ModulesPages.RSSAddNew') url = '@AppPagesUrl.Modules.RSSAddNew';
+        if (page == '@ModulesPages.RSSAddNewFeed') url = '@AppPagesUrl.Modules.RSSAddNewFeed' + `?rssCategoryId=${id}`;
         
         // Previewers
         if (page == '@ModulesPages.ModuleContentPreviewer') url = '@AppPagesUrl.Modules.ModuleContentPreviewer' + `?contentPreviewType=${id}`;
@@ -163,6 +164,7 @@
         if (page == '@ModulesPages.RSSFeedOverview') title = "RSS Feed Overview";
         if (page == '@ModulesPages.RSSFeedDetails') title = "RSS Feed Details";
         if (page == '@ModulesPages.RSSAddNew') title = "Add New RSS";
+        if (page == '@ModulesPages.RSSAddNewFeed') title = "Add New RSS Feed"
 
         // Settings Section
         if (page == '@SettingsPages.StagingUsers') title = "Manage Staging Users";

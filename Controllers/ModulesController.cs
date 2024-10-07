@@ -12,6 +12,7 @@ using CLA_Administration_Web.ViewModels.Modules.ContentLibrary;
 using CLA_Administration_Web.ViewModels.Modules.GanttChart;
 using CLA_Administration_Web.ViewModels.Modules.LDS;
 using CLA_Administration_Web.ViewModels.Modules.PST;
+using CLA_Administration_Web.ViewModels.Modules.Rss;
 using CLACommonFunctionsLibrary_NET.Helpers;
 using CLACommonFunctionsLibrary_NET.Helpers.Enums;
 using CLACommonFunctionsLibrary_NET.Helpers.Logs;
@@ -395,7 +396,29 @@ namespace CLA_Administration_Web.Controllers
 
         public IActionResult AddNewSurvey()
         {
-            return PartialView(AppPagesLinks.Modules.SurveyAddNewPageLink);
+            var addNewSurveyViewModel = new AddNewSurveyViewModel
+            {
+                SurveySkins = new List<ModuleSkinViewModel>
+                {
+                    new ModuleSkinViewModel
+                    {
+                        Filename = "SurveyBackground.bmp",
+                        FileURL = $"{LaunchSettingsHelper.GetBaseAddressForImages()}/images/others/modules/skins/SurveyBackground.bmp"
+                    },
+                    new ModuleSkinViewModel
+                    {
+                        Filename = "Survey_Skin_10578.bmp",
+                        FileURL = $"{LaunchSettingsHelper.GetBaseAddressForImages()}/images/others/modules/skins/Survey_Skin_10578.bmp"
+                    },
+                    new ModuleSkinViewModel
+                    {
+                        Filename = "Survey_Skin_999.bmp",
+                        FileURL = $"{LaunchSettingsHelper.GetBaseAddressForImages()}/images/others/modules/skins/Survey_Skin_999.bmp"
+                    }
+                }
+            };
+
+            return PartialView(AppPagesLinks.Modules.SurveyAddNewPageLink, addNewSurveyViewModel);
         }
 
         #endregion
@@ -484,6 +507,18 @@ namespace CLA_Administration_Web.Controllers
             return PartialView(AppPagesLinks.Modules.RSSAddNewPageLink);
         }
 
+        public async Task<IActionResult> AddNewRSSFeed(int rssCategoryId)
+        {
+            var rssCategories = await _moduleService.GetAllRssCategories(StagingLiveType.Staging);
+
+            var addNewFeedVm = new AddNewRssFeed
+            {
+                CurrentCategoryId = rssCategoryId,
+                RssCategories = rssCategories
+            };
+
+            return PartialView(AppPagesLinks.Modules.RSSAddNewFeedPageLink, addNewFeedVm);
+        }
         #endregion
 
         #region Module Additional Components

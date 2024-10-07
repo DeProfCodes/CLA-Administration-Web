@@ -1,0 +1,27 @@
+﻿@model CLA_Administration_Web.ViewModels.Modules.Components.Form.CommonModel
+
+@{
+    var id = !string.IsNullOrEmpty(Model.ElementId) ? Model.ElementId : "";
+    var css = !string.IsNullOrEmpty(Model.Css) ? Model.Css : "";
+    var style = !string.IsNullOrEmpty(Model.Style) ? Model.Style : "";
+    var width = !string.IsNullOrEmpty(Model.WidthPx) ? $"width:{Model.Style}" : "";
+}
+
+
+
+<div class="row time-picker d-flex">
+    <div class="d-flex">
+        <div class="col-md-8 d-flex">
+            <i class="fas fa-clock calendar-icon-date-box" onclick="$('#StartTime').click()" style="margin-right: -25px; margin-top: 5px;"></i>
+            <select class="custom-input-text" id="StartTime" style="@width;padding-left: 30px;" onload="GenerateTimeOptions(this.id)">
+            </select>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/timepicker/jquery.timepicker.min.js"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+<script>
+
+</script>

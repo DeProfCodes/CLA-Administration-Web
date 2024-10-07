@@ -138,7 +138,7 @@
                             </div>
                         </div>
                         <!-- Texts Tab -->
-                        <div id="TextsTab-2" class="ticker-wizard-tabs flex-wrap  text-center justify-content-center mb-3">
+                        <div id="TextsTab-2" class="ticker-wizard-tabs flex-wrap  text-center justify-content-center mb-3 hidden">
                             <h5 class="fw-bold mt-4">2. Ticker Text</h5>
                             <p class="custom-p mt-2 fs-13 text-center mb-3">Enter ticker text.</p>
                             <div class="row mt-4 d-flex pe-4 w-fit-content mx-auto">
@@ -149,8 +149,9 @@
                                         new HtmlEditorModel 
                                         { 
                                             EditorId = "TickerText", 
-                                            HeightPx = "150px",
+                                            HeightPx = "160px",
                                             WidthPx = "450px",
+                                            MaxCharacterCount = 300,
                                             WriteToDesitnationOnInput = true, 
                                             DestinationTextDivId = "TickerPreviewText" 
                                         });
@@ -160,30 +161,22 @@
                             </div>
                             <div class="ticker-container mt-3">
                                 <p class="text-center pt-2 fw-bold fst-italic">Preview</p>
-
-                                <!-- Ticker at the bottom -->
                                 <div class="ticker-tape ">
-                                    <!-- Left icon -->
                                     <div class="ticker-left-icon">
                                         <img src="~/images/logos/app-icon-blue.png" alt="Warning Icon" width="30">
                                     </div>
-
-                                    <!-- Scrolling text -->
                                     <div class="ticker-content">
-                                        <!-- Repeated text for smooth, continuous scrolling -->
                                         <span class="ticker-text" id="TickerPreviewText">Enter Ticker Text</span>
                                     </div>
-
-                                    <!-- Right icons for minimize and dismiss -->
-                                    <div class="ticker-right-icons bg-black">
-                                        <img src="https://img.icons8.com/material-rounded/24/ffffff/minimize-window.png" alt="Minimize" class="ticker-right-icon bg-primary" width="30" onclick="minimizeTicker()">
-                                        <img src="https://img.icons8.com/material-rounded/24/ffffff/delete-sign.png" alt="Dismiss" class="ticker-right-icon bg-danger" width="30" onclick="dismissTicker()">
-                                    </div>
+                                </div>
+                                <div class="ticker-right-icons bg-black w-fit-content">
+                                    <img src="https://img.icons8.com/material-rounded/24/ffffff/minimize-window.png" alt="Minimize" class="ticker-right-icon bg-primary" width="30" onclick="minimizeTicker()">
+                                    <img src="https://img.icons8.com/material-rounded/24/ffffff/delete-sign.png" alt="Dismiss" class="ticker-right-icon bg-danger" width="30" onclick="dismissTicker()">
                                 </div>
                             </div>
                         </div>
                         <!-- Times Tab -->
-                        <div id="TimesTab-3" class="ticker-wizard-tabs flex-wrap  text-center justify-content-center mb-3 w-75 mx-auto">
+                        <div id="TimesTab-3" class="ticker-wizard-tabs flex-wrap  text-center justify-content-center mb-3 w-75 mx-auto hidden">
                             <h5 class="fw-bold module-heading-theme mt-4">3. Ticker Effective Dates & Timeslots</h5>
                             <p class="custom-p mt-2 fs-13 text-center">Please define the date and time range that the Ticker must display</p>
                             <p class="custom-p mt-4 fs-13 text-center">
@@ -211,13 +204,13 @@
 
                         </div>
                         <!-- Target Users -->
-                        <div id="TargetUserTab-4" class="ticker-wizard-tabs flex-wrap  text-center justify-content-center mb-3">
+                        <div id="TargetUserTab-4" class="ticker-wizard-tabs flex-wrap  text-center justify-content-center mb-3 hidden">
                             <h5 class="fw-bold mb-3 module-heading-theme">4. Ticker Target Users</h5>
                             <p class="module-heading-theme">Ticker target user settings.</p>
                             
                         </div>
                         <!-- Exposure Summary Tab -->
-                        <div id="ExposureSummaryTab-5" class="ticker-wizard-tabs flex-wrap  text-center justify-content-center mb-3">
+                        <div id="ExposureSummaryTab-5" class="ticker-wizard-tabs flex-wrap  text-center justify-content-center mb-3 hidden">
                             <h5 class="fw-bold mb-3 module-heading-theme">5. Ticker Exposure Summary</h5>
                             <p class="module-heading-theme">Ticker exposure summary settings.</p>
                             

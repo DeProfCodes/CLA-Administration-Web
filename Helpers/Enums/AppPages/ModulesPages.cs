@@ -121,6 +121,9 @@ namespace CLA_Administration_Web.Helpers.Enums.AppPages
         [Display(Name = "RSSAddNew", ShortName = "RSS")]
         RSSAddNew,
 
+        [Display(Name = "AddNewRSSFeed", ShortName = "RSS")]
+        RSSAddNewFeed,
+
         [Display(Name = "ModuleContentPreviewer", ShortName = "Component")]
         ModuleContentPreviewer,
 

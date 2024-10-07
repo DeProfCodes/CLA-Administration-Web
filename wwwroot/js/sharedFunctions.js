@@ -2,10 +2,10 @@
 function GetMonthStartAndEnd(dateString, val, val2)
 {
     const date = new Date(dateString);
-    
+
     const startOfMonth = new Date(date.getFullYear(), date.getMonth() + val, val2);
     const endOfMonth = new Date(date.getFullYear(), date.getMonth() + val, val2);
-    
+
     const formatDate = (d) => `${d.getFullYear()}-${(d.getMonth() + 1).toString().padStart(2, '0')}-${d.getDate().toString().padStart(2, '0')}`;
 
     return formatDate(startOfMonth);
@@ -62,10 +62,35 @@ function GetImageDimensions(imageURL)
             {
                 reject(new DimensionType(-1, -1));
             };
-        } 
+        }
         else
         {
             reject(new DimensionType(-1, -1));
         }
     });
+}
+
+function GenerateTimeOptions(id)
+{
+    const select = document.getElementById(id);
+    const startTime = 0; // 00:00 in hours
+    const endTime = 23; // 23:00 in hours
+    const stepMinutes = 30; // Step in minutes (30 mins)
+
+    // Loop through each hour and minute
+    for (let hour = startTime; hour <= endTime; hour++)
+    {
+        for (let minutes = 0; minutes < 60; minutes += stepMinutes)
+        {
+            const option = document.createElement("option");
+
+            // Pad hours and minutes to ensure two digits (e.g., "08:00", "14:30")
+            const hourString = String(hour).padStart(2, '0');
+            const minuteString = String(minutes).padStart(2, '0');
+
+            option.value = `${hourString}:${minuteString}`;
+            option.text = `${hourString}:${minuteString}`;
+            select.appendChild(option);
+        }
+    }
 }

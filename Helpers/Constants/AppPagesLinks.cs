@@ -86,6 +86,7 @@
             public const string RssFeedOverviewPageLink = "~/Views/Modules/RSS/RssFeedOverview.cshtml";
             public const string RssFeedDetailsPageLink = "~/Views/Modules/RSS/RssFeedDetails.cshtml";
             public const string RSSAddNewPageLink = "~/Views/Modules/RSS/AddNewRSS.cshtml";
+            public const string RSSAddNewFeedPageLink = "~/Views/Modules/RSS/AddNewRSSFeed.cshtml";
 
             //Previewer Components
             public const string ModuleImagePreviewerPageLink = "~/Views/Shared/Components/Custom/Modules/ContentPreviewers/ImagePreviewer.cshtml";

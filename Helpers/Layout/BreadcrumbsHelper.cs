@@ -338,7 +338,7 @@ namespace CLA_Administration_Web.Helpers.Layout
                     IsAddNewIcon = true,
                     ActionButtonText = "Add New Feed",
                     ActionButtonPage = ModulesPages.RSSAddNew
-                },
+                }
             };
             return modulesBreadcrumbs;
         }

@@ -93,6 +93,7 @@ namespace CLA_Administration_Web.Helpers.Constants
             public static string RSSFeedOverview = $"/{modulesController}/{ModulesPages.RSSFeedOverview.GetDisplayName()}";
             public static string RSSFeedDetails = $"/{modulesController}/{ModulesPages.RSSFeedDetails.GetDisplayName()}";
             public static string RSSAddNew = $"/{modulesController}/{ModulesPages.RSSAddNew.GetDisplayName()}";
+            public static string RSSAddNewFeed = $"/{modulesController}/{ModulesPages.RSSAddNewFeed.GetDisplayName()}";
 
             //Additional Components
             public static string ModuleContentPreviewer = $"/{modulesController}/{ModulesPages.ModuleContentPreviewer.GetDisplayName()}";

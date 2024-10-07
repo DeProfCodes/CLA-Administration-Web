@@ -6,7 +6,9 @@
 
         public string WidthPx {get; set; }
 
-        public string WidthCss { get; set; }
+        public string Css { get; set; }
+
+        public int MaxCharacterCount { get; set; }
 
         public string HeightPx { get; set; }
 

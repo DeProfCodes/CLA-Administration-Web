@@ -1,5 +1,5 @@
-var currentPopupTab = 1;
-var totalPopupTabs = 9;
+var currentSurveyTab = 1;
+var totalSurveyTabs = 9;
 
 var backBtnId = "PopupPrevTabBtn"
 var nextBtnId = "PopupNextTabBtn";
@@ -17,26 +17,26 @@ function ValidatePopupTabs(currentTab)
 
 function PreviousPopupTab()
 {
-    if (currentPopupTab > 1)
+    if (currentSurveyTab > 1)
     {
-        currentPopupTab = PreviousModuleTab("popup", currentPopupTab, totalPopupTabs, backBtnId, nextBtnId, submitBtnId);
+        currentSurveyTab = PreviousModuleTab("popup", currentSurveyTab, totalSurveyTabs, backBtnId, nextBtnId, submitBtnId);
     }
 }
 
 function NextPopupTab()
 {
-    if (currentPopupTab < totalPopupTabs)
+    if (currentSurveyTab < totalSurveyTabs)
     {
-        if (!ValidatePopupTabs(currentPopupTab))
+        if (!ValidatePopupTabs(currentSurveyTab))
             return;
         
-        currentPopupTab = NextModuleTab("popup", currentPopupTab, totalPopupTabs, backBtnId, nextBtnId, submitBtnId);
+        currentSurveyTab = NextModuleTab("popup", currentSurveyTab, totalSurveyTabs, backBtnId, nextBtnId, submitBtnId);
     }
 }
 
 function NavigateToPopupTab(navLinkId, tabLinkNumber)
 {
-     currentPopupTab = NavigateToModuleTab("popup", navLinkId, tabLinkNumber, currentPopupTab, backBtnId, nextBtnId, submitBtnId);
+     currentSurveyTab = NavigateToModuleTab("popup", navLinkId, tabLinkNumber, currentSurveyTab, backBtnId, nextBtnId, submitBtnId);
 }
 
 /*==================================================================================================================================*/
@@ -174,11 +174,12 @@ function CheckAllEmailsListValid(emailList)
 
 function PopupSkinTypeSelect(id)
 {
+    HideShowElementVisibity("#PopupSkinPreview", HideShow.SHOW);
+
     id = id.toLowerCase();
     if (id.includes("defaultskin"))
     {
         LoadDefaultSkinPreview();
-        HideShowElementVisibity("#PopupSkinPreview", HideShow.SHOW);
         HideShowElement("#PopupSkinImage", HideShow.HIDE);
     }
     else
@@ -190,6 +191,8 @@ function PopupSkinTypeSelect(id)
 
 function UpdatePopupSkinPreview()
 {
+    HideShowElementVisibity("#PopupSkinPreview", HideShow.SHOW);
+
     var skinImgSrc = $("#PopupSkinImage").val();
 
     if (skinImgSrc != "0")

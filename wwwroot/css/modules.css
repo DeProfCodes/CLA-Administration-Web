@@ -824,7 +824,19 @@
     width:140px;
     align-content:center;
 }
-.popup-display-settings-info
+.survey-delivery-method-titles
+{
+    margin-left: 80px;
+    width:225px;
+    align-content:center;
+}
+.survey-response-urgency-titles
+{
+    margin-left: 80px;
+    width:220px;
+    align-content:center;
+}
+.popup-display-settings-info, .survey-addon-details-box
 {
     width: 540px;
     border: 1px solid var(--theme-blue-clr);
@@ -914,7 +926,7 @@
 /* The ticker area at the bottom */
 .ticker-tape
 {
-    width: 100%;
+    min-width: 100%;
     position: absolute;
     bottom: 0; /* Align at the bottom */
     background-color: #000;
@@ -949,11 +961,11 @@
     position: relative;
     z-index: 10;
     padding: 0;
-    margin-top: -11px;
     height: 43px;
-    padding-top: 10px;
     background: black;
     padding-right:10px;
+    margin-top: 19px;
+    height: 50px;
 }
 
 .ticker-right-icon
@@ -980,7 +992,16 @@
     display: inline-block;
     padding-right: 50px; /* Space between repeated text */
 }
-
+#SurveySnoozeSettingsContainer
+{
+    margin-left:80px;
+    width: 750px;
+}
+.date-time-picker
+{
+    width:255px;
+    padding-left: 30px;
+}
 /* Animation for continuous scrolling */
 @keyframes ticker
 {
@@ -999,6 +1020,59 @@
 .ticker-content
 {
     animation: ticker 10s linear infinite;
+}
+
+#SurveyAddOnsChecksContainer
+{
+    width: 300px;
+}
+#SurveyAddOnsAnswerContainer
+{
+    width: fit-content;
+    margin-left:auto;
+    margin-right:auto;
+    border-left: 3px solid var(--theme-blue-clr);
+}
+.survey-addon-info-img-btn
+{
+    width: 100px;
+    height: 25px;
+    margin-left: 20px;
+}
+.survey-addon-info-img-scored
+{
+    width: 350px;
+    height: 150px;
+    margin-top: 10px;
+    margin-left: -5px;
+    margin-right:auto;
+    object-fit: contain;
+}
+
+.survey-addon-info-img-summary
+{
+    width: 340px;
+    height: 30px;
+    margin-top: 10px;
+    margin-left: -5px;
+    margin-right:auto;
+}
+.form-border-inputs
+{
+    width:500px;
+    margin-left:auto;
+    margin-right: auto;
+    margin-top: 30px;
+    padding:20px;
+    border: 3px solid var(--theme-blue-clr);
+}
+.common-titles-col
+{
+    width:40%;
+}
+.common-titles-value-col
+{
+    width:60%;
 }
 /*#endregion*/
 
@@ -1046,14 +1120,18 @@
 }
 @media screen and (max-width:1600px)
 {
-    .popup-display-settings-info
+    .popup-display-settings-info, .survey-addon-details-box
     {
         width: 400px;
+    }
+    #SurveySnoozeSettingsContainer
+    {
+        width: 610px;
     }
 }
 @media screen and (max-width:1500px)
 {
-    .popup-display-settings-titles
+    .popup-display-settings-titles, .survey-response-urgency-titles, #SurveySnoozeSettingsContainer
     {
         margin-left: 45px;
     }
@@ -1080,6 +1158,15 @@
         width: 450px;
         margin-left: 30px;
     }
+    .survey-addon-details-box
+    {
+        width: 350px;
+        margin-left: 0px;
+    }
+    .survey-delivery-method-titles
+    {
+        margin-left:40px;
+    }
 }
 @media screen and (max-width:1370px)
 {
@@ -1091,6 +1178,13 @@
     {
         margin-left: -20px;
     }
+    /*#SurveyAddOnsAnswerContainer
+    {
+        margin: 20px 0px 0px 0px;
+        border-left: 0;
+        width:100%;
+        border-top: 3px solid var(--theme-blue-clr);
+    }*/
 }
 
 @media screen and (max-width:1285px)

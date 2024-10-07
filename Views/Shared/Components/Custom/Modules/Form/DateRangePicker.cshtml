@@ -1,5 +1,4 @@
 ﻿
-
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/timepicker/jquery.timepicker.min.css" />
 
 
@@ -52,7 +51,8 @@
             locale: {
                 format: 'YYYY-MM-DD'
             }
-        }, function (start, end)
+        }, 
+        function (start, end)
         {
             $('#DatePickerStartDate').val(start.format('DD MMM YYYY'));
             $('#DatePickerEndDate').val(end.format('DD MMM YYYY'));

@@ -182,7 +182,7 @@ function UpdateModuleTabButtons(tabNo, backBtnId, nextBtnId, submitBtnId)
     if (tabNo == 1)
     {
         HideShowElement(backBtnId, HideShow.HIDE);
-        HideShowElement(backBtnId, HideShow.SHOW);
+        HideShowElement(nextBtnId, HideShow.SHOW);
     }
     if (tabNo > 1 && tabNo < tabsCount)
     {

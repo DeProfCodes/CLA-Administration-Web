@@ -5,10 +5,12 @@
 
     var height = !string.IsNullOrEmpty(Model.HeightPx) ? $"height:{Model.HeightPx}" : "";
     var width = !string.IsNullOrEmpty(Model.WidthPx) ? $"width:{Model.WidthPx}" : "";
+
+    var maxCharacters = Model.MaxCharacterCount != 0 ? Model.MaxCharacterCount : 1000000;
 }
 
 <!-- Toolbar -->
-<div class="editor-toolbar">
+<div class="editor-toolbar" style="@width">
     <!-- Font Family Dropdown -->
     <select onchange="ChangeFontFamily(this.value)" class="editor-font-family-selector">
         <option value="Arial" style="font-family: Arial;" selected>Arial</option>
@@ -43,6 +45,8 @@
         <option value="3">3</option>
         <option value="4">4</option>
         <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
     </select>
 
     <button onclick="document.execCommand('undo', false, '')"><i class="fas fa-undo"></i></button>
@@ -60,11 +64,42 @@
 </div>
 
 <!-- Editable Area -->
-<div class="editor-area html-text-editor" id="@editorId" contenteditable="true" style="text-align: left;@height;@width" oninput="UpdatePreviews(this.id, '@Model.WriteToDesitnationOnInput', '@Model.DestinationTextDivId')">
-    
+<div class="editor-area html-text-editor" id="@editorId" contenteditable="true"
+     style="overflow-y:auto;text-align: left;@height;@width"
+     oninput="CheckCharacterLimit(this.id, @maxCharacters, '@editorId-validate', '@Model.WriteToDesitnationOnInput', '@Model.DestinationTextDivId')"
+     onkeypress="return LimitInput(event, this, @maxCharacters)">
 </div>
+<p class="mb-0 fs-12 text-danger fl-right fst-italic" id="@editorId-validate"></p>
 
 <script>
+
+    function CheckCharacterLimit(editorId, maxLength, validateId, writeToDestination, destinationDivId)
+    {
+        const currentText = $(`#${editorId}`).text().trim();
+        const validateElement = $(`${validateId}`);
+       
+        if (currentText.length >= maxLength)
+        {
+            $(`#${validateId}`).text(`Character limit of ${maxLength} reached`);
+            $(`#${editorId}`).text(currentText.substring(0, maxLength));
+        } 
+        else
+        {
+            $(`#${validateId}`).text("");
+            UpdatePreviews(editorId, writeToDestination, destinationDivId);
+        }
+    }
+
+    function LimitInput(event, editor, maxLength)
+    {
+        const currentText = editor.innerText.trim();
+        if (currentText.length >= maxLength && event.key !== 'Backspace' && event.key !== 'Delete')
+        {
+            event.preventDefault(); // Prevent further input
+            return false;
+        }
+        return true;
+    }
 
     function UpdatePreviews(editorDivId, writeToDestination, destinationDivId)
     {
