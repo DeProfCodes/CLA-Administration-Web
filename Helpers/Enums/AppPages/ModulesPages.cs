@@ -30,6 +30,9 @@ namespace CLA_Administration_Web.Helpers.Enums.AppPages
         [Display(Name = "ContentLibraryCategories", ShortName = "ContentLibrary")]
         ContentLibraryCategories,
 
+        [Display(Name = "AddNewContentLibraryCategory", ShortName = "ContentLibrary")]
+        AddNewContentLibraryCategory,
+
         [Display(Name = "ContentLibraryCategoryDetails", ShortName = "ContentLibrary")]
         ContentLibraryCategoryDetails,
 
@@ -118,8 +121,8 @@ namespace CLA_Administration_Web.Helpers.Enums.AppPages
         [Display(Name = "RssFeedDetails", ShortName = "RSS")]
         RSSFeedDetails,
 
-        [Display(Name = "RSSAddNew", ShortName = "RSS")]
-        RSSAddNew,
+        [Display(Name = "RSSAddNewCategory", ShortName = "RSS")]
+        RSSAddNewCategory,
 
         [Display(Name = "AddNewRSSFeed", ShortName = "RSS")]
         RSSAddNewFeed,

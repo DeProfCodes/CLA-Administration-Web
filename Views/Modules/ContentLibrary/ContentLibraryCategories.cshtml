@@ -50,8 +50,8 @@
     var actionButtons = function (cell, formatterParams)
     {
         return `<button class='btn btn-sm btn-info custom-btn-sm' onclick="OpenContentLibraryCategory(${cell.getRow().getData().CategoryId})">Open</button>
-                <button class='btn btn-sm btn-secondary me-2 custom-btn-sm'>Edit</button>
-                    <button class='btn btn-sm btn-success me-2 me-2 custom-btn-sm' onclick="OpenContentsOverview(${cell.getRow().getData().CategoryId})">Contents</button>
+                    <button class='btn btn-sm btn-primary me-2 custom-btn-sm' onclick="OpenNewContentLibraryCategory(${cell.getRow().getData().CategoryId})">New Sub Category</button>
+                <button class='btn btn-sm btn-success me-2 me-2 custom-btn-sm' onclick="OpenContentsOverview(${cell.getRow().getData().CategoryId})">Contents</button>
                 <button class='btn btn-sm btn-danger me-2 me-2 custom-btn-sm' onclick="alert('Delete = ${cell.getRow().getData().CategoryId}');">Delete</button>`;
     };
 
@@ -85,6 +85,11 @@
     function OpenContentsOverview(categoryId)
     {
         OpenPage('@ModulesPages.ContentLibraryContent', categoryId);
+    }
+
+    function OpenNewContentLibraryCategory(categoryId)
+    {
+        OpenPage('@ModulesPages.AddNewContentLibraryCategory', categoryId);
     }
 
 </script>

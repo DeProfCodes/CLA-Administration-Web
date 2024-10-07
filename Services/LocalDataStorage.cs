@@ -57,7 +57,7 @@ namespace CLA_Administration_Web.Services
             public static List<RssFeedOverviewViewModel> AllRSSFeed { get; set; } 
         }
 
-        public static List<ContentLibraryCategoryModel> AllContentLibraryCategories {get; set; }
+        public static List<ContentLibraryCategoryTree> AllContentLibraryCategories {get; set; }
 
         public static List<ContentLibraryContentModel> AllContentLibraryContents { get; set; }
 
@@ -179,7 +179,7 @@ namespace CLA_Administration_Web.Services
             }
         }
 
-        public static void UpdateContentLibraryCategoriesData(List<ContentLibraryCategoryModel> data)
+        public static void UpdateContentLibraryCategoriesData(List<ContentLibraryCategoryTree> data)
         {
             AllContentLibraryCategories = data;
         }

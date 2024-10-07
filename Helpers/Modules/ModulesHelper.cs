@@ -4,6 +4,7 @@ using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
 using CLA_Administration_Web.Helpers.Shared;
 using CLA_Administration_Web.Services;
 using CLA_Administration_Web.ViewModels.Modules;
+using CLA_Administration_Web.ViewModels.Modules.ContentLibrary;
 using CLA_Administration_Web.ViewModels.Modules.GanttChart;
 using CLA_Administration_Web.ViewModels.Modules.LDS;
 using CLA_Administration_Web.ViewModels.Modules.PST;
@@ -265,6 +266,74 @@ namespace CLA_Administration_Web.Helpers.Modules
             string[] fullNames = parts.Select(part => nameMap.ContainsKey(part) ? nameMap[part] : part).ToArray();
 
             return string.Join(" | ", fullNames);
+        }
+
+        private static bool SearchCategoryPath(ContentLibraryCategoryTree category, int searchId, List<string> path)
+        {
+            if (category == null) return false;
+
+            // Add current category name to the path
+            path.Add(category.CategoryName);
+
+            // Check if the current category ID matches the search ID
+            if (category.CategoryId == searchId) return true;
+
+            // If category has children, search in them
+            if (category._children != null)
+            {
+                foreach (var child in category._children)
+                {
+                    if (SearchCategoryPath(child, searchId, path)) return true;
+                }
+            }
+
+            // If not found, remove the current category from the path
+            path.RemoveAt(path.Count - 1);
+            return false;
+        }
+
+        private static List<string> GetCategoryPath(ContentLibraryCategoryTree root, int searchId)
+        {
+            var path = new List<string>();
+
+            if (SearchCategoryPath(root, searchId, path))
+            {
+                // Join the path using " > " to display the full hierarchy
+                return path;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static AddNewContentLibraryCategory GetCategoryTreeStructure(List<ContentLibraryCategoryTree> categories, int categoryId)
+        {
+            var contentLibraryVm = new AddNewContentLibraryCategory();
+
+            var tree = new List<string>();
+            foreach (var category in categories)
+            {
+                tree = GetCategoryPath(category, categoryId);
+                if (tree != null)
+                {
+                    break;
+                }
+            }
+            if (tree.Count > 0)
+            {
+                var categoryName = tree.LastOrDefault();
+                contentLibraryVm.CategoryName = categoryName;
+
+                if (tree.Count > 1)
+                {
+                    tree.RemoveAt(tree.Count - 1);
+                    var structure = string.Join(" > ", tree);
+
+                    contentLibraryVm.ContentLibraryParents = structure;
+                }
+            }
+            return contentLibraryVm;
         }
     }
 }

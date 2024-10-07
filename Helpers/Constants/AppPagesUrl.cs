@@ -52,6 +52,7 @@ namespace CLA_Administration_Web.Helpers.Constants
             //Content Library
             public static string ContentLibraryCategories = $"/{modulesController}/{ModulesPages.ContentLibraryCategories.GetDisplayName()}";
             public static string ContentLibraryCategoryDetails = $"/{modulesController}/{ModulesPages.ContentLibraryCategoryDetails.GetDisplayName()}";
+            public static string AddNewContentLibraryCategory = $"/{modulesController}/{ModulesPages.AddNewContentLibraryCategory.GetDisplayName()}";
             public static string ContentLibraryContent = $"/{modulesController}/{ModulesPages.ContentLibraryContent.GetDisplayName()}";
             public static string ContentLibraryContentDetails = $"/{modulesController}/{ModulesPages.ContentLibraryContentDetails.GetDisplayName()}";
 
@@ -92,7 +93,7 @@ namespace CLA_Administration_Web.Helpers.Constants
             public static string RSSCategoryDetails = $"/{modulesController}/{ModulesPages.RSSCategoryDetails.GetDisplayName()}";
             public static string RSSFeedOverview = $"/{modulesController}/{ModulesPages.RSSFeedOverview.GetDisplayName()}";
             public static string RSSFeedDetails = $"/{modulesController}/{ModulesPages.RSSFeedDetails.GetDisplayName()}";
-            public static string RSSAddNew = $"/{modulesController}/{ModulesPages.RSSAddNew.GetDisplayName()}";
+            public static string RSSAddNewCategory = $"/{modulesController}/{ModulesPages.RSSAddNewCategory.GetDisplayName()}";
             public static string RSSAddNewFeed = $"/{modulesController}/{ModulesPages.RSSAddNewFeed.GetDisplayName()}";
 
             //Additional Components

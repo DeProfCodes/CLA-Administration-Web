@@ -151,7 +151,7 @@ function IsTickerTextsTabValid()
 {
     $("#TickerTextError").text("");
 
-    var tickerText = $("#TickerText").val();
+    var tickerText = $("#TickerText").text();
 
     if (StringNullOrEmpty(tickerText))
     {

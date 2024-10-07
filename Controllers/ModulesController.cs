@@ -115,6 +115,8 @@ namespace CLA_Administration_Web.Controllers
             try
             {
                 data.CategoriesTrees = ModulesMockData.GenerateDummyDataContentLibraryCategories();
+
+                LocalDataStorage.UpdateContentLibraryCategoriesData(data.CategoriesTrees);
             }
             catch(Exception ex)
             {
@@ -130,6 +132,13 @@ namespace CLA_Administration_Web.Controllers
             data.CategoryId = categoryId;
 
             return PartialView(AppPagesLinks.Modules.ContentLibraryCategoryDetailsPageLink, data);
+        }
+
+        public async Task<IActionResult> AddNewContentLibraryCategory(int categoryId=0)
+        {
+            var categoryTreeVm = ModulesHelper.GetCategoryTreeStructure(LocalDataStorage.AllContentLibraryCategories, categoryId);
+
+            return PartialView(AppPagesLinks.Modules.AddNewContentLibraryCategoryPageLink, categoryTreeVm);
         }
 
         public async Task<IActionResult> ContentLibraryContent(int categoryId)
@@ -502,9 +511,9 @@ namespace CLA_Administration_Web.Controllers
             return PartialView(AppPagesLinks.Modules.RssFeedDetailsPageLink, rssCategoryInfo);
         }
 
-        public IActionResult RSSAddNew()
+        public IActionResult RSSAddNewCategory()
         {
-            return PartialView(AppPagesLinks.Modules.RSSAddNewPageLink);
+            return PartialView(AppPagesLinks.Modules.RSSAddNewCategoryPageLink);
         }
 
         public async Task<IActionResult> AddNewRSSFeed(int rssCategoryId)

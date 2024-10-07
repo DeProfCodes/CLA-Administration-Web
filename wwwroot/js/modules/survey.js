@@ -327,35 +327,6 @@ function IsValidDeliveryMethod()
     return true;
 }
 
-function IsPopupTextsTabValid()
-{
-    $("#LinkTypeTextsTitleError").text("");
-    $("#LinkTypeTextsBodyError").text("");
-
-    var titleText = $("#PopupTextHeader").text();
-    var bodyText = $("#PopupTextBody").text();
-
-    var isValid = true;
-
-    if (StringNullOrEmpty(titleText))
-    {
-        $("#LinkTypeTextsTitleError").text("enter popup title text");
-        isValid = false;
-    }
-    if (StringNullOrEmpty(bodyText))
-    {
-        $("#LinkTypeTextsBodyError").text("enter popup title body");
-        isValid = false;
-    }
-
-    if (!isValid)
-    {
-        swal("Popup Texts Error", "Enter Popup Texts", "error");
-    }
-
-    return isValid;
-}
-
 function IsPopupRepeatTabValid()
 {
     var atLeastOneSelected = $('input:radio[name="PopupRepeatOption"]:checked').length > 0;

@@ -141,7 +141,7 @@ namespace CLA_Administration_Web.Helpers.Layout
                 {
                     ModuleName = ModuleNamesType.RSS,
                     OverviewPage = ModulesPages.RSSCategoryOverview,
-                    AddNewPage = ModulesPages.RSSAddNew,
+                    AddNewPage = ModulesPages.RSSAddNewCategory,
                     IconWhiteUrl = $"{whiteModuleIcons}/rss.png",
                     IconBlueUrl = $"{blueModuleIcons}/rss.png"
                 }

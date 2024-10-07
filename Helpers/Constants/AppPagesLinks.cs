@@ -45,6 +45,7 @@
             //Content Library
             public const string ContentLibraryCategoriesPageLink = "~/Views/Modules/ContentLibrary/ContentLibraryCategories.cshtml";
             public const string ContentLibraryCategoryDetailsPageLink = "~/Views/Modules/ContentLibrary/ContentLibraryCategoryDetails.cshtml";
+            public const string AddNewContentLibraryCategoryPageLink = "~/Views/Modules/ContentLibrary/AddNewContentLibraryCategory.cshtml";
             public const string ContentLibraryContentsPageLink = "~/Views/Modules/ContentLibrary/ContentLibraryContentsOverview.cshtml";
             public const string ContentLibraryContentDetailsPageLink = "~/Views/Modules/ContentLibrary/ContentLibraryContentDetails.cshtml";
 
@@ -85,7 +86,7 @@
             public const string RssCategoryDetailsPageLink = "~/Views/Modules/RSS/RssCategoryDetails.cshtml";
             public const string RssFeedOverviewPageLink = "~/Views/Modules/RSS/RssFeedOverview.cshtml";
             public const string RssFeedDetailsPageLink = "~/Views/Modules/RSS/RssFeedDetails.cshtml";
-            public const string RSSAddNewPageLink = "~/Views/Modules/RSS/AddNewRSS.cshtml";
+            public const string RSSAddNewCategoryPageLink = "~/Views/Modules/RSS/AddNewRSSCategory.cshtml";
             public const string RSSAddNewFeedPageLink = "~/Views/Modules/RSS/AddNewRSSFeed.cshtml";
 
             //Previewer Components

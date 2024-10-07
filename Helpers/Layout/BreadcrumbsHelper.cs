@@ -63,9 +63,20 @@ namespace CLA_Administration_Web.Helpers.Layout
                     ModuleName = "Content Library",
                     ModuleSubPage = "Categories",
                     HasActionButton = true,
-                    IsAddNewIcon = false,
+                    IsAddNewIcon = true,
                     ActionButtonText = "Add New Category",
-                    ActionButtonPage = ModulesPages.ContentLibraryContent
+                    ActionButtonPage = ModulesPages.AddNewContentLibraryCategory
+                },
+                new ModuleBreadcrumbViewModel()
+                {
+                    ModulePage = ModulesPages.AddNewContentLibraryCategory,
+                    ModulePageName = "Content Library Module",
+                    ModuleName = "Content Library",
+                    ModuleSubPage = "Add New Categories",
+                    HasActionButton = true,
+                    IsAddNewIcon = false,
+                    ActionButtonText = "Categories Overview",
+                    ActionButtonPage = ModulesPages.ContentLibraryCategories
                 },
                 new ModuleBreadcrumbViewModel()
                 {
@@ -294,7 +305,7 @@ namespace CLA_Administration_Web.Helpers.Layout
                 //RSS
                 new ModuleBreadcrumbViewModel()
                 {
-                    ModulePage = ModulesPages.RSSAddNew,
+                    ModulePage = ModulesPages.RSSAddNewCategory,
                     ModulePageName = "RSS Module",
                     ModuleName = "RSS",
                     ModuleSubPage = "Add New",
@@ -312,7 +323,7 @@ namespace CLA_Administration_Web.Helpers.Layout
                     HasActionButton = true,
                     IsAddNewIcon = true,
                     ActionButtonText = "Add New RSS",
-                    ActionButtonPage = ModulesPages.RSSAddNew
+                    ActionButtonPage = ModulesPages.RSSAddNewCategory
                 },
                 new ModuleBreadcrumbViewModel()
                 {
@@ -326,7 +337,7 @@ namespace CLA_Administration_Web.Helpers.Layout
                     ModulePreviewPage = ModulesPages.RSSCategoryOverview,
                     IsAddNewIcon = true,
                     ActionButtonText = "Edit RSS Category",
-                    ActionButtonPage = ModulesPages.RSSAddNew
+                    ActionButtonPage = ModulesPages.RSSAddNewCategory
                 },
                 new ModuleBreadcrumbViewModel()
                 {
@@ -337,7 +348,7 @@ namespace CLA_Administration_Web.Helpers.Layout
                     HasActionButton = true,
                     IsAddNewIcon = true,
                     ActionButtonText = "Add New Feed",
-                    ActionButtonPage = ModulesPages.RSSAddNew
+                    ActionButtonPage = ModulesPages.RSSAddNewCategory
                 }
             };
             return modulesBreadcrumbs;
