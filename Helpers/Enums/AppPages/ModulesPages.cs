@@ -42,6 +42,9 @@ namespace CLA_Administration_Web.Helpers.Enums.AppPages
         [Display(Name = "ContentLibraryContentDetails", ShortName = "ContentLibrary")]
         ContentLibraryContentDetails,
 
+        [Display(Name = "AddNewContentLibraryContent", ShortName = "ContentLibrary")]
+        AddNewContentLibraryContent,
+
         //Desktop
         [Display(Name = "DesktopOverview", ShortName = "Desktop")]
         DesktopOverview,

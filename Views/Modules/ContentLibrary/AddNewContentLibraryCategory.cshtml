@@ -21,17 +21,20 @@
             <div class="row theme-txt-clr">
                 <h5 class="fw-bold mt-3 text-center">Category Details</h5>
                 <div class="form-border-inputs-content-library">
-                    <div class="row mt-3 mb-4">
-                        <div class="common-titles-col">
-                            <p class="custom-p fl-right">Parent Category</p>
+                    @if (!string.IsNullOrEmpty(Model.CategoryName))
+                    {
+                        <div class="row mt-3 mb-4">
+                            <div class="common-titles-col">
+                                <p class="custom-p fl-right">Parent Category</p>
+                            </div>
+                            <div class="common-titles-value-col">
+                                <p class="fs-14 mb-0">
+                                    <span class="fst-italic theme-txt-clr">@treeParents</span>
+                                    <span class="fw-bold text-success">@Model.CategoryName</span>
+                                </p>
+                            </div>
                         </div>
-                        <div class="common-titles-value-col">
-                            <p class="fs-14 mb-0">
-                                <span class="fst-italic theme-txt-clr">@treeParents</span>
-                                <span class="fw-bold text-success">@Model.CategoryName</span>
-                            </p>
-                        </div>
-                    </div>
+                    }
                     <div class="row">
                         <div class="common-titles-col">
                             <p class="custom-p fl-right">New Category Name</p>

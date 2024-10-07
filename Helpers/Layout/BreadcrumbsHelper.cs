@@ -101,7 +101,7 @@ namespace CLA_Administration_Web.Helpers.Layout
                     HasActionButton = true,
                     IsAddNewIcon = true,
                     ActionButtonText = "Add New Content",
-                    ActionButtonPage = ModulesPages.ContentLibraryCategories
+                    ActionButtonPage = ModulesPages.AddNewContentLibraryContent
                 },
                 //Desktops
                 new ModuleBreadcrumbViewModel()

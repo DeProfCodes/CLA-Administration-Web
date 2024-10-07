@@ -297,7 +297,7 @@
                                     <p class="fw-bold fs-16 text-center">Effective Dates</p>
                                     <div class="mt-4">
                                     @{
-                                        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Form/DateRangePicker.cshtml");
+                                        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Form/DateRangePicker.cshtml", new DateTimeRangePicker { ShowDatesTitle = true });
                                     }
                                     </div>
                                 </div>

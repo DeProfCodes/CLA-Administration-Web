@@ -48,6 +48,7 @@
             public const string AddNewContentLibraryCategoryPageLink = "~/Views/Modules/ContentLibrary/AddNewContentLibraryCategory.cshtml";
             public const string ContentLibraryContentsPageLink = "~/Views/Modules/ContentLibrary/ContentLibraryContentsOverview.cshtml";
             public const string ContentLibraryContentDetailsPageLink = "~/Views/Modules/ContentLibrary/ContentLibraryContentDetails.cshtml";
+            public const string AddNewContentLibraryContentPageLink = "~/Views/Modules/ContentLibrary/AddNewContentLibraryContent.cshtml";
 
             //Desktop
             public const string DesktopOverviewPageLink = "~/Views/Modules/Desktop/DesktopOverview.cshtml";

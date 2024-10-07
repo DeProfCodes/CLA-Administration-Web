@@ -55,6 +55,7 @@ namespace CLA_Administration_Web.Helpers.Constants
             public static string AddNewContentLibraryCategory = $"/{modulesController}/{ModulesPages.AddNewContentLibraryCategory.GetDisplayName()}";
             public static string ContentLibraryContent = $"/{modulesController}/{ModulesPages.ContentLibraryContent.GetDisplayName()}";
             public static string ContentLibraryContentDetails = $"/{modulesController}/{ModulesPages.ContentLibraryContentDetails.GetDisplayName()}";
+            public static string AddNewContentLibraryContent = $"/{modulesController}/{ModulesPages.AddNewContentLibraryContent.GetDisplayName()}";
 
             //Desktop
             public static string DesktopOverview = $"/{modulesController}/{ModulesPages.DesktopOverview.GetDisplayName()}";

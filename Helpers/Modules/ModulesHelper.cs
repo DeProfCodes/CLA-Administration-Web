@@ -309,7 +309,7 @@ namespace CLA_Administration_Web.Helpers.Modules
 
         public static AddNewContentLibraryCategory GetCategoryTreeStructure(List<ContentLibraryCategoryTree> categories, int categoryId)
         {
-            var contentLibraryVm = new AddNewContentLibraryCategory();
+            var contentLibraryVm = new AddNewContentLibraryCategory { CategoryId = categoryId };
 
             var tree = new List<string>();
             foreach (var category in categories)
@@ -320,7 +320,7 @@ namespace CLA_Administration_Web.Helpers.Modules
                     break;
                 }
             }
-            if (tree.Count > 0)
+            if (tree?.Count > 0)
             {
                 var categoryName = tree.LastOrDefault();
                 contentLibraryVm.CategoryName = categoryName;

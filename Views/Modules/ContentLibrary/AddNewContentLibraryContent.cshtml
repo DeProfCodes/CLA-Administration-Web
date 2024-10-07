@@ -1,0 +1,210 @@
+﻿@model CLA_Administration_Web.ViewModels.Modules.LDS.AddNewContentLibraryCategory
+@using CLA_Administration_Web.Helpers.Enums.AppPages
+@using CLA_Administration_Web.ViewModels.Modules.Components.Form
+
+@{
+    var treeParents = !string.IsNullOrEmpty(Model.ContentLibraryParents) ? $"{Model.ContentLibraryParents} > " : "";
+}
+
+<div class="container-fluid">
+    <!-- Breadcrumb -->
+    <div class="row mb-2">
+        <div class="w-auto">
+            <h2 class="theme-txt-clr breadcrumb-title">Content Library Module</h2>
+            <p class="breadcrumb-nav-body">
+                <span class="breadcrumb-item-nav" onclick="OpenPageWithAnimations('Dashboard', null, '@DashboardPages.Dashboard', 'DashboardSubLink')">Dashboard</span> /
+                <span class="breadcrumb-item-nav" onclick="OpenPageWithAnimations('Modules', null, '@ModulesPages.AllModules', 'AllModulesLink', true)">Modules</span> /
+                <span class="breadcrumb-item-nav" onclick="OpenPageWithAnimations('Modules', 'Survey', '@ModulesPages.ContentLibraryCategories', 'ContentLibraryCategoriesLink')">Content Library </span> /
+                <span class="breadcrumb-item-nav" onclick="OpenPageWithAnimations('Modules', 'Survey', '@ModulesPages.ContentLibraryCategories', 'ContentLibraryCategoriesLink')">Categories</span> /
+                <span class="breadcrumb-item-nav" onclick="OpenPage('@ModulesPages.ContentLibraryCategoryDetails', '@Model.CategoryId');">@Model.CategoryId</span> /
+                <span class="breadcrumb-item-nav" onclick="OpenPage('@ModulesPages.ContentLibraryContent', '@Model.CategoryId')">Contents Overview</span> /
+                <span class="breadcrumb-item">Add New Content</span>
+            </p>
+        </div>
+    </div>
+
+    <!-- Card for Title -->
+    <div class="card mb-4 mt-2" style="min-width:940px;">
+        <div class="card-body pb-0">
+            <h4 class="w-100 text-center theme-txt-clr">Add Content Library Category</h4>
+        </div>
+    </div>
+
+    <div class="card" style="min-width:940px;min-height:500px">
+        <div class="card-body">
+            <div class="row theme-txt-clr">
+                <h5 class="fw-bold mt-3 text-center">Content Details</h5>
+                <div class="form-border-inputs-content-library" style="width:900px">
+                    <div class="row mt-3 mb-4">
+                        <div class="common-titles-col">
+                            <p class="custom-p fl-right">Category</p>
+                        </div>
+                        <div class="common-titles-value-col">
+                            <p class="fs-14 mb-0">
+                                <span class="fst-italic theme-txt-clr">@treeParents</span>
+                                <span class="fw-bold text-success">@Model.CategoryName</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="common-titles-col">
+                            <p class="custom-p fl-right">Content Description</p>
+                        </div>
+                        <div class="common-titles-value-col">
+                            <input class="custom-input-text w-250p" type="text" id="NewContentLibCategoryName" />
+                            <p class="mb-0 fs-12 text-danger fst-italic ps-1" id="NewContentLibCategoryNameError"></p>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="common-titles-col">
+                            <p class="custom-p fl-right">User Last Modified</p>
+                        </div>
+                        <div class="common-titles-value-col">
+                            <p class="custom-p fw-bold">NDHUVAZIM</p>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="common-titles-col">
+                            <p class="custom-p fl-right">Machine Last Modified</p>
+                        </div>
+                        <div class="common-titles-value-col">
+                            <p class="custom-p fw-bold">Proficient-PC</p>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="common-titles-col">
+                            <p class="custom-p fl-right">Content Type</p>
+                        </div>
+                        <div class="common-titles-value-col">
+                            <select class="custom-input-text w-250p" id="NewContentLibCategoryDescription">
+                                <option value="Image">Image</option>
+                                <option value="Video">Video</option>
+                                <option value="Audio">Audio</option>
+                                <option value="URL">URL</option>
+                            </select>
+                            <p class="mb-0 fs-12 text-danger fst-italic ps-1" id="NewContentLibCategoryDescriptionError"></p>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="common-titles-col" style="align-content: flex-start;">
+                            <p class="custom-p fl-right">Content</p>
+                        </div>
+                        <div class="common-titles-value-col">
+                            <!-- Uploader Component -->
+                            @{
+                                await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Form/FileUploader.cshtml",
+                                new FileUploaderModel 
+                                { 
+                                    ComponentId = "ContentLibraryContent", 
+                                    InputId = "NewContentInput", 
+                                    ShowPreviewButton = true, 
+                                    InitialHidden = false, 
+                                    WidthPx = "275px", 
+                                    OnFileUploadCallback = null 
+                                });
+                            }
+                            <p class="mb-0 fs-12 text-danger fst-italic ps-1" id="NewContentLibCategoryNameError"></p>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="common-titles-col" style="align-content: flex-start;">
+                            <p class="custom-p fl-right">Effective Dates</p>
+                        </div>
+                        <div class="common-titles-value-col" style="margin-left:-20px">
+                            @{
+                                await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Form/DateRangePicker.cshtml", new DateTimeRangePicker { ShowDatesTitle = false });
+                             }
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="common-titles-col">
+                            <p class="custom-p fl-right">Targeted Modules</p>
+                        </div>
+                        <div class="common-titles-value-col">
+                            <div class="d-flex">
+                                <div class="form-check form-switch w-fit-content mb-0">
+                                    <label class="form-check-label fs-12 fw-bold" for="AutoHidePopupToggle">Screensaver</label>
+                                    <input class="form-check-input" type="checkbox" id="AutoHidePopupToggle">
+                                </div>
+                                <div class="form-check form-switch w-fit-content mb-0 ms-2">
+                                    <label class="form-check-label fs-12 fw-bold" for="AutoHidePopupToggle">Desktop</label>
+                                    <input class="form-check-input" type="checkbox" id="AutoHidePopupToggle">
+                                </div>
+                                <div class="form-check form-switch w-fit-content mb-0 ms-2">
+                                    <label class="form-check-label fs-12 fw-bold" for="AutoHidePopupToggle">Locked Desktop</label>
+                                    <input class="form-check-input" type="checkbox" id="AutoHidePopupToggle">
+                                </div>
+                            </div>
+                            <p class="mb-0 fs-12 text-danger fst-italic ps-1" id="NewContentLibCategoryNameError"></p>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="common-titles-col">
+                            <p class="custom-p fl-right">Default Duration</p>
+                        </div>
+                        <div class="common-titles-value-col">
+                            <input class="custom-input-text w-50p" type="number" step="1" min="1" value="1" id="NewContentLibCategoryName" />
+                            <p class="mb-0 fs-12 text-danger fst-italic ps-1" id="NewContentLibCategoryNameError"></p>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="common-titles-col">
+                            <p class="custom-p fl-right">Targeting</p>
+                        </div>
+                        <div class="common-titles-value-col">
+                            <button class="btn btn-warning btn-sm">Set Content Targeting</button>
+                            <button class="btn btn-info btn-sm ms-2">Open Targeting</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-3">
+                    <button class="btn btn-sm btn-success px-5" onclick="SubmitNewContentLibraryCategory()">Save Content</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@{
+    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/ContentPreviewers/AllContentPreviewer.cshtml");
+}
+
+
+<script>
+
+    function ValidateContentLibraryCategory()
+    {
+        $("#NewContentLibCategoryNameError").text("");
+        $("#NewContentLibCategoryDescriptionError").text("");
+
+        var valid = true;
+
+        if (IsEmptyInput("NewContentLibCategoryName"))
+        {
+            $("#NewContentLibCategoryNameError").text("please enter category name");
+            valid = false;
+        }
+        if (IsEmptyInput("NewContentLibCategoryDescription"))
+        {
+            $("#NewContentLibCategoryDescriptionError").text("please enter category description");
+            valid = false;
+        }
+
+        if (!valid)
+        {
+            swal("New Category Success", "Please enter all required fields", "error");
+        }
+        return valid;
+    }
+
+    function SubmitNewContentLibraryCategory()
+    {
+        var valid = SubmitNewContentLibraryCategory();
+
+        if (valid)
+        {
+            swal("New Category Success", "Content Library Category (will be) Added Successfully.", "success");
+        }
+    }
+
+
+</script>

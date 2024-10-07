@@ -2,6 +2,10 @@
 {
     public class DateTimeRangePicker
     {
+        public bool ShowDatesTitle { get; set; }
+
+        public bool ShowTimesTitle { get; set; }
+
         public string StartDateId { get; set; }
 
         public string EndDateId { get; set; }

@@ -6,6 +6,7 @@
     var pageType = Model.ActionButtonPage;
     var moduleName = pageType.GetDisplayShortName();
     var navPageId = $"{pageType.GetDisplayName()}Link";
+    var overviewBtnId = $"{Model.ModulePreviewPage.GetDisplayName()}Link";
 }
 
 
@@ -17,13 +18,12 @@
             <p class="breadcrumb-nav-body">
                 <span class="breadcrumb-item-nav" onclick="OpenPageWithAnimations('Dashboard', null, '@DashboardPages.Dashboard', 'DashboardSubLink')">Dashboard</span> /
                 <span class="breadcrumb-item-nav" onclick="OpenPageWithAnimations('Modules', null, '@ModulesPages.AllModules', 'AllModulesLink', true)">Modules</span> /
-                <span class="breadcrumb-item">@Model.ModuleName</span> /
+                <span class="breadcrumb-item-nav" onclick="OpenPageWithAnimations('Modules', '@moduleName', '@Model.ModulePreviewPage', '@overviewBtnId')">@Model.ModuleName</span> /
                 <span class="breadcrumb-item">@Model.ModuleSubPage</span>
             </p>
         }
         else if (Model.IsDetailsPage)
         {
-            var overviewBtnId = $"{Model.ModulePreviewPage.GetDisplayName()}Link";
             <p class="breadcrumb-nav-body">
                 <span class="breadcrumb-item-nav" onclick="OpenPageWithAnimations('Dashboard', null, '@DashboardPages.Dashboard', 'DashboardSubLink')">Dashboard</span> /
                 <span class="breadcrumb-item-nav" onclick="OpenPageWithAnimations('Modules', null, '@ModulesPages.AllModules', 'AllModulesLink', true)">Modules</span> /

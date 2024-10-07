@@ -136,7 +136,7 @@ namespace CLA_Administration_Web.Controllers
 
         public async Task<IActionResult> AddNewContentLibraryCategory(int categoryId=0)
         {
-            var categoryTreeVm = ModulesHelper.GetCategoryTreeStructure(LocalDataStorage.AllContentLibraryCategories, categoryId);
+            var categoryTreeVm = (categoryId != null && categoryId != 0) ? ModulesHelper.GetCategoryTreeStructure(LocalDataStorage.AllContentLibraryCategories, categoryId) : new();
 
             return PartialView(AppPagesLinks.Modules.AddNewContentLibraryCategoryPageLink, categoryTreeVm);
         }
@@ -172,6 +172,12 @@ namespace CLA_Administration_Web.Controllers
             return PartialView(AppPagesLinks.Modules.ContentLibraryContentDetailsPageLink, contentInfo);
         }
 
+        public async Task<IActionResult> AddNewContentLibraryContent(int categoryId)
+        {
+            var categoryTreeVm = ModulesHelper.GetCategoryTreeStructure(LocalDataStorage.AllContentLibraryCategories, categoryId);
+            
+            return PartialView(AppPagesLinks.Modules.AddNewContentLibraryContentPageLink, categoryTreeVm);
+        }
         #endregion
 
         #region Desktop
