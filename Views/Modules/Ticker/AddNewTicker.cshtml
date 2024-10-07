@@ -201,7 +201,13 @@
                                     </div>
                                 </div>
                             </div>
-
+                            <div class="row">
+                                <p class="w-600p mx-auto p-2 theme-border">
+                                    This survey will attempt to show everyday startting from <span id="TickerStartEffDate"></span>, until <span id="TickerEndEffDate"></span>.
+                                    It will only appear between the time range of <span id="TickerStartTimeSlot"></span> and <span id="TickerEndTimeSlot"></span>. Once
+                                    this survey has been completed/opted out. it will not display again
+                                </p>
+                            </div>
                         </div>
                         <!-- Target Users -->
                         <div id="TargetUserTab-4" class="ticker-wizard-tabs flex-wrap  text-center justify-content-center mb-3 hidden">
@@ -245,6 +251,43 @@
     $(document).ready(function ()
     {
         HideAllTickerTabs();
+        UpdateTickerDisplayTimeDetails();
+    });
+
+    function UpdateTickerDisplayTimeDetails()
+    {
+        var startDate = $("#DatePickerStartDate").val();
+        var endDate = $("#DatePickerEndDate").val();
+        var startTime = $("#TimePickerStartTime").val();
+        var endTime = $("#TimePickerEndTime").val();
+
+        if (IsNotEmptyString(startDate) && IsNotEmptyString(endDate) && IsNotEmptyString(startTime) && IsNotEmptyString(endTime))
+        {
+            $("#TickerStartEffDate").text(startDate);
+            $("#TickerEndEffDate").text(endDate);
+            $("#TickerStartTimeSlot").text(startTime);
+            $("#TickerEndTimeSlot").text(endTime);
+        }
+    }
+
+    $("#DatePickerStartDate").change(function ()
+    {
+        UpdateTickerDisplayTimeDetails();
+    });
+
+    $("#DatePickerEndDate").change(function ()
+    {
+        UpdateTickerDisplayTimeDetails();
+    });
+
+    $("#TimePickerStartTime").change(function ()
+    {
+        UpdateTickerDisplayTimeDetails();
+    });
+
+    $("#TimePickerEndTime").change(function ()
+    {
+        UpdateTickerDisplayTimeDetails();
     });
 
 

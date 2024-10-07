@@ -10,7 +10,7 @@
         <div id="dateRange"></div>
         <div class="col-md-8 d-flex">
             <i class="fas fa-calendar-alt calendar-icon-date-box" onclick="OpenDatePicker()"></i>
-            <input type="text" class="custom-input-text" id="DatePickerStartDate" readonly onclick="OpenDatePicker()" />
+            <input type="text" class="custom-input-text fs-12 w-250p" id="DatePickerStartDate" readonly onclick="OpenDatePicker()" />
         </div>
     </div>
     <div class="d-flex">
@@ -19,7 +19,7 @@
         </div>
         <div class="col-md-8 d-flex">
             <i class="fas fa-calendar-alt calendar-icon-date-box" onclick="OpenDatePicker()"></i>
-            <input type="text" class="custom-input-text" id="DatePickerEndDate" readonly onclick="OpenDatePicker()" />
+            <input type="text" class="custom-input-text fs-12 w-250p" id="DatePickerEndDate" readonly onclick="OpenDatePicker()" />
         </div>
     </div>
 </div>
@@ -39,8 +39,8 @@
     {
         var today = FormatDate(TodayDate(), "DD-MMM-YYYY");
 
-        $("#DatePickerStartDate").val(today);
-        $("#DatePickerEndDate").val(today);
+        $("#DatePickerStartDate").val(FormatDate(today, 'DDDD, DD MMMM YYYY'));
+        $("#DatePickerEndDate").val(FormatDate(today, 'DDDD, DD MMMM YYYY'));
     }
 
     function InitializeDatePicker()
@@ -54,8 +54,8 @@
         }, 
         function (start, end)
         {
-            $('#DatePickerStartDate').val(start.format('DD MMM YYYY'));
-            $('#DatePickerEndDate').val(end.format('DD MMM YYYY'));
+            $('#DatePickerStartDate').val(FormatDate(start,'DDDD, DD MMMM YYYY'));
+            $('#DatePickerEndDate').val(FormatDate(end, 'DDDD, DD MMMM YYYY'));
         });
     }
 
