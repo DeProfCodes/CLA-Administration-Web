@@ -25,7 +25,8 @@
         if (page == '@ModulesPages.ModuleLDSTableOverview') url = '@AppPagesUrl.Modules.ModuleLDSTableOverview';
         if (page == '@ModulesPages.ModuleLDSCalendarOverview') url = '@AppPagesUrl.Modules.ModuleLDSCalendarOverview';
         if (page == '@ModulesPages.ModuleLDSGanttOverview') url = '@AppPagesUrl.Modules.ModuleLDSGanttOverview';
-        
+        if (page == '@ModulesPages.AddNewLDSModule') url = '@AppPagesUrl.Modules.AddNewLDSModuleTableOverview' + `?moduleNameType=${id}`;
+
         // Content Library
         if (page == '@ModulesPages.ContentLibraryCategories') url = '@AppPagesUrl.Modules.ContentLibraryCategories';
         if (page == '@ModulesPages.ContentLibraryCategoryDetails') url = '@AppPagesUrl.Modules.ContentLibraryCategoryDetails' + `?categoryId=${id}`;

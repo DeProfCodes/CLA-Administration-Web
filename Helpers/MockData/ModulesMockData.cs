@@ -476,7 +476,7 @@ namespace CLA_Administration_Web.Helpers.MockData
             DateTime effectiveFrom = new();
             DateTime effectiveTo = new();
 
-            for (int i = 1; i <= 10; i++)
+            for (int i = 1; i <= 1000; i++)
             {
                 GetEffectiveDates(ref effectiveFrom, ref effectiveTo, i);
 

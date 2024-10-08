@@ -48,6 +48,7 @@ namespace CLA_Administration_Web.Helpers.Constants
             public static string ModuleLDSTableOverview = $"/{modulesController}/{ModulesPages.ModuleLDSTableOverview.GetDisplayName()}";
             public static string ModuleLDSCalendarOverview = $"/{modulesController}/{ModulesPages.ModuleLDSCalendarOverview.GetDisplayName()}";
             public static string ModuleLDSGanttOverview = $"/{modulesController}/{ModulesPages.ModuleLDSGanttOverview.GetDisplayName()}";
+            public static string AddNewLDSModuleTableOverview = $"/{modulesController}/{ModulesPages.AddNewLDSModule.GetDisplayName()}";
 
             //Content Library
             public static string ContentLibraryCategories = $"/{modulesController}/{ModulesPages.ContentLibraryCategories.GetDisplayName()}";

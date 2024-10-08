@@ -48,6 +48,9 @@ function LoadPartialView(url, destinationDiv)
 
 function LoadPartialViewWithLoader(url, destinationDiv, loaderDiv)
 {
+    destinationDiv = EnsureJQueryId(destinationDiv);
+    loaderDiv = EnsureJQueryId(loaderDiv);
+
     $.ajax({
         url: url,
         type: 'GET',

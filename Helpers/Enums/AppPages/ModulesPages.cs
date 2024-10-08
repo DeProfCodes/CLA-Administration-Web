@@ -26,6 +26,9 @@ namespace CLA_Administration_Web.Helpers.Enums.AppPages
         [Display(Name = "ModuleLDSGanttOverview", ShortName = "LDS")]
         ModuleLDSGanttOverview,
 
+        [Display(Name = "AddNewLDSModule", ShortName = "LDS")]
+        AddNewLDSModule,
+
         //Content Library
         [Display(Name = "ContentLibraryCategories", ShortName = "ContentLibrary")]
         ContentLibraryCategories,

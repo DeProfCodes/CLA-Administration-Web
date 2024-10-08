@@ -41,6 +41,7 @@
             public const string ModuleLDSTableOverviewPageLink = "~/Views/Shared/Components/Custom/Modules/Overviews/LDS/ModuleLDSTableOverview.cshtml";
             public const string ModuleLDSGanttOverviewPageLink = "~/Views/Shared/Components/Custom/Modules/Overviews/LDS/ModuleLDSGanttOverview.cshtml";
             public const string ModuleLDSCalendarOverviewPageLink = "~/Views/Shared/Components/Custom/Modules/Overviews/LDS/ModuleLDSCalendarOverview.cshtml";
+            public const string AddNewLDSModulePageLink = "~/Views/Shared/Components/Custom/Modules/Overviews/LDS/AddNewLDSModule.cshtml";
 
             //Content Library
             public const string ContentLibraryCategoriesPageLink = "~/Views/Modules/ContentLibrary/ContentLibraryCategories.cshtml";

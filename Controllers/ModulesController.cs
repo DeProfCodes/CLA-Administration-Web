@@ -104,6 +104,34 @@ namespace CLA_Administration_Web.Controllers
             return PartialView(AppPagesLinks.Modules.ModuleLDSGanttOverviewPageLink, ganttChartVM);
         }
 
+        public async Task<IActionResult> AddNewLDSModule(ModuleNamesType moduleNameType)
+        {
+            var contents = await _moduleService.GetAllContentLibraryContents();
+
+            contents.ForEach(s =>
+            {
+                s.Status = ModulesHelper.GetModuleStatus(s.EffectiveFrom, s.EffectiveTo);
+                s.EffectiveFromDate = TypesParserHelper.ParseDate(s.EffectiveFrom);
+                s.EffectiveToDate = TypesParserHelper.ParseDate(s.EffectiveTo);
+                s.TargetedModulesFullName = ModulesHelper.ConvertTargetedModulesToFullNames(s.TargetedModules);
+            });
+
+            var moduleSearchName = moduleNameType != ModuleNamesType.LockedDesktop ? moduleNameType.GetDisplayName().ToLower() : "lockscreen";
+            
+            contents = contents.Where(x => 
+                                            x.TargetedModulesFullName.ToLower().Contains(moduleSearchName) &&
+                                            x.EffectiveFromDate.ToString("MM/YY") == DateTime.Today.ToString("MM/YY")
+                                     ).ToList();
+
+            var contentsViewModel = new ContentLibraryContentsViewModel
+            {
+                ContentLibraryContents = contents,
+                ModuleName = moduleNameType
+            };
+
+
+            return PartialView(AppPagesLinks.Modules.AddNewLDSModulePageLink, contentsViewModel);
+        }
         #endregion
 
         #region Content Library
