@@ -20,7 +20,7 @@
                         <h5 class="fw-bold mt-4 theme-txt-clr w-fit-content">Select Locked Desktop Content</h5>
                     </div>
                     <div class="w-fit-content ms-auto align-content-center" style="margin-right:-25px;">
-                        <button class="btn btn-sm btn-success">Add New Content</button>
+                        <button class="btn btn-sm btn-success" onclick="AddNewLockedDesktopContent()">Add New Content</button>
                     </div>
                 </div>
                 <div id="LockedDesktopAvailableContent">
@@ -45,6 +45,11 @@
         var url = GetPageUrl('@ModulesPages.AddNewLDSModule', '@ModuleNamesType.LockedDesktop');
 
         LoadPartialViewWithLoader(url, "LockedDesktopAvailableContent", "SecondaryLoader");
+    }
+
+    function AddNewLockedDesktopContent()
+    {
+        OpenPage('@ModulesPages.AddNewContentLibraryContent', 0, '@ModuleNamesType.LockedDesktop');
     }
 
 </script>

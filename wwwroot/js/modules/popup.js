@@ -62,7 +62,7 @@ function LoadDefaultSkinPreview()
 function HideAllPopupTabs()
 {
     HideShowElement(".popup-wizard-tabs", HideShow.HIDE);
-    HideShowElement("#LinkTypeTab-1", HideShow.SHOW);
+    HideShowElement("#TargetUserTab-8", HideShow.SHOW);
 }
 
 function PopupLinkTypeClick(linkBtnId)
@@ -365,7 +365,6 @@ function PopupRepeatOptionSelect(id)
 
 function UpdatePopupFeedback()
 {
-
     if (IsCheckboxChecked("FeedbackLikeDislikeToggle") || IsCheckboxChecked("FeedbackCommentToggle"))
     {
         HideShowElementVisibity("#PopupFeedbackContents", HideShow.SHOW);

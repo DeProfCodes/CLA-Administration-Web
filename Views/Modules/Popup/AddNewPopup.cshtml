@@ -3,6 +3,7 @@
 @using CLA_Administration_Web.Helpers.Constants
 @using CLA_Administration_Web.Helpers.Enums.AppPages
 @using CLA_Administration_Web.Helpers.Enums.Shared
+@using CLA_Administration_Web.Helpers.Enums.Shared.PageNames
 @using CLA_Administration_Web.ViewModels.Modules.Components.Form
 @using CLA_Administration_Web.ViewModels.Modules.PST
 
@@ -448,9 +449,11 @@
                         </div>
                         <!-- Target Users -->
                         <div id="TargetUserTab-8" class="popup-wizard-tabs flex-wrap  text-center align-content-center justify-content-center mb-3">
-                            <h5 class="fw-bold mb-3 module-heading-theme">8. Popup Target Users</h5>
-                            <p class="module-heading-theme">Popup target user settings.</p>
-                            <!-- Add content for Popup 8 -->
+                            <h5 class="fw-bold mt-4">8. Popup Target Users</h5>
+                            <p class="custom-p mt-4 fs-13 text-center">Popup target user settings.</p>
+                            <div id="PopupTargetedEntities">
+
+                            </div>
                         </div>
                         <!-- Exposure Summary Tab -->
                         <div id="ExposureSummaryTab-9" class="popup-wizard-tabs flex-wrap  text-center align-content-center justify-content-center mb-3">
@@ -559,8 +562,15 @@
         IntilizeSkinsPreview();
         PopupRepeatInitailExpirationDate();
         UpdatePopupDisplayTimeDetails();
+        LoadPopupTargetedEntity();
     });
     
+    function LoadPopupTargetedEntity()
+    {
+        var url = GetPageUrl('@TargetingPages.TargetedEntities', '@ModuleNamesType.Popup');
+        LoadPartialView(url, "PopupTargetedEntities");
+    }
+
     function UpdatePopupDisplayTimeDetails()
     {
         var startDate = $("#DatePickerStartDate").val();

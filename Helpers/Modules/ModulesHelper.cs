@@ -268,37 +268,49 @@ namespace CLA_Administration_Web.Helpers.Modules
             return string.Join(" | ", fullNames);
         }
 
-        private static bool SearchCategoryPath(ContentLibraryCategoryTree category, int searchId, List<string> path)
+        public static bool SearchCategoryPath(ContentLibraryCategoryTree category, List<ContentLibraryCategoryModel> path, int searchId=0)
         {
             if (category == null) return false;
 
-            // Add current category name to the path
-            path.Add(category.CategoryName);
+            // Add current category data to the path
+            path.Add(new ContentLibraryCategoryModel
+            {
+                CategoryId = category.CategoryId,
+                CategoryName = category.CategoryName,
+                CategoryDescription = category.CategoryDescription,
+                ContentsCount = category.ContentsCount,
+                DateLastModified = "2024-01-01",  // Example date
+                UserLastModified = "UserA",       // Example user
+                MachineLastModified = "Machine1"  // Example machine
+            });
 
             // Check if the current category ID matches the search ID
-            if (category.CategoryId == searchId) return true;
+            if (searchId != 0 && category.CategoryId == searchId) return true;
 
             // If category has children, search in them
             if (category._children != null)
             {
                 foreach (var child in category._children)
                 {
-                    if (SearchCategoryPath(child, searchId, path)) return true;
+                    if (SearchCategoryPath(child, path, searchId)) return true;
                 }
             }
 
             // If not found, remove the current category from the path
             path.RemoveAt(path.Count - 1);
-            return false;
+
+            if (searchId != 0)
+                return false;
+            else
+                return true;
         }
 
-        private static List<string> GetCategoryPath(ContentLibraryCategoryTree root, int searchId)
+        private static List<ContentLibraryCategoryModel> GetCategoryPath(ContentLibraryCategoryTree root, int searchId=0)
         {
-            var path = new List<string>();
+            var path = new List<ContentLibraryCategoryModel>();
 
-            if (SearchCategoryPath(root, searchId, path))
+            if (SearchCategoryPath(root, path, searchId))
             {
-                // Join the path using " > " to display the full hierarchy
                 return path;
             }
             else
@@ -307,33 +319,44 @@ namespace CLA_Administration_Web.Helpers.Modules
             }
         }
 
+        public static List<ContentLibraryCategoryModel> GetAllCategoriesInTree(List<ContentLibraryCategoryTree> categories, int categoryId=0)
+        {
+            var result = new List<ContentLibraryCategoryModel>();
+
+            foreach (var category in categories)
+            {
+                var data = GetCategoryPath(category, categoryId);
+                if (data != null)
+                {
+                    result.AddRange(data);
+                }
+            }
+            return result;
+        }
+
         public static AddNewContentLibraryCategory GetCategoryTreeStructure(List<ContentLibraryCategoryTree> categories, int categoryId)
         {
             var contentLibraryVm = new AddNewContentLibraryCategory { CategoryId = categoryId };
 
-            var tree = new List<string>();
-            foreach (var category in categories)
-            {
-                tree = GetCategoryPath(category, categoryId);
-                if (tree != null)
-                {
-                    break;
-                }
-            }
+            var tree = GetAllCategoriesInTree(categories, categoryId);
+
             if (tree?.Count > 0)
             {
-                var categoryName = tree.LastOrDefault();
+                var categoryName = tree.LastOrDefault().CategoryName;
                 contentLibraryVm.CategoryName = categoryName;
 
                 if (tree.Count > 1)
                 {
                     tree.RemoveAt(tree.Count - 1);
-                    var structure = string.Join(" > ", tree);
+                    var categoryList = tree.Select(x => x.CategoryName);
+
+                    var structure = string.Join(" > ", categoryList);
 
                     contentLibraryVm.ContentLibraryParents = structure;
                 }
             }
             return contentLibraryVm;
         }
+
     }
 }

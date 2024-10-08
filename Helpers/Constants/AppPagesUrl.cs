@@ -8,6 +8,7 @@ namespace CLA_Administration_Web.Helpers.Constants
         public static string BaseAddress = LaunchSettingsHelper.GetBaseAddressForControllers();
 
         public static string adminController = $"{BaseAddress}Admin";
+        public static string targetingController = $"{BaseAddress}Targeting";
         public static string accountController = $"{BaseAddress}Account";
         public static string dashboardController = $"{BaseAddress}Dashboard";
         public static string modulesController = $"{BaseAddress}Modules";
@@ -22,6 +23,11 @@ namespace CLA_Administration_Web.Helpers.Constants
             public static string Licensing = $"/{adminController}/{AdminPages.Licensing}";
             public static string AutoReminders = $"/{adminController}/{AdminPages.AutoReminders}";
             public static string SQLBrowser = $"/{adminController}/{AdminPages.SQLBrowser}";
+        }
+
+        public class Targeting
+        {
+            public static string TargetedEntities = $"/{targetingController}/{TargetingPages.TargetedEntities}";
         }
 
         public class Account

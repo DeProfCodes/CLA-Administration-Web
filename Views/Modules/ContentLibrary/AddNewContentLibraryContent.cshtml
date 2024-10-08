@@ -1,9 +1,11 @@
 ﻿@model CLA_Administration_Web.ViewModels.Modules.LDS.AddNewContentLibraryCategory
 @using CLA_Administration_Web.Helpers.Enums.AppPages
+@using CLA_Administration_Web.Helpers.Enums.Shared.PageNames
 @using CLA_Administration_Web.ViewModels.Modules.Components.Form
 
 @{
     var treeParents = !string.IsNullOrEmpty(Model.ContentLibraryParents) ? $"{Model.ContentLibraryParents} > " : "";
+    var isLDSModule = Model.ModuleName == ModuleNamesType.Screensaver || Model.ModuleName == ModuleNamesType.LockedDesktop || Model.ModuleName == ModuleNamesType.Desktop;
 }
 
 <div class="container-fluid">
@@ -40,10 +42,42 @@
                             <p class="custom-p fl-right">Category</p>
                         </div>
                         <div class="common-titles-value-col">
-                            <p class="fs-14 mb-0">
-                                <span class="fst-italic theme-txt-clr">@treeParents</span>
-                                <span class="fw-bold text-success">@Model.CategoryName</span>
-                            </p>
+                            @if (!isLDSModule)
+                            {   
+                                <p class="fs-14 mb-0">
+                                    <span class="fst-italic theme-txt-clr">@treeParents</span>
+                                    <span class="fw-bold text-success">@Model.CategoryName</span>
+                                </p>
+                            }
+                            else
+                            {
+                                <select class="custom-input-text" id="NewContentCategorySelect" onchange="ToggleNewCategoryFields(this.id)">
+                                    <option value="0">Please select category</option>
+                                    <option value="-142" class="text-success fw-bold" onclick="CreateNewCategory()">Create New Category.....</option>
+                                    @foreach (var category in Model.ContentCategories)
+                                    {
+                                        <option value="@category.CategoryId">@category.CategoryName</option>   
+                                    }
+                                </select>
+                            }
+                        </div>
+                    </div>
+                    <div class="row mt-3 new-category hidden">
+                        <div class="common-titles-col">
+                            <p class="custom-p fl-right fw-bold">New Category Name</p>
+                        </div>
+                        <div class="common-titles-value-col">
+                            <input class="custom-input-text w-250p" type="text" id="NewContentLibCategoryName" />
+                            <p class="mb-0 fs-12 text-danger fst-italic ps-1" id="NewContentLibCategoryNameError"></p>
+                        </div>
+                    </div>
+                    <div class="row mt-3 mb-3 new-category hidden">
+                        <div class="common-titles-col">
+                            <p class="custom-p fl-right fw-bold">New Category Description</p>
+                        </div>
+                        <div class="common-titles-value-col">
+                            <input class="custom-input-text w-250p" type="text" id="NewContentLibCategoryName" />
+                            <p class="mb-0 fs-12 text-danger fst-italic ps-1" id="NewContentLibCategoryNameError"></p>
                         </div>
                     </div>
                     <div class="row">
@@ -158,7 +192,7 @@
                     </div>
                 </div>
                 <div class="text-center mt-3">
-                    <button class="btn btn-sm btn-success px-5" onclick="SubmitNewContentLibraryCategory()">Save Content</button>
+                    <button class="btn btn-sm btn-success px-5" onclick="SubmitNewContentLibraryContents()">Save Content</button>
                 </div>
             </div>
         </div>
@@ -196,15 +230,35 @@
         return valid;
     }
 
-    function SubmitNewContentLibraryCategory()
+    function SubmitNewContentLibraryContents()
     {
-        var valid = SubmitNewContentLibraryCategory();
+        var valid = true;//SubmitNewContentLibraryCategory();
 
         if (valid)
         {
             swal("New Category Success", "Content Library Category (will be) Added Successfully.", "success");
         }
+
+        var redirectPage = "@ModulesPages.ContentLibraryContent";
+        if ('@Model.ModuleName' == '@ModuleNamesType.Screensaver') redirectPage = '@ModulesPages.ScreensaverAddNew';
+        if ('@Model.ModuleName' == '@ModuleNamesType.LockedDesktop') redirectPage = '@ModulesPages.LockedDesktopAddNew';
+        if ('@Model.ModuleName' == '@ModuleNamesType.Desktop') redirectPage = '@ModulesPages.DesktopAddNew';
+
+        OpenPage(redirectPage);
     }
 
+    function ToggleNewCategoryFields(id)
+    {
+        var val = $(`#${id}`).val();
+
+        if(val == -142)
+        {
+            HideShowElement(".new-category", HideShow.SHOW);
+        }
+        else
+        {
+            HideShowElement(".new-category", HideShow.HIDE);
+        }
+    }
 
 </script>

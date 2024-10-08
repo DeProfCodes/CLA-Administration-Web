@@ -107,11 +107,14 @@
                                     <i class="ri-menu-search-fill left-sub-nav-icons" id="@overviewLeftIcon"></i><span class="left-sub-nav-title">Overview</span>
                                 </a>
                             </li>
-                            <li>
-                                <a onclick="OpenLeftNavigationPage('@modulePage.AddNewPage', '@addNewId')" class="left-sub-nav-link" id="@addNewId">
-                                    <i class="bi bi-plus-circle-fill left-sub-nav-icons" id="@leftIconId"></i><span class="left-sub-nav-title">Add New</span>
-                                </a>
-                            </li>
+                            @if (modulePage.ModuleName != ModuleNamesType.ContentLibrary)
+                            {
+                                <li>
+                                    <a onclick="OpenLeftNavigationPage('@modulePage.AddNewPage', '@addNewId')" class="left-sub-nav-link" id="@addNewId">
+                                        <i class="bi bi-plus-circle-fill left-sub-nav-icons" id="@leftIconId"></i><span class="left-sub-nav-title">Add New</span>
+                                    </a>
+                                </li>
+                            }
                         </ul>
                     </li>
                 }
@@ -237,7 +240,7 @@
 
     function InitialPage()
     {
-        OpenPageWithAnimations('Modules', 'Screensaver', '@ModulesPages.ScreensaverAddNew', 'AddNewScreensaverLink');
+        OpenPageWithAnimations('Modules', 'Popup', '@ModulesPages.PopupAddNew', 'AddNewPopupLink');
         //OpenPage('@ModulesPages.AddNewContentLibraryContent', 1);
         //OpenPage('@ModulesPages.SurveyDetails', 1); 
     }

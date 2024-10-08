@@ -33,7 +33,7 @@
         if (page == '@ModulesPages.AddNewContentLibraryCategory') url = '@AppPagesUrl.Modules.AddNewContentLibraryCategory' + `?categoryId=${id}`;
         if (page == '@ModulesPages.ContentLibraryContent') url = '@AppPagesUrl.Modules.ContentLibraryContent' + `?categoryId=${id}`;
         if (page == '@ModulesPages.ContentLibraryContentDetails') url = '@AppPagesUrl.Modules.ContentLibraryContentDetails' + `?contentId=${id}`;
-        if (page == '@ModulesPages.AddNewContentLibraryContent') url = '@AppPagesUrl.Modules.AddNewContentLibraryContent' + `?categoryId=${id}`;
+        if (page == '@ModulesPages.AddNewContentLibraryContent') url = '@AppPagesUrl.Modules.AddNewContentLibraryContent' + `?categoryId=${id}&moduleName=${id2}`;
 
         // Desktop
         if (page == '@ModulesPages.DesktopOverview') url = '@AppPagesUrl.Modules.DesktopOverview';
@@ -117,6 +117,9 @@
         if (page == '@AdminPages.AutoReminders') url = '@AppPagesUrl.Admin.AutoReminders';
         if (page == '@AdminPages.SQLBrowser') url = '@AppPagesUrl.Admin.SQLBrowser';
 
+        // Targeting Section
+        if (page == '@TargetingPages.TargetedEntities') url = '@AppPagesUrl.Targeting.TargetedEntities' + `?moduleName=${id}`;
+        
         return url;
     }
 

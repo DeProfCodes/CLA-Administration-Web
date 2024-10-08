@@ -11,6 +11,11 @@
             public const string SQLBrowserPageLink = "~/Views/Admin/SQLBrowser.cshtml";
         }
 
+        public class Targeting
+        {
+            public const string TargetedEntityPSTPageLink = "~/Views/Shared/Components/Custom/Modules/Targeting/TargetedEntityPST.cshtml";
+        }
+
         public class Account
         {
             public const string AccountOverviewPageLink = "~/Views/Account/AccountOverview.cshtml";

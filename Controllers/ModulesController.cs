@@ -200,12 +200,22 @@ namespace CLA_Administration_Web.Controllers
             return PartialView(AppPagesLinks.Modules.ContentLibraryContentDetailsPageLink, contentInfo);
         }
 
-        public async Task<IActionResult> AddNewContentLibraryContent(int categoryId)
+        public async Task<IActionResult> AddNewContentLibraryContent(int categoryId, ModuleNamesType moduleName)
         {
-            var categoryTreeVm = ModulesHelper.GetCategoryTreeStructure(LocalDataStorage.AllContentLibraryCategories, categoryId);
-            
+            var categoryTreeVm = new AddNewContentLibraryCategory { ModuleName = moduleName };
+
+            if (moduleName == ModuleNamesType.Screensaver || moduleName == ModuleNamesType.LockedDesktop || moduleName == ModuleNamesType.Desktop)
+            {
+                var allCategories = ModulesMockData.GenerateDummyDataContentLibraryCategories();
+                categoryTreeVm.ContentCategories = ModulesHelper.GetAllCategoriesInTree(allCategories);
+            }
+            else
+            {
+                categoryTreeVm = ModulesHelper.GetCategoryTreeStructure(LocalDataStorage.AllContentLibraryCategories, categoryId);
+            }
             return PartialView(AppPagesLinks.Modules.AddNewContentLibraryContentPageLink, categoryTreeVm);
         }
+
         #endregion
 
         #region Desktop

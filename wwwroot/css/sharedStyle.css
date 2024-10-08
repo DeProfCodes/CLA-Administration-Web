@@ -42,6 +42,10 @@
 {
     width: fit-content !important;
 }
+.h-fit-content
+{
+    height: fit-content !important;
+}
 /**========================= Breadcrumbs / Navigation =======================*/
 
 .breadcrumb-item-nav 
@@ -148,9 +152,17 @@
 {
     width: 50px !important;
 }
+.w-75p
+{
+    width: 75px !important;
+}
 .w-100p
 {
     width: 100px !important;
+}
+.w-150p
+{
+    width: 150px !important;
 }
 .w-200p
 {

@@ -159,3 +159,75 @@
     cursor: pointer;
 }
 /*#endregion*/
+
+/*#region Targeting Trees*/
+
+#TargetedEntityTable , #TargetedEntityTable2, #TargetedEntityTable3
+{
+    overflow-y: auto;
+    max-height: 300px;
+    width: 300px;
+    scrollbar-color: var(--theme-blue-clr) white;
+    scrollbar-width: thin;
+    border: 2px solid var(--theme-blue-clr);
+}
+#AddRemoveButtons
+{
+    margin-top: 100px;
+}
+#TargetingTablesContainer
+{
+    background:red;
+}
+#TargetingTreesSelectContainer
+{
+    margin-left:auto;
+}
+#TargetingTreeSelectedContainer
+{
+    margin-right:auto;
+}
+/*#endregion*/
+
+
+/*#region Scaling*/
+
+@media screen and (max-width:1600px)
+{
+    #TargetedEntityTable , #TargetedEntityTable2, #TargetedEntityTable3
+    {
+        width: 250px;
+        font-size:10px !important;
+    }
+}
+@media screen and (max-width:1500px)
+{
+    .targetings-btn-lrg
+    {
+        width: 75px !important;
+    }
+}
+@media screen and (max-width:1450px)
+{
+    .targetings-btn-lrg
+    {
+        display: none !important;
+    }
+    .targetings-btn-sm
+    {
+        display: block !important;
+        width: 30px !important;
+    }
+}
+@media screen and (max-width:1450px)
+{
+    #TargetedEntityTable , #TargetedEntityTable2, #TargetedEntityTable3
+    {
+        width: 200px;
+        height: 250px;
+        font-size:10px !important;
+    }
+}
+
+
+/*#endregion*/
