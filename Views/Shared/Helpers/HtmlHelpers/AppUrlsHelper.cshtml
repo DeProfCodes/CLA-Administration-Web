@@ -119,7 +119,7 @@
         if (page == '@AdminPages.SQLBrowser') url = '@AppPagesUrl.Admin.SQLBrowser';
 
         // Targeting Section
-        if (page == '@TargetingPages.TargetedEntities') url = '@AppPagesUrl.Targeting.TargetedEntities' + `?moduleName=${id}`;
+        if (page == '@TargetingPages.TargetedEntities') url = '@AppPagesUrl.Targeting.TargetedEntities' + `?moduleName=${id}&isReadonly=${id2}`;
         if (page == '@TargetingPages.TargetingExposure') url = '@AppPagesUrl.Targeting.TargetingExposure' + `?moduleName=${id}`;
         
         return url;

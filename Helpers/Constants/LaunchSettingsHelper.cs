@@ -2,7 +2,7 @@
 {
     public class LaunchSettingsHelper
     {
-        public const bool IsLiveSite = false;
+        public const bool IsLiveSite = true;
 
         public static string GetBaseAddressForImages()
         {

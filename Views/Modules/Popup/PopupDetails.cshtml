@@ -1,6 +1,7 @@
 ﻿@model CLA_Administration_Web.ViewModels.Modules.PST.ModulePSTDataViewModel
 @using CLA_Administration_Web.Helpers.Constants
 @using CLA_Administration_Web.Helpers.Enums.AppPages
+@using CLA_Administration_Web.Helpers.Enums.Shared.PageNames
 
 @{
     var testPopupTitle = "<p class='mb-0' style='color:yellow;font-size:16px;'>Popup Title HTML</p>";
@@ -56,7 +57,7 @@
                             <div class="mb-0 d-flex">
                                 <span class="custom-p-bold me-2">Image | </span> 
                                 <i class="bi bi-card-image popup-info-attachment-icon"></i>
-                                <p class="popup-info-attachment-text ms-1" onclick="PreviewImage()">testImage101.png</p>
+                                <p class="popup-info-attachment-text ms-1" onclick="PreviewContentType(ContentTypes.IMAGE, '/images/others/modules/skins/Popup_Skin_Default.png')">testImage101.png</p>
                             </div>
                         </div>
                     </div>
@@ -218,7 +219,7 @@
                             <p class="custom-p popup-info-headings">Target Users</p>
                         </div>
                         <div class="col-md-6">
-                            <btn class="btn btn-sm btn-success module-details-targeting-btns">Targeting</btn>
+                            <btn class="btn btn-sm btn-success module-details-targeting-btns" onclick="OpenTargetedEntityPreviewModal('@ModuleNamesType.Popup', true)">Targeting</btn>
                         </div>
                     </div>
                     <div class="row mt-3">
@@ -226,7 +227,7 @@
                             <p class="custom-p popup-info-headings">Who Is Targeted</p>
                         </div>
                         <div class="col-md-6">
-                            <btn class="btn btn-sm btn-primary module-details-targeting-btns">Targeting Exposure</btn>
+                            <btn class="btn btn-sm btn-primary module-details-targeting-btns" onclick="OpenTargetingExposurePreviewModal('@ModuleNamesType.Popup')">Targeting Exposure</btn>
                         </div>
                     </div>
                 </div>
@@ -263,16 +264,10 @@
             </div>
         </div>
     </div>
-    <div id="ImagePreviwer">
-    </div>
 </div>
+@{
+    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/ContentPreviewers/AllContentPreviewer.cshtml");
+    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Targeting/TargetedEntityModal.cshtml");
+    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Targeting/TargetingExposureModal.cshtml");
+}
 
-
-<script>
-
-    $(document).ready(function ()
-    {
-        LoadContentPreviewer("#ImagePreviwer");
-    });
-
-</script>

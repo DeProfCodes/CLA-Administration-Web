@@ -1,5 +1,6 @@
 ﻿@model CLA_Administration_Web.ViewModels.Modules.PST.ModulePSTDataViewModel
 @using CLA_Administration_Web.Helpers.Enums.AppPages
+@using CLA_Administration_Web.Helpers.Enums.Shared.PageNames
 
 
 <div class="container-fluid">
@@ -103,7 +104,7 @@
                             <p class="custom-p popup-info-headings">Target Users</p>
                         </div>
                         <div class="col-md-6">
-                            <btn class="btn btn-sm btn-success module-details-targeting-btns">Targeting</btn>
+                            <btn class="btn btn-sm btn-success module-details-targeting-btns" onclick="OpenTargetedEntityPreviewModal('@ModuleNamesType.Ticker', true)">Targeting</btn>
                         </div>
                     </div>
                     <div class="row mt-3">
@@ -111,23 +112,16 @@
                             <p class="custom-p popup-info-headings">Who Is Targeted</p>
                         </div>
                         <div class="col-md-6">
-                            <btn class="btn btn-sm btn-primary module-details-targeting-btns">Targeting Exposure</btn>
+                            <btn class="btn btn-sm btn-primary module-details-targeting-btns" onclick="OpenTargetingExposurePreviewModal('@ModuleNamesType.Ticker')">Targeting Exposure</btn>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
-    <div id="ImagePreviwer">
-    </div>
 </div>
-
-<script>
-
-    $(document).ready(function ()
-    {
-        LoadContentPreviewer("#ImagePreviwer");
-    });
-
-</script>
+@{
+    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/ContentPreviewers/AllContentPreviewer.cshtml");
+    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Targeting/TargetedEntityModal.cshtml");
+    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Targeting/TargetingExposureModal.cshtml");
+}

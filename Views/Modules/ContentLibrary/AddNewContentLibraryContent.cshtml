@@ -186,8 +186,8 @@
                             <p class="custom-p fl-right">Targeting</p>
                         </div>
                         <div class="common-titles-value-col">
-                            <button class="btn btn-warning btn-sm">Set Content Targeting</button>
-                            <button class="btn btn-info btn-sm ms-2">Open Targeting</button>
+                            <button class="btn btn-warning btn-sm" onclick="OpenTargetedEntityPreviewModal('@ModuleNamesType.ContentLibrary', false)">Set Content Targeting</button>
+                            <button class="btn btn-info btn-sm ms-2" onclick="OpenTargetingExposurePreviewModal('@ModuleNamesType.ContentLibrary')">Open Targeting</button>
                         </div>
                     </div>
                 </div>
@@ -200,8 +200,9 @@
 </div>
 @{
     await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/ContentPreviewers/AllContentPreviewer.cshtml");
+    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Targeting/TargetedEntityModal.cshtml");
+    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Targeting/TargetingExposureModal.cshtml");
 }
-
 
 <script>
 

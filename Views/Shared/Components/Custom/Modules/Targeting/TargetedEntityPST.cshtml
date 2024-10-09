@@ -6,7 +6,7 @@
 <div class="d-flex text-center" id="TargetingTablesContainer">
     <div id="TargetingTreesSelectContainer">
         <div id="TargetedEntityTable" class="mt-3"></div>
-        <div id="TargetedEntityTable2" class="mt-3"></div>
+        <div id="TargetedEntityTable2" class="mt-1"></div>
     </div>
     <div id="AddRemoveButtons" class="h-fit-content mx-2 d-grid">
         <button class="btn btn-success btn-sm w-100p targetings-btn-lrg">Add </button>
@@ -25,27 +25,18 @@
 
 <script>
 
+    $(document).ready(function ()
+    {
+        if('@Model.IsReadonly' == "True")
+        {
+            $(".targetings-btn-lrg").attr("disabled", true);
+            $(".targetings-btn-sm").attr("disabled", true);
+        }
+    });
+
     var tableDataNested2 = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.TargetedEntities));
     var tableDataNested3 = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.TargetedAccepted));
     var tableDataNested4 = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.TargetedGroups));
-
-    var targetingBtn = function (cell, formatterParams)
-    {
-        return `<button class='btn btn-sm btn-info custom-btn-sm' onclick="alert('Targeting = ${cell.getRow().getData().CategoryId}');">Open</button>`;
-    };
-
-    var targetingExposureBtn = function (cell, formatterParams)
-    {
-        return `<button class='btn btn-sm btn-success custom-btn-sm' onclick="alert('Targeting Exposure = ${cell.getRow().getData().CategoryId}');">Open</button>`;
-    };
-
-    var actionButtons = function (cell, formatterParams)
-    {
-        return `<button class='btn btn-sm btn-info custom-btn-sm' onclick="OpenContentLibraryCategory(${cell.getRow().getData().CategoryId})">Open</button>
-                            <button class='btn btn-sm btn-primary me-2 custom-btn-sm' onclick="OpenNewContentLibraryCategory(${cell.getRow().getData().CategoryId})">New Sub Category</button>
-                        <button class='btn btn-sm btn-success me-2 me-2 custom-btn-sm' onclick="OpenContentsOverview(${cell.getRow().getData().CategoryId})">Contents</button>
-                        <button class='btn btn-sm btn-danger me-2 me-2 custom-btn-sm' onclick="alert('Delete = ${cell.getRow().getData().CategoryId}');">Delete</button>`;
-    };
 
     var table = new Tabulator("#TargetedEntityTable",
         {
@@ -58,6 +49,7 @@
                 return (level == 0 || level == 1);
             },
             maxHeight: "300px",
+            minHeight: "250px", 
             columns: [
                 {
                     title: "", field: "EntityName", responsive: 0, headerFilter: "input", headerFilterPlaceholder: "Search...", frozen: true
@@ -76,6 +68,7 @@
                 return (level == 0 || level == 1);
             },
             maxHeight: "300px",
+            minHeight: "250px",
             columns: [
                 {
                     title: "", field: "EntityName", responsive: 0
@@ -93,7 +86,8 @@
             {
                 return (level == 0 || level == 1);
             },
-            maxHeight: "300px",
+            maxHeight: "530px",
+            minHeight: "530px",
             columns: [
                 {
                     title: "", field: "EntityName", responsive: 0

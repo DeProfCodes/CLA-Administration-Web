@@ -187,6 +187,25 @@
 {
     margin-right:auto;
 }
+#ModalTargetedEntities
+{
+    background: white;
+    opacity: 1;
+    min-width: 500px;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+#ModalTargetingExposureData
+{
+    overflow: auto;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    border-top: 3px solid navy;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
 /*#endregion*/
 
 

@@ -58,7 +58,7 @@
                                 <td><p class="text-center">@content.Duration</p></td>
                                 <td><p class="text-center">@content.ContentType</p></td>
                                 <td><p class="module-dt-header-text">@content.ContentPath</p></td>
-                                <td><p class="text-center"><button class="btn btn-sm btn-info custom-btn-sm" onclick="PreviewImage()">Open</button></td>
+                                <td><p class="text-center"><button class="btn btn-sm btn-info custom-btn-sm" onclick="PreviewContentType(ContentTypes.IMAGE, '/images/others/modules/skins/Popup_Skin_Default.png')">Open</button></td>
                                 <td><p class="text-center">@content.TargetedModules</p></td>
                                 <td><p class="text-center">@content.EffectiveFrom</p></td>
                                 <td><p class="text-center">@content.EffectiveTo</p></td>
@@ -76,8 +76,9 @@
         </div>
     </div>
 </div>
-<div id="ImagePreviwer">
-</div>
+@{
+    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/ContentPreviewers/AllContentPreviewer.cshtml");
+}
 
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
 <script>
@@ -85,7 +86,6 @@
     $(document).ready(function ()
     {
         $('#SurveyQuesitonsOverviewDataTable').DataTable();
-        LoadContentPreviewer("#ImagePreviwer");
     });
 
     function OpenCategory()

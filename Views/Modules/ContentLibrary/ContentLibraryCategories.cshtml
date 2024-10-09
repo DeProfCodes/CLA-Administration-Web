@@ -1,6 +1,7 @@
 ﻿@model CLA_Administration_Web.ViewModels.Modules.ContentLibrary.ContentLibraryCategoryViewModel
 
 @using CLA_Administration_Web.Helpers.Enums.AppPages
+@using CLA_Administration_Web.Helpers.Enums.Shared.PageNames
 @using Newtonsoft.Json
 
 <div class="container-fluid">
@@ -29,6 +30,13 @@
     </div>
 </div>
 
+@{
+    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/ContentPreviewers/AllContentPreviewer.cshtml");
+    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Targeting/TargetedEntityModal.cshtml");
+    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Targeting/TargetingExposureModal.cshtml");
+}
+
+
 <link href="https://unpkg.com/tabulator-tables@4.1.1/dist/css/semantic-ui/tabulator_semantic-ui.min.css" rel="stylesheet">
 <script src="https://unpkg.com/tabulator-tables/dist/js/tabulator.min.js" type="text/javascript"></script>
 
@@ -39,12 +47,12 @@
     
     var targetingBtn = function (cell, formatterParams)
     { 
-        return `<button class='btn btn-sm btn-info custom-btn-sm' onclick="alert('Targeting = ${cell.getRow().getData().CategoryId}');">Open</button>`;
+        return `<button class='btn btn-sm btn-info custom-btn-sm' onclick="OpenTargetedEntities()">Open</button>`;
     };
 
     var targetingExposureBtn = function (cell, formatterParams)
     {
-        return `<button class='btn btn-sm btn-success custom-btn-sm' onclick="alert('Targeting Exposure = ${cell.getRow().getData().CategoryId}');">Open</button>`;
+        return `<button class='btn btn-sm btn-success custom-btn-sm' onclick="OpenTargetingExposure(${cell.getRow().getData().CategoryId})">Open</button>`;
     };
 
     var actionButtons = function (cell, formatterParams)
@@ -90,6 +98,16 @@
     function OpenNewContentLibraryCategory(categoryId)
     {
         OpenPage('@ModulesPages.AddNewContentLibraryCategory', categoryId);
+    }
+
+    function OpenTargetedEntities()
+    {
+        OpenTargetedEntityPreviewModal('@ModuleNamesType.ContentLibrary', true);
+    }
+
+    function OpenTargetingExposure()
+    {
+        OpenTargetingExposurePreviewModal('@ModuleNamesType.ContentLibrary');
     }
 
 </script>

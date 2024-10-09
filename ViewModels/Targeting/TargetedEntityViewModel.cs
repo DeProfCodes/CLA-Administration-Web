@@ -12,5 +12,7 @@ namespace CLA_Administration_Web.ViewModels.Targeting
 
         public List<TargetedEntityTree> TargetedGroups { get; set; }
 
+        public bool IsReadonly { get; set; }
+
     }
 }

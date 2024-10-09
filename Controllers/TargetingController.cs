@@ -18,7 +18,7 @@ namespace CLA_Administration_Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> TargetedEntities(ModuleNamesType moduleName)
+        public async Task<IActionResult> TargetedEntities(ModuleNamesType moduleName, bool isReadonly=true)
         {
             var targetingTree = TargetingHelper.GetTargetedEntities();
             var targetingSelect = TargetingHelper.GetTargetedEntitiesSelect();
@@ -28,7 +28,8 @@ namespace CLA_Administration_Web.Controllers
                 ModuleName = moduleName,
                 TargetedEntities = targetingTree,
                 TargetedAccepted = targetingSelect,
-                TargetedGroups = targetingSelect
+                TargetedGroups = targetingSelect,
+                IsReadonly = isReadonly
             };
 
             return PartialView(AppPagesLinks.Targeting.TargetedEntityPSTPageLink, targetedEntityVm);

@@ -1,5 +1,6 @@
 ﻿@model CLA_Administration_Web.ViewModels.Modules.ContentLibrary.ContentLibraryCategoryModel
 @using CLA_Administration_Web.Helpers.Enums.AppPages
+@using CLA_Administration_Web.Helpers.Enums.Shared.PageNames
 
 
 <div class="container-fluid">
@@ -48,11 +49,11 @@
                             </tr>
                             <tr>
                                 <td><p class="custom-p popup-info-headings mt-3">Target Users</p></td>
-                                <td><btn class="btn btn-sm btn-success custom-btn-sm ms-3 mt-3">Targeting</btn></td>
+                                <td><btn class="btn btn-sm btn-success custom-btn-sm ms-3 mt-3" onclick="OpenTargetedEntityPreviewModal('@ModuleNamesType.ContentLibrary', true)">Targeting</btn></td>
                             </tr>
                             <tr>
                                 <td><p class="custom-p popup-info-headings mt-3">Who Is Targeted</p></td>
-                                <td><btn class="btn btn-sm btn-primary custom-btn-sm ms-3 mt-3">Targeting Exposure</btn></td>
+                                <td><btn class="btn btn-sm btn-primary custom-btn-sm ms-3 mt-3" onclick="OpenTargetingExposurePreviewModal('@ModuleNamesType.ContentLibrary')">Targeting Exposure</btn></td>
                             </tr>
                         </table>
                     </div>
@@ -64,3 +65,8 @@
         </div>
     </div>
 </div>
+
+@{
+    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Targeting/TargetedEntityModal.cshtml");
+    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Targeting/TargetingExposureModal.cshtml");
+}
