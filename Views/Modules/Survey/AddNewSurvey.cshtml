@@ -3,6 +3,7 @@
 @using CLA_Administration_Web.Helpers.Constants
 @using CLA_Administration_Web.Helpers.Enums.AppPages
 @using CLA_Administration_Web.Helpers.Enums.Shared
+@using CLA_Administration_Web.Helpers.Enums.Shared.PageNames
 @using CLA_Administration_Web.ViewModels.Modules.Components.Form
 @using CLA_Administration_Web.ViewModels.Modules.PST
 
@@ -413,13 +414,17 @@
                         <div id="TargetUserTab-7" class="survey-wizard-tabs flex-wrap  text-center align-content-center justify-content-center mb-3 hidden">
                             <h5 class="fw-bold mb-3 module-heading-theme">7. Survey Target Users</h5>
                             <p class="module-heading-theme">Survey target user settings.</p>
-                            <!-- Add content for Popup 8 -->
+                            
+                            <div id="SurveyTargetedEntities">
+                            </div>
                         </div>
                         <!-- Exposure Summary Tab -->
                         <div id="ExposureSummaryTab-8" class="survey-wizard-tabs flex-wrap  text-center align-content-center justify-content-center mb-3 hidden">
                             <h5 class="fw-bold mb-3 module-heading-theme">8. Survey Exposure Summary</h5>
                             <p class="module-heading-theme">Survey exposure summary settings.</p>
-                            <!-- Add content for Popup 9 -->
+                            
+                            <div id="SurveyTargetingExposure">
+                            </div>
                         </div>
 
                         <!-- Navigation Buttons -->
@@ -454,7 +459,17 @@
         HideAllSurveyTabs();
         InitialiseFlatPicker();
         UpdateDisplayTimeDetails();
+        LoadSurveyTargetedEntity();
     });
+
+    function LoadSurveyTargetedEntity()
+    {
+        var url = GetPageUrl('@TargetingPages.TargetedEntities', '@ModuleNamesType.Survey');
+        LoadPartialView(url, "SurveyTargetedEntities");
+
+        url = GetPageUrl('@TargetingPages.TargetingExposure', '@ModuleNamesType.Survey');
+        LoadPartialView(url, "SurveyTargetingExposure");
+    }
 
     function InitialiseFlatPicker()
     {

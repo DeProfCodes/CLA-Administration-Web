@@ -4,8 +4,21 @@
 
 <div class="container-fluid">
 
-    <!-- Breadcrumb Component -->
-    @await Component.InvokeAsync("Breadcrumbs", new { page = ModulesPages.SurveyQuestionsOverview, itemId = Model.SurveyId })
+    <!-- Top Page Navigation Breadcrumb -->
+    <div class="row mb-2">
+        <div class="w-auto">
+            <h2 class="theme-txt-clr breadcrumb-title">Content Library Module</h2>
+            <p class="breadcrumb-nav-body">
+                <span class="breadcrumb-item-nav" onclick="OpenPageWithAnimations('Dashboard', null, 'Dashboard', 'DashboardSubLink')">Dashboard</span> /
+                <span class="breadcrumb-item-nav" onclick="OpenPageWithAnimations('Modules', null, 'AllModules', 'AllModulesLink', true)">Modules</span> /
+                <span class="breadcrumb-item-nav" onclick="OpenPageWithAnimations('Modules', 'Survey', '@ModulesPages.SurveyOverview', 'SurveyOverviewLink')">Survey Overview</span> /
+                <span class="breadcrumb-item">Questions Overview</span>
+            </p>
+        </div>
+        <div class="w-auto ms-auto" id="BreadcrumbBtnContainer">
+            <button class="custom-btn custom-btn-default breadcrumb-btn" onclick="OpenPage('@ModulesPages.AddNewSurveyQuestion', '@Model.SurveyId')"><i class="bi bi-plus-circle-fill custom-btn-icons breadcrumb-btn-icon"></i> Add New Question</button>
+        </div>
+    </div>
 
     <!-- Card for Filters -->
     <div class="card mb-4 mt-2 overview-filters-card">

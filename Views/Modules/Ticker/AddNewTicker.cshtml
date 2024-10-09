@@ -3,6 +3,7 @@
 @using CLA_Administration_Web.Helpers.Enums.AppPages
 @using CLA_Administration_Web.Helpers.Constants
 @using CLA_Administration_Web.Helpers.Enums.Shared
+@using CLA_Administration_Web.Helpers.Enums.Shared.PageNames
 @using CLA_Administration_Web.ViewModels.Modules.Components.Form
 @using CLA_Administration_Web.ViewModels.Modules.PST
 
@@ -214,12 +215,16 @@
                             <h5 class="fw-bold mb-3 module-heading-theme">4. Ticker Target Users</h5>
                             <p class="module-heading-theme">Ticker target user settings.</p>
                             
+                            <div id="TickerTargetedEntities">
+                            </div>
                         </div>
                         <!-- Exposure Summary Tab -->
                         <div id="ExposureSummaryTab-5" class="ticker-wizard-tabs flex-wrap  text-center justify-content-center mb-3 hidden">
                             <h5 class="fw-bold mb-3 module-heading-theme">5. Ticker Exposure Summary</h5>
                             <p class="module-heading-theme">Ticker exposure summary settings.</p>
                             
+                            <div id="TickerTargetingExposure">
+                            </div>
                         </div>
                        
                         <!-- Navigation Buttons -->
@@ -252,7 +257,17 @@
     {
         HideAllTickerTabs();
         UpdateTickerDisplayTimeDetails();
+        LoadTickerTargetedEntity();
     });
+
+    function LoadTickerTargetedEntity()
+    {
+        var url = GetPageUrl('@TargetingPages.TargetedEntities', '@ModuleNamesType.Ticker');
+        LoadPartialView(url, "TickerTargetedEntities");
+
+        url = GetPageUrl('@TargetingPages.TargetingExposure', '@ModuleNamesType.Ticker');
+        LoadPartialView(url, "TickerTargetingExposure");
+    }
 
     function UpdateTickerDisplayTimeDetails()
     {

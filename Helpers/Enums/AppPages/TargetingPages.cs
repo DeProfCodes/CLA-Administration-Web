@@ -10,5 +10,8 @@ namespace CLA_Administration_Web.Helpers.Enums.AppPages
         [Display(Name = "TargetedEntities")]
         TargetedEntities,
 
+        [Display(Name = "TargetingExposure")]
+        TargetingExposure,
+
     }
 }

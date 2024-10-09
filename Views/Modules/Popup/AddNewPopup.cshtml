@@ -457,9 +457,10 @@
                         </div>
                         <!-- Exposure Summary Tab -->
                         <div id="ExposureSummaryTab-9" class="popup-wizard-tabs flex-wrap  text-center align-content-center justify-content-center mb-3">
-                            <h5 class="fw-bold mb-3 module-heading-theme">9. Popup Exposure Summary</h5>
-                            <p class="module-heading-theme">Popup exposure summary settings.</p>
-                            <!-- Add content for Popup 9 -->
+                            <h5 class="fw-bold mt-4">9. Popup Targeting Exposure</h5>
+                            <p class="custom-p mt-4 fs-13 text-center">Popup target user settings.</p>
+                            <div id="PopupTargetingExposure">
+                            </div>
                         </div>
 
                         <!-- Navigation Buttons -->
@@ -569,6 +570,9 @@
     {
         var url = GetPageUrl('@TargetingPages.TargetedEntities', '@ModuleNamesType.Popup');
         LoadPartialView(url, "PopupTargetedEntities");
+
+        url = GetPageUrl('@TargetingPages.TargetingExposure', '@ModuleNamesType.Popup');
+        LoadPartialView(url, "PopupTargetingExposure");
     }
 
     function UpdatePopupDisplayTimeDetails()

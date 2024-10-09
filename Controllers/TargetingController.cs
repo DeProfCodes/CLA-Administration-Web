@@ -2,6 +2,7 @@ using CLA_Administration_Web.Helpers.Constants;
 using CLA_Administration_Web.Helpers.Enums.AppPages;
 using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
 using CLA_Administration_Web.Helpers.Targeting;
+using CLA_Administration_Web.ViewModels.Shared;
 using CLA_Administration_Web.ViewModels.Targeting;
 using Microsoft.AspNetCore.Mvc;
 
@@ -31,6 +32,53 @@ namespace CLA_Administration_Web.Controllers
             };
 
             return PartialView(AppPagesLinks.Targeting.TargetedEntityPSTPageLink, targetedEntityVm);
+        }
+
+        public async Task<IActionResult> TargetingExposure(ModuleNamesType moduleName)
+        {
+            var targingExposureVm = new TargetingExposureViewModel
+            {
+                TargetedUsers = new List<TargetedUser>()
+                {
+                    new TargetedUser
+                    {
+                        DomainName = "nthdmi",
+                        LastSyncDT = DateTime.Now.AddHours(-99).AddMinutes(-147).ToString("yyyy/MM/dd HH:mm"),
+                        DisplayName = "NdhuvaziM",
+                        NTUsername = "NdhuvaziM-WIN",
+                        Status = new StatusViewModel { CustomStatusText = "NOT INSTALLED", CssClass = "badge bg-danger" }
+                    },
+                    new TargetedUser
+                    {
+                        DomainName = "nthdmi",
+                        LastSyncDT = DateTime.Now.AddHours(-99).AddMinutes(-147).ToString("yyyy/MM/dd HH:mm"),
+                        DisplayName = "Proficient",
+                        NTUsername = "Prof-PC",
+                        Status = new StatusViewModel { CustomStatusText = "ACTIVE", CssClass = "badge bg-success" }
+                    }
+                },
+                TargetedGroups = new List<TargetedGroup>
+                {
+                    new TargetedGroup
+                    {
+                        DomainName = "NTHDIM",
+                        DisplayName = "Corporate voice Rebranded",
+                        GroupId = 1,
+                    }
+                },
+                TargetedMachines = new List<TargetedMachine>
+                {
+                    new TargetedMachine
+                    {
+                        DomainName = "nthdmi",
+                        LastSyncDT = DateTime.Now.AddHours(-99).AddMinutes(-147).ToString("yyyy/MM/dd HH:mm"),
+                        DisplayName = "NdhuvaziM",
+                        NTUsername = "NdhuvaziM-WIN",
+                        Status = new StatusViewModel { CustomStatusText = "INACTIVE", CssClass = "badge bg-warning" }
+                    }
+                }
+            };
+            return PartialView(AppPagesLinks.Targeting.TargetingExposurePageLink, targingExposureVm);
         }
 
     }

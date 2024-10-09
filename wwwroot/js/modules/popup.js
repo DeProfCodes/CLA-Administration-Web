@@ -62,7 +62,7 @@ function LoadDefaultSkinPreview()
 function HideAllPopupTabs()
 {
     HideShowElement(".popup-wizard-tabs", HideShow.HIDE);
-    HideShowElement("#TargetUserTab-8", HideShow.SHOW);
+    HideShowElement("#ExposureSummaryTab-9", HideShow.SHOW);
 }
 
 function PopupLinkTypeClick(linkBtnId)

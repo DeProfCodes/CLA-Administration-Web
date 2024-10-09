@@ -14,6 +14,7 @@
         public class Targeting
         {
             public const string TargetedEntityPSTPageLink = "~/Views/Shared/Components/Custom/Modules/Targeting/TargetedEntityPST.cshtml";
+            public const string TargetingExposurePageLink = "~/Views/Shared/Components/Custom/Modules/Targeting/TargetingExposure.cshtml";
         }
 
         public class Account
@@ -82,6 +83,7 @@
             public const string SurveyQuestionsOverviewPageLink = "~/Views/Modules/Survey/SurveyQuestionsOverview.cshtml";
             public const string SurveyQuestionDetailsPageLink = "~/Views/Modules/Survey/SurveyQuestionDetails.cshtml";
             public const string SurveyAddNewPageLink = "~/Views/Modules/Survey/AddNewSurvey.cshtml";
+            public const string AddNewSurveyQuestionPageLink = "~/Views/Modules/Survey/AddNewSurveyQuestion.cshtml";
 
             //Ticker
             public const string TickerOverviewPageLink = "~/Views/Modules/Ticker/TickerOverview.cshtml";

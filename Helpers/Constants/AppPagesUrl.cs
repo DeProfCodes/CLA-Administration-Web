@@ -28,6 +28,7 @@ namespace CLA_Administration_Web.Helpers.Constants
         public class Targeting
         {
             public static string TargetedEntities = $"/{targetingController}/{TargetingPages.TargetedEntities}";
+            public static string TargetingExposure = $"/{targetingController}/{TargetingPages.TargetingExposure}";
         }
 
         public class Account
@@ -90,6 +91,7 @@ namespace CLA_Administration_Web.Helpers.Constants
             public static string SurveyQuestionsOverview = $"/{modulesController}/{ModulesPages.SurveyQuestionsOverview.GetDisplayName()}";
             public static string SurveyQuestionDetails = $"/{modulesController}/{ModulesPages.SurveyQuestionDetails.GetDisplayName()}";
             public static string SurveyAddNew = $"/{modulesController}/{ModulesPages.SurveyAddNew.GetDisplayName()}";
+            public static string AddNewSurveyQuestion = $"/{modulesController}/{ModulesPages.AddNewSurveyQuestion.GetDisplayName()}";
 
             //Ticker
             public static string TickerOverview = $"/{modulesController}/{ModulesPages.TickerOverview.GetDisplayName()}";

@@ -1019,7 +1019,7 @@
 /* Apply animation to both instances of text */
 .ticker-content
 {
-    animation: ticker 10s linear infinite;
+    animation: ticker 15s linear infinite;
 }
 
 #SurveyAddOnsChecksContainer

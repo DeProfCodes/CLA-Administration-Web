@@ -474,6 +474,11 @@ namespace CLA_Administration_Web.Controllers
             return PartialView(AppPagesLinks.Modules.SurveyAddNewPageLink, addNewSurveyViewModel);
         }
 
+        public IActionResult AddNewSurveyQuestion(int surveyId)
+        {
+            return PartialView(AppPagesLinks.Modules.AddNewSurveyQuestionPageLink, surveyId);
+        }
+
         #endregion
 
         #region Ticker

@@ -6,6 +6,8 @@ namespace CLA_Administration_Web.ViewModels.Shared
     {
         public StatusType StatusType { get; set; }
 
+        public string CustomStatusText { get; set; }
+
         public string CssClass { get; set; }
     }
 }

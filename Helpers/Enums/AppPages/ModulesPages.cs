@@ -114,6 +114,9 @@ namespace CLA_Administration_Web.Helpers.Enums.AppPages
         [Display(Name = "AddNewSurvey", ShortName = "Survey")]
         SurveyAddNew,
 
+        [Display(Name = "AddNewSurveyQuestion", ShortName = "Survey")]
+        AddNewSurveyQuestion,
+
         //RSS
         [Display(Name = "RssCategoryOverview", ShortName = "RSS")]
         RSSCategoryOverview,

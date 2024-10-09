@@ -61,6 +61,7 @@
         if (page == '@ModulesPages.SurveyQuestionsOverview') url = '@AppPagesUrl.Modules.SurveyQuestionsOverview' + `?surveyId=${id}`;;
         if (page == '@ModulesPages.SurveyQuestionDetails') url = '@AppPagesUrl.Modules.SurveyQuestionDetails' + `?surveyId=${id}&questionId=${id2}`;
         if (page == '@ModulesPages.SurveyAddNew') url = '@AppPagesUrl.Modules.SurveyAddNew';
+        if (page == '@ModulesPages.AddNewSurveyQuestion') url = '@AppPagesUrl.Modules.AddNewSurveyQuestion' + `?surveyId=${id}`;
         
         // Ticker
         if (page == '@ModulesPages.TickerOverview') url = '@AppPagesUrl.Modules.TickerOverview';
@@ -119,6 +120,7 @@
 
         // Targeting Section
         if (page == '@TargetingPages.TargetedEntities') url = '@AppPagesUrl.Targeting.TargetedEntities' + `?moduleName=${id}`;
+        if (page == '@TargetingPages.TargetingExposure') url = '@AppPagesUrl.Targeting.TargetingExposure' + `?moduleName=${id}`;
         
         return url;
     }
@@ -162,6 +164,7 @@
         if (page == '@ModulesPages.SurveyQuestionsOverview') title = "Survey Questions Overview";
         if (page == '@ModulesPages.SurveyQuestionDetails') title = "Survey Questions Details";
         if (page == '@ModulesPages.SurveyAddNew') title = "Add New Survey";
+        if (page == '@ModulesPages.AddNewSurveyQuestion') title = "Add New Survey Question"
         //
         if (page == '@ModulesPages.TickerOverview') title = "Tickers Overview";
         if (page == '@ModulesPages.TickerDetails') title = "Ticker Details";
