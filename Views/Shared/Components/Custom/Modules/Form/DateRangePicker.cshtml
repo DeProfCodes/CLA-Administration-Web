@@ -43,9 +43,15 @@
     function SetInitialDatesToday()
     {
         var today = FormatDate(TodayDate(), "DD-MMM-YYYY");
-
+        
         $("#DatePickerStartDate").val(FormatDate(today, 'DDDD, DD MMMM YYYY'));
         $("#DatePickerEndDate").val(FormatDate(today, 'DDDD, DD MMMM YYYY'));
+    }
+
+    function SetDateRangePickerDate(date, id)
+    {
+        id = EnsureJQueryId(id);
+        $(id).val(FormatDate(date, 'DDDD, DD MMMM YYYY'));
     }
 
     function InitializeDatePicker()

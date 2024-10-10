@@ -1,5 +1,9 @@
-﻿@using CLA_Administration_Web.Helpers.Enums.AppPages
+﻿@model CLA_Administration_Web.ViewModels.Modules.Rss.RssCategoryOverviewViewModel
+@using CLA_Administration_Web.Helpers.Enums.AppPages
 
+@{
+    var pageTitle = Model.CategoryId == 0 ? "Add New RSS Category" : $"Edit RSS Category: {Model.CategoryId}";
+}
 
 <div class="container-fluid">
     <!-- Top Page Navigation Breadcrumb -->
@@ -8,7 +12,7 @@
     <!-- Card for Title -->
     <div class="card mb-4 mt-2" style="min-width:940px;">
         <div class="card-body pb-0">
-            <h4 class="w-100 text-center theme-txt-clr">Add New RSS Category</h4>
+            <h4 class="w-100 text-center theme-txt-clr">@pageTitle</h4>
         </div>
     </div>
 
@@ -46,6 +50,14 @@
 
 <script>
 
+    $(document).ready(function()
+    {
+        if('@Model' != null && '@Model.CategoryId' > 0)
+        {
+            PrePopulateRSSCategoryForEdit();
+        }
+    });
+
     function ValidateRSSCategory()
     {
         $("#NewRSSCategoryNameError").text("");
@@ -81,5 +93,10 @@
         }
     }
 
+    function PrePopulateRSSCategoryForEdit()
+    {
+        $("#NewRSSCategoryName").val("@Model.CategoryName");
+        $("#NewRSSCategoryDescription").val("@Model.CategoryDescription");
+    }
 
 </script>

@@ -1,0 +1,1337 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\obj\\Release\\net8.0\\scopedcss\\projectbundle\\CLA-Administration-Web.bundle.scp.css",
+      "PackagePath": "staticwebassets\\CLA-Administration-Web.bundle.scp.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\css\\bootstrap-extended.css",
+      "PackagePath": "staticwebassets\\assets\\css\\bootstrap-extended.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\assets\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\css\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\assets\\css\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\css\\dark-theme.css",
+      "PackagePath": "staticwebassets\\assets\\css\\dark-theme.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\css\\header-colors.css",
+      "PackagePath": "staticwebassets\\assets\\css\\header-colors.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\css\\icons.css",
+      "PackagePath": "staticwebassets\\assets\\css\\icons.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\css\\pace.min.css",
+      "PackagePath": "staticwebassets\\assets\\css\\pace.min.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\css\\semi-dark.css",
+      "PackagePath": "staticwebassets\\assets\\css\\semi-dark.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\css\\style.css",
+      "PackagePath": "staticwebassets\\assets\\css\\style.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\css\\transformations.css",
+      "PackagePath": "staticwebassets\\assets\\css\\transformations.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\fonts\\LineIcons.eot",
+      "PackagePath": "staticwebassets\\assets\\fonts\\LineIcons.eot"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\fonts\\LineIcons.svg",
+      "PackagePath": "staticwebassets\\assets\\fonts\\LineIcons.svg"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\fonts\\LineIcons.ttf",
+      "PackagePath": "staticwebassets\\assets\\fonts\\LineIcons.ttf"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\fonts\\LineIcons.woff",
+      "PackagePath": "staticwebassets\\assets\\fonts\\LineIcons.woff"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\fonts\\LineIcons.woff2",
+      "PackagePath": "staticwebassets\\assets\\fonts\\LineIcons.woff2"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\fonts\\boxicons.eot",
+      "PackagePath": "staticwebassets\\assets\\fonts\\boxicons.eot"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\fonts\\boxicons.svg",
+      "PackagePath": "staticwebassets\\assets\\fonts\\boxicons.svg"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\fonts\\boxicons.ttf",
+      "PackagePath": "staticwebassets\\assets\\fonts\\boxicons.ttf"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\fonts\\boxicons.woff",
+      "PackagePath": "staticwebassets\\assets\\fonts\\boxicons.woff"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\fonts\\boxicons.woff2",
+      "PackagePath": "staticwebassets\\assets\\fonts\\boxicons.woff2"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\assets\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\js\\bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets\\assets\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\js\\component-popovers-tooltips.js",
+      "PackagePath": "staticwebassets\\assets\\js\\component-popovers-tooltips.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\js\\form-date-time-pickes.js",
+      "PackagePath": "staticwebassets\\assets\\js\\form-date-time-pickes.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\js\\form-file-upload.js",
+      "PackagePath": "staticwebassets\\assets\\js\\form-file-upload.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\js\\form-select2.js",
+      "PackagePath": "staticwebassets\\assets\\js\\form-select2.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\js\\index.js",
+      "PackagePath": "staticwebassets\\assets\\js\\index.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\js\\jquery.min.js",
+      "PackagePath": "staticwebassets\\assets\\js\\jquery.min.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\js\\main.js",
+      "PackagePath": "staticwebassets\\assets\\js\\main.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\js\\pace.min.js",
+      "PackagePath": "staticwebassets\\assets\\js\\pace.min.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\js\\price-slider.js",
+      "PackagePath": "staticwebassets\\assets\\js\\price-slider.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\js\\product-details.js",
+      "PackagePath": "staticwebassets\\assets\\js\\product-details.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\js\\table-datatable.js",
+      "PackagePath": "staticwebassets\\assets\\js\\table-datatable.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\js\\todo.js",
+      "PackagePath": "staticwebassets\\assets\\js\\todo.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\js\\widgets.js",
+      "PackagePath": "staticwebassets\\assets\\js\\widgets.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\Drag-And-Drop\\dist\\imageuploadify.min.css",
+      "PackagePath": "staticwebassets\\assets\\plugins\\Drag-And-Drop\\dist\\imageuploadify.min.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\Drag-And-Drop\\dist\\imageuploadify.min.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\Drag-And-Drop\\dist\\imageuploadify.min.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\OwlCarousel\\css\\owl.carousel.min.css",
+      "PackagePath": "staticwebassets\\assets\\plugins\\OwlCarousel\\css\\owl.carousel.min.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\OwlCarousel\\js\\owl.carousel.min.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\OwlCarousel\\js\\owl.carousel.min.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\OwlCarousel\\js\\owl.carousel2.thumbs.min.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\OwlCarousel\\js\\owl.carousel2.thumbs.min.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\apexcharts-bundle\\css\\apexcharts.css",
+      "PackagePath": "staticwebassets\\assets\\plugins\\apexcharts-bundle\\css\\apexcharts.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\apexcharts-bundle\\js\\apex-custom.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\apexcharts-bundle\\js\\apex-custom.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\apexcharts-bundle\\js\\apexcharts.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\apexcharts-bundle\\js\\apexcharts.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\apexcharts-bundle\\js\\apexcharts.min.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\apexcharts-bundle\\js\\apexcharts.min.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\bootstrap-material-datetimepicker\\js\\moment.min.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\bootstrap-material-datetimepicker\\js\\moment.min.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\bs-stepper\\css\\bs-stepper-custom.css",
+      "PackagePath": "staticwebassets\\assets\\plugins\\bs-stepper\\css\\bs-stepper-custom.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\bs-stepper\\css\\bs-stepper.css",
+      "PackagePath": "staticwebassets\\assets\\plugins\\bs-stepper\\css\\bs-stepper.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\bs-stepper\\css\\custom.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\bs-stepper\\css\\custom.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\bs-stepper\\js\\bs-stepper.min.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\bs-stepper\\js\\bs-stepper.min.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\bs-stepper\\js\\index.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\bs-stepper\\js\\index.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\bs-stepper\\js\\index.spec.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\bs-stepper\\js\\index.spec.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\bs-stepper\\js\\listeners.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\bs-stepper\\js\\listeners.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\bs-stepper\\js\\main.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\bs-stepper\\js\\main.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\bs-stepper\\js\\polyfill.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\bs-stepper\\js\\polyfill.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\bs-stepper\\js\\util.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\bs-stepper\\js\\util.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\chartjs\\chart.min.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\chartjs\\chart.min.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\chartjs\\custom-script.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\chartjs\\custom-script.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\datatable\\css\\dataTables.bootstrap5.min.css",
+      "PackagePath": "staticwebassets\\assets\\plugins\\datatable\\css\\dataTables.bootstrap5.min.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\datatable\\js\\dataTables.bootstrap5.min.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\datatable\\js\\dataTables.bootstrap5.min.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\datatable\\js\\jquery.dataTables.min.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\datatable\\js\\jquery.dataTables.min.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\datetimepicker\\css\\classic.css",
+      "PackagePath": "staticwebassets\\assets\\plugins\\datetimepicker\\css\\classic.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\datetimepicker\\css\\classic.date.css",
+      "PackagePath": "staticwebassets\\assets\\plugins\\datetimepicker\\css\\classic.date.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\datetimepicker\\css\\classic.time.css",
+      "PackagePath": "staticwebassets\\assets\\plugins\\datetimepicker\\css\\classic.time.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\datetimepicker\\js\\legacy.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\datetimepicker\\js\\legacy.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\datetimepicker\\js\\picker.date.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\datetimepicker\\js\\picker.date.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\datetimepicker\\js\\picker.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\datetimepicker\\js\\picker.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\datetimepicker\\js\\picker.time.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\datetimepicker\\js\\picker.time.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\easyPieChart\\jquery.easypiechart.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\easyPieChart\\jquery.easypiechart.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\fancy-file-uploader\\cors\\jquery.postmessage-transport.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\fancy-file-uploader\\cors\\jquery.postmessage-transport.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\fancy-file-uploader\\cors\\jquery.xdr-transport.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\fancy-file-uploader\\cors\\jquery.xdr-transport.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\fancy-file-uploader\\fancy_fileupload.css",
+      "PackagePath": "staticwebassets\\assets\\plugins\\fancy-file-uploader\\fancy_fileupload.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\fancy-file-uploader\\fancy_microphone.png",
+      "PackagePath": "staticwebassets\\assets\\plugins\\fancy-file-uploader\\fancy_microphone.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\fancy-file-uploader\\fancy_okay.png",
+      "PackagePath": "staticwebassets\\assets\\plugins\\fancy-file-uploader\\fancy_okay.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\fancy-file-uploader\\fancy_remove.png",
+      "PackagePath": "staticwebassets\\assets\\plugins\\fancy-file-uploader\\fancy_remove.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\fancy-file-uploader\\fancy_upload.png",
+      "PackagePath": "staticwebassets\\assets\\plugins\\fancy-file-uploader\\fancy_upload.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\fancy-file-uploader\\fancy_webcam.png",
+      "PackagePath": "staticwebassets\\assets\\plugins\\fancy-file-uploader\\fancy_webcam.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\fancy-file-uploader\\jquery.fancy-fileupload.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\fancy-file-uploader\\jquery.fancy-fileupload.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\fancy-file-uploader\\jquery.fileupload.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\fancy-file-uploader\\jquery.fileupload.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\fancy-file-uploader\\jquery.iframe-transport.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\fancy-file-uploader\\jquery.iframe-transport.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\fancy-file-uploader\\jquery.ui.widget.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\fancy-file-uploader\\jquery.ui.widget.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\gmaps\\map-custom-script.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\gmaps\\map-custom-script.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\input-tags\\css\\tagsinput.css",
+      "PackagePath": "staticwebassets\\assets\\plugins\\input-tags\\css\\tagsinput.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\input-tags\\js\\tagsinput.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\input-tags\\js\\tagsinput.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\jquery-knob\\excanvas.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\jquery-knob\\excanvas.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\jquery-knob\\jquery.knob.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\jquery-knob\\jquery.knob.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\jquery.easy-pie-chart\\easy-pie-chart.init.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\jquery.easy-pie-chart\\easy-pie-chart.init.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\jquery.easy-pie-chart\\easypiechart.min.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\jquery.easy-pie-chart\\easypiechart.min.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\jquery.easy-pie-chart\\jquery.easypiechart.min.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\jquery.easy-pie-chart\\jquery.easypiechart.min.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\metismenu\\css\\metisMenu.min.css",
+      "PackagePath": "staticwebassets\\assets\\plugins\\metismenu\\css\\metisMenu.min.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\metismenu\\css\\metisMenu.min.css.map",
+      "PackagePath": "staticwebassets\\assets\\plugins\\metismenu\\css\\metisMenu.min.css.map"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\metismenu\\js\\metisMenu.min.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\metismenu\\js\\metisMenu.min.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\metismenu\\js\\metisMenu.min.js.map",
+      "PackagePath": "staticwebassets\\assets\\plugins\\metismenu\\js\\metisMenu.min.js.map"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\notifications\\css\\lobibox.css",
+      "PackagePath": "staticwebassets\\assets\\plugins\\notifications\\css\\lobibox.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\notifications\\css\\lobibox.min.css",
+      "PackagePath": "staticwebassets\\assets\\plugins\\notifications\\css\\lobibox.min.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\notifications\\img\\1.jpg",
+      "PackagePath": "staticwebassets\\assets\\plugins\\notifications\\img\\1.jpg"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\notifications\\img\\2.jpg",
+      "PackagePath": "staticwebassets\\assets\\plugins\\notifications\\img\\2.jpg"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\notifications\\img\\3.jpg",
+      "PackagePath": "staticwebassets\\assets\\plugins\\notifications\\img\\3.jpg"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\notifications\\img\\4.jpg",
+      "PackagePath": "staticwebassets\\assets\\plugins\\notifications\\img\\4.jpg"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\notifications\\img\\5.jpg",
+      "PackagePath": "staticwebassets\\assets\\plugins\\notifications\\img\\5.jpg"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\notifications\\img\\6.jpg",
+      "PackagePath": "staticwebassets\\assets\\plugins\\notifications\\img\\6.jpg"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\notifications\\js\\lobibox.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\notifications\\js\\lobibox.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\notifications\\js\\lobibox.min.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\notifications\\js\\lobibox.min.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\notifications\\js\\messageboxes.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\notifications\\js\\messageboxes.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\notifications\\js\\messageboxes.min.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\notifications\\js\\messageboxes.min.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\notifications\\js\\notification-custom-script.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\notifications\\js\\notification-custom-script.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\notifications\\js\\notifications.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\notifications\\js\\notifications.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\notifications\\js\\notifications.min.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\notifications\\js\\notifications.min.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\notifications\\sounds\\sound1.ogg",
+      "PackagePath": "staticwebassets\\assets\\plugins\\notifications\\sounds\\sound1.ogg"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\notifications\\sounds\\sound2.ogg",
+      "PackagePath": "staticwebassets\\assets\\plugins\\notifications\\sounds\\sound2.ogg"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\notifications\\sounds\\sound3.ogg",
+      "PackagePath": "staticwebassets\\assets\\plugins\\notifications\\sounds\\sound3.ogg"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\notifications\\sounds\\sound4.ogg",
+      "PackagePath": "staticwebassets\\assets\\plugins\\notifications\\sounds\\sound4.ogg"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\notifications\\sounds\\sound5.ogg",
+      "PackagePath": "staticwebassets\\assets\\plugins\\notifications\\sounds\\sound5.ogg"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\notifications\\sounds\\sound6.ogg",
+      "PackagePath": "staticwebassets\\assets\\plugins\\notifications\\sounds\\sound6.ogg"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\nouislider\\nouislider.css",
+      "PackagePath": "staticwebassets\\assets\\plugins\\nouislider\\nouislider.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\nouislider\\nouislider.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\nouislider\\nouislider.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\nouislider\\nouislider.min.css",
+      "PackagePath": "staticwebassets\\assets\\plugins\\nouislider\\nouislider.min.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\nouislider\\nouislider.min.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\nouislider\\nouislider.min.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\peity\\jquery.peity.init.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\peity\\jquery.peity.init.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\peity\\jquery.peity.min.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\peity\\jquery.peity.min.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\perfect-scrollbar\\css\\perfect-scrollbar.css",
+      "PackagePath": "staticwebassets\\assets\\plugins\\perfect-scrollbar\\css\\perfect-scrollbar.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\perfect-scrollbar\\js\\perfect-scrollbar.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\perfect-scrollbar\\js\\perfect-scrollbar.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\select2\\css\\select2-bootstrap4.css",
+      "PackagePath": "staticwebassets\\assets\\plugins\\select2\\css\\select2-bootstrap4.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\select2\\css\\select2.min.css",
+      "PackagePath": "staticwebassets\\assets\\plugins\\select2\\css\\select2.min.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\select2\\js\\select2-custom.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\select2\\js\\select2-custom.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\select2\\js\\select2.min.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\select2\\js\\select2.min.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\simplebar\\css\\simplebar.css",
+      "PackagePath": "staticwebassets\\assets\\plugins\\simplebar\\css\\simplebar.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\simplebar\\js\\simplebar.min.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\simplebar\\js\\simplebar.min.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\validation\\jquery.validate.min.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\validation\\jquery.validate.min.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\validation\\validation-script.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\validation\\validation-script.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\vectormap\\jquery-jvectormap-2.0.2.css",
+      "PackagePath": "staticwebassets\\assets\\plugins\\vectormap\\jquery-jvectormap-2.0.2.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\vectormap\\jquery-jvectormap-2.0.2.min.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\vectormap\\jquery-jvectormap-2.0.2.min.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\vectormap\\jquery-jvectormap-au-mill.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\vectormap\\jquery-jvectormap-au-mill.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\vectormap\\jquery-jvectormap-in-mill.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\vectormap\\jquery-jvectormap-in-mill.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\vectormap\\jquery-jvectormap-uk-mill-en.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\vectormap\\jquery-jvectormap-uk-mill-en.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\vectormap\\jquery-jvectormap-us-aea-en.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\vectormap\\jquery-jvectormap-us-aea-en.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\vectormap\\jquery-jvectormap-world-mill-en.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\vectormap\\jquery-jvectormap-world-mill-en.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\assets\\plugins\\vectormap\\jvectormap.custom.js",
+      "PackagePath": "staticwebassets\\assets\\plugins\\vectormap\\jvectormap.custom.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\css\\component.css",
+      "PackagePath": "staticwebassets\\css\\component.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\css\\custom-bootstrap.css",
+      "PackagePath": "staticwebassets\\css\\custom-bootstrap.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\css\\custom-datatables.css",
+      "PackagePath": "staticwebassets\\css\\custom-datatables.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\css\\layout.css",
+      "PackagePath": "staticwebassets\\css\\layout.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\css\\modules.css",
+      "PackagePath": "staticwebassets\\css\\modules.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\css\\sharedStyle.css",
+      "PackagePath": "staticwebassets\\css\\sharedStyle.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\css\\theme.css",
+      "PackagePath": "staticwebassets\\css\\theme.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\company\\vodacom\\logo.png",
+      "PackagePath": "staticwebassets\\images\\company\\vodacom\\logo.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\company\\vodacom\\ndhuvazim-nth-47852.png",
+      "PackagePath": "staticwebassets\\images\\company\\vodacom\\ndhuvazim-nth-47852.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\blue\\account\\account-overview.png",
+      "PackagePath": "staticwebassets\\images\\icons\\blue\\account\\account-overview.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\blue\\account\\security-settings.png",
+      "PackagePath": "staticwebassets\\images\\icons\\blue\\account\\security-settings.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\blue\\admin\\application-parameters.png",
+      "PackagePath": "staticwebassets\\images\\icons\\blue\\admin\\application-parameters.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\blue\\admin\\auto-reminders.png",
+      "PackagePath": "staticwebassets\\images\\icons\\blue\\admin\\auto-reminders.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\blue\\admin\\licensing.png",
+      "PackagePath": "staticwebassets\\images\\icons\\blue\\admin\\licensing.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\blue\\admin\\sql-browser.png",
+      "PackagePath": "staticwebassets\\images\\icons\\blue\\admin\\sql-browser.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\blue\\admin\\upload-files.png",
+      "PackagePath": "staticwebassets\\images\\icons\\blue\\admin\\upload-files.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\blue\\dashboard\\calendar.png",
+      "PackagePath": "staticwebassets\\images\\icons\\blue\\dashboard\\calendar.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\blue\\dashboard\\home.png",
+      "PackagePath": "staticwebassets\\images\\icons\\blue\\dashboard\\home.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\blue\\modules\\content-library.png",
+      "PackagePath": "staticwebassets\\images\\icons\\blue\\modules\\content-library.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\blue\\modules\\desktop.png",
+      "PackagePath": "staticwebassets\\images\\icons\\blue\\modules\\desktop.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\blue\\modules\\lockscreen.png",
+      "PackagePath": "staticwebassets\\images\\icons\\blue\\modules\\lockscreen.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\blue\\modules\\popup.png",
+      "PackagePath": "staticwebassets\\images\\icons\\blue\\modules\\popup.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\blue\\modules\\rss.png",
+      "PackagePath": "staticwebassets\\images\\icons\\blue\\modules\\rss.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\blue\\modules\\screensaver.png",
+      "PackagePath": "staticwebassets\\images\\icons\\blue\\modules\\screensaver.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\blue\\modules\\survey.png",
+      "PackagePath": "staticwebassets\\images\\icons\\blue\\modules\\survey.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\blue\\modules\\ticker.png",
+      "PackagePath": "staticwebassets\\images\\icons\\blue\\modules\\ticker.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\blue\\reports\\active-machines.png",
+      "PackagePath": "staticwebassets\\images\\icons\\blue\\reports\\active-machines.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\blue\\reports\\active-users.png",
+      "PackagePath": "staticwebassets\\images\\icons\\blue\\reports\\active-users.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\blue\\reports\\campaign-dispatch.png",
+      "PackagePath": "staticwebassets\\images\\icons\\blue\\reports\\campaign-dispatch.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\blue\\reports\\policy.png",
+      "PackagePath": "staticwebassets\\images\\icons\\blue\\reports\\policy.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\blue\\reports\\popup.png",
+      "PackagePath": "staticwebassets\\images\\icons\\blue\\reports\\popup.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\blue\\reports\\survey.png",
+      "PackagePath": "staticwebassets\\images\\icons\\blue\\reports\\survey.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\blue\\reports\\ticker.png",
+      "PackagePath": "staticwebassets\\images\\icons\\blue\\reports\\ticker.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\blue\\reports\\troubleshoot.png",
+      "PackagePath": "staticwebassets\\images\\icons\\blue\\reports\\troubleshoot.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\blue\\settings\\active-connections.png",
+      "PackagePath": "staticwebassets\\images\\icons\\blue\\settings\\active-connections.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\blue\\settings\\admin-access.png",
+      "PackagePath": "staticwebassets\\images\\icons\\blue\\settings\\admin-access.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\blue\\settings\\automated-jobs.png",
+      "PackagePath": "staticwebassets\\images\\icons\\blue\\settings\\automated-jobs.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\blue\\settings\\control-panel.png",
+      "PackagePath": "staticwebassets\\images\\icons\\blue\\settings\\control-panel.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\blue\\settings\\custom-user.png",
+      "PackagePath": "staticwebassets\\images\\icons\\blue\\settings\\custom-user.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\blue\\settings\\default-fonts.png",
+      "PackagePath": "staticwebassets\\images\\icons\\blue\\settings\\default-fonts.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\blue\\settings\\desktop-Information.png",
+      "PackagePath": "staticwebassets\\images\\icons\\blue\\settings\\desktop-Information.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\blue\\settings\\rebuild-target-groups.png",
+      "PackagePath": "staticwebassets\\images\\icons\\blue\\settings\\rebuild-target-groups.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\blue\\settings\\setup-exclusions.png",
+      "PackagePath": "staticwebassets\\images\\icons\\blue\\settings\\setup-exclusions.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\blue\\settings\\skins-offline-images.png",
+      "PackagePath": "staticwebassets\\images\\icons\\blue\\settings\\skins-offline-images.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\blue\\settings\\staging-users.png",
+      "PackagePath": "staticwebassets\\images\\icons\\blue\\settings\\staging-users.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\blue\\support\\about-us.png",
+      "PackagePath": "staticwebassets\\images\\icons\\blue\\support\\about-us.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\blue\\support\\contact.png",
+      "PackagePath": "staticwebassets\\images\\icons\\blue\\support\\contact.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\blue\\support\\faq.png",
+      "PackagePath": "staticwebassets\\images\\icons\\blue\\support\\faq.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\blue\\support\\remote-assistance.png",
+      "PackagePath": "staticwebassets\\images\\icons\\blue\\support\\remote-assistance.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\blue\\support\\tutorials.png",
+      "PackagePath": "staticwebassets\\images\\icons\\blue\\support\\tutorials.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\modules\\popup\\Dislike-icon.png",
+      "PackagePath": "staticwebassets\\images\\icons\\modules\\popup\\Dislike-icon.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\modules\\popup\\Like-icon.png",
+      "PackagePath": "staticwebassets\\images\\icons\\modules\\popup\\Like-icon.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\modules\\popup\\icon-error.png",
+      "PackagePath": "staticwebassets\\images\\icons\\modules\\popup\\icon-error.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\modules\\popup\\icon-info.png",
+      "PackagePath": "staticwebassets\\images\\icons\\modules\\popup\\icon-info.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\modules\\popup\\icon-warning.png",
+      "PackagePath": "staticwebassets\\images\\icons\\modules\\popup\\icon-warning.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\white\\account\\account-overview.png",
+      "PackagePath": "staticwebassets\\images\\icons\\white\\account\\account-overview.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\white\\account\\security-settings.png",
+      "PackagePath": "staticwebassets\\images\\icons\\white\\account\\security-settings.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\white\\admin\\application-parameters.png",
+      "PackagePath": "staticwebassets\\images\\icons\\white\\admin\\application-parameters.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\white\\admin\\auto-reminders.png",
+      "PackagePath": "staticwebassets\\images\\icons\\white\\admin\\auto-reminders.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\white\\admin\\licensing.png",
+      "PackagePath": "staticwebassets\\images\\icons\\white\\admin\\licensing.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\white\\admin\\sql-browser.png",
+      "PackagePath": "staticwebassets\\images\\icons\\white\\admin\\sql-browser.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\white\\admin\\upload-files.png",
+      "PackagePath": "staticwebassets\\images\\icons\\white\\admin\\upload-files.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\white\\border.png",
+      "PackagePath": "staticwebassets\\images\\icons\\white\\border.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\white\\dashboard\\calendar.png",
+      "PackagePath": "staticwebassets\\images\\icons\\white\\dashboard\\calendar.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\white\\dashboard\\home.png",
+      "PackagePath": "staticwebassets\\images\\icons\\white\\dashboard\\home.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\white\\modules\\content-library.png",
+      "PackagePath": "staticwebassets\\images\\icons\\white\\modules\\content-library.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\white\\modules\\desktop.png",
+      "PackagePath": "staticwebassets\\images\\icons\\white\\modules\\desktop.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\white\\modules\\lockscreen.png",
+      "PackagePath": "staticwebassets\\images\\icons\\white\\modules\\lockscreen.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\white\\modules\\popup.png",
+      "PackagePath": "staticwebassets\\images\\icons\\white\\modules\\popup.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\white\\modules\\rss.png",
+      "PackagePath": "staticwebassets\\images\\icons\\white\\modules\\rss.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\white\\modules\\screensaver.png",
+      "PackagePath": "staticwebassets\\images\\icons\\white\\modules\\screensaver.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\white\\modules\\survey.png",
+      "PackagePath": "staticwebassets\\images\\icons\\white\\modules\\survey.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\white\\modules\\ticker.png",
+      "PackagePath": "staticwebassets\\images\\icons\\white\\modules\\ticker.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\white\\reports\\active-machines.png",
+      "PackagePath": "staticwebassets\\images\\icons\\white\\reports\\active-machines.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\white\\reports\\active-users.png",
+      "PackagePath": "staticwebassets\\images\\icons\\white\\reports\\active-users.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\white\\reports\\campaign-dispatch.png",
+      "PackagePath": "staticwebassets\\images\\icons\\white\\reports\\campaign-dispatch.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\white\\reports\\policy.png",
+      "PackagePath": "staticwebassets\\images\\icons\\white\\reports\\policy.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\white\\reports\\popup.png",
+      "PackagePath": "staticwebassets\\images\\icons\\white\\reports\\popup.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\white\\reports\\survey.png",
+      "PackagePath": "staticwebassets\\images\\icons\\white\\reports\\survey.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\white\\reports\\ticker.png",
+      "PackagePath": "staticwebassets\\images\\icons\\white\\reports\\ticker.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\white\\reports\\troubleshoot.png",
+      "PackagePath": "staticwebassets\\images\\icons\\white\\reports\\troubleshoot.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\white\\settings\\active-connections.png",
+      "PackagePath": "staticwebassets\\images\\icons\\white\\settings\\active-connections.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\white\\settings\\admin-access.png",
+      "PackagePath": "staticwebassets\\images\\icons\\white\\settings\\admin-access.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\white\\settings\\automated-jobs.png",
+      "PackagePath": "staticwebassets\\images\\icons\\white\\settings\\automated-jobs.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\white\\settings\\control-panel.png",
+      "PackagePath": "staticwebassets\\images\\icons\\white\\settings\\control-panel.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\white\\settings\\custom-user.png",
+      "PackagePath": "staticwebassets\\images\\icons\\white\\settings\\custom-user.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\white\\settings\\default-fonts.png",
+      "PackagePath": "staticwebassets\\images\\icons\\white\\settings\\default-fonts.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\white\\settings\\desktop-information.png",
+      "PackagePath": "staticwebassets\\images\\icons\\white\\settings\\desktop-information.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\white\\settings\\rebuild-targeted-groups.png",
+      "PackagePath": "staticwebassets\\images\\icons\\white\\settings\\rebuild-targeted-groups.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\white\\settings\\setup-exclusions.png",
+      "PackagePath": "staticwebassets\\images\\icons\\white\\settings\\setup-exclusions.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\white\\settings\\skins-offline-images.png",
+      "PackagePath": "staticwebassets\\images\\icons\\white\\settings\\skins-offline-images.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\white\\settings\\staging-users.png",
+      "PackagePath": "staticwebassets\\images\\icons\\white\\settings\\staging-users.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\white\\support\\about-us.png",
+      "PackagePath": "staticwebassets\\images\\icons\\white\\support\\about-us.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\white\\support\\contact.png",
+      "PackagePath": "staticwebassets\\images\\icons\\white\\support\\contact.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\white\\support\\faq.png",
+      "PackagePath": "staticwebassets\\images\\icons\\white\\support\\faq.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\white\\support\\remote-assistance.png",
+      "PackagePath": "staticwebassets\\images\\icons\\white\\support\\remote-assistance.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\icons\\white\\support\\tutorials.png",
+      "PackagePath": "staticwebassets\\images\\icons\\white\\support\\tutorials.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\logos\\app-icon-blue.png",
+      "PackagePath": "staticwebassets\\images\\logos\\app-icon-blue.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\logos\\app-icon-white.png",
+      "PackagePath": "staticwebassets\\images\\logos\\app-icon-white.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\logos\\logo-white.png",
+      "PackagePath": "staticwebassets\\images\\logos\\logo-white.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\others\\Loading_2.gif",
+      "PackagePath": "staticwebassets\\images\\others\\Loading_2.gif"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\others\\epic-loading.gif",
+      "PackagePath": "staticwebassets\\images\\others\\epic-loading.gif"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\others\\loading-waiting.gif",
+      "PackagePath": "staticwebassets\\images\\others\\loading-waiting.gif"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\others\\modules\\skins\\Popup_Skin_Default.png",
+      "PackagePath": "staticwebassets\\images\\others\\modules\\skins\\Popup_Skin_Default.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\others\\modules\\skins\\Popup_Skin_Test_1.BMP",
+      "PackagePath": "staticwebassets\\images\\others\\modules\\skins\\Popup_Skin_Test_1.BMP"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\others\\modules\\skins\\Popup_Skin_Test_2.BMP",
+      "PackagePath": "staticwebassets\\images\\others\\modules\\skins\\Popup_Skin_Test_2.BMP"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\others\\modules\\skins\\Popup_Skin_Test_3.BMP",
+      "PackagePath": "staticwebassets\\images\\others\\modules\\skins\\Popup_Skin_Test_3.BMP"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\others\\modules\\skins\\SurveyBackground.bmp",
+      "PackagePath": "staticwebassets\\images\\others\\modules\\skins\\SurveyBackground.bmp"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\others\\modules\\skins\\Survey_Skin_10578.bmp",
+      "PackagePath": "staticwebassets\\images\\others\\modules\\skins\\Survey_Skin_10578.bmp"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\others\\modules\\skins\\Survey_Skin_999.bmp",
+      "PackagePath": "staticwebassets\\images\\others\\modules\\skins\\Survey_Skin_999.bmp"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\others\\modules\\survey\\survey_export_button.png",
+      "PackagePath": "staticwebassets\\images\\others\\modules\\survey\\survey_export_button.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\others\\modules\\survey\\survey_previous_button.png",
+      "PackagePath": "staticwebassets\\images\\others\\modules\\survey\\survey_previous_button.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\others\\modules\\survey\\survey_score_summary.png",
+      "PackagePath": "staticwebassets\\images\\others\\modules\\survey\\survey_score_summary.png"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\images\\others\\modules\\survey\\survey_scored_question.jpg",
+      "PackagePath": "staticwebassets\\images\\others\\modules\\survey\\survey_scored_question.jpg"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\js\\calendaDataTest.js",
+      "PackagePath": "staticwebassets\\js\\calendaDataTest.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\js\\commonFunctions.js",
+      "PackagePath": "staticwebassets\\js\\commonFunctions.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\js\\enumsTypes.js",
+      "PackagePath": "staticwebassets\\js\\enumsTypes.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\js\\layouts.js",
+      "PackagePath": "staticwebassets\\js\\layouts.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\js\\main.js",
+      "PackagePath": "staticwebassets\\js\\main.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\js\\models\\DimensionType.js",
+      "PackagePath": "staticwebassets\\js\\models\\DimensionType.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\js\\models\\LeftNavigationMenuItem.js",
+      "PackagePath": "staticwebassets\\js\\models\\LeftNavigationMenuItem.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\js\\models\\ModuleTypes.js",
+      "PackagePath": "staticwebassets\\js\\models\\ModuleTypes.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\js\\models\\StatusTypes.js",
+      "PackagePath": "staticwebassets\\js\\models\\StatusTypes.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\js\\modules\\PSTModules.js",
+      "PackagePath": "staticwebassets\\js\\modules\\PSTModules.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\js\\modules\\fullCalendar.js",
+      "PackagePath": "staticwebassets\\js\\modules\\fullCalendar.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\js\\modules\\ganttCharts.js",
+      "PackagePath": "staticwebassets\\js\\modules\\ganttCharts.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\js\\modules\\modules.js",
+      "PackagePath": "staticwebassets\\js\\modules\\modules.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\js\\modules\\popup.js",
+      "PackagePath": "staticwebassets\\js\\modules\\popup.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\js\\modules\\survey.js",
+      "PackagePath": "staticwebassets\\js\\modules\\survey.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\js\\modules\\ticker.js",
+      "PackagePath": "staticwebassets\\js\\modules\\ticker.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\js\\navigations.js",
+      "PackagePath": "staticwebassets\\js\\navigations.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\js\\sharedFunctions.js",
+      "PackagePath": "staticwebassets\\js\\sharedFunctions.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "PackagePath": "staticwebassets\\lib\\bootstrap"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
+    },
+    {
+      "Id": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.CLA-Administration-Web.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.build.CLA-Administration-Web.props",
+      "PackagePath": "build\\CLA-Administration-Web.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.CLA-Administration-Web.props",
+      "PackagePath": "buildMultiTargeting\\CLA-Administration-Web.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.buildTransitive.CLA-Administration-Web.props",
+      "PackagePath": "buildTransitive\\CLA-Administration-Web.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

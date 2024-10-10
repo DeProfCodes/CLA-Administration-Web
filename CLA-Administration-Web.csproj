@@ -8,11 +8,11 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <NoWarn>1701;1702;8618;8603;024</NoWarn>
+    <NoWarn>1701;1702;8618;8603;024;8600</NoWarn>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <NoWarn>1701;1702;8618;8603;024</NoWarn>
+    <NoWarn>1701;1702;8618;8603;024;8600</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
@@ -48,6 +48,9 @@
   <ItemGroup>
     <Reference Include="CLACommonFunctionsLibrary_NET">
       <HintPath>..\..\..\Miscellaneous\# Utilities #\CLACommonFunctionsLibrary_NET.dll</HintPath>
+    </Reference>
+    <Reference Include="CLAModulesLibrary">
+      <HintPath>..\..\..\Miscellaneous\# Utilities #\CLAModulesLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
 

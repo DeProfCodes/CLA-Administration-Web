@@ -1,4 +1,5 @@
-﻿using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
+﻿using CLA_Administration_Web.Helpers.Enums.Shared;
+using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
 using CLA_Administration_Web.ViewModels.Modules.ContentLibrary;
 
 namespace CLA_Administration_Web.ViewModels.Modules.LDS
@@ -10,6 +11,10 @@ namespace CLA_Administration_Web.ViewModels.Modules.LDS
         public string ContentLibraryParents { get; set; }
 
         public string CategoryName { get; set; }
+
+        public string CategoryDescription { get; set; }
+
+        public AddOrEditType AddOrEdit { get; set; }
 
         public List<ContentLibraryCategoryModel> ContentCategories { get; set; }
 

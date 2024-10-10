@@ -1,0 +1,370 @@
+﻿@model CLA_Administration_Web.ViewModels.Layouts.LeftNavigationViewModel
+
+@using CLACommonFunctionsLibrary_NET.Helpers.Enums
+@using CLA_Administration_Web.Helpers.Enums.AppPages
+@using CLA_Administration_Web.Helpers.Enums.Shared
+@using CLA_Administration_Web.Helpers.Html
+
+<link href="~/assets/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" />
+
+<!--start sidebar -->
+<aside class="sidebar-wrapper theme-bg" data-simplebar="true" id="LeftNavMenu">
+    <div class="sidebar-header">
+        <div>
+            <img src="~/images/logos/logo-white.png" class="logo-icon" alt="logo icon">
+        </div>
+    </div>
+    <!--navigation-->
+    <ul class="metismenu" id="LeftNavigationActualMenu" >
+        <!-- Dashboard -->
+        <li>
+            <a onclick="ExpandToggleLeftMainNavMenu('Dashboard')" id="DashboardLink" class="left-nav-menu-item">
+                <i class="bi bi-grid-fill left-main-nav-icons" id="DashboardLeftIcon"></i>
+                <span class="left-nav-titles" id="DashboardTitle">Dashboard</span>
+                <i class="bi bi-chevron-right ms-lg-auto left-nav-arrow-icons" id="DashboardRightIcon"></i>
+            </a>
+            <ul id="DashboardDropdown" class="mm-collapse left-nav-sub-menu">
+                @foreach (var dashboardPage in Model.DashboardLeftNavigation)
+                {
+                    var dashboardName = dashboardPage.DashboardName.GetDisplayName();
+                    var linkId = $"{dashboardName}SubLink";
+                    var leftIconId = $"{dashboardName}LeftIcon";
+                    var titleId = $"{dashboardName}Title";
+                    var title = dashboardPage.DashboardName.GetDisplayDescription();
+
+                    <li>
+                        <a onclick="OpenLeftNavigationPage('@dashboardPage.DashboardPage', '@linkId')" id="@linkId" class="left-sub-nav-link">
+                            <img class="left-nav-img-icons" id="@leftIconId" src="@dashboardPage.IconWhiteUrl" />
+                            <span class="left-sub-nav-title" id="@titleId">@title</span>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </li>
+        <!-- Admin -->
+        <li>
+            <a onclick="ExpandToggleLeftMainNavMenu('Admin')" id="AdminLink" class="left-nav-menu-item">
+                <i class="bi bi-kanban-fill left-main-nav-icons" id="AdminLeftIcon"></i>
+                <span class="left-nav-titles" id="AdminTitle">Admin</span>
+                <i class="bi bi-chevron-right ms-lg-auto left-nav-arrow-icons" id="AdminRightIcon"></i>
+            </a>
+            <ul id="AdminDropdown" class="mm-collapse left-nav-sub-menu">
+                @foreach (var adminPage in Model.AdminLeftNavigation)
+                {
+                    var adminName = adminPage.AdminName.GetDisplayName();
+                    var linkId = $"{adminName}Link";
+                    var leftIconId = $"{adminName}LeftIcon";
+                    var titleId = $"{adminName}Title";
+                    var title = adminPage.AdminName.GetDisplayDescription();
+                    
+                    <li>
+                        <a onclick="OpenLeftNavigationPage('@adminPage.AdminPage', '@linkId')" id="@linkId" class="left-sub-nav-link">
+                            <img class="left-nav-img-icons" id="@leftIconId" src="@adminPage.IconWhiteUrl" />
+                            <span class="left-sub-nav-title" id="@titleId">@title</span>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </li>
+        <!-- Modules -->
+        <li>
+            <a onclick="ExpandToggleLeftMainNavMenu('Modules')" id="ModulesLink" class="left-nav-menu-item">
+                <i class="bi bi-boxes left-main-nav-icons" id="ModulesLeftIcon"></i>
+                <span class="left-nav-titles" id="ModulesTitle">Modules</span>
+                <i class="bi bi-chevron-right ms-lg-auto left-nav-arrow-icons" id="ModulesRightIcon"></i>
+            </a>
+            <ul id="ModulesDropdown" class="mm-collapse left-nav-sub-menu">
+                @foreach (var modulePage in Model.ModulesLeftNavigation)
+                {
+                    var moduleName = modulePage.ModuleName.GetDisplayName();
+                    var linkId = $"{moduleName}Link";
+                    var leftIconId = $"{moduleName}LeftIcon";
+                    var titleId = $"{moduleName}Title";
+                    var title = modulePage.ModuleName.GetDisplayDescription();
+                    var rightIconId = $"{moduleName}RightIcon";
+                    var dropdownId = $"{moduleName}Dropdown";
+                    var overviewLeftIcon = $"{moduleName}OverviewLeftIcon";
+                    var overviewId = $"{moduleName}OverviewLink";
+                    var addNewId = $"{moduleName}AddNewLink";
+
+                    <li>
+                        <a onclick="ExpandToggleLeftSubNavMenu('@moduleName')" id="@linkId" class="left-sub-nav-link">
+                            <img class="left-nav-img-icons" id="@leftIconId" src="@modulePage.IconWhiteUrl" />
+                            <span class="left-sub-nav-title" id="@titleId">@title</span>
+                            <i class="bi bi-chevron-right ms-lg-auto left-nav-arrow-icons" id="@rightIconId"></i>
+                        </a>
+                        <ul id="@dropdownId" class="mm-collapse left-nav-sub-menu">
+                            <li>
+                                <a onclick="OpenLeftNavigationPage('@modulePage.OverviewPage', '@overviewId')" class="left-sub-nav-link" id="@overviewId">
+                                    <i class="ri-menu-search-fill left-sub-nav-icons" id="@overviewLeftIcon"></i><span class="left-sub-nav-title">Overview</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a onclick="OpenLeftNavigationPage('@modulePage.AddNewPage', '@addNewId')" class="left-sub-nav-link" id="@addNewId">
+                                    <i class="bi bi-plus-circle-fill left-sub-nav-icons" id="@leftIconId"></i><span class="left-sub-nav-title">Add New</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                }
+            </ul>
+        </li>
+        <!-- Settings -->
+        <li>
+            <a onclick="ExpandToggleLeftMainNavMenu('Settings')" id="SettingsLink" class="left-nav-menu-item">
+                <i class="bi bi-gear-fill left-main-nav-icons" id="SettingsLeftIcon"></i>
+                <span class="left-nav-titles" id="SettingsTitle">Settings</span>
+                <i class="bi bi-chevron-right ms-lg-auto left-nav-arrow-icons" id="SettingsRightIcon"></i>
+            </a>
+            <ul id="SettingsDropdown" class="mm-collapse left-nav-sub-menu">
+                @foreach (var settingVm in Model.SettingsLeftNavigation)
+                {
+                    var settingName = settingVm.SettingName.GetDisplayName();
+                    var linkId = $"{settingName}Link";
+                    var leftIconId = $"{settingName}LeftIcon";
+                    var titleId = $"{settingName}Title";
+                    var title = settingVm.SettingName.GetDisplayDescription();
+                    
+                    <li>
+                        <a onclick="OpenLeftNavigationPage('@settingVm.SettingsPage', '@linkId')" id="@linkId" class="left-sub-nav-link">
+                            <img class="left-nav-img-icons" id="@leftIconId" src="@settingVm.IconWhiteUrl" />
+                            <span class="left-sub-nav-title" id="@titleId">@title</span>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </li>
+        <!-- Reports -->
+        <li>
+            <a onclick="ExpandToggleLeftMainNavMenu('Reports')" id="ReportsLink" class="left-nav-menu-item">
+                <i class="bi bi-pie-chart-fill left-main-nav-icons" id="ReportsLeftIcon"></i>
+                <span class="left-nav-titles" id="ReportsTitle">Reports</span>
+                <i class="bi bi-chevron-right ms-lg-auto left-nav-arrow-icons" id="ReportsRightIcon"></i>
+            </a>
+            <ul id="ReportsDropdown" class="mm-collapse left-nav-sub-menu">
+                @foreach (var reportVm in Model.ReportsLeftNavigation)
+                {
+                    var reportName = reportVm.ReportName.GetDisplayName();
+                    var linkId = $"{reportName}Link";
+                    var leftIconId = $"{reportName}LeftIcon";
+                    var titleId = $"{reportName}Title";
+                    var title = reportVm.ReportName.GetDisplayDescription();
+
+                    <li>
+                        <a onclick="OpenLeftNavigationPage('@reportVm.ReportPage','@linkId')" id="@linkId" class="left-sub-nav-link">
+                            <img class="left-nav-img-icons" id="@leftIconId" src="@reportVm.IconWhiteUrl" />
+                            <span class="left-sub-nav-title" id="@titleId">@title</span>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </li>
+        <!-- Support -->
+        <li>
+            <a onclick="ExpandToggleLeftMainNavMenu('Support')" id="SupportLink" class="left-nav-menu-item">
+                <i class="bx bx-support left-main-nav-icons" id="SupportLeftIcon"></i>
+                <span class="left-nav-titles" id="SupportTitle">Support</span>
+                <i class="bi bi-chevron-right ms-lg-auto left-nav-arrow-icons" id="SupportRightIcon"></i>
+            </a>
+            <ul id="SupportDropdown" class="mm-collapse left-nav-sub-menu">
+                @foreach (var supportVm in Model.SupportLeftNavigation)
+                {
+                    var supportName = supportVm.SupportName.GetDisplayName();
+                    var linkId = $"{supportName}Link";
+                    var leftIconId = $"{supportName}LeftIcon";
+                    var titleId = $"{supportName}Title";
+                    var title = supportVm.SupportName.GetDisplayDescription();
+
+                    <li>
+                        <a onclick="OpenLeftNavigationPage('@supportVm.SupportPage','@linkId')" id="@linkId" class="left-sub-nav-link">
+                            <img class="left-nav-img-icons" id="@leftIconId" src="@supportVm.IconWhiteUrl" />
+                            <span class="left-sub-nav-title" id="@titleId">@title</span>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </li>
+        <!-- Account -->
+        <li>
+            <a onclick="ExpandToggleLeftMainNavMenu('Account')" id="AccountLink" class="left-nav-menu-item">
+                <i class="bi bi-person-fill left-main-nav-icons" id="AccountLeftIcon"></i>
+                <span class="left-nav-titles" id="AccountTitle">Account</span>
+                <i class="bi bi-chevron-right ms-lg-auto left-nav-arrow-icons" id="AccountRightIcon"></i>
+            </a>
+            <ul id="AccountDropdown" class="mm-collapse left-nav-sub-menu">
+                @foreach (var accountVm in Model.AccountLeftNavigation)
+                {
+                    var accountName = accountVm.AccountName.GetDisplayName();
+                    var linkId = $"{accountName}Link";
+                    var leftIconId = $"{accountName}LeftIcon";
+                    var titleId = $"{accountName}Title";
+                    var title = accountVm.AccountName.GetDisplayDescription();
+
+                    <li>
+                        <a onclick="OpenLeftNavigationPage('@accountVm.AccountPage', '@linkId')" id="@linkId" class="left-sub-nav-link">
+                            <img class="left-nav-img-icons" id="@leftIconId" src="@accountVm.IconWhiteUrl" />
+                            <span class="left-sub-nav-title" id="@titleId">@title</span>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </li>
+    </ul>
+    <!--end navigation-->
+    <a onclick="Logout()" id="LogoutLink" class="left-nav-menu-item" style="padding:20px">
+        <i class="bi bi-door-open-fill left-main-nav-icons" id="LogoutLeftIcon"></i>
+        <span class="left-nav-titles" id="LogoutTitle">Logout</span>
+    </a>
+</aside>
+<!--end sidebar -->
+
+<script src="~/assets/plugins/metismenu/js/metisMenu.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+<script>
+    
+    $(document).ready(function ()
+    {
+        InitialPage();
+    });
+
+    function ToggleIconImageActive(leftIconId, isActive)
+    {
+        var iconImgUrl = $(leftIconId).attr("src");
+        
+        var newUrl = isActive ? iconImgUrl.replace('white', 'blue') : iconImgUrl.replace('blue', 'white');
+
+        $(leftIconId).attr("src", newUrl);
+    }
+
+    function ExpandOpenLeftNavMenu(linkId, leftIconId, titleId, rightIconId, dropDownId, activeNavCss, isImageIcon)
+    {
+        if (isImageIcon)
+            ToggleIconImageActive(leftIconId, true);
+        else
+            $(leftIconId).addClass(activeNavCss);
+
+        $(titleId).addClass(activeNavCss);
+        $(rightIconId).addClass(activeNavCss);
+        $(rightIconId).removeClass('bi-chevron-right');
+        $(rightIconId).addClass('bi-chevron-down');
+
+        $(linkId).addClass(activeNavCss);
+
+
+        $(dropDownId).addClass("menu-active");
+        $(dropDownId).slideDown();
+    }
+
+    function ExpandCloseLeftNavMenu(linkId, leftIconId, titleId, rightIconId, dropDownId, activeNavCss, isImageIcon)
+    {
+        if (isImageIcon)
+            ToggleIconImageActive(leftIconId, false);
+        else
+            $(leftIconId).removeClass(activeNavCss);
+
+        $(titleId).removeClass(activeNavCss);
+        $(rightIconId).removeClass(activeNavCss);
+        $(rightIconId).addClass('bi-chevron-right');
+        $(rightIconId).removeClass('bi-chevron-down');
+
+        $(linkId).removeClass(activeNavCss);
+        $(dropDownId).removeClass("menu-active");
+        $(dropDownId).slideUp();
+    }
+
+    function ExpandCloseAllMainMenuDropdowns()
+    {
+        const leftMenus = ["Dashboard", "Admin", "Modules", "Settings", "Reports", "Support", "Account"];
+
+        for (let i = 0; i < leftMenus.length; i++)
+        {
+            var groupName = leftMenus[i];
+            var linkId = `#${groupName}Link`;
+            var leftIconId = `#${groupName}LeftIcon`;
+            var titleId = `#${groupName}Title`;
+            var rightIconId = `#${groupName}RightIcon`;
+            var dropDownId = `#${groupName}Dropdown`;
+
+            ExpandCloseLeftNavMenu(linkId, leftIconId, titleId, rightIconId, dropDownId, 'left-nav-menu-active', false);
+        }
+    }
+
+    function ExpandCloseAllSubMenuDropdowns()
+    {
+        const leftMenus = ["ContentLibrary", "LockedDesktop", "Desktop", "Screensaver", "Popup", "Survey", "Ticker", "RSS"];
+
+        for (let i = 0; i < leftMenus.length; i++)
+        {
+            var groupName = leftMenus[i];
+            var linkId = `#${groupName}Link`;
+            var leftIconId = `#${groupName}LeftIcon`;
+            var titleId = `#${groupName}Title`;
+            var rightIconId = `#${groupName}RightIcon`;
+            var dropDownId = `#${groupName}Dropdown`;
+
+            ExpandCloseLeftNavMenu(linkId, leftIconId, titleId, rightIconId, dropDownId, 'left-sub-nav-menu-active', true);
+        }
+    }
+
+    function ExpandToggleLeftMainNavMenu(groupName)
+    {
+        var linkId = `#${groupName}Link`;
+        var leftIconId = `#${groupName}LeftIcon`;
+        var titleId = `#${groupName}Title`;
+        var rightIconId = `#${groupName}RightIcon`;
+        var dropDownId = `#${groupName}Dropdown`;
+
+        var isOpening = $(dropDownId).hasClass('menu-active') == false;
+        
+        if(isOpening)
+        {
+            ExpandCloseAllMainMenuDropdowns();
+            ExpandOpenLeftNavMenu(linkId, leftIconId, titleId, rightIconId, dropDownId, 'left-nav-menu-active', false);
+        }
+        else
+        {
+            ExpandCloseLeftNavMenu(linkId, leftIconId, titleId, rightIconId, dropDownId, 'left-nav-menu-active', false);
+        }
+    }
+
+    function ExpandToggleLeftSubNavMenu(groupName)
+    {
+        var linkId = `#${groupName}Link`;
+        var leftIconId = `#${groupName}LeftIcon`;
+        var titleId = `#${groupName}Title`;
+        var rightIconId = `#${groupName}RightIcon`;
+        var dropDownId = `#${groupName}Dropdown`;
+
+        var isOpening = $(dropDownId).hasClass('menu-active') == false;
+
+        if (isOpening)
+        {
+            ExpandCloseAllSubMenuDropdowns();
+            ExpandOpenLeftNavMenu(linkId, leftIconId, titleId, rightIconId, dropDownId, 'left-sub-nav-menu-active', true);
+        }
+        else
+        {
+            ExpandCloseLeftNavMenu(linkId, leftIconId, titleId, rightIconId, dropDownId, 'left-sub-nav-menu-active', true);
+        }
+    }
+
+    function SetLinkActive(linkId)
+    {
+       $('.left-sub-nav-link').removeClass("active-sub-nav-link");
+       $(linkId).addClass("active-sub-nav-link");
+    }
+
+    function OpenLeftNavigationPage(page, linkId)
+    {
+        SetLinkActive(`#${linkId}`);
+        OpenPage(page);
+    }
+
+    function InitialPage()
+    {
+        ExpandToggleLeftMainNavMenu('Dashboard');
+        OpenLeftNavigationPage('@DashboardPages.Dashboard', 'DashboardSubLink');
+    }
+
+</script>

@@ -20,7 +20,7 @@ function NextTickerTab()
     {
         if (!ValidateTickerTab(currentTickerTab))
             return;
-        
+
         currentTickerTab = NextModuleTab("ticker", currentTickerTab, totalTickerTabs, backBtnId, nextBtnId, submitBtnId);
     }
 }
@@ -124,6 +124,42 @@ function TickerLinkTypeClick(linkBtnId)
         }
     }
 }
+
+function UpdateTickerDisplayTimeDetails()
+{
+    var startDate = $("#DatePickerStartDate").val();
+    var endDate = $("#DatePickerEndDate").val();
+    var startTime = $("#TimePickerStartTime").val();
+    var endTime = $("#TimePickerEndTime").val();
+
+    if (IsNotEmptyString(startDate) && IsNotEmptyString(endDate) && IsNotEmptyString(startTime) && IsNotEmptyString(endTime))
+    {
+        $("#TickerStartEffDate").text(startDate);
+        $("#TickerEndEffDate").text(endDate);
+        $("#TickerStartTimeSlot").text(startTime);
+        $("#TickerEndTimeSlot").text(endTime);
+    }
+}
+
+$("#DatePickerStartDate").change(function ()
+{
+    UpdateTickerDisplayTimeDetails();
+});
+
+$("#DatePickerEndDate").change(function ()
+{
+    UpdateTickerDisplayTimeDetails();
+});
+
+$("#TimePickerStartTime").change(function ()
+{
+    UpdateTickerDisplayTimeDetails();
+});
+
+$("#TimePickerEndTime").change(function ()
+{
+    UpdateTickerDisplayTimeDetails();
+});
 
 function SurveyLinkTypeClick(btnId)
 {

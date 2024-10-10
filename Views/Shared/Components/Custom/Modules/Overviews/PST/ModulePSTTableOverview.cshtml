@@ -65,7 +65,7 @@
                     {
                         <button class="btn btn-success btn-sm custom-btn-sm custom-btn-sm mx-1" onclick="OpenSurveyQuestions('@module.Id')">Questions</button>
                     }
-                    <button class="btn btn-secondary btn-sm custom-btn-sm mx-1">Edit</button>
+                    <button class="btn btn-secondary btn-sm custom-btn-sm mx-1" onclick="EditPSTModule('@module.Id')">Edit</button>
                     <button class="btn btn-danger btn-sm custom-btn-sm mx-1">Expire</button>
                 </td>
             </tr>
@@ -101,6 +101,17 @@
     function OpenModuleDetails(itemId)
     {
         OpenPage('@Model.ModuleDetailsPage', itemId);
+    }
+
+    function EditPSTModule(itemId)
+    {
+        var page = "";
+        
+        if ('@Model.ModuleName' == '@ModuleNamesType.Popup') page = '@ModulesPages.PopupAddNew';
+        if ('@Model.ModuleName' == '@ModuleNamesType.Survey') page = '@ModulesPages.SurveyAddNew';
+        if ('@Model.ModuleName' == '@ModuleNamesType.Ticker') page = '@ModulesPages.TickerAddNew';
+
+        OpenPage(page, itemId);
     }
 
     function OpenSurveyQuestions(surveyId)

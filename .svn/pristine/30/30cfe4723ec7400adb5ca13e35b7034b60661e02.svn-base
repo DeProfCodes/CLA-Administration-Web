@@ -1,0 +1,32 @@
+﻿
+<div id="DocumentPreviewModal" class="modal">
+    <span class="close text-danger" onclick="CloseDocumentModal">&times;</span>
+    <iframe class="modal-content" id="DocumentPreviewer" style="width:85%; height:80vh;"></iframe>
+    <div id="caption">
+        <button class="btn btn-primary" onclick="OpenDocumentInNewWindow()">Open New Window</button>
+    </div>
+</div>
+
+<script>
+
+    function OpenDocumentPreviewModal(docSrc)
+    {
+        $("#DocumentPreviewModal").fadeIn();
+        $("#DocumentPreviewer").attr("src", docSrc);
+    }
+
+    function CloseDocumentModal()
+    {
+        $("#DocumentPreviewModal").fadeOut();
+        $("#DocumentPreviewer").attr("src", "");
+    }
+
+    function OpenDocumentInNewWindow()
+    {
+        var doc = document.getElementById('DocumentPreviewer');
+        var url = doc.getAttribute('src');
+        window.open(url);
+
+        CloseDocumentModal();
+    }
+</script>

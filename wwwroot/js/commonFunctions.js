@@ -32,11 +32,11 @@ function HideShowElementVisibity(selector, hideShow)
 {
     if(hideShow == HideShow.HIDE)
     {
-        $(selector).addClass("invisble");
+        $(selector).addClass("invisible");
     }
     else if(hideShow == HideShow.SHOW)
     {
-        $(selector).removeClass("invisble");
+        $(selector).removeClass("invisible");
     }
 }
 

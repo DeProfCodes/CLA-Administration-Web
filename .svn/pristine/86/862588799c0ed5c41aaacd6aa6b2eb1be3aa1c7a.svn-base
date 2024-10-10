@@ -1,0 +1,24 @@
+﻿@model CLA_Administration_Web.ViewModels.Modules.Components.Form.CommonModel
+
+@{
+    var id = !string.IsNullOrEmpty(Model.ElementId) ? Model.ElementId : "";
+    var css = !string.IsNullOrEmpty(Model.Css) ? Model.Css : "";
+    var style = !string.IsNullOrEmpty(Model.Style) ? Model.Style : "";
+}
+
+<input type="date" class="@css" style="@style" id="@id" />
+
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+
+    $(`#@id`).flatpickr({
+        dateFormat: "Y-m-d", // Internal format (ISO 8601)
+        altInput: true,      // Display formatted date
+        altFormat: "l, d F Y", // Custom display format (e.g., Thursday, 03 October 2024)
+        minDate: "today",    // Disable past dates
+        defaultDate: "today",  // Set initial date to today
+        allowInput: true
+    });
+
+</script>

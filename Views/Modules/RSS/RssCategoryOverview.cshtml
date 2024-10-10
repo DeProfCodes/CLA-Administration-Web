@@ -40,7 +40,7 @@
                                 <td>
                                     <button class="btn btn-info btn-sm ms-auto" onclick="OpenRSSCategoryDetails('@rssCat.CategoryId')">Open</button>
                                     <button class="btn btn-success btn-sm mx-1" onclick="OpenRSSFeed('@rssCat.CategoryId')">Open Feeds</button>
-                                    <button class="btn btn-secondary btn-sm mx-1">Edit</button>
+                                    <button class="btn btn-secondary btn-sm mx-1" onclick="OpenPage('@ModulesPages.RSSAddNewCategory', '@rssCat.CategoryId')">Edit</button>
                                     <button class="btn btn-danger btn-sm me-auto">Delete</button>
                                 </td>
                             </tr>

@@ -1,10 +1,16 @@
-﻿using CLA_Administration_Web.Helpers.Enums.Shared;
+﻿using CLA_Administration_Web.Helpers.Constants;
+using CLA_Administration_Web.Helpers.Enums.Module;
+using CLA_Administration_Web.Helpers.Enums.Shared;
+using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
 using CLA_Administration_Web.Helpers.Shared;
 using CLA_Administration_Web.ViewModels.Modules.ContentLibrary;
 using CLA_Administration_Web.ViewModels.Modules.LDS;
 using CLA_Administration_Web.ViewModels.Modules.PST;
 using CLA_Administration_Web.ViewModels.Modules.Rss;
 using CLA_Administration_Web.ViewModels.Shared;
+using CLAModulesLibrary.Helpers.Enums.Modules.Popup;
+using CLAModulesLibrary.Models.Popup;
+using CLAModulesLibrary.Models.Popup.SubModels;
 using System;
 using System.Net.Mime;
 
@@ -15,11 +21,11 @@ namespace CLA_Administration_Web.Helpers.MockData
         public static class StagingData
         {
             //PST
-            public static List<ModulePSTDataViewModel> AllPopupsData { get; set; } = GeneratePSTRandomData();
+            public static List<ModulePSTDataViewModel> AllPopupsData { get; set; } = GeneratePSTRandomData(ModuleNamesType.Popup);
 
-            public static List<ModulePSTDataViewModel> AllTickersData { get; set; } = GeneratePSTRandomData();
+            public static List<ModulePSTDataViewModel> AllTickersData { get; set; } = GeneratePSTRandomData(ModuleNamesType.Ticker);
 
-            public static List<ModulePSTDataViewModel> AllSurveysData { get; set; } = GeneratePSTRandomData();
+            public static List<ModulePSTDataViewModel> AllSurveysData { get; set; } = GeneratePSTRandomData(ModuleNamesType.Survey);
 
             public static List<SurveyQuestionViewModel> AllSurveyQuestions { get; set; } = GenerateSurveyQuestions();
 
@@ -38,11 +44,11 @@ namespace CLA_Administration_Web.Helpers.MockData
         public static class LiveData
         {
             //PST
-            public static List<ModulePSTDataViewModel> AllPopupsData { get; set; } = GeneratePSTRandomData();
+            public static List<ModulePSTDataViewModel> AllPopupsData { get; set; } = GeneratePSTRandomData(ModuleNamesType.Popup);
 
-            public static List<ModulePSTDataViewModel> AllTickersData { get; set; } = GeneratePSTRandomData();
+            public static List<ModulePSTDataViewModel> AllTickersData { get; set; } = GeneratePSTRandomData(ModuleNamesType.Ticker);
 
-            public static List<ModulePSTDataViewModel> AllSurveysData { get; set; } = GeneratePSTRandomData();
+            public static List<ModulePSTDataViewModel> AllSurveysData { get; set; } = GeneratePSTRandomData(ModuleNamesType.Survey);
 
             public static List<SurveyQuestionViewModel> AllSurveyQuestions { get; set; } = GenerateSurveyQuestions();
 
@@ -58,18 +64,21 @@ namespace CLA_Administration_Web.Helpers.MockData
             public static List<RssFeedOverviewViewModel> AllRSSFeed { get; set; } = GenerateRSSFeedRandomData();
         }
 
-        public static List<ContentLibraryCategoryModel> AllContentLibraryCategories { get; set; } = GenerateContentLibraryRandomData();
+        public static List<ContentLibraryCategoryTree> AllContentLibraryCategories { get; set; } = GenerateDummyDataContentLibraryCategories();
 
         public static List<ContentLibraryContentModel> AllContentLibraryContents { get; set; } = GenerateContentLibraryContents();
 
         // Generate Module Data for Popups, Tickers, Surveys
-        private static List<ModulePSTDataViewModel> GeneratePSTRandomData()
+        private static List<ModulePSTDataViewModel> GeneratePSTRandomData(ModuleNamesType module)
         {
             var random = new Random();
             var items = new List<ModulePSTDataViewModel>();
 
             var usersList = new List<string> { "NdhuvaziM", "LegeB", "SinethembaS", "LeboC", "Administrator", "CathrineT", "LarryM", "Tarryn" };
             var machinesList = new List<string> { "NdhuvaziM-PC", "LegeB-PC", "Sinethemba-PC", "LeboC-PC", "Administrator-PC", "CathrineT-PC", "LarryM-PC", "Tarryn-PC" };
+            
+            var popupIcons = Enum.GetValues(typeof(PopupIconType)).Cast<PopupIconType>().ToList();
+            var popupDisplayTypes = Enum.GetValues(typeof(PopupDisplayTypes)).Cast<PopupDisplayTypes>().ToList();
 
             DateTime effectiveFrom = new();
             DateTime effectiveTo = new();
@@ -77,12 +86,26 @@ namespace CLA_Administration_Web.Helpers.MockData
             for (int i = 1; i <= 1000; i++)
             {
                 GetEffectiveDates(ref effectiveFrom, ref effectiveTo, i);
-
                 var item = new ModulePSTDataViewModel
                 {
                     Id = i,
                     HeaderText = RandomString(random, 1, 5),
-                    BodyText = RandomString(random, 20, 50),
+                    BodyText = RandomString(random, 10, 50),
+                    ConclusionText = RandomString(random, 10, 30),
+                    DisplayHeaderText = random.Next(0, 2) == 1,
+                    DisplayBodyText = random.Next(0, 2) == 1,
+                    DisplayConclusionText = random.Next(0, 2) == 1,
+                    
+                    PopupIcon = popupIcons[random.Next(popupIcons.Count)],
+                    PopupDisplayType = popupDisplayTypes[random.Next(popupDisplayTypes.Count)],
+                    PopupAutoHideSeconds = random.Next(100),
+                    PopupPosition = random.Next(10),
+                    PopupFeedback = new FeedbackSettings
+                    {
+                        RequireFeedbackComment = random.Next(0, 2) == 1,
+                        RequireFeedbackLikeDislike = random.Next(0, 2) == 1,
+                    },
+
                     EffectiveFrom = effectiveFrom.ToString("yyyy/MM/dd"),
                     EffectiveTo = effectiveTo.ToString("yyyy/MM/dd"),
                     TimeslotFrom = RandomTime(random),
@@ -92,10 +115,20 @@ namespace CLA_Administration_Web.Helpers.MockData
                     MachineLastModified = machinesList[random.Next(machinesList.Count)]
                 };
 
+                if (module == ModuleNamesType.Popup)
+                {
+                    item.ModuleSkinUrl = ResourcesLibrary.ModulesLibrary.Skins.PopupDefaultSkin;
+                }
+                else if (module == ModuleNamesType.Survey)
+                {
+                    item.ModuleSkinUrl = ResourcesLibrary.ModulesLibrary.Skins.SurveyDefaultSkin;
+                }
+
                 items.Add(item);
             }
             return items;
         }
+
 
         private static string RandomTime(Random random)
         {

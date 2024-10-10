@@ -1,0 +1,252 @@
+﻿/*#region File Uploader*/
+
+.upload-file-container
+{
+    border: 1px solid #ced4da;
+    padding: 1rem;
+    text-align: center;
+    position: relative;
+    background-color: var(--light-blue);
+}
+.upload-file-container i
+{
+    font-size: 30px;
+    color: #ced4da;
+}
+.upload-file-container.dragging 
+{
+    background-color: #e9ecef;
+    border-color: var(--dark-blue);
+}
+.upload-file-container button
+{
+    border: 2px solid var(--theme-blue-clr);
+    padding: 0 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+.upload-file-container button:hover
+{
+    background: var(--theme-blue-clr);
+    color: white;
+}
+
+/*#endregion*/
+
+/*#region HTML Editor*/
+.editor-toolbar
+{
+    background-color: #f1f1f1;
+    padding: 0 5px;
+    border: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.editor-toolbar button,
+.editor-toolbar select,
+.editor-toolbar input
+{
+    margin-right: 5px;
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-size: 14px;
+    padding: 5px;
+}
+
+.editor-font-family-selector
+{
+    width: 100px !important;
+    border: 1px solid silver !important;
+    padding: 0 4px !important;
+}
+
+.editor-toolbar input[type="color"]
+{
+    width: 20px;
+    height: 20px;
+    padding: 0;
+}
+
+.editor-toolbar button:hover,
+.editor-toolbar select:hover
+{
+    color: #007bff;
+}
+/*#endregion*/
+
+/*#region Date & Time Pickers*/
+
+.date-picker
+{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.calendar-icon
+{
+    width: 30px;
+    height: 30px;
+    background-color: var(--theme-blue-clr);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.calendar-icon i
+{
+    color: white;
+    font-size: 16px;
+}
+
+.date-picker input
+{
+    padding: 10px;
+    padding-left: 30px;
+    font-size: 14px;
+    width: 150px;
+    cursor: pointer;
+}
+.calendar-icon-date-box
+{
+    margin-right: -22px;
+    margin-left: 22px;
+    z-index: 100;
+    font-size: 20px;
+    margin-top: 4px;
+    cursor:pointer;
+}
+
+.time-picker
+{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+/* Style for the clock icon */
+.clock-icon
+{
+    width: 30px;
+    height: 30px;
+    background-color: #007bff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.clock-icon i
+{
+    color: white;
+    font-size: 16px;
+}
+
+.time-picker input
+{
+    padding: 10px;
+    padding-left: 30px;
+    font-size: 16px;
+    width: 100px;
+    cursor: pointer;
+}
+/*#endregion*/
+
+/*#region Targeting Trees*/
+
+#TargetedEntityTable , #TargetedEntityTable2, #TargetedEntityTable3
+{
+    overflow-y: auto;
+    max-height: 300px;
+    width: 300px;
+    scrollbar-color: var(--theme-blue-clr) white;
+    scrollbar-width: thin;
+    border: 2px solid var(--theme-blue-clr);
+}
+#AddRemoveButtons
+{
+    margin-top: 100px;
+}
+#TargetingTablesContainer
+{
+
+}
+#TargetingTreesSelectContainer
+{
+    margin-left:auto;
+}
+#TargetingTreeSelectedContainer
+{
+    margin-right:auto;
+}
+#ModalTargetedEntities
+{
+    background: white;
+    opacity: 1;
+    min-width: 500px;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+#ModalTargetingExposureData
+{
+    overflow: auto;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    border-top: 3px solid navy;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+/*#endregion*/
+
+
+/*#region Scaling*/
+
+@media screen and (max-width:1600px)
+{
+    #TargetedEntityTable , #TargetedEntityTable2, #TargetedEntityTable3
+    {
+        width: 250px;
+        font-size:10px !important;
+    }
+}
+@media screen and (max-width:1500px)
+{
+    .targetings-btn-lrg
+    {
+        width: 75px !important;
+    }
+}
+@media screen and (max-width:1450px)
+{
+    .targetings-btn-lrg
+    {
+        display: none !important;
+    }
+    .targetings-btn-sm
+    {
+        display: block !important;
+        width: 30px !important;
+    }
+}
+@media screen and (max-width:1450px)
+{
+    #TargetedEntityTable , #TargetedEntityTable2, #TargetedEntityTable3
+    {
+        width: 200px;
+        height: 250px;
+        font-size:10px !important;
+    }
+}
+
+
+/*#endregion*/

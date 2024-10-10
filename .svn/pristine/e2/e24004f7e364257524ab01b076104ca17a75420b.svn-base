@@ -1,0 +1,747 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|d:\\projects\\svn\\work_in_progress\\sourcecode\\cla-administration-web\\helpers\\constants\\launchsettingshelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|solutionrelative:helpers\\constants\\launchsettingshelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|d:\\projects\\svn\\work_in_progress\\sourcecode\\cla-administration-web\\controllers\\targetingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|solutionrelative:controllers\\targetingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|d:\\projects\\svn\\work_in_progress\\sourcecode\\cla-administration-web\\views\\modules\\popup\\popupdetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|solutionrelative:views\\modules\\popup\\popupdetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|d:\\projects\\svn\\work_in_progress\\sourcecode\\cla-administration-web\\views\\modules\\contentlibrary\\contentlibrarycontentdetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|solutionrelative:views\\modules\\contentlibrary\\contentlibrarycontentdetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|d:\\projects\\svn\\work_in_progress\\sourcecode\\cla-administration-web\\views\\modules\\contentlibrary\\addnewcontentlibrarycategory.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|solutionrelative:views\\modules\\contentlibrary\\addnewcontentlibrarycategory.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|d:\\projects\\svn\\work_in_progress\\sourcecode\\cla-administration-web\\views\\modules\\contentlibrary\\addnewcontentlibrarycontent.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|solutionrelative:views\\modules\\contentlibrary\\addnewcontentlibrarycontent.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|d:\\projects\\svn\\work_in_progress\\sourcecode\\cla-administration-web\\views\\modules\\contentlibrary\\contentlibrarycategories.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|solutionrelative:views\\modules\\contentlibrary\\contentlibrarycategories.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|d:\\projects\\svn\\work_in_progress\\sourcecode\\cla-administration-web\\views\\modules\\contentlibrary\\contentlibrarycategorydetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|solutionrelative:views\\modules\\contentlibrary\\contentlibrarycategorydetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|d:\\projects\\svn\\work_in_progress\\sourcecode\\cla-administration-web\\views\\modules\\desktop\\desktopdetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|solutionrelative:views\\modules\\desktop\\desktopdetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|d:\\projects\\svn\\work_in_progress\\sourcecode\\cla-administration-web\\views\\modules\\contentlibrary\\contentlibrarycontentsoverview.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|solutionrelative:views\\modules\\contentlibrary\\contentlibrarycontentsoverview.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|d:\\projects\\svn\\work_in_progress\\sourcecode\\cla-administration-web\\views\\modules\\screensaver\\screensaverdetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|solutionrelative:views\\modules\\screensaver\\screensaverdetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|d:\\projects\\svn\\work_in_progress\\sourcecode\\cla-administration-web\\views\\modules\\lockeddesktop\\lockeddesktopdetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|solutionrelative:views\\modules\\lockeddesktop\\lockeddesktopdetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|d:\\projects\\svn\\work_in_progress\\sourcecode\\cla-administration-web\\views\\modules\\survey\\surveydetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|solutionrelative:views\\modules\\survey\\surveydetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|d:\\projects\\svn\\work_in_progress\\sourcecode\\cla-administration-web\\views\\modules\\survey\\surveyquestiondetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|solutionrelative:views\\modules\\survey\\surveyquestiondetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|d:\\projects\\svn\\work_in_progress\\sourcecode\\cla-administration-web\\views\\modules\\ticker\\tickerdetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|solutionrelative:views\\modules\\ticker\\tickerdetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|d:\\projects\\svn\\work_in_progress\\sourcecode\\cla-administration-web\\views\\modules\\survey\\addnewsurvey.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|solutionrelative:views\\modules\\survey\\addnewsurvey.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|d:\\projects\\svn\\work_in_progress\\sourcecode\\cla-administration-web\\views\\shared\\components\\custom\\modules\\contentpreviewers\\imagepreviewer.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|solutionrelative:views\\shared\\components\\custom\\modules\\contentpreviewers\\imagepreviewer.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|d:\\projects\\svn\\work_in_progress\\sourcecode\\cla-administration-web\\views\\shared\\components\\custom\\modules\\contentpreviewers\\allcontentpreviewer.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|solutionrelative:views\\shared\\components\\custom\\modules\\contentpreviewers\\allcontentpreviewer.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|d:\\projects\\svn\\work_in_progress\\sourcecode\\cla-administration-web\\views\\shared\\components\\custom\\modules\\form\\fileuploader.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|solutionrelative:views\\shared\\components\\custom\\modules\\form\\fileuploader.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|d:\\projects\\svn\\work_in_progress\\sourcecode\\cla-administration-web\\wwwroot\\css\\component.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|solutionrelative:wwwroot\\css\\component.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|d:\\projects\\svn\\work_in_progress\\sourcecode\\cla-administration-web\\views\\shared\\components\\custom\\modules\\targeting\\targetingexposuremodal.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|solutionrelative:views\\shared\\components\\custom\\modules\\targeting\\targetingexposuremodal.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|d:\\projects\\svn\\work_in_progress\\sourcecode\\cla-administration-web\\views\\layout\\leftnavigation.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|solutionrelative:views\\layout\\leftnavigation.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|d:\\projects\\svn\\work_in_progress\\sourcecode\\cla-administration-web\\views\\shared\\components\\custom\\modules\\targeting\\targetedentitypst.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|solutionrelative:views\\shared\\components\\custom\\modules\\targeting\\targetedentitypst.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|d:\\projects\\svn\\work_in_progress\\sourcecode\\cla-administration-web\\views\\shared\\components\\custom\\modules\\targeting\\targetedentitymodal.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|solutionrelative:views\\shared\\components\\custom\\modules\\targeting\\targetedentitymodal.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|d:\\projects\\svn\\work_in_progress\\sourcecode\\cla-administration-web\\views\\shared\\helpers\\htmlhelpers\\appurlshelper.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|solutionrelative:views\\shared\\helpers\\htmlhelpers\\appurlshelper.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|d:\\projects\\svn\\work_in_progress\\sourcecode\\cla-administration-web\\viewmodels\\targeting\\targetedentityviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|solutionrelative:viewmodels\\targeting\\targetedentityviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|d:\\projects\\svn\\work_in_progress\\sourcecode\\cla-administration-web\\views\\modules\\popup\\addnewpopup.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|solutionrelative:views\\modules\\popup\\addnewpopup.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|d:\\projects\\svn\\work_in_progress\\sourcecode\\cla-administration-web\\wwwroot\\js\\modules\\modules.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|solutionrelative:wwwroot\\js\\modules\\modules.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|d:\\projects\\svn\\work_in_progress\\sourcecode\\cla-administration-web\\wwwroot\\js\\modules\\popup.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|solutionrelative:wwwroot\\js\\modules\\popup.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|d:\\projects\\svn\\work_in_progress\\sourcecode\\cla-administration-web\\views\\modules\\survey\\addnewsurveyquestion.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|solutionrelative:views\\modules\\survey\\addnewsurveyquestion.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|d:\\projects\\svn\\work_in_progress\\sourcecode\\cla-administration-web\\views\\modules\\survey\\surveyquestionsoverview.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|solutionrelative:views\\modules\\survey\\surveyquestionsoverview.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|d:\\projects\\svn\\work_in_progress\\sourcecode\\cla-administration-web\\wwwroot\\css\\modules.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|solutionrelative:wwwroot\\css\\modules.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|d:\\projects\\svn\\work_in_progress\\sourcecode\\cla-administration-web\\helpers\\constants\\apppagesurl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|solutionrelative:helpers\\constants\\apppagesurl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|d:\\projects\\svn\\work_in_progress\\sourcecode\\cla-administration-web\\controllers\\modulescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|solutionrelative:controllers\\modulescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|d:\\projects\\svn\\work_in_progress\\sourcecode\\cla-administration-web\\helpers\\constants\\apppageslinks.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|solutionrelative:helpers\\constants\\apppageslinks.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|d:\\projects\\svn\\work_in_progress\\sourcecode\\cla-administration-web\\helpers\\enums\\apppages\\modulespages.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|solutionrelative:helpers\\enums\\apppages\\modulespages.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|d:\\projects\\svn\\work_in_progress\\sourcecode\\cla-administration-web\\views\\modules\\ticker\\addnewticker.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|solutionrelative:views\\modules\\ticker\\addnewticker.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|d:\\projects\\svn\\work_in_progress\\sourcecode\\cla-administration-web\\views\\shared\\components\\custom\\modules\\targeting\\targetingexposure.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|solutionrelative:views\\shared\\components\\custom\\modules\\targeting\\targetingexposure.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|d:\\projects\\svn\\work_in_progress\\sourcecode\\cla-administration-web\\viewmodels\\targeting\\targetedgroup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|solutionrelative:viewmodels\\targeting\\targetedgroup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|d:\\projects\\svn\\work_in_progress\\sourcecode\\cla-administration-web\\viewmodels\\targeting\\targetingexposureviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|solutionrelative:viewmodels\\targeting\\targetingexposureviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|d:\\projects\\svn\\work_in_progress\\sourcecode\\cla-administration-web\\viewmodels\\targeting\\targetedmachine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|solutionrelative:viewmodels\\targeting\\targetedmachine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|d:\\projects\\svn\\work_in_progress\\sourcecode\\cla-administration-web\\viewmodels\\shared\\statusviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|solutionrelative:viewmodels\\shared\\statusviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|d:\\projects\\svn\\work_in_progress\\sourcecode\\cla-administration-web\\viewmodels\\targeting\\targeteduser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|solutionrelative:viewmodels\\targeting\\targeteduser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|d:\\projects\\svn\\work_in_progress\\sourcecode\\cla-administration-web\\views\\shared\\components\\custom\\modules\\overviews\\pst\\modulepsttableoverview.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|solutionrelative:views\\shared\\components\\custom\\modules\\overviews\\pst\\modulepsttableoverview.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|d:\\projects\\svn\\work_in_progress\\sourcecode\\cla-administration-web\\helpers\\enums\\apppages\\targetingpages.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5F0F0CAF-603D-4D13-843D-B6E3AB5DDDEC}|CLA-Administration-Web.csproj|solutionrelative:helpers\\enums\\apppages\\targetingpages.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "TargetingController.cs",
+              "DocumentMoniker": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Controllers\\TargetingController.cs",
+              "RelativeDocumentMoniker": "Controllers\\TargetingController.cs",
+              "ToolTip": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Controllers\\TargetingController.cs",
+              "RelativeToolTip": "Controllers\\TargetingController.cs",
+              "ViewState": "AQIAAA0AAAAAAAAAAAAiwBoAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-08T22:23:41.336Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "PopupDetails.cshtml",
+              "DocumentMoniker": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Modules\\Popup\\PopupDetails.cshtml",
+              "RelativeDocumentMoniker": "Views\\Modules\\Popup\\PopupDetails.cshtml",
+              "ToolTip": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Modules\\Popup\\PopupDetails.cshtml",
+              "RelativeToolTip": "Views\\Modules\\Popup\\PopupDetails.cshtml",
+              "ViewState": "AQIAABgAAAAAAAAAAAAAADkAAABRAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-09T08:21:19.417Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "LaunchSettingsHelper.cs",
+              "DocumentMoniker": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Helpers\\Constants\\LaunchSettingsHelper.cs",
+              "RelativeDocumentMoniker": "Helpers\\Constants\\LaunchSettingsHelper.cs",
+              "ToolTip": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Helpers\\Constants\\LaunchSettingsHelper.cs",
+              "RelativeToolTip": "Helpers\\Constants\\LaunchSettingsHelper.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAsAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-09T09:55:10.591Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AddNewContentLibraryCategory.cshtml",
+              "DocumentMoniker": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Modules\\ContentLibrary\\AddNewContentLibraryCategory.cshtml",
+              "RelativeDocumentMoniker": "Views\\Modules\\ContentLibrary\\AddNewContentLibraryCategory.cshtml",
+              "ToolTip": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Modules\\ContentLibrary\\AddNewContentLibraryCategory.cshtml",
+              "RelativeToolTip": "Views\\Modules\\ContentLibrary\\AddNewContentLibraryCategory.cshtml",
+              "ViewState": "AQIAAEAAAAAAAAAAAAAAAE0AAACVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-09T09:50:54.252Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ContentLibraryCategories.cshtml",
+              "DocumentMoniker": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Modules\\ContentLibrary\\ContentLibraryCategories.cshtml",
+              "RelativeDocumentMoniker": "Views\\Modules\\ContentLibrary\\ContentLibraryCategories.cshtml",
+              "ToolTip": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Modules\\ContentLibrary\\ContentLibraryCategories.cshtml",
+              "RelativeToolTip": "Views\\Modules\\ContentLibrary\\ContentLibraryCategories.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-09T09:47:24.962Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ContentLibraryCategoryDetails.cshtml",
+              "DocumentMoniker": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Modules\\ContentLibrary\\ContentLibraryCategoryDetails.cshtml",
+              "RelativeDocumentMoniker": "Views\\Modules\\ContentLibrary\\ContentLibraryCategoryDetails.cshtml",
+              "ToolTip": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Modules\\ContentLibrary\\ContentLibraryCategoryDetails.cshtml",
+              "RelativeToolTip": "Views\\Modules\\ContentLibrary\\ContentLibraryCategoryDetails.cshtml",
+              "ViewState": "AQIAACsAAAAAAAAAAIBJwDMAAACxAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-09T09:45:53.335Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ContentLibraryContentDetails.cshtml",
+              "DocumentMoniker": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Modules\\ContentLibrary\\ContentLibraryContentDetails.cshtml",
+              "RelativeDocumentMoniker": "Views\\Modules\\ContentLibrary\\ContentLibraryContentDetails.cshtml",
+              "ToolTip": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Modules\\ContentLibrary\\ContentLibraryContentDetails.cshtml",
+              "RelativeToolTip": "Views\\Modules\\ContentLibrary\\ContentLibraryContentDetails.cshtml",
+              "ViewState": "AQIAALUAAAAAAAAAAAAAALUAAAC9AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-09T09:44:02.942Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AddNewContentLibraryContent.cshtml",
+              "DocumentMoniker": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Modules\\ContentLibrary\\AddNewContentLibraryContent.cshtml",
+              "RelativeDocumentMoniker": "Views\\Modules\\ContentLibrary\\AddNewContentLibraryContent.cshtml",
+              "ToolTip": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Modules\\ContentLibrary\\AddNewContentLibraryContent.cshtml",
+              "RelativeToolTip": "Views\\Modules\\ContentLibrary\\AddNewContentLibraryContent.cshtml",
+              "ViewState": "AQIAAMAAAAAAAAAAAIBJwNEAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-09T09:50:50.292Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "DesktopDetails.cshtml",
+              "DocumentMoniker": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Modules\\Desktop\\DesktopDetails.cshtml",
+              "RelativeDocumentMoniker": "Views\\Modules\\Desktop\\DesktopDetails.cshtml",
+              "ToolTip": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Modules\\Desktop\\DesktopDetails.cshtml",
+              "RelativeToolTip": "Views\\Modules\\Desktop\\DesktopDetails.cshtml",
+              "ViewState": "AQIAAGcAAAAAAAAAAAAAAGkAAACoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-09T09:40:30.331Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "LockedDesktopDetails.cshtml",
+              "DocumentMoniker": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Modules\\LockedDesktop\\LockedDesktopDetails.cshtml",
+              "RelativeDocumentMoniker": "Views\\Modules\\LockedDesktop\\LockedDesktopDetails.cshtml",
+              "ToolTip": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Modules\\LockedDesktop\\LockedDesktopDetails.cshtml",
+              "RelativeToolTip": "Views\\Modules\\LockedDesktop\\LockedDesktopDetails.cshtml",
+              "ViewState": "AQIAAG0AAAAAAAAAAAAAAH8AAACsAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-09T09:31:35.264Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ScreensaverDetails.cshtml",
+              "DocumentMoniker": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Modules\\Screensaver\\ScreensaverDetails.cshtml",
+              "RelativeDocumentMoniker": "Views\\Modules\\Screensaver\\ScreensaverDetails.cshtml",
+              "ToolTip": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Modules\\Screensaver\\ScreensaverDetails.cshtml",
+              "RelativeToolTip": "Views\\Modules\\Screensaver\\ScreensaverDetails.cshtml",
+              "ViewState": "AQIAAGoAAAAAAAAAAAAAAHEAAACsAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-09T09:30:16.334Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "TickerDetails.cshtml",
+              "DocumentMoniker": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Modules\\Ticker\\TickerDetails.cshtml",
+              "RelativeDocumentMoniker": "Views\\Modules\\Ticker\\TickerDetails.cshtml",
+              "ToolTip": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Modules\\Ticker\\TickerDetails.cshtml",
+              "RelativeToolTip": "Views\\Modules\\Ticker\\TickerDetails.cshtml",
+              "ViewState": "AQIAAGcAAAAAAAAAAAAAAHIAAAChAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-09T09:28:30.952Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "SurveyDetails.cshtml",
+              "DocumentMoniker": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Modules\\Survey\\SurveyDetails.cshtml",
+              "RelativeDocumentMoniker": "Views\\Modules\\Survey\\SurveyDetails.cshtml",
+              "ToolTip": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Modules\\Survey\\SurveyDetails.cshtml",
+              "RelativeToolTip": "Views\\Modules\\Survey\\SurveyDetails.cshtml",
+              "ViewState": "AQIAALwAAAAAAAAAAAAAANkAAABeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-09T09:25:17.404Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ContentLibraryContentsOverview.cshtml",
+              "DocumentMoniker": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Modules\\ContentLibrary\\ContentLibraryContentsOverview.cshtml",
+              "RelativeDocumentMoniker": "Views\\Modules\\ContentLibrary\\ContentLibraryContentsOverview.cshtml",
+              "ToolTip": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Modules\\ContentLibrary\\ContentLibraryContentsOverview.cshtml",
+              "RelativeToolTip": "Views\\Modules\\ContentLibrary\\ContentLibraryContentsOverview.cshtml",
+              "ViewState": "AQIAADYAAAAAAAAAAAAAAE8AAAB7AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-09T04:42:27.014Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "FileUploader.cshtml",
+              "DocumentMoniker": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Shared\\Components\\Custom\\Modules\\Form\\FileUploader.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\Components\\Custom\\Modules\\Form\\FileUploader.cshtml",
+              "ToolTip": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Shared\\Components\\Custom\\Modules\\Form\\FileUploader.cshtml",
+              "RelativeToolTip": "Views\\Shared\\Components\\Custom\\Modules\\Form\\FileUploader.cshtml",
+              "ViewState": "AQIAAF0AAAAAAAAAAAAkwHEAAABOAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-09T09:22:01.943Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "AllContentPreviewer.cshtml",
+              "DocumentMoniker": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Shared\\Components\\Custom\\Modules\\ContentPreviewers\\AllContentPreviewer.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\Components\\Custom\\Modules\\ContentPreviewers\\AllContentPreviewer.cshtml",
+              "ToolTip": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Shared\\Components\\Custom\\Modules\\ContentPreviewers\\AllContentPreviewer.cshtml",
+              "RelativeToolTip": "Views\\Shared\\Components\\Custom\\Modules\\ContentPreviewers\\AllContentPreviewer.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-09T09:21:16.876Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "TargetingExposureModal.cshtml",
+              "DocumentMoniker": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Shared\\Components\\Custom\\Modules\\Targeting\\TargetingExposureModal.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\Components\\Custom\\Modules\\Targeting\\TargetingExposureModal.cshtml",
+              "ToolTip": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Shared\\Components\\Custom\\Modules\\Targeting\\TargetingExposureModal.cshtml",
+              "RelativeToolTip": "Views\\Shared\\Components\\Custom\\Modules\\Targeting\\TargetingExposureModal.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAArAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-09T09:09:03.34Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "SurveyQuestionDetails.cshtml",
+              "DocumentMoniker": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Modules\\Survey\\SurveyQuestionDetails.cshtml",
+              "RelativeDocumentMoniker": "Views\\Modules\\Survey\\SurveyQuestionDetails.cshtml",
+              "ToolTip": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Modules\\Survey\\SurveyQuestionDetails.cshtml",
+              "RelativeToolTip": "Views\\Modules\\Survey\\SurveyQuestionDetails.cshtml",
+              "ViewState": "AQIAAHUAAAAAAAAAAAAAAAEAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-09T04:15:17.76Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "LeftNavigation.cshtml",
+              "DocumentMoniker": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Layout\\LeftNavigation.cshtml",
+              "RelativeDocumentMoniker": "Views\\Layout\\LeftNavigation.cshtml",
+              "ToolTip": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Layout\\LeftNavigation.cshtml",
+              "RelativeToolTip": "Views\\Layout\\LeftNavigation.cshtml",
+              "ViewState": "AQIAAHYAAAAAAAAAAAAAAPIAAABgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-09T09:17:08.694Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "ImagePreviewer.cshtml",
+              "DocumentMoniker": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Shared\\Components\\Custom\\Modules\\ContentPreviewers\\ImagePreviewer.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\Components\\Custom\\Modules\\ContentPreviewers\\ImagePreviewer.cshtml",
+              "ToolTip": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Shared\\Components\\Custom\\Modules\\ContentPreviewers\\ImagePreviewer.cshtml",
+              "RelativeToolTip": "Views\\Shared\\Components\\Custom\\Modules\\ContentPreviewers\\ImagePreviewer.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABoAAAAsAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-09T02:17:50.803Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "AddNewSurvey.cshtml",
+              "DocumentMoniker": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Modules\\Survey\\AddNewSurvey.cshtml",
+              "RelativeDocumentMoniker": "Views\\Modules\\Survey\\AddNewSurvey.cshtml",
+              "ToolTip": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Modules\\Survey\\AddNewSurvey.cshtml",
+              "RelativeToolTip": "Views\\Modules\\Survey\\AddNewSurvey.cshtml",
+              "ViewState": "AQIAALIBAAAAAAAAAAAAAIsAAABxAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-09T01:04:53.108Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "TargetedEntityPST.cshtml",
+              "DocumentMoniker": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Shared\\Components\\Custom\\Modules\\Targeting\\TargetedEntityPST.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\Components\\Custom\\Modules\\Targeting\\TargetedEntityPST.cshtml",
+              "ToolTip": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Shared\\Components\\Custom\\Modules\\Targeting\\TargetedEntityPST.cshtml",
+              "RelativeToolTip": "Views\\Shared\\Components\\Custom\\Modules\\Targeting\\TargetedEntityPST.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACEAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-09T08:35:24.689Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "TargetedEntityViewModel.cs",
+              "DocumentMoniker": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\ViewModels\\Targeting\\TargetedEntityViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\Targeting\\TargetedEntityViewModel.cs",
+              "ToolTip": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\ViewModels\\Targeting\\TargetedEntityViewModel.cs",
+              "RelativeToolTip": "ViewModels\\Targeting\\TargetedEntityViewModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-09T08:48:03.912Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "TargetedEntityModal.cshtml",
+              "DocumentMoniker": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Shared\\Components\\Custom\\Modules\\Targeting\\TargetedEntityModal.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\Components\\Custom\\Modules\\Targeting\\TargetedEntityModal.cshtml",
+              "ToolTip": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Shared\\Components\\Custom\\Modules\\Targeting\\TargetedEntityModal.cshtml",
+              "RelativeToolTip": "Views\\Shared\\Components\\Custom\\Modules\\Targeting\\TargetedEntityModal.cshtml",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAACEAAABDAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-09T08:20:25.969Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "component.css",
+              "DocumentMoniker": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\css\\component.css",
+              "RelativeDocumentMoniker": "wwwroot\\css\\component.css",
+              "ToolTip": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\css\\component.css",
+              "RelativeToolTip": "wwwroot\\css\\component.css",
+              "ViewState": "AQIAAKYAAAAAAAAAAAAuwM8AAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2024-10-08T22:14:55.96Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "modules.js",
+              "DocumentMoniker": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\js\\modules\\modules.js",
+              "RelativeDocumentMoniker": "wwwroot\\js\\modules\\modules.js",
+              "ToolTip": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\js\\modules\\modules.js",
+              "RelativeToolTip": "wwwroot\\js\\modules\\modules.js",
+              "ViewState": "AQIAAD4AAAAAAAAAAADwv1YAAABUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-10-09T08:17:54.843Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "AddNewSurveyQuestion.cshtml",
+              "DocumentMoniker": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Modules\\Survey\\AddNewSurveyQuestion.cshtml",
+              "RelativeDocumentMoniker": "Views\\Modules\\Survey\\AddNewSurveyQuestion.cshtml",
+              "ToolTip": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Modules\\Survey\\AddNewSurveyQuestion.cshtml",
+              "RelativeToolTip": "Views\\Modules\\Survey\\AddNewSurveyQuestion.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACQAAABbAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-09T04:45:56.425Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "AppUrlsHelper.cshtml",
+              "DocumentMoniker": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Shared\\Helpers\\HtmlHelpers\\AppUrlsHelper.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\Helpers\\HtmlHelpers\\AppUrlsHelper.cshtml",
+              "ToolTip": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Shared\\Helpers\\HtmlHelpers\\AppUrlsHelper.cshtml",
+              "RelativeToolTip": "Views\\Shared\\Helpers\\HtmlHelpers\\AppUrlsHelper.cshtml",
+              "ViewState": "AQIAAFcAAAAAAAAAAAAAAHkAAACHAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-08T22:25:57.15Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "SurveyQuestionsOverview.cshtml",
+              "DocumentMoniker": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Modules\\Survey\\SurveyQuestionsOverview.cshtml",
+              "RelativeDocumentMoniker": "Views\\Modules\\Survey\\SurveyQuestionsOverview.cshtml",
+              "ToolTip": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Modules\\Survey\\SurveyQuestionsOverview.cshtml",
+              "RelativeToolTip": "Views\\Modules\\Survey\\SurveyQuestionsOverview.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAAdAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-09T04:41:37.223Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "AddNewPopup.cshtml",
+              "DocumentMoniker": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Modules\\Popup\\AddNewPopup.cshtml",
+              "RelativeDocumentMoniker": "Views\\Modules\\Popup\\AddNewPopup.cshtml",
+              "ToolTip": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Modules\\Popup\\AddNewPopup.cshtml",
+              "RelativeToolTip": "Views\\Modules\\Popup\\AddNewPopup.cshtml",
+              "ViewState": "AQIAANEBAAAAAAAAAAAQwCUCAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-08T23:31:28.066Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "ModulesController.cs",
+              "DocumentMoniker": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Controllers\\ModulesController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ModulesController.cs",
+              "ToolTip": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Controllers\\ModulesController.cs",
+              "RelativeToolTip": "Controllers\\ModulesController.cs",
+              "ViewState": "AQIAAJQBAAAAAAAAAAAswN4BAABRAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-09T04:08:54.189Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "popup.js",
+              "DocumentMoniker": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\js\\modules\\popup.js",
+              "RelativeDocumentMoniker": "wwwroot\\js\\modules\\popup.js",
+              "ToolTip": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\js\\modules\\popup.js",
+              "RelativeToolTip": "wwwroot\\js\\modules\\popup.js",
+              "ViewState": "AQIAACcAAAAAAAAAAAAtwEAAAAAWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-10-08T23:37:08.239Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "AppPagesLinks.cs",
+              "DocumentMoniker": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Helpers\\Constants\\AppPagesLinks.cs",
+              "RelativeDocumentMoniker": "Helpers\\Constants\\AppPagesLinks.cs",
+              "ToolTip": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Helpers\\Constants\\AppPagesLinks.cs",
+              "RelativeToolTip": "Helpers\\Constants\\AppPagesLinks.cs",
+              "ViewState": "AQIAAEIAAAAAAAAAAAAmwFYAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-08T22:25:05.323Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "ModulesPages.cs",
+              "DocumentMoniker": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Helpers\\Enums\\AppPages\\ModulesPages.cs",
+              "RelativeDocumentMoniker": "Helpers\\Enums\\AppPages\\ModulesPages.cs",
+              "ToolTip": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Helpers\\Enums\\AppPages\\ModulesPages.cs",
+              "RelativeToolTip": "Helpers\\Enums\\AppPages\\ModulesPages.cs",
+              "ViewState": "AQIAAFAAAAAAAAAAAAAQwHUAAAAcAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-09T04:08:14.825Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "AppPagesUrl.cs",
+              "DocumentMoniker": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Helpers\\Constants\\AppPagesUrl.cs",
+              "RelativeDocumentMoniker": "Helpers\\Constants\\AppPagesUrl.cs",
+              "ToolTip": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Helpers\\Constants\\AppPagesUrl.cs",
+              "RelativeToolTip": "Helpers\\Constants\\AppPagesUrl.cs",
+              "ViewState": "AQIAADoAAAAAAAAAAAAcwF0AAAA1AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-08T22:25:30.409Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "modules.css",
+              "DocumentMoniker": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\css\\modules.css",
+              "RelativeDocumentMoniker": "wwwroot\\css\\modules.css",
+              "ToolTip": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\wwwroot\\css\\modules.css",
+              "RelativeToolTip": "wwwroot\\css\\modules.css",
+              "ViewState": "AQIAANUDAAAAAAAAAAAwwP0DAAAYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2024-10-08T22:14:45.748Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "AddNewTicker.cshtml",
+              "DocumentMoniker": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Modules\\Ticker\\AddNewTicker.cshtml",
+              "RelativeDocumentMoniker": "Views\\Modules\\Ticker\\AddNewTicker.cshtml",
+              "ToolTip": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Modules\\Ticker\\AddNewTicker.cshtml",
+              "RelativeToolTip": "Views\\Modules\\Ticker\\AddNewTicker.cshtml",
+              "ViewState": "AQIAAOYAAAAAAAAAAAAAAAcBAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-09T01:05:17.547Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "StatusViewModel.cs",
+              "DocumentMoniker": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\ViewModels\\Shared\\StatusViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\Shared\\StatusViewModel.cs",
+              "ToolTip": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\ViewModels\\Shared\\StatusViewModel.cs",
+              "RelativeToolTip": "ViewModels\\Shared\\StatusViewModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-08T23:14:00.974Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "TargetingExposureViewModel.cs",
+              "DocumentMoniker": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\ViewModels\\Targeting\\TargetingExposureViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\Targeting\\TargetingExposureViewModel.cs",
+              "ToolTip": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\ViewModels\\Targeting\\TargetingExposureViewModel.cs",
+              "RelativeToolTip": "ViewModels\\Targeting\\TargetingExposureViewModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAgAAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-08T22:42:22.661Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "TargetedMachine.cs",
+              "DocumentMoniker": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\ViewModels\\Targeting\\TargetedMachine.cs",
+              "RelativeDocumentMoniker": "ViewModels\\Targeting\\TargetedMachine.cs",
+              "ToolTip": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\ViewModels\\Targeting\\TargetedMachine.cs",
+              "RelativeToolTip": "ViewModels\\Targeting\\TargetedMachine.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwA4AAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-08T22:41:01.641Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "TargetedUser.cs",
+              "DocumentMoniker": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\ViewModels\\Targeting\\TargetedUser.cs",
+              "RelativeDocumentMoniker": "ViewModels\\Targeting\\TargetedUser.cs",
+              "ToolTip": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\ViewModels\\Targeting\\TargetedUser.cs",
+              "RelativeToolTip": "ViewModels\\Targeting\\TargetedUser.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwA4AAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-08T22:39:00.761Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "TargetedGroup.cs",
+              "DocumentMoniker": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\ViewModels\\Targeting\\TargetedGroup.cs",
+              "RelativeDocumentMoniker": "ViewModels\\Targeting\\TargetedGroup.cs",
+              "ToolTip": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\ViewModels\\Targeting\\TargetedGroup.cs",
+              "RelativeToolTip": "ViewModels\\Targeting\\TargetedGroup.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAgAAAAWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-08T22:36:24.677Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "TargetingExposure.cshtml",
+              "DocumentMoniker": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Shared\\Components\\Custom\\Modules\\Targeting\\TargetingExposure.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\Components\\Custom\\Modules\\Targeting\\TargetingExposure.cshtml",
+              "ToolTip": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Shared\\Components\\Custom\\Modules\\Targeting\\TargetingExposure.cshtml",
+              "RelativeToolTip": "Views\\Shared\\Components\\Custom\\Modules\\Targeting\\TargetingExposure.cshtml",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAAAC8AAABKAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-08T22:22:36.644Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "ModulePSTTableOverview.cshtml",
+              "DocumentMoniker": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Shared\\Components\\Custom\\Modules\\Overviews\\PST\\ModulePSTTableOverview.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\Components\\Custom\\Modules\\Overviews\\PST\\ModulePSTTableOverview.cshtml",
+              "ToolTip": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Views\\Shared\\Components\\Custom\\Modules\\Overviews\\PST\\ModulePSTTableOverview.cshtml",
+              "RelativeToolTip": "Views\\Shared\\Components\\Custom\\Modules\\Overviews\\PST\\ModulePSTTableOverview.cshtml",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAABAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-08T22:27:56.411Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "TargetingPages.cs",
+              "DocumentMoniker": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Helpers\\Enums\\AppPages\\TargetingPages.cs",
+              "RelativeDocumentMoniker": "Helpers\\Enums\\AppPages\\TargetingPages.cs",
+              "ToolTip": "D:\\Projects\\SVN\\Work_In_Progress\\SourceCode\\CLA-Administration-Web\\Helpers\\Enums\\AppPages\\TargetingPages.cs",
+              "RelativeToolTip": "Helpers\\Enums\\AppPages\\TargetingPages.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAaAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-08T22:23:06.588Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

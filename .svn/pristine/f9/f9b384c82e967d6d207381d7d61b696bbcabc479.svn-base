@@ -1,0 +1,131 @@
+﻿@model CLA_Administration_Web.ViewModels.Modules.Components.Form.FileUploaderModel
+
+@{
+    var inputId = Model.InputId;
+    var showHideInitial = Model.InitialHidden ? "hidden" : "";
+    var width = !string.IsNullOrEmpty(Model.WidthPx) ? $"width:{Model.WidthPx}" : "";
+    var css = !string.IsNullOrEmpty(Model.WidthCss) ? Model.WidthCss : "";
+
+    var fileUploadContainerId = $"{Model.ComponentId}UploadFileContainer";
+
+    var filenameTextId = $"{Model.ComponentId}_UploadFileName";
+    var previewBtnId = $"{Model.ComponentId}_PreviewUpload";
+
+    var uploadFileUrlId = $"{Model.ComponentId}_UploadFileURL";
+    var uploadFileTypeId = $"{Model.ComponentId}_UploadFileType";
+    var callbackFunctionId = !string.IsNullOrEmpty(Model.ComponentId) ? $"{Model.ComponentId}_CallbackFunction" : "";
+}
+
+<div id="ContentUploadComponent" class="@showHideInitial">
+
+    <input type="text" id="@uploadFileUrlId" value="" hidden/>
+    <input type="text" id="@uploadFileTypeId" value="" hidden />
+    <input type="text" id="@callbackFunctionId" value="@Model.OnFileUploadCallback" hidden />
+
+    <p class="mb-0 custom-p fst-italic w-fit-content">
+        <span id="@filenameTextId">No file selected</span>
+        @if (Model.ShowPreviewButton)
+        {
+            <button class="btn btn-success content-preview-btn custom-btn-sm ms-3 hidden" id="@previewBtnId" onclick="PreviewContent('@uploadFileUrlId', '@uploadFileTypeId', '@callbackFunctionId')">Preview</button>
+        }
+    </p>
+    <div class="upload-file-container mt-2 p-0 @css" id="@fileUploadContainerId" style="@width"
+         ondragleave="HandleDragLeave(this.id)" 
+         ondragover="HandleDragOver(event, this.id)"
+         ondrop="HandleDrop(event, this.id, '@filenameTextId', '@previewBtnId', '@uploadFileUrlId', '@uploadFileTypeId', '@callbackFunctionId')"
+         onchange="HandleChange(event, '@filenameTextId', '@previewBtnId', '@uploadFileUrlId', '@uploadFileTypeId', '@callbackFunctionId')">
+            <i class="bi bi-cloud-arrow-up-fill"></i>
+            <p class="mb-0 text-silver fs-12" style="margin-top:-5px">Drag & Drop file here</p>
+            <p class="mb-0 text-silver fs-12">or</p>
+            <input type="file" id="@inputId" hidden>
+        <button class="btn btn-upload" onclick="document.getElementById('@inputId').click();">Browse</button>
+    </div>
+</div>
+
+<script>
+
+    function HandleDragOver(event, containerId)
+    {
+        event.preventDefault();
+        $(`#${containerId}`).addClass('dragging');
+    }
+
+    function HandleDragLeave(containerId)
+    {
+        $(`#${containerId}`).removeClass('dragging');
+    }
+    
+    function HandleDrop(event, containerId, filenameTextId, previewBtnId, uploadFileUrlId, uploadFileTypeId, callbackFunctionId)
+    {
+        event.preventDefault();
+        $(`#${containerId}`).remove('dragging');
+        
+        const files = event.dataTransfer.files;
+        HandleUploadedFiles(files, filenameTextId, previewBtnId, uploadFileUrlId, uploadFileTypeId, callbackFunctionId);
+    }
+
+    function HandleChange(event, filenameTextId, previewBtnId, uploadFileUrlId, uploadFileTypeId, callbackFunctionId)
+    {
+        const files = event.target.files;
+        HandleUploadedFiles(files, filenameTextId, previewBtnId, uploadFileUrlId, uploadFileTypeId, callbackFunctionId);
+    }
+
+    function HandleUploadedFiles(files, filenameTextId, previewBtnId, uploadFileUrlId, uploadFileTypeId, callbackFunctionId)
+    {
+        if (files.length > 0)
+        {
+            $(`#${filenameTextId}`).text(files[0].name);
+            HideShowElement(`#${previewBtnId}`, HideShow.SHOW);
+
+            var imagePath = URL.createObjectURL(files[0]);
+            
+            $(`#${uploadFileUrlId}`).val(imagePath);
+            $(`#${uploadFileTypeId}`).val(files[0].type);
+            
+            var callbackFunction = !StringNullOrEmpty(callbackFunctionId) ? $(`#${callbackFunctionId}`).val() : null;
+
+            if (callbackFunction != null)
+            {
+                if (typeof window[callbackFunction] === 'function')
+                {
+                    window[callbackFunction](imagePath, files[0]);
+                }
+            }
+        }
+        else
+        {
+            $(`#${filenameTextId}`).text("No file selected");
+            HideShowElement(`#${previewBtnId}`, HideShow.HIDE);
+        }
+    }
+
+    function PreviewContent(uploadFileUrlId, uploadFileTypeId)
+    {
+        let uploadFileType = $(`#${uploadFileTypeId}`).val();
+        let uploadFileUrl = $(`#${uploadFileUrlId}`).val();
+
+        if (uploadFileType == null || uploadFileType.length == 0 || uploadFileUrl == null || uploadFileUrl.length == 0)
+        {
+            swal("File Preiview Error", "Please upload a file first before previewing", "error");
+            return;
+        }
+        var contentType = 0;
+
+        if (uploadFileType.includes("image")) contentType = ContentTypes.IMAGE;
+        if (uploadFileType.includes("audio")) contentType = ContentTypes.AUDIO;
+        if (uploadFileType.includes("video")) contentType = ContentTypes.VIDEO;
+        if (uploadFileType.includes("document")) contentType = ContentTypes.DOCUMENT;
+
+        PreviewContentType(contentType, uploadFileUrl)
+    }
+
+    function ClearFileUpload(componentId)
+    {
+        $(`#${componentId}_UploadFileURL`).val("");
+        $(`#${componentId}_UploadFileType`).val("");
+
+        $(`#${componentId}_UploadFileName`).text("No file selected");
+        HideShowElement(`#${componentId}_PreviewUpload`, HideShow.HIDE);
+    }
+
+</script>

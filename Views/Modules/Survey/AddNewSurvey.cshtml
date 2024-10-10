@@ -9,6 +9,9 @@
 
 @{
     var surveySkin = $"{LaunchSettingsHelper.GetBaseAddressForImages()}/images/others/modules/skins/SurveyBackground.bmp";
+
+    var pageTitle = Model.AddOrEditType == AddOrEditType.Add ? "Add New Survey" : $"Edit Survey: {Model.SurveyModel.Id}";
+
 }
 
 <div class="container-fluid">
@@ -18,7 +21,7 @@
     <!-- Card for Title -->
     <div class="card mb-4 mt-2" style="min-width:940px;">
         <div class="card-body pb-0">
-            <h4 class="w-100 text-center theme-txt-clr">Add New Survey</h4>
+            <h4 class="w-100 text-center theme-txt-clr">@pageTitle</h4>
         </div>
     </div>
 
@@ -361,7 +364,7 @@
                             </div>
                         </div>
                         <!-- Delivery Method Tab -->
-                        <div id="DeliveryTab-6" class="survey-wizard-tabs flex-wrap  text-center align-content-center justify-content-center mb-5">
+                        <div id="DeliveryTab-6" class="survey-wizard-tabs flex-wrap  text-center align-content-center justify-content-center mb-5 hidden">
                             <h5 class="fw-bold mt-4">6. Delivery Method</h5>
                             <p class="custom-p mt-4 fs-13 text-center">Please define the delivery method/s of this survey.</p>
                             <p class="fw-bold mt-4 fs-13 text-center text-success">Note: More than one delivery method can be selected.</p>
@@ -460,6 +463,11 @@
         InitialiseFlatPicker();
         UpdateDisplayTimeDetails();
         LoadSurveyTargetedEntity();
+
+        if('@Model.AddOrEditType' == '@AddOrEditType.Edit')
+        {
+            PrePopulateSurveyDataForEdit();
+        }
     });
 
     function LoadSurveyTargetedEntity()
@@ -471,68 +479,38 @@
         LoadPartialView(url, "SurveyTargetingExposure");
     }
 
-    function InitialiseFlatPicker()
+    function PrePopulateSurveyDataForEdit()
     {
-        $("#SurveyCriticalSnoozeDate").flatpickr({
-            dateFormat: "Y-m-d", // Internal format (ISO 8601)
-            altInput: true,      // Display formatted date
-            altFormat: "l, d F Y, H:i", // Custom display format (e.g., Thursday, 03 October 2024, 17:00)
-            minDate: "today",    // Disable past dates
-            defaultDate: "today",  // Set initial date to today
-            allowInput: true,
-            enableTime: true,
-        });
+        $(".module-left-nav-link").addClass("visited-nav-link");
+        $(".module-nav-link-dot").removeClass("hidden");
+
+        //Texts
+        alert('@Model.SurveyModel.DisplayHeaderText , @Model.SurveyModel.DisplayBodyText , @Model.SurveyModel.DisplayConclusionText');
+        $("#SurveyTitleText").html('@Model.SurveyModel.HeaderText');
+        $("#SurveyIntroductionText").html('@Model.SurveyModel.BodyText');
+        $("#SurveyConclusionText").html('@Model.SurveyModel.ConclusionText');
+
+        CheckOrUncheckInput("ShowHideSurveyTitle", "@Model.SurveyModel.DisplayHeaderText" == "True");
+        CheckOrUncheckInput("ShowHideSurveyIntro", "@Model.SurveyModel.DisplayBodyText" == "True");
+        CheckOrUncheckInput("ShowHideSurveyConclusion", "@Model.SurveyModel.DisplayConclusionText" == "True");
+
+        SurveyTextShowHide("ShowHideSurveyTitle");
+        SurveyTextShowHide("ShowHideSurveyIntro");
+        SurveyTextShowHide("ShowHideSurveyConclusion");
+
+        //Skins
+        CheckOrUncheckInput("SurveyDefaultSkinOption", true);
+        SurveySkinTypeSelect("SurveyDefaultSkinOption");
+
+        //Times
+        SetDateRangePickerDate("DatePickerStartDate", '@Model.SurveyModel.EffectiveFromDate.ToString("dd-MMM-yyyy")');
+        SetDateRangePickerDate("DatePickerEndDate", '@Model.SurveyModel.EffectiveToDate.ToString("dd-MMM-yyyy")');
+
+        //Urgency, Addons, Delivery
+        CheckOrUncheckInput("SurveyResponseCritical", true);
+        CheckOrUncheckInput("AllowRecallAddOn", false);
+        CheckOrUncheckInput("SurveyDeveryViaScreensaver", false);
     }
 
-    $("#SurveyTitleText").on('input', function()
-    {
-        CheckOrUncheckInput("ShowHideSurveyTitle", false);
-    });
-
-    $("#SurveyIntroductionText").on('input', function ()
-    {
-        CheckOrUncheckInput("ShowHideSurveyIntro", false);
-    });
-
-    $("#SurveyConclusionText").on('input', function ()
-    {
-        CheckOrUncheckInput("ShowHideSurveyConclusion", false);
-    });
-
-    function UpdateDisplayTimeDetails()
-    {
-        var startDate = $("#DatePickerStartDate").val();
-        var endDate = $("#DatePickerEndDate").val();
-        var startTime = $("#TimePickerStartTime").val();
-        var endTime = $("#TimePickerEndTime").val();
-
-        if (IsNotEmptyString(startDate) && IsNotEmptyString(endDate) && IsNotEmptyString(startTime) && IsNotEmptyString(endTime))
-        {
-            $("#SurveyStartEffDate").text(startDate);
-            $("#SurveyEndEffDate").text(endDate);
-            $("#SurveyStartTimeSlot").text(startTime);
-            $("#SurveyEndTimeSlot").text(endTime);
-        }
-    }
-
-    $("#DatePickerStartDate").change(function ()
-    {
-        UpdateDisplayTimeDetails();
-    });
-
-    $("#DatePickerEndDate").change(function ()
-    {
-        UpdateDisplayTimeDetails();
-    });
-
-    $("#TimePickerStartTime").change(function ()
-    {
-        UpdateDisplayTimeDetails();
-    });
-
-    $("#TimePickerEndTime").change(function ()
-    {
-        UpdateDisplayTimeDetails();
-    });
 
 </script>

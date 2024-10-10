@@ -1,0 +1,31 @@
+﻿
+<div id="ImagePreviewModal" class="modal">
+    <span class="close text-danger" onclick="CloseImagePreviewerModal()">&times;</span>
+    <img class="modal-content" id="ImagePreviewer" />
+    <div id="caption">
+        <button class="btn btn-warning" onclick="OpenImageInNewWindow()">Open New Window</button>
+    </div>
+    
+</div>
+
+<script>
+
+    function OpenImagePreviewModal(imgSrc)
+    {
+        $("#ImagePreviewModal").fadeIn();
+        $("#ImagePreviewer").attr("src", imgSrc);
+    }
+
+    function CloseImagePreviewerModal()
+    {
+        $("#ImagePreviewModal").fadeOut();
+    }
+
+    function OpenImageInNewWindow()
+    {
+        var image = document.getElementById('ImagePreviewer');
+        var url = image.getAttribute('src');
+        window.open(url);
+    }
+
+</script>

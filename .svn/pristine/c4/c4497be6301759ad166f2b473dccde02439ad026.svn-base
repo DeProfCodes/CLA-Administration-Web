@@ -1,0 +1,348 @@
+﻿@using CLA_Administration_Web.Helpers.Enums.AppPages
+@using CLA_Administration_Web.Helpers.Enums.Shared
+@model CLA_Administration_Web.ViewModels.Layouts.TopNavigationViewModel
+
+<!--start top header-->
+<header class="top-header theme-bg" id="TopNavigationBar">
+    <nav class="navbar navbar-expand gap-3">
+        <!-- Toggle Icon -->
+        <div class="toggle-icon" onclick="ToggleLeftNavigationMenu()">
+            <i class="bi bi-list"></i>
+        </div>
+        <!-- Search Bar -->
+        <div id="TopNavSearchContainer">
+            <input class="form-control" type="text" placeholder="Search for anything" id="TopNavSearchBar">
+            <i class="bi bi-search" id="TopNavSearchIcon"></i>
+        </div>
+        <!-- Icons -->
+        <div class="top-navbar-right ms-auto" style="display:flex">
+            <ul class="navbar-nav align-items-center">
+                <li >
+                    <a class="nav-link dark-mode-icon" onclick="OpenCalendar()" style="cursor:pointer">
+                        <div class="mode-icon">
+                            <i class='bx bx-calendar top-nav-icons' id="TopNavCalendarIcon"></i>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item dropdown dropdown-large hidden">
+                    <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;" data-bs-toggle="dropdown">
+                        <div class="position-relative" style="font-size:20px">
+                            <span class="notify-badge">8</span>
+                            <i class="bi bi-bell-fill"></i>
+                        </div>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end">
+                        <a href="javascript:;">
+                            <div class="msg-header">
+                                <p class="msg-header-title">Notifications</p>
+                                <p class="msg-header-clear ms-auto">Marks all as read</p>
+                            </div>
+                        </a>
+                        <div class="header-notifications-list">
+                            <a class="dropdown-item" href="javascript:;">
+                                <div class="d-flex align-items-center">
+                                    <div class="notify text-primary">
+                                        <ion-icon name="cart-outline"></ion-icon>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h6 class="msg-name">
+                                            New Orders <span class="msg-time float-end">
+                                                2 min
+                                                ago
+                                            </span>
+                                        </h6>
+                                        <p class="msg-info">You have recived new orders</p>
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item" href="javascript:;">
+                                <div class="d-flex align-items-center">
+                                    <div class="notify text-danger">
+                                        <ion-icon name="person-outline"></ion-icon>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h6 class="msg-name">
+                                            New Customers<span class="msg-time float-end">
+                                                14 Sec
+                                                ago
+                                            </span>
+                                        </h6>
+                                        <p class="msg-info">5 new user registered</p>
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item" href="javascript:;">
+                                <div class="d-flex align-items-center">
+                                    <div class="notify text-success">
+                                        <ion-icon name="document-outline"></ion-icon>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h6 class="msg-name">
+                                            24 PDF File<span class="msg-time float-end">
+                                                19 min
+                                                ago
+                                            </span>
+                                        </h6>
+                                        <p class="msg-info">The pdf files generated</p>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <a class="dropdown-item" href="javascript:;">
+                                <div class="d-flex align-items-center">
+                                    <div class="notify text-info">
+                                        <ion-icon name="checkmark-done-outline"></ion-icon>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h6 class="msg-name">New Product Approved <span class="msg-time float-end">2 hrs ago</span></h6>
+                                        <p class="msg-info">Your new product has approved</p>
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item" href="javascript:;">
+                                <div class="d-flex align-items-center">
+                                    <div class="notify text-warning">
+                                        <ion-icon name="send-outline"></ion-icon>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h6 class="msg-name">
+                                            Time Response <span class="msg-time float-end">
+                                                28 min
+                                                ago
+                                            </span>
+                                        </h6>
+                                        <p class="msg-info">5.1 min avarage time response</p>
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item" href="javascript:;">
+                                <div class="d-flex align-items-center">
+                                    <div class="notify text-danger">
+                                        <ion-icon name="chatbox-ellipses-outline"></ion-icon>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h6 class="msg-name">
+                                            New Comments <span class="msg-time float-end">
+                                                4 hrs
+                                                ago
+                                            </span>
+                                        </h6>
+                                        <p class="msg-info">New customer comments recived</p>
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item" href="javascript:;">
+                                <div class="d-flex align-items-center">
+                                    <div class="notify text-primary">
+                                        <ion-icon name="albums-outline"></ion-icon>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h6 class="msg-name">
+                                            New 24 authors<span class="msg-time float-end">
+                                                1 day
+                                                ago
+                                            </span>
+                                        </h6>
+                                        <p class="msg-info">24 new authors joined last week</p>
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item" href="javascript:;">
+                                <div class="d-flex align-items-center">
+                                    <div class="notify text-success">
+                                        <ion-icon name="shield-outline"></ion-icon>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h6 class="msg-name">
+                                            Your item is shipped <span class="msg-time float-end">
+                                                5 hrs
+                                                ago
+                                            </span>
+                                        </h6>
+                                        <p class="msg-info">Successfully shipped your item</p>
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item" href="javascript:;">
+                                <div class="d-flex align-items-center">
+                                    <div class="notify text-warning">
+                                        <ion-icon name="cafe-outline"></ion-icon>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h6 class="msg-name">
+                                            Defense Alerts <span class="msg-time float-end">
+                                                2 weeks
+                                                ago
+                                            </span>
+                                        </h6>
+                                        <p class="msg-info">45% less alerts last 4 weeks</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <a href="javascript:;">
+                            <div class="text-center msg-footer">View All Notifications</div>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+            <span style="border-right:1px solid silver; margin:10px;" id="UserProfileSeparator"></span>
+            <ul class="navbar-nav align-items-center" id="ProfileDropdownContainer">
+                <li class="nav-item dropdown dropdown-user-setting">
+                    <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;" data-bs-toggle="dropdown">
+                        <div class="user-setting" style="margin-left:4px">
+                            <img src="@Model.ProfilePictureUrl" class="user-img" alt="">
+                        </div>
+                    </a>
+                    <i class="bi bi-chevron-down" style="color:white;font-size:10px;margin-top:6px;margin-left:-8px"></i>
+                    <ul class="dropdown-menu dropdown-menu-end" style="margin-top:250px;cursor:pointer;width:230px !important" id="ProfileDropdown" >
+                        <li>
+                            <a class="dropdown-item" href="javascript:;">
+                                <div class="d-flex flex-row align-items-center gap-2">
+                                    <img src="@Model.ProfilePictureUrl" alt="" class="rounded-circle" width="54" height="54">
+                                    <div class="">
+                                        <h6 class="mb-0 dropdown-user-name">@Model.UserFullname</h6>
+                                        <small class="mb-0 dropdown-user-designation text-secondary">@Model.CompanyDepartment</small>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <a class="dropdown-item" onclick="OpenUserProfile()">
+                                <div class="d-flex align-items-center">
+                                    <div class="">
+                                        <ion-icon name="person-outline"></ion-icon>
+                                    </div>
+                                    <div class="ms-3"><span>Profile</span></div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" onclick="OpenUserSettings()">
+                                <div class="d-flex align-items-center">
+                                    <div class="">
+                                        <ion-icon name="settings-outline"></ion-icon>
+                                    </div>
+                                    <div class="ms-3"><span>Setting</span></div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="javascript:;">
+                                <div class="d-flex align-items-center">
+                                    <div class="">
+                                        <ion-icon name="log-out-outline"></ion-icon>
+                                    </div>
+                                    <div class="ms-3"><span>Logout</span></div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li style="margin-left:10px; cursor:pointer">
+                    <div class="text-white" style="display:grid" id="UserInfoGrid">
+                        <span id="UserName">@Model.UserFullname</span>
+                        <span id="UserRole" style="color:silver;font-style:italic; font-size:12px">@Model.CompanyDepartment</span>
+                    </div>
+                </li>
+            </ul>
+            <span style="border-right:1px solid silver; margin:10px;" id="UserCompanyImageSeparator"></span>
+            <div id="UserCompany">
+                <img src="@Model.CompanyLogo" id="UserCompanyImage" />
+            </div>
+
+        </div>
+    </nav>
+</header>
+
+<script>
+
+    window.addEventListener('click', function (e)
+    {
+        if (document.getElementById('ProfileDropdownContainer').contains(e.target))
+        {
+            $("#ProfileDropdown").addClass('show');
+        } 
+        else
+        {
+            $("#ProfileDropdown").removeClass('show');
+        }
+    });
+
+    function ToggleLeftNavigationMenu()
+    {
+        var isClosed = $("#TopNavigationBar").css('left') == '0px';
+        if(isClosed)
+        {
+            $("#TopNavigationBar").css('left', '260px');
+            $("#PageArea").css('margin-left', '260px');
+            $("#LeftNavMenu").css('left', '0');
+        }
+        else
+        {
+            $("#TopNavigationBar").css('left', '0px');
+            $("#PageArea").css('margin-left', '0px');
+            $("#LeftNavMenu").css('left', '-300px');
+        }
+    }
+
+    function OpenCalendar()
+    {
+        var groupName = 'Dashboard';
+
+        var linkId = `#${groupName}Link`;
+        var leftIconId = `#${groupName}LeftIcon`;
+        var titleId = `#${groupName}Title`;
+        var rightIconId = `#${groupName}RightIcon`;
+        var dropDownId = `#${groupName}Dropdown`;
+
+        ExpandCloseAllMainMenuDropdowns();
+        ExpandOpenLeftNavMenu(linkId, leftIconId, titleId, rightIconId, dropDownId, 'left-nav-menu-active', false);
+
+        OpenLeftNavigationPage('@DashboardPages.Calendar', 'CalendarSubLink');
+    }
+
+    function OpenUserProfile()
+    {
+        var groupName = 'Account';
+
+        var linkId = `#${groupName}Link`;
+        var leftIconId = `#${groupName}LeftIcon`;
+        var titleId = `#${groupName}Title`;
+        var rightIconId = `#${groupName}RightIcon`;
+        var dropDownId = `#${groupName}Dropdown`;
+
+        ExpandCloseAllMainMenuDropdowns();
+        ExpandOpenLeftNavMenu(linkId, leftIconId, titleId, rightIconId, dropDownId, 'left-nav-menu-active', false);
+
+        OpenLeftNavigationPage('@AccountPages.AccountOverview', 'AccountOverviewLink');
+
+        $("#ProfileDropdown").removeClass('show');
+    }
+
+    function OpenUserSettings()
+    {
+        var groupName = 'Account';
+
+        var linkId = `#${groupName}Link`;
+        var leftIconId = `#${groupName}LeftIcon`;
+        var titleId = `#${groupName}Title`;
+        var rightIconId = `#${groupName}RightIcon`;
+        var dropDownId = `#${groupName}Dropdown`;
+
+        ExpandCloseAllMainMenuDropdowns();
+        ExpandOpenLeftNavMenu(linkId, leftIconId, titleId, rightIconId, dropDownId, 'left-nav-menu-active', false);
+
+        OpenLeftNavigationPage('@AccountPages.SecuritySettings', 'SecurityLink');
+
+        $("#ProfileDropdown").removeClass('show');
+    }
+
+
+</script>

@@ -1,0 +1,123 @@
+﻿@using CLACommonFunctionsLibrary_NET.Helpers.Enums
+@using CLA_Administration_Web.Helpers.Constants
+@using CLA_Administration_Web.Helpers.Enums.AppPages
+@using CLA_Administration_Web.Helpers.Enums.Shared
+@using CLA_Administration_Web.Helpers.Shared
+
+<!--start wrapper-->
+<div class="wrapper">
+
+    <!--start sidebar -->
+    <div id="LeftNavigation">
+    </div>
+    <!--end sidebar -->
+
+    <!--start top header-->
+    <div id="TopNavigation">
+    </div>
+    <!--end top header-->
+    <!-- Loader -->
+    
+    <div id="loader" class="loader">
+        <!-- GIF Loader -->
+        <img src="~/images/others/loading-waiting.gif" alt="Loading..." id="loaderImage" class="loader-image" />
+        <!-- Loader Message -->
+        <p id="loaderMessage">Loading...</p>
+    </div>
+    <!--End Loader -->
+
+    <!-- start page content wrapper-->
+    <div class="page-content-wrapper" id="PageArea">
+        <!-- start page content-->
+        <div class="page-content" id="DashboardMainArea">
+            
+        </div>
+        <!-- end page content-->
+    </div>
+    <!--end page content wrapper-->
+
+    <!--Start Back To Top Button-->
+    <a href="javaScript:;" class="back-to-top">
+        <ion-icon name="arrow-up-outline"></ion-icon>
+    </a>
+    <!--End Back To Top Button-->
+    
+</div>
+<!--end wrapper-->
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+
+@{ 
+    await Html.RenderPartialAsync("~/Views/Shared/Helpers/HtmlHelpers/AppUrlsHelper.cshtml"); 
+}
+
+<script>
+
+    $(document).ready(function ()
+    {
+        LoadLayoutSections();
+    });
+
+    function LoadLayoutSections()
+    {
+        var topNavUrl = '@Url.Action("TopNavigation", "Dashboard")';
+        var leftNavUrl = '@Url.Action("LeftNavigation", "Dashboard")';
+
+        LoadPartialWithSpinner(topNavUrl, "#TopNavigation");
+        LoadPartialWithSpinner(leftNavUrl, "#LeftNavigation");
+    }
+
+    function OpenPage(page, id)
+    {
+        LoadPageArea(page, id);
+
+        var pageTitle = GetPageTitle(page);
+
+        document.title = pageTitle;
+    }
+
+    function LoadPageArea(page, id)
+    {
+        var url = GetPageUrl(page, id);
+        
+        var pageName = GetPageTitle(page);
+        
+        ShowLoader("Loading " + pageName);
+
+        setTimeout(function ()
+        {
+            HideLoader();
+            LoadPartialWithSpinner(url, "#DashboardMainArea");
+
+        }, 2000);
+    }
+
+    function ShowLoader(message)
+    {
+        $("#loaderMessage").text(message);
+        $(".loader").css("visibility", "visible");
+
+        $(".loader-image").css("visibility", "visible");
+    }
+
+    function HideLoader()
+    {
+        $(".loader").css("visibility", "hidden");
+        $(".loader-image").css("visibility", "hidden");
+    }
+
+    function Logout()
+    {
+        swal({
+            title: "Logout",
+            text: "You will be logged out of CLA Admin Tool",
+            icon: "warning",
+            buttons: true,
+            dangerMode: false
+        }).then((confirmed) =>
+        {
+            swal('Log out success', 'You have been successfully logged out!', 'success');
+        });
+    }
+</script>

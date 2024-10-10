@@ -81,7 +81,7 @@ function OpenPage(page, id = null, id2 = null)
 {
     LoadPageArea(page, id, id2);
 
-    var pageTitle = GetPageTitle(page);
+    var pageTitle = GetPageTitle(page, id);
 
     document.title = pageTitle;
 }
@@ -90,7 +90,7 @@ function LoadPageArea(page, id = null, id2 = null)
 {
     var url = GetPageUrl(page, id, id2);
     
-    var pageName = GetPageTitle(page);
+    var pageName = GetPageTitle(page, id);
     
     ShowLoader("Main", "Loading " + pageName);
 

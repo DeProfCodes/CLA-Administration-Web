@@ -7,10 +7,10 @@ var submitBtnId = "AddPopupSubmitBtn";
 
 function ValidatePopupTabs(currentTab)
 {
-    if(currentTab == 1) return IsLinksTypeTabValid("Popup");
-    if(currentTab == 2) return IsSkinsTabValid();
-    if(currentTab == 3) return IsPopupTextsTabValid();
-    if(currentTab == 6) return IsPopupRepeatTabValid();
+    if (currentTab == 1) return IsLinksTypeTabValid("Popup");
+    if (currentTab == 2) return IsSkinsTabValid();
+    if (currentTab == 3) return IsPopupTextsTabValid();
+    if (currentTab == 6) return IsPopupRepeatTabValid();
 
     return true;
 }
@@ -29,14 +29,14 @@ function NextPopupTab()
     {
         if (!ValidatePopupTabs(currentSurveyTab))
             return;
-        
+
         currentSurveyTab = NextModuleTab("popup", currentSurveyTab, totalSurveyTabs, backBtnId, nextBtnId, submitBtnId);
     }
 }
 
 function NavigateToPopupTab(navLinkId, tabLinkNumber)
 {
-     currentSurveyTab = NavigateToModuleTab("popup", navLinkId, tabLinkNumber, currentSurveyTab, backBtnId, nextBtnId, submitBtnId);
+    currentSurveyTab = NavigateToModuleTab("popup", navLinkId, tabLinkNumber, currentSurveyTab, backBtnId, nextBtnId, submitBtnId);
 }
 
 /*==================================================================================================================================*/
@@ -51,9 +51,9 @@ function IntilizeSkinsPreview()
 
 function LoadDefaultSkinPreview()
 {
-    
+
     var popupDefaultSkin = `${APP_BASE_ADDRESS}/images/others/modules/skins/Popup_Skin_Default.png`;
-    
+
     $("#PopupBodyPreview").css("background", `url(${popupDefaultSkin})`);
     $("#SkinFileName").text("Popup_Skin_Default.png");
     $("#PopupBodyPreviewFeedback").css("background", `url(${popupDefaultSkin})`);
@@ -250,7 +250,7 @@ function PopupStandardIconSelect(iconId)
     iconId = iconId.toLowerCase();
 
     var iconUrl = "";
-    
+
     if (iconId.includes("info")) iconUrl = `${APP_BASE_ADDRESS}/images/icons/modules/popup/icon-info.png`;
     if (iconId.includes("warning")) iconUrl = `${APP_BASE_ADDRESS}/images/icons/modules/popup/icon-warning.png`;
     if (iconId.includes("error")) iconUrl = `${APP_BASE_ADDRESS}/images/icons/modules/popup/icon-error.png`;
@@ -272,13 +272,12 @@ function UpdatePopupIconCustom(customImgUrl, fileData)
             ClearFileUpload("PopupCustomIcon");
         }
     })
-    .catch(error =>
-    {
-        console.error('Error getting image dimensions:', error);
-        ClearFileUpload("PopupCustomIcon");
-    });
+        .catch(error =>
+        {
+            console.error('Error getting image dimensions:', error);
+            ClearFileUpload("PopupCustomIcon");
+        });
 }
-
 
 function ShowHidePopupText(sliderId, textType)
 {
@@ -320,6 +319,41 @@ function TogglePopupDisplaySettings()
     }
 }
 
+function UpdatePopupDisplayTimeDetails()
+{
+    var startDate = $("#DatePickerStartDate").val();
+    var endDate = $("#DatePickerEndDate").val();
+    var startTime = $("#TimePickerStartTime").val();
+    var endTime = $("#TimePickerEndTime").val();
+
+    if (IsNotEmptyString(startDate) && IsNotEmptyString(endDate) && IsNotEmptyString(startTime) && IsNotEmptyString(endTime))
+    {
+        $("#PopupStartEffDate").text(startDate);
+        $("#PopupEndEffDate").text(endDate);
+        $("#PopupStartTimeSlot").text(startTime);
+        $("#PopupEndTimeSlot").text(endTime);
+    }
+}
+
+$("#DatePickerStartDate").change(function ()
+{
+    UpdatePopupDisplayTimeDetails();
+});
+
+$("#DatePickerEndDate").change(function ()
+{
+    UpdatePopupDisplayTimeDetails();
+});
+
+$("#TimePickerStartTime").change(function ()
+{
+    UpdatePopupDisplayTimeDetails();
+});
+
+$("#TimePickerEndTime").change(function ()
+{
+    UpdatePopupDisplayTimeDetails();
+});
 function SetPopupPosition(popupPosId)
 {
     $(".popup-pos").removeClass("active");

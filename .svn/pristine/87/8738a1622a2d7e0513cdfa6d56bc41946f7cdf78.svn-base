@@ -1,0 +1,55 @@
+﻿@using CLA_Administration_Web.Helpers.Enums.AppPages
+@using CLA_Administration_Web.Helpers.Enums.Shared.PageNames
+
+<div class="container-fluid">
+    <!-- Top Page Navigation Breadcrumb -->
+    @await Component.InvokeAsync("Breadcrumbs", new { page = ModulesPages.LockedDesktopAddNew })
+
+    <!-- Card for Title -->
+    <div class="card mb-4 mt-2" style="min-width:940px;">
+        <div class="card-body pb-0">
+            <h4 class="w-100 text-center theme-txt-clr">Add New Locked Desktop</h4>
+        </div>
+    </div>
+
+    <div class="card" style="min-width:940px;">
+        <div class="card-body">
+            <div class="row">
+                <div class="row mb-4">
+                    <div class="w-fit-content">
+                        <h5 class="fw-bold mt-4 theme-txt-clr w-fit-content">Select Locked Desktop Content</h5>
+                    </div>
+                    <div class="w-fit-content ms-auto align-content-center" style="margin-right:-25px;">
+                        <button class="btn btn-sm btn-success" onclick="AddNewLockedDesktopContent()">Add New Content</button>
+                    </div>
+                </div>
+                <div id="LockedDesktopAvailableContent">
+                </div>
+                <div class="text-center mt-4">
+                    <button class="btn btn-sm custom-btn custom-btn-default">Apply Selected</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function ()
+    {
+        LoadAddNewLockedDesktop();
+    });
+
+    function LoadAddNewLockedDesktop()
+    {
+        var url = GetPageUrl('@ModulesPages.AddNewLDSModule', '@ModuleNamesType.LockedDesktop');
+
+        LoadPartialViewWithLoader(url, "LockedDesktopAvailableContent", "SecondaryLoader");
+    }
+
+    function AddNewLockedDesktopContent()
+    {
+        OpenPage('@ModulesPages.AddNewContentLibraryContent', 0, '@ModuleNamesType.LockedDesktop');
+    }
+
+</script>

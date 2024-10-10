@@ -1,0 +1,13 @@
+﻿<!-- Modules Data Table Component for LDS Modules : Lockscreen, Desktops, Screensavers -->
+@model CLA_Administration_Web.Helpers.Enums.AppPages.ModulesPages
+
+@using CLACommonFunctionsLibrary_NET.Helpers.Enums
+
+<!-- Card for Table -->
+<div class="card" id="ModuleOverviewCard">
+    <div class="card-body">
+        <div class="table-responsive" id="ModuleOverviewTableContainer">
+
+        </div>
+    </div>
+</div>

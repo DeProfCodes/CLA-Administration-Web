@@ -1,0 +1,157 @@
+﻿@model CLA_Administration_Web.ViewModels.Modules.PST.SurveyQuestionViewModel
+@using CLA_Administration_Web.Helpers.Enums.AppPages
+@using CLA_Administration_Web.Helpers.Html
+
+@{
+
+}
+
+<div class="container-fluid">
+
+    <!-- Breadcrumb -->
+    <div class="row mb-2">
+        <div class="w-auto">
+            <h2 class="theme-txt-clr breadcrumb-title">Survey Module</h2>
+            <p class="breadcrumb-nav-body">
+                <span class="breadcrumb-item-nav" onclick="OpenPageWithAnimations('Dashboard', null, '@DashboardPages.Dashboard', 'DashboardSubLink')">Dashboard</span> /
+                <span class="breadcrumb-item-nav" onclick="OpenPageWithAnimations('Modules', null, '@ModulesPages.AllModules', 'AllModulesLink', true)">Modules</span> /
+                <span class="breadcrumb-item-nav" onclick="OpenPageWithAnimations('Modules', 'Survey', '@ModulesPages.SurveyOverview', 'SurveyLink')">Survey</span> /
+                <span class="breadcrumb-item-nav" onclick="OpenPageWithAnimations('Modules', 'Survey', '@ModulesPages.SurveyOverview', 'SurveyLink')">Overview</span> /
+                <span class="breadcrumb-item-nav" onclick="OpenPage('@ModulesPages.SurveyDetails', '@Model.SurveyId');">@Model.SurveyId</span> /
+                <span class="breadcrumb-item-nav" onclick="OpenPage('@ModulesPages.SurveyQuestionsOverview', '@Model.SurveyId')">Questions</span> /
+                <span class="breadcrumb-item">@Model.QuestionId</span>
+            </p>
+        </div>
+    </div>
+
+    <!-- Card for Filters -->
+    <div class="card mb-4 mt-5 overview-filters-card">
+        <div class="card-body">
+            <h4 class="w-100 text-center theme-txt-clr">Survey Question Details for Survey Question Id: @Model.QuestionId</h4>
+        </div>
+    </div>
+
+    <!-- Card for Body -->
+    <div class="card mb-4 mt-2 overview-filters-card p-3">
+        <div class="card-body" id="LockedDesktopDetailsContainer">
+            <div class="row">
+                <h4 class="w-100 text-center theme-txt-clr fw-bold">Survey Question Details Details</h4>
+                <div class="col-md-6">
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <p class="custom-p popup-info-headings">Survey Id</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="custom-p-bold">@Model.SurveyId</p>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <p class="custom-p popup-info-headings">Question No</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="custom-p-bold">@Model.QuestionNo</p>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <p class="custom-p popup-info-headings">Question Title</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="custom-p-bold">@Model.QuestionTitle</p>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <p class="custom-p popup-info-headings">Question Text</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="custom-p-bold">@Model.QuestionText</p>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <p class="custom-p popup-info-headings">Response Type</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="custom-p-bold">@Model.ResponseType</p>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <p class="custom-p popup-info-headings">Is Scored Question</p>
+                        </div>
+                        <div class="col-md-6">
+                            <span class="badge @CssHtmlHelpers.GetBGForYesNoValues(Model.IsScored)">@Model.IsScored</span>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <p class="custom-p popup-info-headings">Correct Answer</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="custom-p-bold">@Model.CorrectAnswer</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <p class="custom-p popup-info-headings">Dependencies</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="custom-p-bold">@Model.Dependencies</p>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <p class="custom-p popup-info-headings">Is Scored Anonymous</p>
+                        </div>
+                        <div class="col-md-6">
+                            <span class="badge @CssHtmlHelpers.GetBGForYesNoValues(Model.IsAnonymous)">@Model.IsAnonymous</span>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <p class="custom-p popup-info-headings">Randomize</p>
+                        </div>
+                        <div class="col-md-6">
+                            <span class="badge @CssHtmlHelpers.GetBGForYesNoValues(Model.Randomize)">@Model.Randomize</span>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <p class="custom-p popup-info-headings">Date Last Modified</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="custom-p-bold">@Model.LastModifiedDate</p>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <p class="custom-p popup-info-headings">User Id Last Modified</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="custom-p-bold">@Model.UserIdLastModified</p>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <p class="custom-p popup-info-headings">Machine Id Last Modified</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="custom-p-bold">@Model.MachineLastModified</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <btn class="custom-btn custom-btn-default mt-4 px-5 w-fit-c" onclick="OpenPage('@ModulesPages.SurveyDetails', '@Model.SurveyId')">Open Survey</btn>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+</script>

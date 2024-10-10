@@ -1,18 +1,36 @@
 ﻿@model CLA_Administration_Web.ViewModels.Modules.PST.ModulePSTDataViewModel
+@using CLACommonFunctionsLibrary_NET.Helpers.Enums
+@using CLAModulesLibrary.Helpers.Enums.Modules.Popup
 @using CLA_Administration_Web.Helpers.Constants
 @using CLA_Administration_Web.Helpers.Enums.AppPages
+@using CLA_Administration_Web.Helpers.Enums.Module
 @using CLA_Administration_Web.Helpers.Enums.Shared.PageNames
+@using CLA_Administration_Web.Helpers.Html
+@using CLA_Administration_Web.Helpers.Modules
 
 @{
-    var testPopupTitle = "<p class='mb-0' style='color:yellow;font-size:16px;'>Popup Title HTML</p>";
+    var displayHeaderText = Model.DisplayHeaderText ? "Yes" : "No";
+    var displayBodyText = Model.DisplayBodyText ? "Yes" : "No";
 
-    var testPopupBody = @"
-                            <font color=""#000000"" size=""3"" face=""Arial""><table style=""WIDTH: 148pt; BORDER-COLLAPSE: collapse"" cellspacing=""0"" cellpadding=""0"" width=""198"" border=""0""><colgroup><col style=""WIDTH: 101pt; mso-width-source: userset; mso-width-alt: 4937"" width=""135""><col style=""WIDTH: 47pt; mso-width-source: userset; mso-width-alt: 2304"" width=""63""><tbody><tr style=""HEIGHT: 12pt"" height=""16""><td class=""xl68"" style=""BORDER-TOP: windowtext 0.5pt solid; HEIGHT: 12pt; BORDER-RIGHT: windowtext 0.5pt solid; WIDTH: 148pt; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext 0.5pt solid; BACKGROUND-COLOR: transparent"" height=""16"" width=""198"" colspan=""2""><strong><font size=""2"" face=""Calibri"">WIP Status</font></strong></td></tr><tr style=""HEIGHT: 12pt"" height=""16""><td class=""xl66"" style=""BORDER-TOP: windowtext; HEIGHT: 12pt; BORDER-RIGHT: windowtext 0.5pt solid; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext 0.5pt solid; BACKGROUND-COLOR: transparent"" height=""16""><font size=""2"" face=""Calibri"">Opening prior</font></td><td class=""xl67"" style=""BORDER-TOP: windowtext; BORDER-RIGHT: windowtext 0.5pt solid; WIDTH: 47pt; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext; BACKGROUND-COLOR: transparent"" width=""63"" align=""right""><font size=""2"" face=""Segoe UI"">880 222</font></td></tr><tr style=""HEIGHT: 12pt"" height=""16""><td class=""xl66"" style=""BORDER-TOP: windowtext; HEIGHT: 12pt; BORDER-RIGHT: windowtext 0.5pt solid; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext 0.5pt solid; BACKGROUND-COLOR: transparent"" height=""16""><font face=""Calibri""><font size=""2"">In-Cycle Prior month&nbsp; </font></font></td><td class=""xl67"" style=""BORDER-TOP: windowtext; BORDER-RIGHT: windowtext 0.5pt solid; WIDTH: 47pt; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext; BACKGROUND-COLOR: transparent"" width=""63"" align=""right""><font size=""2"" face=""Segoe UI"">644 868</font></td></tr><tr style=""HEIGHT: 12pt"" height=""16""><td class=""xl66"" style=""BORDER-TOP: windowtext; HEIGHT: 12pt; BORDER-RIGHT: windowtext 0.5pt solid; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext 0.5pt solid; BACKGROUND-COLOR: transparent"" height=""16""><font size=""2"" face=""Calibri"">% in-cycle</font></td><td class=""xl69"" style=""BORDER-TOP: windowtext; BORDER-RIGHT: windowtext 0.5pt solid; WIDTH: 47pt; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext; BACKGROUND-COLOR: #00b050"" width=""63"" align=""right""><font size=""2"" face=""Segoe UI"">73%</font></td></tr><tr style=""HEIGHT: 12pt"" height=""16""><td class=""xl66"" style=""BORDER-TOP: windowtext; HEIGHT: 12pt; BORDER-RIGHT: windowtext 0.5pt solid; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext 0.5pt solid; BACKGROUND-COLOR: transparent"" height=""16""><font size=""2"" face=""Calibri"">Out-Cycle Prior</font></td><td class=""xl67"" style=""BORDER-TOP: windowtext; BORDER-RIGHT: windowtext 0.5pt solid; WIDTH: 47pt; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext; BACKGROUND-COLOR: transparent"" width=""63"" align=""right""><font size=""2"" face=""Segoe UI"">141 710</font></td></tr><tr style=""HEIGHT: 12pt"" height=""16""><td class=""xl66"" style=""BORDER-TOP: windowtext; HEIGHT: 12pt; BORDER-RIGHT: windowtext 0.5pt solid; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext 0.5pt solid; BACKGROUND-COLOR: transparent"" height=""16""><font size=""2"" face=""Calibri"">Opening Current</font></td><td class=""xl67"" style=""BORDER-TOP: windowtext; BORDER-RIGHT: windowtext 0.5pt solid; WIDTH: 47pt; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext; BACKGROUND-COLOR: transparent"" width=""63"" align=""right""><font size=""2"" face=""Segoe UI"">786 466</font></td></tr><tr style=""HEIGHT: 12pt"" height=""16""><td class=""xl66"" style=""BORDER-TOP: windowtext; HEIGHT: 12pt; BORDER-RIGHT: windowtext 0.5pt solid; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext 0.5pt solid; BACKGROUND-COLOR: transparent"" height=""16""><font size=""2"" face=""Calibri"">Target</font></td><td class=""xl67"" style=""BORDER-TOP: windowtext; BORDER-RIGHT: windowtext 0.5pt solid; WIDTH: 47pt; BORDER-BOTTOM: windowtext 0.5pt solid; BORDER-LEFT: windowtext; BACKGROUND-COLOR: transparent"" width=""63"" align=""right""><font size=""2"" face=""Segoe UI"">393 233</font></td></tr></tbody></colgroup></table></font>
-                            ";
+    var popupPosition = PopupHelper.GetPopupPositionString(Model.PopupPosition);
 
-    var popupSkin = $"{LaunchSettingsHelper.GetBaseAddressForImages()}/images/others/modules/skins/Popup_Skin_Default.png";
+    var displayTypeText = PopupHelper.GetPopupDisplayTypeString(Model.PopupDisplayType);
+    var popupAutoHideSecconds = displayTypeText.ToLower().Contains(PopupDisplayTypes.AutoHide.GetDisplayName().ToLower()) ? $"{Model.PopupAutoHideSeconds}" : "N/A";
+    var snoozable = displayTypeText.ToLower().Contains(PopupDisplayTypes.Snoozable.GetDisplayName().ToLower());
+    var dismissableCss = !displayTypeText.ToLower().Contains(PopupDisplayTypes.Dismissable.GetDisplayName().ToLower()) ? CssHtmlHelpers.CSS_INVISIBLE : "";
 
+    var skinFilename = !string.IsNullOrEmpty(Model.ModuleSkinUrl) ? Model.ModuleSkinUrl.Split("/")?.LastOrDefault() ?? "" : "";
+
+    var hasIconCss = Model.PopupIcon == PopupIconType.None ? CssHtmlHelpers.CSS_INVISIBLE : "";
+    var iconUrl = $"{ResourcesLibrary.ModulesLibrary.Icons.PopupBaseAddress}/{Model.PopupIcon.GetDisplayShortName()}";
+
+    var hasFeedback = Model.PopupFeedback.RequireFeedbackLikeDislike || Model.PopupFeedback.RequireFeedbackComment;
+    var feedbackText = PopupHelper.GetPopupFeedbackTypeString(Model.PopupFeedback);
+
+    var feedbackLikeCss = !Model.PopupFeedback.RequireFeedbackLikeDislike ? CssHtmlHelpers.CSS_INVISIBLE : "";
+    var feedbackCommentCss = !Model.PopupFeedback.RequireFeedbackComment ? CssHtmlHelpers.CSS_INVISIBLE : "";
 }
+
 
 <div class="container-fluid">
 
@@ -34,15 +52,15 @@
                 <div class="col-md-6 mb-3">
                     <h4 class="w-100 text-center theme-txt-clr fw-bold">Popup Texts</h4>
                     <div class="row mt-4">
-                        <p class="custom-p-bold ps-0">Popup Title <span class="fst-italic fw-normal">(Display: Yes)</span></p>
+                        <p class="custom-p-bold ps-0">Popup Title <span class="fst-italic fw-normal">(Display: @displayHeaderText)</span></p>
                         <div class="mt-1" id="PopupDetailsTitlePreview">
-                            @Html.Raw(testPopupTitle)
+                            @Html.Raw(Model.HeaderText)
                         </div>
                     </div>
                     <div class="row mt-3">
-                        <p class="custom-p-bold ps-0">Popup Text <span class="fst-italic fw-normal">(Display: Yes)</span></p>
+                        <p class="custom-p-bold ps-0">Popup Text <span class="fst-italic fw-normal">(Display: @displayBodyText)</span></p>
                         <div class="mt-1" id="PopupDetailsBodyPreview">
-                            @Html.Raw(testPopupBody)
+                            @Html.Raw(Model.BodyText)
                         </div>
                     </div>
                 </div>
@@ -57,7 +75,7 @@
                             <div class="mb-0 d-flex">
                                 <span class="custom-p-bold me-2">Image | </span> 
                                 <i class="bi bi-card-image popup-info-attachment-icon"></i>
-                                <p class="popup-info-attachment-text ms-1" onclick="PreviewContentType(ContentTypes.IMAGE, '/images/others/modules/skins/Popup_Skin_Default.png')">testImage101.png</p>
+                                <p class="popup-info-attachment-text ms-1" onclick="PreviewContentType(ContentTypes.IMAGE, `${APP_BASE_ADDRESS}/images/others/modules/skins/Popup_Skin_Default.png`)">testImage101.png</p>
                             </div>
                         </div>
                     </div>
@@ -66,7 +84,7 @@
                             <p class="custom-p popup-info-headings">Popup Icon</p>
                         </div>
                         <div class="col-md-6">
-                            <img class="popup-icon" src="~/images/icons/modules/popup/icon-info.png"/>
+                            <img class="popup-icon @hasIconCss" src="@iconUrl"/>
                         </div>
                     </div>
                     <div class="row mt-3">
@@ -74,7 +92,7 @@
                             <p class="custom-p popup-info-headings">Display Type</p>
                         </div>
                         <div class="col-md-6">
-                            <p class="custom-p-bold">Dismissable | Snoozable</p>
+                            <p class="custom-p-bold">@displayTypeText</p>
                         </div>
                     </div>
                     <div class="row mt-3">
@@ -82,7 +100,7 @@
                             <p class="custom-p popup-info-headings">Auto Hide Seconds</p>
                         </div>
                         <div class="col-md-6">
-                            <p class="custom-p-bold">N/A</p>
+                            <p class="custom-p-bold">@popupAutoHideSecconds</p>
                         </div>
                     </div>
                     <div class="row mt-3">
@@ -90,7 +108,7 @@
                             <p class="custom-p popup-info-headings">Popup Display Position</p>
                         </div>
                         <div class="col-md-6">
-                            <p class="custom-p-bold">Middle Center</p>
+                            <p class="custom-p-bold">@popupPosition</p>
                         </div>
                     </div>
                     <div class="row mt-3">
@@ -98,7 +116,7 @@
                             <p class="custom-p popup-info-headings">Feedback Request</p>
                         </div>
                         <div class="col-md-6">
-                            <p class="custom-p-bold">Like/Dislike | Comment</p>
+                            <p class="custom-p-bold">@feedbackText</p>
                         </div>
                     </div>
                     <div class="row mt-3">
@@ -125,65 +143,78 @@
                     <h4 class="w-100 text-center theme-txt-clr fw-bold">Popup Preview</h4>
                     <div class="row mt-3 d-flex">
                         <div class="mb-3 w-fit-content p-0">
-                            <p class="custom-p">Popup Skin <span class="custom-p-bold text-decoration-underline">StandardVodacomSkin.png</span></p>
-                            <div class="mt-1 me-4" id="PopupBodyPreview" style="background-image: url('@popupSkin')">
+                            <p class="custom-p">Popup Skin <span class="custom-p-bold text-decoration-underline">@skinFilename</span></p>
+                            <div class="mt-1 me-4" id="PopupBodyPreview" style="background-image: url('@Model.ModuleSkinUrl')">
                                 <div class="d-flex" id="PopupBodyPreviewTitle">
                                     <div id="PopupBodyPreviewTitleIcon">
-                                        <img src="~/images/icons/modules/popup/icon-info.png" />
+                                        <img class="@hasIconCss" src="@iconUrl" />
                                     </div>
                                     <div class="poup-body-preview-title-text" id="PopupBodyPreviewTitleText">
-                                        @Html.Raw(testPopupTitle)
+                                        @Html.Raw(Model.HeaderText)
                                     </div>
                                     <div id="PopupBodyPreviewTitleDismiss">
-                                        <img src="~/images/icons/modules/popup/icon-error.png" />
+                                        <img src="~/images/icons/modules/popup/icon-error.png" class="@dismissableCss" />
                                     </div>
                                 </div>
                                 <div id="PopupBodyPreviewText">
                                     <div class="popup-body-preview-text-body" id="PopupBodyPreviewTextBody">
-                                        @Html.Raw(testPopupBody)
+                                        @Html.Raw(Model.BodyText)
                                     </div>
-                                    <div id="PopupBodyPreviewTextBodyFooter">
-                                        <button class="btn">Remind Me Later</button>
-                                    </div>
+                                    @if (snoozable)
+                                    {
+                                        <div id="PopupBodyPreviewTextBodyFooter">
+                                            <button class="btn">Remind Me Later</button>
+                                        </div>
+                                    }
                                 </div>
                             </div>
                         </div>
                         <div class="w-fit-content p-0">
                             <p class="custom-p">Popup Feedback</p>
-                            <div class="mt-1" id="PopupBodyPreview" style="background-image: url('@popupSkin'); opacity:0.4">
-                                <div class="d-flex" id="PopupBodyPreviewTitle">
-                                    <div id="PopupBodyPreviewTitleIcon">
-                                        <img src="~/images/icons/modules/popup/icon-info.png" />
+                            @if (hasFeedback)
+                            {
+                                <div class="mt-1" id="PopupBodyPreview" style="background-image: url('@Model.ModuleSkinUrl');opacity:0.4">
+                                    <div class="d-flex" id="PopupBodyPreviewTitle">
+                                        <div id="PopupBodyPreviewTitleIcon">
+                                            <img class="@hasIconCss" src="@iconUrl" />
+                                        </div>
+                                        <div class="poup-body-preview-title-text" id="PopupBodyPreviewTitleText">
+                                            @Html.Raw(Model.HeaderText)
+                                        </div>
+                                        <div id="PopupBodyPreviewTitleDismiss">
+                                            <img src="~/images/icons/modules/popup/icon-error.png" class="@dismissableCss" />
+                                        </div>
                                     </div>
-                                    <div class="poup-body-preview-title-text" id="PopupBodyPreviewTitleText">
-                                        @Html.Raw(testPopupTitle)
-                                    </div>
-                                    <div id="PopupBodyPreviewTitleDismiss">
-                                        <img src="~/images/icons/modules/popup/icon-error.png" />
+                                    <div id="PopupBodyPreviewText">
+                                        <div class="popup-body-preview-text-body" id="PopupBodyPreviewTextBody">
+                                            @Html.Raw(Model.BodyText)
+                                        </div>
+                                        @if (snoozable)
+                                        {
+                                            <div id="PopupBodyPreviewTextBodyFooter">
+                                                <button class="btn">Remind Me Later</button>
+                                            </div>
+                                        }
                                     </div>
                                 </div>
-                                <div id="PopupBodyPreviewText">
-                                    <div class="popup-body-preview-text-body" id="PopupBodyPreviewTextBody">
-                                        @Html.Raw(testPopupBody)
+                                <div id="PopupFeedbackContents">
+                                    <p class="pt-1 mb-0 w-100 text-center" style="font-size:11px">Please provide feedback on this popup</p>
+                                    <div class="d-flex mt-1 @feedbackLikeCss">
+                                        <img src="~/images/icons/modules/popup/Like-icon.png" class="popup-feedback-icons ms-auto"/>
+                                        <img src="~/images/icons/modules/popup/Dislike-icon.png" class="popup-feedback-icons me-auto" />
                                     </div>
-                                    <div id="PopupBodyPreviewTextBodyFooter">
-                                        <button class="btn">Remind Me Later</button>
+                                    <div class="mt-1 text-center @feedbackCommentCss">
+                                        <textarea rows="3" id="PopupFeedbackText" disabled></textarea>
+                                    </div>
+                                    <div class="text-center">
+                                        <button class="btn" id="PopupFeedbackBtn">Submit</button>
                                     </div>
                                 </div>
-                            </div>
-                            <div id="PopupFeedbackContents">
-                                <p class="pt-1 mb-0 w-100 text-center" style="font-size:11px">Please provide feedback on this popup</p>
-                                <div class="d-flex mt-1">
-                                    <img src="~/images/icons/modules/popup/Like-icon.png" class="popup-feedback-icons ms-auto"/>
-                                    <img src="~/images/icons/modules/popup/Dislike-icon.png" class="popup-feedback-icons me-auto" />
-                                </div>
-                                <div class="mt-1 text-center">
-                                    <textarea rows="3" id="PopupFeedbackText" disabled></textarea>
-                                </div>
-                                <div class="text-center">
-                                    <button class="btn" id="PopupFeedbackBtn">Submit</button>
-                                </div>
-                            </div>
+                            }
+                            else
+                            {
+                                <p class="custom-p fst-italic p-5 fs-18">No Feedback</p>   
+                            }
                         </div>
                     </div>
                 </div>
@@ -195,7 +226,7 @@
                             <p class="custom-p popup-info-headings">Effective From</p>
                         </div>
                         <div class="col-md-6">
-                            <p class="custom-p-bold">Thursday, 26 September 2024</p>
+                            <p class="custom-p-bold">@Model.EffectiveFromDate.ToString("dddd, dd MMMM yyyy")</p>
                         </div>
                     </div>
                     <div class="row mt-3">
@@ -203,7 +234,7 @@
                             <p class="custom-p popup-info-headings">Effective To</p>
                         </div>
                         <div class="col-md-6">
-                            <p class="custom-p-bold">Monday, 30 September 2024</p>
+                            <p class="custom-p-bold">@Model.EffectiveToDate.ToString("dddd, dd MMMM yyyy")</p>
                         </div>
                     </div>
                     <div class="row mt-3">
@@ -211,7 +242,7 @@
                             <p class="custom-p popup-info-headings">Timeslots</p>
                         </div>
                         <div class="col-md-6">
-                            <p class="custom-p-bold">07:00 - 16:30</p>
+                            <p class="custom-p-bold">@Model.TimeslotFrom - @Model.TimeslotFrom</p>
                         </div>
                     </div>
                     <div class="row mt-3">

@@ -1,0 +1,32 @@
+﻿@model List<CLA_Administration_Web.ViewModels.Modules.PST.ModulePSTDataViewModel>
+@using CLACommonFunctionsLibrary_NET.Helpers.Enums
+@using CLA_Administration_Web.Helpers.Enums.AppPages
+@using CLA_Administration_Web.Helpers.Enums.Shared
+@using Newtonsoft.Json
+
+<div class="container-fluid">
+
+    <!-- Breadcrumb Component -->
+    @await Component.InvokeAsync("Breadcrumbs", new { page = ModulesPages.SurveyOverview })
+
+    <!-- ModuleFilter Component -->
+    @await Component.InvokeAsync("OverviewDataFilters", new { page = ModulesPages.SurveyOverview })
+
+    <!-- ModuleFilter Component -->
+    @await Component.InvokeAsync("OverviewDataTables", new { page = ModulesPages.SurveyOverview })
+
+</div>
+
+<script>
+
+    $(document).ready(function ()
+    {
+        LoadSurveyDefaultOverviewData();
+    });
+
+    function LoadSurveyDefaultOverviewData()
+    {
+        FilterModuleDataOverviewByStatus('Survey', `ActiveSurveyBtnFilter`, AllStatusTypes.Active);
+    }
+
+</script>

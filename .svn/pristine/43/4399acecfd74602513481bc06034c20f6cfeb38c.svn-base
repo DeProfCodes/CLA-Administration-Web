@@ -1,0 +1,37 @@
+﻿
+<div id="AudioPreviewModal" class="modal">
+
+    <span class="close text-danger" onclick="CloseAudioModal()">&times;</span>
+
+    <audio controls class="modal-content" id="AudioPreviewer"></audio>
+
+    <div id="caption">
+        <button class="btn btn-info" onclick="OpenAudioInNewWindow()">Open New Window</button>
+    </div>
+</div>
+
+<script>
+
+    function OpenAudioPreviewModal(audioSrc)
+    {
+        $("#AudioPreviewModal").fadeIn();
+        $("#AudioPreviewer").attr("src", audioSrc);
+    }
+
+    function CloseAudioModal()
+    {
+        $("#AudioPreviewModal").fadeOut();
+        var modalAudio = document.getElementById("AudioPreviewer");
+        modalAudio.pause();
+    }
+
+    function OpenAudioInNewWindow()
+    {
+        var audio = document.getElementById('AudioPreviewer');
+        var url = audio.getAttribute('src');
+        window.open(url);
+
+        CloseAudioModal();
+    }
+
+</script>

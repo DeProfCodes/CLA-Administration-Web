@@ -7,6 +7,11 @@
 @using CLA_Administration_Web.ViewModels.Modules.Components.Form
 @using CLA_Administration_Web.ViewModels.Modules.PST
 
+@{
+    var pageTitle = Model.AddOrEditType == AddOrEditType.Add ? "Add New Ticker" : $"Edit Ticker: {Model.TickerModel.Id}";
+}
+
+
 <div class="container-fluid">
     <!-- Breadcrumb Component -->
     @await Component.InvokeAsync("Breadcrumbs", new { page = ModulesPages.TickerAddNew })
@@ -14,7 +19,7 @@
     <!-- Card for Title -->
     <div class="card mb-4 mt-2" style="min-width:940px;">
         <div class="card-body pb-0">
-            <h4 class="w-100 text-center theme-txt-clr">Add New Ticker</h4>
+            <h4 class="w-100 text-center theme-txt-clr">@pageTitle</h4>
         </div>
     </div>
 
@@ -258,6 +263,11 @@
         HideAllTickerTabs();
         UpdateTickerDisplayTimeDetails();
         LoadTickerTargetedEntity();
+
+        if('@Model.AddOrEditType' == '@AddOrEditType.Edit')
+        {
+            PrePopulateTickerDataForEdit();
+        }
     });
 
     function LoadTickerTargetedEntity()
@@ -269,41 +279,23 @@
         LoadPartialView(url, "TickerTargetingExposure");
     }
 
-    function UpdateTickerDisplayTimeDetails()
+    function PrePopulateTickerDataForEdit()
     {
-        var startDate = $("#DatePickerStartDate").val();
-        var endDate = $("#DatePickerEndDate").val();
-        var startTime = $("#TimePickerStartTime").val();
-        var endTime = $("#TimePickerEndTime").val();
+        $(".module-left-nav-link").addClass("visited-nav-link");
+        $(".module-nav-link-dot").removeClass("hidden");
 
-        if (IsNotEmptyString(startDate) && IsNotEmptyString(endDate) && IsNotEmptyString(startTime) && IsNotEmptyString(endTime))
-        {
-            $("#TickerStartEffDate").text(startDate);
-            $("#TickerEndEffDate").text(endDate);
-            $("#TickerStartTimeSlot").text(startTime);
-            $("#TickerEndTimeSlot").text(endTime);
-        }
+        //Link Type
+        TickerLinkTypeClick("WebsiteLink");
+        $("#LinkTypeUrlInput").val("https://corporatevoice.co.za/");
+
+        //Texts
+        $("#TickerText").html('@Model.TickerModel.BodyText');
+        $("#TickerPreviewText").html('@Model.TickerModel.BodyText');
+
+        //Times
+        SetDateRangePickerDate("DatePickerStartDate", '@Model.TickerModel.EffectiveFromDate.ToString("dd-MMM-yyyy")');
+        SetDateRangePickerDate("DatePickerEndDate", '@Model.TickerModel.EffectiveToDate.ToString("dd-MMM-yyyy")');
     }
-
-    $("#DatePickerStartDate").change(function ()
-    {
-        UpdateTickerDisplayTimeDetails();
-    });
-
-    $("#DatePickerEndDate").change(function ()
-    {
-        UpdateTickerDisplayTimeDetails();
-    });
-
-    $("#TimePickerStartTime").change(function ()
-    {
-        UpdateTickerDisplayTimeDetails();
-    });
-
-    $("#TimePickerEndTime").change(function ()
-    {
-        UpdateTickerDisplayTimeDetails();
-    });
 
 
 </script>

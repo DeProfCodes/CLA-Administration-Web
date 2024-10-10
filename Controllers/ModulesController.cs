@@ -1,4 +1,5 @@
 using CLA_Administration_Web.Helpers.Constants;
+using CLA_Administration_Web.Helpers.Enums.Module;
 using CLA_Administration_Web.Helpers.Enums.Shared;
 using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
 using CLA_Administration_Web.Helpers.MockData;
@@ -16,6 +17,7 @@ using CLA_Administration_Web.ViewModels.Modules.Rss;
 using CLACommonFunctionsLibrary_NET.Helpers;
 using CLACommonFunctionsLibrary_NET.Helpers.Enums;
 using CLACommonFunctionsLibrary_NET.Helpers.Logs;
+using CLAModulesLibrary.Models.Popup.SubModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -142,7 +144,7 @@ namespace CLA_Administration_Web.Controllers
 
             try
             {
-                data.CategoriesTrees = ModulesMockData.GenerateDummyDataContentLibraryCategories();
+                data.CategoriesTrees = ModulesMockData.AllContentLibraryCategories;
 
                 LocalDataStorage.UpdateContentLibraryCategoriesData(data.CategoriesTrees);
             }
@@ -164,8 +166,9 @@ namespace CLA_Administration_Web.Controllers
 
         public async Task<IActionResult> AddNewContentLibraryCategory(int categoryId=0)
         {
-            var categoryTreeVm = (categoryId != null && categoryId != 0) ? ModulesHelper.GetCategoryTreeStructure(LocalDataStorage.AllContentLibraryCategories, categoryId) : new();
+            var categoryTreeVm = (categoryId != null && categoryId != 0) ? ModulesHelper.GetCategoryTreeStructure(ModulesMockData.AllContentLibraryCategories, categoryId) : new();
 
+            
             return PartialView(AppPagesLinks.Modules.AddNewContentLibraryCategoryPageLink, categoryTreeVm);
         }
 
@@ -361,41 +364,38 @@ namespace CLA_Administration_Web.Controllers
             return PartialView(AppPagesLinks.Modules.PopupDetailsPageLink, popupDetails);
         }
 
-        public async Task<IActionResult> AddNewPopup()
+        public async Task<IActionResult> AddNewPopup(int popupId)
         {
-            var allSurveys = await _moduleService.GetAllTickersData();
+            var allSurveys = await _moduleService.GetAllSurveysData();
             allSurveys.ForEach(s =>
             {
                 s.Status = ModulesHelper.GetModuleStatus(s.EffectiveFrom, s.EffectiveTo);
             });
 
+            ModulePSTDataViewModel popup = new()
+            {
+                PopupFeedback = new(),
+                Status = new()
+            }; 
+
+            if (popupId > 0)
+            {
+                popup = await _moduleService.GetPopupById(popupId, StagingLiveType.Staging) ?? new() { PopupFeedback = new(), Status = new() }; 
+
+                if (popup != null)
+                {
+                    popup.EffectiveFromDate = TypesParserHelper.ParseDate(popup.EffectiveFrom);
+                    popup.EffectiveToDate = TypesParserHelper.ParseDate(popup.EffectiveTo);
+                }
+            }
+            
             var addNewPopupVm = new AddNewPopupViewModel
             {
                 ActiveSurveys = allSurveys.Where(s => s.Status.StatusType == StatusType.Active).ToList(),
                 PendingSurveys = allSurveys.Where(s => s.Status.StatusType == StatusType.Pending).ToList(),
-                CustomSkins = new List<ModuleSkinViewModel>
-                {
-                    new ModuleSkinViewModel
-                    {
-                        Filename = "Default",
-                        FileURL = $"{LaunchSettingsHelper.GetBaseAddressForImages()}/images/others/modules/skins/Popup_Skin_Default.png"
-                    },
-                    new ModuleSkinViewModel
-                    {
-                        Filename = "Popup_Skin_90_456_654",
-                        FileURL = $"{LaunchSettingsHelper.GetBaseAddressForImages()}/images/others/modules/skins/Popup_Skin_Test_1.BMP"
-                    },
-                    new ModuleSkinViewModel
-                    {
-                        Filename = "Pick_N_Pay_June_Skin",
-                        FileURL = $"{LaunchSettingsHelper.GetBaseAddressForImages()}/images/others/modules/skins/Popup_Skin_Test_2.BMP"
-                    },
-                    new ModuleSkinViewModel
-                    {
-                        Filename = "INC_Default_Skin",
-                        FileURL = $"{LaunchSettingsHelper.GetBaseAddressForImages()}/images/others/modules/skins/Popup_Skin_Test_3.BMP"
-                    },
-                }
+                AddOrEditType = popup.Id > 0 ? AddOrEditType.Edit : AddOrEditType.Add,
+                PopupModel = popup,
+                CustomSkins = PopupHelper.GetPopupAvailableSkins()
             };
 
             return PartialView(AppPagesLinks.Modules.PopupAddNewPageLink, addNewPopupVm);
@@ -447,10 +447,24 @@ namespace CLA_Administration_Web.Controllers
             return PartialView(AppPagesLinks.Modules.SurveyQuestionDetailsPageLink, surveyQuestionInfo);
         }
 
-        public IActionResult AddNewSurvey()
+        public async Task<IActionResult> AddNewSurvey(int surveyId)
         {
+            ModulePSTDataViewModel survey = new();
+
+            if (surveyId != 0)
+            {
+                survey = await _moduleService.GetSurveyById(surveyId, StagingLiveType.Staging) ?? new();
+                if (survey != null)
+                {
+                    survey.EffectiveFromDate = TypesParserHelper.ParseDate(survey.EffectiveFrom);
+                    survey.EffectiveToDate = TypesParserHelper.ParseDate(survey.EffectiveTo);
+                }
+            }
+
             var addNewSurveyViewModel = new AddNewSurveyViewModel
             {
+                SurveyModel = survey,
+                AddOrEditType = (survey.Id > 0 && survey != null) ? AddOrEditType.Edit : AddOrEditType.Add,
                 SurveySkins = new List<ModuleSkinViewModel>
                 {
                     new ModuleSkinViewModel
@@ -505,7 +519,7 @@ namespace CLA_Administration_Web.Controllers
             return PartialView(AppPagesLinks.Modules.TickerDetailsPageLink, tickerDetails);
         }
         
-        public async Task<IActionResult> AddNewTicker()
+        public async Task<IActionResult> AddNewTicker(int tickerId)
         {
             var allSurveys = await _moduleService.GetAllTickersData();
             allSurveys.ForEach(s =>
@@ -513,10 +527,24 @@ namespace CLA_Administration_Web.Controllers
                 s.Status = ModulesHelper.GetModuleStatus(s.EffectiveFrom, s.EffectiveTo);
             });
 
+            ModulePSTDataViewModel ticker = new();
+
+            if (tickerId != 0)
+            {
+                ticker = await _moduleService.GetSurveyById(tickerId, StagingLiveType.Staging) ?? new();
+                if (ticker != null)
+                {
+                    ticker.EffectiveFromDate = TypesParserHelper.ParseDate(ticker.EffectiveFrom);
+                    ticker.EffectiveToDate = TypesParserHelper.ParseDate(ticker.EffectiveTo);
+                }
+            }
+
             var addNewTickerVm = new AddNewTickerViewModel
             {
                 ActiveSurveys = allSurveys.Where(s => s.Status.StatusType == StatusType.Active).ToList(),
-                PendingSurveys = allSurveys.Where(s => s.Status.StatusType == StatusType.Pending).ToList()
+                PendingSurveys = allSurveys.Where(s => s.Status.StatusType == StatusType.Pending).ToList(),
+                TickerModel = ticker,
+                AddOrEditType = ticker.Id > 0 ? AddOrEditType.Edit : AddOrEditType.Add
             };
 
             return PartialView(AppPagesLinks.Modules.TickerAddNewPageLink, addNewTickerVm);
@@ -560,18 +588,24 @@ namespace CLA_Administration_Web.Controllers
             return PartialView(AppPagesLinks.Modules.RssFeedDetailsPageLink, rssCategoryInfo);
         }
 
-        public IActionResult RSSAddNewCategory()
+        public IActionResult RSSAddNewCategory(int rssCategoryId)
         {
-            return PartialView(AppPagesLinks.Modules.RSSAddNewCategoryPageLink);
+            var rssCategoryInfo = rssCategoryId > 0 ? (ModulesMockData.StagingData.AllRSSCategories?.FirstOrDefault(x => x.CategoryId == rssCategoryId) ?? new()) : new();
+
+            return PartialView(AppPagesLinks.Modules.RSSAddNewCategoryPageLink, rssCategoryInfo);
         }
 
-        public async Task<IActionResult> AddNewRSSFeed(int rssCategoryId)
+        public async Task<IActionResult> AddNewRSSFeed(int rssCategoryId, int rssFeedId)
         {
             var rssCategories = await _moduleService.GetAllRssCategories(StagingLiveType.Staging);
+
+            var rssFeed = rssFeedId > 0 ? (ModulesMockData.StagingData.AllRSSFeed?.FirstOrDefault(x => x.FeedId == rssFeedId) ?? new()) : new();
 
             var addNewFeedVm = new AddNewRssFeed
             {
                 CurrentCategoryId = rssCategoryId,
+                RssFeedData = rssFeed, 
+                AddOrEditType = rssFeed.FeedId > 0 ? AddOrEditType.Edit : AddOrEditType.Add,
                 RssCategories = rssCategories
             };
 

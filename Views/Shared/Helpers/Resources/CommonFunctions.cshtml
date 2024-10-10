@@ -1,0 +1,24 @@
+﻿@using CLA_Administration_Web.Helpers.Enums.Shared.PageNames
+
+@{
+
+
+}
+
+<script>
+
+    function GetModuleName(moduleType)
+    {
+        if (moduleType == '@ModuleNamesType.Popup') return "Popup";
+        if (moduleType == '@ModuleNamesType.Survey') return "Survey";
+        if (moduleType == '@ModuleNamesType.Ticker') return "Ticker";
+        if (moduleType == '@ModuleNamesType.RSS') return "RSS";
+        if (moduleType == '@ModuleNamesType.LockedDesktop') return "Locked Desktop";
+        if (moduleType == '@ModuleNamesType.Desktop') return "Desktop";
+        if (moduleType == '@ModuleNamesType.Screensaver') return "Screensaver";
+        if (moduleType == '@ModuleNamesType.ContentLibrary') return "Content Library";
+    }
+
+
+
+</script>

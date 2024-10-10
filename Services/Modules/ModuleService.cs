@@ -23,6 +23,19 @@ namespace CLA_Administration_Web.Services.Modules
             return ModulesMockData.StagingData.AllPopupsData;
         }
 
+        public async Task<ModulePSTDataViewModel> GetPopupById(int popupId, StagingLiveType stagingLiveType)
+        {
+            ModulePSTDataViewModel popupData = null;
+            
+            if(stagingLiveType == StagingLiveType.Staging)
+                popupData = ModulesMockData.StagingData.AllPopupsData.FirstOrDefault(p => p.Id == popupId);
+
+            if (stagingLiveType == StagingLiveType.Live)
+                popupData = ModulesMockData.LiveData.AllPopupsData.FirstOrDefault(p => p.Id == popupId);
+
+            return popupData;
+        }
+
         #endregion
 
         #region Tickers
@@ -32,6 +45,22 @@ namespace CLA_Administration_Web.Services.Modules
             return ModulesMockData.StagingData.AllTickersData;
         }
 
+        public async Task<ModulePSTDataViewModel> GetTickerById(int tickerId, StagingLiveType stagingLive)
+        {
+
+            ModulePSTDataViewModel tickerData = null;
+
+            if (stagingLive == StagingLiveType.Staging)
+            {
+                tickerData = ModulesMockData.StagingData.AllTickersData.FirstOrDefault(x => x.Id == tickerId);
+            }
+            else if (stagingLive == StagingLiveType.Live)
+            {
+                tickerData = ModulesMockData.LiveData.AllTickersData.FirstOrDefault(x => x.Id == tickerId);
+            }
+            return tickerData;
+        }
+
         #endregion
 
         #region Surveys
@@ -39,6 +68,20 @@ namespace CLA_Administration_Web.Services.Modules
         public async Task<List<ModulePSTDataViewModel>> GetAllSurveysData()
         {
             return ModulesMockData.StagingData.AllSurveysData;
+        }
+
+        public async Task<ModulePSTDataViewModel> GetSurveyById(int surveyId, StagingLiveType stagingLiveType)
+        {
+            ModulePSTDataViewModel surveyData = null;
+            if (stagingLiveType == StagingLiveType.Staging)
+            {
+                surveyData = LocalDataStorage.StagingData.AllSurveysData.FirstOrDefault(s => s.Id == surveyId);
+            }
+            else if (stagingLiveType == StagingLiveType.Live)
+            {
+                surveyData = LocalDataStorage.LiveData.AllSurveysData.FirstOrDefault(s => s.Id == surveyId);
+            }
+            return surveyData;
         }
 
         public async Task<List<SurveyQuestionViewModel>> GetAllSurveysQuestions()
@@ -53,6 +96,7 @@ namespace CLA_Administration_Web.Services.Modules
             return surveyQuestions;
         }
 
+        
         #endregion
 
         #endregion
@@ -91,7 +135,7 @@ namespace CLA_Administration_Web.Services.Modules
 
         public async Task<List<ContentLibraryCategoryModel>> GetAllContentLibraryCategories()
         {
-            return ModulesMockData.AllContentLibraryCategories;
+            return null;// ModulesMockData.AllContentLibraryCategories;
         }
 
         public async Task<List<ContentLibraryContentModel>> GetAllContentLibraryContents()

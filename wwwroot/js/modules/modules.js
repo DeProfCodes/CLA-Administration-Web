@@ -40,23 +40,21 @@ function ModuleFilterDatesFilterChange(moduleName)
 
 function ModuleOverviewLoader(moduleType, status)
 {
-    if(moduleType == AllModuleTypes.Popup)
-    {
-        var width = $("#ModuleOverviewCard").css("width");
-        var height = $("#ModuleOverviewCard").css("height");
+    var width = $("#ModuleOverviewCard").css("width");
+    var height = $("#ModuleOverviewCard").css("height");
 
-        const element = document.getElementById("ModuleOverviewCard");
-        const rect = element.getBoundingClientRect();
-        const left = rect.left + window.scrollX;
-        const top = rect.top + window.scrollY;
-        
-        $("#SecondaryLoader").css("top", top);
-        $("#SecondaryLoader").css("left", left);
-        $("#SecondaryLoader").css("width", width);
-        $("#SecondaryLoader").css("height", height);
-        
-        $("#SecondaryLoaderMessage").text(`Loading ${status} Popups...`);
-    }
+    const element = document.getElementById("ModuleOverviewCard");
+    const rect = element.getBoundingClientRect();
+    const left = rect.left + window.scrollX;
+    const top = rect.top + window.scrollY;
+
+    $("#SecondaryLoader").css("top", top);
+    $("#SecondaryLoader").css("left", left);
+    $("#SecondaryLoader").css("width", width);
+    $("#SecondaryLoader").css("height", height);
+
+    $("#SecondaryLoaderMessage").text(`Loading ${status} ${GetModuleName(moduleType)}s...`);
+
 }
 
 function ReloadFilteredModuleOverview(moduleType, status, username, startDate, endDate, stagingLiveFilter, viewType)

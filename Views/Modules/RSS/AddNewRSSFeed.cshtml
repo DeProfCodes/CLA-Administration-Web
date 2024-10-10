@@ -1,7 +1,12 @@
 ﻿@model CLA_Administration_Web.ViewModels.Modules.Rss.AddNewRssFeed
 
 @using CLA_Administration_Web.Helpers.Enums.AppPages
+@using CLA_Administration_Web.Helpers.Enums.Shared
 
+@{
+    var pageTitle = Model.AddOrEditType == AddOrEditType.Add ? "Add New RSS Feed" : $"Edit RSS Feed: {Model.RssFeedData.FeedId}";
+    var breadcrumbLast = Model.AddOrEditType == AddOrEditType.Add ? "Add New RSS Feed" : $"Edit RSS Feed / {Model.RssFeedData.FeedId}";
+}
 
 <div class="container-fluid">
     <!-- Breadcrumb -->
@@ -15,7 +20,7 @@
                 <span class="breadcrumb-item-nav" onclick="OpenPageWithAnimations('Modules', 'RSS', '@ModulesPages.RSSCategoryOverview', 'RSSLink')">Categories</span> /
                 <span class="breadcrumb-item-nav" onclick="OpenPage('@ModulesPages.RSSCategoryDetails', '@Model.CurrentCategoryId');">@Model.CurrentCategoryId</span> /
                 <span class="breadcrumb-item-nav" onclick="OpenPage('@ModulesPages.RSSFeedOverview', '@Model.CurrentCategoryId')">Feeds</span> /
-                <span class="breadcrumb-item">Add New RSS Feed</span>
+                <span class="breadcrumb-item">@breadcrumbLast</span>
             </p>
         </div>
     </div>
@@ -23,7 +28,7 @@
     <!-- Card for Title -->
     <div class="card mb-4 mt-2" style="min-width:940px;">
         <div class="card-body pb-0">
-            <h4 class="w-100 text-center theme-txt-clr">Add New RSS Feed</h4>
+            <h4 class="w-100 text-center theme-txt-clr">@pageTitle</h4>
         </div>
     </div>
 
@@ -79,6 +84,9 @@
     $(document).ready(function ()
     {
         SelectCurrentCategory();
+
+        if ('@Model.AddOrEditType' == '@AddOrEditType.Edit')
+            PrePopulateFeedData();
     });
 
     function SelectCurrentCategory()
@@ -131,6 +139,12 @@
         {
             swal("New RSS Feed Success", "Rss Feed (will be) Added Successfully.", "success");
         }
+    }
+
+    function PrePopulateFeedData()
+    {
+        $("#NewRSSFeedName").val("@Model.RssFeedData.FeedName");
+        $("#NewRSSFeedURL").val("@Model.RssFeedData.FeedURL");
     }
 
 </script>

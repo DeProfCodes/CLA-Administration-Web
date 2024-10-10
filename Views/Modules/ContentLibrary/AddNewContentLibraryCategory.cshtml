@@ -1,9 +1,11 @@
 ﻿@model CLA_Administration_Web.ViewModels.Modules.LDS.AddNewContentLibraryCategory
 @using CLA_Administration_Web.Helpers.Enums.AppPages
+@using CLA_Administration_Web.Helpers.Enums.Shared
 @using CLA_Administration_Web.Helpers.Enums.Shared.PageNames
 
 @{
     var treeParents = !string.IsNullOrEmpty(Model.ContentLibraryParents) ? $"{Model.ContentLibraryParents} > " : "";
+    var pageTitle = Model.AddOrEdit == AddOrEditType.Add ? "Add Content Library Category" : $"Edit Content Library Category: {Model.CategoryId}";
 }
 
 <div class="container-fluid">
@@ -13,7 +15,7 @@
     <!-- Card for Title -->
     <div class="card mb-4 mt-2" style="min-width:940px;">
         <div class="card-body pb-0">
-            <h4 class="w-100 text-center theme-txt-clr">Add Content Library Category</h4>
+            <h4 class="w-100 text-center theme-txt-clr">@pageTitle</h4>
         </div>
     </div>
 
@@ -95,6 +97,14 @@
 
 <script>
 
+    $(document).ready(function ()
+    {
+        if('@Model.AddOrEdit' == '@AddOrEditType.Edit')
+        {
+            PrePopulateContentLibraryDataForEdit();
+        }
+    });
+
     function ValidateContentLibraryCategory()
     {
         $("#NewContentLibCategoryNameError").text("");
@@ -128,6 +138,12 @@
         {
             swal("New Category Success", "Content Library Category (will be) Added Successfully.", "success");
         }
+    }
+
+    function PrePopulateContentLibraryDataForEdit()
+    {
+        $("#NewContentLibCategoryName").val("@Model.CategoryName");
+        $("#NewContentLibCategoryDescription").val("@Model.CategoryDescription");
     }
 
 

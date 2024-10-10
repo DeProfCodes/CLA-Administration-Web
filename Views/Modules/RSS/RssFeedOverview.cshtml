@@ -43,7 +43,7 @@
                                 <td>@rss.FeedURL</td>
                                 <td>
                                     <button class="btn btn-info btn-sm mx-1" onclick="OpenRSSFeedDetails('@rss.CategoryId', '@rss.FeedId')">Open</button>
-                                    <button class="btn btn-secondary btn-sm mx-1">Edit</button>
+                                    <button class="btn btn-secondary btn-sm mx-1" onclick="OpenPage('@ModulesPages.RSSAddNewFeed', '@rss.CategoryId', '@rss.FeedId')">Edit</button>
                                     <button class="btn btn-danger btn-sm mx-1">Delete</button>
                                 </td>
                             </tr>

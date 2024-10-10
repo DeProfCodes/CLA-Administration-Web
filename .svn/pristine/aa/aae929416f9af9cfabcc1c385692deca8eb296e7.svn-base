@@ -1,0 +1,72 @@
+﻿@model CLA_Administration_Web.ViewModels.Modules.ContentLibrary.ContentLibraryCategoryModel
+@using CLA_Administration_Web.Helpers.Enums.AppPages
+@using CLA_Administration_Web.Helpers.Enums.Shared.PageNames
+
+
+<div class="container-fluid">
+
+    <!-- Breadcrumb Component -->
+    @await Component.InvokeAsync("Breadcrumbs", new { page = ModulesPages.ContentLibraryCategoryDetails, itemId = Model.CategoryId })
+
+    <!-- Card for Title -->
+    <div class="card mb-4 mt-2 overview-filters-card">
+        <div class="card-body">
+            <h4 class="w-100 text-center theme-txt-clr">Content Library Category Details for Category Id: @Model.CategoryId</h4>
+        </div>
+    </div>
+
+    <!-- Card for Body -->
+    <div class="card mb-4 mt-2 overview-filters-card">
+        <div class="card-body p-4">
+            <div class="row mb-3">
+                <div class="w-fit-content" id="ContentLibraryCategoryDetailsContainer">
+                    <h4 class="w-100 theme-txt-clr fw-bold">Content Library Category Details</h4>
+                    <div class="row mt-4">
+                        <table>
+                            <tr>
+                                <td><p class="custom-p popup-info-headings mt-3">Category Id</p></td>
+                                <td><p class="custom-p-bold ms-3 mt-3">@Model.CategoryId</p></td>
+                            </tr>
+                            <tr class="mt-3">
+                                <td><p class="custom-p popup-info-headings mt-3">Category Name</p></td>
+                                <td><p class="custom-p-bold ms-3 mt-3">@Model.CategoryName</p></td>
+                            </tr>
+                            <tr>
+                                <td><p class="custom-p popup-info-headings mt-3">Category Description</p></td>
+                                <td><p class="custom-p-bold ms-3 mt-3">@Model.CategoryDescription</p></td>
+                            </tr>
+                            <tr>
+                                <td><p class="custom-p popup-info-headings mt-3">Date Last Modified</p></td>
+                                <td><p class="custom-p-bold ms-3 mt-3">@Model.DateLastModified</p></td>
+                            </tr>
+                            <tr>
+                                <td><p class="custom-p popup-info-headings mt-3">User Id Last Modified</p></td>
+                                <td><p class="custom-p-bold ms-3 mt-3">@Model.UserLastModified</p></td>
+                            </tr>
+                            <tr>
+                                <td><p class="custom-p popup-info-headings mt-3">Machine Id Last Modified</p></td>
+                                <td><p class="custom-p-bold ms-3 mt-3">@Model.MachineLastModified</p></td>
+                            </tr>
+                            <tr>
+                                <td><p class="custom-p popup-info-headings mt-3">Target Users</p></td>
+                                <td><btn class="btn btn-sm btn-success custom-btn-sm ms-3 mt-3" onclick="OpenTargetedEntityPreviewModal('@ModuleNamesType.ContentLibrary', true)">Targeting</btn></td>
+                            </tr>
+                            <tr>
+                                <td><p class="custom-p popup-info-headings mt-3">Who Is Targeted</p></td>
+                                <td><btn class="btn btn-sm btn-primary custom-btn-sm ms-3 mt-3" onclick="OpenTargetingExposurePreviewModal('@ModuleNamesType.ContentLibrary')">Targeting Exposure</btn></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="mt-4 ms-3">
+                        <button class="btn btn-primary" onclick="OpenPage('@ModulesPages.ContentLibraryContent', '@Model.CategoryId');">Open Category Contents</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@{
+    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Targeting/TargetedEntityModal.cshtml");
+    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Targeting/TargetingExposureModal.cshtml");
+}

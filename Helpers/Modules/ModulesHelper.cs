@@ -336,25 +336,31 @@ namespace CLA_Administration_Web.Helpers.Modules
 
         public static AddNewContentLibraryCategory GetCategoryTreeStructure(List<ContentLibraryCategoryTree> categories, int categoryId)
         {
-            var contentLibraryVm = new AddNewContentLibraryCategory { CategoryId = categoryId };
+            var contentLibraryVm = new AddNewContentLibraryCategory { CategoryId = categoryId, AddOrEdit = AddOrEditType.Add };
 
             var tree = GetAllCategoriesInTree(categories, categoryId);
 
-            if (tree?.Count > 0)
+            var category = tree?.LastOrDefault() ?? null;
+
+            if (category != null)
             {
-                var categoryName = tree.LastOrDefault().CategoryName;
-                contentLibraryVm.CategoryName = categoryName;
-
-                if (tree.Count > 1)
-                {
-                    tree.RemoveAt(tree.Count - 1);
-                    var categoryList = tree.Select(x => x.CategoryName);
-
-                    var structure = string.Join(" > ", categoryList);
-
-                    contentLibraryVm.ContentLibraryParents = structure;
-                }
+                contentLibraryVm.CategoryName = category.CategoryName;
+                contentLibraryVm.CategoryId = categoryId;
+                contentLibraryVm.CategoryDescription = category.CategoryDescription;
+                contentLibraryVm.AddOrEdit = category.CategoryId > 0 ? AddOrEditType.Edit : AddOrEditType.Add;
             }
+
+            if (tree?.Count > 1)
+            {
+                tree.RemoveAt(tree.Count - 1);
+                var categoryList = tree.Select(x => x.CategoryName);
+
+                var structure = string.Join(" > ", categoryList);
+
+                contentLibraryVm.ContentLibraryParents = structure;
+
+            }
+
             return contentLibraryVm;
         }
 

@@ -12,18 +12,23 @@ namespace CLA_Administration_Web.Services.Modules
         
         public Task<List<ModulePSTDataViewModel>> GetAllPopupsData();
 
+        public Task<ModulePSTDataViewModel> GetPopupById(int popupId, StagingLiveType stagingLiveType);
+
         #endregion
 
         #region Tickers
-        
+
         public Task<List<ModulePSTDataViewModel>> GetAllTickersData();
 
+        public Task<ModulePSTDataViewModel> GetTickerById(int tickerId, StagingLiveType stagingLive);
 
         #endregion
 
         #region Survey
-        
+
         public Task<List<ModulePSTDataViewModel>> GetAllSurveysData();
+
+        public Task<ModulePSTDataViewModel> GetSurveyById(int surveyId, StagingLiveType stagingLiveType);
 
         public Task<List<SurveyQuestionViewModel>> GetAllSurveysQuestions();
 
