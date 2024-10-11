@@ -109,10 +109,3 @@ function CheckOrUncheckInput(checkboxId, check)
     checkboxId = EnsureJQueryId(checkboxId);
     $(checkboxId).prop( "checked", check);
 }
-
-function SelectAnOptionWithValue(selectListId, searchValue)
-{
-    selectListId = EnsureJQueryId(selectListId);
-
-    $(`${selectListId} option[value='${searchValue}']`).attr("selected", true);
-}

@@ -102,16 +102,4 @@ function LoadPageArea(page, id = null, id2 = null)
     }, 0);
 }
 
-function LoadPageAreaURL(url, pageName)
-{
-    ShowLoader("Main", "Loading " + pageName);
-
-    setTimeout(function ()
-    {
-        HideLoader("Main");
-        LoadPartialView(url, "#DashboardMainArea");
-
-    }, 0);
-}
-
 

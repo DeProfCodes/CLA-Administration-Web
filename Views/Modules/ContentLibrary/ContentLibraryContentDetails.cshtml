@@ -2,6 +2,9 @@
 @using CLA_Administration_Web.Helpers.Enums.AppPages
 @using CLA_Administration_Web.Helpers.Enums.Shared.PageNames
 
+@{
+    var categoryTree = !string.IsNullOrEmpty(Model.CategoryTree) ? $"{Model.CategoryTree} > {Model.CategoryName}" : "";
+}
 
 <div class="container-fluid">
 
@@ -42,6 +45,22 @@
                             <p class="custom-p-bold">@Model.CategoryId</p>
                         </div>
                     </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <p class="custom-p popup-info-headings">Category Tree</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="custom-p fst-italic">@categoryTree</p>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <p class="custom-p popup-info-headings">Category</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="custom-p-bold">@Model.CategoryName</p>
+                        </div>
+                    </div>
                     <div class="row mt-4">
                         <div class="col-md-6">
                             <p class="custom-p popup-info-headings">Product Id</p>
@@ -64,14 +83,6 @@
                         </div>
                         <div class="col-md-6">
                             <p class="custom-p-bold">@Model.AdvertDescription</p>
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-md-6">
-                            <p class="custom-p popup-info-headings">Category Name</p>
-                        </div>
-                        <div class="col-md-6">
-                            <p class="custom-p-bold">@Model.CategoryName</p>
                         </div>
                     </div>
                     <div class="row mt-3">

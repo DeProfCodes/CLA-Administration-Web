@@ -2,7 +2,6 @@
 using CLA_Administration_Web.Helpers.Enums.Module;
 using CLA_Administration_Web.Helpers.Enums.Shared;
 using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
-using CLA_Administration_Web.Helpers.Modules;
 using CLA_Administration_Web.Helpers.Shared;
 using CLA_Administration_Web.ViewModels.Modules.ContentLibrary;
 using CLA_Administration_Web.ViewModels.Modules.LDS;
@@ -504,9 +503,6 @@ namespace CLA_Administration_Web.Helpers.MockData
             var machinesList = new List<string> { "NdhuvaziM-PC", "LegeB-PC", "Sinethemba-PC", "LeboC-PC", "Administrator-PC", "CathrineT-PC", "LarryM-PC", "Tarryn-PC" };
             var contentType = new List<string> { "Picture", "Audio", "Video", "URL" };
 
-            var allCategories = ModulesHelper.GetAllCategoriesInTree(ModulesMockData.AllContentLibraryCategories);
-            var allCatIDs = allCategories.Select(c => c.CategoryId).ToList(); 
-
             List<string> options = new List<string> { "SCR", "DSK", "LCK" };
             int numberOfOptions = random.Next(1, options.Count + 1);
 
@@ -521,16 +517,12 @@ namespace CLA_Administration_Web.Helpers.MockData
                                           .Take(numberOfOptions)
                                           .ToArray();
 
-                var catID = allCatIDs[random.Next(allCatIDs.Count)];
-                var catName = allCategories.FirstOrDefault(x => x.CategoryId == catID)?.CategoryName ?? "";
-
                 var item = new ContentLibraryContentModel
                 {
                     ContentId = i,
                     AdvertId = random.Next(101),
                     ProductId = random.Next(101),
-                    CategoryId = catID,
-                    CategoryName = catName,
+                    CategoryName = SharedFunctions.CapitalizeFirst(RandomString(random, 1, 2)),
                     AdvertDescription = SharedFunctions.CapitalizeFirst(RandomString(random, 3, 5)),
                     ContentType = SharedFunctions.CapitalizeFirst(contentType[random.Next(contentType.Count)]),
                     ContentPath = "C:\\Users\\Resources\\Data\\Urgent\\",

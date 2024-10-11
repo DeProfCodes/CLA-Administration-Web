@@ -1,0 +1,79 @@
+﻿@model List<CLA_Administration_Web.ViewModels.Modules.Rss.RssCategoryOverviewViewModel>
+
+@using CLA_Administration_Web.Helpers.Enums.AppPages
+
+
+<div class="container-fluid">
+    <!-- Top Page Navigation Breadcrumb -->
+    @await Component.InvokeAsync("Breadcrumbs", new { page = ModulesPages.RSSCategoryOverview })
+
+    <!-- Card for Filters -->
+    <div class="card mb-4 mt-2 overview-filters-card">
+        <div class="card-body">
+            <h4 class="w-100 text-center theme-txt-clr">RSS Management</h4>
+        </div>
+    </div>
+
+    <!-- Card for Table -->
+    <div class="card" id="ModuleOverviewCard">
+        <div class="card-body">
+            <div class="table-responsive" id="ModuleOverviewTableContainer">
+                <h3 class="w-100 text-center theme-txt-clr overview-table-caption" id="ModuleOverviewTableCaption">
+                    RSS Categories
+                </h3>
+                <table id="RSSCategoryOverviewDataTable" class="table table-striped table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Category Name</th>
+                            <th class="text-center">Category Description</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var rssCat in Model)
+                        {
+                            <tr>
+                                <td class="text-center">@rssCat.CategoryId</td>
+                                <td>@rssCat.CategoryName</td>
+                                <td><p class="text-center">@rssCat.CategoryDescription</p></td>
+                                <td>
+                                    <button class="btn btn-info btn-sm ms-auto" onclick="OpenRSSCategoryDetails('@rssCat.CategoryId')">Open</button>
+                                    <button class="btn btn-success btn-sm mx-1" onclick="OpenRSSFeed('@rssCat.CategoryId')">Open Feeds</button>
+                                    <button class="btn btn-secondary btn-sm mx-1" onclick="OpenPage('@ModulesPages.RSSAddNewCategory', '@rssCat.CategoryId')">Edit</button>
+                                    <button class="btn btn-danger btn-sm me-auto">Delete</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+
+<script>
+
+    $(document).ready(function ()
+    {
+        SetDataTableData();
+    });
+
+    function SetDataTableData()
+    {
+        rssCategoryDataTable = $('#RSSCategoryOverviewDataTable').DataTable();
+    }
+
+    function OpenRSSCategoryDetails(rssCategoryId)
+    {
+        OpenPage('@ModulesPages.RSSCategoryDetails', rssCategoryId);
+    }
+
+    function OpenRSSFeed(rssCategoryId)
+    {
+        OpenPage('@ModulesPages.RSSFeedOverview', rssCategoryId);
+    }
+
+</script>

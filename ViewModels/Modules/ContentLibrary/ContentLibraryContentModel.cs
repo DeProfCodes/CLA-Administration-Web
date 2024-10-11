@@ -12,6 +12,8 @@ namespace CLA_Administration_Web.ViewModels.Modules.ContentLibrary
 
         public int ProductId { get; set; }
 
+        public string CategoryTree { get; set; }
+
         public string CategoryName { get; set; }
 
         public string AdvertDescription { get; set; }

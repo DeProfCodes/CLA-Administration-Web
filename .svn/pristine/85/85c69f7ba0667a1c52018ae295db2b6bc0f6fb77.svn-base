@@ -1,0 +1,122 @@
+﻿<!-- Modules Data Table Component for PST Modules : Popups, Surveys, Tickers -->
+@using CLACommonFunctionsLibrary_NET.Helpers.Enums
+@using CLA_Administration_Web.Helpers.Enums.AppPages
+@using CLA_Administration_Web.Helpers.Enums.Shared.PageNames
+
+@model CLA_Administration_Web.ViewModels.Modules.PST.ModulePSTFilterOverviewModel
+
+@{
+    var moduleName = Model.ModuleName.GetDisplayName();
+
+    var forUserTitle = Model.FilterTitle.User.ToLower() == "all" ? "All Users" : Model.FilterTitle.User;
+
+    var bodyTextTitle = $"{moduleName} " + (Model.ModuleName == ModuleNamesType.Survey ? "Title" : "Text");
+    
+}
+
+<h3 class="w-100 text-center theme-txt-clr overview-table-caption" id="ModuleOverviewTableCaption">
+    <span>Showing @Model.FilterTitle.Status.ToUpper() (@Model.ModulesData.Count) </span> 
+    <span>@Model.FilterTitle.StagingLiveFilter</span> @moduleName for
+    <span class="fst-italic">@forUserTitle</span> from
+    <span class="text-decoration-underline">@Model.FilterTitle.StartDate</span> to
+    <span class="text-decoration-underline">@Model.FilterTitle.EndDate</span>
+</h3>
+<table id="ModuleOverviewDataTable" class="table table-striped table-hover align-middle" style="font-size:12px;">
+    <thead>
+        <tr>
+            <th class="text-center">@moduleName Id</th>
+            @if (Model.ModuleName == ModuleNamesType.Popup)
+            {
+                <th>Popup Header</th>
+            }
+            <th>@bodyTextTitle</th>
+            <th>Effective From</th>
+            <th>Effective To</th>
+            <th>Status</th>
+            @if (Model.ModuleName == ModuleNamesType.Survey)
+            {
+                <th>User Last Modified</th>
+                <th>User Last Modified</th>
+            }
+            <th class="text-center">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var module in Model.ModulesData)
+        {
+            <tr>
+                <td class="text-center">@module.Id</td>
+                @if (Model.ModuleName == ModuleNamesType.Popup)
+                {
+                    <td><p class="module-dt-header-text">@module.HeaderText</p></td>
+                }
+                <td><p class="module-dt-body-text">@module.BodyText</p></td>
+                <td>@module.EffectiveFrom</td>
+                <td>@module.EffectiveTo</td>
+                <td><span class="@module.Status.CssClass">@module.Status.StatusType.GetDisplayName()</span></td>
+                @if(Model.ModuleName == ModuleNamesType.Survey)
+                {
+                    <td>@module.UserIdLastModified</td>
+                    <td>@module.MachineLastModified</td>
+                }
+                <td>
+                    <button class="btn btn-info btn-sm custom-btn-sm mx-1" onclick="OpenModuleDetails('@module.Id')">Open</button>
+                    @if (Model.ModuleName == ModuleNamesType.Survey)
+                    {
+                        <button class="btn btn-success btn-sm custom-btn-sm custom-btn-sm mx-1" onclick="OpenSurveyQuestions('@module.Id')">Questions</button>
+                    }
+                    <button class="btn btn-secondary btn-sm custom-btn-sm mx-1" onclick="EditPSTModule('@module.Id')">Edit</button>
+                    <button class="btn btn-danger btn-sm custom-btn-sm mx-1">Expire</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+
+<script>
+
+    $(document).ready(function ()
+    {
+        SetDataTableData();
+    });
+
+    function SetDataTableData()
+    {
+        if ('@Model.ModuleName' == '@ModuleNamesType.Popup')
+        {
+            popupsDataTable = $('#ModuleOverviewDataTable').DataTable();
+        }
+        else if ('@Model.ModuleName' == '@ModuleNamesType.Ticker')
+        {
+            tickersDataTable = $('#ModuleOverviewDataTable').DataTable();
+        }
+        else if ('@Model.ModuleName' == '@ModuleNamesType.Survey')
+        {
+            surveysDataTable = $('#ModuleOverviewDataTable').DataTable();
+        }
+    }
+
+    function OpenModuleDetails(itemId)
+    {
+        OpenPage('@Model.ModuleDetailsPage', itemId);
+    }
+
+    function EditPSTModule(itemId)
+    {
+        var page = "";
+        
+        if ('@Model.ModuleName' == '@ModuleNamesType.Popup') page = '@ModulesPages.PopupAddNew';
+        if ('@Model.ModuleName' == '@ModuleNamesType.Survey') page = '@ModulesPages.SurveyAddNew';
+        if ('@Model.ModuleName' == '@ModuleNamesType.Ticker') page = '@ModulesPages.TickerAddNew';
+
+        OpenPage(page, itemId);
+    }
+
+    function OpenSurveyQuestions(surveyId)
+    {
+        OpenPage('@ModulesPages.SurveyQuestionsOverview', surveyId);
+    }
+
+</script>

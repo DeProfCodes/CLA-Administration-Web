@@ -145,13 +145,6 @@ namespace CLA_Administration_Web.Controllers
             try
             {
                 data.CategoriesTrees = ModulesMockData.AllContentLibraryCategories;
-                
-                data.CategoriesTrees.ForEach(x => 
-                {
-                    x.ContentsCount = ModulesMockData.AllContentLibraryContents.Count(c => c.CategoryId == x.CategoryId);
-                });
-
-                data.CategoriesTrees.OrderByDescending(c => c.ContentsCount).ToList();
 
                 LocalDataStorage.UpdateContentLibraryCategoriesData(data.CategoriesTrees);
             }
@@ -183,8 +176,6 @@ namespace CLA_Administration_Web.Controllers
         {
             var contents = await _moduleService.GetAllContentLibraryContents();
 
-            contents = contents.Where(c => c.CategoryId == categoryId).ToList();
-
             contents.ForEach(s =>
             {
                 s.Status = ModulesHelper.GetModuleStatus(s.EffectiveFrom, s.EffectiveTo);
@@ -192,13 +183,9 @@ namespace CLA_Administration_Web.Controllers
                 s.EffectiveToDate = TypesParserHelper.ParseDate(s.EffectiveTo);
             });
 
-            var categoryTree = ModulesHelper.GetCategoryTreeStructure(ModulesMockData.AllContentLibraryCategories, categoryId);
-            
             var contentsViewModel = new ContentLibraryContentsViewModel
             {
                 CategoryId = categoryId,
-                CategoryName = categoryTree.CategoryName,
-                CategoryTree = categoryTree.ContentLibraryParents,
                 ContentLibraryContents = contents
             };
 
@@ -210,11 +197,8 @@ namespace CLA_Administration_Web.Controllers
         public async Task<IActionResult> ContentLibraryContentDetails(int contentId)
         {
             var contentInfo = ModulesMockData.AllContentLibraryContents.FirstOrDefault(x => x.ContentId == contentId);
-
-            var categoryTree = ModulesHelper.GetCategoryTreeStructure(ModulesMockData.AllContentLibraryCategories, contentInfo.CategoryId);
-
+            
             contentInfo.TargetedModulesFullName = ModulesHelper.ConvertTargetedModulesToFullNames(contentInfo.TargetedModules);
-            contentInfo.CategoryTree = categoryTree.ContentLibraryParents;
 
             return PartialView(AppPagesLinks.Modules.ContentLibraryContentDetailsPageLink, contentInfo);
         }
@@ -228,7 +212,7 @@ namespace CLA_Administration_Web.Controllers
                 ModuleName = moduleName,   
             };
             
-            if (moduleName == ModuleNamesType.Screensaver || moduleName == ModuleNamesType.LockedDesktop || moduleName == ModuleNamesType.Desktop || contentId > 0)
+            if (moduleName == ModuleNamesType.Screensaver || moduleName == ModuleNamesType.LockedDesktop || moduleName == ModuleNamesType.Desktop)
             {
                 categoryTreeVm.ContentCategories = ModulesHelper.GetAllCategoriesInTree(ModulesMockData.AllContentLibraryCategories);
             }
@@ -236,8 +220,7 @@ namespace CLA_Administration_Web.Controllers
             {
                 categoryTreeVm = ModulesHelper.GetCategoryTreeStructure(ModulesMockData.AllContentLibraryCategories, categoryId);
             }
-
-            categoryTreeVm.CategoryId = categoryId;
+            
             categoryTreeVm.ContentLibraryModel = contentInfo ?? new();
             categoryTreeVm.AddOrEdit = contentInfo == null ? AddOrEditType.Add : AddOrEditType.Edit;
 

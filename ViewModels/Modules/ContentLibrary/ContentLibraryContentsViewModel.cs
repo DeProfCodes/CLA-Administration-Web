@@ -6,6 +6,10 @@ namespace CLA_Administration_Web.ViewModels.Modules.ContentLibrary
     {
         public int CategoryId { get; set; }
 
+        public string CategoryName { get; set; }
+
+        public string CategoryTree { get; set; }
+
         public ModuleNamesType ModuleName { get; set; }
 
         public List<ContentLibraryContentModel> ContentLibraryContents { get; set; }

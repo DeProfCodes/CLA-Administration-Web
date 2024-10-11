@@ -1,0 +1,115 @@
+﻿@model CLA_Administration_Web.ViewModels.Modules.ContentLibrary.ContentLibraryCategoryViewModel
+
+@using CLA_Administration_Web.Helpers.Enums.AppPages
+@using CLA_Administration_Web.Helpers.Enums.Shared.PageNames
+@using Newtonsoft.Json
+
+<div class="container-fluid">
+    <!-- Top Page Navigation Breadcrumb -->
+    @await Component.InvokeAsync("Breadcrumbs", new { page = ModulesPages.ContentLibraryCategories })
+
+    @*  <!-- ModuleFilter Component -->
+    @await Component.InvokeAsync("OverviewDataFilters", new { page = ModulesPages.ContentLibraryCategories }) *@
+    <!-- Card for Filters -->
+    <div class="card mb-4 mt-2 overview-filters-card">
+        <div class="card-body">
+            <h4 class="w-100 text-center theme-txt-clr">Filters To Be Added</h4>
+        </div>
+    </div>
+
+    <!-- Card for Table -->
+    <div class="card" id="ModuleOverviewCard">
+        <div class="card-body">
+            <div class="table-responsive" id="ModuleOverviewTableContainer">
+                <h3 class="w-100 text-center theme-txt-clr overview-table-caption" id="ModuleOverviewTableCaption">
+                    Content Library Categories
+                </h3>
+                <div id="example-table" class="mt-3"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@{
+    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/ContentPreviewers/AllContentPreviewer.cshtml");
+    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Targeting/TargetedEntityModal.cshtml");
+    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Targeting/TargetingExposureModal.cshtml");
+}
+
+
+<link href="https://unpkg.com/tabulator-tables@4.1.1/dist/css/semantic-ui/tabulator_semantic-ui.min.css" rel="stylesheet">
+<script src="https://unpkg.com/tabulator-tables/dist/js/tabulator.min.js" type="text/javascript"></script>
+
+<script>
+
+    var tableDataNested2 = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.CategoriesTrees));
+
+    
+    var targetingBtn = function (cell, formatterParams)
+    { 
+        return `<button class='btn btn-sm btn-info custom-btn-sm' onclick="OpenTargetedEntities()">Open</button>`;
+    };
+
+    var targetingExposureBtn = function (cell, formatterParams)
+    {
+        return `<button class='btn btn-sm btn-success custom-btn-sm' onclick="OpenTargetingExposure(${cell.getRow().getData().CategoryId})">Open</button>`;
+    };
+
+    var actionButtons = function (cell, formatterParams)
+    {
+        return `<button class='btn btn-sm btn-info custom-btn-sm' onclick="OpenContentLibraryCategory(${cell.getRow().getData().CategoryId})">Open</button>
+                <button class='btn btn-sm btn-primary me-2 custom-btn-sm' onclick="OpenNewContentLibraryCategory(${cell.getRow().getData().CategoryId})">New Sub Category</button>
+                <button class='btn btn-sm btn-secondary me-2 custom-btn-sm' onclick="OpenNewContentLibraryCategory(${cell.getRow().getData().CategoryId})">Edit</button>                
+                <button class='btn btn-sm btn-success me-2 me-2 custom-btn-sm' onclick="OpenContentsOverview(${cell.getRow().getData().CategoryId})">Contents</button>
+                <button class='btn btn-sm btn-danger me-2 me-2 custom-btn-sm' onclick="alert('Delete = ${cell.getRow().getData().CategoryId}');">Delete</button>`;
+    };
+
+    var table = new Tabulator("#example-table",
+        {
+            layout: "fitColumns",
+            data: tableDataNested2,
+            dataTree: true,
+            dataTreeStartExpanded: false,
+            pagination: "local",
+            paginationSize: 10,
+            paginationSizeSelector: [10, 25, 50, 100],
+            movableColumns: true,
+            paginationCounter: "rows",
+            columns: [
+                { title: "CategoryID", field: "CategoryId", responsive: 0, visible: false }, 
+                { title: "Category Name", field: "CategoryName", responsive: 0 }, //never hide this column
+                { title: "Category Description", field: "CategoryDescription" },
+                { title: "Contents Count", field: "ContentsCount", responsive: 2, maxWidth: 140 }, //hide this column first
+                { title: "Targeting", formatter: targetingBtn, align: "center", maxWidth:100 },
+                { title: "Targeting Exposure", formatter: targetingExposureBtn, align: "center", maxWidth: 160 },
+                { title: "Actions", formatter: actionButtons, align: "center" },
+            ],
+        });
+
+    function OpenContentLibraryCategory(categoryId)
+    {
+        OpenPage('@ModulesPages.ContentLibraryCategoryDetails', categoryId);
+    }
+
+    function OpenContentsOverview(categoryId)
+    {
+        OpenPage('@ModulesPages.ContentLibraryContent', categoryId);
+    }
+
+    function OpenNewContentLibraryCategory(categoryId)
+    {
+        OpenPage('@ModulesPages.AddNewContentLibraryCategory', categoryId);
+    }
+
+    function OpenTargetedEntities()
+    {
+        OpenTargetedEntityPreviewModal('@ModuleNamesType.ContentLibrary', true);
+    }
+
+    function OpenTargetingExposure()
+    {
+        OpenTargetingExposurePreviewModal('@ModuleNamesType.ContentLibrary');
+    }
+
+
+</script>
