@@ -116,3 +116,13 @@ function SelectAnOptionWithValue(selectListId, searchValue)
 
     $(`${selectListId} option[value='${searchValue}']`).attr("selected", true);
 }
+
+function RadioGroupHasAtLeastOneChecked(radioGroupName)
+{
+    return $(`input:radio[name="${radioGroupName}"]:checked`).length > 0;
+}
+
+function GetIdOfSelectedRadioInGroup(radioGroupName)
+{
+    return $(`input[name="${radioGroupName}"]:checked`).attr('id');
+}

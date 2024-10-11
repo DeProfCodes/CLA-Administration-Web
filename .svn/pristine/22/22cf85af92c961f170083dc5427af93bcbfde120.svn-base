@@ -80,7 +80,6 @@
                                             MaxCharacterCount = 25,
                                         });
                                     }
-                                    <p class="mb-0 fs-12 text-danger fst-italic ps-1 w-fit-content" id="SurveyQuestionTitleError"></p>
                                 </div>
                             </div>
                             <!-- Introduction input-->
@@ -100,7 +99,6 @@
                                             DestinationTextDivId = "SurveyQuestionTextPreviewer"
                                         });
                                     }
-                                    <p class="mb-0 fs-12 text-danger fst-italic ps-1 w-fit-content" id="SurveyQuestionDetailsError"></p>
                                 </div>
                             </div>
                         </div>
@@ -124,69 +122,68 @@
 
                                 <div class="row mt-4">
                                     <div class="col-sm-2 align-content-center">
-                                        <label class="fw-bold text-center fl-right w-max-content">Survey Scoring</label>
+                                        <label class="fw-bold text-center fl-right w-max-content">Response Type</label>
                                     </div>
                                     <div class="w-400p ms-5">
-                                        <div class="form-check form-switch w-fit-content mb-0 align-content-center">
-                                            <input class="form-check-input" type="checkbox" name="SurveyScoringYesNo" id="SurveyQuestionScoringToggle" onclick="EnableSurveyQuestionScoring(event)">
-                                            <label class="form-check-label cursor-pointer" for="SurveyQuestionScoringToggle">Enable</label>
-                                        </div>
+                                        <select class="form-control ml-3 w-50 w-300p fs-14 " id="SurveyQuestionResponseType" style="appearance:menulist" onchange="SurveyQuestionResponseTypeSelect()">
+                                            <option value="0" selected>Please select response type...</option>
+                                            <option value="1">Yes / No</option>
+                                            <option value="2">Yes / No / NA</option>
+                                            <option value="3">Agree / Disagree</option>
+                                            <option value="4">Agree / Disagree / Na</option>
+                                            <option value="5">Text</option>
+                                            <option value="6">Re-Arrange</option>
+                                            <option value="7">Single Select</option>
+                                            <option value="8">Multi Select</option>
+                                        </select>
                                     </div>
                                 </div>
 
                                 <div class="row mt-4 ">
                                     <div class="col-sm-2 ">
-                                        <label class="fw-bold text-center fl-right w-max-content">Response Type</label>
+                                        <label class="fw-bold text-center fl-right w-max-content">Survey Scoring</label>
                                     </div>
                                     <div class="w-400p ms-5">
                                         <div id="SurveyQuestionScoringToggleContainer">
-                                            <select class="form-control ml-3 w-50 w-300p fs-14 " id="SurveyQuestionResponseType" style="appearance:menulist" onchange="SurveyQuestionResponseTypeSelect()">
-                                                <option value="0" selected>Please select response type...</option>
-                                                <option value="1">Yes / No</option>
-                                                <option value="2">Yes / No / NA</option>
-                                                <option value="3">Agree / Disagree</option>
-                                                <option value="4">Agree / Disagree / Na</option>
-                                                <option value="5">Text</option>
-                                                <option value="6">Re-Arrange</option>
-                                                <option value="7">Single Select</option>
-                                                <option value="8">Multi Select</option>
-                                            </select>
+                                            <div class="form-check form-switch w-fit-content mb-0 align-content-center">
+                                                <input class="form-check-input" type="checkbox" name="SurveyScoringYesNo" id="SurveyQuestionScoringToggle" onclick="EnableSurveyQuestionScoring(event)">
+                                                <label class="form-check-label cursor-pointer" for="SurveyQuestionScoringToggle">Enable</label>
+                                            </div>
                                         </div>
-                                        <div id="SurveyQuestionScoringOptionsContainer" class="hidden w-400p mt-2">
+                                        <div id="SurveyQuestionScoringOptionsContainer" class="hidden w-400p">
                                             <div class="theme-border p-2" id="QuestionContainer">
                                                 <p class="custom-p fw-bold text-center fs-16">Question</p>
                                                 <p class="custom-p html-text-editor" id="SurveyQuestionTextPreviewer"></p>
                                             </div>
                                             <div class="theme-border" id="QuestionOptionsContainer">
                                                 <p class="custom-p fw-bold text-center fs-16 mx-auto px-5 w-fit-content border-2 theme-border-bottom">Qualifying Options</p>
-                                                <p class="fw-bold fs-12 mb-0 pt-2 text-center text-alternate hidden" id="SurveyQuestionScoringText">Please select correct answer below</p>
                                                 <!-- Yes/No/NA -->
                                                 <div id="SurveyQuestionAnswerYES-NO" class="hidden p-3 ms-3">
                                                     <div class="form-check form-switch w-fit-content mb-0 align-content-center">
-                                                        <input class="form-check-input" type="radio" name="SurveyScoringYesNoNA" id="SurveyScoringYesNoNA-YES" onchange="SurveyResponseTypeTrueFalse(this.id)">
+                                                        <input class="form-check-input" type="radio" name="SurveyScoringYesNoNA" id="SurveyScoringYesNoNA-YES">
                                                         <label class="form-check-label" for="SurveyScoringYesNoNA-YES">Yes</label>
                                                     </div>
                                                     <div class="form-check form-switch w-fit-content mb-0 align-content-center mt-2">
-                                                        <input class="form-check-input" type="radio" name="SurveyScoringYesNoNA" id="SurveyScoringYesNoNA-NO" onchange="SurveyResponseTypeTrueFalse(this.id)">
+                                                        <input class="form-check-input" type="radio" name="SurveyScoringYesNoNA" id="SurveyScoringYesNoNA-NO">
                                                         <label class="form-check-label" for="SurveyScoringYesNoNA-NO">No</label>
                                                     </div>
                                                     <div class="form-check form-switch w-fit-content mb-0 align-content-center mt-2 hidden na-option">
-                                                        <input class="form-check-input" type="radio" name="SurveyScoringYesNoNA" id="SurveyScoringYesNoNA-NA" onchange="SurveyResponseTypeTrueFalse(this.id)">
+                                                        <input class="form-check-input" type="radio" name="SurveyScoringYesNoNA" id="SurveyScoringYesNoNA-NA">
                                                         <label class="form-check-label" for="SurveyScoringYesNoNA-NA">NA</label>
                                                     </div>
                                                 </div>
                                                 <!-- Agree/Disagree/NA -->
                                                 <div id="SurveyQuestionAnswerAGREE-DISAGREE-NA" class="hidden p-3 ms-3">
                                                     <div class="form-check form-switch w-fit-content mb-0 align-content-center">
-                                                        <input class="form-check-input" type="radio" name="SurveyScoringAgreeDisagreeNA" id="SurveyScoringAgreeDisagreeNA-Agree" onchange="SurveyResponseTypeTrueFalse(this.id)">
+                                                        <input class="form-check-input" type="radio" name="SurveyScoringAgreeDisagreeNA" id="SurveyScoringAgreeDisagreeNA-Agree">
                                                         <label class="form-check-label" for="SurveyScoringAgreeDisagreeNA-Agree">Agree</label>
                                                     </div>
                                                     <div class="form-check form-switch w-fit-content mb-0 align-content-center mt-2">
-                                                        <input class="form-check-input" type="radio" name="SurveyScoringAgreeDisagreeNA" id="SurveyScoringAgreeDisagreeNA-Disagree" onchange="SurveyResponseTypeTrueFalse(this.id)">
+                                                        <input class="form-check-input" type="radio" name="SurveyScoringAgreeDisagreeNA" id="SurveyScoringAgreeDisagreeNA-Disagree">
                                                         <label class="form-check-label" for="SurveyScoringAgreeDisagreeNA-Disagree">Disagree</label>
                                                     </div>
                                                     <div class="form-check form-switch w-fit-content mb-0 align-content-center mt-2 hidden na-option">
-                                                        <input class="form-check-input" type="radio" name="SurveyScoringAgreeDisagreeNA" id="SurveyScoringAgreeDisagreeNA-NA" onchange="SurveyResponseTypeTrueFalse(this.id)">
+                                                        <input class="form-check-input" type="radio" name="SurveyScoringAgreeDisagreeNA" id="SurveyScoringAgreeDisagreeNA-NA">
                                                         <label class="form-check-label" for="SurveyScoringAgreeDisagreeNA-NA">NA</label>
                                                     </div>
                                                 </div>
@@ -240,14 +237,22 @@
                         </div>
                         <!-- Dependencies Tab -->
                         <div id="DependenciesTab-3" class="survey-questions-wizard-tabs flex-wrap  text-center align-content-center justify-content-center mb-5 hidden">
-                            <h5 class="fw-bold module-heading-theme mt-4">3. Survey Question Dependency</h5>
-                            <p class="custom-p mt-2 fs-13 text-center">Please set survey questions details</p>
+                            <h5 class="fw-bold module-heading-theme mt-4">3. Survey Effective Dates & Timeslots</h5>
+                            <p class="custom-p mt-2 fs-13 text-center">Please define the date and time range that the Survey must display</p>
+                            <p class="custom-p mt-4 fs-13 text-center">
+                                Tip:In order to maximize exposure, we recommend that the date range span over multiple calendar weeks (Thursday to Thursday) and setting the time
+                                to be as long as possible (e.g 07h00 to 19h00).
                             </p>
+
                         </div>
                         <!-- Calendar Options Tab -->
                         <div id="CalendarTab-4" class="survey-questions-wizard-tabs flex-wrap  text-center align-content-center justify-content-center mb-5 hidden">
-                            <h5 class="fw-bold module-heading-theme mt-4">4. Survey Question Calendar</h5>
-                            <p class="custom-p mt-2 fs-13 text-center">calendar</p>
+                            <h5 class="fw-bold module-heading-theme mt-4">3. Survey Effective Dates & Timeslots</h5>
+                            <p class="custom-p mt-2 fs-13 text-center">Please define the date and time range that the Survey must display</p>
+                            <p class="custom-p mt-4 fs-13 text-center">
+                                Tip:In order to maximize exposure, we recommend that the date range span over multiple calendar weeks (Thursday to Thursday) and setting the time
+                                to be as long as possible (e.g 07h00 to 19h00).
+                            </p>
                             
                         </div>
                         
@@ -282,5 +287,180 @@
     {
         HideAllSurveyQuestionTabs();
     });
+
+    function HideAllSurveyQuestionTabs()
+    {
+        HideShowElement(".survey-questions-wizard-tabs", HideShow.HIDE);
+        HideShowElement("#QuestionsTab-1", HideShow.SHOW);
+    }
+
+    function EnableSurveyQuestionScoring(event)
+    {
+        var questionResponseType = $("#SurveyQuestionResponseType").val();
+
+        if (questionResponseType == 0)
+        {
+            event.preventDefault();
+            swal("Survey Question Response Type", "Please select survey Response Type before selecting Scoring.", "warning");
+        }
+        else if (questionResponseType == 5)
+        {
+            event.preventDefault();
+            swal("Survey Question Response Type", "TEXT response type cannot be scored.", "info");
+        }
+        else
+        {
+            HideShowElement("#SurveyQuestionScoringOptionsContainer", HideShow.SHOW);
+        }
+
+        if (!IsCheckboxChecked("SurveyQuestionScoringToggle"))
+        {
+            HideShowElement("#SurveyQuestionScoringOptionsContainer", HideShow.HIDE);
+        }
+    }
+
+    function SurveyQuestionResponseTypeSelect()
+    {
+
+        HideShowElement("#SurveyQuestionAnswerYES-NO", HideShow.HIDE);
+        HideShowElement("#SurveyQuestionAnswerYES-NO .na-option", HideShow.HIDE);
+        HideShowElement("#SurveyQuestionAnswerAGREE-DISAGREE-NA", HideShow.HIDE);
+        HideShowElement("#SurveyQuestionAnswerAGREE-DISAGREE-NA .na-option", HideShow.HIDE);
+        HideShowElement("#SurveyQuestionAnswer-ReArrange", HideShow.HIDE);
+        HideShowElement("#SurveyQuestionAnswer-SingleSelect", HideShow.HIDE);
+        HideShowElement("#SurveyQuestionAnswer-MultiSelect", HideShow.HIDE);
+
+        var questionResponseType = $("#SurveyQuestionResponseType").val();
+        if (questionResponseType == 0)
+        {
+            CheckOrUncheckInput("SurveyQuestionScoringToggle", false);
+            HideShowElement("#SurveyQuestionScoringOptionsContainer", HideShow.HIDE);
+        }
+        else 
+        {
+            if (questionResponseType == 1 || questionResponseType == 2)
+            {
+                HideShowElement("#SurveyQuestionAnswerYES-NO", HideShow.SHOW);
+                
+                if(questionResponseType == 2)
+                    HideShowElement("#SurveyQuestionAnswerYES-NO .na-option", HideShow.SHOW);
+            }
+            else if (questionResponseType == 3 || questionResponseType == 4)
+            {
+                HideShowElement("#SurveyQuestionAnswerAGREE-DISAGREE-NA", HideShow.SHOW);
+
+                if (questionResponseType == 4)
+                    HideShowElement("#SurveyQuestionAnswerAGREE-DISAGREE-NA .na-option", HideShow.SHOW);
+            }
+            else if (questionResponseType == 5)
+            {
+                CheckOrUncheckInput("SurveyQuestionScoringToggle", false);
+                HideShowElement("#SurveyQuestionScoringOptionsContainer", HideShow.HIDE);
+            }
+            else if(questionResponseType == 6)
+            {
+                HideShowElement("#SurveyQuestionAnswer-ReArrange", HideShow.SHOW);
+                CreateSurveyResponseReArrangeOptions("rearrange");
+            }
+            else if(questionResponseType == 7)
+            {
+                HideShowElement("#SurveyQuestionAnswer-SingleSelect", HideShow.SHOW);
+                CreateSurveyResponseReArrangeOptions("singleselect");
+            }
+            else if (questionResponseType == 8)
+            {
+                HideShowElement("#SurveyQuestionAnswer-MultiSelect", HideShow.SHOW);
+                CreateSurveyResponseReArrangeOptions("multiselect");
+            }
+        }
+    }
+
+    function CreateSurveyResponseReArrangeOptions(id)
+    {
+        id = id.toLowerCase();
+
+        var prefix = "";
+
+        if (id.includes("rearrange")) prefix = "ReArrange";
+        if (id.includes("single")) prefix = "SingleSelect";
+        if (id.includes("multi")) prefix = "MultiSelect";
+
+        var destinationDivId = `#SurveyQuestions${prefix}Options`;
+        var inputCountsId = `#SurveyAnswer${prefix}Count`;
+
+        var optionsCount = $(inputCountsId).val();
+
+        var htmlOptions = id.includes("select") ? `<div class="mb-0 fs-12 ms-auto w-fit-content fw-bold me-3 text-success">Correct</div>` : "";
+
+        var answerType = id.includes("single") ? "radio" : "checkbox";
+
+        for(var i=0; i < optionsCount; i++)
+        {
+            var optionNo = i+1;
+            
+            var slider = id.includes("select") ?
+                            `<div class="form-check form-switch w-fit-content ms-2 mt-1">
+                                <input class="form-check-input" type="${answerType}" name="${prefix}-select" id="${prefix}-select-${optionNo}">
+                             </div>` : "";
+
+            htmlOptions += `
+                    <div class="d-flex mb-2">
+                        <p class="custom-p w-fit-content align-content-center"> Options ${(optionNo)}</p>
+                        <input class="custom-input-text w-200p ms-3" type="text" id="${prefix}-Option-${optionNo}"/>
+                        ${slider}
+                    </div>
+                `;
+        }
+
+        $(destinationDivId).html(htmlOptions);
+
+        if(id.includes("single"))
+        {
+            ShowSingleListAsDropdown();
+        }
+    }
+
+    function ShowSingleListAsDropdown()
+    {
+        if (IsCheckboxChecked("SurveyAnswerSingleSelectAsDropdownCheck"))
+        {
+            HideShowElement("#SurveyAnswerSingleSelectAsDropdownContainer", HideShow.SHOW);
+
+            var html = `<select class="custom-input-text w-150p fs-12 h-25p" onclick="UpdateSingleListOptionValues()">`;
+            var optionsCount = $("#SurveyAnswerSingleSelectCount").val();
+            
+            for (var i = 0; i < optionsCount; i++)
+            {
+                var optionNo = i + 1;
+                var optionText = $(`#SingleSelect-Option-${optionNo}`).val();
+
+                optionText = StringNullOrEmpty(optionText) ? `option ${optionNo}` : optionText;
+
+                html += `<option id="single-drop-option-${optionNo}" value="">${optionText}</option>`;
+            }
+            html += "</select>";
+            $("#SurveyAnswerSingleSelectAsDropdownData").html(html);
+        }
+        else
+        {
+            HideShowElement("#SurveyAnswerSingleSelectAsDropdownContainer", HideShow.HIDE);
+        }
+    }
+
+    function UpdateSingleListOptionValues()
+    {
+        var optionsCount = $("#SurveyAnswerSingleSelectCount").val();
+
+        for (var i = 0; i < optionsCount; i++)
+        {
+            var optionNo = i + 1;
+            var optionText = $(`#SingleSelect-Option-${optionNo}`).val();
+
+            optionText = StringNullOrEmpty(optionText) ? `option ${optionNo}` : optionText;
+
+            $(`#single-drop-option-${optionNo}`).text(optionText);
+        }
+    }
+
 
 </script>

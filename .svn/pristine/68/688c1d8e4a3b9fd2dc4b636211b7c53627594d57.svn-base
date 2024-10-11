@@ -1093,23 +1093,6 @@
     scrollbar-color: var(--theme-blue-clr) white;
     scrollbar-width: thin;
 }
-#SurveyQuestionScoringText
-{
-    margin-bottom: -10px !important;
-}
-@keyframes colorChange 
-{
-    0% { color: limegreen; }
-    25% { color: rgba(var(--bs-info-rgb), var(--bs-text-opacity)) !important; }
-    50% { color: blue; }
-    75% { color: rgba(var(--bs-success-rgb), var(--bs-text-opacity)) !important; }
-    100% { color: red; }
-}
-
-.text-alternate 
-{
-    animation: colorChange 1s infinite;
-}
 /*::-webkit-scrollbar {
     width: 2em;
     height: 2em

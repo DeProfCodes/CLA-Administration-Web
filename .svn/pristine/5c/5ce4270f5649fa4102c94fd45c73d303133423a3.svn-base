@@ -1,0 +1,22 @@
+﻿
+.theme-bg
+{
+    background-color: #04316d !important;
+}
+.theme-bg-dim
+{
+    background-color: rgba(4, 49, 109, 0.8) !important;
+}
+.theme-txt-clr
+{
+    color: #04316d !important;
+}
+
+.theme-border
+{
+    border: 1px solid var(--theme-blue-clr);
+}
+.theme-border-bottom
+{
+    border-bottom: 1px solid var(--theme-blue-clr);
+}
