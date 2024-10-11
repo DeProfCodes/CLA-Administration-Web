@@ -15,8 +15,8 @@
             <p class="breadcrumb-nav-body">
                 <span class="breadcrumb-item-nav" onclick="OpenPageWithAnimations('Dashboard', null, '@DashboardPages.Dashboard', 'DashboardSubLink')">Dashboard</span> /
                 <span class="breadcrumb-item-nav" onclick="OpenPageWithAnimations('Modules', null, '@ModulesPages.AllModules', 'AllModulesLink', true)">Modules</span> /
-                <span class="breadcrumb-item-nav" onclick="OpenPageWithAnimations('Modules', 'ContentLibrary', '@ModulesPages.ContentLibraryCategories', 'ContentLibraryCategoriesLink')">Content Library </span> /
-                <span class="breadcrumb-item-nav" onclick="OpenPageWithAnimations('Modules', 'ContentLibrary', '@ModulesPages.ContentLibraryCategories', 'ContentLibraryCategoriesLink')">Categories</span> /
+                <span class="breadcrumb-item-nav" onclick="OpenPageWithAnimations('Modules', 'Survey', '@ModulesPages.ContentLibraryCategories', 'ContentLibraryCategoriesLink')">Content Library </span> /
+                <span class="breadcrumb-item-nav" onclick="OpenPageWithAnimations('Modules', 'Survey', '@ModulesPages.ContentLibraryCategories', 'ContentLibraryCategoriesLink')">Categories</span> /
                 <span class="breadcrumb-item-nav" onclick="OpenPage('@ModulesPages.ContentLibraryCategoryDetails', '@Model.CategoryId');">@Model.CategoryId</span> /
                 <span class="breadcrumb-item-nav" onclick="OpenPage('@ModulesPages.ContentLibraryContent', '@Model.CategoryId')">Contents Overview</span> /
                 <span class="breadcrumb-item">@Model.ContentId</span>

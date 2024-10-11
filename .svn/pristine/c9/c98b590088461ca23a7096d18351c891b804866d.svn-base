@@ -1,0 +1,25 @@
+﻿@{
+
+
+
+
+}
+
+<script>
+
+
+    var IconsLibrary = new 
+    {
+        PopupBaseIconsAddress: `${APP_BASE_ADDRESS}/images/icons/modules/popup/`
+    };
+
+
+
+
+
+
+
+
+
+
+</script>

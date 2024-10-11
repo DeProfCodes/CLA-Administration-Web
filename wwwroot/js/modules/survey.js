@@ -1,6 +1,9 @@
 var currentSurveyTab = 1;
 var totalSurveyTabs = 9;
 
+var currentSurveyQuestionTab = 1;
+var totalSurveyQuestionTabs = 3;
+
 var backBtnId = "SurveyPrevTabBtn"
 var nextBtnId = "SurveyNextTabBtn";
 var submitBtnId = "AddSurveySubmitBtn";
@@ -11,14 +14,23 @@ function ValidateSurveyTabs(currentTab)
     if (currentTab == 2) return IsSurveySkinsTabValid();
     if (currentTab == 4) return IsValidSurveyResponseUrgency();
     if (currentTab == 6) return IsValidDeliveryMethod();
-    /*
     
-    if(currentTab == 3) return IsPopupTextsTabValid();
-    if(currentTab == 6) return IsPopupRepeatTabValid();
-    */
     return true;
 }
 
+function ValidateSurveyQuestionsTabs(currentTab)
+{
+    return true;
+
+    if (currentTab == 1) return IsValidSurveyTexts();
+    if (currentTab == 2) return IsSurveySkinsTabValid();
+    if (currentTab == 4) return IsValidSurveyResponseUrgency();
+    if (currentTab == 6) return IsValidDeliveryMethod();
+    
+    return true;
+}
+
+/*============================================= Survey Tabs Navigation ===================================================*/
 function PreviousSurveyTab()
 {
     if (currentSurveyTab > 1)
@@ -41,6 +53,31 @@ function NextSurveyTab()
 function NavigateToSurveyTab(navLinkId, tabLinkNumber)
 {
     currentSurveyTab = NavigateToModuleTab("survey", navLinkId, tabLinkNumber, currentSurveyTab, backBtnId, nextBtnId, submitBtnId);
+}
+
+/*============================================ Survey Queestions Tabs Navigation ===================================================*/
+function NavigateToSurveyQuestionTab(navLinkId, tabLinkNumber)
+{
+    currentSurveyQuestionTab = NavigateToModuleTab("survey-questions", navLinkId, tabLinkNumber, currentSurveyQuestionTab, backBtnId, nextBtnId, submitBtnId);
+}
+
+function PreviousSurveyQuestionTab()
+{
+    if (currentSurveyQuestionTab > 1)
+    {
+        currentSurveyQuestionTab = PreviousModuleTab("survey-questions", currentSurveyQuestionTab, totalSurveyQuestionTabs, backBtnId, nextBtnId, submitBtnId);
+    }
+}
+
+function NextSurveyQuestionTab()
+{
+    if (currentSurveyQuestionTab < totalSurveyQuestionTabs)
+    {
+        if (!ValidateSurveyQuestionsTabs(currentSurveyQuestionTab))
+            return;
+
+        currentSurveyQuestionTab = NextModuleTab("survey-questions", currentSurveyQuestionTab, totalSurveyQuestionTabs, backBtnId, nextBtnId, submitBtnId);
+    }
 }
 
 /*==================================================================================================================================*/

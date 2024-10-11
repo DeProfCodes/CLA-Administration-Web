@@ -42,6 +42,10 @@
 {
     width: fit-content !important;
 }
+.w-max-content
+{
+    width: max-content !important;
+}
 .h-fit-content
 {
     height: fit-content !important;
@@ -187,6 +191,15 @@
 .w-600p
 {
     width: 600px !important;
+}
+/*============================  heights ==================*/
+.h-25p
+{
+    height: 25px !important;
+}
+.h-30p
+{
+    height: 30px !important;
 }
 
 /* ======================================================= Texts =======================================================*/

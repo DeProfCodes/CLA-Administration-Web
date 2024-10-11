@@ -135,21 +135,7 @@
 {
     min-height: 450px;
 }
-/*
-.btn-group .btn
-{
-    padding: 0.5rem;
-    border: 1px solid black;
-    color: black;
-    border-radius: 0.375rem;
-    flex: 1;
-}
 
-.btn-group .btn.active
-{
-    background-color: #04316D;
-    color: white;
-}*/
 
 /*#region Module Filters*/
 .overview-filter-btn-group
@@ -1084,7 +1070,29 @@
 {
     width:60%;
 }
-
+.module-wizard-container
+{
+    min-width:940px;
+    height: 630px;
+    min-height: 530px;
+}
+#ModuleWizardMain
+{
+    overflow:auto;
+    max-height: 590px;
+    height: 560px;
+    border-bottom: 2px solid var(--theme-blue-clr);
+    scrollbar-color: var(--theme-blue-clr) white;
+    scrollbar-width: thin;
+}
+#SurveyQuestionTextPreviewer
+{
+    max-height:100px;
+    min-height:30px;
+    overflow:auto;
+    scrollbar-color: var(--theme-blue-clr) white;
+    scrollbar-width: thin;
+}
 /*::-webkit-scrollbar {
     width: 2em;
     height: 2em
@@ -1100,8 +1108,32 @@
 }*/
 /*#endregion*/
 
-
 /*#region Modules Scaling*/
+
+/**================================================= HEIGHT QUERIES ==================================*/
+@media screen and (max-height: 768px)
+{
+    .module-wizard-container
+    {
+        min-width:940px;
+        height: 100px;
+        min-height: 480px;
+    }
+    #ModuleWizardMain
+    {
+        overflow:auto;
+        max-height: 410px;
+        height: 410px;
+        border-bottom: 2px solid var(--theme-blue-clr);
+    }
+    #ModulePreviewSection
+    {
+        max-height: 460px;
+        height: 460px;
+    }
+}
+
+/**================================================= WIDTH QUERIES ==================================*/
 @media screen and (max-width:1950px)
 {
     .module-dt-body-text
@@ -1159,6 +1191,17 @@
     {
         margin-left: 45px;
     }
+    #NewPopupDates
+    {
+        margin-right: 50px;
+        margin-left:20%;
+    }
+    #NewPopupTimes
+    {
+        margin-top:30px;
+        margin-right: 50px;
+        margin-left:20%;
+    }
 }
 @media screen and (max-width:1450px)
 {
@@ -1192,6 +1235,8 @@
         margin-left:40px;
     }
 }
+
+
 @media screen and (max-width:1370px)
 {
     .overview-filter-btn-group
