@@ -2,7 +2,7 @@ var currentSurveyTab = 1;
 var totalSurveyTabs = 9;
 
 var currentSurveyQuestionTab = 1;
-var totalSurveyQuestionTabs = 4;
+var totalSurveyQuestionTabs = 3;
 
 var backBtnId = "SurveyPrevTabBtn"
 var nextBtnId = "SurveyNextTabBtn";
@@ -51,7 +51,7 @@ function NavigateToSurveyTab(navLinkId, tabLinkNumber)
     currentSurveyTab = NavigateToModuleTab("survey", navLinkId, tabLinkNumber, currentSurveyTab, backBtnId, nextBtnId, submitBtnId);
 }
 
-/*============================================ Survey Questions  ===================================================*/
+/*============================================ Survey Queestions  ===================================================*/
 function NavigateToSurveyQuestionTab(navLinkId, tabLinkNumber)
 {
     currentSurveyQuestionTab = NavigateToModuleTab("survey-questions", navLinkId, tabLinkNumber, currentSurveyQuestionTab, backBtnId, nextBtnId, submitBtnId);
@@ -200,14 +200,12 @@ function CreateSurveyResponseReArrangeOptions(id)
 
     var answerType = id.includes("single") ? "radio" : "checkbox";
 
-    var hideShowScoring = IsCheckboxChecked("SurveyQuestionScoringToggle") ? "" : "hidden";
-
     for (var i = 0; i < optionsCount; i++)
     {
         var optionNo = i + 1;
 
         var slider = id.includes("select") ?
-            `<div class="form-check form-switch w-fit-content ms-2 mt-1 survey-select-correct-answer ${hideShowScoring}">
+                            `<div class="form-check form-switch w-fit-content ms-2 mt-1 survey-select-correct-answer hidden">
                                 <input class="form-check-input" type="${answerType}" name="${prefix}-select" id="${prefix}-select-${optionNo}">
                              </div>` : "";
 
@@ -270,286 +268,6 @@ function UpdateSingleListOptionValues()
     }
 }
 
-function SurveyQuestionDatePickerSettings()
-{
-    $("#SurveyQuestionCalendarStartTime").flatpickr({
-        dateFormat: "Y-m-d", // Internal format (ISO 8601)
-        altInput: true,      // Display formatted date
-        altFormat: "l, d F Y, H:i", // Custom display format (e.g., Thursday, 03 October 2024, 17:00)
-        minDate: "today",    // Disable past dates
-        defaultDate: "today",  // Set initial date to today
-        allowInput: true,
-        enableTime: true,
-    });
-
-    $("#SurveyQuestionCalendarEndTime").flatpickr({
-        dateFormat: "Y-m-d", // Internal format (ISO 8601)
-        altInput: true,      // Display formatted date
-        altFormat: "l, d F Y, H:i", // Custom display format (e.g., Thursday, 03 October 2024, 17:00)
-        minDate: "today",    // Disable past dates
-        defaultDate: "today",  // Set initial date to today
-        allowInput: true,
-        enableTime: true,
-    });
-}
-
-function PopuplateTimeIntervals()
-{
-    let timeIntervals = [];
-
-    timeIntervals.push('0 minutes');
-    timeIntervals.push('5 minutes');
-    timeIntervals.push('10 minutes');
-    timeIntervals.push('15 minutes');
-    timeIntervals.push('30 minutes');
-
-    for (let hour = 1; hour <= 11; hour++)
-    {
-        timeIntervals.push(hour + ' hour' + (hour > 1 ? 's' : ''));
-    }
-
-    timeIntervals.push('0.5 days (12 hours)');
-    timeIntervals.push('18 hours');
-
-    for (let day = 1; day <= 4; day++)
-    {
-        timeIntervals.push(day + ' day' + (day > 1 ? 's' : ''));
-    }
-
-    timeIntervals.push('1 week');
-    timeIntervals.push('2 weeks');
-
-    return timeIntervals;
-}
-
-function CreateSurveyQuestionsReminderOptions()
-{
-    let timeIntervals = PopuplateTimeIntervals();
-
-    let selectElement = document.getElementById('SurveyQuestionCalendarReminder');
-
-    timeIntervals.forEach(function (interval)
-    {
-        let option = document.createElement('option');
-        option.value = interval;
-        option.text = interval;
-        selectElement.appendChild(option);
-    });
-}
-
-function SurveyQuestionCalendarImportanceClick(id)
-{
-    $(".survey-question-calendar-importance-btn").removeClass("btn-group-active");
-    $(`#${id}`).addClass("btn-group-active");
-}
-
-function ToggleSurveyQuestionDependency(id)
-{
-    var surveyQuestionType = "Dependency";
-    ToggleSurveyQuestionType(id, surveyQuestionType);
-}
-
-function SurveyQuestionDependencySelect(id)
-{
-    var surveyQuestionType = "Dependency";
-    SurveyQuestionSelectType(id, surveyQuestionType);
-}
-
-function AddSurveyQuestionDependency()
-{
-    var surveyQuestionType = "Dependency";
-    AddSurveyQuestionType(surveyQuestionType)
-}
-
-function RemoveSurveyQuestionDependency()
-{
-    var surveyQuestionType = "Dependency";
-    RemoveSurveyQuestionType(surveyQuestionType);
-}
-
-function ToggleSurveyQuestionCalendar(id)
-{
-    var surveyQuestionType = "Calendar";
-    ToggleSurveyQuestionType(id, surveyQuestionType);
-
-    if (!IsCheckboxChecked(id))
-    {
-        HideShowElement("#SurveyQuestionCalendarFormContainer", HideShow.HIDE);
-    }
-}
-
-function SurveyQuestionCalendarSelect(id)
-{
-    var surveyQuestionType = "Calendar";
-    SurveyQuestionSelectType(id, surveyQuestionType);
-}
-
-function AddSurveyQuestionCalendar(surveyQuestionType)
-{
-    var surveyQuestionType = "Calendar";
-    $("#SurveyQuestionsCalendarPreviewModal").fadeIn();
-    //AddSurveyQuestionType(surveyQuestionType);
-}
-
-function CloseSurveyCalendarItemDetails()
-{
-    $("#SurveyQuestionsCalendarPreviewModal").fadeOut();
-}
-
-function SaveSurveyCalendarItemDetails()
-{
-    $("#SurveyQuestionsCalendarPreviewModal").fadeOut();
-    AddSurveyQuestionType("Calendar");
-}
-
-function RemoveSurveyQuestionCalendar()
-{
-    var surveyQuestionType = "Calendar";
-    RemoveSurveyQuestionType(surveyQuestionType);
-}
-
-function ToggleSurveyQuestionType(id, surveyQuestionType)
-{
-    if (IsCheckboxChecked(id))
-    {
-        HideShowElement(`#SurveyQuestion${surveyQuestionType}Container`, HideShow.SHOW);
-    }
-    else
-    {
-        HideShowElement(`#SurveyQuestion${surveyQuestionType}Container`, HideShow.HIDE);
-    }
-}
-
-function SurveyQuestionSelectType(id, surveyQuestionType)
-{
-    var option = $(`#${id}`).val();
-
-    var questionTextHTML = "";
-    var qualifyingOptionsHTML = "";
-
-    if (option == 0)
-    {
-        HideShowElement(`#SurveyQuestion${surveyQuestionType}AnswerOptionsContainer`, HideShow.HIDE);
-        depedencyQuestionType = SurveyQuestionResponseTypes.NONE;
-    }
-    else 
-    {
-        HideShowElement(`#SurveyQuestion${surveyQuestionType}AnswerOptionsContainer`, HideShow.SHOW);
-        HideShowElement(`#Add${surveyQuestionType}Question`, HideShow.SHOW);
-
-        if (option == 1)
-        {
-            questionTextHTML = "Do you like CLA, with all your heart?";
-
-            qualifyingOptionsHTML = `
-                                     <div id="SurveyQuestion${surveyQuestionType}AnswerYES-NO" class="p-3 ms-3">
-                                         <div class="form-check form-switch w-fit-content mb-0 align-content-center">
-                                             <input class="form-check-input" type="radio" name="Survey${surveyQuestionType}YesNoNA" id="Survey${surveyQuestionType}YESNO-YES" onclick="SurveyQuestion${surveyQuestionType}OptionSelect(this.id)">
-                                             <label class="form-check-label" for="Survey${surveyQuestionType}YESNO-YES" id="Survey${surveyQuestionType}YESNO-YES-txt">Yes</label>
-                                         </div>
-                                         <div class= "form-check form-switch w-fit-content mb-0 align-content-center mt-2">
-                                             <input class= "form-check-input" type="radio" name="Survey${surveyQuestionType}YesNoNA" id="Surve${surveyQuestionType}YESNO-NO" onclick="SurveyQuestion${surveyQuestionType}OptionSelect(this.id)">
-                                             <label class="form-check-label" for="Survey${surveyQuestionType}YESNO-NO" id="Survey${surveyQuestionType}YESNO-NO-txt">No</label>
-                                         </div>
-                                     </div>`;
-
-            depedencyQuestionType = SurveyQuestionResponseTypes.YES_NO;
-        }
-        else if (option == 2)
-        {
-            var singleSelectOptions = ["Banana", "Apple", "Pear", "Orange"];
-
-            questionTextHTML = "What is your favorite fruit?";
-
-            qualifyingOptionsHTML = `<div id="SurveyQuestionAnswer-${surveyQuestionType}-SingleSelect" class="p-3 ms-3">`;
-
-            for (var i = 0; i < singleSelectOptions.length; i++)
-            {
-                var optionNo = i + 1;
-
-                qualifyingOptionsHTML += `
-                        <div class="form-check form-switch w-fit-content mb-0 align-content-center mt-1">
-                            <input class="form-check-input" type="radio" name="SurveyQuestionAnswer-SingleSelect-Options" id="SurveyQuestion${surveyQuestionType}-SingleOption-${optionNo}" onclick="SurveyQuestionCalendarOptionSelect(this.id)">
-                            <label class="form-check-label" for="SurveyQuestion${surveyQuestionType}-SingleOption-${optionNo}" id="SurveyQuestion${surveyQuestionType}-SingleOption-${optionNo}-txt">${singleSelectOptions[i]}</label>
-                        </div>`;
-            }
-
-            qualifyingOptionsHTML += `</div>`;
-            depedencyQuestionType = SurveyQuestionResponseTypes.SINGLE_SELECT;
-        }
-
-        var selectedOptionText = GetTextOfSelectedOptionInSelectList(id);
-
-        $(`#Survey${surveyQuestionType}QuestionNo`).text(selectedOptionText);
-        $(`#Survey${surveyQuestionType}QuestionTextPreviewer`).html(questionTextHTML);
-        $(`#SurveyQuestion${surveyQuestionType}Options`).html(qualifyingOptionsHTML);
-    }
-}
-
-function AddSurveyQuestionType(surveyQuestionType)
-{
-    var option = $(`#SurveyQuestion${surveyQuestionType}Type`).val();
-    var answerRadioId = "";
-    if (depedencyQuestionType == SurveyQuestionResponseTypes.YES_NO)
-    {
-        if (!RadioGroupHasAtLeastOneChecked(`Survey${surveyQuestionType}YesNoNA`))
-        {
-            swal(`Survey Question ${surveyQuestionType} Error`, `Please select a ${surveyQuestionType} response to the question.`, "error");
-            return;
-        }
-        answerRadioId = GetIdOfSelectedRadioInGroup(`Survey${surveyQuestionType}YesNoNA`);
-    }
-    else if (depedencyQuestionType == SurveyQuestionResponseTypes.SINGLE_SELECT)
-    {
-        if (!RadioGroupHasAtLeastOneChecked("SurveyQuestionAnswer-SingleSelect-Options"))
-        {
-            swal(`Survey Question ${surveyQuestionType} Error`, `Please select a ${surveyQuestionType} response to the question.`, "error");
-            return;
-        }
-        answerRadioId = GetIdOfSelectedRadioInGroup("SurveyQuestionAnswer-SingleSelect-Options");
-    }
-
-    var dependentQuestion = GetTextOfSelectedOptionInSelectList(`SurveyQuestion${surveyQuestionType}Type`);
-    var dependentAnswer = $(`#${answerRadioId}-txt`).text();
-
-    var newRow = `
-                      <tr>
-                          <td><input type="checkbox" class="row-checkbox"/></td>
-                          <td>${dependentQuestion}</td>
-                          <td>${dependentAnswer}</td>
-                      </tr>`;
-
-    $(`#SurveyQuestions${surveyQuestionType}Selection-Body`).append(newRow);
-    HideShowElement(`#RemoveSelected${surveyQuestionType}`, HideShow.SHOW);
-}
-
-function RemoveSurveyQuestionType(surveyQuestionType)
-{
-    $(`#SurveyQuestions${surveyQuestionType}Selection tbody tr`).each(function ()
-    {
-        var checkbox = $(this).find('input.row-checkbox');
-
-        if (checkbox.is(':checked'))
-        {
-            $(this).remove();
-
-            if ($(`#SurveyQuestions${surveyQuestionType}Selection tbody tr`).length == 0)
-            {
-                HideShowElement(`#RemoveSelected${surveyQuestionType}`, HideShow.HIDE);
-            }
-        }
-        else 
-        {
-            swal(`Survey Question ${surveyQuestionType} Error`, `Please select a ${surveyQuestionType} row to remove it from the question.`, "error");
-        }
-    });
-}
-
-function SurveyQuestionCalendarOptionSelect(id)
-{
-    HideShowElement("#SurveyQuestionCalendarFormContainer", HideShow.SHOW);
-}
-
 function SurveyQuestionTextValid()
 {
     $("#SurveyQuestionTitleError").text("");
@@ -557,18 +275,18 @@ function SurveyQuestionTextValid()
 
     var isValid = true;
 
-    if (IsEmptyText("SurveyQuestionTitle"))
+    if(IsEmptyText("SurveyQuestionTitle"))
     {
         $("#SurveyQuestionTitleError").text("please enter title.");
         isValid = false;
     }
-    if (IsEmptyText("SurveyQuestionDetails"))
+    if(IsEmptyText("SurveyQuestionDetails"))
     {
         $("#SurveyQuestionDetailsError").text("please enter question text.");
         isValid = false;
     }
 
-    if (!isValid)
+    if(!isValid)
     {
         swal("Survey Question Text Error", "Please enter both survey question title and question text.", "error");
     }
@@ -579,7 +297,7 @@ function SurveyQuestionResponseValid()
 {
     var questionResponseType = $("#SurveyQuestionResponseType").val();
 
-    if (questionResponseType == 0)
+    if(questionResponseType == 0)
     {
         swal("Survey Question Response Type Error", "Please select Response Type.", "error");
         return false;
@@ -587,24 +305,24 @@ function SurveyQuestionResponseValid()
     else
     {
         var scoringEnable = IsCheckboxChecked("SurveyQuestionScoringToggle");
-        if (questionResponseType < 5 && scoringEnable)
+        if(questionResponseType < 5 && scoringEnable)
         {
             var yesOrNoNotSelected = (questionResponseType == 1 || questionResponseType == 2) && !RadioGroupHasAtLeastOneChecked("SurveyScoringYesNoNA");
 
             var agreeOrDisAgreeNotSelected = (questionResponseType == 3 || questionResponseType == 4) && !RadioGroupHasAtLeastOneChecked("SurveyScoringAgreeDisagreeNA");
 
-            if (yesOrNoNotSelected || agreeOrDisAgreeNotSelected)
+            if(yesOrNoNotSelected || agreeOrDisAgreeNotSelected)
             {
                 swal("Survey Question Response Type Error", "Please select correct answer for this SCORED question.", "error");
                 return false;
             }
         }
-        else if (questionResponseType != 5)
+        else if(questionResponseType != 5)
         {
             var singleSelect = (questionResponseType == 7) && !RadioGroupHasAtLeastOneChecked("SingleSelect-select");
             var multiSelect = (questionResponseType == 8) && !RadioGroupHasAtLeastOneChecked("MultiSelect-select");
 
-            if (singleSelect || multiSelect)
+            if(singleSelect || multiSelect)
             {
                 swal("Survey Question Response Type Error", "Please select correct answer for this SCORED question.", "error");
                 return false;

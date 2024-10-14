@@ -1110,16 +1110,6 @@
 {
     animation: colorChange 1s infinite;
 }
-.survey-calendar-item-form-title
-{
-    width:200px;
-    align-content:center;
-}
-.survey-calendar-item-form-value
-{
-    width: 400px;
-}
-
 /*::-webkit-scrollbar {
     width: 2em;
     height: 2em
@@ -1273,10 +1263,6 @@
     #UploadFileContainer, #SurveyType, #LinkTypeUrl
     {
         margin-left: -20px;
-    }
-    #SelectSurveyDependentQuestionContainer
-    {
-        width: 370px !important;
     }
     /*#SurveyAddOnsAnswerContainer
     {

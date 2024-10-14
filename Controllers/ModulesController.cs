@@ -460,7 +460,7 @@ namespace CLA_Administration_Web.Controllers
             var surveyQuestionsOverviewVM = new SurveyQuestionsOverviewViewModel
             {
                 SurveyId = surveyId,
-                SurveyQuestions = LocalDataStorage.StagingData.AllSurveyQuestions.Where(x => x.SurveyId == surveyId).ToList(),
+                SurveyQuestions = ModulesMockData.StagingData.AllSurveyQuestions.ToList(),
             };
             return PartialView(AppPagesLinks.Modules.SurveyQuestionsOverviewPageLink, surveyQuestionsOverviewVM);
         }
@@ -513,9 +513,16 @@ namespace CLA_Administration_Web.Controllers
             return PartialView(AppPagesLinks.Modules.SurveyAddNewPageLink, addNewSurveyViewModel);
         }
 
-        public IActionResult AddNewSurveyQuestion(int surveyId)
+        public IActionResult AddNewSurveyQuestion(int surveyId, int questionId)
         {
-            return PartialView(AppPagesLinks.Modules.AddNewSurveyQuestionPageLink, surveyId);
+            var surveyQuestionVm = new AddNewSurveyQuestion
+            {
+                SurveyId = surveyId,
+                SurveyQuestionId = questionId,
+                AddOrEditType = (questionId > 0 ) ? AddOrEditType.Edit : AddOrEditType.Add
+            };
+
+            return PartialView(AppPagesLinks.Modules.AddNewSurveyQuestionPageLink, surveyQuestionVm);
         }
 
         #endregion

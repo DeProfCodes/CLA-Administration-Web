@@ -74,7 +74,7 @@
                                 <td class="hidden">@surveyQuestion.MachineLastModified</td>
                                 <td>
                                     <button class="btn btn-info btn-sm mx-1 custom-btn-sm" onclick="OpenSurveyQuestionDetails('@surveyQuestion.QuestionId')">Open</button>
-                                    <button class="btn btn-secondary btn-sm mx-1 custom-btn-sm">Edit</button>
+                                    <button class="btn btn-secondary btn-sm mx-1 custom-btn-sm" onclick="OpenPage('@ModulesPages.AddNewSurveyQuestion', '@Model.SurveyId', '@surveyQuestion.QuestionId')">Edit</button>
                                     <button class="btn btn-danger btn-sm custom-btn-sm">Delete</button>
                                 </td>
                             </tr>

@@ -126,10 +126,3 @@ function GetIdOfSelectedRadioInGroup(radioGroupName)
 {
     return $(`input[name="${radioGroupName}"]:checked`).attr('id');
 }
-
-function GetTextOfSelectedOptionInSelectList(id)
-{
-    id = EnsureJQueryId(id);
-    
-    return $(`${id} option:selected`).text();
-}

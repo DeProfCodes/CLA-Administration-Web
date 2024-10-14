@@ -1,4 +1,4 @@
-﻿@model CLA_Administration_Web.ViewModels.Modules.PST.AddNewSurveyQuestion
+﻿@model int
 
 @using CLA_Administration_Web.Helpers.Constants
 @using CLA_Administration_Web.Helpers.Enums.AppPages
@@ -10,10 +10,6 @@
 @{
     var surveySkin = $"{LaunchSettingsHelper.GetBaseAddressForImages()}/images/others/modules/skins/SurveyBackground.bmp";
 
-    var pageTitle = (Model.AddOrEditType == AddOrEditType.Edit) ? $"Edit Survey Question Id: {Model.SurveyQuestionId}" : 
-                                                                  $"Add New Survey Question for Survey Id: {Model.SurveyId}";
-
-    var lastBreadcrumb = (Model.AddOrEditType == AddOrEditType.Edit) ? $"Edit Survey Question / {Model.SurveyQuestionId}" : "Add New Survey Question";
 }
 
 <div class="container-fluid">
@@ -26,8 +22,8 @@
                 <span class="breadcrumb-item-nav" onclick="OpenPageWithAnimations('Modules', null, '@ModulesPages.AllModules', 'AllModulesLink', true)">Modules</span> /
                 <span class="breadcrumb-item-nav" onclick="OpenPageWithAnimations('Modules', 'Survey', '@ModulesPages.SurveyOverview', 'SurveyLink')">Survey</span> /
                 <span class="breadcrumb-item-nav" onclick="OpenPageWithAnimations('Modules', 'Survey', '@ModulesPages.SurveyOverview', 'SurveyLink')">Overview</span> /
-                <span class="breadcrumb-item-nav" onclick="OpenPage('@ModulesPages.SurveyDetails', '@Model');">@Model.SurveyId</span> /
-                <span class="breadcrumb-item">@lastBreadcrumb</span>
+                <span class="breadcrumb-item-nav" onclick="OpenPage('@ModulesPages.SurveyDetails', '@Model');">@Model</span> /
+                <span class="breadcrumb-item">Add New Survey Question</span>
             </p>
         </div>
     </div>
@@ -35,7 +31,7 @@
     <!-- Card for Filters -->
     <div class="card mb-4 mt-5 overview-filters-card">
         <div class="card-body">
-            <h4 class="w-100 text-center theme-txt-clr">@pageTitle</h4>
+            <h4 class="w-100 text-center theme-txt-clr">Add New Survey Question for Survey Id: @Model</h4>
         </div>
     </div>
 
@@ -67,7 +63,7 @@
                         <div id="QuestionsTab-1" class="survey-questions-wizard-tabs  text-center align-content-center justify-content-center mb-5 hidden">
                             <h5 class="fw-bold mt-4">1. Survey Title, Introduction & Conclusion</h5>
                             <p class="custom-p mt-2 fs-13 text-center">Enter survey texts.</p>
-                            <!-- Question Title input-->
+                            <!-- Question Title Title input-->
                             <div class="row mt-4 me-5">
                                 <div class="col-sm-2 ms-auto">
                                     <label class="fw-bold text-center fl-right">Question Title:</label>
@@ -87,7 +83,7 @@
                                     <p class="mb-0 fs-12 text-danger fst-italic ps-1 w-fit-content" id="SurveyQuestionTitleError"></p>
                                 </div>
                             </div>
-                            <!-- Question Details input-->
+                            <!-- Introduction input-->
                             <div class="row mt-2 me-5">
                                 <div class="col-sm-2 ms-auto">
                                     <label class="fw-bold text-center fl-right">Question</label>
@@ -245,237 +241,14 @@
                         <!-- Dependencies Tab -->
                         <div id="DependenciesTab-3" class="survey-questions-wizard-tabs flex-wrap  text-center align-content-center justify-content-center mb-5 hidden">
                             <h5 class="fw-bold module-heading-theme mt-4">3. Survey Question Dependency</h5>
-                            <p class="custom-p mt-2 fs-13 text-center">Please set survey question dependency options</p>
-                            <div class="row mt-5">
-                                <div class="col-md-12">
-                                    <div class="form-check form-switch w-fit-content mb-0 align-content-center mx-auto">
-                                        <input class="form-check-input" type="checkbox" id="EnableSurveyQuestionDependency" onchange="ToggleSurveyQuestionDependency(this.id)">
-                                        <label class="form-check-label" for="EnableSurveyQuestionDependency">Enable Survey Question Dependency</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-5 hidden" id="SurveyQuestionDependencyContainer">
-                                <div class="col-md-6 mb-4">
-                                    <div class="w-400p ms-auto" id="SelectSurveyDependencyQuestionContainer">
-                                        <div id="SelectSurveyDependentQuestion" class="d-flex">
-                                            <select class="form-control ml-3 w-50 w-200p fs-14 " id="SurveyQuestionDependencyType" style="appearance:menulist" onchange="SurveyQuestionDependencySelect(this.id)">
-                                                <option value="0" selected>Please Select Question...</option>
-                                                <option value="1">Question 1</option>
-                                                <option value="2">Question 3</option>
-                                            </select>
-                                            <button class="btn btn-success btn-sm px-4 ms-auto hidden" id="AddDependencyQuestion" onclick="AddSurveyQuestionDependency()">Add Dependency...</button>
-                                        </div>
-                                        <div id="SurveyQuestionDependencyAnswerOptionsContainer" class="mt-2 hidden">
-                                            <div class="theme-border p-2" id="QuestionContainer">
-                                                <p class="custom-p fw-bold text-center fs-16" id="SurveyDependencyQuestionNo">Question</p>
-                                                <p class="custom-p html-text-editor" id="SurveyDependencyQuestionTextPreviewer"></p>
-                                            </div>
-                                            <div class="theme-border" id="QuestionOptionsContainer">
-                                                <p class="custom-p fw-bold text-center fs-16 mx-auto px-5 w-fit-content border-2 theme-border-bottom">Qualifying Options</p>
-                                                <p class="fw-bold fs-12 mb-0 pt-2 text-center text-alternate" id="SurveyQuestionScoringText">Please select dependent question answer</p>
-                                                <div id="SurveyQuestionDependencyOptions">
-
-                                                </div>
-                                            
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div>
-                                        <table class="table table-striped table-bordered w-400p me-auto" id="SurveyQuestionsDependencySelection">
-                                            <thead>
-                                                <tr>
-                                                    <th class="theme-bg text-white"><input type="checkbox" /></th>
-                                                    <th class="theme-bg text-white">Dependent Question</th>
-                                                    <th class="theme-bg text-white">Qualifying Options</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="SurveyQuestionsDependencySelection-Body">
-                                            
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div>
-                                        <button class="btn btn-danger btn-sm fl-left hidden" onclick="RemoveSurveyQuestionDependency()" id="RemoveSelectedDependency">Remove Selected Dependency</button>
-                                    </div>
-                                </div>
-                            </div>
+                            <p class="custom-p mt-2 fs-13 text-center">Please set survey questions details</p>
+                            </p>
                         </div>
                         <!-- Calendar Options Tab -->
                         <div id="CalendarTab-4" class="survey-questions-wizard-tabs flex-wrap  text-center align-content-center justify-content-center mb-5 hidden">
                             <h5 class="fw-bold module-heading-theme mt-4">4. Survey Question Calendar</h5>
-                            <p class="custom-p mt-2 fs-13 text-center">Please set survey question calendar options</p>
-                            <div class="row mt-5">
-                                <div class="col-md-12">
-                                    <div class="form-check form-switch w-fit-content mb-0 align-content-center mx-auto">
-                                        <input class="form-check-input" type="checkbox" id="EnableSurveyQuestionCalendar" onchange="ToggleSurveyQuestionCalendar(this.id)">
-                                        <label class="form-check-label" for="EnableSurveyQuestionCalendar">Enable Survey Question Calendar</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-5 hidden" id="SurveyQuestionCalendarContainer">
-                                <div class="col-md-6 mb-4">
-                                    <div class="w-400p ms-auto" id="SelectSurveyCalendarQuestionContainer">
-                                        <div id="SelectSurveyCalendarQuestion" class="d-flex">
-                                            <select class="form-control ml-3 w-50 w-200p fs-14 " id="SurveyQuestionCalendarType" style="appearance:menulist" onchange="SurveyQuestionCalendarSelect(this.id)">
-                                                <option value="0" selected>Please Select Question...</option>
-                                                <option value="1">Question 1</option>
-                                                <option value="2">Question 3</option>
-                                            </select>
-                                            <button class="btn btn-success btn-sm px-4 ms-auto hidden" id="AddCalendarQuestion" onclick="AddSurveyQuestionCalendar()">Add Calendar Item...</button>
-                                        </div>
-                                        <div id="SurveyQuestionCalendarAnswerOptionsContainer" class="mt-2 hidden">
-                                            <div class="theme-border p-2" id="QuestionContainer">
-                                                <p class="custom-p fw-bold text-center fs-16" id="SurveyCalendarQuestionNo">Question</p>
-                                                <p class="custom-p html-text-editor" id="SurveyCalendarQuestionTextPreviewer"></p>
-                                            </div>
-                                            <div class="theme-border" id="QuestionOptionsContainer">
-                                                <p class="custom-p fw-bold text-center fs-16 mx-auto px-5 w-fit-content border-2 theme-border-bottom">Qualifying Options</p>
-                                                <p class="fw-bold fs-12 mb-0 pt-2 text-center text-alternate" id="SurveyQuestionScoringText">Please select calendar question answer</p>
-                                                <div id="SurveyQuestionCalendarOptions">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div>
-                                        <table class="table table-striped table-bordered w-400p me-auto" id="SurveyQuestionsCalendarSelection">
-                                            <thead>
-                                                <tr>
-                                                    <th class="theme-bg text-white"><input type="checkbox" /></th>
-                                                    <th class="theme-bg text-white">Modify</th>
-                                                    <th class="theme-bg text-white">Option</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="SurveyQuestionsCalendarSelection-Body">
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div>
-                                        <button class="btn btn-danger btn-sm fl-left hidden" onclick="RemoveSurveyQuestionCalendar()" id="RemoveSelectedCalendar">Remove Selected Calendar Item</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="SurveyQuestionsCalendarPreviewModal" class="modal">
-                                <span class="close text-danger" onclick="CloseSurveyCalendarItemDetails()">&times;</span>
-                                <div id="ModalTargetedEntities" style="width: 800px;height: 700px;">
-                                    <h3 class="theme-txt-clr text-center fw-bold p-2" id="TargetEntityTitle"></h3>
-                                    <div class="w-600p mx-auto" id="SurveyQuestionCalendarFormContainer">
-                                        <div id="SurveyQuestionCalendarForm" class="theme-border">
-                                    <p class="custom-p fw-bold text-center fs-16 mx-auto px-3 w-fit-content border-2 theme-border-bottom mt-3">Question Calendar Details</p>
-                                    <div class="d-flex mt-4">
-                                        <div class="survey-calendar-item-form-title">
-                                            <p class="custom-p fw-bold fl-right">Subject</p>
-                                        </div>
-                                        <div class="survey-calendar-item-form-value ms-3">
-                                            <input class="custom-input-text fl-left w-200p" />
-                                        </div>
-                                    </div>
-                                    <div class="d-flex mt-2">
-                                        <div class="survey-calendar-item-form-title">
-                                            <p class="custom-p fw-bold fl-right">Location</p>
-                                        </div>
-                                        <div class="survey-calendar-item-form-value ms-3">
-                                            <input class="custom-input-text fl-left w-200p" />
-                                        </div>
-                                    </div>
-                                    <div class="d-flex mt-2">
-                                        <div class="survey-calendar-item-form-title"> 
-                                            <p class="custom-p fw-bold fl-right">Description</p>
-                                        </div>
-                                        <div class="survey-calendar-item-form-value ms-3">
-                                            <textarea class="custom-input-textarea fl-left w-200p" rows="3"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex mt-2">
-                                        <div class="survey-calendar-item-form-title">
-                                            <p class="custom-p fw-bold fl-right">Start Time</p>
-                                        </div>
-                                        <div class="survey-calendar-item-form-value ms-3">
-                                            <input type="date" class="custom-input-text fs-12 w-200p cursor-pointer fl-left" id="SurveyQuestionCalendarStartTime" />
-                                        </div>
-                                    </div>
-                                    <div class="d-flex mt-2">
-                                        <div class="survey-calendar-item-form-title">
-                                            <p class="custom-p fw-bold fl-right">End Time</p>
-                                        </div>
-                                        <div class="survey-calendar-item-form-value ms-3">
-                                            <input type="date" class="custom-input-text fs-12 w-200p cursor-pointer fl-left" id="SurveyQuestionCalendarEndTime" />
-                                        </div>
-                                    </div>
-                                    <div class="d-flex mt-2">
-                                        <div class="survey-calendar-item-form-title">
-                                            <p class="custom-p fw-bold fl-right">Show As</p>
-                                        </div>
-                                        <div class="survey-calendar-item-form-value ms-3">
-                                            <select class="custom-input-text w-200p fl-left">
-                                                <option value="1">Free</option>
-                                                <option value="1">Tentative</option>
-                                                <option value="3" selected>Busy</option>
-                                                <option value="4">Out of office</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex mt-2">
-                                        <div class="survey-calendar-item-form-title">
-                                            <p class="custom-p fw-bold fl-right">Reminder</p>
-                                        </div>
-                                        <div class="survey-calendar-item-form-value ms-3 ">
-                                            <select class="custom-input-text w-200p fl-left" id="SurveyQuestionCalendarReminder">
-                                                
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex mt-2">
-                                        <div class="survey-calendar-item-form-title">
-                                            <p class="custom-p fw-bold fl-right">Privacy</p>
-                                        </div>
-                                        <div class="survey-calendar-item-form-value">
-                                            <div class="form-check form-switch w-fit-content mb-0 align-content-center">
-                                                <input class="form-check-input ms-2 fl-left" type="checkbox" id="EnableSurveyQuestionCalendarPrivacy" style="margin-left: -20px !important;">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex mt-2">
-                                        <div class="survey-calendar-item-form-title">
-                                            <p class="custom-p fw-bold fl-right">Importance</p>
-                                        </div>
-                                        <div class="survey-calendar-item-form-value d-flex">
-                                            <div class="btn-group mb-2 w-auto overview-filter-btn-group w-200p ms-2">
-                                                <button class="btn custom-btn-group survey-question-calendar-importance-btn btn-group-active" onclick="SurveyQuestionCalendarImportanceClick(this.id)" id="NoLink">None</button>
-                                                <button class="btn custom-btn-group survey-question-calendar-importance-btn" onclick="SurveyQuestionCalendarImportanceClick(this.id)" id="ImageLink">Low</button>
-                                                <button class="btn custom-btn-group survey-question-calendar-importance-btn" onclick="SurveyQuestionCalendarImportanceClick(this.id)" id="AudioLink">High</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex mt-2 ">
-                                        <div class="survey-calendar-item-form-title">
-                                            <p class="custom-p fw-bold fl-right">Attachment</p>
-                                        </div>
-                                        <div class="survey-calendar-item-form-value ms-3">
-                                            @{
-                                                    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Form/FileUploader.cshtml",
-                                                    new FileUploaderModel 
-                                                    { 
-                                                        ComponentId = "SurveyQuestionCalendarContent", 
-                                                        InputId = "SurveyQuestionCalendarContentInput", 
-                                                        ShowPreviewButton = true, 
-                                                        InitialHidden = false, 
-                                                        WidthPx = "200px",
-                                                        OnFileUploadCallback = null }
-                                                    );
-                                             }
-                                        </div>
-                                    </div>
-                                    <div class="mt-2 mb-3">
-                                        <button class="btn btn-success btn-sm" onclick="SaveSurveyCalendarItemDetails()">Save Calendar Details</button>
-                                    </div>
-                                </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <p class="custom-p mt-2 fs-13 text-center">calendar</p>
+                            
                         </div>
                         
                         <!-- Navigation Buttons -->
@@ -505,55 +278,9 @@
 
 <script>
 
-    var SurveyQuestionResponseTypes = 
-    {
-        NONE: -1,
-        YES_NO: 0,
-        YES_NO_NA: 1,
-        AGREE_DISAGREE: 2,
-        AGREE_DISAGREE_NA: 3,
-        SINGLE_SELECT: 4,
-    };
-
-    var depedencyQuestionType = SurveyQuestionResponseTypes.NONE;
-
     $(document).ready(function ()
     {
         HideAllSurveyQuestionTabs();
-        SurveyQuestionDatePickerSettings();
-        CreateSurveyQuestionsReminderOptions();
-
-        if('@Model.AddOrEditType' == '@AddOrEditType.Edit')
-        {
-            PrePopulateSurveyQuestionDataForEdit();
-        }
     });
-
-    function PrePopulateSurveyQuestionDataForEdit()
-    {
-        $(".module-left-nav-link").addClass("visited-nav-link");
-        $(".module-nav-link-dot").removeClass("hidden");
-
-        $("#SurveyQuestionTitle").html("Some information for edit view only");
-        $("#SurveyQuestionDetails").html("information informatics & data");
-        $("#SurveyQuestionTextPreviewer").html("Some information for edit view only");
-
-        CheckOrUncheckInput("ShowHideSurveyTitle", true);
-        
-        CheckOrUncheckInput("SurveyQuestionScoringToggle", true);
-        HideShowElement(`#SurveyQuestionScoringOptionsContainer`, HideShow.SHOW);
-        SelectAnOptionWithValue("SurveyQuestionResponseType", 2);
-        SurveyQuestionResponseTypeSelect();
-
-        var newRow = `<tr>
-                        <td><input type="checkbox" class="row-checkbox"/></td>
-                        <td>Question 2</td>
-                        <td>Agree</td>
-                      </tr>`;
-
-        $(`#SurveyQuestionsDependencySelection-Body`).append(newRow);
-        HideShowElement(`#RemoveSelectedDependency`, HideShow.SHOW);
-    }
-
 
 </script>
