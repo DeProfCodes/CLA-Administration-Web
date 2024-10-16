@@ -89,14 +89,14 @@
         if (page == '@SettingsPages.DesktopInformation') url = '@AppPagesUrl.Setttings.DesktopInformation';
 
         // Reports Section
-        if (page == '@ReportsPages.SurveyReport') url = '@AppPagesUrl.Reports.Survey';
-        if (page == '@ReportsPages.PopupReport') url = '@AppPagesUrl.Reports.Popup';
-        if (page == '@ReportsPages.TickerReport') url = '@AppPagesUrl.Reports.Ticker';
-        if (page == '@ReportsPages.PolicyReport') url = '@AppPagesUrl.Reports.Policy';
-        if (page == '@ReportsPages.ActiveUsersReport') url = '@AppPagesUrl.Reports.ActiveUsers';
-        if (page == '@ReportsPages.ActiveMachinesReport') url = '@AppPagesUrl.Reports.ActiveMachines';
-        if (page == '@ReportsPages.CampaignDispatchReport') url = '@AppPagesUrl.Reports.CampaignDispatch';
-        if (page == '@ReportsPages.TroubleshootReport') url = '@AppPagesUrl.Reports.Troubleshoot';
+        if (page == '@ReportsPages.Survey') url = '@AppPagesUrl.Reports.Survey';
+        if (page == '@ReportsPages.Popup') url = '@AppPagesUrl.Reports.Popup';
+        if (page == '@ReportsPages.Ticker') url = '@AppPagesUrl.Reports.Ticker';
+        if (page == '@ReportsPages.Policy') url = '@AppPagesUrl.Reports.Policy';
+        if (page == '@ReportsPages.ActiveUsers') url = '@AppPagesUrl.Reports.ActiveUsers';
+        if (page == '@ReportsPages.ActiveMachines') url = '@AppPagesUrl.Reports.ActiveMachines';
+        if (page == '@ReportsPages.CampaignDispatch') url = '@AppPagesUrl.Reports.CampaignDispatch';
+        if (page == '@ReportsPages.Troubleshoot') url = '@AppPagesUrl.Reports.Troubleshoot';
 
         // Support Section
         if (page == '@SupportPages.AboutUs') url = '@AppPagesUrl.Support.AboutUs';
@@ -186,14 +186,14 @@
         if (page == '@SettingsPages.DesktopInformation') title = "Desktop Information";
 
         // Reports Section
-        if (page == '@ReportsPages.SurveyReport') title = "Survey Report";
-        if (page == '@ReportsPages.PopupReport') title = "Popup Report";
-        if (page == '@ReportsPages.TickerReport') title = "Ticker Report";
-        if (page == '@ReportsPages.PolicyReport') title = "Policy Report";
-        if (page == '@ReportsPages.ActiveUsersReport') title = "Active Users Report";
-        if (page == '@ReportsPages.ActiveMachinesReport') title = "Active Machines Report";
-        if (page == '@ReportsPages.CampaignDispatchReport') title = "Campaign Dispatch Listing Report";
-        if (page == '@ReportsPages.TroubleshootReport') title = "Troubleshoot Report";
+        if (page == '@ReportsPages.Survey') title = "Survey Report";
+        if (page == '@ReportsPages.Popup') title = "Popup Report";
+        if (page == '@ReportsPages.Ticker') title = "Ticker Report";
+        if (page == '@ReportsPages.Policy') title = "Policy Report";
+        if (page == '@ReportsPages.ActiveUsers') title = "Active Users Report";
+        if (page == '@ReportsPages.ActiveMachines') title = "Active Machines Report";
+        if (page == '@ReportsPages.CampaignDispatch') title = "Campaign Dispatch Listing Report";
+        if (page == '@ReportsPages.Troubleshoot') title = "Troubleshoot Report";
 
         // Support Section
         if (page == '@SupportPages.AboutUs') title = "About CLA";

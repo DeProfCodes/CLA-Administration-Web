@@ -6,6 +6,8 @@
 
         public bool ShowTimesTitle { get; set; }
 
+        public bool TitlesBold { get; set; }
+
         public string StartDateId { get; set; }
 
         public string EndDateId { get; set; }
@@ -13,5 +15,14 @@
         public string StartTimeId { get; set; }
 
         public string EndTimeId { get; set; }
+
+        public bool VerticalAlign { get; set; }
+
+        public bool ShowFullTitles { get; set; }
+
+        public string WidthCss { get; set; }
+
+        public string ExternalCssControl { get; set; }
+
     }
 }

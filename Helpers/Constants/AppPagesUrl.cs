@@ -124,14 +124,14 @@ namespace CLA_Administration_Web.Helpers.Constants
 
         public class Reports
         {
-            public static string Survey = $"/{reportsController}/{ReportsPages.Survey.GetDisplayName()}";
-            public static string Popup = $"/{reportsController}/{ReportsPages.Popup.GetDisplayName()}";
-            public static string Ticker = $"/{reportsController}/{ReportsPages.Ticker.GetDisplayName()}";
-            public static string Policy = $"/{reportsController}/{ReportsPages.Policy.GetDisplayName()}";
-            public static string ActiveUsers = $"/{reportsController}/{ReportsPages.ActiveUsers.GetDisplayName()}";
-            public static string ActiveMachines = $"/{reportsController}/{ReportsPages.ActiveMachines.GetDisplayName()}";
-            public static string CampaignDispatch = $"/{reportsController}/{ReportsPages.CampaignDispatch.GetDisplayName()}";
-            public static string Troubleshoot = $"/{reportsController}/{ReportsPages.Troubleshoot.GetDisplayName()}";
+            public static string Survey = $"/{reportsController}/{ReportsPages.SurveyReport.GetDisplayName()}";
+            public static string Popup = $"/{reportsController}/{ReportsPages.PopupReport.GetDisplayName()}";
+            public static string Ticker = $"/{reportsController}/{ReportsPages.TickerReport.GetDisplayName()}";
+            public static string Policy = $"/{reportsController}/{ReportsPages.PolicyReport.GetDisplayName()}";
+            public static string ActiveUsers = $"/{reportsController}/{ReportsPages.ActiveUsersReport.GetDisplayName()}";
+            public static string ActiveMachines = $"/{reportsController}/{ReportsPages.ActiveMachinesReport.GetDisplayName()}";
+            public static string CampaignDispatch = $"/{reportsController}/{ReportsPages.CampaignDispatchReport.GetDisplayName()}";
+            public static string Troubleshoot = $"/{reportsController}/{ReportsPages.TroubleshootReport.GetDisplayName()}";
         }
 
         public class Support

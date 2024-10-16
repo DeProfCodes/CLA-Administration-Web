@@ -13,49 +13,49 @@ namespace CLA_Administration_Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Survey()
+        public async Task<IActionResult> SurveyReport()
         {
             return PartialView(AppPagesLinks.Reports.SurveyPageLink);
         }
 
         [HttpGet]
-        public async Task<IActionResult> Popup()
+        public async Task<IActionResult> PopupReport()
         {
             return PartialView(AppPagesLinks.Reports.PopupPageLink);
         }
 
         [HttpGet]
-        public async Task<IActionResult> Ticker()
+        public async Task<IActionResult> TickerReport()
         {
             return PartialView(AppPagesLinks.Reports.TickerPageLink);
         }
 
         [HttpGet]
-        public async Task<IActionResult> Policy()
+        public async Task<IActionResult> PolicyReport()
         {
             return PartialView(AppPagesLinks.Reports.PolicyPageLink);
         }
 
         [HttpGet]
-        public async Task<IActionResult> ActiveUsers()
+        public async Task<IActionResult> ActiveUsersReport()
         {
             return PartialView(AppPagesLinks.Reports.ActiveUsersPageLink);
         }
 
         [HttpGet]
-        public async Task<IActionResult> ActiveMachines()
+        public async Task<IActionResult> ActiveMachinesReport()
         {
             return PartialView(AppPagesLinks.Reports.ActiveMachinesPageLink);
         }
 
         [HttpGet]
-        public async Task<IActionResult> CampaignDispatch()
+        public async Task<IActionResult> CampaignDispatchReport()
         {
             return PartialView(AppPagesLinks.Reports.CampaignDispatchPageLink);
         }
 
         [HttpGet]
-        public async Task<IActionResult> Troubleshoot()
+        public async Task<IActionResult> TroubleshootReport()
         {
             return PartialView(AppPagesLinks.Reports.TroubleshootPageLink);
         }

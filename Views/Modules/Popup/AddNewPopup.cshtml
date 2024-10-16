@@ -98,7 +98,7 @@
                                 <div class="col-lg-9 p-0">
                                     <!-- Uploader Component -->
                                     @{
-                                        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Form/FileUploader.cshtml",
+                                        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Form/FileUploader.cshtml",
                                         new FileUploaderModel { ComponentId = "PopupLinkType", InputId = "PopupLinkTypeUploadInput", ShowPreviewButton = true, InitialHidden = true, WidthPx = "396px",OnFileUploadCallback = null });
                                     }
                                     <!-- Website Textbox -->
@@ -227,7 +227,7 @@
                                             <div class="col w-fit-content hidden ms-5" id="PopupCustomIconsContainer">
                                                 <!-- Uploader Component -->
                                                 @{
-                                                    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Form/FileUploader.cshtml",
+                                                    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Form/FileUploader.cshtml",
                                                     new FileUploaderModel 
                                                     { 
                                                         ComponentId = "PopupCustomIcon", 
@@ -259,7 +259,7 @@
                                 <label class="col-sm-2 fw-bold text-center">Title:</label>
                                 <div class="col-sm-10">
                                     @{
-                                        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Form/HtmlEditor.cshtml",
+                                        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Form/HtmlEditor.cshtml",
                                         new HtmlEditorModel 
                                         { 
                                             EditorId = "PopupTextHeader", 
@@ -282,7 +282,7 @@
                                 <label class="col-sm-2 fw-bold  text-center">Body:</label>
                                 <div class="col-sm-10">
                                     @{
-                                        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Form/HtmlEditor.cshtml",
+                                        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Form/HtmlEditor.cshtml",
                                         new HtmlEditorModel { EditorId = "PopupTextBody", HeightPx = "150px", WriteToDesitnationOnInput = true, DestinationTextDivId = "PopupBodyPreviewTextBody" });
                                     }
                                     <p class="mb-0 fs-12 text-danger fst-italic ps-1 w-fit-content" id="LinkTypeTextsBodyError"></p>
@@ -305,16 +305,22 @@
                                 <div class="col-md-6" id="NewPopupDates">
                                     <p class="fw-bold fs-16 text-center">Effective Dates</p>
                                     <div class="mt-4">
-                                    @{
-                                        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Form/DateRangePicker.cshtml", new DateTimeRangePicker { ShowDatesTitle = true });
-                                    }
+                                        @{
+                                            await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Form/DateRangePicker.cshtml",
+                                            new DateTimeRangePicker
+                                            {
+                                                ShowDatesTitle = true,
+                                                ShowFullTitles = true,
+                                                VerticalAlign = true
+                                            });
+                                        }
                                     </div>
                                 </div>
                                 <div class="col-md-6" id="NewPopupTimes">
                                     <p class="fw-bold fs-16 text-center">Timeslots</p>
                                     <div class="mt-4">
                                     @{
-                                        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Form/TimeRangePicker.cshtml");
+                                        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Form/TimeRangePicker.cshtml");
                                     }
                                     </div>
                                 </div>

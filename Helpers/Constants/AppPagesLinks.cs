@@ -119,14 +119,14 @@
 
         public class Reports
         {
-            public const string SurveyPageLink = "~/Views/Reports/Survey.cshtml";
-            public const string PopupPageLink = "~/Views/Reports/Popup.cshtml";
-            public const string TickerPageLink = "~/Views/Reports/Ticker.cshtml";
-            public const string PolicyPageLink = "~/Views/Reports/Policy.cshtml";
-            public const string ActiveUsersPageLink = "~/Views/Reports/ActiveUsers.cshtml";
-            public const string ActiveMachinesPageLink = "~/Views/Reports/ActiveMachines.cshtml";
-            public const string CampaignDispatchPageLink = "~/Views/Reports/CampaignDispatch.cshtml";
-            public const string TroubleshootPageLink = "~/Views/Reports/Troubleshoot.cshtml";
+            public const string SurveyPageLink = "~/Views/Reports/SurveyReport.cshtml";
+            public const string PopupPageLink = "~/Views/Reports/PopupReport.cshtml";
+            public const string TickerPageLink = "~/Views/Reports/TickerReport.cshtml";
+            public const string PolicyPageLink = "~/Views/Reports/PolicyReport.cshtml";
+            public const string ActiveUsersPageLink = "~/Views/Reports/ActiveUsersReport.cshtml";
+            public const string ActiveMachinesPageLink = "~/Views/Reports/ActiveMachinesReport.cshtml";
+            public const string CampaignDispatchPageLink = "~/Views/Reports/CampaignDispatchReport.cshtml";
+            public const string TroubleshootPageLink = "~/Views/Reports/TroubleshootReport.cshtml";
         }
 
         public class Support

@@ -80,7 +80,7 @@
                                 <div class="col-lg-9 p-0">
                                     <!-- Uploader Component -->
                                     @{
-                                        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Form/FileUploader.cshtml",
+                                        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Form/FileUploader.cshtml",
                                         new FileUploaderModel { ComponentId = "TickerLinkType", InputId = "TickerLinkTypeUploadInput", ShowPreviewButton = true, InitialHidden = true, WidthPx = "396px", OnFileUploadCallback = null });
                                     }
                                     <!-- Website Textbox -->
@@ -151,7 +151,7 @@
                                 <label class="fw-bold w-fit-content">Ticker Text</label>
                                 <div class="col">
                                     @{
-                                        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Form/HtmlEditor.cshtml",
+                                        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Form/HtmlEditor.cshtml",
                                         new HtmlEditorModel 
                                         { 
                                             EditorId = "TickerText", 
@@ -194,7 +194,13 @@
                                     <p class="fw-bold fs-16 text-center">Effective Dates</p>
                                     <div class="mt-4">
                                         @{
-                                            await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Form/DateRangePicker.cshtml", new DateTimeRangePicker { ShowDatesTitle = true});
+                                            await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Form/DateRangePicker.cshtml", 
+                                            new DateTimeRangePicker 
+                                            { 
+                                                ShowDatesTitle = true,
+                                                ShowFullTitles = true,
+                                                VerticalAlign = true
+                                            });
                                         }
                                     </div>
                                 </div>
@@ -202,7 +208,7 @@
                                     <p class="fw-bold fs-16 text-center">Timeslots</p>
                                     <div class="mt-4">
                                         @{
-                                            await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Form/TimeRangePicker.cshtml");
+                                            await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Form/TimeRangePicker.cshtml");
                                         }
                                     </div>
                                 </div>

@@ -71,7 +71,7 @@
                                 </div>
                                 <div class="w-fit-content">
                                     @{
-                                        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Form/HtmlEditor.cshtml",
+                                        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Form/HtmlEditor.cshtml",
                                         new HtmlEditorModel
                                         {
                                             EditorId = "SurveyTitleText",
@@ -96,7 +96,7 @@
                                 </div>
                                 <div class="w-fit-content">
                                     @{
-                                        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Form/HtmlEditor.cshtml",
+                                        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Form/HtmlEditor.cshtml",
                                         new HtmlEditorModel 
                                         { 
                                             EditorId = "SurveyIntroductionText", 
@@ -119,7 +119,7 @@
                                 </div>
                                 <div class="w-fit-content">
                                     @{
-                                        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Form/HtmlEditor.cshtml",
+                                        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Form/HtmlEditor.cshtml",
                                         new HtmlEditorModel
                                         {
                                             EditorId = "SurveyConclusionText",
@@ -220,13 +220,7 @@
                                     <p class="fw-bold fs-16 text-center">Effective Dates</p>
                                     <div class="mt-4">
                                         @{
-                                            await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Form/DateRangePicker.cshtml",
-                                            new DateTimeRangePicker
-                                            {
-                                                ShowDatesTitle = true,
-                                                ShowFullTitles = true,
-                                                VerticalAlign = true
-                                            });
+                                            await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Form/DateRangePicker.cshtml", new DateTimeRangePicker { ShowDatesTitle = true });
                                         }
                                     </div>
                                 </div>
@@ -234,7 +228,7 @@
                                     <p class="fw-bold fs-16 text-center">Timeslots</p>
                                     <div class="mt-4">
                                         @{
-                                            await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Form/TimeRangePicker.cshtml");
+                                            await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Form/TimeRangePicker.cshtml");
                                         }
                                     </div>
                                 </div>

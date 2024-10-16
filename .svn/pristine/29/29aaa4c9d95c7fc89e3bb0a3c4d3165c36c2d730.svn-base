@@ -145,39 +145,12 @@
     border-radius: 10px;
 }
 
-.slider-large
-{
-    height: 20px;
-    width: 40px !important;
-}
-
 .form-check-input:checked
 {
     background-color: var(--dark-blue);
     border-color: var(--dark-blue);
 }
 
-.form-check-input-warning:checked
-{
-    background-color: darkorange;
-}
-.form-check-input-success:checked
-{
-    background-color: darkgreen;
-}
-.form-check-input-danger:checked
-{
-    background-color: darkred;
-}
-
-.section-nav-btns 
-{
-    background-color: #04316D !important;
-    color: white;
-    border-radius: 10px;
-    padding: 2px 5px;
-    width: 80px;
-}
 /* ======================================================= Sizes =======================================================*/
 .w-50p
 {
@@ -195,17 +168,9 @@
 {
     width: 150px !important;
 }
-.w-180p
-{
-    width: 180px !important;
-}
 .w-200p
 {
     width: 200px !important;
-}
-.w-225p
-{
-    width: 225px !important;
 }
 .w-250p
 {
@@ -214,10 +179,6 @@
 .w-300p
 {
     width: 300px !important;
-}
-.w-350p
-{
-    width: 350px !important;
 }
 .w-400p
 {

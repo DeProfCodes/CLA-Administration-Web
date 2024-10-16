@@ -74,7 +74,7 @@
                                 </div>
                                 <div class="w-fit-content me-auto">
                                     @{
-                                        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Form/HtmlEditor.cshtml",
+                                        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Form/HtmlEditor.cshtml",
                                         new HtmlEditorModel
                                         {
                                             EditorId = "SurveyQuestionTitle",
@@ -94,7 +94,7 @@
                                 </div>
                                 <div class="w-fit-content me-auto">
                                     @{
-                                        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Form/HtmlEditor.cshtml",
+                                        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Form/HtmlEditor.cshtml",
                                         new HtmlEditorModel
                                         {
                                             EditorId = "SurveyQuestionDetails",
@@ -456,7 +456,7 @@
                                         </div>
                                         <div class="survey-calendar-item-form-value ms-3">
                                             @{
-                                                    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Form/FileUploader.cshtml",
+                                                    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Form/FileUploader.cshtml",
                                                     new FileUploaderModel 
                                                     { 
                                                         ComponentId = "SurveyQuestionCalendarContent", 

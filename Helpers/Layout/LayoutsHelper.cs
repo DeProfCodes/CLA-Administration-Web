@@ -233,56 +233,56 @@ namespace CLA_Administration_Web.Helpers.Layout
                 new ReportsLeftNavigationViewModel
                 {
                     ReportName = ReportsNamesType.Survey,
-                    ReportPage = ReportsPages.Survey,
+                    ReportPage = ReportsPages.SurveyReport,
                     IconWhiteUrl = $"{whiteReportsIcons}/survey.png",
                     IconBlueUrl = $"{blueReportsIcons}/survey.png"
                 },
                 new ReportsLeftNavigationViewModel
                 {
                     ReportName = ReportsNamesType.Popup,
-                    ReportPage = ReportsPages.Popup,
+                    ReportPage = ReportsPages.PopupReport,
                     IconWhiteUrl = $"{whiteReportsIcons}/popup.png",
                     IconBlueUrl = $"{blueReportsIcons}/popup.png"
                 },
                 new ReportsLeftNavigationViewModel
                 {
                     ReportName = ReportsNamesType.Ticker,
-                    ReportPage = ReportsPages.Ticker,
+                    ReportPage = ReportsPages.TickerReport,
                     IconWhiteUrl = $"{whiteReportsIcons}/ticker.png",
                     IconBlueUrl = $"{blueReportsIcons}/ticker.png"
                 },
                 new ReportsLeftNavigationViewModel
                 {
                     ReportName = ReportsNamesType.Policy,
-                    ReportPage = ReportsPages.Policy,
+                    ReportPage = ReportsPages.PolicyReport,
                     IconWhiteUrl = $"{whiteReportsIcons}/policy.png",
                     IconBlueUrl = $"{blueReportsIcons}/policy.png"
                 },
                 new ReportsLeftNavigationViewModel
                 {
                     ReportName = ReportsNamesType.ActiveUsers,
-                    ReportPage = ReportsPages.ActiveUsers,
+                    ReportPage = ReportsPages.ActiveUsersReport,
                     IconWhiteUrl = $"{whiteReportsIcons}/active-users.png",
                     IconBlueUrl = $"{blueReportsIcons}/active-users.png"
                 },
                 new ReportsLeftNavigationViewModel
                 {
                     ReportName = ReportsNamesType.ActiveMachines,
-                    ReportPage = ReportsPages.ActiveMachines,
+                    ReportPage = ReportsPages.ActiveMachinesReport,
                     IconWhiteUrl = $"{whiteReportsIcons}/active-machines.png",
                     IconBlueUrl = $"{blueReportsIcons}/active-machines.png"
                 },
                 new ReportsLeftNavigationViewModel
                 {
                     ReportName = ReportsNamesType.CampaignDispatch,
-                    ReportPage = ReportsPages.CampaignDispatch,
+                    ReportPage = ReportsPages.CampaignDispatchReport,
                     IconWhiteUrl = $"{whiteReportsIcons}/campaign-dispatch.png",
                     IconBlueUrl = $"{blueReportsIcons}/campaign-dispatch.png"
                 },
                 new ReportsLeftNavigationViewModel
                 {
                     ReportName = ReportsNamesType.Troubleshoot,
-                    ReportPage = ReportsPages.Troubleshoot,
+                    ReportPage = ReportsPages.TroubleshootReport,
                     IconWhiteUrl = $"{whiteReportsIcons}/troubleshoot.png",
                     IconBlueUrl = $"{blueReportsIcons}/troubleshoot.png"
                 }

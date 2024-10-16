@@ -4,31 +4,34 @@ namespace CLA_Administration_Web.Helpers.Enums.AppPages
 {
     public enum ReportsPages
     {
-        [Display(Name = "")]
+        [Display(Name = "", Description = "", ShortName = "")]
         None,
 
-        [Display(Name = "Survey")]
-        Survey,
+        [Display(Name = "AllReports", Description = "All Reports", ShortName = "All")]
+        AllReports,
 
-        [Display(Name = "Popup")]
-        Popup,
+        [Display(Name = "SurveyReport", Description = "Survey Report", ShortName = "Survey")]
+        SurveyReport,
 
-        [Display(Name = "Ticker")]
-        Ticker,
+        [Display(Name = "PopupReport", Description = "Popup Report", ShortName = "Popup")]
+        PopupReport,
 
-        [Display(Name = "Policy")]
-        Policy,
+        [Display(Name = "TickerReport", Description = "Ticker Report", ShortName = "Ticker")]
+        TickerReport,
 
-        [Display(Name = "ActiveUsers")]
-        ActiveUsers,
+        [Display(Name = "PolicyReport", Description = "Policy Report", ShortName = "Policy")]
+        PolicyReport,
 
-        [Display(Name = "ActiveMachines")]
-        ActiveMachines,
+        [Display(Name = "ActiveUsersReport", Description = "Active Users Report", ShortName = "Active Users")]
+        ActiveUsersReport,
 
-        [Display(Name = "CampaignDispatch")]
-        CampaignDispatch,
+        [Display(Name = "ActiveMachinesReport", Description = "Active Machines Report", ShortName = "Active Machines")]
+        ActiveMachinesReport,
 
-        [Display(Name = "Troubleshoot")]
-        Troubleshoot
+        [Display(Name = "CampaignDispatchReport", Description = "Campaign Dispatch Report", ShortName = "Campaign Dispatch")]
+        CampaignDispatchReport,
+
+        [Display(Name = "TroubleshootReport", Description = "Troubleshoot Report", ShortName = "Troubleshoot")]
+        TroubleshootReport
     }
 }

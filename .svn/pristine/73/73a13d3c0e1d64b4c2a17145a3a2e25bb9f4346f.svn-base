@@ -240,7 +240,7 @@
 
     function InitialPage()
     {
-        OpenPageWithAnimations('Reports', 'Popup', '@ReportsPages.PopupReport', 'PopupReportLink');
+        OpenPageWithAnimations('Modules', 'Survey', '@ModulesPages.SurveyAddNew', 'AddNewSurveyLink');
         //OpenPage('@ModulesPages.AddNewSurveyQuestion', 1); 
     }
 

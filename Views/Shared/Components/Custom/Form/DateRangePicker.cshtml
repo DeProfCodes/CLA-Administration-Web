@@ -2,29 +2,48 @@
 
 @{
     var toggleShowDateTilesCss = !Model.ShowDatesTitle ? "hidden" : "";
+    var flowStyle = Model.VerticalAlign ? "flex-direction: column" : "flex-wrap:nowrap";
+
+    var startDateTitle = Model.ShowFullTitles ? "Start Date" : "From";
+    var endDateTitle = Model.ShowFullTitles ? "End Date" : "to";
+
+    var widthCss = !string.IsNullOrEmpty(Model.WidthCss) ? Model.WidthCss : "w-200p";
+
+    var titlesWidth = Model.ShowFullTitles ? "width:100px;" : "width:40px;";
+
+    var titlesToStyle = Model.ShowFullTitles ? titlesWidth : "width:fit-content;";
+
+    var titlesStartStyle = !Model.VerticalAlign ? "margin-right:-8px;" : "";
+    titlesToStyle += !Model.VerticalAlign ? "margin-left:10px;margin-right:-8px;" : "";
+
+    var marginBottom = Model.VerticalAlign ? "margin-bottom: 10px;" : "";
+
+    var titlesWeight = Model.TitlesBold ? "fw-bold" : "";
+
+    var externalCss = !string.IsNullOrEmpty(Model.ExternalCssControl) ? Model.ExternalCssControl : "";
 }
 
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/timepicker/jquery.timepicker.min.css" />
 
 
-<div class="row date-picker d-flex w-fit-content">
-    <div class="d-flex">
-        <div class="col-md-4 align-content-center @toggleShowDateTilesCss">
-            <p class="custom-p">Start Date</p>
+<div class="w-fit-content d-flex w-fit-content theme-txt-clr @externalCss" style="@flowStyle">
+    <div class="d-flex" style="@marginBottom">
+        <div class="align-content-center @toggleShowDateTilesCss" style="@titlesWidth;@titlesStartStyle">
+            <p class="custom-p @titlesWeight" id="DatePickerStartDateTitle">@startDateTitle</p>
         </div>
         <div id="dateRange"></div>
-        <div class="col-md-8 d-flex">
+        <div class="d-flex cursor-pointer">
             <i class="fas fa-calendar-alt calendar-icon-date-box" onclick="OpenDatePicker()"></i>
-            <input type="text" class="custom-input-text fs-12 w-250p" id="DatePickerStartDate" readonly onclick="OpenDatePicker()" />
+            <input type="text" class="custom-input-text fs-12 @widthCss ps-30p" id="DatePickerStartDate" readonly onclick="OpenDatePicker()" />
         </div>
     </div>
-    <div class="d-flex">
-        <div class="col-md-4 align-content-center @toggleShowDateTilesCss">
-            <p class="custom-p">End Date</p>
+    <div class="d-flex" id="DatePickerEndDateContainer">
+        <div class="col-md-4 align-content-center @toggleShowDateTilesCss" style="@titlesToStyle">
+            <p class="custom-p @titlesWeight" id="DatePickerEndDateTitle">@endDateTitle</p>
         </div>
-        <div class="col-md-8 d-flex">
+        <div class="d-flex cursor-pointer">
             <i class="fas fa-calendar-alt calendar-icon-date-box" onclick="OpenDatePicker()"></i>
-            <input type="text" class="custom-input-text fs-12 w-250p" id="DatePickerEndDate" readonly onclick="OpenDatePicker()" />
+            <input type="text" class="custom-input-text fs-12 @widthCss ps-30p" id="DatePickerEndDate" readonly onclick="OpenDatePicker()" />
         </div>
     </div>
 </div>

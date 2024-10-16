@@ -22,6 +22,10 @@
     border-color: #17a2b8 !important;
 }
 
+.w-25
+{
+    width: 25% !important;
+}
 .w-50
 {
     width: 50% !important;
@@ -29,4 +33,9 @@
 .w-75
 {
     width: 75% !important;
+}
+
+.ps-30p
+{
+    padding-left: 30px !important;
 }

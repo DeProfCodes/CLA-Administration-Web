@@ -44,6 +44,15 @@
   <ItemGroup>
     <TypeScriptCompile Remove="node_modules\**" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\js\reports\piechart.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\js\reports\piechart.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="wwwroot\js\reports\piechart.js" />
+  </ItemGroup>
     
   <ItemGroup>
     <Reference Include="CLACommonFunctionsLibrary_NET">
