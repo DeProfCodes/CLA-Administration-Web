@@ -13,14 +13,26 @@ namespace CLA_Administration_Web.Helpers.Enums.AppPages
         [Display(Name = "SurveyReport", Description = "Survey Report", ShortName = "Survey")]
         SurveyReport,
 
+        [Display(Name = "SurveyReportForExport", Description = "Survey Report For Export", ShortName = "Survey")]
+        SurveyReportForExport,
+
         [Display(Name = "PopupReport", Description = "Popup Report", ShortName = "Popup")]
         PopupReport,
+
+        [Display(Name = "PopupReportForExport", Description = "Popup Report For Export", ShortName = "Popup")]
+        PopupReportForExport,
 
         [Display(Name = "TickerReport", Description = "Ticker Report", ShortName = "Ticker")]
         TickerReport,
 
+        [Display(Name = "TickerReportForExport", Description = "Ticker Report For Export", ShortName = "Ticker")]
+        TickerReportForExport,
+
         [Display(Name = "PolicyReport", Description = "Policy Report", ShortName = "Policy")]
         PolicyReport,
+
+        [Display(Name = "PolicyReportForExport", Description = "Policy Report For Export", ShortName = "Policy")]
+        PolicyReportForExport,
 
         [Display(Name = "ActiveUsersReport", Description = "Active Users Report", ShortName = "Active Users")]
         ActiveUsersReport,

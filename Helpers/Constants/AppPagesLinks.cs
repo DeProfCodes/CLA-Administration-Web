@@ -119,10 +119,14 @@
 
         public class Reports
         {
-            public const string SurveyPageLink = "~/Views/Reports/SurveyReport.cshtml";
-            public const string PopupPageLink = "~/Views/Reports/PopupReport.cshtml";
-            public const string TickerPageLink = "~/Views/Reports/TickerReport.cshtml";
-            public const string PolicyPageLink = "~/Views/Reports/PolicyReport.cshtml";
+            public const string SurveyPageLink = "~/Views/Reports/Survey/SurveyReport.cshtml";
+            public const string SurveyExportPageLink = "~/Views/Reports/Survey/_SurveyReportDataForExport.cshtml";
+            public const string PopupPageLink = "~/Views/Reports/Popup/PopupReport.cshtml";
+            public const string PopupExportPageLink = "~/Views/Reports/Popup/_PopupReportDataForExport.cshtml";
+            public const string TickerPageLink = "~/Views/Reports/Ticker/TickerReport.cshtml";
+            public const string TickerExportPageLink = "~/Views/Reports/Ticker/_TickerReportDataForExport.cshtml";
+            public const string PolicyPageLink = "~/Views/Reports/Policy/PolicyReport.cshtml";
+            public const string PolicyExportPageLink = "~/Views/Reports/Policy/_PolicyReportDataForExport.cshtml";
             public const string ActiveUsersPageLink = "~/Views/Reports/ActiveUsersReport.cshtml";
             public const string ActiveMachinesPageLink = "~/Views/Reports/ActiveMachinesReport.cshtml";
             public const string CampaignDispatchPageLink = "~/Views/Reports/CampaignDispatchReport.cshtml";

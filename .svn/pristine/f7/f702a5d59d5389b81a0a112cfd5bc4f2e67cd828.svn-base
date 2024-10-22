@@ -1,0 +1,2456 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="dsReporting_Policies">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>155fd80d-f181-4cb3-af18-53e1b5337e22</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="dsReporting_Policies_Outstanding">
+      <Query>
+        <DataSourceName>dsReporting_Policies</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="TargetedType">
+          <DataField>TargetedType</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Domain">
+          <DataField>Domain</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="User_ID">
+          <DataField>User_ID</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="User_Name">
+          <DataField>User_Name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Machine_ID">
+          <DataField>Machine_ID</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Machine_Name">
+          <DataField>Machine_Name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Last_Sync_DT_User">
+          <DataField>Last_Sync_DT_User</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Last_Sync_DT_Machine">
+          <DataField>Last_Sync_DT_Machine</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>dsReporting_Policies</rd:DataSetName>
+        <rd:SchemaPath>C:\Bertus\Projects\Work In Progress\SourceCode\CLA-Administration\CLA-Administration\dsReporting_Policies.xsd</rd:SchemaPath>
+        <rd:TableName>spReporting_Optimized_Policies_Outstanding</rd:TableName>
+        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
+        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
+        <rd:TableAdapterName>spReporting_Optimized_Policies_OutstandingTableAdapter</rd:TableAdapterName>
+      </rd:DataSetInfo>
+    </DataSet>
+    <DataSet Name="dsReporting_Policies_Response_Detail">
+      <Query>
+        <DataSourceName>dsReporting_Policies</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="TargetedType">
+          <DataField>TargetedType</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="User_ID">
+          <DataField>User_ID</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="User_Name">
+          <DataField>User_Name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Machine_ID">
+          <DataField>Machine_ID</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Machine_Name">
+          <DataField>Machine_Name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Response">
+          <DataField>Response</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Response_DT">
+          <DataField>Response_DT</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Last_Update_DT_User">
+          <DataField>Last_Update_DT_User</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Last_Update_DT_Machine">
+          <DataField>Last_Update_DT_Machine</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>dsReporting_Policies</rd:DataSetName>
+        <rd:SchemaPath>C:\Bertus\Projects\Work In Progress\SourceCode\CLA-Administration\CLA-Administration\dsReporting_Policies.xsd</rd:SchemaPath>
+        <rd:TableName>spReporting_Optimized_Policies_Response_Detail</rd:TableName>
+        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
+        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
+        <rd:TableAdapterName>spReporting_Optimized_Policies_Response_DetailTableAdapter</rd:TableAdapterName>
+      </rd:DataSetInfo>
+    </DataSet>
+    <DataSet Name="dsReporting_Policies_Summary">
+      <Query>
+        <DataSourceName>dsReporting_Policies</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="TargetedType">
+          <DataField>TargetedType</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Completed">
+          <DataField>Completed</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Targeted">
+          <DataField>Targeted</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Policy_Title">
+          <DataField>Policy_Title</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Eff_From">
+          <DataField>Eff_From</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Eff_To">
+          <DataField>Eff_To</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Outstanding">
+          <DataField>Outstanding</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>dsReporting_Policies</rd:DataSetName>
+        <rd:SchemaPath>C:\Bertus\Projects\Work In Progress\SourceCode\CLA-Administration\CLA-Administration\dsReporting_Policies.xsd</rd:SchemaPath>
+        <rd:TableName>spReporting_Optimized_Policies_Summary</rd:TableName>
+        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
+        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
+        <rd:TableAdapterName>spReporting_Optimized_Policies_SummaryTableAdapter</rd:TableAdapterName>
+      </rd:DataSetInfo>
+    </DataSet>
+    <DataSet Name="dsReporting_Policies_Summary_Detail">
+      <Query>
+        <DataSourceName>dsReporting_Policies</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="TargetedType">
+          <DataField>TargetedType</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Summary_Info">
+          <DataField>Summary_Info</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Last_30_Days_Result">
+          <DataField>Last_30_Days_Result</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Since_Popup_Active_Result">
+          <DataField>Since_Popup_Active_Result</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>dsReporting_Policies</rd:DataSetName>
+        <rd:SchemaPath>C:\Bertus\Projects\Work In Progress\SourceCode\CLA-Administration\CLA-Administration\dsReporting_Policies.xsd</rd:SchemaPath>
+        <rd:TableName>spReporting_Optimized_Policies_Summary_Detail</rd:TableName>
+        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
+        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
+        <rd:TableAdapterName>spReporting_Optimized_Policies_Summary_DetailTableAdapter</rd:TableAdapterName>
+      </rd:DataSetInfo>
+    </DataSet>
+  </DataSets>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Rectangle Name="Rectangle2">
+            <ReportItems>
+              <Textbox Name="txtSummarizedDetailUsers">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>Summarized Detail - Users</Value>
+                        <Style>
+                          <FontSize>14pt</FontSize>
+                          <FontWeight>Bold</FontWeight>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style>
+                      <TextAlign>Center</TextAlign>
+                    </Style>
+                  </Paragraph>
+                </Paragraphs>
+                <Height>0.82049cm</Height>
+                <Width>23.72216cm</Width>
+                <Visibility>
+                  <Hidden>=iif(Parameters!pTargetedType.Value = "Machines",true,false)</Hidden>
+                </Visibility>
+                <Style>
+                  <Border>
+                    <Style>Solid</Style>
+                  </Border>
+                  <BackgroundColor>LimeGreen</BackgroundColor>
+                  <VerticalAlign>Middle</VerticalAlign>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Tablix Name="Tablix5">
+                <TablixBody>
+                  <TablixColumns>
+                    <TablixColumn>
+                      <Width>11.79252cm</Width>
+                    </TablixColumn>
+                    <TablixColumn>
+                      <Width>4.08046cm</Width>
+                    </TablixColumn>
+                    <TablixColumn>
+                      <Width>7.84917cm</Width>
+                    </TablixColumn>
+                  </TablixColumns>
+                  <TablixRows>
+                    <TablixRow>
+                      <Height>0.6cm</Height>
+                      <TablixCells>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="Textbox25">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>Summary Info</Value>
+                                      <Style>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Left</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox25</rd:DefaultName>
+                              <Style>
+                                <Border>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>LimeGreen</BackgroundColor>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="Textbox27">
+                              <CanGrow>true</CanGrow>
+                              <UserSort>
+                                <SortExpression>=Fields!Last_30_Days_Result.Value</SortExpression>
+                              </UserSort>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>Last 30 Days Results</Value>
+                                      <Style>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox27</rd:DefaultName>
+                              <Style>
+                                <Border>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>LimeGreen</BackgroundColor>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="Textbox4">
+                              <CanGrow>true</CanGrow>
+                              <UserSort>
+                                <SortExpression>=Fields!Since_Popup_Active_Result.Value</SortExpression>
+                              </UserSort>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>Since Popup Active Results</Value>
+                                      <Style>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox4</rd:DefaultName>
+                              <Style>
+                                <Border>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>LimeGreen</BackgroundColor>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                      </TablixCells>
+                    </TablixRow>
+                    <TablixRow>
+                      <Height>0.6cm</Height>
+                      <TablixCells>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="Summary_Info">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!Summary_Info.Value</Value>
+                                      <Style />
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Left</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Summary_Info</rd:DefaultName>
+                              <Style>
+                                <Border>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="Last_30_Days_Result">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!Last_30_Days_Result.Value</Value>
+                                      <Style />
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Last_30_Days_Result</rd:DefaultName>
+                              <Style>
+                                <Border>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="Since_Popup_Active_Result">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!Since_Popup_Active_Result.Value</Value>
+                                      <Style />
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Since_Popup_Active_Result</rd:DefaultName>
+                              <Style>
+                                <Border>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                      </TablixCells>
+                    </TablixRow>
+                  </TablixRows>
+                </TablixBody>
+                <TablixColumnHierarchy>
+                  <TablixMembers>
+                    <TablixMember />
+                    <TablixMember />
+                    <TablixMember />
+                  </TablixMembers>
+                </TablixColumnHierarchy>
+                <TablixRowHierarchy>
+                  <TablixMembers>
+                    <TablixMember>
+                      <FixedData>true</FixedData>
+                      <Visibility>
+                        <Hidden>true</Hidden>
+                        <ToggleItem>txtSummarizedDetailUsers</ToggleItem>
+                      </Visibility>
+                      <KeepWithGroup>After</KeepWithGroup>
+                      <RepeatOnNewPage>true</RepeatOnNewPage>
+                    </TablixMember>
+                    <TablixMember>
+                      <Group Name="Details1">
+                        <PageName>Survey Summary</PageName>
+                      </Group>
+                      <Visibility>
+                        <Hidden>true</Hidden>
+                        <ToggleItem>txtSummarizedDetailUsers</ToggleItem>
+                      </Visibility>
+                    </TablixMember>
+                  </TablixMembers>
+                </TablixRowHierarchy>
+                <KeepTogether>true</KeepTogether>
+                <DataSetName>dsReporting_Policies_Summary_Detail</DataSetName>
+                <Filters>
+                  <Filter>
+                    <FilterExpression>=Fields!TargetedType.Value</FilterExpression>
+                    <Operator>Equal</Operator>
+                    <FilterValues>
+                      <FilterValue>Users</FilterValue>
+                    </FilterValues>
+                  </Filter>
+                </Filters>
+                <SortExpressions>
+                  <SortExpression>
+                    <Value>=Fields!Summary_Info.Value</Value>
+                  </SortExpression>
+                </SortExpressions>
+                <Top>0.82049cm</Top>
+                <Height>1.2cm</Height>
+                <Width>23.72215cm</Width>
+                <ZIndex>1</ZIndex>
+                <Visibility>
+                  <Hidden>true</Hidden>
+                  <ToggleItem>txtSummarizedDetailUsers</ToggleItem>
+                </Visibility>
+                <Style>
+                  <Border>
+                    <Style>Solid</Style>
+                  </Border>
+                </Style>
+              </Tablix>
+            </ReportItems>
+            <KeepTogether>true</KeepTogether>
+            <Top>15.14403cm</Top>
+            <Height>2.02049cm</Height>
+            <Width>23.74862cm</Width>
+            <Visibility>
+              <Hidden>=iif(Parameters!pTargetedType.Value = "Machines",true,false)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+            </Style>
+          </Rectangle>
+          <Textbox Name="Textbox28">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Policy Response Summary</Value>
+                    <Style>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox28</rd:DefaultName>
+            <Height>0.97088cm</Height>
+            <Width>23.74862cm</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>LimeGreen</BackgroundColor>
+              <VerticalAlign>Middle</VerticalAlign>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="txtSummarizedMachines">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Machines</Value>
+                    <Style>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>0.97936cm</Top>
+            <Left>4.66026in</Left>
+            <Height>0.82049cm</Height>
+            <Width>11.91156cm</Width>
+            <ZIndex>2</ZIndex>
+            <Visibility>
+              <Hidden>=iif(Parameters!pTargetedType.Value = "Users",true,false)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>LimeGreen</BackgroundColor>
+              <VerticalAlign>Middle</VerticalAlign>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="txtSummarizedUsers">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Users</Value>
+                    <Style>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>0.97936cm</Top>
+            <Height>0.82049cm</Height>
+            <Width>11.76651cm</Width>
+            <ZIndex>3</ZIndex>
+            <Visibility>
+              <Hidden>=iif(Parameters!pTargetedType.Value = "Machines",true,false)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>LimeGreen</BackgroundColor>
+              <VerticalAlign>Middle</VerticalAlign>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Tablix Name="tblxPolicy_Machine_Summary">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>4.07566cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>3.97377cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>3.86212cm</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>0.6cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox37">
+                          <CanGrow>true</CanGrow>
+                          <UserSort>
+                            <SortExpression>=Fields!Targeted.Value</SortExpression>
+                          </UserSort>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value># Targeted</Value>
+                                  <Style>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox34</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>LimeGreen</BackgroundColor>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox48">
+                          <CanGrow>true</CanGrow>
+                          <UserSort>
+                            <SortExpression>=Fields!Outstanding.Value</SortExpression>
+                          </UserSort>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value># Outstanding</Value>
+                                  <Style>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox47</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>LimeGreen</BackgroundColor>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox38">
+                          <CanGrow>true</CanGrow>
+                          <UserSort>
+                            <SortExpression>=Fields!Completed.Value</SortExpression>
+                          </UserSort>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value># Completed</Value>
+                                  <Style>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox36</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>LimeGreen</BackgroundColor>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.6cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Targeted2">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Targeted.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Outstanding2">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Outstanding.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <ActionInfo>
+                            <Actions>
+                              <Action>
+                                <Drillthrough>
+                                  <ReportName>rptSurvey_Outstanding</ReportName>
+                                </Drillthrough>
+                              </Action>
+                            </Actions>
+                          </ActionInfo>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Opt_In2">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Completed.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <KeepWithGroup>After</KeepWithGroup>
+                  <RepeatOnNewPage>true</RepeatOnNewPage>
+                </TablixMember>
+                <TablixMember>
+                  <Group Name="Details2">
+                    <PageName>Survey Summary</PageName>
+                  </Group>
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <RepeatRowHeaders>true</RepeatRowHeaders>
+            <FixedRowHeaders>true</FixedRowHeaders>
+            <KeepTogether>true</KeepTogether>
+            <DataSetName>dsReporting_Policies_Summary</DataSetName>
+            <Filters>
+              <Filter>
+                <FilterExpression>=Fields!TargetedType.Value</FilterExpression>
+                <Operator>Equal</Operator>
+                <FilterValues>
+                  <FilterValue>Machines</FilterValue>
+                </FilterValues>
+              </Filter>
+            </Filters>
+            <Top>13.76764cm</Top>
+            <Left>4.66026in</Left>
+            <Height>1.2cm</Height>
+            <Width>11.91155cm</Width>
+            <ZIndex>4</ZIndex>
+            <Visibility>
+              <Hidden>=iif(Parameters!pTargetedType.Value = "Users",true,false)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+            </Style>
+          </Tablix>
+          <Chart Name="chtPolicy_User_Summary">
+            <ChartCategoryHierarchy>
+              <ChartMembers>
+                <ChartMember>
+                  <Label />
+                </ChartMember>
+              </ChartMembers>
+            </ChartCategoryHierarchy>
+            <ChartSeriesHierarchy>
+              <ChartMembers>
+                <ChartMember>
+                  <Label>Completed</Label>
+                </ChartMember>
+                <ChartMember>
+                  <Label>Outstanding</Label>
+                </ChartMember>
+              </ChartMembers>
+            </ChartSeriesHierarchy>
+            <ChartData>
+              <ChartSeriesCollection>
+                <ChartSeries Name="Completed">
+                  <ChartDataPoints>
+                    <ChartDataPoint>
+                      <ChartDataPointValues>
+                        <Y>=iif(Fields!Completed.Value &gt; 0, Fields!Completed.Value,"")</Y>
+                      </ChartDataPointValues>
+                      <ChartDataLabel>
+                        <Style />
+                        <Label>=iif(Fields!Completed.Value &gt; 0, Round(Fields!Completed.Value,2) &amp; " (" &amp; Round(Fields!Completed.Value / Fields!Targeted.Value * 100) &amp; " %)", "0")</Label>
+                        <Visible>true</Visible>
+                      </ChartDataLabel>
+                      <ToolTip>=iif(Fields!Completed.Value &gt; 0, Round(Fields!Completed.Value,2) &amp; " (" &amp; Round(Fields!Completed.Value / Fields!Targeted.Value * 100) &amp; " %)", "")</ToolTip>
+                      <ActionInfo>
+                        <Actions>
+                          <Action>
+                            <Drillthrough>
+                              <ReportName>rptPolicy_Completed_Responses</ReportName>
+                              <Parameters>
+                                <Parameter Name="pTargetedType">
+                                  <Value>=iif(Parameters!pTargetedType.Value = "Users", "Users", "Users-Machines")</Value>
+                                </Parameter>
+                                <Parameter Name="pUserOrMachine">
+                                  <Value>"User"</Value>
+                                </Parameter>
+                              </Parameters>
+                            </Drillthrough>
+                          </Action>
+                        </Actions>
+                      </ActionInfo>
+                      <Style>
+                        <Color>Green</Color>
+                      </Style>
+                      <ChartMarker>
+                        <Style />
+                      </ChartMarker>
+                      <DataElementOutput>Output</DataElementOutput>
+                      <ChartItemInLegend>
+                        <LegendText>Completed</LegendText>
+                      </ChartItemInLegend>
+                    </ChartDataPoint>
+                  </ChartDataPoints>
+                  <Type>Shape</Type>
+                  <Style />
+                  <ChartEmptyPoints>
+                    <Style />
+                    <ChartMarker>
+                      <Style />
+                    </ChartMarker>
+                    <ChartDataLabel>
+                      <Style />
+                    </ChartDataLabel>
+                  </ChartEmptyPoints>
+                  <ValueAxisName>Primary</ValueAxisName>
+                  <CategoryAxisName>Primary</CategoryAxisName>
+                  <ChartSmartLabel>
+                    <CalloutLineColor>Black</CalloutLineColor>
+                    <MinMovingDistance>0pt</MinMovingDistance>
+                  </ChartSmartLabel>
+                </ChartSeries>
+                <ChartSeries Name="Outstanding">
+                  <ChartDataPoints>
+                    <ChartDataPoint>
+                      <ChartDataPointValues>
+                        <Y>=iif(Fields!Outstanding.Value &gt; 0,Fields!Outstanding.Value,"")</Y>
+                      </ChartDataPointValues>
+                      <ChartDataLabel>
+                        <Style />
+                        <Label>=iif(Fields!Outstanding.Value &gt; 0, Round(Fields!Outstanding.Value,2) &amp; " (" &amp; Round(Fields!Outstanding.Value / Fields!Targeted.Value * 100) &amp; " %)", "")</Label>
+                        <Visible>true</Visible>
+                      </ChartDataLabel>
+                      <ToolTip>=iif(Fields!Outstanding.Value &gt; 0, Round(Fields!Outstanding.Value,2) &amp; " (" &amp; Round(Fields!Outstanding.Value / Fields!Targeted.Value * 100) &amp; " %)", "")</ToolTip>
+                      <ActionInfo>
+                        <Actions>
+                          <Action>
+                            <Drillthrough>
+                              <ReportName>rptPolicy_Outstanding</ReportName>
+                              <Parameters>
+                                <Parameter Name="pTargetedType">
+                                  <Value>=iif(Parameters!pTargetedType.Value = "Users", "Users", "Users-Machines")</Value>
+                                </Parameter>
+                                <Parameter Name="pUserOrMachine">
+                                  <Value>"User"</Value>
+                                </Parameter>
+                              </Parameters>
+                            </Drillthrough>
+                          </Action>
+                        </Actions>
+                      </ActionInfo>
+                      <Style>
+                        <Color>Red</Color>
+                      </Style>
+                      <ChartMarker>
+                        <Style />
+                      </ChartMarker>
+                      <DataElementOutput>Output</DataElementOutput>
+                      <ChartItemInLegend>
+                        <LegendText>Outstanding</LegendText>
+                      </ChartItemInLegend>
+                    </ChartDataPoint>
+                  </ChartDataPoints>
+                  <Type>Shape</Type>
+                  <Style />
+                  <ChartEmptyPoints>
+                    <Style />
+                    <ChartMarker>
+                      <Style />
+                    </ChartMarker>
+                    <ChartDataLabel>
+                      <Style />
+                    </ChartDataLabel>
+                  </ChartEmptyPoints>
+                  <ValueAxisName>Primary</ValueAxisName>
+                  <CategoryAxisName>Primary</CategoryAxisName>
+                  <ChartSmartLabel>
+                    <CalloutLineColor>Black</CalloutLineColor>
+                    <MinMovingDistance>0pt</MinMovingDistance>
+                  </ChartSmartLabel>
+                </ChartSeries>
+              </ChartSeriesCollection>
+            </ChartData>
+            <ChartAreas>
+              <ChartArea Name="Default">
+                <ChartCategoryAxes>
+                  <ChartAxis Name="Primary">
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                    <ChartAxisTitle>
+                      <Caption>Axis Title</Caption>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </ChartAxisTitle>
+                    <ChartMajorGridLines>
+                      <Enabled>False</Enabled>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                        </Border>
+                      </Style>
+                    </ChartMajorGridLines>
+                    <ChartMinorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                          <Style>Dotted</Style>
+                        </Border>
+                      </Style>
+                    </ChartMinorGridLines>
+                    <ChartMinorTickMarks>
+                      <Length>0.5</Length>
+                    </ChartMinorTickMarks>
+                    <CrossAt>NaN</CrossAt>
+                    <Minimum>NaN</Minimum>
+                    <Maximum>NaN</Maximum>
+                    <ChartAxisScaleBreak>
+                      <Style />
+                    </ChartAxisScaleBreak>
+                  </ChartAxis>
+                  <ChartAxis Name="Secondary">
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                    <ChartAxisTitle>
+                      <Caption>Axis Title</Caption>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </ChartAxisTitle>
+                    <ChartMajorGridLines>
+                      <Enabled>False</Enabled>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                        </Border>
+                      </Style>
+                    </ChartMajorGridLines>
+                    <ChartMinorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                          <Style>Dotted</Style>
+                        </Border>
+                      </Style>
+                    </ChartMinorGridLines>
+                    <ChartMinorTickMarks>
+                      <Length>0.5</Length>
+                    </ChartMinorTickMarks>
+                    <CrossAt>NaN</CrossAt>
+                    <Location>Opposite</Location>
+                    <Minimum>NaN</Minimum>
+                    <Maximum>NaN</Maximum>
+                    <ChartAxisScaleBreak>
+                      <Style />
+                    </ChartAxisScaleBreak>
+                  </ChartAxis>
+                </ChartCategoryAxes>
+                <ChartValueAxes>
+                  <ChartAxis Name="Primary">
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                    <ChartAxisTitle>
+                      <Caption>Axis Title</Caption>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </ChartAxisTitle>
+                    <ChartMajorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                        </Border>
+                      </Style>
+                    </ChartMajorGridLines>
+                    <ChartMinorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                          <Style>Dotted</Style>
+                        </Border>
+                      </Style>
+                    </ChartMinorGridLines>
+                    <ChartMinorTickMarks>
+                      <Length>0.5</Length>
+                    </ChartMinorTickMarks>
+                    <CrossAt>NaN</CrossAt>
+                    <Minimum>NaN</Minimum>
+                    <Maximum>NaN</Maximum>
+                    <ChartAxisScaleBreak>
+                      <Style />
+                    </ChartAxisScaleBreak>
+                  </ChartAxis>
+                  <ChartAxis Name="Secondary">
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                    <ChartAxisTitle>
+                      <Caption>Axis Title</Caption>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </ChartAxisTitle>
+                    <ChartMajorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                        </Border>
+                      </Style>
+                    </ChartMajorGridLines>
+                    <ChartMinorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                          <Style>Dotted</Style>
+                        </Border>
+                      </Style>
+                    </ChartMinorGridLines>
+                    <ChartMinorTickMarks>
+                      <Length>0.5</Length>
+                    </ChartMinorTickMarks>
+                    <CrossAt>NaN</CrossAt>
+                    <Location>Opposite</Location>
+                    <Minimum>NaN</Minimum>
+                    <Maximum>NaN</Maximum>
+                    <ChartAxisScaleBreak>
+                      <Style />
+                    </ChartAxisScaleBreak>
+                  </ChartAxis>
+                </ChartValueAxes>
+                <ChartThreeDProperties>
+                  <Enabled>true</Enabled>
+                </ChartThreeDProperties>
+                <Style>
+                  <BackgroundGradientType>None</BackgroundGradientType>
+                </Style>
+              </ChartArea>
+            </ChartAreas>
+            <ChartLegends>
+              <ChartLegend Name="Default">
+                <Style>
+                  <BackgroundGradientType>None</BackgroundGradientType>
+                  <FontSize>8pt</FontSize>
+                </Style>
+                <Position>RightCenter</Position>
+                <DockOutsideChartArea>true</DockOutsideChartArea>
+                <ChartLegendTitle>
+                  <Caption />
+                  <Style>
+                    <FontSize>8pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </ChartLegendTitle>
+                <HeaderSeparatorColor>Black</HeaderSeparatorColor>
+                <ColumnSeparatorColor>Black</ColumnSeparatorColor>
+              </ChartLegend>
+            </ChartLegends>
+            <Palette>BrightPastel</Palette>
+            <ChartBorderSkin>
+              <Style>
+                <BackgroundColor>Gray</BackgroundColor>
+                <BackgroundGradientType>None</BackgroundGradientType>
+                <Color>White</Color>
+              </Style>
+            </ChartBorderSkin>
+            <ChartNoDataMessage Name="NoDataMessage">
+              <Caption>No Data Available</Caption>
+              <Style>
+                <BackgroundGradientType>None</BackgroundGradientType>
+                <TextAlign>General</TextAlign>
+                <VerticalAlign>Top</VerticalAlign>
+              </Style>
+            </ChartNoDataMessage>
+            <DataSetName>dsReporting_Policies_Summary</DataSetName>
+            <PageName>Policy Response Summary</PageName>
+            <Filters>
+              <Filter>
+                <FilterExpression>=Fields!TargetedType.Value</FilterExpression>
+                <Operator>Equal</Operator>
+                <FilterValues>
+                  <FilterValue>Users</FilterValue>
+                </FilterValues>
+              </Filter>
+            </Filters>
+            <Top>1.79985cm</Top>
+            <Height>11.65029cm</Height>
+            <Width>11.76651cm</Width>
+            <ZIndex>5</ZIndex>
+            <Visibility>
+              <Hidden>=iif(Parameters!pTargetedType.Value = "Machines",true,false)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>White</BackgroundColor>
+              <BackgroundGradientType>None</BackgroundGradientType>
+            </Style>
+          </Chart>
+          <Chart Name="chtPolicy_Machine_Summary">
+            <ChartCategoryHierarchy>
+              <ChartMembers>
+                <ChartMember>
+                  <Label />
+                </ChartMember>
+              </ChartMembers>
+            </ChartCategoryHierarchy>
+            <ChartSeriesHierarchy>
+              <ChartMembers>
+                <ChartMember>
+                  <Label>Completed</Label>
+                </ChartMember>
+                <ChartMember>
+                  <Label>Outstanding</Label>
+                </ChartMember>
+              </ChartMembers>
+            </ChartSeriesHierarchy>
+            <ChartData>
+              <ChartSeriesCollection>
+                <ChartSeries Name="Completed">
+                  <ChartDataPoints>
+                    <ChartDataPoint>
+                      <ChartDataPointValues>
+                        <Y>=iif(Fields!Completed.Value &gt; 0, Fields!Completed.Value,"")</Y>
+                      </ChartDataPointValues>
+                      <ChartDataLabel>
+                        <Style />
+                        <Label>=iif(Fields!Completed.Value &gt; 0, Round(Fields!Completed.Value, 2) &amp; " (" &amp; Round(Fields!Completed.Value / Fields!Targeted.Value * 100) &amp; " %)", "0")</Label>
+                        <Visible>true</Visible>
+                      </ChartDataLabel>
+                      <ToolTip>=iif(Fields!Completed.Value &gt; 0, Round(Fields!Completed.Value, 2) &amp; " (" &amp; Round(Fields!Completed.Value / iif(Fields!Targeted.Value=0,"0.1",Fields!Targeted.Value) * 100) &amp; " %)", "")</ToolTip>
+                      <ActionInfo>
+                        <Actions>
+                          <Action>
+                            <Drillthrough>
+                              <ReportName>rptPolicy_Completed_Responses</ReportName>
+                              <Parameters>
+                                <Parameter Name="pTargetedType">
+                                  <Value>=iif(Parameters!pTargetedType.Value = "Machines", "Machines", "Users-Machines")</Value>
+                                </Parameter>
+                                <Parameter Name="pUserOrMachine">
+                                  <Value>"Machine"</Value>
+                                </Parameter>
+                              </Parameters>
+                            </Drillthrough>
+                          </Action>
+                        </Actions>
+                      </ActionInfo>
+                      <Style>
+                        <Color>Green</Color>
+                      </Style>
+                      <ChartMarker>
+                        <Style />
+                      </ChartMarker>
+                      <DataElementOutput>Output</DataElementOutput>
+                      <ChartItemInLegend>
+                        <LegendText>Completed</LegendText>
+                      </ChartItemInLegend>
+                    </ChartDataPoint>
+                  </ChartDataPoints>
+                  <Type>Shape</Type>
+                  <Style />
+                  <ChartEmptyPoints>
+                    <Style />
+                    <ChartMarker>
+                      <Style />
+                    </ChartMarker>
+                    <ChartDataLabel>
+                      <Style />
+                    </ChartDataLabel>
+                  </ChartEmptyPoints>
+                  <ValueAxisName>Primary</ValueAxisName>
+                  <CategoryAxisName>Primary</CategoryAxisName>
+                  <ChartSmartLabel>
+                    <CalloutLineColor>Black</CalloutLineColor>
+                    <MinMovingDistance>0pt</MinMovingDistance>
+                  </ChartSmartLabel>
+                </ChartSeries>
+                <ChartSeries Name="Outstanding">
+                  <ChartDataPoints>
+                    <ChartDataPoint>
+                      <ChartDataPointValues>
+                        <Y>=iif(Fields!Outstanding.Value &gt; 0,Fields!Outstanding.Value,"")</Y>
+                      </ChartDataPointValues>
+                      <ChartDataLabel>
+                        <Style />
+                        <Label>=iif(Fields!Outstanding.Value &gt; 0, Round(Fields!Outstanding.Value, 2) &amp; " (" &amp; Round(Fields!Outstanding.Value / Fields!Targeted.Value * 100) &amp; " %)", "")</Label>
+                        <Visible>true</Visible>
+                      </ChartDataLabel>
+                      <ToolTip>=iif(Fields!Outstanding.Value &gt; 0, Round(Fields!Outstanding.Value, 2) &amp; " (" &amp; Round(Fields!Outstanding.Value / Fields!Targeted.Value * 100) &amp; " %)", "")</ToolTip>
+                      <ActionInfo>
+                        <Actions>
+                          <Action>
+                            <Drillthrough>
+                              <ReportName>rptPolicy_Outstanding</ReportName>
+                              <Parameters>
+                                <Parameter Name="pTargetedType">
+                                  <Value>=iif(Parameters!pTargetedType.Value = "Machines", "Machines", "Users-Machines")</Value>
+                                </Parameter>
+                                <Parameter Name="pUserOrMachine">
+                                  <Value>"Machine"</Value>
+                                </Parameter>
+                              </Parameters>
+                            </Drillthrough>
+                          </Action>
+                        </Actions>
+                      </ActionInfo>
+                      <Style>
+                        <Color>Red</Color>
+                      </Style>
+                      <ChartMarker>
+                        <Style />
+                      </ChartMarker>
+                      <DataElementOutput>Output</DataElementOutput>
+                      <ChartItemInLegend>
+                        <LegendText>Outstanding</LegendText>
+                      </ChartItemInLegend>
+                    </ChartDataPoint>
+                  </ChartDataPoints>
+                  <Type>Shape</Type>
+                  <Style />
+                  <ChartEmptyPoints>
+                    <Style />
+                    <ChartMarker>
+                      <Style />
+                    </ChartMarker>
+                    <ChartDataLabel>
+                      <Style />
+                    </ChartDataLabel>
+                  </ChartEmptyPoints>
+                  <ValueAxisName>Primary</ValueAxisName>
+                  <CategoryAxisName>Primary</CategoryAxisName>
+                  <ChartSmartLabel>
+                    <CalloutLineColor>Black</CalloutLineColor>
+                    <MinMovingDistance>0pt</MinMovingDistance>
+                  </ChartSmartLabel>
+                </ChartSeries>
+              </ChartSeriesCollection>
+            </ChartData>
+            <ChartAreas>
+              <ChartArea Name="Default">
+                <ChartCategoryAxes>
+                  <ChartAxis Name="Primary">
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                    <ChartAxisTitle>
+                      <Caption>Axis Title</Caption>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </ChartAxisTitle>
+                    <ChartMajorGridLines>
+                      <Enabled>False</Enabled>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                        </Border>
+                      </Style>
+                    </ChartMajorGridLines>
+                    <ChartMinorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                          <Style>Dotted</Style>
+                        </Border>
+                      </Style>
+                    </ChartMinorGridLines>
+                    <ChartMinorTickMarks>
+                      <Length>0.5</Length>
+                    </ChartMinorTickMarks>
+                    <CrossAt>NaN</CrossAt>
+                    <Minimum>NaN</Minimum>
+                    <Maximum>NaN</Maximum>
+                    <ChartAxisScaleBreak>
+                      <Style />
+                    </ChartAxisScaleBreak>
+                  </ChartAxis>
+                  <ChartAxis Name="Secondary">
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                    <ChartAxisTitle>
+                      <Caption>Axis Title</Caption>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </ChartAxisTitle>
+                    <ChartMajorGridLines>
+                      <Enabled>False</Enabled>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                        </Border>
+                      </Style>
+                    </ChartMajorGridLines>
+                    <ChartMinorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                          <Style>Dotted</Style>
+                        </Border>
+                      </Style>
+                    </ChartMinorGridLines>
+                    <ChartMinorTickMarks>
+                      <Length>0.5</Length>
+                    </ChartMinorTickMarks>
+                    <CrossAt>NaN</CrossAt>
+                    <Location>Opposite</Location>
+                    <Minimum>NaN</Minimum>
+                    <Maximum>NaN</Maximum>
+                    <ChartAxisScaleBreak>
+                      <Style />
+                    </ChartAxisScaleBreak>
+                  </ChartAxis>
+                </ChartCategoryAxes>
+                <ChartValueAxes>
+                  <ChartAxis Name="Primary">
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                    <ChartAxisTitle>
+                      <Caption>Axis Title</Caption>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </ChartAxisTitle>
+                    <ChartMajorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                        </Border>
+                      </Style>
+                    </ChartMajorGridLines>
+                    <ChartMinorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                          <Style>Dotted</Style>
+                        </Border>
+                      </Style>
+                    </ChartMinorGridLines>
+                    <ChartMinorTickMarks>
+                      <Length>0.5</Length>
+                    </ChartMinorTickMarks>
+                    <CrossAt>NaN</CrossAt>
+                    <Minimum>NaN</Minimum>
+                    <Maximum>NaN</Maximum>
+                    <ChartAxisScaleBreak>
+                      <Style />
+                    </ChartAxisScaleBreak>
+                  </ChartAxis>
+                  <ChartAxis Name="Secondary">
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                    <ChartAxisTitle>
+                      <Caption>Axis Title</Caption>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </ChartAxisTitle>
+                    <ChartMajorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                        </Border>
+                      </Style>
+                    </ChartMajorGridLines>
+                    <ChartMinorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                          <Style>Dotted</Style>
+                        </Border>
+                      </Style>
+                    </ChartMinorGridLines>
+                    <ChartMinorTickMarks>
+                      <Length>0.5</Length>
+                    </ChartMinorTickMarks>
+                    <CrossAt>NaN</CrossAt>
+                    <Location>Opposite</Location>
+                    <Minimum>NaN</Minimum>
+                    <Maximum>NaN</Maximum>
+                    <ChartAxisScaleBreak>
+                      <Style />
+                    </ChartAxisScaleBreak>
+                  </ChartAxis>
+                </ChartValueAxes>
+                <ChartThreeDProperties>
+                  <Enabled>true</Enabled>
+                </ChartThreeDProperties>
+                <Style>
+                  <BackgroundGradientType>None</BackgroundGradientType>
+                </Style>
+              </ChartArea>
+            </ChartAreas>
+            <ChartLegends>
+              <ChartLegend Name="Default">
+                <Style>
+                  <BackgroundGradientType>None</BackgroundGradientType>
+                  <FontSize>8pt</FontSize>
+                </Style>
+                <Position>RightCenter</Position>
+                <DockOutsideChartArea>true</DockOutsideChartArea>
+                <ChartLegendTitle>
+                  <Caption />
+                  <Style>
+                    <FontSize>8pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </ChartLegendTitle>
+                <HeaderSeparatorColor>Black</HeaderSeparatorColor>
+                <ColumnSeparatorColor>Black</ColumnSeparatorColor>
+              </ChartLegend>
+            </ChartLegends>
+            <Palette>BrightPastel</Palette>
+            <ChartBorderSkin>
+              <Style>
+                <BackgroundColor>Gray</BackgroundColor>
+                <BackgroundGradientType>None</BackgroundGradientType>
+                <Color>White</Color>
+              </Style>
+            </ChartBorderSkin>
+            <ChartNoDataMessage Name="NoDataMessage">
+              <Caption>No Data Available</Caption>
+              <Style>
+                <BackgroundGradientType>None</BackgroundGradientType>
+                <TextAlign>General</TextAlign>
+                <VerticalAlign>Top</VerticalAlign>
+              </Style>
+            </ChartNoDataMessage>
+            <DataSetName>dsReporting_Policies_Summary</DataSetName>
+            <PageName>Policy Response Summary</PageName>
+            <Filters>
+              <Filter>
+                <FilterExpression>=Fields!TargetedType.Value</FilterExpression>
+                <Operator>Equal</Operator>
+                <FilterValues>
+                  <FilterValue>Machines</FilterValue>
+                </FilterValues>
+              </Filter>
+            </Filters>
+            <Top>1.79985cm</Top>
+            <Left>4.66026in</Left>
+            <Height>11.65029cm</Height>
+            <Width>11.91156cm</Width>
+            <ZIndex>6</ZIndex>
+            <Visibility>
+              <Hidden>=iif(Parameters!pTargetedType.Value = "Users",true,false)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>White</BackgroundColor>
+              <BackgroundGradientType>None</BackgroundGradientType>
+            </Style>
+          </Chart>
+          <Tablix Name="tblxPolicy_User_Summary">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>3.98127cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>4.09105cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>3.69418cm</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>0.6cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox34">
+                          <CanGrow>true</CanGrow>
+                          <UserSort>
+                            <SortExpression>=Fields!Targeted.Value</SortExpression>
+                          </UserSort>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value># Targeted</Value>
+                                  <Style>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox34</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>LimeGreen</BackgroundColor>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox47">
+                          <CanGrow>true</CanGrow>
+                          <UserSort>
+                            <SortExpression>=Fields!Outstanding.Value</SortExpression>
+                          </UserSort>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value># Outstanding</Value>
+                                  <Style>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox47</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>LimeGreen</BackgroundColor>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox36">
+                          <CanGrow>true</CanGrow>
+                          <UserSort>
+                            <SortExpression>=Fields!Completed.Value</SortExpression>
+                          </UserSort>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value># Completed</Value>
+                                  <Style>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox36</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>LimeGreen</BackgroundColor>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.6cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Targeted">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Targeted.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Outstanding">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Outstanding.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <ActionInfo>
+                            <Actions>
+                              <Action>
+                                <Drillthrough>
+                                  <ReportName>rptSurvey_Outstanding</ReportName>
+                                </Drillthrough>
+                              </Action>
+                            </Actions>
+                          </ActionInfo>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Opt_In">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Completed.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <KeepWithGroup>After</KeepWithGroup>
+                  <RepeatOnNewPage>true</RepeatOnNewPage>
+                </TablixMember>
+                <TablixMember>
+                  <Group Name="Details">
+                    <PageName>Survey Summary</PageName>
+                  </Group>
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <RepeatRowHeaders>true</RepeatRowHeaders>
+            <FixedRowHeaders>true</FixedRowHeaders>
+            <KeepTogether>true</KeepTogether>
+            <DataSetName>dsReporting_Policies_Summary</DataSetName>
+            <Filters>
+              <Filter>
+                <FilterExpression>=Fields!TargetedType.Value</FilterExpression>
+                <Operator>Equal</Operator>
+                <FilterValues>
+                  <FilterValue>Users</FilterValue>
+                </FilterValues>
+              </Filter>
+            </Filters>
+            <Top>13.76764cm</Top>
+            <Height>1.2cm</Height>
+            <Width>11.7665cm</Width>
+            <ZIndex>7</ZIndex>
+            <Visibility>
+              <Hidden>=iif(Parameters!pTargetedType.Value = "Machines",true,false)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+            </Style>
+          </Tablix>
+          <Rectangle Name="Rectangle1">
+            <ReportItems>
+              <Tablix Name="Tablix6">
+                <TablixBody>
+                  <TablixColumns>
+                    <TablixColumn>
+                      <Width>11.78887cm</Width>
+                    </TablixColumn>
+                    <TablixColumn>
+                      <Width>4.07639cm</Width>
+                    </TablixColumn>
+                    <TablixColumn>
+                      <Width>7.8569cm</Width>
+                    </TablixColumn>
+                  </TablixColumns>
+                  <TablixRows>
+                    <TablixRow>
+                      <Height>0.6cm</Height>
+                      <TablixCells>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="Textbox26">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>Summary Info</Value>
+                                      <Style>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Left</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox25</rd:DefaultName>
+                              <Style>
+                                <Border>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>LimeGreen</BackgroundColor>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="Textbox29">
+                              <CanGrow>true</CanGrow>
+                              <UserSort>
+                                <SortExpression>=Fields!Last_30_Days_Result.Value</SortExpression>
+                              </UserSort>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>Last 30 Days Results</Value>
+                                      <Style>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox27</rd:DefaultName>
+                              <Style>
+                                <Border>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>LimeGreen</BackgroundColor>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="Textbox5">
+                              <CanGrow>true</CanGrow>
+                              <UserSort>
+                                <SortExpression>=Fields!Since_Popup_Active_Result.Value</SortExpression>
+                              </UserSort>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>Since Popup Active Results</Value>
+                                      <Style>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox4</rd:DefaultName>
+                              <Style>
+                                <Border>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>LimeGreen</BackgroundColor>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                      </TablixCells>
+                    </TablixRow>
+                    <TablixRow>
+                      <Height>0.6cm</Height>
+                      <TablixCells>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="Summary_Info2">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!Summary_Info.Value</Value>
+                                      <Style />
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Left</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Summary_Info</rd:DefaultName>
+                              <Style>
+                                <Border>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="Last_30_Days_Result2">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!Last_30_Days_Result.Value</Value>
+                                      <Style />
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Last_30_Days_Result</rd:DefaultName>
+                              <Style>
+                                <Border>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="Since_Popup_Active_Result2">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!Since_Popup_Active_Result.Value</Value>
+                                      <Style />
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Since_Popup_Active_Result</rd:DefaultName>
+                              <Style>
+                                <Border>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                      </TablixCells>
+                    </TablixRow>
+                  </TablixRows>
+                </TablixBody>
+                <TablixColumnHierarchy>
+                  <TablixMembers>
+                    <TablixMember />
+                    <TablixMember />
+                    <TablixMember />
+                  </TablixMembers>
+                </TablixColumnHierarchy>
+                <TablixRowHierarchy>
+                  <TablixMembers>
+                    <TablixMember>
+                      <FixedData>true</FixedData>
+                      <Visibility>
+                        <Hidden>true</Hidden>
+                        <ToggleItem>txtSummarizedDetailMachines</ToggleItem>
+                      </Visibility>
+                      <KeepWithGroup>After</KeepWithGroup>
+                      <RepeatOnNewPage>true</RepeatOnNewPage>
+                    </TablixMember>
+                    <TablixMember>
+                      <Group Name="Details3">
+                        <PageName>Survey Summary</PageName>
+                      </Group>
+                      <Visibility>
+                        <Hidden>true</Hidden>
+                        <ToggleItem>txtSummarizedDetailMachines</ToggleItem>
+                      </Visibility>
+                    </TablixMember>
+                  </TablixMembers>
+                </TablixRowHierarchy>
+                <KeepTogether>true</KeepTogether>
+                <DataSetName>dsReporting_Policies_Summary_Detail</DataSetName>
+                <PageName>Policy Response Summary</PageName>
+                <Filters>
+                  <Filter>
+                    <FilterExpression>=Fields!TargetedType.Value</FilterExpression>
+                    <Operator>Equal</Operator>
+                    <FilterValues>
+                      <FilterValue>Machines</FilterValue>
+                    </FilterValues>
+                  </Filter>
+                </Filters>
+                <SortExpressions>
+                  <SortExpression>
+                    <Value>=Fields!Summary_Info.Value</Value>
+                  </SortExpression>
+                </SortExpressions>
+                <Top>0.82049cm</Top>
+                <Height>1.2cm</Height>
+                <Width>23.72216cm</Width>
+                <Visibility>
+                  <Hidden>true</Hidden>
+                  <ToggleItem>txtSummarizedDetailMachines</ToggleItem>
+                </Visibility>
+                <Style>
+                  <Border>
+                    <Style>Solid</Style>
+                  </Border>
+                </Style>
+              </Tablix>
+              <Textbox Name="txtSummarizedDetailMachines">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>Summarized Detail - Machines</Value>
+                        <Style>
+                          <FontSize>14pt</FontSize>
+                          <FontWeight>Bold</FontWeight>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style>
+                      <TextAlign>Center</TextAlign>
+                    </Style>
+                  </Paragraph>
+                </Paragraphs>
+                <Height>0.82049cm</Height>
+                <Width>23.72216cm</Width>
+                <ZIndex>1</ZIndex>
+                <Visibility>
+                  <Hidden>=iif(Parameters!pTargetedType.Value = "Users",true,false)</Hidden>
+                </Visibility>
+                <Style>
+                  <Border>
+                    <Style>Solid</Style>
+                  </Border>
+                  <BackgroundColor>LimeGreen</BackgroundColor>
+                  <VerticalAlign>Middle</VerticalAlign>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+            </ReportItems>
+            <KeepTogether>true</KeepTogether>
+            <Top>17.3409cm</Top>
+            <Height>2.02049cm</Height>
+            <Width>23.74862cm</Width>
+            <ZIndex>8</ZIndex>
+            <Visibility>
+              <Hidden>=iif(Parameters!pTargetedType.Value = "Users",true,false)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+            </Style>
+          </Rectangle>
+        </ReportItems>
+        <Height>7.72676in</Height>
+        <Style />
+      </Body>
+      <Width>9.34985in</Width>
+      <Page>
+        <PageHeader>
+          <Height>3.12314cm</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <ReportItems>
+            <Textbox Name="lblPolicy_Title">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!Policy_Title.Value, "dsReporting_Policies_Summary")</Value>
+                      <Style>
+                        <FontSize>20pt</FontSize>
+                        <Color>LimeGreen</Color>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <Top>0.6612cm</Top>
+              <Left>5.69791cm</Left>
+              <Height>0.92667cm</Height>
+              <Width>18.02426cm</Width>
+              <Style>
+                <Border>
+                  <Color>LimeGreen</Color>
+                  <Style>None</Style>
+                </Border>
+                <BackgroundColor>Black</BackgroundColor>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Image Name="imgClientLogo">
+              <Source>Embedded</Source>
+              <Value>ClientLogo</Value>
+              <Sizing>FitProportional</Sizing>
+              <Top>0.00681in</Top>
+              <Height>3.07905cm</Height>
+              <Width>5.66741cm</Width>
+              <ZIndex>1</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+              </Style>
+            </Image>
+            <Textbox Name="lblEff_From">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>="Effective From: " &amp; First(Fields!Eff_From.Value, "dsReporting_Policies_Summary") &amp; " To: " &amp; First(Fields!Eff_To.Value, "dsReporting_Policies_Summary")</Value>
+                      <Style>
+                        <FontSize>12pt</FontSize>
+                        <Color>LimeGreen</Color>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <Top>1.72898cm</Top>
+              <Left>5.69791cm</Left>
+              <Height>0.6cm</Height>
+              <Width>18.02426cm</Width>
+              <ZIndex>2</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+          </ReportItems>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <BackgroundColor>Black</BackgroundColor>
+          </Style>
+        </PageHeader>
+        <PageHeight>29.7cm</PageHeight>
+        <PageWidth>21cm</PageWidth>
+        <LeftMargin>2cm</LeftMargin>
+        <RightMargin>2cm</RightMargin>
+        <TopMargin>2cm</TopMargin>
+        <BottomMargin>2cm</BottomMargin>
+        <ColumnSpacing>0.13cm</ColumnSpacing>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <ReportParameters>
+    <ReportParameter Name="pExport">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>0</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="pTargetedType">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+  </ReportParameters>
+  <ReportParametersLayout>
+    <GridLayoutDefinition>
+      <NumberOfColumns>2</NumberOfColumns>
+      <NumberOfRows>1</NumberOfRows>
+      <CellDefinitions>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>pExport</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>pTargetedType</ParameterName>
+        </CellDefinition>
+      </CellDefinitions>
+    </GridLayoutDefinition>
+  </ReportParametersLayout>
+  <EmbeddedImages>
+    <EmbeddedImage Name="ClientLogo">
+      <MIMEType>image/jpeg</MIMEType>
+      <ImageData>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</ImageData>
+    </EmbeddedImage>
+  </EmbeddedImages>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>f99b1177-655f-4493-ad6f-80eaa6b9d232</rd:ReportID>
+</Report>

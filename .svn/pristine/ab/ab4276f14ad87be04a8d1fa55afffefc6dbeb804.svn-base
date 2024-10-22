@@ -1,0 +1,66 @@
+﻿using CLA_Administration_Web.Helpers.MockData;
+using CLA_Administration_Web.ViewModels.Reports;
+using Microsoft.AspNetCore.Hosting.Server;
+using Microsoft.Reporting.NETCore;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Data;
+using System.Xml.Serialization;
+
+
+namespace CLA_Administration_Web.Helpers.Reporting
+{
+    public class ReportingHelper
+    {
+        public static LocalReport GetPopupReport(IWebHostEnvironment hostingEnvironment)
+        {
+            string reportPath = Path.Combine(hostingEnvironment.WebRootPath,"resources", "reports", "popup","rptReporting_STM_All_Export_Only.rdlc");
+
+            LocalReport localReport = new LocalReport();
+            localReport.ReportPath = reportPath;
+
+            var reportData = ReportsMockData.PopupReportData;
+            List<PopupResponseBreakDown> responseList = reportData.ResponseClick;
+
+            localReport.DataSources.Add(new ReportDataSource("PopupReportDataSet", new List<PopupReportStatsMockViewModel> { reportData }));
+            localReport.DataSources.Add(new ReportDataSource("ResponseBreakdownDataSet", responseList));
+
+            return localReport;
+        }
+
+        public static string MergeJsonArrays(string jsonArray1, string jsonArray2, string jsonArray3)
+        {
+            JArray array1 = !string.IsNullOrEmpty(jsonArray1) ? JArray.Parse(jsonArray1) : new JArray();
+            JArray array2 = !string.IsNullOrEmpty(jsonArray2) ? JArray.Parse(jsonArray2) : new JArray();
+            JArray array3 = !string.IsNullOrEmpty(jsonArray3) ? JArray.Parse(jsonArray3) : new JArray();
+
+
+            array1.Merge(array2, new JsonMergeSettings
+            {
+                MergeArrayHandling = MergeArrayHandling.Concat 
+            });
+
+            array1.Merge(array3, new JsonMergeSettings
+            {
+                MergeArrayHandling = MergeArrayHandling.Concat 
+            });
+
+            return array1.ToString(Formatting.None);
+        }
+
+        public static DataSet ConstructFilteredDataSet(bool active, bool inActive, bool notInstalled, string activeJsonData, string inActiveJsonData, string notInstalledJsonData)
+        {
+            var activeJson = active ? activeJsonData : "";
+            var inActiveJson = inActive ? inActiveJsonData : "";
+            var notInstalledJson = notInstalled ? notInstalledJsonData : "";
+
+            var mergedJson = MergeJsonArrays(activeJson, inActiveJson, notInstalledJson);
+
+            mergedJson = "{ \"ResultTable\" :" + mergedJson +"}";
+
+            var dataSet = JsonConvert.DeserializeObject<DataSet>(mergedJson);
+
+            return dataSet;
+        }
+    }
+}

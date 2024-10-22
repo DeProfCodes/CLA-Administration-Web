@@ -13,3 +13,17 @@ const ContentTypes = Object.freeze(
     DOCUMENT: 3,
 });
  
+const ReportDataTypes = Object.freeze(
+{
+    EXPORT_ONLY: 0,
+    DATA_ONLY: 1,
+});
+
+const ReportModuleTypes = Object.freeze(
+{
+    POPUP: "Popup",
+    SURVEY: "Survey",
+    TICKER: "Ticker",
+    POLICY: "Policy"
+});
+ 

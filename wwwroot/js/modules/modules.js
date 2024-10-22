@@ -54,6 +54,7 @@ function ModuleOverviewLoader(moduleType, status)
     $("#SecondaryLoader").css("height", height);
 
     $("#SecondaryLoaderMessage").text(`Loading ${status} ${GetModuleName(moduleType)}s...`);
+    HideShowElementVisibity("#SecondaryLoaderImage", HideShow.SHOW);
 
 }
 

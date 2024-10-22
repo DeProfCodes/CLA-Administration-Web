@@ -90,9 +90,13 @@
 
         // Reports Section
         if (page == '@ReportsPages.SurveyReport') url = '@AppPagesUrl.Reports.Survey';
+        if (page == '@ReportsPages.SurveyReportForExport') url = '@AppPagesUrl.Reports.SurveyExport' + `?surveyId=${id}`;
         if (page == '@ReportsPages.PopupReport') url = '@AppPagesUrl.Reports.Popup';
+        if (page == '@ReportsPages.PopupReportForExport') url = '@AppPagesUrl.Reports.PopupExport' + `?popupId=${id}`;
         if (page == '@ReportsPages.TickerReport') url = '@AppPagesUrl.Reports.Ticker';
+        if (page == '@ReportsPages.TickerReportForExport') url = '@AppPagesUrl.Reports.TickerExport' + `?tickerId=${id}`;
         if (page == '@ReportsPages.PolicyReport') url = '@AppPagesUrl.Reports.Policy';
+        if (page == '@ReportsPages.PolicyReportForExport') url = '@AppPagesUrl.Reports.PolicyExport' + `?policyId=${id}`;
         if (page == '@ReportsPages.ActiveUsersReport') url = '@AppPagesUrl.Reports.ActiveUsers';
         if (page == '@ReportsPages.ActiveMachinesReport') url = '@AppPagesUrl.Reports.ActiveMachines';
         if (page == '@ReportsPages.CampaignDispatchReport') url = '@AppPagesUrl.Reports.CampaignDispatch';

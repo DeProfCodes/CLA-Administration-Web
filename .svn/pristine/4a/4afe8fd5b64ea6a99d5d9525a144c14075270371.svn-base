@@ -1,0 +1,435 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = CLA_Administration_Web
+build_property.RootNamespace = CLA_Administration_Web
+build_property.ProjectDir = D:\Projects\SVN\Work_In_Progress\SourceCode\CLA-Administration-Web\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = true
+build_property.MSBuildProjectDirectory = D:\Projects\SVN\Work_In_Progress\SourceCode\CLA-Administration-Web
+build_property._RazorSourceGeneratorDebug = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Account/AccountOverview.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxBY2NvdW50T3ZlcnZpZXcuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Account/SecuritySettings.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxTZWN1cml0eVNldHRpbmdzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Admin/ApplicationParameters.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQXBwbGljYXRpb25QYXJhbWV0ZXJzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Admin/AutoReminders.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQXV0b1JlbWluZGVycy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Admin/Licensing.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTGljZW5zaW5nLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Admin/SQLBrowser.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cU1FMQnJvd3Nlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Admin/UploadFiles.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVXBsb2FkRmlsZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Dashboard/Calendar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGFzaGJvYXJkXENhbGVuZGFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Dashboard/Home.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGFzaGJvYXJkXEhvbWUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Dashboard/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGFzaGJvYXJkXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Layout/LeftNavigation.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGF5b3V0XExlZnROYXZpZ2F0aW9uLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Layout/TopNavigation.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGF5b3V0XFRvcE5hdmlnYXRpb24uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Modules/AllModules.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kdWxlc1xBbGxNb2R1bGVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Modules/ContentLibrary/AddNewContentLibraryCategory.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kdWxlc1xDb250ZW50TGlicmFyeVxBZGROZXdDb250ZW50TGlicmFyeUNhdGVnb3J5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Modules/ContentLibrary/AddNewContentLibraryContent.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kdWxlc1xDb250ZW50TGlicmFyeVxBZGROZXdDb250ZW50TGlicmFyeUNvbnRlbnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Modules/ContentLibrary/ContentLibraryCategories.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kdWxlc1xDb250ZW50TGlicmFyeVxDb250ZW50TGlicmFyeUNhdGVnb3JpZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Modules/ContentLibrary/ContentLibraryCategoryDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kdWxlc1xDb250ZW50TGlicmFyeVxDb250ZW50TGlicmFyeUNhdGVnb3J5RGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Modules/ContentLibrary/ContentLibraryContentDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kdWxlc1xDb250ZW50TGlicmFyeVxDb250ZW50TGlicmFyeUNvbnRlbnREZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Modules/ContentLibrary/ContentLibraryContentsOverview.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kdWxlc1xDb250ZW50TGlicmFyeVxDb250ZW50TGlicmFyeUNvbnRlbnRzT3ZlcnZpZXcuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Modules/Desktop/AddNewDesktop.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kdWxlc1xEZXNrdG9wXEFkZE5ld0Rlc2t0b3AuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Modules/Desktop/DesktopDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kdWxlc1xEZXNrdG9wXERlc2t0b3BEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Modules/Desktop/DesktopOverview.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kdWxlc1xEZXNrdG9wXERlc2t0b3BPdmVydmlldy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Modules/LockedDesktop/AddNewLockedDesktop.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kdWxlc1xMb2NrZWREZXNrdG9wXEFkZE5ld0xvY2tlZERlc2t0b3AuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Modules/LockedDesktop/LockedDesktopDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kdWxlc1xMb2NrZWREZXNrdG9wXExvY2tlZERlc2t0b3BEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Modules/LockedDesktop/LockedDesktopOverview.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kdWxlc1xMb2NrZWREZXNrdG9wXExvY2tlZERlc2t0b3BPdmVydmlldy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Modules/Popup/AddNewPopup.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kdWxlc1xQb3B1cFxBZGROZXdQb3B1cC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Modules/Popup/PopupDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kdWxlc1xQb3B1cFxQb3B1cERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Modules/Popup/PopupOverview.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kdWxlc1xQb3B1cFxQb3B1cE92ZXJ2aWV3LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Modules/RSS/AddNewRSSCategory.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kdWxlc1xSU1NcQWRkTmV3UlNTQ2F0ZWdvcnkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Modules/RSS/AddNewRSSFeed.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kdWxlc1xSU1NcQWRkTmV3UlNTRmVlZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Modules/RSS/RssCategoryDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kdWxlc1xSU1NcUnNzQ2F0ZWdvcnlEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Modules/RSS/RssCategoryOverview.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kdWxlc1xSU1NcUnNzQ2F0ZWdvcnlPdmVydmlldy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Modules/RSS/RssFeedDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kdWxlc1xSU1NcUnNzRmVlZERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Modules/RSS/RssFeedOverview.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kdWxlc1xSU1NcUnNzRmVlZE92ZXJ2aWV3LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Modules/Screensaver/AddNewScreensaver.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kdWxlc1xTY3JlZW5zYXZlclxBZGROZXdTY3JlZW5zYXZlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Modules/Screensaver/ScreensaverDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kdWxlc1xTY3JlZW5zYXZlclxTY3JlZW5zYXZlckRldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Modules/Screensaver/ScreensaverOverview.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kdWxlc1xTY3JlZW5zYXZlclxTY3JlZW5zYXZlck92ZXJ2aWV3LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Modules/Survey/AddNewSurvey.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kdWxlc1xTdXJ2ZXlcQWRkTmV3U3VydmV5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Modules/Survey/AddNewSurveyQuestion.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kdWxlc1xTdXJ2ZXlcQWRkTmV3U3VydmV5UXVlc3Rpb24uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Modules/Survey/SurveyDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kdWxlc1xTdXJ2ZXlcU3VydmV5RGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Modules/Survey/SurveyOverview.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kdWxlc1xTdXJ2ZXlcU3VydmV5T3ZlcnZpZXcuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Modules/Survey/SurveyQuestionDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kdWxlc1xTdXJ2ZXlcU3VydmV5UXVlc3Rpb25EZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Modules/Survey/SurveyQuestionsOverview.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kdWxlc1xTdXJ2ZXlcU3VydmV5UXVlc3Rpb25zT3ZlcnZpZXcuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Modules/Ticker/AddNewTicker.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kdWxlc1xUaWNrZXJcQWRkTmV3VGlja2VyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Modules/Ticker/TickerDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kdWxlc1xUaWNrZXJcVGlja2VyRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Modules/Ticker/TickerOverview.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kdWxlc1xUaWNrZXJcVGlja2VyT3ZlcnZpZXcuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Reports/ActiveMachinesReport.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0c1xBY3RpdmVNYWNoaW5lc1JlcG9ydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Reports/ActiveUsersReport.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0c1xBY3RpdmVVc2Vyc1JlcG9ydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Reports/CampaignDispatchReport.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0c1xDYW1wYWlnbkRpc3BhdGNoUmVwb3J0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Reports/PolicyReport.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0c1xQb2xpY3lSZXBvcnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Reports/PopupReport.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0c1xQb3B1cFJlcG9ydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Reports/SurveyReport.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0c1xTdXJ2ZXlSZXBvcnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Reports/TickerReport.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0c1xUaWNrZXJSZXBvcnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Reports/TroubleshootReport.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0c1xUcm91Ymxlc2hvb3RSZXBvcnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Settings/ActiveConnections.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2V0dGluZ3NcQWN0aXZlQ29ubmVjdGlvbnMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Settings/AdminAccess.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2V0dGluZ3NcQWRtaW5BY2Nlc3MuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Settings/CustomUserSettings.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2V0dGluZ3NcQ3VzdG9tVXNlclNldHRpbmdzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Settings/DesktopInformation.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2V0dGluZ3NcRGVza3RvcEluZm9ybWF0aW9uLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Settings/SetupExclusions.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2V0dGluZ3NcU2V0dXBFeGNsdXNpb25zLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Settings/SkinsOfflineImages.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2V0dGluZ3NcU2tpbnNPZmZsaW5lSW1hZ2VzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Settings/StagingUsers.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2V0dGluZ3NcU3RhZ2luZ1VzZXJzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Settings/TargetGroups.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2V0dGluZ3NcVGFyZ2V0R3JvdXBzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Shared/Components/Breadcrumbs/ModuleBreadcrumbs.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQnJlYWRjcnVtYnNcTW9kdWxlQnJlYWRjcnVtYnMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Shared/Components/Custom/Form/DatePicker.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQ3VzdG9tXEZvcm1cRGF0ZVBpY2tlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Shared/Components/Custom/Form/DateRangePicker.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQ3VzdG9tXEZvcm1cRGF0ZVJhbmdlUGlja2VyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Shared/Components/Custom/Form/FileUploader.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQ3VzdG9tXEZvcm1cRmlsZVVwbG9hZGVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Shared/Components/Custom/Form/HtmlEditor.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQ3VzdG9tXEZvcm1cSHRtbEVkaXRvci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Shared/Components/Custom/Form/TimePicker.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQ3VzdG9tXEZvcm1cVGltZVBpY2tlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Shared/Components/Custom/Form/TimeRangePicker.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQ3VzdG9tXEZvcm1cVGltZVJhbmdlUGlja2VyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Shared/Components/Custom/Modules/ContentPreviewers/AllContentPreviewer.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQ3VzdG9tXE1vZHVsZXNcQ29udGVudFByZXZpZXdlcnNcQWxsQ29udGVudFByZXZpZXdlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Shared/Components/Custom/Modules/ContentPreviewers/AudioPreviewer.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQ3VzdG9tXE1vZHVsZXNcQ29udGVudFByZXZpZXdlcnNcQXVkaW9QcmV2aWV3ZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Shared/Components/Custom/Modules/ContentPreviewers/DocumentPreviewer.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQ3VzdG9tXE1vZHVsZXNcQ29udGVudFByZXZpZXdlcnNcRG9jdW1lbnRQcmV2aWV3ZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Shared/Components/Custom/Modules/ContentPreviewers/ImagePreviewer.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQ3VzdG9tXE1vZHVsZXNcQ29udGVudFByZXZpZXdlcnNcSW1hZ2VQcmV2aWV3ZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Shared/Components/Custom/Modules/ContentPreviewers/VideoPreviewer.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQ3VzdG9tXE1vZHVsZXNcQ29udGVudFByZXZpZXdlcnNcVmlkZW9QcmV2aWV3ZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Shared/Components/Custom/Modules/Overviews/LDS/AddNewLDSModule.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQ3VzdG9tXE1vZHVsZXNcT3ZlcnZpZXdzXExEU1xBZGROZXdMRFNNb2R1bGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Shared/Components/Custom/Modules/Overviews/LDS/ModuleLDSCalendarOverview.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQ3VzdG9tXE1vZHVsZXNcT3ZlcnZpZXdzXExEU1xNb2R1bGVMRFNDYWxlbmRhck92ZXJ2aWV3LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Shared/Components/Custom/Modules/Overviews/LDS/ModuleLDSGanttOverview.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQ3VzdG9tXE1vZHVsZXNcT3ZlcnZpZXdzXExEU1xNb2R1bGVMRFNHYW50dE92ZXJ2aWV3LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Shared/Components/Custom/Modules/Overviews/LDS/ModuleLDSTableOverview.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQ3VzdG9tXE1vZHVsZXNcT3ZlcnZpZXdzXExEU1xNb2R1bGVMRFNUYWJsZU92ZXJ2aWV3LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Shared/Components/Custom/Modules/Overviews/PST/ModulePSTTableOverview.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQ3VzdG9tXE1vZHVsZXNcT3ZlcnZpZXdzXFBTVFxNb2R1bGVQU1RUYWJsZU92ZXJ2aWV3LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Shared/Components/Custom/Modules/Targeting/TargetedEntityModal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQ3VzdG9tXE1vZHVsZXNcVGFyZ2V0aW5nXFRhcmdldGVkRW50aXR5TW9kYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Shared/Components/Custom/Modules/Targeting/TargetedEntityPST.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQ3VzdG9tXE1vZHVsZXNcVGFyZ2V0aW5nXFRhcmdldGVkRW50aXR5UFNULmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Shared/Components/Custom/Modules/Targeting/TargetingExposure.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQ3VzdG9tXE1vZHVsZXNcVGFyZ2V0aW5nXFRhcmdldGluZ0V4cG9zdXJlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Shared/Components/Custom/Modules/Targeting/TargetingExposureModal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQ3VzdG9tXE1vZHVsZXNcVGFyZ2V0aW5nXFRhcmdldGluZ0V4cG9zdXJlTW9kYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Shared/Components/Custom/Reports/ModuleReportFilter.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQ3VzdG9tXFJlcG9ydHNcTW9kdWxlUmVwb3J0RmlsdGVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Shared/Components/Custom/Reports/ReportBreadcrumb.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQ3VzdG9tXFJlcG9ydHNcUmVwb3J0QnJlYWRjcnVtYi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Shared/Components/OverviewDataFilters/ModulesDataFilterLDS.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcT3ZlcnZpZXdEYXRhRmlsdGVyc1xNb2R1bGVzRGF0YUZpbHRlckxEUy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Shared/Components/OverviewDataFilters/ModulesDataFilterPST.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcT3ZlcnZpZXdEYXRhRmlsdGVyc1xNb2R1bGVzRGF0YUZpbHRlclBTVC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Shared/Components/OverviewDataTables/ModulesOverviewDataTableLDS.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcT3ZlcnZpZXdEYXRhVGFibGVzXE1vZHVsZXNPdmVydmlld0RhdGFUYWJsZUxEUy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Shared/Components/OverviewDataTables/ModulesOverviewDataTablePST.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcT3ZlcnZpZXdEYXRhVGFibGVzXE1vZHVsZXNPdmVydmlld0RhdGFUYWJsZVBTVC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Shared/Helpers/HtmlHelpers/AppUrlsHelper.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEhlbHBlcnNcSHRtbEhlbHBlcnNcQXBwVXJsc0hlbHBlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Shared/Helpers/Resources/CommonFunctions.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEhlbHBlcnNcUmVzb3VyY2VzXENvbW1vbkZ1bmN0aW9ucy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Shared/Helpers/Resources/ResourcesLibrary.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEhlbHBlcnNcUmVzb3VyY2VzXFJlc291cmNlc0xpYnJhcnkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Support/AboutUs.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwcG9ydFxBYm91dFVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Support/ContactUs.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwcG9ydFxDb250YWN0VXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Support/FAQ.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwcG9ydFxGQVEuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Support/RemoteAssistance.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwcG9ydFxSZW1vdGVBc3Npc3RhbmNlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Support/Tutorials.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwcG9ydFxUdXRvcmlhbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/SVN/Work_In_Progress/SourceCode/CLA-Administration-Web/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-td331uk5uh

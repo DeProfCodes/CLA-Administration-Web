@@ -4,6 +4,6 @@ namespace CLA_Administration_Web.ViewModels.Reports
 {
     public class ModuleReportFilterViewModel
     {
-        public ModuleNamesType ModuleName { get; set; }
+        public ReportsNamesType ReportName { get; set; }
     }
 }

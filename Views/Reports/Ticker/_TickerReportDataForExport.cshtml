@@ -1,0 +1,57 @@
+﻿@model TickerReportsRaw
+
+<div class="card-body p-1 pb-0">
+    <!-- Report Type -->
+    <div class="row mt-1">
+        <div class="btn-group w-auto overview-filter-btn-group mx-auto">
+            <button class="btn custom-btn-group report-tab-type popup-report-type-nav T-1" id="SummaryLink-1" onclick="NavigateToPopupReportTab(1)">Ticker Summary</button>
+            <button class="btn custom-btn-group report-tab-type popup-report-type-nav T-2" id="ResponseSummaryLink-2" onclick="NavigateToPopupReportTab(2)">Ticker Completed</button>
+            <button class="btn custom-btn-group report-tab-type popup-report-type-nav T-3" id="ResponseClikcLink-3" onclick="NavigateToPopupReportTab(3)">Ticker Outstanding</button>
+        </div>
+    </div>
+</div>
+
+<div class="report-outter-container">
+    <div class="card-body p-1">
+        <div class="row flex-sm-nowrap">
+            <div class="flex-wrap report-body-container px-5">
+                <!-- 1. Ticker Summary Tab -->
+                <div id="TickerSummaryTab-1" class="report-module-tabs-popup hidden">
+                    <div class="report-raw-data">
+                        @Html.Raw(Model.Summary)
+                    </div>
+                </div>
+                <!-- 2. Ticker Completed Tab -->
+                <div id="TickerCompletedTab-2" class="report-module-tabs-popup hidden">
+                    <div class="report-raw-data">
+                        @Html.Raw(Model.Completed)
+                    </div>
+                </div>
+                <!-- 3. Ticker Outstanding Tab -->
+                <div id="TickerOutstandingTab-3" class="report-module-tabs-popup hidden">
+                    <div class="report-raw-data">
+                        @Html.Raw(Model.Outstanding)
+                    </div>
+                </div>
+                <!-- Navigation Buttons -->
+                <div class="row fix-content-bottom">
+                    <div class="col-12 ">
+                        <div class="pagination-section flex-column flex-md-row  text-center align-content-center justify-content-center ">
+                            <button class="btn section-nav-btns hidden" id="ReportPrevTabBtn" onclick="PreviousReportTab()">Back</button>
+                            <button class="btn section-nav-btns ms-3" id="ReportNextTabBtn" onclick="NextReportTab()">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function()
+    {
+        NavigateToPopupReportTab(1);
+    });
+
+</script>

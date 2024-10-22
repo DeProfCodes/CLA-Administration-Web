@@ -125,9 +125,13 @@ namespace CLA_Administration_Web.Helpers.Constants
         public class Reports
         {
             public static string Survey = $"/{reportsController}/{ReportsPages.SurveyReport.GetDisplayName()}";
+            public static string SurveyExport = $"/{reportsController}/{ReportsPages.SurveyReportForExport.GetDisplayName()}";
             public static string Popup = $"/{reportsController}/{ReportsPages.PopupReport.GetDisplayName()}";
+            public static string PopupExport = $"/{reportsController}/{ReportsPages.PopupReportForExport.GetDisplayName()}";
             public static string Ticker = $"/{reportsController}/{ReportsPages.TickerReport.GetDisplayName()}";
-            public static string Policy = $"/{reportsController}/{ReportsPages.PolicyReport.GetDisplayName()}";
+            public static string TickerExport = $"/{reportsController}/{ReportsPages.TickerReportForExport.GetDisplayName()}";
+            public static string Policy = $"/{reportsController}/{ReportsPages.PolicyReport.GetDisplayName()}"; 
+            public static string PolicyExport = $"/{reportsController}/{ReportsPages.PolicyReportForExport.GetDisplayName()}";
             public static string ActiveUsers = $"/{reportsController}/{ReportsPages.ActiveUsersReport.GetDisplayName()}";
             public static string ActiveMachines = $"/{reportsController}/{ReportsPages.ActiveMachinesReport.GetDisplayName()}";
             public static string CampaignDispatch = $"/{reportsController}/{ReportsPages.CampaignDispatchReport.GetDisplayName()}";

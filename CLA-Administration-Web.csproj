@@ -18,17 +18,28 @@
   <ItemGroup>
     <Folder Include="Views\Shared\Components\Custom\Modules\Views\" />
     <Folder Include="wwwroot\assets\plugins\bootstrap-material-datetimepicker\css\" />
+    <Folder Include="wwwroot\resources\reports\policy\" />
+    <Folder Include="wwwroot\resources\reports\survey\" />
+    <Folder Include="wwwroot\resources\reports\ticker\" />
     <Folder Include="wwwroot\scripts\ts\" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.8" />
+    <PackageReference Include="ClosedXML" Version="0.104.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.10" />
+    <PackageReference Include="Microsoft.CodeAnalysis" Version="4.11.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="4.11.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.11.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.VisualBasic" Version="4.11.0" />
     <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="5.6.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="ReportViewerCore.NETCore" Version="15.1.23" />
     <PackageReference Include="System.Diagnostics.EventLog" Version="6.0.0" />
+    <PackageReference Include="System.IO.Packaging" Version="8.0.1" />
+    <PackageReference Include="System.Security.Cryptography.Pkcs" Version="7.0.2" />
     <PackageReference Include="System.Security.Permissions" Version="8.0.0" />
   </ItemGroup>
 
@@ -52,6 +63,47 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="wwwroot\js\reports\piechart.js" />
+    <None Include="wwwroot\resources\reports\rpActiveUsers.rdlc" />
+    <None Include="wwwroot\resources\reports\rptActiveMachines.rdlc" />
+    <None Include="wwwroot\resources\reports\rptDispatch_Listings.rdlc" />
+    <None Include="wwwroot\resources\reports\rptPolicy_All.rdlc" />
+    <None Include="wwwroot\resources\reports\rptPolicy_Completed_Responses.rdlc" />
+    <None Include="wwwroot\resources\reports\rptPolicy_DataOnly.rdlc" />
+    <None Include="wwwroot\resources\reports\rptPolicy_Outstanding.rdlc" />
+    <None Include="wwwroot\resources\reports\rptPolicy_Questions_Detail.rdlc" />
+    <None Include="wwwroot\resources\reports\rptPolicy_Response_Summary.rdlc" />
+    <None Include="wwwroot\resources\reports\rptReporting_STM_All_Export_Only.rdlc" />
+    <None Include="wwwroot\resources\reports\rptReporting_STM_Export_Only.rdlc" />
+    <None Include="wwwroot\resources\reports\rptReporting_Surveys_Export_Only.rdlc" />
+    <None Include="wwwroot\resources\reports\rptReporting_Survey_All_Export_Only.rdlc" />
+    <None Include="wwwroot\resources\reports\rptReporting_Ticker_All_Export_Only.rdlc" />
+    <None Include="wwwroot\resources\reports\rptReporting_Ticker_Export_Only.rdlc" />
+    <None Include="wwwroot\resources\reports\rptSTM_All.rdlc" />
+    <None Include="wwwroot\resources\reports\rptSTM_Outstanding_Summary.rdlc" />
+    <None Include="wwwroot\resources\reports\rptSTM_Question_Summary.rdlc" />
+    <None Include="wwwroot\resources\reports\rptSTM_Responses_Breakdown.rdlc" />
+    <None Include="wwwroot\resources\reports\rptSTM_Summary.rdlc" />
+    <None Include="wwwroot\resources\reports\rptSurvey_All.rdlc" />
+    <None Include="wwwroot\resources\reports\rptSurvey_Complete_Opt_Out.rdlc" />
+    <None Include="wwwroot\resources\reports\rptSurvey_Comprehensive.rdlc" />
+    <None Include="wwwroot\resources\reports\rptSurvey_No_Response_Detail.rdlc" />
+    <None Include="wwwroot\resources\reports\rptSurvey_Opt_In_No_Response.rdlc" />
+    <None Include="wwwroot\resources\reports\rptSurvey_Opt_Out.rdlc" />
+    <None Include="wwwroot\resources\reports\rptSurvey_Outstanding.rdlc" />
+    <None Include="wwwroot\resources\reports\rptSurvey_Questions_Detail.rdlc" />
+    <None Include="wwwroot\resources\reports\rptSurvey_Questions_Detail_Correct.rdlc" />
+    <None Include="wwwroot\resources\reports\rptSurvey_Questions_Detail_Incorrect.rdlc" />
+    <None Include="wwwroot\resources\reports\rptSurvey_Questions_Detail_Opt_In.rdlc" />
+    <None Include="wwwroot\resources\reports\rptSurvey_Questions_Detail_Opt_In_Correct.rdlc" />
+    <None Include="wwwroot\resources\reports\rptSurvey_Questions_Detail_Opt_In_Incorrect.rdlc" />
+    <None Include="wwwroot\resources\reports\rptSurvey_Questions_Summary.rdlc" />
+    <None Include="wwwroot\resources\reports\rptSurvey_Questions_Summary_Opt_In.rdlc" />
+    <None Include="wwwroot\resources\reports\rptSurvey_Summary.rdlc" />
+    <None Include="wwwroot\resources\reports\rptTicker_All.rdlc" />
+    <None Include="wwwroot\resources\reports\rptTicker_Completed.rdlc" />
+    <None Include="wwwroot\resources\reports\rptTicker_Outstanding.rdlc" />
+    <None Include="wwwroot\resources\reports\rptTicker_Summary.rdlc" />
+    <None Include="wwwroot\resources\reports\rtpSTM_Outstanding.rdlc" />
   </ItemGroup>
     
   <ItemGroup>

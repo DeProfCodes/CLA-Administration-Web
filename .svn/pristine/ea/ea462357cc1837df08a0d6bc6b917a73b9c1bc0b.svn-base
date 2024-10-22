@@ -1,0 +1,118 @@
+using CLA_Administration_Web.Helpers.Constants;
+using CLA_Administration_Web.Helpers.MockData;
+using CLA_Administration_Web.Helpers.Reporting;
+using CLA_Administration_Web.ViewModels.Reports;
+using Microsoft.AspNetCore.Hosting.Server;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting.Internal;
+using Microsoft.Reporting.NETCore;
+using Newtonsoft.Json;
+using System.Text;
+
+namespace CLA_Administration_Web.Controllers
+{
+    public class ReportsController : Controller
+    {
+        private readonly IWebHostEnvironment _hostingEnvironment;
+        public ReportsController(IWebHostEnvironment hostingEnvironment)
+        {
+            _hostingEnvironment = hostingEnvironment;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> SurveyReport()
+        {
+            return PartialView(AppPagesLinks.Reports.SurveyPageLink);
+        }
+
+        public ActionResult ExportLocalReport()
+        {
+            LocalReport localReport = new LocalReport();
+
+            string reportPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources/Reporting/Report/rptReporting_STM_ALL_Export_Only.rdlc");
+            localReport.ReportPath = reportPath;
+
+            var reportData = ReportingHelper.GetPopupReport(_hostingEnvironment); 
+
+            string mimeType, encoding, fileNameExtension;
+            Warning[] warnings;
+            string[] streams;
+
+            byte[] renderedBytes = localReport.Render("EXCEL", null, out mimeType, out encoding, out fileNameExtension, out streams, out warnings);
+
+            return File(renderedBytes, mimeType, "PopupReport.xlsx");
+        }
+
+        public IActionResult ShowLocalReport()
+        {
+            var data = ReportsMockData.GetReportingMockData().PopupReporting.Summary;
+
+            LocalReport localReport = new LocalReport();
+            using (FileStream fs = new FileStream(data.ReportRDLCPath, FileMode.Open, FileAccess.Read))
+            {
+                localReport.LoadReportDefinition(fs);
+            }
+
+            localReport.DataSources.Add(new ReportDataSource(data.RDLCName, data.DataSet.Tables[0]));
+
+            string mimeType, encoding, fileNameExtension;
+            Warning[] warnings;
+            string[] streams;
+
+            byte[] renderedBytes = localReport.Render(
+                    "HTML5",  
+                    null, out mimeType, out encoding, out fileNameExtension,
+                    out streams, out warnings);
+
+            return Content(Encoding.UTF8.GetString(renderedBytes), "text/html");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> PopupReport()
+        {
+            var popupReportVm = new PopupReportViewModel
+            {
+                PopupReport = ReportingHelper.GetPopupReport(_hostingEnvironment)
+            };
+
+            return PartialView(AppPagesLinks.Reports.PopupPageLink, popupReportVm);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> TickerReport()
+        {
+            return PartialView(AppPagesLinks.Reports.TickerPageLink);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> PolicyReport()
+        {
+            return PartialView(AppPagesLinks.Reports.PolicyPageLink);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ActiveUsersReport()
+        {
+            return PartialView(AppPagesLinks.Reports.ActiveUsersPageLink);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ActiveMachinesReport()
+        {
+            return PartialView(AppPagesLinks.Reports.ActiveMachinesPageLink);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> CampaignDispatchReport()
+        {
+            return PartialView(AppPagesLinks.Reports.CampaignDispatchPageLink);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> TroubleshootReport()
+        {
+            return PartialView(AppPagesLinks.Reports.TroubleshootPageLink);
+        }
+    }
+}
+ 

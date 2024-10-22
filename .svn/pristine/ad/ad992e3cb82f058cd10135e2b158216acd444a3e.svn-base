@@ -1,0 +1,35 @@
+﻿using System.Data;
+
+namespace CLA_Administration_Web.ViewModels.Reports
+{
+    public class ReportDataRDLCViewModel
+    {
+        public PopupReports PopupReporting { get; set; }
+    }
+
+    public class PopupReports
+    {
+        public ReportRDLC Summary { get; set; }
+
+        public ReportRDLC OutstandingLiveAndStaging { get; set; }
+
+        public ReportRDLC CompletedLiveAndStaging { get; set; }
+
+        public ReportRDLC ResponseDetailsLiveAndStaging { get; set; }
+
+        public ReportRDLC OutstandingSummary { get; set; }
+
+        public ReportRDLC AllDataOnly { get; set; }
+
+        public ReportRDLC Status { get; set; }
+    }
+
+    public class ReportRDLC
+    {
+        public string ReportRDLCPath { get; set; }
+
+        public string RDLCName { get; set; }
+
+        public DataSet DataSet { get; set; }
+    }
+}

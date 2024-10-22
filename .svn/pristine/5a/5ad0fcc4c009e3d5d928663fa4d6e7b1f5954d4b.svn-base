@@ -1,0 +1,81 @@
+var popupReportTab = 1;
+var totalPopupReportTabs = 8;
+
+var backBtnId = "#ReportNavBackBtn";
+var nextBtnId = "#ReportNavNextBtn";
+
+function NavigateToPopupReportTab(tabNo)
+{
+    popupReportTab = tabNo;
+    SwitchReportTab("popup", tabNo);
+    UpdateReportNavigationBtns(popupReportTab, totalPopupReportTabs);
+}
+
+function NextReportTab()
+{
+    if(popupReportTab < totalPopupReportTabs)
+    {
+        popupReportTab++;
+
+        NavigateToPopupReportTab(popupReportTab);
+    }
+}
+
+function PreviousReportTab()
+{
+    if(popupReportTab > 1)
+    {
+        popupReportTab--;
+
+        NavigateToPopupReportTab(popupReportTab);
+    }
+}
+
+function UpdateReportNavigationBtns(tabNo, maxTabs)
+{
+    if(tabNo == 1)
+    {
+        HideShowElement(backBtnId, HideShow.HIDE);
+        HideShowElement(nextBtnId, HideShow.SHOW);
+    }
+    else if(tabNo > 1 && tabNo < maxTabs)
+    {
+        HideShowElement(backBtnId, HideShow.SHOW);
+        HideShowElement(nextBtnId, HideShow.SHOW);
+    }
+    else if(tab == maxTabs)
+    {
+        HideShowElement(backBtnId, HideShow.SHOW);
+        HideShowElement(nextBtnId, HideShow.HIDE);
+    }
+}
+
+function SwitchReportTab(moduleReportName, tabNo)
+{
+    moduleReportName = moduleReportName.toLowerCase();
+
+    var reportModuleTabs = $(`.report-module-tabs-${moduleReportName}`);
+    HideShowElement(`.report-module-tabs-${moduleReportName}`, HideShow.HIDE);
+
+    for (let i = 0; i < reportModuleTabs.length; i++)
+    {
+        var tabElementId = `#${reportModuleTabs[i].getAttribute("id")}`;
+        var data = tabElementId.split("-");
+        
+        if (data != null && data.length >= 2)
+        {
+            var tabNumber = data[1];
+            if (tabNumber == tabNo)
+            {
+                var linkTab = `.popup-report-type-nav.T-${tabNumber}`;
+
+                $(".popup-report-type-nav").removeClass("btn-group-active");
+                $(linkTab).addClass("btn-group-active");
+                
+                HideShowElement(tabElementId, HideShow.SHOW);
+
+                break;
+            }
+        }
+    }
+}

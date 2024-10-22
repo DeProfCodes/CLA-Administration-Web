@@ -2,77 +2,110 @@
 .report-filter-module-status-titles
 {
     width: 130px;
-    margin-left:auto;
+    margin-left: auto;
 }
+
 .report-filter-module-status-sliders
 {
     width: 100px;
-    margin-right:auto;
+    margin-right: auto;
     margin-left: 30px;
 }
+
 .report-tab-type
 {
     width: 160px !important;
     color: var(--theme-blue-clr);
 }
+
+.report-data-area
+{
+    height: 630px;
+    min-height: 630px;
+}
 .report-outter-container
 {
     min-width: 940px;
-    height: 470px;
-    min-height: 470px;
-    margin:15px;
+    height: 575px;
+    min-height: 575px;
+    margin: 15px;
+    margin-top: 0;
 }
+
 .report-body-container
 {
     overflow: auto;
-    max-height: 410px;
-    height: 410px;
+    max-height: 540px;
+    height: 540px;
     border-bottom: 2px solid var(--theme-blue-clr);
     scrollbar-color: var(--theme-blue-clr) white;
     scrollbar-width: thin;
+}
+
+.report-raw-data
+{
+    margin-bottom: 10px;
+    margin-left: -40px;
 }
 
 .report-piechart-color-blue
 {
     background: rgb(65,105,225) !important;
 }
+
 .report-piechart-color-blue-dim
 {
-    background:rgba(65,105,225,.3) !important;
+    background: rgba(65,105,225,.3) !important;
 }
 
 .report-piechart-color-orange
 {
     background: rgb(255,140,0) !important;
 }
+
 .report-piechart-color-orange-dim
 {
-    background:rgba(255,140,0,.3) !important;
+    background: rgba(255,140,0,.3) !important;
 }
 
 .report-piechart-color-crimson
 {
-    background:rgb(60,0,0) !important;
+    background: rgb(60,0,0) !important;
 }
+
 .report-piechart-color-crimson-dim
 {
-    background:rgba(60,0,0,.3) !important;
+    background: rgba(60,0,0,.3) !important;
 }
+
 .report-piechart-color-slate
 {
-    background:rgb(47,79,79) !important;
+    background: rgb(47,79,79) !important;
 }
+
 .report-piechart-color-slate-dim
 {
-    background:rgba(47,79,79,.3) !important;
+    background: rgba(47,79,79,.3) !important;
 }
+
 .report-piechart-color-silver
 {
-    background:rgba(192,192,192) !important;
+    background: rgba(192,192,192) !important;
 }
+
 .report-piechart-color-silver-dim
 {
-    background:rgba(192,192,192,.3) !important;
+    background: rgba(192,192,192,.3) !important;
+}
+
+.report-piechart-color-green
+{
+    background: rgba(22,160,133) !important;
+}
+
+.report-piechart-color-green-dim
+{
+    background: rgba(22,160,133,.3) !important;
 }
 
 .report-body-container
@@ -87,27 +120,32 @@
         font-size: 14px;
     }
 }
+
 @media screen and (max-width:1560px)
 {
     .report-filter-datepicker
     {
         flex-direction: column;
     }
+
     .report-filter-datepicker #DatePickerEndDateTitle
     {
-        margin-left:0;
+        margin-left: 0;
         width: 30px;
     }
+
     .report-filter-datepicker #DatePickerEndDateContainer
     {
-        margin-top:10px;
+        margin-top: 10px;
     }
+
     #ReportModuleSelect
     {
         width: 225px !important;
-        margin-left:-3px;
+        margin-left: -3px;
     }
 }
+
 @media screen and (max-width:1450px)
 {
     .report-tab-type
@@ -115,5 +153,3 @@
         font-size: 12px;
     }
 }
-
-

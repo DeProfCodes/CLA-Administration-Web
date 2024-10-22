@@ -66,6 +66,7 @@ function LoadPartialViewWithLoader(url, destinationDiv, loaderDiv)
         {
             FinishedLoading(destinationDiv, res);   
             $(loaderDiv).css("visibility", "hidden");
+            HideShowElementVisibity("#SecondaryLoaderImage", HideShow.HIDE);
             $(destinationDiv).css("opacity", "1");
         },
         error: function (res)

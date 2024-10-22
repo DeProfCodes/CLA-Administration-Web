@@ -1,0 +1,141 @@
+﻿using CLAModulesLibrary.Models.Popup;
+using CLAModulesLibrary.Models.Popup.SubModels;
+using System.ComponentModel.DataAnnotations;
+
+namespace CLA_Administration_Web.ViewModels.Reports
+{
+    public class PopupReportStatsMockViewModel
+    {
+        //Title
+        public int PopupId { get; set; }
+
+        public string PopupTitle { get; set; }
+
+        public string EffectiveFrom { get; set; }
+
+        public string EffectiveTo { get; set; }
+
+        public string PopupReportTitle { get; set; }
+
+        public string PopupReportTimeframe { get; set; }
+
+        //SummaryScreen
+        public int Delivered { get; set; }
+
+        public int NotDelivered { get; set; }
+
+        public int Targeted { get; set; }
+
+        //Response Summary
+        public int Click { get; set; }
+
+        public int Dismiss { get; set; }
+
+        public int Snooze { get; set; }
+
+        public int AutoHide { get; set; }
+
+        public int Show { get; set; }
+
+        //
+        public List<PopupResponseBreakDown> ResponseClick { get; set; }
+
+        public List<PopupResponseBreakDown> ResponseDismiss { get; set; }
+
+        public List<PopupResponseBreakDown> ResponseAutoHide { get; set; }
+
+        public List<PopupResponseBreakDown> ResponseSnooze { get; set; }
+
+        public List<PopupResponseBreakDown> ResponseShow { get; set; }
+
+        public List<PopupOutstanding> PopupOutstandings { get; set; }
+    }
+
+    public class PopupResponseBreakDown
+    {
+        public string Domain { get; set; }
+
+        public string UserId { get; set; }
+
+        public string Username { get; set; }
+
+        public UserStatus UserStatus { get; set; }
+
+        public string MachineId { get; set; }
+
+        public string MachineName { get; set; }
+
+        public DateTime BubbleShowDT { get; set; }
+
+        public DateTime BubbleClickDT { get; set; }
+
+        public DateTime BubbleDismissDT { get; set; }
+
+        public DateTime BubbleSnoozeDT { get; set; }
+
+        public DateTime BubbleAutoHideDT { get; set; }
+
+        public string FeedbackLikeDislike { get; set; }
+
+        public string FeedbackComment { get; set; }
+
+        public DateTime LastSyncDT { get; set; }
+    }
+
+    public class PopupOutstanding
+    {
+        public string Domain { get; set; }
+
+        public string UserId { get; set; }
+
+        public string Username { get; set; }
+
+        public UserStatus UserStatus { get; set; }
+
+        public string MachineId { get; set; }
+
+        public string MachineName { get; set; }
+
+        public DateTime LastSyncDT { get; set; }
+    }
+
+    public enum UserStatus
+    {
+        [Display(Name = "")]
+        None,
+
+        [Display(Name = "Active")]
+        Active,
+
+        [Display(Name = "Inactive")]
+        Inactive,
+
+        [Display(Name = "Not Installed")]
+        NotInstalled
+    }
+
+    public class ReportDataItem
+    {
+        public DateTime? Eff_From { get; set; }
+        public DateTime? Eff_To { get; set; }
+        public int STM_ID { get; set; }
+        public string STM_Title { get; set; }
+        public string STM_Text { get; set; }
+        public string User_Name { get; set; }
+        public string Machine_Name { get; set; }
+        public DateTime? Bubble_Show_DT { get; set; }
+        public DateTime? Bubble_Click_DT { get; set; }
+        public DateTime? Bubble_Dismiss_DT { get; set; }
+        public DateTime? Bubble_Snooze_DT { get; set; }
+        public DateTime? Bubble_AutoHide_DT { get; set; }
+        public int? Snooze_Count { get; set; }
+        public string Feedback_LikeDislike { get; set; }
+        public string Feedback_Comment { get; set; }
+        public int Domain_Id { get; set; }
+        public string User_ID { get; set; }
+        public string Machine_ID { get; set; }
+        public DateTime? Bubble_ReShow_DT { get; set; }
+        public string Timeslot_From { get; set; }
+        public string Timeslot_To { get; set; }
+    }
+}

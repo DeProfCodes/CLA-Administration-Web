@@ -1,0 +1,9 @@
+﻿using Microsoft.Reporting.NETCore;
+
+namespace CLA_Administration_Web.ViewModels.Reports
+{
+    public class PopupReportViewModel
+    {
+        public LocalReport PopupReport { get; set; }
+    }
+}
