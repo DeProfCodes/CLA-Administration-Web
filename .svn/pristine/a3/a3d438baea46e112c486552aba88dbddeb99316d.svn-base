@@ -1,0 +1,60 @@
+
+.loader 
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%; /* Adjust 200px if the left navigation width changes */
+    height: 100%;
+    background-color: rgba(0, 0, 0, .4);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    color: #333;
+    z-index: 1000;
+}
+
+#MainLoader, #SecondaryLoader
+{
+    visibility: hidden;
+}
+
+#MainLoader
+{
+    margin-top: 62px;
+}
+
+
+#MainLoaderImage
+{
+    width: 70px;
+    height: 70px;
+    visibility: hidden; 
+    margin-top:-160px;
+}
+#SecondaryLoaderImage
+{
+    width: 70px;
+    height: 70px;
+    margin-top:-160px;
+}
+
+#MainLoaderMessage
+{
+    margin-top: 20px; 
+    color:#04316d;
+    font-weight: bold !important;
+}
+#SecondaryLoaderMessage
+{
+    margin-top: 20px; 
+    color:#04316d;
+    font-weight: bold !important;
+}
+
+#PageArea
+{
+    min-height: 92vh !important;
+}

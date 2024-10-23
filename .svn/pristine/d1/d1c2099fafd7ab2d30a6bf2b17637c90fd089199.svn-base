@@ -1,0 +1,222 @@
+﻿@using CLACommonFunctionsLibrary_NET.Helpers.Enums
+@using CLA_Administration_Web.Helpers.Constants
+@using CLA_Administration_Web.Helpers.Enums.AppPages
+
+<script>
+
+    function GetPageUrl(page, id = null, id2 = null)
+    {
+        var url = "";
+
+        // Dashboard Section
+        if (page == '@DashboardPages.Dashboard') url = '@AppPagesUrl.Dashboard.Home';
+        if (page == '@DashboardPages.Calendar') url = '@AppPagesUrl.Dashboard.Calendar';
+
+        // Modules Section
+        // All
+        if (page == '@ModulesPages.AllModules') url = '@AppPagesUrl.Modules.AllModules';
+        
+        // PST Modules: Popup, Survey, Ticker, RSS
+        if (page == '@ModulesPages.ModulePSTTableOverview') url = '@AppPagesUrl.Modules.ModulePSTTableOverview';
+        
+        // LDS Modules: Lockscreen, Desktop, Screensaver
+        if (page == '@ModulesPages.ModuleLDSTableOverview') url = '@AppPagesUrl.Modules.ModuleLDSTableOverview';
+        if (page == '@ModulesPages.ModuleLDSCalendarOverview') url = '@AppPagesUrl.Modules.ModuleLDSCalendarOverview';
+        if (page == '@ModulesPages.ModuleLDSGanttOverview') url = '@AppPagesUrl.Modules.ModuleLDSGanttOverview';
+        if (page == '@ModulesPages.AddNewLDSModule') url = '@AppPagesUrl.Modules.AddNewLDSModuleTableOverview' + `?moduleNameType=${id}`;
+
+        // Content Library
+        if (page == '@ModulesPages.ContentLibraryCategories') url = '@AppPagesUrl.Modules.ContentLibraryCategories';
+        if (page == '@ModulesPages.ContentLibraryCategoryDetails') url = '@AppPagesUrl.Modules.ContentLibraryCategoryDetails' + `?categoryId=${id}`;
+        if (page == '@ModulesPages.AddNewContentLibraryCategory') url = '@AppPagesUrl.Modules.AddNewContentLibraryCategory' + `?categoryId=${id}`;
+        if (page == '@ModulesPages.ContentLibraryContent') url = '@AppPagesUrl.Modules.ContentLibraryContent' + `?categoryId=${id}`;
+        if (page == '@ModulesPages.ContentLibraryContentDetails') url = '@AppPagesUrl.Modules.ContentLibraryContentDetails' + `?contentId=${id}`;
+        if (page == '@ModulesPages.AddNewContentLibraryContent') url = '@AppPagesUrl.Modules.AddNewContentLibraryContent' + `?categoryId=${id}&moduleName=${id2}`;
+
+        // Desktop
+        if (page == '@ModulesPages.DesktopOverview') url = '@AppPagesUrl.Modules.DesktopOverview';
+        if (page == '@ModulesPages.DesktopDetails') url = '@AppPagesUrl.Modules.DesktopDetails' + `?desktopId=${id}`;
+        if (page == '@ModulesPages.DesktopAddNew') url = '@AppPagesUrl.Modules.DesktopAddNew';
+        
+        // Locked Desktop
+        if (page == '@ModulesPages.LockedDesktopOverview') url = '@AppPagesUrl.Modules.LockedDesktopOverview';
+        if (page == '@ModulesPages.LockedDesktopDetails') url = '@AppPagesUrl.Modules.LockedDesktopDetails' + `?lockedDesktopId=${id}`;
+        if (page == '@ModulesPages.LockedDesktopAddNew') url = '@AppPagesUrl.Modules.LockedDesktopAddNew';
+        
+        // Screensaver
+        if (page == '@ModulesPages.ScreensaverOverview') url = '@AppPagesUrl.Modules.ScreensaverOverview';
+        if (page == '@ModulesPages.ScreensaverDetails') url = '@AppPagesUrl.Modules.ScreensaverDetails' + `?screensaverId=${id}`;
+        if (page == '@ModulesPages.ScreensaverAddNew') url = '@AppPagesUrl.Modules.ScreensaverAddNew';
+        
+        // Popup
+        if (page == '@ModulesPages.PopupOverview') url = '@AppPagesUrl.Modules.PopupOverview';
+        if (page == '@ModulesPages.PopupDetails') url = '@AppPagesUrl.Modules.PopupDetails' + `?popupId=${id}`;
+        if (page == '@ModulesPages.PopupAddNew') url = '@AppPagesUrl.Modules.PopupAddNew' + `?popupId=${id}`;
+        
+        // Survey
+        if (page == '@ModulesPages.SurveyOverview') url = '@AppPagesUrl.Modules.SurveyOverview';
+        if (page == '@ModulesPages.SurveyDetails') url = '@AppPagesUrl.Modules.SurveyDetails' + `?surveyId=${id}`;
+        if (page == '@ModulesPages.SurveyQuestionsOverview') url = '@AppPagesUrl.Modules.SurveyQuestionsOverview' + `?surveyId=${id}`;;
+        if (page == '@ModulesPages.SurveyQuestionDetails') url = '@AppPagesUrl.Modules.SurveyQuestionDetails' + `?surveyId=${id}&questionId=${id2}`;
+        if (page == '@ModulesPages.SurveyAddNew') url = '@AppPagesUrl.Modules.SurveyAddNew' + `?surveyId=${id}`;
+        if (page == '@ModulesPages.AddNewSurveyQuestion') url = '@AppPagesUrl.Modules.AddNewSurveyQuestion' + `?surveyId=${id}&questionId=${id2}`;
+        
+        // Ticker
+        if (page == '@ModulesPages.TickerOverview') url = '@AppPagesUrl.Modules.TickerOverview';
+        if (page == '@ModulesPages.TickerDetails') url = '@AppPagesUrl.Modules.TickerDetails' + `?tickerId=${id}`;
+        if (page == '@ModulesPages.TickerAddNew') url = '@AppPagesUrl.Modules.TickerAddNew' + `?tickerId=${id}`;
+       
+        // RSS
+        if (page == '@ModulesPages.RSSCategoryOverview') url = '@AppPagesUrl.Modules.RSSCategoryOverview';
+        if (page == '@ModulesPages.RSSCategoryDetails') url = '@AppPagesUrl.Modules.RSSCategoryDetails' + `?rssCategoryId=${id}`;
+        if (page == '@ModulesPages.RSSFeedOverview') url = '@AppPagesUrl.Modules.RSSFeedOverview' + `?rssCategoryId=${id}`;
+        if (page == '@ModulesPages.RSSFeedDetails') url = '@AppPagesUrl.Modules.RSSFeedDetails' + `?rssCategoryId=${id}&rssFeedId=${id2}`;
+        if (page == '@ModulesPages.RSSAddNewCategory') url = '@AppPagesUrl.Modules.RSSAddNewCategory' + `?rssCategoryId=${id}`;
+        if (page == '@ModulesPages.RSSAddNewFeed') url = '@AppPagesUrl.Modules.RSSAddNewFeed' + `?rssCategoryId=${id}&rssFeedId=${id2}`;
+        
+        // Previewers
+        if (page == '@ModulesPages.ModuleContentPreviewer') url = '@AppPagesUrl.Modules.ModuleContentPreviewer' + `?contentPreviewType=${id}`;
+
+
+        // Settings Section
+        if (page == '@SettingsPages.StagingUsers') url = '@AppPagesUrl.Setttings.StagingUsers';
+        if (page == '@SettingsPages.SetupExclusions') url = '@AppPagesUrl.Setttings.SetupExclusions';
+        if (page == '@SettingsPages.AdminAccess') url = '@AppPagesUrl.Setttings.AdminAccess';
+        if (page == '@SettingsPages.TargetGroups') url = '@AppPagesUrl.Setttings.TargetGroups';
+        if (page == '@SettingsPages.CustomUserSettings') url = '@AppPagesUrl.Setttings.CustomUserSettings';
+        if (page == '@SettingsPages.ActiveConnections') url = '@AppPagesUrl.Setttings.ActiveConnections';
+        if (page == '@SettingsPages.SkinsOfflineImages') url = '@AppPagesUrl.Setttings.SkinsOfflineImages';
+        if (page == '@SettingsPages.DesktopInformation') url = '@AppPagesUrl.Setttings.DesktopInformation';
+
+        // Reports Section
+        if (page == '@ReportsPages.SurveyReport') url = '@AppPagesUrl.Reports.Survey';
+        if (page == '@ReportsPages.SurveyReportForExport') url = '@AppPagesUrl.Reports.SurveyExport' + `?surveyId=${id}`;
+        if (page == '@ReportsPages.PopupReport') url = '@AppPagesUrl.Reports.Popup';
+        if (page == '@ReportsPages.PopupReportForExport') url = '@AppPagesUrl.Reports.PopupExport' + `?popupId=${id}`;
+        if (page == '@ReportsPages.TickerReport') url = '@AppPagesUrl.Reports.Ticker';
+        if (page == '@ReportsPages.TickerReportForExport') url = '@AppPagesUrl.Reports.TickerExport' + `?tickerId=${id}`;
+        if (page == '@ReportsPages.PolicyReport') url = '@AppPagesUrl.Reports.Policy';
+        if (page == '@ReportsPages.PolicyReportForExport') url = '@AppPagesUrl.Reports.PolicyExport' + `?policyId=${id}`;
+        if (page == '@ReportsPages.ActiveUsersReport') url = '@AppPagesUrl.Reports.ActiveUsers';
+        if (page == '@ReportsPages.ActiveMachinesReport') url = '@AppPagesUrl.Reports.ActiveMachines';
+        if (page == '@ReportsPages.CampaignDispatchReport') url = '@AppPagesUrl.Reports.CampaignDispatch';
+        if (page == '@ReportsPages.TroubleshootReport') url = '@AppPagesUrl.Reports.Troubleshoot';
+
+        // Support Section
+        if (page == '@SupportPages.AboutUs') url = '@AppPagesUrl.Support.AboutUs';
+        if (page == '@SupportPages.Tutorials') url = '@AppPagesUrl.Support.Tutorials';
+        if (page == '@SupportPages.RemoteAssistance') url = '@AppPagesUrl.Support.RemoteAssistance';
+        if (page == '@SupportPages.ContactUs') url = '@AppPagesUrl.Support.ContactUs';
+        if (page == '@SupportPages.FAQ') url = '@AppPagesUrl.Support.FAQ';
+
+        // Account Section
+        if (page == '@AccountPages.AccountOverview') url = '@AppPagesUrl.Account.AccountOverview';
+        if (page == '@AccountPages.SecuritySettings') url = '@AppPagesUrl.Account.SecuritySettings';
+        
+        // Admin Section
+        if (page == '@AdminPages.UploadFiles') url = '@AppPagesUrl.Admin.UploadFiles';
+        if (page == '@AdminPages.ApplicationParameters') url = '@AppPagesUrl.Admin.ApplicationParameters';
+        if (page == '@AdminPages.Licensing') url = '@AppPagesUrl.Admin.Licensing';
+        if (page == '@AdminPages.AutoReminders') url = '@AppPagesUrl.Admin.AutoReminders';
+        if (page == '@AdminPages.SQLBrowser') url = '@AppPagesUrl.Admin.SQLBrowser';
+
+        // Targeting Section
+        if (page == '@TargetingPages.TargetedEntities') url = '@AppPagesUrl.Targeting.TargetedEntities' + `?moduleName=${id}&isReadonly=${id2}`;
+        if (page == '@TargetingPages.TargetingExposure') url = '@AppPagesUrl.Targeting.TargetingExposure' + `?moduleName=${id}`;
+        
+        return url;
+    }
+
+    function GetPageTitle(page, id)
+    {
+       var title = "";
+
+        // Dashboard Section
+        if (page == '@DashboardPages.Dashboard') title = "Dashboad";
+        if (page == '@DashboardPages.Calendar') title = "Calendar";
+
+        // Modules Section
+        if (page == '@ModulesPages.AllModules') title = "All Modules";
+
+        if (page == '@ModulesPages.ContentLibraryCategories') title = "Content Library Categories";
+        if (page == '@ModulesPages.ContentLibraryCategoryDetails') title = "Category Details";
+        if (page == '@ModulesPages.AddNewContentLibraryCategory') title = (id == null) ? "Add New Content Library Category" : "Edit Category";
+        if (page == '@ModulesPages.ContentLibraryContent') title = "Content Library Contents";
+        if (page == '@ModulesPages.ContentLibraryContentDetails') title = "Contents Details";
+        if (page == '@ModulesPages.AddNewContentLibraryContent') title = (id == null) ? "Add New Content" : "Edit Content";
+        //
+        if (page == '@ModulesPages.LockedDesktopOverview') title = "Locked Desktops Overview";
+        if (page == '@ModulesPages.LockedDesktopDetails') title = "Locked Desktops Details";
+        if (page == '@ModulesPages.LockedDesktopAddNew') title = "Add New Locked Desktop";
+        //
+        if (page == '@ModulesPages.DesktopOverview') title = "Desktops Overview";
+        if (page == '@ModulesPages.DesktopDetails') title = "Desktops Details";
+        if (page == '@ModulesPages.DesktopAddNew') title = "Add New Desktop";
+        //
+        if (page == '@ModulesPages.ScreensaverOverview') title = "Screensavers Overview";
+        if (page == '@ModulesPages.ScreensaverDetails') title = "Screensaver Details";
+        if (page == '@ModulesPages.ScreensaverAddNew') title = "Add New Screensaver Sequence";
+        //
+        if (page == '@ModulesPages.PopupOverview') title = "Popups Overview";
+        if (page == '@ModulesPages.PopupDetails') title = "Popup Details";
+        if (page == '@ModulesPages.PopupAddNew') title = (id == null) ? "Add New Popup" : "Edit Popup";
+        //
+        if (page == '@ModulesPages.SurveyOverview') title = "Surveys Overview";
+        if (page == '@ModulesPages.SurveyDetails') title = "Surveys Details";
+        if (page == '@ModulesPages.SurveyQuestionsOverview') title = "Survey Questions Overview";
+        if (page == '@ModulesPages.SurveyQuestionDetails') title = "Survey Questions Details";
+        if (page == '@ModulesPages.SurveyAddNew') title = (id == null) ? "Add New Survey" : "Edit Survey";
+        if (page == '@ModulesPages.AddNewSurveyQuestion') title = "Add New Survey Question"
+        //
+        if (page == '@ModulesPages.TickerOverview') title = "Tickers Overview";
+        if (page == '@ModulesPages.TickerDetails') title = "Ticker Details";
+        if (page == '@ModulesPages.TickerAddNew') title = (id == null) ? "Add New Ticker" : "Edit Ticker";
+        //
+        if (page == '@ModulesPages.RSSCategoryOverview') title = "RSS Overview";
+        if (page == '@ModulesPages.RSSCategoryDetails') title = "RSS Category Details";
+        if (page == '@ModulesPages.RSSFeedOverview') title = "RSS Feed Overview";
+        if (page == '@ModulesPages.RSSFeedDetails') title = "RSS Feed Details";
+        if (page == '@ModulesPages.RSSAddNewCategory') title = (id == null) ? "Add New RSS Category" : "Edit RSS Category";
+        if (page == '@ModulesPages.RSSAddNewFeed') title = (id == null) ? "Add New RSS Feed" : "Edit RSS Feed";
+
+        // Settings Section
+        if (page == '@SettingsPages.StagingUsers') title = "Manage Staging Users";
+        if (page == '@SettingsPages.SetupExclusions') title = "Manage Setup Exclusions";
+        if (page == '@SettingsPages.AdminAccess') title = "Admin Access";
+        if (page == '@SettingsPages.TargetGroups') title = "Manage Targeting Groups";
+        if (page == '@SettingsPages.CustomUserSettings') title = "Custom User Settings";
+        if (page == '@SettingsPages.ActiveConnections') title = "Manage Active Connections";
+        if (page == '@SettingsPages.SkinsOfflineImages') title = "Manage Skins & Offline Images";
+        if (page == '@SettingsPages.DesktopInformation') title = "Desktop Information";
+
+        // Reports Section
+        if (page == '@ReportsPages.SurveyReport') title = "Survey Report";
+        if (page == '@ReportsPages.PopupReport') title = "Popup Report";
+        if (page == '@ReportsPages.TickerReport') title = "Ticker Report";
+        if (page == '@ReportsPages.PolicyReport') title = "Policy Report";
+        if (page == '@ReportsPages.ActiveUsersReport') title = "Active Users Report";
+        if (page == '@ReportsPages.ActiveMachinesReport') title = "Active Machines Report";
+        if (page == '@ReportsPages.CampaignDispatchReport') title = "Campaign Dispatch Listing Report";
+        if (page == '@ReportsPages.TroubleshootReport') title = "Troubleshoot Report";
+
+        // Support Section
+        if (page == '@SupportPages.AboutUs') title = "About CLA";
+        if (page == '@SupportPages.Tutorials') title = "CLA Tutorials";
+        if (page == '@SupportPages.RemoteAssistance') title = "Remote Assistance";
+        if (page == '@SupportPages.ContactUs') title = "Contact Support";
+
+         // Account Section
+        if (page == '@AccountPages.AccountOverview') title = "Account Overview";
+        if (page == '@AccountPages.SecuritySettings') title = "Security Settings";
+
+        // Admin Section
+        if (page == '@AdminPages.UploadFiles') title = "Upload Files";
+        if (page == '@AdminPages.ApplicationParameters') title = "Application Parameters";
+        if (page == '@AdminPages.Licensing') title = "Licensing";
+        if (page == '@AdminPages.AutoReminders') title = "Auto Reminders";
+        if (page == '@AdminPages.SQLBrowser') title = "SQL Browser";
+
+        return title;
+    }
+
+</script>

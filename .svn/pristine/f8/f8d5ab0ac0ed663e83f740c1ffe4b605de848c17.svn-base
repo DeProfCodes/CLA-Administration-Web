@@ -1,0 +1,35 @@
+﻿
+<div class="container-fluid">
+
+    @{
+        <!-- Breadcrumb Component -->
+        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Reports/ReportBreadcrumb.cshtml", new ReportBreadcrumbViewModel
+            {
+                ReportCurrentPage = ReportsPages.PopupReport,
+                HasLinkedModulePage = true,
+                LinkedModulePage = ModulesPages.PopupOverview
+            });
+
+        <!-- Report Filter Component -->
+        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Reports/ModuleReportFilter.cshtml", new ModuleReportFilterViewModel
+            {
+                ReportName = ReportsNamesType.Popup
+            });
+    }
+
+    <!-- Card for Popup Report Body -->
+    <div class="card mb-1 mt-1 overview-filters-card theme-txt-clr app-card-main-scaling report-data-area" id="report-data-area">
+        <div id="ReportModuleData">
+            
+            <!-- Inject Partial Here -->
+        </div>
+        <!-- 
+        <div class="row hidden">
+            <iframe src="Url.Action("ShowLocalReport", "Reports")" width="100%" height="800px"></iframe>
+        </div> -->
+    </div>
+</div>
+
+<script>
+
+</script>

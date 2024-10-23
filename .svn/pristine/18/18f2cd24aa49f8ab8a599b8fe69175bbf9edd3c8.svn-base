@@ -1,0 +1,11 @@
+﻿@using CLA_Administration_Web
+@using CLA_Administration_Web.Models
+
+@using CLA_Administration_Web.Helpers.Enums
+@using CLA_Administration_Web.Helpers.Enums.AppPages
+@using CLA_Administration_Web.Helpers.Enums.Shared.PageNames
+@using CLACommonFunctionsLibrary_NET.Helpers.Enums
+
+@using CLA_Administration_Web.ViewModels.Reports
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
