@@ -1,11 +1,18 @@
 
-function DrawPieChart(apexPieChart, chartId, pieData, pieDataLabel, colorsData)
+function DrawPieChart(apexPieChart, chartId, pieData, pieDataLabel, colorsData, dimensions)
 {
     var options = {
         series: pieData,
         chart: {
-            width: 380,
+            width: 500,
             type: 'pie',
+            events: {
+                dataPointSelection: function(event, chartContext, config) 
+                {
+                    var clickedLabel = pieDataLabel[config.dataPointIndex];
+                    onPieChartLabelClick(clickedLabel);
+                }
+            }
         },
         labels: pieDataLabel,
         colors: colorsData,
@@ -23,7 +30,7 @@ function DrawPieChart(apexPieChart, chartId, pieData, pieDataLabel, colorsData)
         }]
     };
 
-    if (apexPieChart != null)
+    if (apexPieChart instanceof ApexCharts)
         apexPieChart.destroy();
 
     apexPieChart = new ApexCharts(document.querySelector(chartId), options);

@@ -1,0 +1,43 @@
+﻿@model SurveyReportsRaw
+
+<div class="report-outter-container">
+    <div class="card-body p-1">
+        <div class="row flex-sm-nowrap">
+            <div class="flex-wrap report-body-container px-5">
+                <!-- 1. Survey Summary Tab -->
+                <div id="SurveySummaryTab-1" class="report-module-tabs-popup hidden">
+                    <div class="report-raw-data">
+                        @Html.Raw(Model.Summary)
+                    </div>
+                </div>
+                <!-- 2. Survey Outstanding Tab -->
+                <div id="SurveyOutstandingTab-2" class="report-module-tabs-popup hidden">
+                    <div class="report-raw-data">
+                        @Html.Raw(Model.Outstanding)
+                    </div>
+                </div>
+                <!-- 3. Survey Opt In No Response Tab -->
+                <div id="SurveyOptInNoResponseTab-3" class="report-module-tabs-popup hidden">
+                    <div class="report-raw-data">
+                        @Html.Raw(Model.OptInNoResponse)
+                    </div>
+                </div>
+                <!-- 4. Survey Opt out Tab -->
+                <div id="SurveyOptOutTab-4" class="report-module-tabs-popup hidden">
+                    <div class="report-raw-data">
+                        @Html.Raw(Model.OptOut)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function()
+    {
+        NavigateToPopupReportTab(1);
+    });
+
+</script>

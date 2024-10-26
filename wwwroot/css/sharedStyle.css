@@ -184,6 +184,34 @@
     color: yellow;
 }
 
+.actionButtonBusy
+{
+    cursor: not-allowed !important;
+    pointer-events: visible !important;
+    opacity: 0.7;
+}
+
+.actionButtonBusy:hover
+{
+    background-color: var(--theme-clr) !important;
+}
+
+.bg-silver
+{
+    background-color: silver !important;
+}
+.bg-lime
+{
+    background-color: lime !important;
+}
+.bg-red
+{
+    background-color: red !important;
+}
+.bg-yellow
+{
+    background-color: yellow !important;
+}
 /* ======================================================= Sizes =======================================================*/
 .w-50p
 {
@@ -296,15 +324,39 @@
 {
     font-size: 20px !important;
 }
+.fs-25
+{
+    font-size: 25px !important;
+}
+.fs-30
+{
+    font-size: 30px !important;
+}
+.fs-35
+{
+    font-size: 35px !important;
+}
+.fs-40
+{
+    font-size: 40px !important;
+}
+.fs-45
+{
+    font-size: 45px !important;
+}
+.fs-50
+{
+    font-size: 50px !important;
+}
+/*=================================================================================================================*/
 .text-silver
 {
     color: silver !important;
 }
 .cursor-pointer
 {
-    cursor:pointer !important;
+    cursor: pointer !important;
 }
-
 /**======================================================= Scaling ====================================================*/
 
 @media screen and (max-width:767px)

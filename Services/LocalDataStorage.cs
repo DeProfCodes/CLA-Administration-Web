@@ -5,6 +5,7 @@ using CLA_Administration_Web.ViewModels.Modules.ContentLibrary;
 using CLA_Administration_Web.ViewModels.Modules.LDS;
 using CLA_Administration_Web.ViewModels.Modules.PST;
 using CLA_Administration_Web.ViewModels.Modules.Rss;
+using CLA_Administration_Web.ViewModels.Reports;
 
 namespace CLA_Administration_Web.Services
 {
@@ -32,6 +33,17 @@ namespace CLA_Administration_Web.Services
             public static List<RssCategoryOverviewViewModel> AllRSSCategories { get; set; }
 
             public static List<RssFeedOverviewViewModel> AllRSSFeed { get; set; }
+
+
+            public static PopupReports PopupReports { get; set; }
+
+            public static SurveyReports SurveyReports { get; set; }
+
+            public static TickerReports TickerReports { get; set; }
+
+            public static TickerReportsViewModel TickerReportsData { get; set; }
+
+            public static PolicyReports PolicyReports { get; set; }
         }
 
         public static class LiveData

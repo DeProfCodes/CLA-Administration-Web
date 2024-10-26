@@ -1,0 +1,222 @@
+﻿@using CLA_Administration_Web.Helpers.Html
+@model TickerReportsViewModel
+
+@{
+    var summaryT = Model.TickerReportSummary;
+
+    var completedRate = Math.Round(((double)summaryT.Completed / summaryT.Targeted) * 100, 2);
+    var outstandingRate = 100 - completedRate;
+}
+
+<div class="report-outter-container">
+    <div class="card-body p-1">
+        <div class="row flex-sm-nowrap">
+            <div class="flex-wrap report-body-container px-5">
+                <div id="ModuleReportHeader">
+                    <div class="d-flex theme-bg">
+                        <div>
+                            <img src="~/images/logos/report-logo.png" class="report-logo" alt="logo icon">
+                        </div>
+                        <div class="w-100">
+                            <p class="mt-2 fs-30 text-center text-white">@summaryT.TickerText</p>
+                            <p class="mt-2 fs-20 text-center text-white">
+                                Effective from: <span>@summaryT.EffectiveFrom.ToString("dddd, dd MMM yyyy")</span>
+                                To: <span>@summaryT.EffectiveFrom.ToString("dddd, dd MMM yyyy")</span>
+                            </p>
+                        </div>
+                        <div id="TickerReportActionBtns">
+                            <button class="btn btn-secondary btn-sm w-100 invisible" id="BackBtn" onclick="SummaryTab()">Back</button>
+                            <div class="dropdown">
+                                <button class="btn btn-success btn-sm dropdown-toggle w-100 mt-2" type="button" id="exportDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Export
+                                </button>
+                                <ul class="dropdown-menu  w-100 " aria-labelledby="exportDropdown">
+                                    <li><a class="dropdown-item fs-12" href="#" onclick="exportSingle()">Export Single</a></li>
+                                    <li><a class="dropdown-item fs-12" href="#" onclick="exportFull()">Export Full</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="p-2 fs-20 text-center bg-silver fw-bold" id="TickerReportTitle"></p>
+                    </div>
+                </div>
+                <!-- 1. Ticker Summary Tab -->
+                <div id="TickerSummaryTab-1" class="report-module-tabs-ticker hidden">
+                    <div class="report-raw-data ms-0 mt-5 d-flex" >
+                        <div class="w-50 align-content-center">
+                            <table class="table table-bordered mb-0 w-75 theme-border" >
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="theme-bg text-white">Event</th>
+                                        <th scope="col" class="theme-bg text-white">Count</th>
+                                        <th scope="col" class="theme-bg text-white">Percentage (%)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="report-piechart-color-darkgreen-dim">Completed</td>
+                                        <td class="report-piechart-color-darkgreen-dim">@summaryT.Completed</td>
+                                        <td class="report-piechart-color-darkgreen-dim">@completedRate</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="report-piechart-color-crimson-dim">Outstanding</td>
+                                        <td class="report-piechart-color-crimson-dim">@summaryT.Outstanding</td>
+                                        <td class="report-piechart-color-crimson-dim">@outstandingRate</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Targeted</td>
+                                        <th>@summaryT.Targeted</td>
+                                        <th>100</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="w-50">
+                            <div id="SummaryChart"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 2. Ticker Outstanding Tab -->
+                <div id="TickerOutstandingTab-2" class="report-module-tabs-ticker hidden">
+                    <div class="report-raw-data ms-0 w-100">
+                        <div class="">
+                            <table id="ModuleOverviewDataTable" class="table table-striped table-bordered table-hover theme-border align-middle" style="font-size:12px;">
+                                <thead>
+                                    <tr>
+                                        <th class="theme-bg text-white">Domain ID</th>
+                                        <th class="theme-bg text-white">User ID</th>
+                                        <th class="theme-bg text-white">User Name</th>
+                                        <th class="theme-bg text-white">Machine ID</th>
+                                        <th class="theme-bg text-white">Machine Name</th>
+                                        <th class="theme-bg text-white">Last Sync DT</th>
+                                    </tr>
+                                </thead>
+                                <tbody class=" theme-txt-clr">
+                                    @foreach (var outstandingData in Model.TickerReportOutstanding)
+                                    {
+                                        var cssBg = CssHtmlHelpers.GetReportRowStatusColor(outstandingData.MaxLastUpdateDate);
+                                        <tr>
+                                            <td class="@cssBg">@outstandingData.DomainId</td>
+                                            <td class="@cssBg">@outstandingData.UserId</td>
+                                            <td class="@cssBg">@outstandingData.UserName</td>
+                                            <td class="@cssBg">@outstandingData.MachineId</td>
+                                            <td class="@cssBg">@outstandingData.MachineName</td>
+                                            <td class="@cssBg">@outstandingData.MaxLastUpdateDate</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- 3. Ticker Completed Tab -->
+                <div id="TickerCompletedTab-3" class="report-module-tabs-ticker hidden">
+                    <div class="report-raw-data ms-0 w-100">
+                        <div class="">
+                            <table id="ModuleOverviewDataTable2" class="table table-striped table-bordered table-hover theme-border align-middle" style="font-size:12px;">
+                                <thead>
+                                    <tr>
+                                        <th class="theme-bg text-white">Domain ID</th>
+                                        <th class="theme-bg text-white">User ID</th>
+                                        <th class="theme-bg text-white">User Name</th>
+                                        <th class="theme-bg text-white">Machine ID</th>
+                                        <th class="theme-bg text-white">Machine Name</th>
+                                        <th class="theme-bg text-white">Click DT</th>
+                                    </tr>
+                                </thead>
+                                <tbody class=" theme-txt-clr">
+                                    @foreach (var outstandingData in Model.TickerReportComplete)
+                                    {
+                                        var cssBg = CssHtmlHelpers.GetReportRowStatusColor(outstandingData.MaxLastUpdateDate) + " theme-txt-clr";
+                                        <tr>
+                                            <td class="@cssBg">@outstandingData.DomainId</td>
+                                            <td class="@cssBg">@outstandingData.UserId</td>
+                                            <td class="@cssBg">@outstandingData.UserName</td>
+                                            <td class="@cssBg">@outstandingData.MachineId</td>
+                                            <td class="@cssBg">@outstandingData.MachineName</td>
+                                            <td class="@cssBg">@outstandingData.TickerPbClickDate</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+
+<script>
+
+    $(document).ready(function()
+    {
+        SummaryTab();
+    });
+
+    function SummaryTab()
+    {
+        HideShowElementVisibity("#BackBtn", HideShow.HIDE);
+        HideShowElement(".report-module-tabs-ticker", HideShow.HIDE);
+        HideShowElement("#TickerSummaryTab-1", HideShow.SHOW);
+        
+        $("#TickerReportTitle").text("Ticker Summary");
+
+        let apexPieChart = null;
+        
+        var completed = parseInt("@summaryT.Completed");
+        var outstanding = parseInt("@summaryT.Outstanding");
+
+        var data = [completed, outstanding];
+        var pieDataLabel = ["Completed", "Outstanding"];
+        var colorsData = ["#067349", "#DC143C"];
+
+        DrawPieChart(apexPieChart, "#SummaryChart", data, pieDataLabel, colorsData)
+    }
+
+    function OutstandingTab()
+    {
+        HideShowElementVisibity("#BackBtn", HideShow.SHOW);
+        HideShowElement(".report-module-tabs-ticker", HideShow.HIDE);
+        HideShowElement("#TickerOutstandingTab-2", HideShow.SHOW);
+
+        $('#ModuleOverviewDataTable').DataTable();
+        $("#TickerReportTitle").text("Outstanding Ticker Breakdown");
+    }
+
+    function CompletedTab()
+    {
+        HideShowElementVisibity("#BackBtn", HideShow.SHOW);
+        HideShowElement(".report-module-tabs-ticker", HideShow.HIDE);
+        HideShowElement("#TickerCompletedTab-3", HideShow.SHOW);
+
+        $('#ModuleOverviewDataTable2').DataTable();
+        $("#TickerReportTitle").text("Completed Ticker Breakdown");
+    }
+
+    function onPieChartLabelClick(label)
+    {
+        if (label === 'Completed')
+        {
+            CompletedTab();
+        } 
+        else if (label === 'Outstanding')
+        {
+            OutstandingTab();
+        }
+    }
+
+    function exportSingle()
+    {
+        alert('Exporting Single');
+    }
+
+    function exportFull()
+    {
+        alert('Exporting Full');
+    }
+
+</script>

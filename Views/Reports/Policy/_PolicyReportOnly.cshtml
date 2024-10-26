@@ -1,0 +1,31 @@
+﻿@model PolicyReportsRaw
+
+<div class="report-outter-container">
+    <div class="card-body p-1">
+        <div class="row flex-sm-nowrap">
+            <div class="flex-wrap report-body-container px-5">
+                <!-- 1. Policy Response Summary Tab -->
+                <div id="PolicyResponseSummaryTab-1" class="report-module-tabs-popup hidden">
+                    <div class="report-raw-data">
+                        @Html.Raw(Model.ResponseSummary)
+                    </div>
+                </div>
+                <!-- 2. Ticker Completed Tab -->
+                <div id="TickerCompletedTab-2" class="report-module-tabs-popup hidden">
+                    <div class="report-raw-data">
+                        @Html.Raw(Model.Outstanding)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function()
+    {
+        NavigateToPopupReportTab(1);
+    });
+
+</script>
