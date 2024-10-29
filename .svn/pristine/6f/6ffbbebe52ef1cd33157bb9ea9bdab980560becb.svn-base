@@ -1,0 +1,231 @@
+﻿@using CLA_Administration_Web.Helpers.Html
+@model TickerReportsViewModel
+
+@{
+    var summaryT = Model.TickerReportSummary;
+
+    var completedRate = Math.Round(((double)summaryT.Completed / summaryT.Targeted) * 100, 2);
+    var outstandingRate = 100 - completedRate;
+}
+
+<div class="report-outter-container">
+    <div class="card-body p-0">
+        <div class="row flex-sm-nowrap">
+            <div class="flex-wrap report-body-container">
+                <div id="ModuleReportHeader">
+                    <div class="d-flex theme-bg">
+                        <div class="mt-1">
+                            <img src="~/images/logos/report-logo.png" class="report-logo" alt="logo icon">
+                        </div>
+                        <div class="w-200p ms-2 text-black align-content-center hidden" id="ReportStatusLegend">
+                            <div class="w-100 bg-lime text-center">Active</div>
+                            <div class="w-100 bg-yellow text-center mt-1">Inactive</div>
+                            <div class="w-100 bg-red text-center mt-1">Not Installed</div>
+                        </div>
+                        <div class="w-100">
+                            <p class="mt-2 fs-30 text-center text-white">@summaryT.TickerText</p>
+                            <p class="mt-2 fs-20 text-center text-white">
+                                Effective from: <span>@summaryT.EffectiveFrom.ToString("dddd, dd MMM yyyy")</span>
+                                To: <span>@summaryT.EffectiveFrom.ToString("dddd, dd MMM yyyy")</span>
+                            </p>
+                        </div>
+                        <div id="TickerReportActionBtns">
+                            <button class="btn btn-secondary btn-sm w-100 invisible" id="BackBtn" onclick="SummaryTab()">Back</button>
+                            <div class="dropdown">
+                                <button class="btn btn-success btn-sm dropdown-toggle w-100 mt-2" type="button" id="exportDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Export
+                                </button>
+                                <ul class="dropdown-menu  w-100 " aria-labelledby="exportDropdown">
+                                    <li><a class="dropdown-item fs-12" href="#" onclick="exportSingle()">Export Single</a></li>
+                                    <li><a class="dropdown-item fs-12" href="#" onclick="ExportReportToExcel('@ReportsNamesType.Ticker')">Export Full</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="p-2 fs-20 text-center bg-silver fw-bold" id="TickerReportTitle"></p>
+                    </div>
+                </div>
+                <!-- 1. Ticker Summary Tab -->
+                <div id="TickerSummaryTab-1" class="report-module-tabs-ticker px-5 hidden">
+                    <div class="report-raw-data ms-0 mt-5 d-flex" >
+                        <div class="w-50 align-content-center">
+                            <table class="table table-bordered mb-0 w-75 theme-border" >
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="theme-bg text-white">Event</th>
+                                        <th scope="col" class="theme-bg text-white">Count</th>
+                                        <th scope="col" class="theme-bg text-white">Percentage (%)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="report-piechart-color-darkgreen-dim">Completed</td>
+                                        <td class="report-piechart-color-darkgreen-dim">@summaryT.Completed</td>
+                                        <td class="report-piechart-color-darkgreen-dim">@completedRate</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="report-piechart-color-crimson-dim">Outstanding</td>
+                                        <td class="report-piechart-color-crimson-dim">@summaryT.Outstanding</td>
+                                        <td class="report-piechart-color-crimson-dim">@outstandingRate</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Targeted</td>
+                                        <td>@summaryT.Targeted</td>
+                                        <td>100</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="w-50">
+                            <div id="SummaryChart"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 2. Ticker Outstanding Tab -->
+                @{
+                    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Reports/ModuleReportTable.cshtml",
+                    new ReportDataTableViewInputsViewModel
+                    {
+                        ComponentId = "TickerOutstandingTab-2",
+                        TableId = "TickerOutstandingData",
+                        DataSource = Model.TickerReportOutstanding,
+                        IsInitiallyHidden = true
+                    });
+                }
+                <!-- 3. Ticker Completed Tab -->
+                @{
+                    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Reports/ModuleReportTable.cshtml",
+                    new ReportDataTableViewInputsViewModel
+                    {
+                        ComponentId = "TickerCompletedTab-3",
+                        TableId = "TickerCompletedData",
+                        DataSource = Model.TickerReportComplete,
+                        IsInitiallyHidden = true
+                    });
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+
+<script>
+
+    $(document).ready(function()
+    {
+        SummaryTab();
+    });
+
+    function SummaryTab()
+    {
+        HideShowElementVisibity("#BackBtn", HideShow.HIDE);
+        HideShowElement(".report-module-tabs-ticker", HideShow.HIDE);
+        HideShowElement("#ReportStatusLegend", HideShow.HIDE);
+        HideShowElement("#TickerSummaryTab-1", HideShow.SHOW);
+        
+        $("#TickerReportTitle").text("Ticker Summary");
+
+        let apexPieChart = null;
+        
+        var completed = parseInt("@summaryT.Completed");
+        var outstanding = parseInt("@summaryT.Outstanding");
+
+        var data = [completed, outstanding];
+        var pieDataLabel = ["Completed", "Outstanding"];
+        var colorsData = ["#067349", "#DC143C"];
+
+        DrawPieChart(apexPieChart, "#SummaryChart", data, pieDataLabel, colorsData, null, onPieChartLabelClick)
+    }
+
+    function OutstandingTab()
+    {
+        HideShowElementVisibity("#BackBtn", HideShow.SHOW);
+        HideShowElement(".report-module-tabs-ticker", HideShow.HIDE);
+        HideShowElement("#TickerOutstandingTab-2", HideShow.SHOW);
+        HideShowElement("#ReportStatusLegend", HideShow.SHOW);
+
+        $('#ModuleOverviewDataTable').DataTable();
+        $("#TickerReportTitle").text("Outstanding Ticker Breakdown");
+    }
+
+    function CompletedTab()
+    {
+        HideShowElementVisibity("#BackBtn", HideShow.SHOW);
+        HideShowElement(".report-module-tabs-ticker", HideShow.HIDE);
+        HideShowElement("#TickerCompletedTab-3", HideShow.SHOW);
+        HideShowElement("#ReportStatusLegend", HideShow.SHOW);
+
+        //$('#ModuleOverviewDataTable2').DataTable();
+        $("#TickerReportTitle").text("Completed Ticker Breakdown");
+    }
+
+    function onPieChartLabelClick(label)
+    {
+        if (label === 'Completed')
+        {
+            CompletedTab();
+        } 
+        else if (label === 'Outstanding')
+        {
+            OutstandingTab();
+        }
+    }
+
+    function exportSingle()
+    {
+        getHtmlAndExport();
+    }
+
+    function exportFull()
+    {
+        alert('Exporting Full');
+    }
+
+    function getHtmlAndExport()
+    {
+        const element = document.getElementById("TickerSummaryTab-1");
+        if (element)
+        {
+            const htmlContent = element.innerHTML;
+            sendHtmlToServer(htmlContent);
+        } else
+        {
+            console.error("Element not found");
+        }
+    }
+
+    function sendHtmlToServer(htmlContent)
+    {
+        const url = "/Reports/ExportFileToExcel2";  // Adjust the URL if necessary
+        const reportType = "@ReportsNamesType.Ticker";  // Adjust this value to match your report type enum
+
+        console.log(htmlContent);
+
+        fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                ReportType: reportType,
+                HTMLData: htmlContent
+            }),
+        })
+            .then(response => response.ok ? response.blob() : Promise.reject(response))
+            .then(blob =>
+            {
+                // Create a link to download the file
+                const url = window.URL.createObjectURL(blob);
+                const link = document.createElement("a");
+                link.href = url;
+                link.download = "Report.xls";
+                link.click();
+                window.URL.revokeObjectURL(url);
+            })
+            .catch(error => console.error("Error:", error));
+    }
+
+
+</script>

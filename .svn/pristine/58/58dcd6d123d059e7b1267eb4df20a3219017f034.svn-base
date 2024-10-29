@@ -146,8 +146,6 @@
         var url = '@AppPagesUrl.Reports.ReportModulesListing' + `?reportType=${reportType}&startDate=${startDate}&endDate=${endDate}`;
         var payload = { startDate: startDate, endDate: endDate }
 
-        ShowLoader("Secondary", "Loading Available @moduleName IDs");
-
         PerformAction(url, "GET", payload, FinishLoadingModuleListing);
     }
 
@@ -165,7 +163,6 @@
                 }));
             });
         }
-        HideLoader("Secondary");
     }
 
 </script>

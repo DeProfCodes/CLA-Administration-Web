@@ -12,7 +12,7 @@
 
     var questionSummaryData = new List<int> 
     { 
-        questionSummary.ClickCount, questionSummary.DismissCount, questionSummary.AutohideCount, questionSummary.SnoozeCount, questionSummary.ReShowCount
+        questionSummary.ClickCount, questionSummary.DismissCount, questionSummary.SnoozeCount, questionSummary.AutohideCount, questionSummary.ReShowCount 
     };
     var questionSummaryTitles = new List<string> { "Click", "Dismiss", "AutoHide", "Snooze", "Show" };
     var questionSummaryColors = new List<string> { "blue", "orange", "crimson", "slate", "silver" };

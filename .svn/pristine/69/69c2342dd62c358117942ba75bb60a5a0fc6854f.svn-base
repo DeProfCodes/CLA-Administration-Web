@@ -1,0 +1,228 @@
+﻿
+.report-filter-module-status-titles
+{
+    width: 130px;
+    margin-left: auto;
+}
+
+.report-filter-module-status-sliders
+{
+    width: 100px;
+    margin-right: auto;
+    margin-left: 30px;
+}
+
+.report-tab-type
+{
+    width: 160px !important;
+    color: var(--theme-blue-clr);
+}
+
+.report-data-area
+{
+    height: 630px;
+    min-height: 630px;
+    background: whitesmoke;
+}
+.report-outter-container
+{
+    min-width: 940px;
+    height: 575px;
+    min-height: 575px;
+    margin: 15px;
+    margin-top: 0;
+}
+
+.report-body-container
+{
+    overflow: auto;
+    max-height: 585px;
+    height: 585px;
+    border-bottom: 2px solid var(--theme-blue-clr);
+    scrollbar-color: var(--theme-blue-clr) white;
+    scrollbar-width: thin;
+}
+
+.report-raw-data
+{
+    margin-bottom: 10px;
+    margin-left: -40px;
+}
+
+.report-piechart-color-blue
+{
+    background: rgb(65,105,225) !important;
+}
+
+.report-piechart-color-blue-dim
+{
+    background: rgba(65,105,225,.3) !important;
+}
+
+.report-piechart-color-orange
+{
+    background: rgb(255,140,0) !important;
+}
+
+.report-piechart-color-orange-dim
+{
+    background: rgba(255,140,0,.3) !important;
+}
+
+.report-piechart-color-crimson
+{
+    background: rgb(60,0,0) !important;
+}
+
+.report-piechart-color-crimson-dim
+{
+    background: rgba(60,0,0,.3) !important;
+}
+.report-piechart-color-red-mid
+{
+    background: rgba(255,0,0,.6) !important;
+}
+.report-piechart-color-darkgreen
+{
+    background: rgb(6, 115, 73) !important;
+}
+
+.report-piechart-color-darkgreen-dim
+{
+    background: rgb(6, 115, 73, .3) !important;
+}
+
+.report-piechart-color-slate
+{
+    background: rgb(47,79,79) !important;
+}
+
+.report-piechart-color-slate-dim
+{
+    background: rgba(47,79,79,.3) !important;
+}
+
+.report-piechart-color-yellow-dim
+{
+    background: rgb(255,255,0, 0.3) !important;
+}
+
+.report-piechart-color-yellow-mid
+{
+    background: rgb(255,255,0, 0.65) !important;
+}
+
+.report-piechart-color-silver
+{
+    background: rgba(192,192,192) !important;
+}
+
+.report-piechart-color-silver-dim
+{
+    background: rgba(192,192,192,.3) !important;
+}
+
+.report-piechart-color-green
+{
+    background: rgba(22,160,133) !important;
+}
+
+.report-piechart-color-green-dim
+{
+    background: rgba(22,160,133,.3) !important;
+}
+
+.report-body-container
+{
+    min-width: 930px;
+}
+#ExportReportToExcelBtn
+{
+    margin-left: -40px;
+    margin-top: 5px;
+    margin-bottom: 8px;
+}
+#ModuleReportHeader
+{
+    margin-left: -45px;
+    margin-right:-10px;
+    padding: 10px;
+}
+.report-logo
+{
+    width: 100px;
+    height:100px;
+    object-fit: contain;
+    margin-left: 40px;
+}
+#TickerReportActionBtns
+{
+    margin-right: 20px;
+    margin-top: 15px;
+}
+/**================================================= WIDTH QUERIES ==================================*/
+@media screen and (max-width:1580px)
+{
+    .report-tab-type
+    {
+        font-size: 14px;
+    }
+    .report-body-container
+    {
+        height: 545px;
+        min-height: 400px;
+    }
+    .report-data-area
+    {
+        height: 580px;
+        min-height: 590px;
+    }
+}
+@media screen and (max-width:1560px)
+{
+    .report-filter-datepicker
+    {
+        flex-direction: column;
+    }
+
+    .report-filter-datepicker #DatePickerEndDateTitle
+    {
+        margin-left: 0;
+        width: 30px;
+    }
+
+    .report-filter-datepicker #DatePickerEndDateContainer
+    {
+        margin-top: 10px;
+    }
+
+    #ReportModuleSelect
+    {
+        width: 225px !important;
+        margin-left: -3px;
+    }
+}
+
+@media screen and (max-width:1450px)
+{
+    .report-tab-type
+    {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width:1300px)
+{
+    .report-body-container
+    {
+        height: 480px;
+        min-height: 400px;
+        width: 80%;
+    }
+
+    .report-data-area
+    {
+        height: 530px;
+        min-height: 450px;
+    }
+}

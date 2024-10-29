@@ -512,9 +512,9 @@ namespace CLA_Administration_Web.Helpers.Reporting
                 
                 var popupResponseDetails = APIResponseParserHelper.ParseJsonToObject<List<PopupReportResponseDetails>>(responseDetailsJson);
 
-                result.PopupResponseSnooze = popupResponseDetails.Where(x => x.BubbleSnoozeDate != null && x.BubbleShowDate != null).ToList();
+                result.PopupResponseSnooze = popupResponseDetails.Where(x => x.SnoozeCount != null && x.SnoozeCount > 0 && x.BubbleSnoozeDate != null).ToList();
                 result.PopupResponseAutoHide = popupResponseDetails.Where(x => x.BubbleAutoHideDate != null).ToList();
-                result.PopupResponseShow = popupResponseDetails.Where(x => x.BubbleShowDate != null && x.BubbleClickDate == null && x.BubbleSnoozeDate == null).ToList();
+                result.PopupResponseShow = popupResponseDetails.Where(x => x.BubbleShowDate != null && x.BubbleClickDate == null).ToList();
                 result.PopupResponseClick = popupResponseDetails.Where(x => x.BubbleClickDate != null).ToList();
                 result.PopupResponseDismiss = popupResponseDetails.Where(x => x.BubbleDismissDate != null).ToList();
 
