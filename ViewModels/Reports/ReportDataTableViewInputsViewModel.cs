@@ -8,6 +8,8 @@
 
         public IEnumerable<object> DataSource { get; set; }
 
+        public Type DefaultFallBackType { get; set; }
+
         public bool IsInitiallyHidden { get; set; }
 
     }

@@ -214,7 +214,7 @@ namespace CLA_Administration_Web.Helpers.Reporting
             }
             catch
             {
-                return null;
+                return new();
             }
         }
 
@@ -510,11 +510,11 @@ namespace CLA_Administration_Web.Helpers.Reporting
                 result.PopupReportSummary = APIResponseParserHelper.ParseJsonToObject<PopupReportSummary>(summaryJson, true);
                 result.PopupReportQuestionSummary = APIResponseParserHelper.ParseJsonToObject<PopupReportQuestionSummary>(questionSummaryJson, true);
                 
-                var popupResponseDetails = APIResponseParserHelper.ParseJsonToObject<List<PopupReportResponseDetails>>(outstandingJson);
+                var popupResponseDetails = APIResponseParserHelper.ParseJsonToObject<List<PopupReportResponseDetails>>(responseDetailsJson);
 
-                result.PopupResponseSnooze = popupResponseDetails.Where(x => x.BubbleSnoozeDate != null).ToList();
+                result.PopupResponseSnooze = popupResponseDetails.Where(x => x.SnoozeCount != null && x.SnoozeCount > 0 && x.BubbleSnoozeDate != null).ToList();
                 result.PopupResponseAutoHide = popupResponseDetails.Where(x => x.BubbleAutoHideDate != null).ToList();
-                result.PopupResponseShow = popupResponseDetails.Where(x => x.BubbleShowDate != null).ToList();
+                result.PopupResponseShow = popupResponseDetails.Where(x => x.BubbleShowDate != null && x.BubbleClickDate == null).ToList();
                 result.PopupResponseClick = popupResponseDetails.Where(x => x.BubbleClickDate != null).ToList();
                 result.PopupResponseDismiss = popupResponseDetails.Where(x => x.BubbleDismissDate != null).ToList();
 

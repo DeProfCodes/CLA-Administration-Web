@@ -122,7 +122,7 @@
 
     $(document).ready(function ()
     {
-        GenerateReportOnly();
+       
     });
 
     function GenerateReportDataForExport()
@@ -134,7 +134,6 @@
     function GenerateReportOnly()
     {
         var moduleId = $("#ReportModuleSelect").val();
-        moduleId = 2;
         ReloadFilteredReport("@Model.ReportName", ReportDataTypes.REPORT_ONLY, moduleId);
     }
 

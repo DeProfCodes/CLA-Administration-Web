@@ -1,4 +1,5 @@
 ﻿@using CLA_Administration_Web.Helpers.Html
+@using CLA_Administration_Web.Models.APIResponses.Reports.Popup
 @model PopupReportsViewModel
 
 @{
@@ -13,7 +14,7 @@
     { 
         questionSummary.ClickCount, questionSummary.DismissCount, questionSummary.SnoozeCount, questionSummary.AutohideCount, questionSummary.ReShowCount 
     };
-    var questionSummaryTitles = new List<string> { "Click", "Dismiss", "Snooze", "AutoHide", "Show" };
+    var questionSummaryTitles = new List<string> { "Click", "Dismiss", "AutoHide", "Snooze", "Show" };
     var questionSummaryColors = new List<string> { "blue", "orange", "crimson", "slate", "silver" };
     var totalSummaryQuestionEventsCount = questionSummaryData.Sum();
 }
@@ -40,7 +41,7 @@
                             </p>
                         </div>
                         <div id="TickerReportActionBtns">
-                            <button class="btn btn-secondary btn-sm w-100 invisible" id="BackBtn" onclick="SummaryTab()">Back</button>
+                            <button class="btn btn-secondary btn-sm w-100 invisible" id="BackBtn" onclick="PopupReportBackButton()">Back</button>
                             <div class="dropdown">
                                 <button class="btn btn-success btn-sm dropdown-toggle w-100 mt-2" type="button" id="exportDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                                     Export
@@ -53,7 +54,7 @@
                         </div>
                     </div>
                     <div>
-                        <p class="p-2 fs-20 text-center bg-silver fw-bold" id="TickerReportTitle"></p>
+                        <p class="p-2 fs-20 text-center bg-silver fw-bold" id="ModuleReportTitle"></p>
                     </div>
                 </div>
                 <!-- 1. Popup Summary Tab -->
@@ -92,8 +93,8 @@
                         </div>
                     </div>
                 </div>
-                <!-- 2. Popup Response Summary -->
-                <div id="PopupResponseTab-2" class="report-module-tabs-ticker px-5 hidden">
+                <!-- 2. Popup Questions Summary -->
+                <div id="PopupQuestionDetailsTab-2" class="report-module-tabs-ticker px-5 hidden">
                     <div class="report-raw-data ms-0 mt-5 d-flex">
                         <div class="w-50 align-content-center">
                             <table class="table table-bordered mb-0 w-75 theme-border">
@@ -120,76 +121,82 @@
                             </table>
                         </div>
                         <div class="w-50">
-                            <div id="SummaryChart"></div>
+                            <div id="SummaryChart2"></div>
                         </div>
                     </div>
                 </div>
-                <!-- 2. Popup Response Tab -->
-                <div id="TickerOutstandingTab-2" class="report-module-tabs-ticker hidden">
-                    <div class="report-raw-data ms-0 w-100">
-                        <div class="">
-                            <table id="ModuleOverviewDataTable" class="table table-striped table-bordered table-hover theme-border align-middle" style="font-size:12px;">
-                                <thead>
-                                    <tr>
-                                        <th class="theme-bg text-white">Domain ID</th>
-                                        <th class="theme-bg text-white">User ID</th>
-                                        <th class="theme-bg text-white">User Name</th>
-                                        <th class="theme-bg text-white">Machine ID</th>
-                                        <th class="theme-bg text-white">Machine Name</th>
-                                        <th class="theme-bg text-white">Last Sync DT</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="text-black">
-                                    @* @foreach (var outstandingData in Model.TickerReportOutstanding)
-                                    {
-                                        var cssBg = CssHtmlHelpers.GetReportRowStatusColor(outstandingData.MaxLastUpdateDate);
-                                        <tr>
-                                            <td class="@cssBg">@outstandingData.DomainId</td>
-                                            <td class="@cssBg">@outstandingData.UserId</td>
-                                            <td class="@cssBg">@outstandingData.UserName</td>
-                                            <td class="@cssBg">@outstandingData.MachineId</td>
-                                            <td class="@cssBg">@outstandingData.MachineName</td>
-                                            <td class="@cssBg">@outstandingData.MaxLastUpdateDate</td>
-                                        </tr>
-                                    } *@
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <!-- 3. Ticker Completed Tab -->
-                <div id="TickerCompletedTab-3" class="report-module-tabs-ticker hidden">
-                    <div class="report-raw-data ms-0 w-100">
-                        <div class="">
-                            <table id="ModuleOverviewDataTable2" class="table table-striped table-bordered table-hover theme-border align-middle" style="font-size:12px;">
-                                <thead>
-                                    <tr>
-                                        <th class="theme-bg text-white">Domain ID</th>
-                                        <th class="theme-bg text-white">User ID</th>
-                                        <th class="theme-bg text-white">User Name</th>
-                                        <th class="theme-bg text-white">Machine ID</th>
-                                        <th class="theme-bg text-white">Machine Name</th>
-                                        <th class="theme-bg text-white">Click DT</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="text-black">
-                                    @* @foreach (var outstandingData in Model.TickerReportComplete)
-                                    {
-                                        var cssBg = CssHtmlHelpers.GetReportRowStatusColor(outstandingData.MaxLastUpdateDate) + " theme-txt-clr";
-                                        <tr>
-                                            <td class="@cssBg">@outstandingData.DomainId</td>
-                                            <td class="@cssBg">@outstandingData.UserId</td>
-                                            <td class="@cssBg">@outstandingData.UserName</td>
-                                            <td class="@cssBg">@outstandingData.MachineId</td>
-                                            <td class="@cssBg">@outstandingData.MachineName</td>
-                                            <td class="@cssBg">@outstandingData.TickerPbClickDate</td>
-                                        < *@/tr>
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+                <!-- 3. Popup Response - SHOW Tab -->
+                @{
+                    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Reports/ModuleReportTable.cshtml",
+                    new ReportDataTableViewInputsViewModel
+                    {
+                        ComponentId = "PopupSHOW-3",
+                        TableId = "Popup-SHOW",
+                        DataSource = Model.PopupResponseShow,
+                        DefaultFallBackType = typeof(PopupReportResponseDetails),
+                        IsInitiallyHidden = true
+                    });
+                }
+                <!-- 4. Popup Response - Click Tab -->
+                @{
+                    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Reports/ModuleReportTable.cshtml",
+                    new ReportDataTableViewInputsViewModel
+                    {
+                        ComponentId = "PopupCLICK-4",
+                        TableId = "Popup-CLICK",
+                        DataSource = Model.PopupResponseClick,
+                        DefaultFallBackType = typeof(PopupReportResponseDetails),
+                        IsInitiallyHidden = true
+                    });
+                }
+                <!-- 5. Popup Response - Snooze Tab -->
+                @{
+                    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Reports/ModuleReportTable.cshtml",
+                    new ReportDataTableViewInputsViewModel
+                    {
+                        ComponentId = "PopupSNOOZE-5",
+                        TableId = "Popup-SNOOZE",
+                        DataSource = Model.PopupResponseSnooze,
+                        DefaultFallBackType = typeof(PopupReportResponseDetails),
+                        IsInitiallyHidden = true
+                    });
+                }
+                <!-- 6. Popup Response - AutoHide Tab -->
+                @{
+                    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Reports/ModuleReportTable.cshtml",
+                    new ReportDataTableViewInputsViewModel
+                    {
+                        ComponentId = "PopupAUTOHIDE-6",
+                        TableId = "Popup-AUTOHIDE",
+                        DataSource = Model.PopupResponseAutoHide,
+                        DefaultFallBackType = typeof(PopupReportResponseDetails),
+                        IsInitiallyHidden = true
+                    });
+                }
+                <!-- 7. Popup Response - AutoHide Tab -->
+                @{
+                    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Reports/ModuleReportTable.cshtml",
+                    new ReportDataTableViewInputsViewModel
+                    {
+                        ComponentId = "PopupDISMISS-7",
+                        TableId = "Popup-DISMISS",
+                        DataSource = Model.PopupResponseDismiss,
+                        DefaultFallBackType = typeof(PopupReportResponseDetails),
+                        IsInitiallyHidden = true
+                    });
+                }
+                <!-- 8. Popup Outstanding Tab -->
+                @{
+                    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Reports/ModuleReportTable.cshtml",
+                    new ReportDataTableViewInputsViewModel
+                    {
+                        ComponentId = "PopupOutstanding-8",
+                        TableId = "Popup-Outstanding",
+                        DataSource = Model.PopupReportOutstanding,
+                        DefaultFallBackType = typeof(PopupReportOutstanding),
+                        IsInitiallyHidden = true
+                    });
+                }
             </div>
         </div>
     </div>
@@ -199,20 +206,18 @@
 
 <script>
 
+    var responseBreakdownType = { DivId: "", Title: "" };
+    var backToDivId = "PopupSummaryTab-1";
+
     $(document).ready(function ()
     {
-        SummaryTab();
+        LoadAllPageData();
+        PopupSummaryTab();
     });
 
-    function SummaryTab()
+    function LoadAllPageData()
     {
-        HideShowElementVisibity("#BackBtn", HideShow.HIDE);
-        HideShowElement(".report-module-tabs-ticker", HideShow.HIDE);
-        HideShowElement("#ReportStatusLegend", HideShow.HIDE);
-        HideShowElement("#TickerSummaryTab-1", HideShow.SHOW);
-
-        $("#TickerReportTitle").text("Ticker Summary");
-
+        //Load Popup Summary
         let apexPieChart = null;
 
         var completed = parseInt("@summaryT.Completed");
@@ -222,51 +227,117 @@
         var pieDataLabel = ["Completed", "Outstanding"];
         var colorsData = ["#067349", "#DC143C"];
 
-        DrawPieChart(apexPieChart, "#SummaryChart", data, pieDataLabel, colorsData)
+        DrawPieChart(apexPieChart, "#SummaryChart", data, pieDataLabel, colorsData, null, onPieSummaryLabelClick);
+
+        //Load Popup Question Summary
+        let apexPieChart2 = null;
+
+        var click = parseInt("@questionSummary.ClickCount");
+        var dismiss = parseInt("@questionSummary.DismissCount");
+        var autoHide = parseInt("@questionSummary.AutohideCount");
+        var snooze = parseInt("@questionSummary.SnoozeCount");
+        var show = parseInt("@questionSummary.ReShowCount");
+
+        data = [click, dismiss, autoHide, snooze, show];
+        pieDataLabel = ["Click", "Dismiss", "AutoHide", "Snooze", "Show"];
+        colorsData = ["#4169E1", "#FF8C00", "#DC143C", "#2F4F4F", "#C0C0C0"];
+
+        DrawPieChart(apexPieChart2, "#SummaryChart2", data, pieDataLabel, colorsData, null, onPieQuestionSummaryLabelClick);
+
+        //Data Tables
+        // $("#Popup-SHOW").DataTable();
+        // $("#Popup-CLICK").DataTable();
+        // $("#Popup-SNOOZE").DataTable();
+        // $("#Popup-AUTOHIDE").DataTable();
+        // $("#Popup-DISMISS").DataTable();
+        // $("#Popup-Outstanding").DataTable();
+    }
+
+
+    function PopupSummaryTab()
+    {
+        HideShowElementVisibity("#BackBtn", HideShow.HIDE);
+        HideShowElement(".report-module-tabs-ticker", HideShow.HIDE);
+        HideShowElement("#ReportStatusLegend", HideShow.HIDE);
+        HideShowElement("#PopupSummaryTab-1", HideShow.SHOW);
+
+        $("#ModuleReportTitle").text("Popup Summary");
+    }
+
+    function QuestionsSummaryTab()
+    {
+        HideShowElementVisibity("#BackBtn", HideShow.SHOW);
+        HideShowElement(".report-module-tabs-ticker", HideShow.HIDE);
+        HideShowElement("#ReportStatusLegend", HideShow.HIDE);
+        
+        HideShowElement("#PopupQuestionDetailsTab-2", HideShow.SHOW);
+
+        backToDivId = "PopupSummaryTab-1";
+
+        $("#ModuleReportTitle").text("Response Summary");
+    }
+
+    function PopupReportBackButton()
+    {
+        if (backToDivId == "PopupSummaryTab-1")
+            PopupSummaryTab();
+
+        else if (backToDivId == "PopupQuestionDetailsTab-2")
+            QuestionsSummaryTab();
+    }
+
+    function ResponseBreakdownTypeTab()
+    {
+        HideShowElement(".report-module-tabs-ticker", HideShow.HIDE);
+        HideShowElementVisibity("#BackBtn", HideShow.SHOW);
+        HideShowElement("#ReportStatusLegend", HideShow.SHOW);
+        
+        HideShowElement(responseBreakdownType.DivId, HideShow.SHOW);
+
+        var title = `Response Breakdown - ${responseBreakdownType.Title}`;
+
+        $("#ModuleReportTitle").text(title);
+
+        backToDivId = "PopupQuestionDetailsTab-2";
+    }
+
+    function onPieQuestionSummaryLabelClick(label)
+    {
+        if (label === 'Click') responseBreakdownType.DivId = "#PopupCLICK-4";
+        else if (label === 'Snooze') responseBreakdownType.DivId = "#PopupSNOOZE-5";
+        else if (label === 'AutoHide') responseBreakdownType.DivId = "#PopupAUTOHIDE-6";
+        else if (label === 'Dismiss') responseBreakdownType.DivId = "#PopupDISMISS-7";
+        else if (label === 'Show') responseBreakdownType.DivId = "#PopupSHOW-3";
+
+        responseBreakdownType.Title = label;
+
+        ResponseBreakdownTypeTab();
+
     }
 
     function OutstandingTab()
     {
         HideShowElementVisibity("#BackBtn", HideShow.SHOW);
         HideShowElement(".report-module-tabs-ticker", HideShow.HIDE);
-        HideShowElement("#TickerOutstandingTab-2", HideShow.SHOW);
         HideShowElement("#ReportStatusLegend", HideShow.SHOW);
+        HideShowElement("#PopupOutstanding-8", HideShow.SHOW);
 
-        $('#ModuleOverviewDataTable').DataTable();
-        $("#TickerReportTitle").text("Outstanding Ticker Breakdown");
+        $("#ModuleReportTitle").text("Outstanding Response Breakdown - No Show");
+
+        backToDivId = "PopupSummaryTab-1";
     }
 
-    function CompletedTab()
-    {
-        HideShowElementVisibity("#BackBtn", HideShow.SHOW);
-        HideShowElement(".report-module-tabs-ticker", HideShow.HIDE);
-        HideShowElement("#TickerCompletedTab-3", HideShow.SHOW);
-        HideShowElement("#ReportStatusLegend", HideShow.SHOW);
 
-        $('#ModuleOverviewDataTable2').DataTable();
-        $("#TickerReportTitle").text("Completed Ticker Breakdown");
-    }
-
-    function onPieChartLabelClick(label)
+    function onPieSummaryLabelClick(label)
     {
         if (label === 'Completed')
         {
-            CompletedTab();
+            QuestionsSummaryTab();
         }
         else if (label === 'Outstanding')
         {
             OutstandingTab();
         }
-    }
-
-    function exportSingle()
-    {
-        getHtmlAndExport();
-    }
-
-    function exportFull()
-    {
-        alert('Exporting Full');
     }
 
     function getHtmlAndExport()

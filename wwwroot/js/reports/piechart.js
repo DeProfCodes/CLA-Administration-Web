@@ -1,5 +1,5 @@
 
-function DrawPieChart(apexPieChart, chartId, pieData, pieDataLabel, colorsData, dimensions)
+function DrawPieChart(apexPieChart, chartId, pieData, pieDataLabel, colorsData, dimensions, onLabelClick)
 {
     var options = {
         series: pieData,
@@ -10,7 +10,11 @@ function DrawPieChart(apexPieChart, chartId, pieData, pieDataLabel, colorsData, 
                 dataPointSelection: function(event, chartContext, config) 
                 {
                     var clickedLabel = pieDataLabel[config.dataPointIndex];
-                    onPieChartLabelClick(clickedLabel);
+                    
+                    if (typeof onLabelClick === 'function') 
+                    {
+                        onLabelClick(clickedLabel);
+                    }
                 }
             }
         },
