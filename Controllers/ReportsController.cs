@@ -97,11 +97,11 @@ namespace CLA_Administration_Web.Controllers
         [HttpGet]
         public async Task<IActionResult> PopupReportOnly([FromQuery] ModuleReportDataFilterViewModel parameters)
         {
-            var popupReportVm = await reportingHelper.LoadPopupReportsTabs(parameters);
+            var popupReportVm = await reportingHelper.LoadPopupReportsData(parameters);
 
             if (parameters.ShowRawDataOnly)
             {
-                return PartialView(AppPagesLinks.Reports.ModuleRawDataPageLink, popupReportVm.AllData);
+                return PartialView(AppPagesLinks.Reports.ModuleRawDataPageLink, popupReportVm.PopupReportAllData);
             }
 
             return PartialView(AppPagesLinks.Reports.PopupReportOnlyPageLink, popupReportVm);
@@ -242,7 +242,16 @@ namespace CLA_Administration_Web.Controllers
                 }
             }
         }
-        
+
+        [HttpPost]
+        public IActionResult ExportFileToExcel2([FromBody] ReportExportViewModel exportData)
+        {
+            var content = $"<html><body>{exportData.HTMLData}</body></html>";
+            var bytes = System.Text.Encoding.UTF8.GetBytes(content);
+
+            return File(bytes, "application/vnd.ms-excel", "Report.xls");
+        }
+
     }
 }
  

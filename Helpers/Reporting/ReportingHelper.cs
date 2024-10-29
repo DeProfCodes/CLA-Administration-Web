@@ -1,12 +1,14 @@
 ﻿using CLA_Administration_Web.Helpers.API;
 using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
 using CLA_Administration_Web.Helpers.MockData;
+using CLA_Administration_Web.Models.APIResponses.Reports.Popup;
 using CLA_Administration_Web.Models.APIResponses.Reports.Ticker;
 using CLA_Administration_Web.Services;
 using CLA_Administration_Web.Services.Reporting;
 using CLA_Administration_Web.ViewModels.API.Reports;
 using CLA_Administration_Web.ViewModels.API.ResponseModels.Popup;
 using CLA_Administration_Web.ViewModels.Reports;
+using CLACommonFunctionsLibrary_NET.Helpers;
 using DocumentFormat.OpenXml.Spreadsheet;
 using DocumentFormat.OpenXml.Wordprocessing;
 using Microsoft.Reporting.NETCore;
@@ -472,6 +474,71 @@ namespace CLA_Administration_Web.Helpers.Reporting
                 TickerReportOutstanding = new(),
                 TickerReportComplete = new(),
                 TickerReportSummary = new()
+            };
+
+            return emptyModel;
+        }
+
+        public async Task<PopupReportsViewModel> LoadPopupReportsData(ModuleReportDataFilterViewModel filters)
+        {
+            
+            try
+            {
+                var result = new PopupReportsViewModel();
+
+                var apiParams = new ModuleSummaryParamsViewModel
+                {
+                    ModuleId = filters.ModuleId,
+                    Active = filters.Active,
+                    Dormant = filters.NotInstalled,
+                    InActive = filters.InActive,
+                    Environment = "",
+                    ShowActive = false,
+                    ShowComplete = true,
+                    ShowOutstanding = true,
+                    UseMachineId = false,
+                    ConnectToLive = false,
+                };
+
+                var summaryJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Popup, "STM_Summary");
+                var questionSummaryJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Popup, "STM_Question_Summary");
+                var responseDetailsJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Popup, "STM_Response_Detail");
+                var outstandingSummaryJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Popup, "STM_Outstanding_Summary");
+                var outstandingJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Popup, "STM_Outstanding");
+                var allDataJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Popup, "STM_All_DataOnly");
+
+                result.PopupReportSummary = APIResponseParserHelper.ParseJsonToObject<PopupReportSummary>(summaryJson, true);
+                result.PopupReportQuestionSummary = APIResponseParserHelper.ParseJsonToObject<PopupReportQuestionSummary>(questionSummaryJson, true);
+                
+                var popupResponseDetails = APIResponseParserHelper.ParseJsonToObject<List<PopupReportResponseDetails>>(outstandingJson);
+
+                result.PopupResponseSnooze = popupResponseDetails.Where(x => x.BubbleSnoozeDate != null).ToList();
+                result.PopupResponseAutoHide = popupResponseDetails.Where(x => x.BubbleAutoHideDate != null).ToList();
+                result.PopupResponseShow = popupResponseDetails.Where(x => x.BubbleShowDate != null).ToList();
+                result.PopupResponseClick = popupResponseDetails.Where(x => x.BubbleClickDate != null).ToList();
+                result.PopupResponseDismiss = popupResponseDetails.Where(x => x.BubbleDismissDate != null).ToList();
+
+                result.PopupReportOutstanding = APIResponseParserHelper.ParseJsonToObject<List<PopupReportOutstanding>>(outstandingJson);
+                result.PopupReportAllData = APIResponseParserHelper.ParseJsonToObject<List<PopupReportAllData>>(allDataJson);
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            var emptyModel = new PopupReportsViewModel()
+            {
+                PopupReportSummary = new(),
+                PopupReportQuestionSummary = new(),
+                PopupResponseSnooze = new(),
+                PopupResponseAutoHide = new(),
+                PopupResponseShow = new(),
+                PopupResponseClick = new(),
+                PopupResponseDismiss = new(),
+                PopupReportOutstanding = new(),
+                PopupReportAllData = new()
             };
 
             return emptyModel;

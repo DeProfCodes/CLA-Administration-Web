@@ -1,0 +1,79 @@
+﻿@using CLACommonFunctionsLibrary_NET.Helpers
+@using CLA_Administration_Web.Helpers.Html
+@using CLA_Administration_Web.Helpers.Reporting
+@model ReportDataTableViewInputsViewModel
+
+@{
+    var firstItem = Model.DataSource.FirstOrDefault(); // Get the first item to retrieve properties
+    var properties = firstItem?.GetType().GetProperties().Where(prop => !Attribute.IsDefined(prop, typeof(SkipPropertyAttribute))); // Get properties for headers
+
+    var hideShowCss = Model.IsInitiallyHidden ? "hidden" : "";
+}
+
+@functions {
+    private string GetFriendlyName(string camelCaseName)
+    {
+        return System.Text.RegularExpressions.Regex.Replace(
+            camelCaseName,
+            "(\\B[A-Z])",
+            " $1"
+        );
+    }
+}
+
+
+<div id="@Model.ComponentId" class="report-module-tabs-ticker @hideShowCss">
+    <div class="report-raw-data ms-0 w-100">
+        <div class="">
+            <table id="@Model.TableId" class="table table-striped table-bordered table-hover theme-border align-middle" style="font-size:12px;">
+                <thead>
+                    <tr>
+                        @if (properties != null)
+                        {
+                            foreach (var property in properties)
+                            {
+                                bool hasHideAttribute = Attribute.IsDefined(property, typeof(HidePropertyAttribute));
+                                if (hasHideAttribute)
+                                    continue;
+
+                                var friendlyName = GetFriendlyName(property.Name);
+
+                                <th class="theme-bg text-white">@friendlyName</th>
+                            }
+                        }
+                    </tr>
+                </thead>
+                <tbody class="text-black">
+                    @foreach (var item in Model.DataSource)
+                    {
+                        var parseData = TypesParserHelper.ParseDate(item.GetType().GetProperty("MaxLastUpdateDate")?.GetValue(item, null).ToString());
+                        var cssBg = CssHtmlHelpers.GetReportRowStatusColor(parseData);
+                        <tr>
+                            @foreach (var property in properties)
+                            {
+                                bool hasHideAttribute = Attribute.IsDefined(property, typeof(HidePropertyAttribute));
+                                if (hasHideAttribute)
+                                    continue;
+
+                                <td class="@cssBg">
+                                    @property.GetValue(item, null)
+                                </td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+
+<script>
+
+    $(document).ready(function ()
+    {
+        $('#@Model.TableId').DataTable();
+    });
+
+</script>

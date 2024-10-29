@@ -25,10 +25,10 @@ namespace CLA_Administration_Web.Helpers.Html
             DateTime thirtyDaysAgo = currentDate.AddDays(-30);
             DateTime minDate = new DateTime(1900, 1, 1);
 
-            if (lastSyncDate >= thirtyDaysAgo) return "bg-success";
-            if (lastSyncDate > minDate.AddDays(-30)) return "bg-warning";
+            if (lastSyncDate >= thirtyDaysAgo) return "bg-lime";
+            if (lastSyncDate > minDate.AddDays(-30)) return "bg-yellow";
             
-            return "report-piechart-color-red-mid";
+            return "bg-red";
         }
     }
 }

@@ -9,13 +9,18 @@
 }
 
 <div class="report-outter-container">
-    <div class="card-body p-1">
+    <div class="card-body p-0">
         <div class="row flex-sm-nowrap">
-            <div class="flex-wrap report-body-container px-5">
+            <div class="flex-wrap report-body-container">
                 <div id="ModuleReportHeader">
                     <div class="d-flex theme-bg">
-                        <div>
+                        <div class="mt-1">
                             <img src="~/images/logos/report-logo.png" class="report-logo" alt="logo icon">
+                        </div>
+                        <div class="w-200p ms-2 text-black align-content-center hidden" id="ReportStatusLegend">
+                            <div class="w-100 bg-lime text-center">Active</div>
+                            <div class="w-100 bg-yellow text-center mt-1">Inactive</div>
+                            <div class="w-100 bg-red text-center mt-1">Not Installed</div>
                         </div>
                         <div class="w-100">
                             <p class="mt-2 fs-30 text-center text-white">@summaryT.TickerText</p>
@@ -32,7 +37,7 @@
                                 </button>
                                 <ul class="dropdown-menu  w-100 " aria-labelledby="exportDropdown">
                                     <li><a class="dropdown-item fs-12" href="#" onclick="exportSingle()">Export Single</a></li>
-                                    <li><a class="dropdown-item fs-12" href="#" onclick="exportFull()">Export Full</a></li>
+                                    <li><a class="dropdown-item fs-12" href="#" onclick="ExportReportToExcel('@ReportsNamesType.Ticker')">Export Full</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -42,7 +47,7 @@
                     </div>
                 </div>
                 <!-- 1. Ticker Summary Tab -->
-                <div id="TickerSummaryTab-1" class="report-module-tabs-ticker hidden">
+                <div id="TickerSummaryTab-1" class="report-module-tabs-ticker px-5 hidden">
                     <div class="report-raw-data ms-0 mt-5 d-flex" >
                         <div class="w-50 align-content-center">
                             <table class="table table-bordered mb-0 w-75 theme-border" >
@@ -66,8 +71,8 @@
                                     </tr>
                                     <tr>
                                         <td>Targeted</td>
-                                        <th>@summaryT.Targeted</td>
-                                        <th>100</td>
+                                        <td>@summaryT.Targeted</td>
+                                        <td>100</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -78,71 +83,27 @@
                     </div>
                 </div>
                 <!-- 2. Ticker Outstanding Tab -->
-                <div id="TickerOutstandingTab-2" class="report-module-tabs-ticker hidden">
-                    <div class="report-raw-data ms-0 w-100">
-                        <div class="">
-                            <table id="ModuleOverviewDataTable" class="table table-striped table-bordered table-hover theme-border align-middle" style="font-size:12px;">
-                                <thead>
-                                    <tr>
-                                        <th class="theme-bg text-white">Domain ID</th>
-                                        <th class="theme-bg text-white">User ID</th>
-                                        <th class="theme-bg text-white">User Name</th>
-                                        <th class="theme-bg text-white">Machine ID</th>
-                                        <th class="theme-bg text-white">Machine Name</th>
-                                        <th class="theme-bg text-white">Last Sync DT</th>
-                                    </tr>
-                                </thead>
-                                <tbody class=" theme-txt-clr">
-                                    @foreach (var outstandingData in Model.TickerReportOutstanding)
-                                    {
-                                        var cssBg = CssHtmlHelpers.GetReportRowStatusColor(outstandingData.MaxLastUpdateDate);
-                                        <tr>
-                                            <td class="@cssBg">@outstandingData.DomainId</td>
-                                            <td class="@cssBg">@outstandingData.UserId</td>
-                                            <td class="@cssBg">@outstandingData.UserName</td>
-                                            <td class="@cssBg">@outstandingData.MachineId</td>
-                                            <td class="@cssBg">@outstandingData.MachineName</td>
-                                            <td class="@cssBg">@outstandingData.MaxLastUpdateDate</td>
-                                        </tr>
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+                @{
+                    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Reports/ModuleReportTable.cshtml",
+                    new ReportDataTableViewInputsViewModel
+                    {
+                        ComponentId = "TickerOutstandingTab-2",
+                        TableId = "TickerOutstandingData",
+                        DataSource = Model.TickerReportOutstanding,
+                        IsInitiallyHidden = true
+                    });
+                }
                 <!-- 3. Ticker Completed Tab -->
-                <div id="TickerCompletedTab-3" class="report-module-tabs-ticker hidden">
-                    <div class="report-raw-data ms-0 w-100">
-                        <div class="">
-                            <table id="ModuleOverviewDataTable2" class="table table-striped table-bordered table-hover theme-border align-middle" style="font-size:12px;">
-                                <thead>
-                                    <tr>
-                                        <th class="theme-bg text-white">Domain ID</th>
-                                        <th class="theme-bg text-white">User ID</th>
-                                        <th class="theme-bg text-white">User Name</th>
-                                        <th class="theme-bg text-white">Machine ID</th>
-                                        <th class="theme-bg text-white">Machine Name</th>
-                                        <th class="theme-bg text-white">Click DT</th>
-                                    </tr>
-                                </thead>
-                                <tbody class=" theme-txt-clr">
-                                    @foreach (var outstandingData in Model.TickerReportComplete)
-                                    {
-                                        var cssBg = CssHtmlHelpers.GetReportRowStatusColor(outstandingData.MaxLastUpdateDate) + " theme-txt-clr";
-                                        <tr>
-                                            <td class="@cssBg">@outstandingData.DomainId</td>
-                                            <td class="@cssBg">@outstandingData.UserId</td>
-                                            <td class="@cssBg">@outstandingData.UserName</td>
-                                            <td class="@cssBg">@outstandingData.MachineId</td>
-                                            <td class="@cssBg">@outstandingData.MachineName</td>
-                                            <td class="@cssBg">@outstandingData.TickerPbClickDate</td>
-                                        </tr>
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+                @{
+                    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Reports/ModuleReportTable.cshtml",
+                    new ReportDataTableViewInputsViewModel
+                    {
+                        ComponentId = "TickerCompletedTab-3",
+                        TableId = "TickerCompletedData",
+                        DataSource = Model.TickerReportComplete,
+                        IsInitiallyHidden = true
+                    });
+                }
             </div>
         </div>
     </div>
@@ -161,6 +122,7 @@
     {
         HideShowElementVisibity("#BackBtn", HideShow.HIDE);
         HideShowElement(".report-module-tabs-ticker", HideShow.HIDE);
+        HideShowElement("#ReportStatusLegend", HideShow.HIDE);
         HideShowElement("#TickerSummaryTab-1", HideShow.SHOW);
         
         $("#TickerReportTitle").text("Ticker Summary");
@@ -182,6 +144,7 @@
         HideShowElementVisibity("#BackBtn", HideShow.SHOW);
         HideShowElement(".report-module-tabs-ticker", HideShow.HIDE);
         HideShowElement("#TickerOutstandingTab-2", HideShow.SHOW);
+        HideShowElement("#ReportStatusLegend", HideShow.SHOW);
 
         $('#ModuleOverviewDataTable').DataTable();
         $("#TickerReportTitle").text("Outstanding Ticker Breakdown");
@@ -192,8 +155,9 @@
         HideShowElementVisibity("#BackBtn", HideShow.SHOW);
         HideShowElement(".report-module-tabs-ticker", HideShow.HIDE);
         HideShowElement("#TickerCompletedTab-3", HideShow.SHOW);
+        HideShowElement("#ReportStatusLegend", HideShow.SHOW);
 
-        $('#ModuleOverviewDataTable2').DataTable();
+        //$('#ModuleOverviewDataTable2').DataTable();
         $("#TickerReportTitle").text("Completed Ticker Breakdown");
     }
 
@@ -211,12 +175,57 @@
 
     function exportSingle()
     {
-        alert('Exporting Single');
+        getHtmlAndExport();
     }
 
     function exportFull()
     {
         alert('Exporting Full');
     }
+
+    function getHtmlAndExport()
+    {
+        const element = document.getElementById("TickerSummaryTab-1");
+        if (element)
+        {
+            const htmlContent = element.innerHTML;
+            sendHtmlToServer(htmlContent);
+        } else
+        {
+            console.error("Element not found");
+        }
+    }
+
+    function sendHtmlToServer(htmlContent)
+    {
+        const url = "/Reports/ExportFileToExcel2";  // Adjust the URL if necessary
+        const reportType = "@ReportsNamesType.Ticker";  // Adjust this value to match your report type enum
+
+        console.log(htmlContent);
+
+        fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                ReportType: reportType,
+                HTMLData: htmlContent
+            }),
+        })
+            .then(response => response.ok ? response.blob() : Promise.reject(response))
+            .then(blob =>
+            {
+                // Create a link to download the file
+                const url = window.URL.createObjectURL(blob);
+                const link = document.createElement("a");
+                link.href = url;
+                link.download = "Report.xls";
+                link.click();
+                window.URL.revokeObjectURL(url);
+            })
+            .catch(error => console.error("Error:", error));
+    }
+
 
 </script>
