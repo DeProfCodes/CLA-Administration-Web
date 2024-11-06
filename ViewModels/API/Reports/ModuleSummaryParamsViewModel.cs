@@ -2,24 +2,24 @@
 {
     public class ModuleSummaryParamsViewModel
     {
-        public required int ModuleId { get; set; }
+        public int ModuleId { get; set; }
 
-        public required bool UseMachineId { get; set; }
+        public bool UseMachineId { get; set; }
 
-        public required bool ShowComplete { get; set; }
+        public bool ShowComplete { get; set; }
 
-        public required bool ShowOutstanding { get; set; }
+        public bool ShowOutstanding { get; set; }
 
-        public required bool ShowActive { get; set; }
+        public bool ShowActive { get; set; }
 
-        public required string Environment { get; set; }
+        public string Environment { get; set; }
 
-        public required int Active { get; set; }
+        public int Active { get; set; }
 
-        public required int Dormant { get; set; }
+        public int Dormant { get; set; }
 
-        public required int InActive { get; set; }
+        public int InActive { get; set; }
 
-        public required bool ConnectToLive { get; set; }
+        public bool ConnectToLive { get; set; }
     }
 }

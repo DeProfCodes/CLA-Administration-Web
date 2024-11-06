@@ -132,8 +132,9 @@
             public const string PolicyPageLink = "~/Views/Reports/Policy/PolicyReport.cshtml";
             public const string PolicyExportPageLink = "~/Views/Reports/Policy/_PolicyReportDataForExport.cshtml";
             public const string PolicyReportOnlyPageLink = "~/Views/Reports/Policy/_PolicyReportOnly.cshtml";
-            public const string ActiveUsersPageLink = "~/Views/Reports/ActiveUsersReport.cshtml";
-            public const string ActiveMachinesPageLink = "~/Views/Reports/ActiveMachinesReport.cshtml";
+            public const string ActiveUsersPageLink = "~/Views/Reports/ActiveUsersMachines/ActiveUsersReport.cshtml";
+            public const string ActiveMachinesPageLink = "~/Views/Reports/ActiveUsersMachines/ActiveMachinesReport.cshtml";
+            public const string ActiveUserMachineTablePageLink = "~/Views/Reports/ActiveUsersMachines/_ActiveUserMachineTable.cshtml";
             public const string CampaignDispatchPageLink = "~/Views/Reports/CampaignDispatchReport.cshtml";
             public const string TroubleshootPageLink = "~/Views/Reports/TroubleshootReport.cshtml";
         }

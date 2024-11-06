@@ -138,22 +138,48 @@ function ReloadFilteredReport(reportModuleType, reportDataType, reportModuleId)
     LoadPartialViewWithLoader(url, "#ReportModuleData","#SecondaryLoader");
 }
 
-function ExportReportToExcel(reportModuleType)
+function GenerateActiveUsersMachinesReport(reportName)
 {
-    var url = GetPageUrl("ExportFileToExcel") + `?reportType=${reportModuleType}`;
+    var payload = 
+    {
+        ModuleId: 0,
+        ShowRawDataOnly: false,
+        Active: CheckboxToInt("ModuleReportFilterActive"),
+        InActive: CheckboxToInt("ModuleReportFilterInActive"),
+        NotInstalled: CheckboxToInt("ModuleReportFilterNotInstalled")
+    };
+
+    var url = GetPageUrl("ActiveUsersMachinesReport") + '?' + $.param(payload) + `&reportName=${reportName}`;
+    
+    LoadPartialViewWithLoader(url, "#ActiveUserMachineReport","#SecondaryLoader");
+}
+
+function ExportReportToExcel(reportModuleType, isAll)
+{
+    var payload = 
+    {
+        ModuleId: $("#ModuleReportId").val(),
+        ShowRawDataOnly: IsCheckboxChecked("ReportModuleShowRawDataOnly"),
+        Active: CheckboxToInt("ModuleReportFilterActive"),
+        InActive: CheckboxToInt("ModuleReportFilterInActive"),
+        NotInstalled: CheckboxToInt("ModuleReportFilterNotInstalled")
+    };
+
+    var reportPageName = !isAll ? $("#ModuleReportActiveReport").val() : "all";
+    var url = GetPageUrl("ExportFileToExcel") + `?reportType=${reportModuleType}&${$.param(payload)}&reportPageName=${reportPageName}`;
+
+    ShowLoader("Main", "Exporting Report...");
 
     DownloadReport(url);
-    //window.location = url; 
-    //PerformAction(url, null, null, "ExportComplete", "ExportReportToExcelBtn","ActionBtnLoader")
 }
 
 function DownloadReport(url) 
 {
     $.ajax({
         url: url,
-        type: 'GET', // or 'POST' if needed
+        type: 'GET',
         xhrFields: {
-            responseType: 'blob' // Important for binary data
+            responseType: 'blob' 
         },
         beforeSend: function ()
         {
@@ -165,7 +191,7 @@ function DownloadReport(url)
 
             var contentDisposition = xhr.getResponseHeader('Content-Disposition');
             var filename = contentDisposition.match(/filename[^;=\n]*=(UTF-8''|['"]?)([^;"\n]*)/i)[2];
-
+            
             var blob = new Blob([data], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
             var link = document.createElement('a');
             link.href = window.URL.createObjectURL(blob);
@@ -173,10 +199,12 @@ function DownloadReport(url)
             link.click();
 
             window.URL.revokeObjectURL(link.href);
+            HideLoader("Main");
         },
         error: function (xhr, status, error) {
             EndButtonLoad("ExportReportToExcelBtn", "ActionBtnLoader");
             console.error("Error downloading file:", error);
+            HideLoader("Main");
         }
     });
 }

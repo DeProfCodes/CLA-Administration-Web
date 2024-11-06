@@ -4,6 +4,8 @@ namespace CLA_Administration_Web.ViewModels.Reports
 {
     public class TickerReportsViewModel
     {
+        public int TickerId { get; set; }
+
         public TickerReportSummary TickerReportSummary { get; set; }
 
         public List<TickerReportComplete> TickerReportComplete { get; set; }

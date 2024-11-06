@@ -19,6 +19,8 @@
     var totalSummaryQuestionEventsCount = questionSummaryData.Sum();
 }
 
+<input id="ModuleReportId" value="@Model.PopupId" hidden/>
+
 <div class="report-outter-container">
     <div class="card-body p-0">
         <div class="row flex-sm-nowrap">
@@ -47,8 +49,8 @@
                                     Export
                                 </button>
                                 <ul class="dropdown-menu  w-100 " aria-labelledby="exportDropdown">
-                                    <li><a class="dropdown-item fs-12" href="#" onclick="exportSingle()">Export Single</a></li>
-                                    <li><a class="dropdown-item fs-12" href="#" onclick="ExportReportToExcel('@ReportsNamesType.Ticker')">Export Full</a></li>
+                                    <li><a class="dropdown-item fs-12" onclick="ExportReportToExcel('@ReportsNamesType.Popup', false)">Export Single</a></li>
+                                    <li><a class="dropdown-item fs-12" onclick="ExportReportToExcel('@ReportsNamesType.Popup', true)">Export Full</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -58,8 +60,8 @@
                     </div>
                 </div>
                 <!-- 1. Popup Summary Tab -->
-                <div id="PopupSummaryTab-1" class="report-module-tabs-ticker px-5 hidden">
-                    <div class="report-raw-data ms-0 mt-5 d-flex">
+                <div id="PopupSummaryTab-1" class="report-module-tabs-module px-5 hidden">
+                    <div class="report-raw-data ms-0 d-flex">
                         <div class="w-50 align-content-center">
                             <table class="table table-bordered mb-0 w-75 theme-border">
                                 <thead>
@@ -94,8 +96,8 @@
                     </div>
                 </div>
                 <!-- 2. Popup Questions Summary -->
-                <div id="PopupQuestionDetailsTab-2" class="report-module-tabs-ticker px-5 hidden">
-                    <div class="report-raw-data ms-0 mt-5 d-flex">
+                <div id="PopupQuestionDetailsTab-2" class="report-module-tabs-module px-5 hidden">
+                    <div class="report-raw-data ms-0 d-flex">
                         <div class="w-50 align-content-center">
                             <table class="table table-bordered mb-0 w-75 theme-border">
                                 <thead>
@@ -134,6 +136,7 @@
                         TableId = "Popup-SHOW",
                         DataSource = Model.PopupResponseShow,
                         DefaultFallBackType = typeof(PopupReportResponseDetails),
+                        LastSyncDateColumnName = "MaxLastUpdateDate",
                         IsInitiallyHidden = true
                     });
                 }
@@ -146,6 +149,7 @@
                         TableId = "Popup-CLICK",
                         DataSource = Model.PopupResponseClick,
                         DefaultFallBackType = typeof(PopupReportResponseDetails),
+                        LastSyncDateColumnName = "MaxLastUpdateDate",
                         IsInitiallyHidden = true
                     });
                 }
@@ -158,6 +162,7 @@
                         TableId = "Popup-SNOOZE",
                         DataSource = Model.PopupResponseSnooze,
                         DefaultFallBackType = typeof(PopupReportResponseDetails),
+                        LastSyncDateColumnName = "MaxLastUpdateDate",
                         IsInitiallyHidden = true
                     });
                 }
@@ -170,6 +175,7 @@
                         TableId = "Popup-AUTOHIDE",
                         DataSource = Model.PopupResponseAutoHide,
                         DefaultFallBackType = typeof(PopupReportResponseDetails),
+                        LastSyncDateColumnName = "MaxLastUpdateDate",
                         IsInitiallyHidden = true
                     });
                 }
@@ -182,6 +188,7 @@
                         TableId = "Popup-DISMISS",
                         DataSource = Model.PopupResponseDismiss,
                         DefaultFallBackType = typeof(PopupReportResponseDetails),
+                        LastSyncDateColumnName = "MaxLastUpdateDate",
                         IsInitiallyHidden = true
                     });
                 }
@@ -194,6 +201,7 @@
                         TableId = "Popup-Outstanding",
                         DataSource = Model.PopupReportOutstanding,
                         DefaultFallBackType = typeof(PopupReportOutstanding),
+                        LastSyncDateColumnName = "MaxLastUpdateDate",
                         IsInitiallyHidden = true
                     });
                 }
@@ -208,6 +216,7 @@
 
     var responseBreakdownType = { DivId: "", Title: "" };
     var backToDivId = "PopupSummaryTab-1";
+    var activeReportTab = "";
 
     $(document).ready(function ()
     {
@@ -257,24 +266,26 @@
     function PopupSummaryTab()
     {
         HideShowElementVisibity("#BackBtn", HideShow.HIDE);
-        HideShowElement(".report-module-tabs-ticker", HideShow.HIDE);
+        HideShowElement(".report-module-tabs-module", HideShow.HIDE);
         HideShowElement("#ReportStatusLegend", HideShow.HIDE);
         HideShowElement("#PopupSummaryTab-1", HideShow.SHOW);
 
-        $("#ModuleReportTitle").text("Popup Summary");
+        $("#ModuleReportSubTitle").text("Popup Summary");
+        $("#ModuleReportActiveReport").val("summary");
     }
 
     function QuestionsSummaryTab()
     {
         HideShowElementVisibity("#BackBtn", HideShow.SHOW);
-        HideShowElement(".report-module-tabs-ticker", HideShow.HIDE);
+        HideShowElement(".report-module-tabs-module", HideShow.HIDE);
         HideShowElement("#ReportStatusLegend", HideShow.HIDE);
         
         HideShowElement("#PopupQuestionDetailsTab-2", HideShow.SHOW);
 
-        backToDivId = "PopupSummaryTab-1";
+        $("#ModuleReportGoBackDiv").val("#PopupSummaryTab-1");
 
-        $("#ModuleReportTitle").text("Response Summary");
+        $("#ModuleReportSubTitle").text("Response Summary");
+        $("#ModuleReportActiveReport").val("response_summary");
     }
 
     function PopupReportBackButton()
@@ -288,17 +299,18 @@
 
     function ResponseBreakdownTypeTab()
     {
-        HideShowElement(".report-module-tabs-ticker", HideShow.HIDE);
+        HideShowElement(".report-module-tabs-module", HideShow.HIDE);
         HideShowElementVisibity("#BackBtn", HideShow.SHOW);
         HideShowElement("#ReportStatusLegend", HideShow.SHOW);
         
         HideShowElement(responseBreakdownType.DivId, HideShow.SHOW);
 
         var title = `Response Breakdown - ${responseBreakdownType.Title}`;
+        $("#ModuleReportActiveReport").val(title.toLowerCase());
 
-        $("#ModuleReportTitle").text(title);
+        $("#ModuleReportSubTitle").text(title);
 
-        backToDivId = "PopupQuestionDetailsTab-2";
+        $("#ModuleReportGoBackDiv").val("#PopupQuestionDetailsTab-2");
     }
 
     function onPieQuestionSummaryLabelClick(label)
@@ -312,21 +324,19 @@
         responseBreakdownType.Title = label;
 
         ResponseBreakdownTypeTab();
-
     }
 
     function OutstandingTab()
     {
         HideShowElementVisibity("#BackBtn", HideShow.SHOW);
-        HideShowElement(".report-module-tabs-ticker", HideShow.HIDE);
+        HideShowElement(".report-module-tabs-module", HideShow.HIDE);
         HideShowElement("#ReportStatusLegend", HideShow.SHOW);
         HideShowElement("#PopupOutstanding-8", HideShow.SHOW);
 
-        $("#ModuleReportTitle").text("Outstanding Response Breakdown - No Show");
+        $("#ModuleReportSubTitle").text("Outstanding Response Breakdown - No Show");
 
-        backToDivId = "PopupSummaryTab-1";
+        $("#ModuleReportGoBackDiv").val("#PopupSummaryTab-1");
     }
-
 
     function onPieSummaryLabelClick(label)
     {
@@ -338,50 +348,6 @@
         {
             OutstandingTab();
         }
-    }
-
-    function getHtmlAndExport()
-    {
-        const element = document.getElementById("TickerSummaryTab-1");
-        if (element)
-        {
-            const htmlContent = element.innerHTML;
-            sendHtmlToServer(htmlContent);
-        } else
-        {
-            console.error("Element not found");
-        }
-    }
-
-    function sendHtmlToServer(htmlContent)
-    {
-        const url = "/Reports/ExportFileToExcel2";  // Adjust the URL if necessary
-        const reportType = "@ReportsNamesType.Ticker";  // Adjust this value to match your report type enum
-
-        console.log(htmlContent);
-
-        fetch(url, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                ReportType: reportType,
-                HTMLData: htmlContent
-            }),
-        })
-            .then(response => response.ok ? response.blob() : Promise.reject(response))
-            .then(blob =>
-            {
-                // Create a link to download the file
-                const url = window.URL.createObjectURL(blob);
-                const link = document.createElement("a");
-                link.href = url;
-                link.download = "Report.xls";
-                link.click();
-                window.URL.revokeObjectURL(url);
-            })
-            .catch(error => console.error("Error:", error));
     }
 
 

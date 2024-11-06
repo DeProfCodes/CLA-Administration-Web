@@ -122,7 +122,8 @@
 
     $(document).ready(function ()
     {
-       
+        //PreloadDatesFilterDates();
+        GenerateReportOnly();
     });
 
     function GenerateReportDataForExport()
@@ -134,7 +135,22 @@
     function GenerateReportOnly()
     {
         var moduleId = $("#ReportModuleSelect").val();
+        moduleId = 21;
         ReloadFilteredReport("@Model.ReportName", ReportDataTypes.REPORT_ONLY, moduleId);
+    }
+
+    function PreloadDatesFilterDates()
+    {
+        var startDate = "2020/01/01";
+        var endDate = "2024/11/30";
+        var reportType = "@Model.ReportName";
+
+        var url = '@AppPagesUrl.Reports.ReportModulesListing' + `?reportType=${reportType}&startDate=${startDate}&endDate=${endDate}`;
+        var payload = { startDate: startDate, endDate: endDate }
+
+        ShowLoader("Secondary", "Loading Available @moduleName IDs");
+
+        PerformAction(url, "GET", payload, FinishLoadingModuleListing);
     }
 
     function ChangeFilterDates()

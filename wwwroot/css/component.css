@@ -209,6 +209,22 @@
 /*#endregion*/
 
 
+.report-table-type th
+{
+    width: 150px;
+    white-space: normal; 
+    word-wrap: break-word;
+}
+.report-table-type td
+{
+    width: 150px;
+    max-width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
 /*#region Scaling*/
 
 @media screen and (max-width:1600px)

@@ -5,6 +5,8 @@ namespace CLA_Administration_Web.ViewModels.Reports
 {
     public class PopupReportsViewModel
     {
+        public int PopupId { get; set; }
+
         public PopupReportSummary PopupReportSummary { get; set; }
 
         public PopupReportQuestionSummary PopupReportQuestionSummary { get; set; }

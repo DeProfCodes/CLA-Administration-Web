@@ -63,7 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="wwwroot\js\reports\piechart.js" />
-    <None Include="wwwroot\resources\reports\rpActiveUsers.rdlc" />
+    <None Include="wwwroot\resources\reports\rptActiveUsers.rdlc" />
     <None Include="wwwroot\resources\reports\rptActiveMachines.rdlc" />
     <None Include="wwwroot\resources\reports\rptDispatch_Listings.rdlc" />
     <None Include="wwwroot\resources\reports\rptPolicy_All.rdlc" />
@@ -105,13 +105,12 @@
     <None Include="wwwroot\resources\reports\rptTicker_Summary.rdlc" />
     <None Include="wwwroot\resources\reports\rtpSTM_Outstanding.rdlc" />
   </ItemGroup>
-    
   <ItemGroup>
     <Reference Include="CLACommonFunctionsLibrary_NET">
-      <HintPath>..\..\..\Miscellaneous\# Utilities #\CLACommonFunctionsLibrary_NET.dll</HintPath>
+      <HintPath>bin\Debug\net8.0\CLACommonFunctionsLibrary_NET.dll</HintPath>
     </Reference>
     <Reference Include="CLAModulesLibrary">
-      <HintPath>..\..\..\Miscellaneous\# Utilities #\CLAModulesLibrary.dll</HintPath>
+      <HintPath>bin\Debug\net8.0\CLAModulesLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
 

@@ -26,4 +26,14 @@ const ReportModuleTypes = Object.freeze(
     TICKER: "Ticker",
     POLICY: "Policy"
 });
+
+const ReportColorsTypes = Object.freeze(
+{
+    GREEN: "#067349",
+    RED: "#DC143C",
+    BLUE: "#4169E1",
+    ORANGE: "#FF8C00",
+    SILVER: "#C0C0C0",
+    GRAY: "#2F4F4F"
+});
  

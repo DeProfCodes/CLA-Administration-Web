@@ -1,18 +1,23 @@
 ﻿using CLA_Administration_Web.Helpers.API;
 using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
 using CLA_Administration_Web.Helpers.MockData;
+using CLA_Administration_Web.Models.APIResponses.Reports.ActiveUserMachine;
 using CLA_Administration_Web.Models.APIResponses.Reports.Popup;
+using CLA_Administration_Web.Models.APIResponses.Reports.Survey;
 using CLA_Administration_Web.Models.APIResponses.Reports.Ticker;
 using CLA_Administration_Web.Services;
 using CLA_Administration_Web.Services.Reporting;
 using CLA_Administration_Web.ViewModels.API.Reports;
 using CLA_Administration_Web.ViewModels.API.ResponseModels.Popup;
 using CLA_Administration_Web.ViewModels.Reports;
+using CLA_Administration_Web.ViewModels.Reports.Survey;
 using CLACommonFunctionsLibrary_NET.Helpers;
+using DocumentFormat.OpenXml.Office2010.Excel;
 using DocumentFormat.OpenXml.Spreadsheet;
 using DocumentFormat.OpenXml.Wordprocessing;
 using Microsoft.Reporting.NETCore;
 using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
 using System.Data;
 using System.Text;
 using System.Text.Json;
@@ -26,7 +31,7 @@ namespace CLA_Administration_Web.Helpers.Reporting
         {
             _reportService = reportService;
         }
-
+        
 
         public static string MergeJsonArrays(string jsonArray1, string jsonArray2, string jsonArray3)
         {
@@ -227,7 +232,16 @@ namespace CLA_Administration_Web.Helpers.Reporting
             return dataSet;
         }
 
-        public async Task<PopupReports> GetPopupReports(ModuleReportDataFilterViewModel filters)
+        public ReportRDLC GetStatusReport(ModuleReportDataFilterViewModel parameters)
+        {
+            return new ReportRDLC
+            {
+                RDLCName = "dsStatus",
+                DataSet = CreateStatusDataSet(parameters.Active, parameters.NotInstalled, parameters.InActive)
+            };
+        }
+
+        public async Task<PopupReports> GetPopupReportsForExport(ModuleReportDataFilterViewModel filters)
         {
             var apiParams = new ModuleSummaryParamsViewModel
             {
@@ -306,7 +320,7 @@ namespace CLA_Administration_Web.Helpers.Reporting
 
             try
             {
-                var data = await GetPopupReports(filters);
+                var data = await GetPopupReportsForExport(filters);
 
                 LocalDataStorage.StagingData.PopupReports = data;
 
@@ -398,6 +412,33 @@ namespace CLA_Administration_Web.Helpers.Reporting
             return result;
         }
 
+        public async Task<ReportRDLC> GetActiveUsersReport(ModuleReportDataFilterViewModel filters, ReportsNamesType reportsName)
+        {
+            var apiParams = new ModuleSummaryParamsViewModel
+            {
+                Active = filters.Active,
+                Dormant = filters.NotInstalled,
+                InActive = filters.InActive,
+                ConnectToLive = false,
+            };
+
+            var activeUsersMachinesJson = await _reportService.GetActiveUsersMachinesReport(apiParams, reportsName);
+            
+            var reportsBaseAddress = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "resources", "reports");
+
+            var reportRDLCName = reportsName == ReportsNamesType.ActiveUsers ? "rptActiveUsers.rdlc" : "rptActiveMachines.rdlc";
+            var SetName = reportsName == ReportsNamesType.ActiveUsers ? "dsActiveUsers" : "dsActiveMachines";
+
+            var result = new ReportRDLC
+            {
+                ReportRDLCPath = $"{reportsBaseAddress}\\{reportRDLCName}",
+                RDLCName = SetName,
+                DataSet = ConvertJsonToDataSet(activeUsersMachinesJson)
+            };
+
+            return result;
+        }
+
         public async Task<TickerReportsRaw> LoadTickerReportsTabs(ModuleReportDataFilterViewModel filters)
         {
             TickerReportsRaw result = null;
@@ -435,7 +476,7 @@ namespace CLA_Administration_Web.Helpers.Reporting
         {
             try
             {
-                var result = new TickerReportsViewModel();
+                var result = new TickerReportsViewModel() { TickerId = filters.ModuleId };
 
                 var apiParams = new ModuleSummaryParamsViewModel
                 {
@@ -481,10 +522,9 @@ namespace CLA_Administration_Web.Helpers.Reporting
 
         public async Task<PopupReportsViewModel> LoadPopupReportsData(ModuleReportDataFilterViewModel filters)
         {
-            
             try
             {
-                var result = new PopupReportsViewModel();
+                var result = new PopupReportsViewModel() { PopupId = filters.ModuleId };
 
                 var apiParams = new ModuleSummaryParamsViewModel
                 {
@@ -521,6 +561,8 @@ namespace CLA_Administration_Web.Helpers.Reporting
                 result.PopupReportOutstanding = APIResponseParserHelper.ParseJsonToObject<List<PopupReportOutstanding>>(outstandingJson);
                 result.PopupReportAllData = APIResponseParserHelper.ParseJsonToObject<List<PopupReportAllData>>(allDataJson);
 
+                LocalDataStorage.StagingData.AllPopupReports = result;
+
                 return result;
             }
             catch (Exception ex)
@@ -544,7 +586,7 @@ namespace CLA_Administration_Web.Helpers.Reporting
             return emptyModel;
         }
 
-        public async Task<SurveyReports> GetSurveyReports(ModuleReportDataFilterViewModel filters)
+        public async Task<SurveyReports> GetSurveyReportsForExport(ModuleReportDataFilterViewModel filters)
         {
             var apiParams = new ModuleSummaryParamsViewModel
             {
@@ -569,6 +611,11 @@ namespace CLA_Administration_Web.Helpers.Reporting
             var allDataJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Survey, "Surveys_All_DataOnly");
 
             var reportsBaseAddress = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "resources", "reports");
+
+            if (optInNoResponseJson.Length > 20)
+            {
+                int y = 0;
+            }
 
             var result = new SurveyReports
             {
@@ -672,13 +719,59 @@ namespace CLA_Administration_Web.Helpers.Reporting
             return result;
         }
 
+        public async Task<SurveyReportViewModel> GetSurveyReportsData(ModuleReportDataFilterViewModel filters)
+        {
+            var result = new SurveyReportViewModel() { SurveyId = filters.ModuleId };
+
+            var apiParams = new ModuleSummaryParamsViewModel
+            {
+                ModuleId = filters.ModuleId,
+                Active = filters.Active,
+                Dormant = filters.NotInstalled,
+                InActive = filters.InActive,
+                Environment = "",
+                ShowActive = false,
+                ShowComplete = true,
+                ShowOutstanding = true,
+                UseMachineId = false,
+                ConnectToLive = false,
+            };
+
+            var detailsJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Survey, "Surveys_Detail"); //summarized details
+            var questionsSummaryJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Survey, "SurveyQuestions_Summary");
+            var questionDetailsJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Survey, "SurveyQuestions_Detail");
+            var optInNoResponseJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Survey, "Surveys_Opt_In_No_Response");
+            var summaryJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Survey, "Surveys_Summary");
+            var summaryDetailsJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Survey, "Surveys_Summary_Detail");
+            var allDataJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Survey, "Surveys_All_DataOnly");
+
+            result.SurveySummary = APIResponseParserHelper.ParseJsonToObject<SurveyReportSummary>(summaryJson, true);
+            result.SummarizedDetails = APIResponseParserHelper.ParseJsonToObject<List<SurveyReportSummaryDetails>>(detailsJson);
+
+            var summaryDetails = APIResponseParserHelper.ParseJsonToObject<List<SurveyOptInNoResponse>>(summaryDetailsJson);
+
+            result.SurveyCompleteOptOut = new SurveyCompleteOptOutViewModel
+            {
+                Complete = summaryDetails.Count(x => x.IsSurveyComplete == 1),
+                OptOut = summaryDetails.Count(x => x.IsSurveyComplete == 0 && x.SurveyOptIn == 0),
+            };
+
+            result.Outstanding = result.SummarizedDetails.Where(x => x.IsComplete == 0).ToList();
+            result.Outstanding.ForEach(x => 
+            {
+                x.LastSyncDate = x.LastUpdateDtUser != null ? x.LastUpdateDtUser : (x.LastUpdateDtMachine != null ? x.LastUpdateDtMachine : DateTime.MinValue);
+            });
+
+            return result;
+        }
+
         public async Task<SurveyReportsRaw> LoadSurveyReportsTabs(ModuleReportDataFilterViewModel filters)
         {
             SurveyReportsRaw result = null;
 
             try
             {
-                var data = await GetSurveyReports(filters);
+                var data = await GetSurveyReportsForExport(filters);
 
                 LocalDataStorage.StagingData.SurveyReports = data;
 
@@ -806,5 +899,29 @@ namespace CLA_Administration_Web.Helpers.Reporting
             return result;
         }
 
+        public async Task<ActiveUserMachinesViewModel> LoadActiveUserMachineReport(ModuleReportDataFilterViewModel filters, ReportsNamesType reportName)
+        {
+            var result = new ActiveUserMachinesViewModel() { ReportName = reportName };
+
+            var apiParams = new ModuleSummaryParamsViewModel
+            {
+                Active = filters.Active,
+                Dormant = filters.NotInstalled,
+                InActive = filters.InActive,
+                ConnectToLive = false,
+            };
+
+            var activeUserMachineReportJson = await _reportService.GetActiveUsersMachinesReport(apiParams, reportName);
+
+            if (reportName == ReportsNamesType.ActiveUsers)
+            {
+                result.ActiveUserReports = APIResponseParserHelper.ParseJsonToObject<List<ActiveUserReport>>(activeUserMachineReportJson);
+            }
+            else if(reportName == ReportsNamesType.ActiveMachines)
+            {
+                result.ActiveMachineReports = APIResponseParserHelper.ParseJsonToObject<List<ActiveMachineReport>>(activeUserMachineReportJson);
+            }
+            return result;
+        }
     }
 }

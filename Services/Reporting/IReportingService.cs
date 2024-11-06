@@ -10,7 +10,7 @@ namespace CLA_Administration_Web.Services.Reporting
 {
     public interface IReportingService
     {
-        #region Popups
+        #region Module
 
         public Task<string> GetModuleListForReporting(ReportsNamesType reportNameType, string effectiveFrom, string effectiveTo, int isAutomated = 0, bool connectToLive = false);
 
@@ -18,27 +18,10 @@ namespace CLA_Administration_Web.Services.Reporting
 
         #endregion
 
-        #region Tickers
+        #region Active Users Machines
 
-
-
-        #endregion
-
-        #region Survey
-
+        public Task<string> GetActiveUsersMachinesReport(ModuleSummaryParamsViewModel parameters, ReportsNamesType reportName);
 
         #endregion
-
-        #region Policy
-
-
-        #endregion
-
-        #region Content Library
-
-
-
-        #endregion
-
     }
 }

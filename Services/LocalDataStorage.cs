@@ -37,11 +37,12 @@ namespace CLA_Administration_Web.Services
 
             public static PopupReports PopupReports { get; set; }
 
+            public static PopupReportsViewModel AllPopupReports {get; set; }
+
             public static SurveyReports SurveyReports { get; set; }
 
             public static TickerReports TickerReports { get; set; }
 
-            public static TickerReportsViewModel TickerReportsData { get; set; }
 
             public static PolicyReports PolicyReports { get; set; }
         }

@@ -1,0 +1,25 @@
+﻿
+
+
+<div class="container-fluid">
+
+    @{
+        <!-- Breadcrumb Component -->
+        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Reports/ReportBreadcrumb.cshtml", new ReportBreadcrumbViewModel
+        {
+            ReportCurrentPage = ReportsPages.ActiveUsersReport,
+            HasLinkedModulePage = false
+        });
+
+        <!-- Report Filter Component -->
+        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Reports/UsersMachinesReportFilter.cshtml", new ModuleReportFilterViewModel
+        {
+            ReportName = ReportsNamesType.ActiveUsers
+        });
+    }
+
+    <div class="card mb-1 mt-1 overview-filters-card theme-txt-clr app-card-main-scaling report-data-area2" id="report-data-area">
+        <div id="ActiveUserMachineReport">
+        </div>
+    </div>
+</div>

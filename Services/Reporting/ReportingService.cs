@@ -20,8 +20,6 @@ namespace CLA_Administration_Web.Services.Reporting
             apiControllerName = "Reporting";
         }
 
-        #region PST Modules
-
         #region Modules 
 
         public async Task<string> GetModuleListForReporting(ReportsNamesType reportNameType, string effectiveFrom, string effectiveTo, int isAutomated = 0, bool connectToLive = false)
@@ -55,165 +53,26 @@ namespace CLA_Administration_Web.Services.Reporting
 
         #endregion
 
-        #region Tickers
+        #region Active Users Machines
 
-        public async Task<List<ModulePSTDataViewModel>> GetAllTickersData()
+        public async Task<string> GetActiveUsersMachinesReport(ModuleSummaryParamsViewModel parameters, ReportsNamesType reportName)
         {
-            return ModulesMockData.StagingData.AllTickersData;
+            try
+            {
+                var method = (reportName == ReportsNamesType.ActiveUsers) ? "GetReportingActiveUsers" : 
+                             ((reportName == ReportsNamesType.ActiveMachines) ?  "GetReportingActiveMachines" : "");
+                
+                var endpoint = $"{apiControllerName}/{method}?&active={parameters.Active}&dormant={parameters.Dormant}&inactive={parameters.InActive}&connectToLive={parameters.ConnectToLive}";
+
+                var apiResponse = await _webApi.HttpGetAsync(endpoint);
+
+                return apiResponse;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
-
-        public async Task<ModulePSTDataViewModel> GetTickerById(int tickerId, StagingLiveType stagingLive)
-        {
-
-            ModulePSTDataViewModel tickerData = null;
-
-            if (stagingLive == StagingLiveType.Staging)
-            {
-                tickerData = ModulesMockData.StagingData.AllTickersData.FirstOrDefault(x => x.Id == tickerId);
-            }
-            else if (stagingLive == StagingLiveType.Live)
-            {
-                tickerData = ModulesMockData.LiveData.AllTickersData.FirstOrDefault(x => x.Id == tickerId);
-            }
-            return tickerData;
-        }
-
-        #endregion
-
-        #region Surveys
-
-        public async Task<List<ModulePSTDataViewModel>> GetAllSurveysData()
-        {
-            return ModulesMockData.StagingData.AllSurveysData;
-        }
-
-        public async Task<ModulePSTDataViewModel> GetSurveyById(int surveyId, StagingLiveType stagingLiveType)
-        {
-            ModulePSTDataViewModel surveyData = null;
-            if (stagingLiveType == StagingLiveType.Staging)
-            {
-                surveyData = LocalDataStorage.StagingData.AllSurveysData.FirstOrDefault(s => s.Id == surveyId);
-            }
-            else if (stagingLiveType == StagingLiveType.Live)
-            {
-                surveyData = LocalDataStorage.LiveData.AllSurveysData.FirstOrDefault(s => s.Id == surveyId);
-            }
-            return surveyData;
-        }
-
-        public async Task<List<SurveyQuestionViewModel>> GetAllSurveysQuestions()
-        {
-            return ModulesMockData.StagingData.AllSurveyQuestions;
-        }
-
-        public async Task<List<SurveyQuestionViewModel>> GetSurveyAllQuestions(int surveyId)
-        {
-            var surveyQuestions = ModulesMockData.StagingData.AllSurveyQuestions.Where(x => x.SurveyId == surveyId).ToList();
-
-            return surveyQuestions;
-        }
-
-        
-        #endregion
-
-        #endregion
-
-        #region RSS
-
-        public async Task<List<RssCategoryOverviewViewModel>> GetAllRssCategories(StagingLiveType stagingLiveType)
-        {
-            if (stagingLiveType == StagingLiveType.Staging)
-            {
-                return ModulesMockData.StagingData.AllRSSCategories;
-            }
-            else if (stagingLiveType == StagingLiveType.Live)
-            {
-                return ModulesMockData.LiveData.AllRSSCategories;
-            }
-            return null;
-        }
-
-        public async Task<List<RssFeedOverviewViewModel>> GetAllRssFeeds(StagingLiveType stagingLiveType)
-        {
-            if (stagingLiveType == StagingLiveType.Staging)
-            {
-                return ModulesMockData.StagingData.AllRSSFeed;
-            }
-            else if (stagingLiveType == StagingLiveType.Live)
-            {
-                return ModulesMockData.LiveData.AllRSSFeed;
-            }
-            return null;
-        }
-
-        #endregion
-
-        #region Content Library
-
-        public async Task<List<ContentLibraryCategoryModel>> GetAllContentLibraryCategories()
-        {
-            return null;// ModulesMockData.AllContentLibraryCategories;
-        }
-
-        public async Task<List<ContentLibraryContentModel>> GetAllContentLibraryContents()
-        {
-            return ModulesMockData.AllContentLibraryContents;
-        }
-
-        #endregion
-
-        #region LDS Modules
-
-        #region Screensavers
-
-        public async Task<List<ModuleLDSDataViewModel>> GetAllScreensaversData(StagingLiveType stagingLiveType)
-        {
-            if (stagingLiveType == StagingLiveType.Staging)
-            {
-                return ModulesMockData.StagingData.AllScreensaversData;
-            }
-            else if (stagingLiveType == StagingLiveType.Live)
-            {
-                return ModulesMockData.LiveData.AllScreensaversData;
-            }
-            return null;
-        }
-
-        #endregion
-
-        #region LockedDesktops
-
-        public async Task<List<ModuleLDSDataViewModel>> GetAllLockedDesktopsData(StagingLiveType stagingLiveType)
-        {
-            if (stagingLiveType == StagingLiveType.Staging)
-            {
-                return ModulesMockData.StagingData.AllLockedDesktopsData;
-            }
-            else if (stagingLiveType == StagingLiveType.Live)
-            {
-                return ModulesMockData.LiveData.AllLockedDesktopsData;
-            }
-            return null;
-        }
-
-        #endregion
-
-        #region Desktops
-
-        public async Task<List<ModuleLDSDataViewModel>> GetAllDesktopsData(StagingLiveType stagingLiveType)
-        {
-            if (stagingLiveType == StagingLiveType.Staging)
-            {
-                return ModulesMockData.StagingData.AllDesktopsData;
-            }
-            else if (stagingLiveType == StagingLiveType.Live)
-            {
-                return ModulesMockData.LiveData.AllDesktopsData;
-            }
-            return null;
-        }
-
-        #endregion
 
         #endregion
     }

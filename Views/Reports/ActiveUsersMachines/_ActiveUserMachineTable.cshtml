@@ -1,0 +1,62 @@
+﻿@model ActiveUserMachinesViewModel
+@using CLA_Administration_Web.Models.APIResponses.Reports.ActiveUserMachine
+
+<div class="report-outter-container">
+    <div class="card-body p-0">
+        <div class="row flex-sm-nowrap">
+            <div class="flex-wrap report-body-container2">
+                <div id="ModuleReportHeader">
+                    <div class="d-flex theme-bg">
+                        <div class="mt-1">
+                            <img src="~/images/logos/report-logo.png" class="report-logo" alt="logo icon">
+                        </div>
+                        <div class="w-200p ms-2 text-black align-content-center" id="ReportStatusLegend">
+                            <div class="w-100 bg-lime text-center">Active</div>
+                            <div class="w-100 bg-yellow text-center mt-1">Inactive</div>
+                            <div class="w-100 bg-red text-center mt-1">Not Installed</div>
+                        </div>
+                        <div class="w-100">
+                            <p class="mt-2 fs-30 text-center text-white">@Model.ReportName.GetDisplayDescription()</p>
+                        </div>
+                        <div id="TickerReportActionBtns">
+                            <button class="btn btn-success btn-sm w-100 mt-2" type="button" onclick="ExportReportToExcel('@Model.ReportName', false)">Export</button>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="p-2 fs-20 text-center bg-silver fw-bold" id="TickerReportTitle"></p>
+                    </div>
+                </div>
+                <div>
+                
+                    @if (Model.ReportName == ReportsNamesType.ActiveUsers)
+                    {
+                        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Reports/ModuleReportTable.cshtml",
+                        new ReportDataTableViewInputsViewModel
+                        {
+                            ComponentId = "ActiveUserReport",
+                            TableId = "ActiveUserReportTable",
+                            DataSource = Model.ActiveUserReports,
+                            DefaultFallBackType = typeof(ActiveUserReport),
+                            IsInitiallyHidden = false,
+                            LastSyncDateColumnName = "MaxUpdateDt"
+                        });           
+                    }
+                    else if(Model.ReportName == ReportsNamesType.ActiveMachines)
+                    {
+                        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Reports/ModuleReportTable.cshtml",
+                        new ReportDataTableViewInputsViewModel
+                        {
+                            ComponentId = "ActiveMachineReport",
+                            TableId = "ActiveMachineTable",
+                            DataSource = Model.ActiveMachineReports,
+                            DefaultFallBackType = typeof(ActiveMachineReport),
+                            IsInitiallyHidden = false,
+                            LastSyncDateColumnName = "MaxUpdateDt"
+                        });     
+                    }
+                
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

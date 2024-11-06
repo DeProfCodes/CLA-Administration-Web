@@ -20,15 +20,14 @@
 
 .report-data-area
 {
-    height: 630px;
-    min-height: 630px;
-    background: whitesmoke;
+    height: 650px;
+    min-height: 650px;
 }
 .report-outter-container
 {
     min-width: 940px;
-    height: 575px;
-    min-height: 575px;
+    height: 645px;
+    min-height: 645px;
     margin: 15px;
     margin-top: 0;
 }
@@ -36,11 +35,27 @@
 .report-body-container
 {
     overflow: auto;
-    max-height: 585px;
-    height: 585px;
+    max-height: 640px;
+    height: 640px;
     border-bottom: 2px solid var(--theme-blue-clr);
     scrollbar-color: var(--theme-blue-clr) white;
     scrollbar-width: thin;
+}
+
+.report-body-container2
+{
+    overflow: auto;
+    max-height: 700px;
+    height: 700px;
+    border-bottom: 2px solid var(--theme-blue-clr);
+    scrollbar-color: var(--theme-blue-clr) white;
+    scrollbar-width: thin;
+}
+.report-data-area2
+{
+    height: 710px;
+    min-height: 710px;
+    background: whitesmoke;
 }
 
 .report-raw-data
@@ -160,6 +175,35 @@
     margin-right: 20px;
     margin-top: 15px;
 }
+
+@media screen and (max-height: 795px)
+{
+    .report-data-area
+    {
+        height: 480px !important;
+        min-height: 480px !important;
+        background: whitesmoke;
+    }
+    .report-outter-container
+    {
+        min-width: 940px;
+        height: 400px;
+        min-height: 400px;
+        margin: 15px;
+    }
+    .report-body-container
+    {
+        max-height: 490px;
+        height: 490px;
+    }
+    .report-data-area2
+    {
+        height: 480px;
+        min-height: 480px;
+        background: whitesmoke;
+    }
+}
+
 /**================================================= WIDTH QUERIES ==================================*/
 @media screen and (max-width:1580px)
 {

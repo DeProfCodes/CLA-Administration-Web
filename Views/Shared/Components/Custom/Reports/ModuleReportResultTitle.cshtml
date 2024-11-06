@@ -1,0 +1,61 @@
+﻿@model ModuleReportResultTitleViewModel
+
+<div id="ModuleReportHeader">
+    <div class="d-flex theme-bg">
+        <div class="mt-1">
+            <img src="~/images/logos/report-logo.png" class="report-logo" alt="logo icon">
+        </div>
+        <div class="w-200p ms-2 text-black align-content-center hidden" id="ReportStatusLegend">
+            <div class="w-100 bg-lime text-center">Active</div>
+            <div class="w-100 bg-yellow text-center mt-1">Inactive</div>
+            <div class="w-100 bg-red text-center mt-1">Not Installed</div>
+        </div>
+        <div class="w-100">
+            <p class="mt-2 fs-30 text-center text-white">@Model.ReportTitle</p>
+            <p class="mt-2 fs-20 text-center text-white">
+                Effective from: <span>@Model.EffectiveFromDate.ToString("dddd, dd MMM yyyy")</span>
+                To: <span>@Model.EffectiveToDate.ToString("dddd, dd MMM yyyy")</span>
+            </p>
+        </div>
+        <div id="TickerReportActionBtns">
+            <button class="btn btn-secondary btn-sm w-100 invisible" id="BackBtn" onclick="SummaryTab()">Back</button>
+            <div class="dropdown">
+                <button class="btn btn-success btn-sm dropdown-toggle w-100 mt-2" type="button" id="exportDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    Export
+                </button>
+                <ul class="dropdown-menu  w-100 " aria-labelledby="exportDropdown">
+                    <li><a class="dropdown-item fs-12" onclick="ExportReportToExcel('@Model.ReportTypeName', false)">Export Single</a></li>
+                    <li><a class="dropdown-item fs-12" onclick="ExportReportToExcel('@Model.ReportTypeName', true)">Export Full</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div>
+        <p class="p-2 fs-20 text-center bg-silver fw-bold" id="ModuleReportSubTitle"></p>
+    </div>
+</div>
+
+<input id="ModuleReportActiveReport" hidden />
+<input type="text" id="ModuleReportGoBackDiv" hidden/>
+<input type="text" id="CallbackFunctionName" value="@Model.OnBackReportTabClickCallbackFunction" hidden />
+
+<script>
+
+    function GoBackReportTab()
+    {
+        var backDivId = $("#ModuleReportGoBackDiv").val();
+        
+        var callbackFunction = $("#CallbackFunctionName").val();
+
+        if (callbackFunction != null)
+        {
+            if (typeof window[callbackFunction] === 'function')
+            {
+                window[callbackFunction](backDivId);
+            }
+        }
+
+    }
+
+
+</script>

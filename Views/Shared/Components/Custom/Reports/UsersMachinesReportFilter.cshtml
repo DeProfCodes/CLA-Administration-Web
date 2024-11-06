@@ -1,0 +1,70 @@
+﻿@model ModuleReportFilterViewModel
+
+@{
+    var moduleName = Model.ReportName.GetDisplayName(); 
+}
+
+
+<!-- Card for Filters -->
+<div class="card mb-4 mt-2 overview-filters-card app-card-main-scaling">
+    <div class="card-body pt-0 pb-0">
+        <div class="row fs-12 mt-1 mb-2">
+            <p class="custom-p text-center hidden">Filter @moduleName Reports Types</p>
+            <div class="row col-12 d-flex flex-wrap module-overview-filters">
+                <div class="w-fit-content ms-auto ms-4">
+                    <p class="theme-txt-clr fw-bold text-center mb-0">Status</p>
+                    <div class="d-flex">
+                        <div class="align-content-center report-filter-module-status-titles">
+                            <p class="custom-p">Show Active</p>
+                        </div>
+                        <div class="report-filter-module-status-sliders">
+                            <div class="form-check form-switch w-fit-content mb-0">
+                                <input class="form-check-input form-check-input-success slider-large" type="checkbox" id="ModuleReportFilterActive" checked>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex">
+                        <div class="align-content-center report-filter-module-status-titles">
+                            <p class="custom-p">Show Inactive</p>
+                        </div>
+                        <div class="report-filter-module-status-sliders">
+                            <div class="form-check form-switch w-fit-content mb-0">
+                                <input class="form-check-input form-check-input-warning slider-large" type="checkbox" id="ModuleReportFilterInActive" checked>
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="d-flex">
+                        <div class="align-content-center report-filter-module-status-titles">
+                            <p class="custom-p">Show Not Installed</p>
+                        </div>
+                        <div class="report-filter-module-status-sliders">
+                            <div class="form-check form-switch w-fit-content mb-0">
+                                <input class="form-check-input form-check-input-danger slider-large" type="checkbox" id="ModuleReportFilterNotInstalled" checked>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-auto me-auto mb-1">
+                    <div class="d-flex mt-3">
+                        <button class="btn custom-btn-default btn-sm ms-2 mt-4 px-3" onclick="GenerateActiveUserMachineReport()">Generate Report</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function ()
+    {
+       
+    });
+
+    function GenerateActiveUserMachineReport()
+    {
+        GenerateActiveUsersMachinesReport('@Model.ReportName');
+    }
+
+
+</script>

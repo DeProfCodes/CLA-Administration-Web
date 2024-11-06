@@ -12,5 +12,7 @@
 
         public bool IsInitiallyHidden { get; set; }
 
+        public string LastSyncDateColumnName { get; set; }
+
     }
 }

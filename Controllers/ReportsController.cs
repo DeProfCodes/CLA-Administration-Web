@@ -4,7 +4,9 @@ using CLA_Administration_Web.Helpers.MockData;
 using CLA_Administration_Web.Helpers.Reporting;
 using CLA_Administration_Web.Services.Reporting;
 using CLA_Administration_Web.ViewModels.Reports;
+using CLACommonFunctionsLibrary_NET.Helpers.Enums;
 using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Spreadsheet;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting.Internal;
@@ -62,11 +64,11 @@ namespace CLA_Administration_Web.Controllers
         [HttpGet]
         public async Task<IActionResult> SurveyReportOnly([FromQuery] ModuleReportDataFilterViewModel parameters)
         {
-            var surveyReportVm = await reportingHelper.LoadSurveyReportsTabs(parameters);
+            var surveyReportVm = await reportingHelper.GetSurveyReportsData(parameters);
 
             if (parameters.ShowRawDataOnly)
             {
-                return PartialView(AppPagesLinks.Reports.ModuleRawDataPageLink, surveyReportVm.AllData);
+                return PartialView(AppPagesLinks.Reports.ModuleRawDataPageLink, surveyReportVm);
             }
             return PartialView(AppPagesLinks.Reports.SurveyReportOnlyPageLink, surveyReportVm);
         }
@@ -195,6 +197,14 @@ namespace CLA_Administration_Web.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> ActiveUsersMachinesReport([FromQuery] ModuleReportDataFilterViewModel parameters, ReportsNamesType reportName)
+        {
+            var activeUserMachineReportVm = await reportingHelper.LoadActiveUserMachineReport(parameters, reportName);
+
+            return PartialView(AppPagesLinks.Reports.ActiveUserMachineTablePageLink, activeUserMachineReportVm);
+        }
+
+        [HttpGet]
         public async Task<IActionResult> CampaignDispatchReport()
         {
             return PartialView(AppPagesLinks.Reports.CampaignDispatchPageLink);
@@ -206,15 +216,17 @@ namespace CLA_Administration_Web.Controllers
             return PartialView(AppPagesLinks.Reports.TroubleshootPageLink);
         }
 
-        public IActionResult ExportFileToExcel(ReportsNamesType reportType)
+        public async Task<IActionResult> ExportFileToExcel(ReportsNamesType reportType, ModuleReportDataFilterViewModel parameters, string reportPageName)
         {
             var filename = "";
             using (var workbook = new XLWorkbook())
             {
                 if (reportType == ReportsNamesType.Popup)
                 {
-                    ExportHelper.ExportPopupReport(workbook);
-                    filename = "rptPopup.xlsx";
+                    var data = await reportingHelper.GetPopupReportsForExport(parameters);
+
+                    ExportHelper.ExportPopupReport(workbook, reportPageName, data);
+                    filename = (reportPageName == "all") ? "rptPopup.xlsx" : $"rptPopup-{reportPageName}.xlsx";
                 }
                 else if (reportType == ReportsNamesType.Survey)
                 {
@@ -223,13 +235,23 @@ namespace CLA_Administration_Web.Controllers
                 }
                 else if (reportType == ReportsNamesType.Ticker)
                 {
-                    ExportHelper.ExportTickerReport(workbook);
-                    filename = "rptTicker.xlsx";
+                    var data = await reportingHelper.GetTickerReports(parameters);
+
+                    ExportHelper.ExportTickerReport(workbook, reportPageName, data);
+                    filename = (reportPageName == "all") ? "rptTicker.xlsx" : $"rptTicker-{reportPageName}.xlsx";
                 }
                 else if (reportType == ReportsNamesType.Policy)
                 {
                     ExportHelper.ExportPolicyReport(workbook);
                     filename = "rptPolicy.xlsx";
+                }
+                else if (reportType == ReportsNamesType.ActiveUsers || reportType == ReportsNamesType.ActiveMachines)
+                {
+                    var data = await reportingHelper.GetActiveUsersReport(parameters, reportType);
+                    var status = reportingHelper.GetStatusReport(parameters);
+
+                    ExportHelper.ExportActiveUsersReport(workbook, reportType.GetDisplayDescription(), data, status);
+                    filename = $"rpt{reportType.GetDisplayName()}.xlsx";
                 }
 
                 using (var stream = new MemoryStream())

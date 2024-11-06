@@ -30,10 +30,8 @@ namespace CLA_Administration_Web.Helpers.Reporting
             }
         }
 
-        public static void ExportPopupReport(XLWorkbook workbook)
+        public static void ExportPopupReport(XLWorkbook workbook, string reportPageName, PopupReports data)
         {
-            var data = LocalDataStorage.StagingData.PopupReports;
-
             var summaryTab = GetReportExcelBytes(new List<ReportRDLC> { data.Summary }, data.Summary.ReportRDLCPath);
             var responseSummary = GetReportExcelBytes(new List<ReportRDLC> { data.QuestionsSummary, data.OutstandingSummary, data.Status }, data.QuestionsSummary.ReportRDLCPath);
             var responseClick = GetReportExcelBytes(new List<ReportRDLC> { data.ResponseBreakdownData, data.Status }, data.ResponseBreakdownData.ReportRDLCPath, "Bubble_Click_DT");
@@ -43,14 +41,29 @@ namespace CLA_Administration_Web.Helpers.Reporting
             var responseShow = GetReportExcelBytes(new List<ReportRDLC> { data.ResponseBreakdownData, data.Status }, data.ResponseBreakdownData.ReportRDLCPath, "Bubble_Show_DT");
             var outstanding = GetReportExcelBytes(new List<ReportRDLC> { data.Outstanding, data.ResponseBreakdownData, data.Status }, data.Outstanding.ReportRDLCPath, "NULL");
 
-            AddSheetToExcel(workbook, summaryTab, "Popup Summary");
-            AddSheetToExcel(workbook, responseSummary, "Popup Response Summary");
-            AddSheetToExcel(workbook, responseClick, "Response - Click");
-            AddSheetToExcel(workbook, responseDismiss, "Response - Dismiss");
-            AddSheetToExcel(workbook, responseAutoHide, "Response - Autohide");
-            AddSheetToExcel(workbook, responseSnooze, "Response - Snooze");
-            AddSheetToExcel(workbook, responseShow, "Response - Show");
-            AddSheetToExcel(workbook, outstanding, "Popup Outstanding");
+            reportPageName = reportPageName.ToLower();
+
+            if (reportPageName == "all")
+            {
+                AddSheetToExcel(workbook, summaryTab, "Popup Summary");
+                AddSheetToExcel(workbook, responseSummary, "Popup Response Summary");
+                AddSheetToExcel(workbook, responseClick, "Response - Click");
+                AddSheetToExcel(workbook, responseDismiss, "Response - Dismiss");
+                AddSheetToExcel(workbook, responseAutoHide, "Response - Autohide");
+                AddSheetToExcel(workbook, responseSnooze, "Response - Snooze");
+                AddSheetToExcel(workbook, responseShow, "Response - Show");
+                AddSheetToExcel(workbook, outstanding, "Popup Outstanding");
+            }
+            else
+            {
+                if (reportPageName == "summary") AddSheetToExcel(workbook, summaryTab, "Popup Summary");
+                if (reportPageName == "response_summary") AddSheetToExcel(workbook, responseSummary, "Popup Response Summary");
+                if (reportPageName == "click") AddSheetToExcel(workbook, responseClick, "Response - Click");
+                if (reportPageName == "dismiss") AddSheetToExcel(workbook, responseDismiss, "Response - Dismiss");
+                if (reportPageName == "autohide") AddSheetToExcel(workbook, responseAutoHide, "Response - Autohide");
+                if (reportPageName == "show") AddSheetToExcel(workbook, responseShow, "Response - Show");
+                if (reportPageName == "noshow") AddSheetToExcel(workbook, outstanding, "Popup Outstanding");
+            }
         }
 
         public static void ExportSurveyReport(XLWorkbook workbook)
@@ -71,10 +84,8 @@ namespace CLA_Administration_Web.Helpers.Reporting
             AddSheetToExcel(workbook, reportData.OptOut, "Survey Opt Out");
         }
 
-        public static void ExportTickerReport(XLWorkbook workbook)
+        public static void ExportTickerReport(XLWorkbook workbook, string reportPageName, TickerReports data)
         {
-            var data = LocalDataStorage.StagingData.TickerReports;
-
             var reportData = new 
             {
                 Summary = GetReportExcelBytes(new List<ReportRDLC> { data.Summary }, data.Summary.ReportRDLCPath),
@@ -82,9 +93,18 @@ namespace CLA_Administration_Web.Helpers.Reporting
                 Outstanding = GetReportExcelBytes(new List<ReportRDLC> { data.Outstanding, data.Status }, data.Outstanding.ReportRDLCPath)
             };
 
-            AddSheetToExcel(workbook, reportData.Summary, "Ticker Summary");
-            AddSheetToExcel(workbook, reportData.Completed, "Ticker Summary (2)");
-            AddSheetToExcel(workbook, reportData.Outstanding, "Ticker Outstanding");
+            if (reportPageName == "all")
+            {
+                AddSheetToExcel(workbook, reportData.Summary, "Ticker Summary");
+                AddSheetToExcel(workbook, reportData.Completed, "Ticker Summary (2)");
+                AddSheetToExcel(workbook, reportData.Outstanding, "Ticker Outstanding");
+            }
+            else
+            {
+                if (reportPageName == "summary") AddSheetToExcel(workbook, reportData.Summary, "Ticker Summary");
+                if (reportPageName == "completed") AddSheetToExcel(workbook, reportData.Completed, "Ticker Summary (2)");
+                if (reportPageName == "outstanding") AddSheetToExcel(workbook, reportData.Outstanding, "Ticker Outstanding");
+            }
         }
 
         public static void ExportPolicyReport(XLWorkbook workbook)
@@ -100,6 +120,17 @@ namespace CLA_Administration_Web.Helpers.Reporting
 
             AddSheetToExcel(workbook, reportData.ResponseSummary, "Policy Response Summary");
         }
+
+        public static void ExportActiveUsersReport(XLWorkbook workbook, string reportPageName, ReportRDLC data, ReportRDLC status)
+        {
+            var reportData = new
+            {
+                ActiveResult = GetReportExcelBytes(new List<ReportRDLC> { data, status }, data.ReportRDLCPath)
+            };
+
+            AddSheetToExcel(workbook, reportData.ActiveResult, $"Active {reportPageName}");
+        }
+
 
     }
 }

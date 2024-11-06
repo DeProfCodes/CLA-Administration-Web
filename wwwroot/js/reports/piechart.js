@@ -1,42 +1,68 @@
-
-function DrawPieChart(apexPieChart, chartId, pieData, pieDataLabel, colorsData, dimensions, onLabelClick)
+function DrawPieChart(apexPieChart, chartId, pieData, pieDataLabel, colorsData, dimensions, onLabelClick, isNumberView = false) 
 {
     var options = {
         series: pieData,
         chart: {
-            width: 500,
+            width: dimensions.Width,
+            height: dimensions.height,
             type: 'pie',
             events: {
-                dataPointSelection: function(event, chartContext, config) 
+                dataPointSelection: function (event, chartContext, config)
                 {
                     var clickedLabel = pieDataLabel[config.dataPointIndex];
-                    
-                    if (typeof onLabelClick === 'function') 
+                    if (typeof onLabelClick === 'function')
                     {
                         onLabelClick(clickedLabel);
                     }
                 }
+            },
+            animations: {
+                enabled: false
             }
         },
         labels: pieDataLabel,
         colors: colorsData,
+        legend: {
+            position: 'right',
+            offsetY: 10
+        },
         responsive: [{
             breakpoint: 480,
             options: {
                 chart: {
-                    width: 210,
-                    height: 210
+                    width: Math.min(210, dimensions.Width),
+                    height: Math.min(210, dimensions.height)
                 },
                 legend: {
                     position: 'bottom'
                 }
             }
-        }]
+        }],
+        plotOptions: {
+            pie: {
+                expandOnClick: false
+            }
+        },
+        dataLabels: {
+            enabled: true,
+            formatter: function (val, opts)
+            {
+                // Show number if isNumberView is true, otherwise show percentage
+                return isNumberView
+                    ? opts.w.config.series[opts.seriesIndex]
+                    : val.toFixed(2) + '%';
+            }
+        }
     };
 
     if (apexPieChart instanceof ApexCharts)
+    {
         apexPieChart.destroy();
+    }
 
     apexPieChart = new ApexCharts(document.querySelector(chartId), options);
-    apexPieChart.render();
+    apexPieChart.render().then(() =>
+    {
+        apexPieChart.redraw();
+    });
 }

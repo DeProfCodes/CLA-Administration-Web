@@ -1,43 +1,305 @@
-﻿@model SurveyReportsRaw
+﻿@using CLA_Administration_Web.Helpers.Html
+@using CLA_Administration_Web.Models.APIResponses.Reports.Survey
+@using CLA_Administration_Web.ViewModels.Reports.Survey
+@model SurveyReportViewModel
+
+@{
+    //Summary
+    var summary = Model.SurveySummary;
+
+    var completedRate = Math.Round(((double)summary.Complete/ summary.Targeted) * 100, 2);
+    var outstandingRate = Math.Round(((double)summary.Outstanding / summary.Targeted) * 100, 2);
+    var optInRate = Math.Round(((double)summary.OptIn / summary.Targeted) * 100, 2);
+}
+
+<input id="ModuleReportId" value="@Model.SurveyId" hidden />
+<input id="ModuleReportActiveReport" hidden />
 
 <div class="report-outter-container">
-    <div class="card-body p-1">
+    <div class="card-body p-0">
         <div class="row flex-sm-nowrap">
-            <div class="flex-wrap report-body-container px-5">
+            <div class="flex-wrap report-body-container">
+                @* <div id="ModuleReportHeader">
+                    <div class="d-flex theme-bg">
+                        <div class="mt-1">
+                            <img src="~/images/logos/report-logo.png" class="report-logo" alt="logo icon">
+                        </div>
+                        <div class="w-200p ms-2 text-black align-content-center hidden" id="ReportStatusLegend">
+                            <div class="w-100 bg-lime text-center">Active</div>
+                            <div class="w-100 bg-yellow text-center mt-1">Inactive</div>
+                            <div class="w-100 bg-red text-center mt-1">Not Installed</div>
+                        </div>
+                        <div class="w-100">
+                            <p class="mt-2 fs-30 text-center text-white">@summary.SurveyTitle</p>
+                            <p class="mt-2 fs-20 text-center text-white">
+                                Effective from: <span>@summary.EffFrom.ToString("dddd, dd MMM yyyy")</span>
+                                To: <span>@summary.EffTo.ToString("dddd, dd MMM yyyy")</span>
+                            </p>
+                        </div>
+                        <div id="TickerReportActionBtns">
+                            <button class="btn btn-secondary btn-sm w-100 invisible" id="BackBtn" onclick="GoBackToSurveyReportTab()">Back</button>
+                            <div class="dropdown">
+                                <button class="btn btn-success btn-sm dropdown-toggle w-100 mt-2" type="button" id="exportDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Export
+                                </button>
+                                <ul class="dropdown-menu  w-100 " aria-labelledby="exportDropdown">
+                                    <li><a class="dropdown-item fs-12" onclick="ExportReportToExcel('@ReportsNamesType.Survey', false)">Export Single</a></li>
+                                    <li><a class="dropdown-item fs-12" onclick="ExportReportToExcel('@ReportsNamesType.Survey', true)">Export Full</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="p-2 fs-20 text-center bg-silver fw-bold" id="TickerReportTitle"></p>
+                    </div>
+                </div> *@
+                @{
+                    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Reports/ModuleReportResultTitle.cshtml",
+                    new ModuleReportResultTitleViewModel
+                    {
+                        ReportTypeName = ReportsNamesType.Survey,
+                        ReportTitle = Model.SurveySummary.SurveyTitle,
+                        EffectiveFromDate = Model.SurveySummary.EffFrom,
+                        EffectiveToDate = Model.SurveySummary.EffTo,
+                        OnBackReportTabClickCallbackFunction = "GoBackToSurveyReportTab"
+                    });
+                }
                 <!-- 1. Survey Summary Tab -->
-                <div id="SurveySummaryTab-1" class="report-module-tabs-popup hidden">
-                    <div class="report-raw-data">
-                        @Html.Raw(Model.Summary)
+                <div id="SurveySummaryTab-1" class="report-module-tabs-module px-5 hidden">
+                    <div class="report-raw-data ms-0 mt-5 d-flex">
+                        <div class="w-50 mt-3">
+                            <table class="table table-bordered mb-0 w-75 theme-border">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="theme-bg text-white">Event</th>
+                                        <th scope="col" class="theme-bg text-white">Count</th>
+                                        <th scope="col" class="theme-bg text-white">Percentage (%)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="report-piechart-color-crimson-dim">Outstanding</td>
+                                        <td class="report-piechart-color-crimson-dim">@summary.Outstanding</td>
+                                        <td class="report-piechart-color-crimson-dim">@outstandingRate</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="report-piechart-color-blue-dim">Opt In</td>
+                                        <td class="report-piechart-color-blue-dim">@summary.OptIn</td>
+                                        <td class="report-piechart-color-blue-dim">@optInRate</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="report-piechart-color-darkgreen-dim">Completed</td>
+                                        <td class="report-piechart-color-darkgreen-dim">@summary.Complete</td>
+                                        <td class="report-piechart-color-darkgreen-dim">@completedRate</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Targeted</td>
+                                        <td>@summary.Targeted</td>
+                                        <td>100</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="">Response Duration</td>
+                                        <td class="">@summary.AverageDurationSeconds</td>
+                                        <td class=""></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="table table-bordered table-stripped mb-0 w-75 mt-5 w-fit-content" id="SummarizedDetailsData">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="theme-bg text-white">Survey ID</th>
+                                        <th scope="col" class="theme-bg text-white">User ID</th>
+                                        <th scope="col" class="theme-bg text-white">Machine ID</th>
+                                        <th scope="col" class="theme-bg text-white">Opt In</th>
+                                        <th scope="col" class="theme-bg text-white">Is Survey Complete</th>
+                                        <th scope="col" class="theme-bg text-white">Response Duration</th>
+                                        <th scope="col" class="theme-bg text-white">View Response</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach(var item in Model.SummarizedDetails)
+                                    {
+                                        <tr>
+                                            <td>@Model.SurveyId</td>
+                                            <td>@item.UserId</td>
+                                            <td>@item.MachineId</td>
+                                            <td>@item.OptIn</td>
+                                            <td>@item.IsComplete</td>
+                                            <td>@item.DurationSeconds</td>
+                                            <td><button class="btn btn-sm btn-info">View</button></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="w-50">
+                            <div class="mx-auto w-fit-content" id="SummaryChart"></div>
+                        </div>
                     </div>
                 </div>
-                <!-- 2. Survey Outstanding Tab -->
-                <div id="SurveyOutstandingTab-2" class="report-module-tabs-popup hidden">
-                    <div class="report-raw-data">
-                        @Html.Raw(Model.Outstanding)
+                <!-- 2. Survey Complete Opt Out Tab -->
+                <div id="SurveyCompleteOptOutTab-2" class="report-module-tabs-module px-5 hidden">
+                    <div class="report-raw-data ms-0 mt-5 d-flex">
+                        <div class="w-50 mt-3">
+                            <table class="table table-bordered mb-0 w-75 theme-border">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="theme-bg text-white">Event</th>
+                                        <th scope="col" class="theme-bg text-white">Count</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="report-piechart-color-silver-dim">Completed</td>
+                                        <td class="report-piechart-color-silver-dim">@Model.SurveyCompleteOptOut.Complete</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="report-piechart-color-blue-dim">Opt Out</td>
+                                        <td class="report-piechart-color-blue-dim">@Model.SurveyCompleteOptOut.OptOut</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="w-50">
+                            <div class="mx-auto w-fit-content" id="CompleteAndOptOut"></div>
+                        </div>
                     </div>
                 </div>
-                <!-- 3. Survey Opt In No Response Tab -->
-                <div id="SurveyOptInNoResponseTab-3" class="report-module-tabs-popup hidden">
-                    <div class="report-raw-data">
-                        @Html.Raw(Model.OptInNoResponse)
-                    </div>
-                </div>
-                <!-- 4. Survey Opt out Tab -->
-                <div id="SurveyOptOutTab-4" class="report-module-tabs-popup hidden">
-                    <div class="report-raw-data">
-                        @Html.Raw(Model.OptOut)
-                    </div>
-                </div>
+                <!-- Survey Outstanding Tab -->
+                @{
+                    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Reports/ModuleReportTable.cshtml",
+                    new ReportDataTableViewInputsViewModel
+                    {
+                        ComponentId = "SurveyOutstandingTab",
+                        TableId = "SurveyOutstandingData",
+                        DataSource = Model.Outstanding,
+                        IsInitiallyHidden = true,
+                        DefaultFallBackType = typeof(SurveyReportSummaryDetails),
+                        LastSyncDateColumnName = "LastSyncDate"
+                    });
+                }
             </div>
         </div>
     </div>
 </div>
 
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+
 <script>
 
-    $(document).ready(function()
+    $(document).ready(function ()
     {
-        NavigateToPopupReportTab(1);
+        LoadData();
+        SummaryTab();
     });
+
+    function LoadData()
+    {
+        //Summary
+        let apexPieChart = null;
+
+        var completed = parseInt("@Model.SurveySummary.Complete");
+        var outstanding = parseInt("@Model.SurveySummary.Outstanding");
+        var optIn = parseInt("@Model.SurveySummary.OptIn");
+
+        var data = [completed, outstanding, optIn];
+        var pieDataLabel = ["Completed", "Outstanding", "Opt In"];
+        var colorsData = [ReportColorsTypes.GREEN, ReportColorsTypes.RED, ReportColorsTypes.BLUE];
+
+        var dimension = new DimensionType(500);
+
+        DrawPieChart(apexPieChart, "#SummaryChart", data, pieDataLabel, colorsData, dimension, onSummaryPieChartLabelClick);
+
+        //Complete & Opt Out
+        var complete = parseInt("@Model.SurveyCompleteOptOut.Complete");
+        var optOut = parseInt("@Model.SurveyCompleteOptOut.OptOut");
+
+        data = [complete, optOut];
+        pieDataLabel = ["Complete", "Opt Out"];
+        colorsData = [ReportColorsTypes.SILVER, ReportColorsTypes.BLUE];
+        dimension = new DimensionType(500);
+
+        DrawPieChart(apexPieChart, "#CompleteAndOptOut", data, pieDataLabel, colorsData, dimension, onSurveyCompleteOptOutPieChartLabelClick, true);
+
+        $(document).ready(function ()
+        {
+            $('#SummarizedDetailsData').DataTable({
+                dom: 'rtip',   // Removes the search box and length menu
+                pageLength: 10 // Sets a default page length if desired
+            });
+        });
+    }
+
+    function SummaryTab()
+    {
+        HideShowElementVisibity("#BackBtn", HideShow.HIDE);
+        HideShowElement(".report-module-tabs-module", HideShow.HIDE);
+        HideShowElement("#ReportStatusLegend", HideShow.HIDE);
+        HideShowElement("#SurveySummaryTab-1", HideShow.SHOW);
+
+        $("#ModuleReportSubTitle").text("Survey Summary");
+        $("#ModuleReportActiveReport").val("summary");
+    }
+
+    function OutstandingTab()
+    {
+        HideShowElementVisibity("#BackBtn", HideShow.SHOW);
+        HideShowElement(".report-module-tabs-module", HideShow.HIDE);
+        HideShowElement("#SurveyOutstandingTab", HideShow.SHOW);
+        HideShowElement("#ReportStatusLegend", HideShow.SHOW);
+
+        $("#ModuleReportGoBackDiv").val("SurveySummary");
+        $("#ModuleReportSubTitle").text("Outstanding Responses Breakdown");
+        $("#ModuleReportActiveReport").val("outstanding");
+    }
+
+    function CompleteAndOptOutTab()
+    {
+        HideShowElementVisibity("#BackBtn", HideShow.SHOW);
+        HideShowElement(".report-module-tabs-module", HideShow.HIDE);
+        HideShowElement("#SurveyCompleteOptOutTab-2", HideShow.SHOW);
+        HideShowElement("#ReportStatusLegend", HideShow.HIDE);
+
+        $("#ModuleReportGoBackDiv").val("SurveySummary");
+        $("#ModuleReportSubTitle").text("Survey Complete & Opt Out");
+        $("#ModuleReportActiveReport").val("completed");
+    }
+
+    function onSummaryPieChartLabelClick(label)
+    {
+        if (label === 'Completed')
+        {
+            CompleteAndOptOutTab();
+        }
+        else if (label === 'Outstanding')
+        {
+            OutstandingTab();
+        }
+        else if (label === "Opt In")
+        {
+
+        }
+    }
+
+    function onSurveyCompleteOptOutPieChartLabelClick(label)
+    {
+        if (label === 'Completed')
+        {
+            CompletedTab();
+        }
+        else if (label === 'Outstanding')
+        {
+            OutstandingTab();
+        }
+    }
+
+    function GoBackToSurveyReportTab(destinationDiv)
+    {
+        if (destinationDiv == "SurveySummary")
+        {
+            SummaryTab();
+        }
+    }
+
 
 </script>

@@ -41,7 +41,7 @@ namespace CLA_Administration_Web.Models.APIResponses.Reports.Ticker
         [JsonProperty("ticker_text")]
         public string TickerText { get; set; }
 
-        [DisplayName("Machine Name")]
+        [DisplayName("Last Sync Date")]
         [HideProperty]
         [JsonProperty("max_last_update_DT")]
         public DateTime MaxLastUpdateDate { get; set; }

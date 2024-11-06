@@ -58,6 +58,9 @@ namespace CLA_Administration_Web.Helpers.Enums.AppPages
         [Display(Name = "ActiveMachinesReport", Description = "Active Machines Report", ShortName = "Active Machines")]
         ActiveMachinesReport,
 
+        [Display(Name = "ActiveUsersMachinesReport", Description = "Active Users Machines Report", ShortName = "Active Users Machines")]
+        ActiveUsersMachinesReport,
+
         [Display(Name = "CampaignDispatchReport", Description = "Campaign Dispatch Report", ShortName = "Campaign Dispatch")]
         CampaignDispatchReport,
 

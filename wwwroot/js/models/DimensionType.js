@@ -4,9 +4,22 @@ class DimensionType
     Width;
     Height;
 
-    constructor(width, height)
+    constructor(width = null, height = null)
     {
-        this.Width = width;
-        this.Height = height;
+        if(width && height)
+        {
+            this.Width = width;
+            this.Height = height;
+        }
+        else if(width)
+        {
+            this.Width = width;
+            this.Height = width;
+        }
+        else
+        {
+            this.Width = 300;
+            this.Height = 300;
+        }
     }
 }
