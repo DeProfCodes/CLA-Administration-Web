@@ -135,7 +135,8 @@
             public const string ActiveUsersPageLink = "~/Views/Reports/ActiveUsersMachines/ActiveUsersReport.cshtml";
             public const string ActiveMachinesPageLink = "~/Views/Reports/ActiveUsersMachines/ActiveMachinesReport.cshtml";
             public const string ActiveUserMachineTablePageLink = "~/Views/Reports/ActiveUsersMachines/_ActiveUserMachineTable.cshtml";
-            public const string CampaignDispatchPageLink = "~/Views/Reports/CampaignDispatchReport.cshtml";
+            public const string CampaignDispatchPageLink = "~/Views/Reports/CampaignDispatch/CampaignDispatchReport.cshtml";
+            public const string CampaignDispatchListPageLink = "~/Views/Reports/CampaignDispatch/_CampaignDispatchList.cshtml";
             public const string TroubleshootPageLink = "~/Views/Reports/TroubleshootReport.cshtml";
         }
 

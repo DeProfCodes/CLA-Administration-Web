@@ -1,0 +1,546 @@
+﻿@using CLA_Administration_Web.ViewModels.Reports.CampaignDispatch
+@model CampaignDispatchViewModel
+
+@{
+    int index = 0;
+
+    var groupedTickers = Model.Tickers
+        .GroupBy(t => t.TickerTickerId)
+        .Select(g => new
+        {
+            TickerId = g.Key,
+            Environments = g.GroupBy(t => t.Environment).ToList()
+        })
+        .ToList();
+
+    var groupedScreensavers = Model.Screensaver
+        .GroupBy(s => s.ScreenSequenceHeaderId)
+        .Select(g => new
+        {
+            ScreensaverId = g.Key,
+            Environments = g.GroupBy(s => s.Environment).ToList()
+        })
+        .ToList();
+
+    var groupedDesktops = Model.Desktops
+        .GroupBy(d => d.DesktopHeaderId)
+        .Select(g => new
+        {
+            DesktopId = g.Key,
+            Environments = g.GroupBy(d => d.Environment).ToList()
+        })
+        .ToList();
+
+    var groupedLockscreens = Model.LockedDesktops
+        .GroupBy(ld => ld.LockedDesktopHeaderId)
+        .Select(g => new
+        {
+            LockedDesktopId = g.Key,
+            Environments = g.GroupBy(ld => ld.Environment).ToList()
+        })
+        .ToList();
+
+    var groupedPopups = Model.Popups
+        .GroupBy(p => p.StmStmId)
+        .Select(g => new
+        {
+            StmStmId = g.Key,
+            Environments = g.GroupBy(p => p.Environment).ToList()
+        })
+        .ToList();
+
+    var groupedSurveys = Model.Surveys
+        .GroupBy(s => s.SurveySurveyId)
+        .Select(g => new
+        {
+            SurveySurveyId = g.Key,
+            Environments = g.GroupBy(s => s.Environment).ToList()
+        })
+        .ToList();
+}
+
+<div id="ReportModuleData">
+    <div class="report-outter-container">
+        <div class="card-body p-0">
+            <div class="row flex-sm-nowrap">
+                <div class="flex-wrap report-body-container">
+                    @{
+                        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Reports/ModuleReportResultTitle.cshtml",
+                        new ModuleReportResultTitleViewModel
+                        {
+                            ReportTypeName = ReportsNamesType.CampaignDispatch,
+                            ReportTitle = "Campaign Dispatch Listing Report",
+                            EffectiveFromDate = Model.Filters.EffectiveFrom,
+                            EffectiveToDate = Model.Filters.EffectiveTo,
+                            OnBackReportTabClickCallbackFunction = "NaN"
+                        });
+                    }
+                    <div id="ScreensaverData" class="report-module-tabs-module mb-4 hidden">
+                        <h4 class="bg-silver p-2 text-center fw-bold">Screensavers</h4>
+                        <table id="ScreensaverCampaignData" class="table table-striped table-bordered table-hover theme-border align-middle campain-table-type fs-12">
+                            <thead>
+                                <tr>
+                                    <th class="theme-bg text-white" style="width:10%">Screensaver Description</th>
+                                    <th class="theme-bg text-white" style="width:10%">Screen Advert Description</th>
+                                    <th class="theme-bg text-white" style="width:7%">Effective From</th>
+                                    <th class="theme-bg text-white" style="width:7%">Effective To</th>
+                                    <th class="theme-bg text-white" style="width:10%">Timeslot From</th>
+                                    <th class="theme-bg text-white" style="width:10%">Timeslot To</th>
+                                    <th class="theme-bg text-white" style="width:10%">Environment</th>
+                                    <th class="theme-bg text-white" style="width:13%">Targeted</th>
+                                    <th class="theme-bg text-white" style="width:13%">User Last Modified</th>
+                                    <th class="theme-bg text-white" style="width:10%"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var screensaverGroup in groupedScreensavers)
+                                {
+                                    foreach (var envGroup in screensaverGroup.Environments)
+                                    {
+                                        var firstItem = envGroup.First();
+                                        var css = (index++ % 2 == 0) ? "report-piechart-color-silver-dim" : "";
+                                        string collapseId = $"collapse_{screensaverGroup.ScreensaverId}_{envGroup.Key}_{index}";
+                                        var collapseIconId = $"{collapseId}-icon";
+
+                                        <tr>
+                                            <td class="@css truncate-text">@firstItem.ScreensaverDescription</td>
+                                            <td class="@css truncate-text">@firstItem.ScreenAdvertDescription</td>
+                                            <td class="@css">@firstItem.ScreenEffFrom?.ToString("d/M/yyyy hh:mm:ss tt")</td>
+                                            <td class="@css">@firstItem.ScreenEffTo?.ToString("d/M/yyyy hh:mm:ss tt")</td>
+                                            <td class="@css">@firstItem.ScreenTimeslotFrom</td>
+                                            <td class="@css">@firstItem.ScreenTimeslotTo</td>
+                                            <td class="@css">@firstItem.Environment</td>
+                                            <td class="@css">
+                                                <a onclick="ToggleHiddenRow('@collapseId')">
+                                                    <i class="bi bi-plus-circle-fill custom-btn-icons breadcrumb-btn-icon theme-txt-clr fs-18" id="@collapseIconId"></i>
+                                                </a>
+                                            </td>
+                                            <td class="@css">@firstItem.ScreenUserLastModified</td>
+                                            <td class="@css"></td>
+                                        </tr>
+
+                                        @foreach (var item in envGroup)
+                                        {
+                                            <tr class="hidden" id="@collapseId">
+                                                <td class="@css"></td>
+                                                <td class="@css"></td>
+                                                <td class="@css"></td>
+                                                <td class="@css"></td>
+                                                <td class="@css"></td>
+                                                <td class="@css"></td>
+                                                <td class="@css"></td>
+                                                <td class="@css">@item.Targeted</td>
+                                                <td class="@css"></td>
+                                                <td class="@css"></td>
+                                            </tr>
+                                        }
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="DesktopData" class="report-module-tabs-module mb-4 hidden">
+                        <h4 class="bg-silver p-2 text-center fw-bold">Desktops</h4>
+                        <table id="DesktopCampaignData" class="table table-striped table-bordered table-hover theme-border align-middle campain-table-type fs-12">
+                            <thead>
+                                <tr>
+                                    <th class="theme-bg text-white" style="width:10%">Desktop Description</th>
+                                    <th class="theme-bg text-white" style="width:10%">Desktop Advert Description</th>
+                                    <th class="theme-bg text-white" style="width:10%">Effective From</th>
+                                    <th class="theme-bg text-white" style="width:10%">Effective To</th>
+                                    <th class="theme-bg text-white" style="width:10%">Timeslot From</th>
+                                    <th class="theme-bg text-white" style="width:10%">Timeslot To</th>
+                                    <th class="theme-bg text-white" style="width:10%">Environment</th>
+                                    <th class="theme-bg text-white" style="width:10%">Targeted</th>
+                                    <th class="theme-bg text-white" style="width:10%">User Last Modified</th>
+                                    <th class="theme-bg text-white" style="width:10%"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var desktopGroup in groupedDesktops)
+                                {
+                                    foreach (var envGroup in desktopGroup.Environments)
+                                    {
+                                        var firstItem = envGroup.First();
+                                        var css = (index++ % 2 == 0) ? "report-piechart-color-silver-dim" : "";
+                                        string collapseId = $"collapse_{desktopGroup.DesktopId}_{envGroup.Key}_{index}";
+                                        var collapseIconId = $"{collapseId}-icon";
+
+                                        <tr>
+                                            <td class="@css truncate-text">@firstItem.DesktopDescription</td>
+                                            <td class="@css truncate-text">@firstItem.DesktopAdvertDescription</td>
+                                            <td class="@css">@firstItem.DesktopEffFrom?.ToString("d/M/yyyy hh:mm:ss tt")</td>
+                                            <td class="@css">@firstItem.DesktopEffTo?.ToString("d/M/yyyy hh:mm:ss tt")</td>
+                                            <td class="@css">@firstItem.DesktopTimeslotFrom</td>
+                                            <td class="@css">@firstItem.DesktopTimeslotTo</td>
+                                            <td class="@css">@firstItem.Environment</td>
+                                            <td class="@css">
+                                                <a onclick="ToggleHiddenRow('@collapseId')">
+                                                    <i class="bi bi-plus-circle-fill custom-btn-icons breadcrumb-btn-icon theme-txt-clr fs-18" id="@collapseIconId"></i>
+                                                </a>
+                                            </td>
+                                            <td class="@css">@firstItem.DesktopUserLastModified</td>
+                                            <td class="@css"></td>
+                                        </tr>
+
+                                        @foreach (var item in envGroup)
+                                        {
+                                            <tr class="hidden" id="@collapseId">
+                                                <td class="@css"></td>
+                                                <td class="@css"></td>
+                                                <td class="@css"></td>
+                                                <td class="@css"></td>
+                                                <td class="@css"></td>
+                                                <td class="@css"></td>
+                                                <td class="@css"></td>
+                                                <td class="@css">@item.Targeted</td>
+                                                <td class="@css"></td>
+                                                <td class="@css"></td>
+                                            </tr>
+                                        }
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="LockscreenData" class="report-module-tabs-module mb-4 hidden">
+                        <h4 class="bg-silver p-2 text-center fw-bold">Lockscreen</h4>
+                        <table id="LockscreenCampaignData" class="table table-striped table-bordered table-hover theme-border align-middle campain-table-type fs-12">
+                            <thead>
+                                <tr>
+                                    <th class="theme-bg text-white" style="width:10%">Lockscreen Description</th>
+                                    <th class="theme-bg text-white" style="width:20%">Lockscreen Advert Description</th>
+                                    <th class="theme-bg text-white" style="width:10%">Effective From</th>
+                                    <th class="theme-bg text-white" style="width:10%">Effective To</th>
+                                    <th class="theme-bg text-white" style="width:10%">Timeslot From</th>
+                                    <th class="theme-bg text-white" style="width:10%">Timeslot To</th>
+                                    <th class="theme-bg text-white" style="width:10%">Environment</th>
+                                    <th class="theme-bg text-white" style="width:10%">Targeted</th>
+                                    <th class="theme-bg text-white" style="width:10%">User Last Modified</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var lockedDesktopGroup in groupedLockscreens)
+                                {
+                                    foreach (var envGroup in lockedDesktopGroup.Environments)
+                                    {
+                                        var firstItem = envGroup.First();
+                                        var css = (index++ % 2 == 0) ? "report-piechart-color-silver-dim" : "";
+                                        string collapseId = $"collapse_{lockedDesktopGroup.LockedDesktopId}_{envGroup.Key}_{index}";
+                                        var collapseIconId = $"{collapseId}-icon";
+
+                                        <tr>
+                                            <td class="@css truncate-text">@firstItem.LockedDesktopDescription</td>
+                                            <td class="@css truncate-text">@firstItem.LockedDesktopAdvertDescription</td>
+                                            <td class="@css">@firstItem.LockedDesktopEffFrom?.ToString("d/M/yyyy hh:mm:ss tt")</td>
+                                            <td class="@css">@firstItem.LockedDesktopEffTo?.ToString("d/M/yyyy hh:mm:ss tt")</td>
+                                            <td class="@css">@firstItem.LockedDesktopTimeslotFrom</td>
+                                            <td class="@css">@firstItem.LockedDesktopTimeslotTo</td>
+                                            <td class="@css">@firstItem.Environment</td>
+                                            <td class="@css">
+                                                <a onclick="ToggleHiddenRow('@collapseId')">
+                                                    <i class="bi bi-plus-circle-fill custom-btn-icons breadcrumb-btn-icon theme-txt-clr fs-18" id="@collapseIconId"></i>
+                                                </a>
+                                            </td>
+                                            <td class="@css">@firstItem.LockedDesktopUserLastModified</td>
+                                        </tr>
+
+                                        @foreach (var item in envGroup)
+                                        {
+                                            <tr class="hidden" id="@collapseId">
+                                                <td class="@css"></td>
+                                                <td class="@css"></td>
+                                                <td class="@css"></td>
+                                                <td class="@css"></td>
+                                                <td class="@css"></td>
+                                                <td class="@css"></td>
+                                                <td class="@css"></td>
+                                                <td class="@css">@item.Targeted</td>
+                                                <td class="@css"></td>
+                                                <td class="@css"></td>
+                                            </tr>
+                                        }
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="PopupData" class="report-module-tabs-module mb-4 hidden">
+                        <h4 class="bg-silver p-2 text-center fw-bold">Popups</h4>
+                        <table id="PopupCampaignData" class="table table-striped table-bordered table-hover theme-border align-middle campain-table-type fs-12">
+                            <thead>
+                                <tr>
+                                    <th class="theme-bg text-white" style="width:10%">Popups ID</th>
+                                    <th class="theme-bg text-white" style="width:10%">Popup Title</th>
+                                    <th class="theme-bg text-white" style="width:10%">Popup Body</th>
+                                    <th class="theme-bg text-white" style="width:10%">Effective From</th>
+                                    <th class="theme-bg text-white" style="width:10%">Effective To</th>
+                                    <th class="theme-bg text-white" style="width:10%">Timeslot From</th>
+                                    <th class="theme-bg text-white" style="width:10%">Timeslot To</th>
+                                    <th class="theme-bg text-white" style="width:10%">Environment</th>
+                                    <th class="theme-bg text-white" style="width:10%">Targeted</th>
+                                    <th class="theme-bg text-white" style="width:10%">User Last Modified</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var popupGroup in groupedPopups)
+                                {
+                                    foreach (var envGroup in popupGroup.Environments)
+                                    {
+                                        var firstItem = envGroup.First();
+                                        var css = (index++ % 2 == 0) ? "report-piechart-color-silver-dim" : "";
+                                        string collapseId = $"collapse_{popupGroup.StmStmId}_{envGroup.Key}_{index}";
+                                        var collapseIconId = $"{collapseId}-icon";
+
+                                        <tr>
+                                            <td class="@css" style="width:10%">@firstItem.StmStmId</td>
+                                            <td class="@css truncate-text" style="width:10%">@firstItem.StmStmHeader</td>
+                                            <td class="@css truncate-text" style="width:10%">@firstItem.StmStmText</td>
+                                            <td class="@css" style="width:10%">@firstItem.StmEffFrom?.ToString("d/M/yyyy hh:mm:ss tt")</td>
+                                            <td class="@css" style="width:10%">@firstItem.StmEffTo?.ToString("d/M/yyyy hh:mm:ss tt")</td>
+                                            <td class="@css" style="width:10%">@firstItem.StmTimeslotFrom</td>
+                                            <td class="@css" style="width:10%">@firstItem.StmTimeslotTo</td>
+                                            <td class="@css" style="width:10%">@firstItem.Environment</td>
+                                            <td class="@css" style="width:10%">
+                                                <a onclick="ToggleHiddenRow('@collapseId')">
+                                                    <i class="bi bi-plus-circle-fill custom-btn-icons breadcrumb-btn-icon theme-txt-clr fs-18" id="@collapseIconId"></i>
+                                                </a>
+                                            </td>
+                                            <td class="@css">@firstItem.StmUserLastModified</td>
+                                        </tr>
+
+                                        @foreach (var item in envGroup)
+                                        {
+                                            <tr class="hidden" id="@collapseId">
+                                                <td class="@css"></td>
+                                                <td class="@css"></td>
+                                                <td class="@css"></td>
+                                                <td class="@css"></td>
+                                                <td class="@css"></td>
+                                                <td class="@css"></td>
+                                                <td class="@css"></td>
+                                                <td class="@css"></td>
+                                                <td class="@css">@item.Targeted</td>
+                                                <td class="@css"></td>
+                                            </tr>
+                                        }
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="SurveyData" class="report-module-tabs-module mb-4 hidden">
+                        <h4 class="bg-silver p-2 text-center fw-bold">Surveys</h4>
+                        <table id="SurveyCampaignData" class="table table-striped table-bordered table-hover theme-border align-middle campain-table-type fs-12">
+                            <thead>
+                                <tr>
+                                    <th class="theme-bg text-white" style="width:10%">Survey ID</th>
+                                    <th class="theme-bg text-white" style="width:10%">Survey Title</th>
+                                    <th class="theme-bg text-white" style="width:10%">Effective From</th>
+                                    <th class="theme-bg text-white" style="width:10%">Effective To</th>
+                                    <th class="theme-bg text-white" style="width:10%">Timeslot From</th>
+                                    <th class="theme-bg text-white" style="width:10%">Timeslot To</th>
+                                    <th class="theme-bg text-white" style="width:10%">Environment</th>
+                                    <th class="theme-bg text-white" style="width:10%">Targeted</th>
+                                    <th class="theme-bg text-white" style="width:10%">User Last Modified</th>
+                                    <th class="theme-bg text-white" style="width:10%"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var surveyGroup in groupedSurveys)
+                                {
+                                    foreach (var envGroup in surveyGroup.Environments)
+                                    {
+                                        var firstItem = envGroup.First();
+                                        var css = (index++ % 2 == 0) ? "report-piechart-color-silver-dim" : "";
+                                        string collapseId = $"collapse_{surveyGroup.SurveySurveyId}_{envGroup.Key}_{index}";
+                                        var collapseIconId = $"{collapseId}-icon";
+
+                                        <tr>
+                                            <td class="@css">@firstItem.SurveySurveyId</td>
+                                            <td class="@css">@firstItem.SurveySurveyTitle</td>
+                                            <td class="@css">@firstItem.SurveyEffFrom?.ToString("d/M/yyyy hh:mm:ss tt")</td>
+                                            <td class="@css">@firstItem.SurveyEffTo?.ToString("d/M/yyyy hh:mm:ss tt")</td>
+                                            <td class="@css">@firstItem.SurveyTimeslotFrom</td>
+                                            <td class="@css">@firstItem.SurveyTimeslotTo</td>
+                                            <td class="@css">@firstItem.Environment</td>
+                                            <td class="@css">
+                                                <a onclick="ToggleHiddenRow('@collapseId')">
+                                                    <i class="bi bi-plus-circle-fill custom-btn-icons breadcrumb-btn-icon theme-txt-clr fs-18" id="@collapseIconId"></i>
+                                                </a>
+                                            </td>
+                                            <td class="@css">@firstItem.SurveyUserLastModified</td>
+                                            <td class="@css"></td>
+                                        </tr>
+
+                                        @foreach (var item in envGroup)
+                                        {
+                                            <tr class="hidden" id="@collapseId">
+                                                <td class="@css"></td>
+                                                <td class="@css truncate-text"></td>
+                                                <td class="@css"></td>
+                                                <td class="@css"></td>
+                                                <td class="@css"></td>
+                                                <td class="@css"></td>
+                                                <td class="@css"></td>
+                                                <td class="@css">@item.Targeted</td>
+                                                <td class="@css"></td>
+                                                <td class="@css"></td>
+                                            </tr>
+                                        }
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="TickerData" class="report-module-tabs-module mb-4 hidden">
+                        <h4 class="bg-silver p-2 text-center fw-bold">Tickers</h4>
+                        <table id="TickerCampaignData" class="table table-striped table-bordered table-hover theme-border align-middle campain-table-type fs-12">
+                            <thead>
+                                <tr>
+                                    <th class="theme-bg text-white" style="width:10%">Ticker ID</th>
+                                    <th class="theme-bg text-white" style="width:10%">Ticker Text</th>
+                                    <th class="theme-bg text-white" style="width:10%">Effective From</th>
+                                    <th class="theme-bg text-white" style="width:10%">Effective To</th>
+                                    <th class="theme-bg text-white" style="width:10%">Timeslot From</th>
+                                    <th class="theme-bg text-white" style="width:10%">Timeslot To</th>
+                                    <th class="theme-bg text-white" style="width:10%">Environment</th>
+                                    <th class="theme-bg text-white" style="width:10%">Targeted</th>
+                                    <th class="theme-bg text-white" style="width:10%">User Last Modified</th>
+                                    <th class="theme-bg text-white" style="width:10%"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var tickerGroup in groupedTickers)
+                                {
+                                    foreach (var envGroup in tickerGroup.Environments)
+                                    {
+                                        // Display the first item in each Environment group
+                                        var firstItem = envGroup.First();
+                                        var css = (index++ % 2 == 0) ? "report-piechart-color-silver-dim" : "";
+                                        string collapseId = $"collapse_{tickerGroup.TickerId}_{envGroup.Key}_{index}";
+                                        var collapseIconId = $"{collapseId}-icon";
+
+                                        <tr>
+                                            <td class="@css" style="width:10%">@firstItem.TickerTickerId</td>
+                                            <td class="@css" style="width:10%">@firstItem.TickerTickerText</td>
+                                            <td class="@css" style="width:10%">@firstItem.TickerEffFrom?.ToString("d/M/yyyy hh:mm:ss tt")</td>
+                                            <td class="@css" style="width:10%">@firstItem.TickerEffTo?.ToString("d/M/yyyy hh:mm:ss tt")</td>
+                                            <td class="@css" style="width:10%">@firstItem.TickerTimeslotFrom</td>
+                                            <td class="@css" style="width:10%">@firstItem.TickerTimeslotTo</td>
+                                            <td class="@css" style="width:10%">@firstItem.Environment</td>
+                                            <td class="@css" style="width:10%">
+                                                <a onclick="ToggleHiddenRow('@collapseId')">
+                                                    <i class="bi bi-plus-circle-fill custom-btn-icons breadcrumb-btn-icon theme-txt-clr fs-18" id="@collapseIconId"></i>
+                                                </a>
+                                            </td>
+                                            <td class="@css" style="width:10%">@firstItem.TickerUserLastModified</td>
+                                            <td class="@css" style="width:10%"></td>
+                                        </tr>
+
+                                        // Render additional rows as collapsed, with only Targeted column populated
+                                        foreach (var item in envGroup)
+                                        {
+                                            <tr class="hidden" id="@collapseId">
+                                                <td class="@css" style="width:10%"></td>
+                                                <td class="@css truncate-text" style="width:10%"></td>
+                                                <td class="@css" style="width:10%"></td>
+                                                <td class="@css" style="width:10%"></td>
+                                                <td class="@css" style="width:10%"></td>
+                                                <td class="@css" style="width:10%"></td>
+                                                <td class="@css" style="width:10%"></td>
+                                                <td class="@css">@item.Targeted</td>
+                                                <td class="@css" style="width:10%"></td>
+                                                <td class="@css" style="width:10%"></td>
+                                            </tr>
+                                        }
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+
+
+<script>
+
+    $(document).ready(function ()
+    {
+        ShowEnabledModulesReports();
+    });
+
+    function ShowEnabledModulesReports()
+    {
+        if ("@Model.Filters.LockscreenReport" == "True")
+        {
+            HideShowElement("#LockscreenData", HideShow.SHOW);
+            setTimeout(() => MakeSimpleDataTable("LockscreenCampaignData"), 100);
+        }
+        if ("@Model.Filters.DesktopReport" == "True")
+        {
+            HideShowElement("#DesktopData", HideShow.SHOW);
+            setTimeout(() => MakeSimpleDataTable("DesktopCampaignData"), 100);
+        }
+        if ("@Model.Filters.ScreensaverReport" == "True")
+        {
+            HideShowElement("#ScreensaverData", HideShow.SHOW);
+            setTimeout(() => MakeSimpleDataTable("ScreensaverCampaignData"), 100);
+        }
+        if ("@Model.Filters.PopupReport" == "True")
+        {
+            HideShowElement("#PopupData", HideShow.SHOW);
+            setTimeout(() => MakeSimpleDataTable("PopupCampaignData"), 100);
+        }
+        if ("@Model.Filters.SurveyReport" == "True")
+        {
+            HideShowElement("#SurveyData", HideShow.SHOW);
+            setTimeout(() => MakeSimpleDataTable("SurveyCampaignData"), 100);
+        }
+        if ("@Model.Filters.TickerReport" == "True")
+        {
+            HideShowElement("#TickerData", HideShow.SHOW);
+            setTimeout(() => MakeSimpleDataTable("TickerCampaignData"), 100);
+        }
+    }
+
+    function MakeSimpleDataTable(tableId) 
+    {
+        return; // Skip Datatable
+
+        $(`#${tableId}`).DataTable({
+            dom: 'rtip',
+            pageLength: 10,
+            responsive: true  // Helps with layout when hidden
+        }).columns.adjust().draw(); // Adjust column layout and redraw to ensure it initializes fully
+    }
+
+    function ToggleHiddenRow(rowId)
+    {
+        var id = `#${rowId}`;
+        
+        var icon = `${id}-icon`;
+
+        if($(id).hasClass("hidden"))
+        {
+            HideShowElement(id, HideShow.SHOW);
+            $(icon).removeClass("bi bi-plus-circle-fill");
+            $(icon).addClass("bi bi-dash-circle-fill");
+        }
+        else
+        {
+            HideShowElement(id, HideShow.HIDE);
+            $(icon).addClass("bi bi-plus-circle-fill");
+            $(icon).removeClass("bi bi-dash-circle-fill");
+        }
+
+        // Redraw DataTables to account for changes
+        //$.fn.dataTable.tables({ visible: true }).DataTable().columns.adjust().draw();
+    }
+
+</script>

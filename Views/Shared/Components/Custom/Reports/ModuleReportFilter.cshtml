@@ -95,7 +95,7 @@
                     {
                         <div class="d-flex mt-1 theme-txt-clr">
                             <div class="form-check form-switch w-fit-content mb-0 align-content-center">
-                                <input class="form-check-input" type="radio" name="PolicyReportExtraOptions" id="UserOption">
+                                <input class="form-check-input" type="radio" name="PolicyReportExtraOptions" id="UserOption" checked>
                                 <label class="form-check-label ms-2 cursor-pointer fw-bold" for="UserOption">Users</label>
                             </div>
                             <div class="form-check form-switch w-fit-content mb-0 ms-2 align-content-center">
@@ -135,7 +135,7 @@
     function GenerateReportOnly()
     {
         var moduleId = $("#ReportModuleSelect").val();
-        moduleId = 21;
+        moduleId = 184;
         ReloadFilteredReport("@Model.ReportName", ReportDataTypes.REPORT_ONLY, moduleId);
     }
 

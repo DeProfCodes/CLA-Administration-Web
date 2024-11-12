@@ -10,6 +10,8 @@
     var completedRate = Math.Round(((double)summary.Complete/ summary.Targeted) * 100, 2);
     var outstandingRate = Math.Round(((double)summary.Outstanding / summary.Targeted) * 100, 2);
     var optInRate = Math.Round(((double)summary.OptIn / summary.Targeted) * 100, 2);
+
+    int index = 0;
 }
 
 <input id="ModuleReportId" value="@Model.SurveyId" hidden />
@@ -19,40 +21,6 @@
     <div class="card-body p-0">
         <div class="row flex-sm-nowrap">
             <div class="flex-wrap report-body-container">
-                @* <div id="ModuleReportHeader">
-                    <div class="d-flex theme-bg">
-                        <div class="mt-1">
-                            <img src="~/images/logos/report-logo.png" class="report-logo" alt="logo icon">
-                        </div>
-                        <div class="w-200p ms-2 text-black align-content-center hidden" id="ReportStatusLegend">
-                            <div class="w-100 bg-lime text-center">Active</div>
-                            <div class="w-100 bg-yellow text-center mt-1">Inactive</div>
-                            <div class="w-100 bg-red text-center mt-1">Not Installed</div>
-                        </div>
-                        <div class="w-100">
-                            <p class="mt-2 fs-30 text-center text-white">@summary.SurveyTitle</p>
-                            <p class="mt-2 fs-20 text-center text-white">
-                                Effective from: <span>@summary.EffFrom.ToString("dddd, dd MMM yyyy")</span>
-                                To: <span>@summary.EffTo.ToString("dddd, dd MMM yyyy")</span>
-                            </p>
-                        </div>
-                        <div id="TickerReportActionBtns">
-                            <button class="btn btn-secondary btn-sm w-100 invisible" id="BackBtn" onclick="GoBackToSurveyReportTab()">Back</button>
-                            <div class="dropdown">
-                                <button class="btn btn-success btn-sm dropdown-toggle w-100 mt-2" type="button" id="exportDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Export
-                                </button>
-                                <ul class="dropdown-menu  w-100 " aria-labelledby="exportDropdown">
-                                    <li><a class="dropdown-item fs-12" onclick="ExportReportToExcel('@ReportsNamesType.Survey', false)">Export Single</a></li>
-                                    <li><a class="dropdown-item fs-12" onclick="ExportReportToExcel('@ReportsNamesType.Survey', true)">Export Full</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="p-2 fs-20 text-center bg-silver fw-bold" id="TickerReportTitle"></p>
-                    </div>
-                </div> *@
                 @{
                     await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Reports/ModuleReportResultTitle.cshtml",
                     new ModuleReportResultTitleViewModel
@@ -119,14 +87,15 @@
                                 <tbody>
                                     @foreach(var item in Model.SummarizedDetails)
                                     {
+                                        var css = (index++ % 2 == 0) ? "report-piechart-color-silver-dim" : "";
                                         <tr>
-                                            <td>@Model.SurveyId</td>
-                                            <td>@item.UserId</td>
-                                            <td>@item.MachineId</td>
-                                            <td>@item.OptIn</td>
-                                            <td>@item.IsComplete</td>
-                                            <td>@item.DurationSeconds</td>
-                                            <td><button class="btn btn-sm btn-info">View</button></td>
+                                            <td class="@css">@Model.SurveyId</td>
+                                            <td class="@css">@item.UserId</td>
+                                            <td class="@css">@item.MachineId</td>
+                                            <td class="@css">@item.OptIn</td>
+                                            <td class="@css">@item.IsComplete</td>
+                                            <td class="@css">@item.DurationSeconds</td>
+                                            <td class="@css"><button class="btn btn-sm btn-info">View</button></td>
                                         </tr>
                                     }
                                 </tbody>
@@ -208,7 +177,7 @@
 
         var dimension = new DimensionType(500);
 
-        DrawPieChart(apexPieChart, "#SummaryChart", data, pieDataLabel, colorsData, dimension, onSummaryPieChartLabelClick);
+        DrawPieChart(apexPieChart, "#SummaryChart", data, pieDataLabel, colorsData, dimension, onSummaryPieChartLabelClick, "#%");
 
         //Complete & Opt Out
         var complete = parseInt("@Model.SurveyCompleteOptOut.Complete");
@@ -219,7 +188,7 @@
         colorsData = [ReportColorsTypes.SILVER, ReportColorsTypes.BLUE];
         dimension = new DimensionType(500);
 
-        DrawPieChart(apexPieChart, "#CompleteAndOptOut", data, pieDataLabel, colorsData, dimension, onSurveyCompleteOptOutPieChartLabelClick, true);
+        DrawPieChart(apexPieChart, "#CompleteAndOptOut", data, pieDataLabel, colorsData, dimension, onSurveyCompleteOptOutPieChartLabelClick, "#");
 
         $(document).ready(function ()
         {

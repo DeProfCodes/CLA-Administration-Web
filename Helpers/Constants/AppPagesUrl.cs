@@ -142,6 +142,7 @@ namespace CLA_Administration_Web.Helpers.Constants
             public static string ActiveMachines = $"/{reportsController}/{ReportsPages.ActiveMachinesReport.GetDisplayName()}";
             public static string ActiveUsersMachines = $"/{reportsController}/{ReportsPages.ActiveUsersMachinesReport.GetDisplayName()}";
             public static string CampaignDispatch = $"/{reportsController}/{ReportsPages.CampaignDispatchReport.GetDisplayName()}";
+            public static string CampaignDispatchList = $"/{reportsController}/{ReportsPages.CampaignDispatchListReport.GetDisplayName()}";
             public static string Troubleshoot = $"/{reportsController}/{ReportsPages.TroubleshootReport.GetDisplayName()}";
         }
 

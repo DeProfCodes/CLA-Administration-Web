@@ -7,6 +7,7 @@ using CLA_Administration_Web.ViewModels.Modules.ContentLibrary;
 using CLA_Administration_Web.ViewModels.Modules.LDS;
 using CLA_Administration_Web.ViewModels.Modules.PST;
 using CLA_Administration_Web.ViewModels.Modules.Rss;
+using CLA_Administration_Web.ViewModels.Reports.CampaignDispatch;
 using CLACommonFunctionsLibrary_NET.Helpers.Enums;
 
 namespace CLA_Administration_Web.Services.Reporting
@@ -75,5 +76,21 @@ namespace CLA_Administration_Web.Services.Reporting
         }
 
         #endregion
+
+        public async Task<string> GetCampaignDispatchReport(CampaignDispatchFiltersViewModel parameters, string report)
+        {
+            try
+            {
+                var endpoint = $"{apiControllerName}/GetReportingExecutorDispatchListing?report={report}&effectiveFrom={parameters.StartDate}&effectiveTo={parameters.EndDate}&isAutomated={parameters.IsAutomated}&connectToLive=false";
+
+                var apiResponse = await _webApi.HttpGetAsync(endpoint);
+
+                return apiResponse;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

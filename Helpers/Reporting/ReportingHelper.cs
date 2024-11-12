@@ -1,7 +1,10 @@
 ﻿using CLA_Administration_Web.Helpers.API;
+using CLA_Administration_Web.Helpers.Enums.Reports;
 using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
 using CLA_Administration_Web.Helpers.MockData;
 using CLA_Administration_Web.Models.APIResponses.Reports.ActiveUserMachine;
+using CLA_Administration_Web.Models.APIResponses.Reports.CampaignDispatch;
+using CLA_Administration_Web.Models.APIResponses.Reports.Policy;
 using CLA_Administration_Web.Models.APIResponses.Reports.Popup;
 using CLA_Administration_Web.Models.APIResponses.Reports.Survey;
 using CLA_Administration_Web.Models.APIResponses.Reports.Ticker;
@@ -10,6 +13,8 @@ using CLA_Administration_Web.Services.Reporting;
 using CLA_Administration_Web.ViewModels.API.Reports;
 using CLA_Administration_Web.ViewModels.API.ResponseModels.Popup;
 using CLA_Administration_Web.ViewModels.Reports;
+using CLA_Administration_Web.ViewModels.Reports.CampaignDispatch;
+using CLA_Administration_Web.ViewModels.Reports.Policy;
 using CLA_Administration_Web.ViewModels.Reports.Survey;
 using CLACommonFunctionsLibrary_NET.Helpers;
 using DocumentFormat.OpenXml.Office2010.Excel;
@@ -612,11 +617,6 @@ namespace CLA_Administration_Web.Helpers.Reporting
 
             var reportsBaseAddress = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "resources", "reports");
 
-            if (optInNoResponseJson.Length > 20)
-            {
-                int y = 0;
-            }
-
             var result = new SurveyReports
             {
                 Details = new ReportRDLC
@@ -752,8 +752,8 @@ namespace CLA_Administration_Web.Helpers.Reporting
 
             result.SurveyCompleteOptOut = new SurveyCompleteOptOutViewModel
             {
-                Complete = summaryDetails.Count(x => x.IsSurveyComplete == 1),
-                OptOut = summaryDetails.Count(x => x.IsSurveyComplete == 0 && x.SurveyOptIn == 0),
+                Complete = summaryDetails.Count(x => x.IsSurveyComplete == 1 || x.IsSurveyComplete == 0),
+                //OptOut = summaryDetails.Count(x => x.IsSurveyComplete == 0 && x.SurveyOptIn == 0),
             };
 
             result.Outstanding = result.SummarizedDetails.Where(x => x.IsComplete == 0).ToList();
@@ -899,6 +899,63 @@ namespace CLA_Administration_Web.Helpers.Reporting
             return result;
         }
 
+        public async Task<PolicyReportViewModel> GetPolicyReportData(ModuleReportDataFilterViewModel filters, PolicyReportEntityType policyReportEntityType)
+        {
+            var result = new PolicyReportViewModel()
+            {
+                PopupId = filters.ModuleId
+            };
+
+            var apiParams = new ModuleSummaryParamsViewModel
+            {
+                ModuleId = filters.ModuleId,
+                Active = filters.Active,
+                Dormant = filters.NotInstalled,
+                InActive = filters.InActive,
+                Environment = "",
+                ShowActive = false,
+                ShowComplete = true,
+                ShowOutstanding = true,
+                UseMachineId = false,
+                ConnectToLive = false,
+            };
+
+            var summaryJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Policy, "Policy_Summary");
+            var summaryDetailsJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Policy, "Policy_Summary_Detail");
+            var outstandingJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Policy, "Policy_Outstanding");
+
+            var summaries = APIResponseParserHelper.ParseJsonToObject<List<PolicyReportSummary>>(summaryJson);
+            var summaryDetails = APIResponseParserHelper.ParseJsonToObject<List<PolicyReportSummarizedDetail>>(summaryDetailsJson);
+            var outstanding = APIResponseParserHelper.ParseJsonToObject<List<PolicyReportOutstanding>>(outstandingJson);
+
+            result.PolicySummary = new PolicyReportSummaryViewModel
+            {
+                SummaryUsers = summaries.FirstOrDefault(x => x.TargetedType.ToLower() == "users"),
+                SummarizedDetailsUsers = summaryDetails.Where(x => x.TargetedType.ToLower() == "users").ToList(),
+                SummaryMachines = summaries.FirstOrDefault(x => x.TargetedType.ToLower() == "machines"),
+                SummarizedDetailsMachines = summaryDetails.Where(x => x.TargetedType.ToLower() == "machines").ToList()
+            };
+
+            result.PolicyOutstanding = new PolicyReportOutstandingViewModel
+            {
+                PolicyOutstandingUsers = outstanding.Where(x => x.TargetedType.ToLower() == "users").ToList(),
+                PolicyOutstandingMachines = outstanding.Where(x => x.TargetedType.ToLower() == "machines").ToList(),
+                PolicyOutstandingUserMachines = outstanding.Where(x => x.TargetedType.ToLower() == "users-machines").ToList(),
+            };
+
+            result.PolicyOutstanding.PolicyOutstandingUsers.ForEach(x => x.LastSyncDate = (x.LastSyncDTUser != null) ? x.LastSyncDTUser : x.LastSyncDTMachine);
+            result.PolicyOutstanding.PolicyOutstandingMachines.ForEach(x => x.LastSyncDate = (x.LastSyncDTUser != null) ? x.LastSyncDTUser : x.LastSyncDTMachine);
+            result.PolicyOutstanding.PolicyOutstandingUserMachines.ForEach(x => x.LastSyncDate = (x.LastSyncDTUser != null) ? x.LastSyncDTUser : x.LastSyncDTMachine);
+
+            if (policyReportEntityType == PolicyReportEntityType.Users) result.PolicyOutstanding.PolicyOutstandingSelected = result.PolicyOutstanding.PolicyOutstandingUsers;
+            if (policyReportEntityType == PolicyReportEntityType.Machines) result.PolicyOutstanding.PolicyOutstandingSelected = result.PolicyOutstanding.PolicyOutstandingMachines;
+            if (policyReportEntityType == PolicyReportEntityType.UsersAndMachines) result.PolicyOutstanding.PolicyOutstandingSelected = result.PolicyOutstanding.PolicyOutstandingUserMachines;
+
+            result.PolicyOutstanding.PolicyOutstandingSelected = result.PolicyOutstanding.PolicyOutstandingUserMachines;
+
+            return result;
+        }
+
         public async Task<ActiveUserMachinesViewModel> LoadActiveUserMachineReport(ModuleReportDataFilterViewModel filters, ReportsNamesType reportName)
         {
             var result = new ActiveUserMachinesViewModel() { ReportName = reportName };
@@ -921,6 +978,64 @@ namespace CLA_Administration_Web.Helpers.Reporting
             {
                 result.ActiveMachineReports = APIResponseParserHelper.ParseJsonToObject<List<ActiveMachineReport>>(activeUserMachineReportJson);
             }
+            return result;
+        }
+
+        public async Task<CampaignDispatchViewModel> LoadCampaignDispatchReports(CampaignDispatchFiltersViewModel parameters)
+        {
+            var result = new CampaignDispatchViewModel
+            {
+                Filters = parameters,
+                LockedDesktops = new(),
+                Desktops = new(),
+                Screensaver = new(),
+                Popups = new(),
+                Surveys = new(),
+                Tickers = new(),
+            };
+            result.Filters.EffectiveFrom = TypesParserHelper.ParseDate(parameters.StartDate);
+            result.Filters.EffectiveTo = TypesParserHelper.ParseDate(parameters.EndDate);
+
+            parameters.IsAutomated = (parameters.ViewType == "automated") ? 1 : 0;
+
+            var lockscreenJson = "";
+            var desktopJson = "";
+            var screensaverJson = "";
+            var popupJson = "";
+            var surveyJson = "";
+            var tickerJson = "";
+
+            if (parameters.LockscreenReport)
+            {
+                lockscreenJson = await _reportService.GetCampaignDispatchReport(parameters, "Dispatch_Listing_Locked_Desktop");
+                result.LockedDesktops = APIResponseParserHelper.ParseJsonToObject<List<DispatchLockedDesktopResponse>>(lockscreenJson); 
+            }
+            if (parameters.DesktopReport)
+            {
+                desktopJson = await _reportService.GetCampaignDispatchReport(parameters, "Dispatch_Listing_Desktop");
+                result.Desktops = APIResponseParserHelper.ParseJsonToObject<List<DispatchDesktopResponse>>(desktopJson);
+            }
+            if (parameters.ScreensaverReport)
+            {
+                screensaverJson = await _reportService.GetCampaignDispatchReport(parameters, "Dispatch_Listing_Screensaver");
+                result.Screensaver = APIResponseParserHelper.ParseJsonToObject<List<DispatchScreensaverResponse>>(screensaverJson);
+            }
+            if (parameters.PopupReport)
+            {
+                popupJson = await _reportService.GetCampaignDispatchReport(parameters, "Dispatch_Listing_STM");
+                result.Popups = APIResponseParserHelper.ParseJsonToObject<List<DispatchPopupResponse>>(popupJson);
+            }
+            if (parameters.SurveyReport)
+            {
+                surveyJson = await _reportService.GetCampaignDispatchReport(parameters, "Dispatch_Listing_Survey");
+                result.Surveys = APIResponseParserHelper.ParseJsonToObject<List<DispatchSurveyResponse>>(surveyJson);
+            }
+            if (parameters.TickerReport)
+            {
+                tickerJson = await _reportService.GetCampaignDispatchReport(parameters, "Dispatch_Listing_Ticker");
+                result.Tickers = APIResponseParserHelper.ParseJsonToObject<List<DispatchTickerResponse>>(tickerJson);
+            }
+
             return result;
         }
     }

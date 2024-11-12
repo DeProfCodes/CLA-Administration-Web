@@ -66,10 +66,8 @@ namespace CLA_Administration_Web.Helpers.Reporting
             }
         }
 
-        public static void ExportSurveyReport(XLWorkbook workbook)
+        public static void ExportSurveyReport(XLWorkbook workbook, string reportPageName, SurveyReports data)
         {
-            var data = LocalDataStorage.StagingData.SurveyReports;
-
             var reportData = new 
             {
                 Summary = GetReportExcelBytes(new List<ReportRDLC> { data.Summary, data.Details, data.SummaryDetails }, data.Summary.ReportRDLCPath),
@@ -78,10 +76,20 @@ namespace CLA_Administration_Web.Helpers.Reporting
                 OptOut = GetReportExcelBytes(new List<ReportRDLC> { data.Summary, data.Details, data.Status }, data.OptOut.ReportRDLCPath),
             };
 
-            AddSheetToExcel(workbook, reportData.Summary, "Survey Summary");
-            AddSheetToExcel(workbook, reportData.Outstanding, "Survey Outstanding");
-            AddSheetToExcel(workbook, reportData.OptInNoResponse, "Survey Opt In - No Response");
-            AddSheetToExcel(workbook, reportData.OptOut, "Survey Opt Out");
+            if (reportPageName == "all")
+            {
+                AddSheetToExcel(workbook, reportData.Summary, "Survey Summary");
+                AddSheetToExcel(workbook, reportData.Outstanding, "Survey Outstanding");
+                AddSheetToExcel(workbook, reportData.OptInNoResponse, "Survey Opt In - No Response");
+                AddSheetToExcel(workbook, reportData.OptOut, "Survey Opt Out");
+            }
+            else
+            {
+                if (reportPageName == "summary") AddSheetToExcel(workbook, reportData.Summary, "Survey Summary");
+                if (reportPageName == "outstanding") AddSheetToExcel(workbook, reportData.Outstanding, "Survey Outstanding");
+                if (reportPageName == "optInNoResponse") AddSheetToExcel(workbook, reportData.OptInNoResponse, "Survey Opt In - No Response");
+                if (reportPageName == "optOut") AddSheetToExcel(workbook, reportData.OptOut, "Survey Opt Out");
+            }
         }
 
         public static void ExportTickerReport(XLWorkbook workbook, string reportPageName, TickerReports data)

@@ -134,6 +134,19 @@ function ReloadFilteredReport(reportModuleType, reportDataType, reportModuleId)
     };
 
     url = GetPageUrl(pageName) + '?' + $.param(payload);
+   
+    if(reportModuleType == ReportModuleTypes.POLICY)
+    {
+        var activeRadioId = GetIdOfSelectedRadioInGroup("PolicyReportExtraOptions");
+
+        var policyReportEntityType = "";
+
+        if(activeRadioId == "UserOption") policyReportEntityType = "Users";
+        if(activeRadioId == "MachineOption") policyReportEntityType = "Machines";
+        if(activeRadioId == "UserMachineOption") policyReportEntityType = "UsersAndMachines";
+
+        url += `&policyReportEntityType=${policyReportEntityType}`;
+    }
 
     LoadPartialViewWithLoader(url, "#ReportModuleData","#SecondaryLoader");
 }

@@ -64,6 +64,9 @@ namespace CLA_Administration_Web.Helpers.Enums.AppPages
         [Display(Name = "CampaignDispatchReport", Description = "Campaign Dispatch Report", ShortName = "Campaign Dispatch")]
         CampaignDispatchReport,
 
+        [Display(Name = "CampaignDispatchListReport", Description = "Campaign Dispatch List Report", ShortName = "Campaign Dispatch")]
+        CampaignDispatchListReport,
+
         [Display(Name = "TroubleshootReport", Description = "Troubleshoot Report", ShortName = "Troubleshoot")]
         TroubleshootReport
     }

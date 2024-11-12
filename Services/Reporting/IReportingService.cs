@@ -5,6 +5,7 @@ using CLA_Administration_Web.ViewModels.Modules.ContentLibrary;
 using CLA_Administration_Web.ViewModels.Modules.LDS;
 using CLA_Administration_Web.ViewModels.Modules.PST;
 using CLA_Administration_Web.ViewModels.Modules.Rss;
+using CLA_Administration_Web.ViewModels.Reports.CampaignDispatch;
 
 namespace CLA_Administration_Web.Services.Reporting
 {
@@ -23,5 +24,7 @@ namespace CLA_Administration_Web.Services.Reporting
         public Task<string> GetActiveUsersMachinesReport(ModuleSummaryParamsViewModel parameters, ReportsNamesType reportName);
 
         #endregion
+
+        public Task<string> GetCampaignDispatchReport(CampaignDispatchFiltersViewModel parameters, string report);
     }
 }

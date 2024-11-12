@@ -1,4 +1,4 @@
-function DrawPieChart(apexPieChart, chartId, pieData, pieDataLabel, colorsData, dimensions, onLabelClick, isNumberView = false) 
+function DrawPieChart(apexPieChart, chartId, pieData, pieDataLabel, colorsData, dimensions, onLabelClick, labelType = "%") 
 {
     var options = {
         series: pieData,
@@ -47,10 +47,13 @@ function DrawPieChart(apexPieChart, chartId, pieData, pieDataLabel, colorsData, 
             enabled: true,
             formatter: function (val, opts)
             {
-                // Show number if isNumberView is true, otherwise show percentage
-                return isNumberView
-                    ? opts.w.config.series[opts.seriesIndex]
-                    : val.toFixed(2) + '%';
+                var value = ""; 
+                
+                if (labelType == "%") value = val.toFixed(0) + '%'; 
+                if (labelType == "#") value = opts.w.config.series[opts.seriesIndex];
+                if (labelType == "#%") value = `${opts.w.config.series[opts.seriesIndex]} (${val.toFixed(0)}%)`;
+
+                return value;
             }
         }
     };

@@ -176,6 +176,20 @@
     margin-top: 15px;
 }
 
+.report-summarized-details-table
+{
+    width: 800px !important;
+}
+/*.truncate-text
+{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100px;*/ /* Ensures it respects the dynamic width of the cell */
+    /*display: block;
+}*/
+
+
 @media screen and (max-height: 795px)
 {
     .report-data-area

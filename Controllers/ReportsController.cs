@@ -1,9 +1,11 @@
 using CLA_Administration_Web.Helpers.Constants;
+using CLA_Administration_Web.Helpers.Enums.Reports;
 using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
 using CLA_Administration_Web.Helpers.MockData;
 using CLA_Administration_Web.Helpers.Reporting;
 using CLA_Administration_Web.Services.Reporting;
 using CLA_Administration_Web.ViewModels.Reports;
+using CLA_Administration_Web.ViewModels.Reports.CampaignDispatch;
 using CLACommonFunctionsLibrary_NET.Helpers.Enums;
 using ClosedXML.Excel;
 using DocumentFormat.OpenXml.Spreadsheet;
@@ -170,13 +172,13 @@ namespace CLA_Administration_Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> PolicyReportOnly([FromQuery] ModuleReportDataFilterViewModel parameters)
+        public async Task<IActionResult> PolicyReportOnly([FromQuery] ModuleReportDataFilterViewModel parameters, PolicyReportEntityType policyReportEntityType)
         {
-            var policyReportVm = await reportingHelper.LoadPolicyReportsTabs(parameters);
+            var policyReportVm = await reportingHelper.GetPolicyReportData(parameters, policyReportEntityType);
 
             if (parameters.ShowRawDataOnly)
             {
-                return PartialView(AppPagesLinks.Reports.ModuleRawDataPageLink, policyReportVm.AllData);
+                return PartialView(AppPagesLinks.Reports.ModuleRawDataPageLink, policyReportVm);
             }
 
             return PartialView(AppPagesLinks.Reports.PolicyReportOnlyPageLink, policyReportVm);
@@ -211,6 +213,14 @@ namespace CLA_Administration_Web.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> CampaignDispatchListReport([FromQuery] CampaignDispatchFiltersViewModel parameters)
+        {
+            var campaignDispatchReportVm = await reportingHelper.LoadCampaignDispatchReports(parameters);
+
+            return PartialView(AppPagesLinks.Reports.CampaignDispatchListPageLink, campaignDispatchReportVm);
+        }
+        
+        [HttpGet]
         public async Task<IActionResult> TroubleshootReport()
         {
             return PartialView(AppPagesLinks.Reports.TroubleshootPageLink);
@@ -230,8 +240,10 @@ namespace CLA_Administration_Web.Controllers
                 }
                 else if (reportType == ReportsNamesType.Survey)
                 {
-                    ExportHelper.ExportSurveyReport(workbook);
-                    filename = "rptSurvey.xlsx";
+                    var data = await reportingHelper.GetSurveyReportsForExport(parameters);
+
+                    ExportHelper.ExportSurveyReport(workbook, reportPageName, data);
+                    filename = (reportPageName == "all") ? "rptSurvey.xlsx" : $"rptSurvey-{reportPageName}.xlsx";
                 }
                 else if (reportType == ReportsNamesType.Ticker)
                 {
