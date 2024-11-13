@@ -181,6 +181,38 @@ function ExportReportToExcel(reportModuleType, isAll)
     var reportPageName = !isAll ? $("#ModuleReportActiveReport").val() : "all";
     var url = GetPageUrl("ExportFileToExcel") + `?reportType=${reportModuleType}&${$.param(payload)}&reportPageName=${reportPageName}`;
 
+    if(reportModuleType == "Troubleshoot")
+    {
+        var value = $("#TroubleshootReportType").val();
+        var fullIPAddress = $("#IpAddr1").val() + "." + $("#IpAddr2").val() + "." + $("#IpAddr3").val() + "." + $("#IpAddr4").val() + ".";
+
+        var entityName = "";
+        var entityValue = (value != "ipaddress") ? $("#UserOrMachineInput").val() : fullIPAddress;
+
+        if (value == "user") entityName = "User";
+        if (value == "machine") entityName = "Machine";
+        if (value == "ipaddress") entityName = "IPAddress";
+
+        url += `&entityType=${entityName}&entityValue=${entityValue}`;
+    }
+
+    if(reportModuleType == "CampaignDispatch")
+    {
+        var dispatchParams = {
+            LockscreenReport: IsCheckboxChecked("LockscreensCampaign"),
+            DesktopReport: IsCheckboxChecked("DesktopCampaign"),
+            ScreensaverReport: IsCheckboxChecked("ScreensaverCampaign"),
+            PopupReport: IsCheckboxChecked("PopupCampaign"),
+            SurveyReport: IsCheckboxChecked("SurveyCampaign"),
+            TickerReport: IsCheckboxChecked("TickersCampaign"),
+            StartDate: FormatDate($('#DatePickerStartDate').val(), "YYYY/MM/DD"),
+            EndDate: FormatDate($('#DatePickerEndDate').val(), "YYYY/MM/DD"),
+            ViewType: $('#CampaignViewType').val()
+        };
+
+        url += `&${$.param(dispatchParams)}`;
+    }
+
     ShowLoader("Main", "Exporting Report...");
 
     DownloadReport(url);

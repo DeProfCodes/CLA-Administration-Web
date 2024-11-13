@@ -225,6 +225,10 @@
 {
     width: 100px !important;
 }
+.w-125p
+{
+    width: 125px !important;
+}
 .w-150p
 {
     width: 150px !important;
@@ -270,6 +274,10 @@
     width: 600px !important;
 }
 /*============================  heights ==================*/
+.h-20p
+{
+    height: 20px !important;
+}
 .h-25p
 {
     height: 25px !important;

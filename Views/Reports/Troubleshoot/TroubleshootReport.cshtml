@@ -1,0 +1,144 @@
+﻿@using CLA_Administration_Web.Helpers.Enums.Shared
+<div class="container-fluid">
+
+    <!-- Breadcrumb Component -->
+    @{
+        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Reports/ReportBreadcrumb.cshtml", new ReportBreadcrumbViewModel
+            {
+                ReportCurrentPage = ReportsPages.TroubleshootReport,
+                HasLinkedModulePage = false,
+            });
+    }
+    <!-- Card for Filters -->
+    <div class="card mb-4 mt-2 overview-filters-card" style="min-width:1350px;">
+        <div class="card-body pt-0 pb-0">
+            <div class="row fs-12 mt-1">
+                <div class="row col-12 d-flex flex-wrap module-overview-filters m-1">
+                    <div class="w-auto mx-auto mb-1">
+                        <p class="custom-p fw-bold fs-16 mb-2 text-center">Report Filters</p>
+                        <div class="d-flex mt-2">
+                            <select class="form-select-sm w-150p" style="appearance:menulist" id="TroubleshootReportType" onchange="SelectInputTypeClick()">
+                                <option value="user">User</option>
+                                <option value="machine">Machine</option>
+                                <option value="ipaddress">IP Address</option>
+                            </select>
+                            <div class="ms-3">
+                                <input type="text" class="custom-input-text w-200p" id="UserOrMachineInput"/>
+                                <div id="IpAddressInput" class="d-flex hidden">
+                                    <input type="number" class="custom-input-text w-50p" id="IpAddr1" maxlength="3" /> <span class="ip-seperator">-</span>
+                                    <input type="number" class="custom-input-text w-50p" id="IpAddr2" maxlength="3" /> <span class="ip-seperator">-</span>
+                                    <input type="number" class="custom-input-text w-50p" id="IpAddr3" maxlength="3" /> <span class="ip-seperator">-</span>
+                                    <input type="number" class="custom-input-text w-50p" id="IpAddr4" maxlength="3"/>
+                                </div>
+                            </div>
+                            <div class="d-flex ms-2">
+                                <button class="btn custom-btn-default btn-sm px-3" onclick="LoadTroubleshootReport()">Generate Report</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-auto ms-3 mx-auto mb-1">
+                        <p class="custom-p fw-bold fs-16 mb-2 text-center">Action buttons</p>
+                        <div class="row mb-3 w-fit-content mx-auto mt-2">
+                            <button class="btn btn-sm btn-success w-fit-content" id="PromoteModuleBtn" onclick="Export()">Export Stats</button>
+                            <button class="btn btn-warning btn-sm w-fit-content ms-3" id="RepeatModuleBtn">Email Stats</button>
+                            <button class="btn btn-info btn-sm w-fit-content ms-3" id="RepeatModuleBtn">Help Info</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card for Campaign Dispatch Report Body -->
+    <div class="card mb-1 mt-1 overview-filters-card theme-txt-clr report-data-area" id="report-data-area" style="min-width:1350px">
+        <div id="ReportModuleData">
+            
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function ()
+    {
+        var url = GetPageUrl("TroubleshootReportData");
+        LoadPartialViewWithLoader(url, "#ReportModuleData");
+    });
+
+    function SelectInputTypeClick()
+    {
+        var value = $("#TroubleshootReportType").val();
+   
+        if (value == "ipaddress")
+        {
+            HideShowElement("#UserOrMachineInput", HideShow.HIDE);
+            HideShowElement("#IpAddressInput", HideShow.SHOW);
+        }
+        else
+        {
+            HideShowElement("#UserOrMachineInput", HideShow.SHOW);
+            HideShowElement("#IpAddressInput", HideShow.HIDE);
+        }
+    }
+
+    function LoadTroubleshootReport()
+    {
+        var value = $("#TroubleshootReportType").val();
+        
+        if (value == "user" && IsEmptyInput("UserOrMachineInput"))
+        {
+            swal("Error", "Please enter user name to generate report for.", "error");
+            return;
+        }
+        if (value == "machine" && IsEmptyInput("UserOrMachineInput"))
+        {
+            swal("Error", "Please enter machine name to generate report for.", "error");
+            return;
+        }
+        if (value == "ipaddress" && (IsEmptyInput("IpAddr1") || IsEmptyInput("IpAddr2") || IsEmptyInput("IpAddr3") || IsEmptyInput("IpAddr4")))
+        {
+            swal("Error", "Please enter full ip address to generate report for.", "error");
+            return;
+        }
+
+        var fullIPAddress = $("#IpAddr1").val() + "." + $("#IpAddr2").val() + "." + $("#IpAddr3").val() + "." + $("#IpAddr4").val() + ".";
+
+        var entityName = "";
+        var entityValue = (value != "ipaddress") ? $("#UserOrMachineInput").val() : fullIPAddress;
+
+        if (value == "user") entityName = "@CLAEntityType.User";
+        if (value == "machine") entityName = "@CLAEntityType.Machine";
+        if (value == "ipaddress") entityName = "@CLAEntityType.IPAddress";
+
+        var url = GetPageUrl("TroubleshootReportData") + `?entityType=${entityName}&entityValue=${entityValue}`;
+
+        ReportDataLoader("Troubleshoot");
+        
+        LoadPartialViewWithLoader(url, "#ReportModuleData", "#SecondaryLoader");
+
+    }
+
+    function Export()
+    {
+        var value = $("#TroubleshootReportType").val();
+
+        if (value == "user" && IsEmptyInput("UserOrMachineInput"))
+        {
+            swal("Error", "Please enter user name to generate report for.", "error");
+            return;
+        }
+        if (value == "machine" && IsEmptyInput("UserOrMachineInput"))
+        {
+            swal("Error", "Please enter machine name to generate report for.", "error");
+            return;
+        }
+        if (value == "ipaddress" && (IsEmptyInput("IpAddr1") || IsEmptyInput("IpAddr2") || IsEmptyInput("IpAddr3") || IsEmptyInput("IpAddr4")))
+        {
+            swal("Error", "Please enter full ip address to generate report for.", "error");
+            return;
+        }
+
+        ExportReportToExcel("@ReportsNamesType.Troubleshoot", false);
+    }
+
+</script>

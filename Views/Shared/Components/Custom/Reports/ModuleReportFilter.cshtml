@@ -109,7 +109,6 @@
                         </div>
                     }
                     <div class="d-flex mt-1">
-                        <button class="btn btn-sm btn-success" onclick="GenerateReportDataForExport()">Generate for Export</button>
                         <button class="btn custom-btn-default btn-sm ms-2 px-3" onclick="GenerateReportOnly()">Generate Report</button>
                     </div>
                 </div>
@@ -122,8 +121,7 @@
 
     $(document).ready(function ()
     {
-        //PreloadDatesFilterDates();
-        GenerateReportOnly();
+        PreloadDatesFilterDates();
     });
 
     function GenerateReportDataForExport()
@@ -135,7 +133,6 @@
     function GenerateReportOnly()
     {
         var moduleId = $("#ReportModuleSelect").val();
-        moduleId = 184;
         ReloadFilteredReport("@Model.ReportName", ReportDataTypes.REPORT_ONLY, moduleId);
     }
 

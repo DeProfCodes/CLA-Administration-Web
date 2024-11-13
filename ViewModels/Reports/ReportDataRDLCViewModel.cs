@@ -95,6 +95,25 @@ namespace CLA_Administration_Web.ViewModels.Reports
         public ReportRDLC Status { get; set; }
     }
 
+    public class CampainDispatchReports
+    {
+        public string ReportPath { get; set; }
+
+        public ReportRDLC Screensaver { get; set; }
+
+        public ReportRDLC Popup { get; set; }
+
+        public ReportRDLC Survey { get; set; }
+
+        public ReportRDLC Ticker { get; set; }
+
+        public ReportRDLC Lockscreen { get; set; }
+
+        public ReportRDLC Desktop { get; set; }
+
+        public ReportRDLC Params { get; set; }
+    }
+
     public class PopupReportsRaw
     {
         public string Summary { get; set; }

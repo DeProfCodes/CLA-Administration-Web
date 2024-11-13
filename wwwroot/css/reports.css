@@ -189,6 +189,32 @@
     /*display: block;
 }*/
 
+.ip-seperator
+{
+    font-size: 25px;
+    margin-top: -5px;
+    margin-left: 3px;
+    margin-right: 3px;
+    height: 30px;
+}
+.targeting-circle
+{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+.module-not-targeted
+{
+    background: #DC143C !important;
+}
+.module-targeted
+{
+    background: rgb(6, 115, 73) !important;
+}
+.align-check
+{
+    margin-top: -3px;
+}
 
 @media screen and (max-height: 795px)
 {

@@ -60,9 +60,9 @@ namespace CLA_Administration_Web.Services.Reporting
         {
             try
             {
-                var method = (reportName == ReportsNamesType.ActiveUsers) ? "GetReportingActiveUsers" : 
-                             ((reportName == ReportsNamesType.ActiveMachines) ?  "GetReportingActiveMachines" : "");
-                
+                var method = (reportName == ReportsNamesType.ActiveUsers) ? "GetReportingActiveUsers" :
+                             ((reportName == ReportsNamesType.ActiveMachines) ? "GetReportingActiveMachines" : "");
+
                 var endpoint = $"{apiControllerName}/{method}?&active={parameters.Active}&dormant={parameters.Dormant}&inactive={parameters.InActive}&connectToLive={parameters.ConnectToLive}";
 
                 var apiResponse = await _webApi.HttpGetAsync(endpoint);
@@ -91,6 +91,107 @@ namespace CLA_Administration_Web.Services.Reporting
             {
                 throw ex;
             }
+        }
+
+        public async Task<string> GetReportingDispatchListingParams(string startDate, string endDate, int isAutomated)
+        {
+            var endpoint = $"{apiControllerName}/GetReportingDispatchListingParams?effectiveFrom={startDate}&effectiveTo={endDate}&isAutomated={isAutomated}" +
+                                                 $"&displayScreenSaver=1&displayDesktop=1&displayLockscreen=1&displayPopup=1&displaySurvey=1&displayTicker=1&connectToLive=false";
+
+            var apiResponse = await _webApi.HttpGetAsync(endpoint);
+
+            return apiResponse;
+        }
+
+        public async Task<string> GetNTUsernameForTroubleshootReporting(string entityValue)
+        {
+            try
+            {
+                var endpoint = $"{apiControllerName}/GetNTUsernameForTroubleshootReporting?userMachineIPAddress={entityValue}&connectToLive=false";
+
+                var apiResponse = await _webApi.HttpGetAsync(endpoint);
+
+                return apiResponse;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<string> GetMachineNameForTroubleshootReporting(string entityValue)
+        {
+            try
+            {
+                var endpoint = $"{apiControllerName}/GetMachineNameForTroubleshootReporting?userMachineIPAddress={entityValue}&connectToLive=false";
+
+                var apiResponse = await _webApi.HttpGetAsync(endpoint);
+
+                return apiResponse;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<string> GetLastPostedValuesForTroubleshootReporting(string entityColName, string entityValue)
+        {
+            try
+            {
+                var endpoint = $"{apiControllerName}/GetLastPostedValuesForTroubleshootReporting?field={entityColName}&value={entityValue}";
+
+                var apiResponse = await _webApi.HttpGetAsync(endpoint);
+
+                return apiResponse;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<string> GetGroupMembershipsForTroubleshootReporting(string entityValue, string entitySymbol)
+        {
+            try
+            {
+                var endpoint = $"{apiControllerName}/GetGroupMembershipsForTroubleshootReporting?userMachineIPAddress={entityValue}&userMachineIPAddressSelection={entitySymbol}&connectToLive=false";
+
+                var apiResponse = await _webApi.HttpGetAsync(endpoint);
+
+                return apiResponse;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<string> GetActivePopupsSurveysForTroubleshootReporting(string user, string machine, string ipAddress)
+        {
+            var endpoint = $"{apiControllerName}/GetActivePopupsSurveysForTroubleshootReporting?umipUser={user}&umipMachine={machine}&umipIP={ipAddress}&connectToLive=false";
+
+            var apiResponse = await _webApi.HttpGetAsync(endpoint);
+
+            return apiResponse;
+        }
+
+        public async Task<string> GetActiveTargetedContentForTroubleshootReporting(string user, string machine, string ipAddress)
+        {
+            var endpoint = $"{apiControllerName}/GetActiveTargetedContentForTroubleshootReporting?umipUser={user}&umipMachine={machine}&umipIP={ipAddress}&connectToLive=false";
+
+            var apiResponse = await _webApi.HttpGetAsync(endpoint);
+
+            return apiResponse;
+        }
+
+        public async Task<string> GetSettingsForTroubleshootReporting(string user, string machine, string ipAddress)
+        {
+            var endpoint = $"{apiControllerName}/GetSettingsForTroubleshootReporting?providerId={6}&userIdQuery={user}&machineIdQuery={machine}&ipAddressQuery={ipAddress}&connectToLive=false";
+
+            var apiResponse = await _webApi.HttpGetAsync(endpoint);
+
+            return apiResponse;
         }
     }
 }

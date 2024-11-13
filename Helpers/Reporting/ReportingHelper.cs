@@ -1,5 +1,6 @@
 ﻿using CLA_Administration_Web.Helpers.API;
 using CLA_Administration_Web.Helpers.Enums.Reports;
+using CLA_Administration_Web.Helpers.Enums.Shared;
 using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
 using CLA_Administration_Web.Helpers.MockData;
 using CLA_Administration_Web.Models.APIResponses.Reports.ActiveUserMachine;
@@ -8,6 +9,7 @@ using CLA_Administration_Web.Models.APIResponses.Reports.Policy;
 using CLA_Administration_Web.Models.APIResponses.Reports.Popup;
 using CLA_Administration_Web.Models.APIResponses.Reports.Survey;
 using CLA_Administration_Web.Models.APIResponses.Reports.Ticker;
+using CLA_Administration_Web.Models.APIResponses.Reports.Troubleshoot;
 using CLA_Administration_Web.Services;
 using CLA_Administration_Web.Services.Reporting;
 using CLA_Administration_Web.ViewModels.API.Reports;
@@ -114,6 +116,39 @@ namespace CLA_Administration_Web.Helpers.Reporting
                     [
                         new ReportParameter(parameterName, parameterValue)
                     ];
+                    localReport.SetParameters(reportParameters);
+                }
+
+                byte[] renderedBytes = localReport.Render(format, null, out _, out _, out _, out _, out _);
+
+                return renderedBytes;
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return null;
+        }
+
+        public static byte[] GetReportBytes(string format, List<ReportRDLC> reportsRDLCs, string reportRDLCPath, Dictionary<string,string> parameters)
+        {
+            try
+            {
+                var localReport = new LocalReport();
+
+                using (FileStream fs = new FileStream(reportRDLCPath, FileMode.Open, FileAccess.Read))
+                {
+                    localReport.LoadReportDefinition(fs);
+                }
+
+                foreach (var report in reportsRDLCs)
+                {
+                    localReport.DataSources.Add(new ReportDataSource(report.RDLCName, report.DataSet.Tables[0]));
+                }
+
+                if (parameters != null)
+                {
+                    ReportParameter[] reportParameters = parameters.Select(param => new ReportParameter(param.Key, param.Value?.ToString())).ToArray();
                     localReport.SetParameters(reportParameters);
                 }
 
@@ -1035,6 +1070,126 @@ namespace CLA_Administration_Web.Helpers.Reporting
                 tickerJson = await _reportService.GetCampaignDispatchReport(parameters, "Dispatch_Listing_Ticker");
                 result.Tickers = APIResponseParserHelper.ParseJsonToObject<List<DispatchTickerResponse>>(tickerJson);
             }
+
+            return result;
+        }
+
+        public async Task<CampainDispatchReports> GetCampaignDispatchListReporting(CampaignDispatchFiltersViewModel parameters)
+        {
+            parameters.IsAutomated = parameters.ViewType == "automated" ? 1 : 0;
+
+            var lockscreenJson = await _reportService.GetCampaignDispatchReport(parameters, "Dispatch_Listing_Locked_Desktop"); ;
+            var desktopJson = await _reportService.GetCampaignDispatchReport(parameters, "Dispatch_Listing_Desktop"); ;
+            var screensaverJson = await _reportService.GetCampaignDispatchReport(parameters, "Dispatch_Listing_Screensaver"); ;
+            var popupJson = await _reportService.GetCampaignDispatchReport(parameters, "Dispatch_Listing_STM"); ;
+            var surveyJson = await _reportService.GetCampaignDispatchReport(parameters, "Dispatch_Listing_Survey"); ;
+            var tickerJson = await _reportService.GetCampaignDispatchReport(parameters, "Dispatch_Listing_Ticker"); ;
+            var paramsJson = await _reportService.GetReportingDispatchListingParams(parameters.StartDate, parameters.EndDate, parameters.IsAutomated);
+
+            var reportsBaseAddress = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "resources", "reports");
+
+            var result = new CampainDispatchReports
+            {
+                ReportPath = $"{reportsBaseAddress}\\rptDispatch_Listings.rdlc",
+                Screensaver = new ReportRDLC
+                {
+                    ReportRDLCPath = $"",
+                    RDLCName = "dsReporting_Dispatch_Listing_Screensaver",
+                    DataSet = ConvertJsonToDataSet(screensaverJson)
+                },
+                Desktop = new ReportRDLC
+                {
+                    ReportRDLCPath = $"",
+                    RDLCName = "dsReporting_Dispatch_Listing_Desktop",
+                    DataSet = ConvertJsonToDataSet(desktopJson)
+                },
+                Lockscreen = new ReportRDLC
+                {
+                    ReportRDLCPath = $"",
+                    RDLCName = "dsReporting_Dispatch_Listing_Lockscreen",
+                    DataSet = ConvertJsonToDataSet(lockscreenJson)
+                },
+                Popup = new ReportRDLC
+                {
+                    ReportRDLCPath = $"",
+                    RDLCName = "dsReporting_Dispatch_Listing_STM",
+                    DataSet = ConvertJsonToDataSet(popupJson)
+                },
+                Ticker = new ReportRDLC
+                {
+                    ReportRDLCPath = $"",
+                    RDLCName = "dsReporting_Dispatch_Listing_Ticker",
+                    DataSet = ConvertJsonToDataSet(tickerJson)
+                },
+                Survey = new ReportRDLC
+                {
+                    ReportRDLCPath = $"",
+                    RDLCName = "dsReporting_Dispatch_Listing_Survey",
+                    DataSet = ConvertJsonToDataSet(surveyJson)
+                },
+                Params = new ReportRDLC
+                {
+                    ReportRDLCPath = $"",
+                    RDLCName = "dsReporting_Dispatch_Listing_Params",
+                    DataSet = ConvertJsonToDataSet(paramsJson)
+                },
+            };
+
+            return result;
+        }
+
+        public async Task<TroubleshootReportViewModel> GetTroubleshootReportData(CLAEntityType entityType, string entityValue)
+        {
+            var result = new TroubleshootReportViewModel();
+
+            var entityJson = "";
+            TroubleshootReportEntity entity = null;
+
+            var entityColName = "";
+            var entitySymbol = "";
+
+            if (entityType == CLAEntityType.User)
+            {
+                entityColName = "User_ID";
+                entitySymbol = "U";
+
+                entityJson = await _reportService.GetNTUsernameForTroubleshootReporting(entityValue);
+            }
+            else if (entityType == CLAEntityType.Machine)
+            {
+                entityColName = "Machine_ID";
+                entitySymbol = "M";
+
+                entityJson = await _reportService.GetMachineNameForTroubleshootReporting(entityValue);
+            }
+            else if (entityType == CLAEntityType.IPAddress)
+            {
+                entityColName = "IP_Address";
+                entitySymbol = "I";
+            }
+
+            var userEntityParam = entityType == CLAEntityType.User ? entityValue : "--####--";
+            var machineEntityParam = entityType == CLAEntityType.Machine ? entityValue : "--####--";
+            var ipAddressEntityParam = entityType == CLAEntityType.IPAddress ? entityValue : "--####--";
+
+            var userEntityVal = entityType == CLAEntityType.User ? entityValue : ".";
+            var machineEntityVal = entityType == CLAEntityType.Machine ? entityValue : ".";
+            var ipAddressEntityVal = entityType == CLAEntityType.IPAddress ? entityValue : ".";
+
+            var lastSyncDetailsJson = await _reportService.GetLastPostedValuesForTroubleshootReporting(entityColName, entityValue);
+            var userGroup = await _reportService.GetGroupMembershipsForTroubleshootReporting(entityValue, entitySymbol); 
+            var activeContentJson = await _reportService.GetActivePopupsSurveysForTroubleshootReporting(userEntityParam, machineEntityParam, ipAddressEntityParam);
+            var targetingJson = await _reportService.GetActiveTargetedContentForTroubleshootReporting(userEntityParam, machineEntityParam, ipAddressEntityParam);
+            var settingsJson = await _reportService.GetSettingsForTroubleshootReporting(userEntityVal, machineEntityVal, ipAddressEntityVal);
+
+            entity = APIResponseParserHelper.ParseJsonToObject<TroubleshootReportEntity>(entityJson, true);
+
+            result.ConnectedToLive = entity == null;
+            result.LastSyncDetails = APIResponseParserHelper.ParseJsonToObject<TroubleshootReportLastSyncDetails>(lastSyncDetailsJson, true);
+            result.UserGroups = APIResponseParserHelper.ParseJsonToObject<List<TroubleshootReportUserGroup>>(userGroup);
+            result.Targeting = APIResponseParserHelper.ParseJsonToObject<List<TroubleshootReportTargeting>>(targetingJson);
+            result.Settings = APIResponseParserHelper.ParseJsonToObject<TroubleshootReportSettings>(settingsJson, true);
+            
 
             return result;
         }

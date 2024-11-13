@@ -1,8 +1,11 @@
 ﻿using CLA_Administration_Web.Helpers.MockData;
+using CLA_Administration_Web.Models.APIResponses.Reports.Troubleshoot;
 using CLA_Administration_Web.Services;
 using CLA_Administration_Web.ViewModels.Reports;
+using CLA_Administration_Web.ViewModels.Reports.CampaignDispatch;
 using ClosedXML.Excel;
 using DocumentFormat.OpenXml.Spreadsheet;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Reporting.NETCore;
 using System.Text;
@@ -11,6 +14,11 @@ namespace CLA_Administration_Web.Helpers.Reporting
 {
     public class ExportHelper
     {
+        public static byte[] GetReportExcelBytes(List<ReportRDLC> reportsRDLCs, string reportRDLCPath, Dictionary<string,string> parameters)
+        {
+            return ReportingHelper.GetReportBytes("EXCELOPENXML", reportsRDLCs, reportRDLCPath, parameters);
+        }
+
         public static byte[] GetReportExcelBytes(List<ReportRDLC> reportsRDLCs, string reportRDLCPath, string parameterValue = "", string parameterName = "pFilterColumn")
         {
             return ReportingHelper.GetReportBytes("EXCELOPENXML", reportsRDLCs, reportRDLCPath, parameterValue, parameterName);
@@ -139,6 +147,105 @@ namespace CLA_Administration_Web.Helpers.Reporting
             AddSheetToExcel(workbook, reportData.ActiveResult, $"Active {reportPageName}");
         }
 
+        public static void ExportCampaignDispatchReport(XLWorkbook workbook, CampainDispatchReports data, CampaignDispatchFiltersViewModel dispatchParams)
+        {
+            var reportParams = new Dictionary<string, string>
+            {
+                { "Display_Screensaver", (dispatchParams.ScreensaverReport ? "1" : "0") },
+                { "Display_Desktop", (dispatchParams.DesktopReport ? "1" : "0") },
+                { "Display_Popup", (dispatchParams.PopupReport ? "1" : "0") },
+                { "Display_Survey", (dispatchParams.SurveyReport ? "1" : "0") },
+                { "Display_Ticker", (dispatchParams.TickerReport ? "1" : "0") },
+                { "Display_Lockscreen", (dispatchParams.LockscreenReport ? "1" : "0") },
+            };
 
+            var reportData = new
+            {
+                All = GetReportExcelBytes(new List<ReportRDLC> { data.Popup, data.Desktop, data.Screensaver, data.Lockscreen, data.Ticker, data.Survey, data.Params }, data.ReportPath, reportParams)
+            };
+
+            AddSheetToExcel(workbook, reportData.All, "rptDispatch_Listing");
+        }
+
+        public static void ExportTroubleshootReport(XLWorkbook workbook, TroubleshootReportViewModel troubleshootData)
+        {
+            string csvRaw = GenerateCSV(troubleshootData);
+
+            var worksheet = workbook.Worksheets.Add("Troubleshoot Report");
+            var rows = csvRaw.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+
+            for (int rowIndex = 0; rowIndex < rows.Length; rowIndex++)
+            {
+                var columns = rows[rowIndex].Split(',');
+
+                for (int colIndex = 0; colIndex < columns.Length; colIndex++)
+                {
+                    worksheet.Cell(rowIndex + 1, colIndex + 1).Value = columns[colIndex].Trim();
+                }
+            }
+        }
+
+        public static string GenerateCSV(TroubleshootReportViewModel troubleshootData)
+        {
+            StringBuilder csvContent = new StringBuilder();
+
+            if (troubleshootData.LastSyncDetails != null)
+            {
+                csvContent.AppendLine("Exported as per,User" + troubleshootData.LastSyncDetails.UserID);
+                csvContent.AppendLine("Environment,Connected to Staging"); // Adjusted to example text
+                csvContent.AppendLine($"Last Sync To Database,{troubleshootData.LastSyncDetails.LastUpdateDT?.ToString("yyyy/MM/dd HH:mm:ss")}");
+                csvContent.AppendLine($"Last Popup Shown,({troubleshootData.LastSyncDetails.LastSTMID}) {troubleshootData.LastSyncDetails.PopupTitle}");
+                csvContent.AppendLine($"Last Popup ID,{troubleshootData.LastSyncDetails.LastSTMDT?.ToString("yyyy/MM/dd HH:mm:ss")}");
+                csvContent.AppendLine($"Last Survey Shown,({troubleshootData.LastSyncDetails.LastSurveyID}) {troubleshootData.LastSyncDetails.SurveyTitle}");
+                csvContent.AppendLine($"Last Survey ID,{troubleshootData.LastSyncDetails.LastSurveyDT?.ToString("yyyy/MM/dd HH:mm:ss")}");
+                csvContent.AppendLine("Is CLA Installed?,No");
+                csvContent.AppendLine($"SYNC Version,{troubleshootData.LastSyncDetails.MSDIMSYNCVersion?.ToString("yyyy/MM/dd")}");
+                csvContent.AppendLine($"MSDIM Version,{troubleshootData.LastSyncDetails.MSDIMVersion?.ToString("yyyy/MM/dd")}");
+                csvContent.AppendLine($"SVC Version,{troubleshootData.LastSyncDetails.MSDIMSVCVersion?.ToString("yyyy/MM/dd")}");
+                csvContent.AppendLine();
+            }
+            
+            if (troubleshootData.UserGroups != null)
+            {
+                csvContent.AppendLine("Active Current Popups,");
+                csvContent.Append("Groups that user belongs to,");
+                csvContent.AppendLine(string.Join("\t", troubleshootData.UserGroups.ConvertAll(g => g.GroupID)));
+                csvContent.AppendLine();
+            }
+            if (troubleshootData.Settings != null)
+            {
+                csvContent.AppendLine("Effective Settings,");
+                csvContent.AppendLine($"Network,{troubleshootData.Settings.Network}");
+                csvContent.AppendLine($"Screensaver Timeout (Seconds),{troubleshootData.Settings.ScreensaverTimeout}");
+                csvContent.AppendLine($"Popup Timeout (Seconds),{troubleshootData.Settings.PopUpTimeout}");
+                csvContent.AppendLine($"Desktop Timeout (Seconds),{troubleshootData.Settings.DesktopTimeout}");
+                csvContent.AppendLine($"Ticker Timeout (Seconds),{troubleshootData.Settings.TickerTimeout}");
+                csvContent.AppendLine($"Sync Timeout (Seconds),{troubleshootData.Settings.SyncTimeout}");
+                csvContent.AppendLine($"Sync TimeSlot (From),{troubleshootData.Settings.SyncTimeslotFrom}");
+                csvContent.AppendLine($"Sync TimeSlot (To),{troubleshootData.Settings.SyncTimeslotTo}");
+                csvContent.AppendLine($"Allow Ticker To Launch Automatically?,{(troubleshootData.Settings.AllowTickerToLaunchAutomatically == 1 ? "Yes" : "No")}");
+                csvContent.AppendLine($"Update Future Content?,{(troubleshootData.Settings.UpdateFutureContent == 1 ? "Yes" : "No")}");
+                csvContent.AppendLine($"Password Protect Screensaver?,{(troubleshootData.Settings.ScreenSaverIsSecure == 1 ? "Yes" : "No")}");
+                csvContent.AppendLine($"Allow User To Change Screensaver?,{(troubleshootData.Settings.NoDispScrSavPage == 0 ? "No" : "Yes")}");
+                csvContent.AppendLine($"Allow User To Override Desktop?,{(troubleshootData.Settings.DesktopIsSecure == 1 ? "Yes" : "No")}");
+                csvContent.AppendLine($"Enable Error Logging?,{(troubleshootData.Settings.ErrorLogging == 1 ? "Yes" : "No")}");
+                csvContent.AppendLine($"Maintain Aspect Ratio?,{(troubleshootData.Settings.MaintainAspectRatio == 1 ? "Yes" : "No")}");
+                csvContent.AppendLine($"Enable Impression Logging?,{(troubleshootData.Settings.ImpressionLogging == 1 ? "Yes" : "No")}");
+                csvContent.AppendLine($"Use Audio?,{(troubleshootData.Settings.UseAudio == "-1" ? "No" : "Yes")}");
+                csvContent.AppendLine($"Use Machine ID?,{(troubleshootData.Settings.UseMachineID == 1 ? "Yes" : "No")}");
+                csvContent.AppendLine();
+            }
+            if (troubleshootData.Targeting != null)
+            {
+                csvContent.AppendLine("Effective Targeting,");
+                csvContent.AppendLine($"Targeted for Screensaver,{(troubleshootData.Targeting.FirstOrDefault(x => x.Destination == "SCREENSAVERS" && x.CNT > 0) != null ? "Yes" : "No")}");
+                csvContent.AppendLine($"Targeted for Desktop,{(troubleshootData.Targeting.FirstOrDefault(x => x.Destination == "DESKTOPS" && x.CNT > 0) != null ? "Yes" : "No")}");
+                csvContent.AppendLine($"Targeted for Survey,{(troubleshootData.Targeting.FirstOrDefault(x => x.Destination == "SURVEYS" && x.CNT > 0) != null ? "Yes" : "No")}");
+                csvContent.AppendLine($"Targeted for Popup,{(troubleshootData.Targeting.FirstOrDefault(x => x.Destination == "POPUPS" && x.CNT > 0) != null ? "Yes" : "No")}");
+                csvContent.AppendLine($"Targeted for Ticker,{(troubleshootData.Targeting.FirstOrDefault(x => x.Destination == "TICKERS" && x.CNT > 0) != null ? "Yes" : "No")}");
+                csvContent.AppendLine($"Targeted for Lockscreen,{(troubleshootData.Targeting.FirstOrDefault(x => x.Destination == "LOCKED DESKTOPS" && x.CNT > 0) != null ? "Yes" : "No")}");
+            }
+            return csvContent.ToString();
+        }
     }
 }

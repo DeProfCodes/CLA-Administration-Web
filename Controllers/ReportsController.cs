@@ -1,5 +1,6 @@
 using CLA_Administration_Web.Helpers.Constants;
 using CLA_Administration_Web.Helpers.Enums.Reports;
+using CLA_Administration_Web.Helpers.Enums.Shared;
 using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
 using CLA_Administration_Web.Helpers.MockData;
 using CLA_Administration_Web.Helpers.Reporting;
@@ -8,6 +9,7 @@ using CLA_Administration_Web.ViewModels.Reports;
 using CLA_Administration_Web.ViewModels.Reports.CampaignDispatch;
 using CLACommonFunctionsLibrary_NET.Helpers.Enums;
 using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using DocumentFormat.OpenXml.Spreadsheet;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Mvc;
@@ -226,7 +228,22 @@ namespace CLA_Administration_Web.Controllers
             return PartialView(AppPagesLinks.Reports.TroubleshootPageLink);
         }
 
-        public async Task<IActionResult> ExportFileToExcel(ReportsNamesType reportType, ModuleReportDataFilterViewModel parameters, string reportPageName)
+        [HttpGet]
+        public async Task<IActionResult> TroubleshootReportData(CLAEntityType entityType, string entityValue)
+        {
+            var troubleshootVm = new TroubleshootReportViewModel();
+            if (entityType != CLAEntityType.None)
+            {
+                troubleshootVm = await reportingHelper.GetTroubleshootReportData(entityType, entityValue);
+            }
+            else
+            {
+                troubleshootVm.IsBlank = true;
+            }
+            return PartialView(AppPagesLinks.Reports.TroubleshootDataPageLink, troubleshootVm);
+        }
+
+        public async Task<IActionResult> ExportFileToExcel(ReportsNamesType reportType, ModuleReportDataFilterViewModel parameters, string reportPageName, CLAEntityType entityType, string entityValue, CampaignDispatchFiltersViewModel dispatchParams)
         {
             var filename = "";
             using (var workbook = new XLWorkbook())
@@ -265,6 +282,21 @@ namespace CLA_Administration_Web.Controllers
                     ExportHelper.ExportActiveUsersReport(workbook, reportType.GetDisplayDescription(), data, status);
                     filename = $"rpt{reportType.GetDisplayName()}.xlsx";
                 }
+                else if (reportType == ReportsNamesType.CampaignDispatch)
+                {
+                    var data = await reportingHelper.GetCampaignDispatchListReporting(dispatchParams);
+
+                    ExportHelper.ExportCampaignDispatchReport(workbook, data, dispatchParams);
+
+                    filename = "rptDispatch_Listings.xlsx";
+                }
+                else if (reportType == ReportsNamesType.Troubleshoot)
+                {
+                    var troubleshootVm = await reportingHelper.GetTroubleshootReportData(entityType, entityValue);
+
+                    ExportHelper.ExportTroubleshootReport(workbook, troubleshootVm);
+                    filename = "rptTroubleshoot.xlsx";
+                }
 
                 using (var stream = new MemoryStream())
                 {
@@ -286,6 +318,13 @@ namespace CLA_Administration_Web.Controllers
             return File(bytes, "application/vnd.ms-excel", "Report.xls");
         }
 
+        public async Task<IActionResult> ExportTroubleshootReport(CLAEntityType entityType, string entityValue)
+        {
+            var troubleshootVm = await reportingHelper.GetTroubleshootReportData(entityType, entityValue);
+            ExportHelper.GenerateCSV(troubleshootVm);
+
+            return Ok();
+        }
     }
 }
  

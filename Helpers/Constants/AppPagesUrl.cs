@@ -144,6 +144,7 @@ namespace CLA_Administration_Web.Helpers.Constants
             public static string CampaignDispatch = $"/{reportsController}/{ReportsPages.CampaignDispatchReport.GetDisplayName()}";
             public static string CampaignDispatchList = $"/{reportsController}/{ReportsPages.CampaignDispatchListReport.GetDisplayName()}";
             public static string Troubleshoot = $"/{reportsController}/{ReportsPages.TroubleshootReport.GetDisplayName()}";
+            public static string TroubleshootData = $"/{reportsController}/{ReportsPages.TroubleshootReportData.GetDisplayName()}";
         }
 
         public class Support
