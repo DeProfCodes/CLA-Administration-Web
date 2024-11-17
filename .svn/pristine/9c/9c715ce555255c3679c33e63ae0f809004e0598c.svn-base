@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\CLA-Administration-Web.props" />
-</Project>

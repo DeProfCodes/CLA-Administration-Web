@@ -1,3 +1,0 @@
-﻿@using CLA_Administration_Web
-@using CLA_Administration_Web.Models
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers

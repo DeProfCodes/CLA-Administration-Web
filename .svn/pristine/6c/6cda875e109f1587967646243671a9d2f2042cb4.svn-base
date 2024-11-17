@@ -1,6 +1,0 @@
-﻿
-
-.app-card-main-scaling
-{
-    min-width: 940px !important;
-}
