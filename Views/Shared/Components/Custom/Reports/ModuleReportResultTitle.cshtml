@@ -18,14 +18,14 @@
             </p>
         </div>
         <div id="TickerReportActionBtns">
-            <button class="btn btn-secondary btn-sm w-100 invisible" id="BackBtn" onclick="SummaryTab()">Back</button>
+            <button class="btn btn-secondary btn-sm w-100 invisible" id="BackBtn" onclick="GoBackReportTab()">Back</button>
             <div class="dropdown">
                 <button class="btn btn-success btn-sm dropdown-toggle w-100 mt-2" type="button" id="exportDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                     Export
                 </button>
                 <ul class="dropdown-menu  w-100 " aria-labelledby="exportDropdown">
-                    <li><a class="dropdown-item fs-12" onclick="ExportReportToExcel('@Model.ReportTypeName', false)">Export Single</a></li>
-                    <li><a class="dropdown-item fs-12" onclick="ExportReportToExcel('@Model.ReportTypeName', true)">Export Full</a></li>
+                    <li><a class="dropdown-item fs-12 cursor-pointer report-export-btn" onclick="ExportReportToExcel('@Model.ReportTypeName', false)">Export Single</a></li>
+                    <li><a class="dropdown-item fs-12 cursor-pointer report-export-btn" onclick="ExportReportToExcel('@Model.ReportTypeName', true)">Export Full</a></li>
                 </ul>
             </div>
         </div>

@@ -1,33 +1,43 @@
-﻿@model string
+﻿@using CLA_Administration_Web.Models.APIResponses.Reports.Popup
+@model ModuleReportRawDataOnlyViewModel
 
 @{
-    var html = Model;
-
-    // if (Model.ReportNameType == ReportsNamesType.Popup)
-    // {
-    //     html = Model.PopupReportData.AllData;
-    // }
-    // else if (Model.ReportNameType == ReportsNamesType.Survey)
-    // {
-    //     html = Model.SurveyReportData.AllData;
-    // }
-    // else if (Model.ReportNameType == ReportsNamesType.Ticker)
-    // {
-    //     html = Model.TickerReportData.AllData;
-    // }
-    // else if (Model.ReportNameType == ReportsNamesType.Policy)
-    // {
-    //     html = Model.PolicyReportData.AllData;
-    // }
+    var reportType = Model.ReportNameType;
+    var reportTitle = $"{reportType.GetDisplayName()} Raw";
 }
 
+<input id="ModuleReportId" value="@Model.ReportModuleId" hidden/>
+
 <div class="report-outter-container">
-    <div class="card-body p-1">
+    <div class="card-body p-0">
         <div class="row flex-sm-nowrap">
-            <div class="flex-wrap report-body-container px-5">
-                <div class="report-raw-data">
-                    @Html.Raw(html)
-                </div>
+            <div class="flex-wrap report-body-container">
+                @{
+                    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Reports/ModuleReportResultTitle.cshtml",
+                    new ModuleReportResultTitleViewModel
+                    {
+                        ReportTypeName = reportType,
+                        ReportTitle = reportTitle,
+                        EffectiveFromDate = Model.EffectiveFrom,
+                        EffectiveToDate = Model.EffectiveFrom,
+                        OnBackReportTabClickCallbackFunction = "NaN"
+                    });
+                }
+                <!-- 1. Popup Summary Tab -->
+                @if (reportType == ReportsNamesType.Popup)
+                {
+                    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Reports/ModuleReportTable.cshtml",
+                    new ReportDataTableViewInputsViewModel
+                    {
+                        ComponentId = "PopupSHOW-3",
+                        TableId = "Popup-SHOW",
+                        DataSource = Model.PopupAllRawData,
+                        DefaultFallBackType = typeof(PopupReportAllData),
+                        LastSyncDateColumnName = "NaN",
+                        IsInitiallyHidden = false,
+                        IsRawDataOnly = true
+                    });
+                }
             </div>
         </div>
     </div>

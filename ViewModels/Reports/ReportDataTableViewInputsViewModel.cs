@@ -14,5 +14,7 @@
 
         public string LastSyncDateColumnName { get; set; }
 
+        public bool IsRawDataOnly { get; set; }
+
     }
 }

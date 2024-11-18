@@ -156,7 +156,7 @@
                 @foreach (var reportVm in Model.ReportsLeftNavigation)
                 {
                     var reportName = reportVm.ReportName.GetDisplayName();
-                    var linkId = $"{reportName}Link";
+                    var linkId = $"{reportName}ReportLink";
                     var leftIconId = $"{reportName}LeftIcon";
                     var titleId = $"{reportName}Title";
                     var title = reportVm.ReportName.GetDisplayDescription();
@@ -240,7 +240,7 @@
 
     function InitialPage()
     {
-        OpenPageWithAnimations('Reports', null, '@ReportsPages.TroubleshootReport', 'TroubleshootReportLink');
+        OpenPageWithAnimations('Reports', null, '@ReportsPages.PopupReport', 'PopupReportLink');
         //OpenPage('@ModulesPages.AddNewSurveyQuestion', 1); 
     }
 

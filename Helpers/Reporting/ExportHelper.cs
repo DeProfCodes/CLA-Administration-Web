@@ -48,6 +48,7 @@ namespace CLA_Administration_Web.Helpers.Reporting
             var responseSnooze = GetReportExcelBytes(new List<ReportRDLC> { data.ResponseBreakdownData, data.Status }, data.ResponseBreakdownData.ReportRDLCPath, "Bubble_Snooze_DT");
             var responseShow = GetReportExcelBytes(new List<ReportRDLC> { data.ResponseBreakdownData, data.Status }, data.ResponseBreakdownData.ReportRDLCPath, "Bubble_Show_DT");
             var outstanding = GetReportExcelBytes(new List<ReportRDLC> { data.Outstanding, data.ResponseBreakdownData, data.Status }, data.Outstanding.ReportRDLCPath, "NULL");
+            var rawDataOnly = GetReportExcelBytes(new List<ReportRDLC> { data.AllDataOnly }, data.AllDataOnly.ReportRDLCPath);
 
             reportPageName = reportPageName.ToLower();
 
@@ -66,11 +67,13 @@ namespace CLA_Administration_Web.Helpers.Reporting
             {
                 if (reportPageName == "summary") AddSheetToExcel(workbook, summaryTab, "Popup Summary");
                 if (reportPageName == "response_summary") AddSheetToExcel(workbook, responseSummary, "Popup Response Summary");
-                if (reportPageName == "click") AddSheetToExcel(workbook, responseClick, "Response - Click");
-                if (reportPageName == "dismiss") AddSheetToExcel(workbook, responseDismiss, "Response - Dismiss");
-                if (reportPageName == "autohide") AddSheetToExcel(workbook, responseAutoHide, "Response - Autohide");
-                if (reportPageName == "show") AddSheetToExcel(workbook, responseShow, "Response - Show");
+                if (reportPageName == "response_breakdown-click") AddSheetToExcel(workbook, responseClick, "Response - Click");
+                if (reportPageName == "response_breakdown-dismiss") AddSheetToExcel(workbook, responseDismiss, "Response - Dismiss");
+                if (reportPageName == "response_breakdown-autohide") AddSheetToExcel(workbook, responseAutoHide, "Response - Autohide");
+                if (reportPageName == "response_breakdown-show") AddSheetToExcel(workbook, responseShow, "Response - Show");
+                if (reportPageName == "response_breakdown-snooze") AddSheetToExcel(workbook, responseSnooze, "Response - Snooze");
                 if (reportPageName == "noshow") AddSheetToExcel(workbook, outstanding, "Popup Outstanding");
+                if (reportPageName == "raw_data_only") AddSheetToExcel(workbook, rawDataOnly, "Popup Raw");
             }
         }
 

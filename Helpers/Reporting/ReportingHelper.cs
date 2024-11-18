@@ -303,7 +303,7 @@ namespace CLA_Administration_Web.Helpers.Reporting
             var outstandingSummaryJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Popup, "STM_Outstanding_Summary");
             var outstandingJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Popup, "STM_Outstanding");
             var allDataJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Popup, "STM_All_DataOnly");
-
+                            //await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Popup, "STM_All_DataOnly");
             var reportsBaseAddress = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "resources", "reports");
 
             var result = new PopupReports
@@ -589,7 +589,11 @@ namespace CLA_Administration_Web.Helpers.Reporting
 
                 result.PopupReportSummary = APIResponseParserHelper.ParseJsonToObject<PopupReportSummary>(summaryJson, true);
                 result.PopupReportQuestionSummary = APIResponseParserHelper.ParseJsonToObject<PopupReportQuestionSummary>(questionSummaryJson, true);
-                
+
+                var qSummary = result?.PopupReportQuestionSummary ?? new();
+                var possibleShowCount = qSummary.PercentageShow - qSummary.ClickCount - qSummary.DismissCount - qSummary.AutohideCount - qSummary.SnoozeCount;
+                result.PopupReportQuestionSummary.ShowCount = possibleShowCount > 0 ? possibleShowCount : 0;
+
                 var popupResponseDetails = APIResponseParserHelper.ParseJsonToObject<List<PopupReportResponseDetails>>(responseDetailsJson);
 
                 result.PopupResponseSnooze = popupResponseDetails.Where(x => x.BubbleSnoozeDate != null && x.BubbleShowDate != null).ToList();

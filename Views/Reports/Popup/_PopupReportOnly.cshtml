@@ -5,14 +5,14 @@
 @{
     var summaryT = Model.PopupReportSummary;
 
-    var completedRate = Math.Round(((double)summaryT.Completed / summaryT.Targeted) * 100, 2);
+    var completedRate = Math.Round(((double)summaryT.Show / summaryT.Targeted) * 100, 2);
     var outstandingRate = 100 - completedRate;
 
     var questionSummary = Model.PopupReportQuestionSummary;
 
     var questionSummaryData = new List<int> 
     { 
-        questionSummary.ClickCount, questionSummary.DismissCount, questionSummary.AutohideCount, questionSummary.SnoozeCount, questionSummary.ReShowCount
+        questionSummary.ClickCount, questionSummary.DismissCount, questionSummary.AutohideCount, questionSummary.SnoozeCount, questionSummary.ShowCount
     };
     var questionSummaryTitles = new List<string> { "Click", "Dismiss", "AutoHide", "Snooze", "Show" };
     var questionSummaryColors = new List<string> { "blue", "orange", "crimson", "slate", "silver" };
@@ -25,40 +25,17 @@
     <div class="card-body p-0">
         <div class="row flex-sm-nowrap">
             <div class="flex-wrap report-body-container">
-                <div id="ModuleReportHeader">
-                    <div class="d-flex theme-bg">
-                        <div class="mt-1">
-                            <img src="~/images/logos/report-logo.png" class="report-logo" alt="logo icon">
-                        </div>
-                        <div class="w-200p ms-2 text-black align-content-center hidden" id="ReportStatusLegend">
-                            <div class="w-100 bg-lime text-center">Active</div>
-                            <div class="w-100 bg-yellow text-center mt-1">Inactive</div>
-                            <div class="w-100 bg-red text-center mt-1">Not Installed</div>
-                        </div>
-                        <div class="w-100">
-                            <p class="mt-2 fs-30 text-center text-white">Popup Title: @summaryT.Title</p>
-                            <p class="mt-2 fs-20 text-center text-white">
-                                Effective from: <span>@summaryT.EffectiveFrom.ToString("dddd, dd MMM yyyy")</span>
-                                To: <span>@summaryT.EffectiveFrom.ToString("dddd, dd MMM yyyy")</span>
-                            </p>
-                        </div>
-                        <div id="TickerReportActionBtns">
-                            <button class="btn btn-secondary btn-sm w-100 invisible" id="BackBtn" onclick="PopupReportBackButton()">Back</button>
-                            <div class="dropdown">
-                                <button class="btn btn-success btn-sm dropdown-toggle w-100 mt-2" type="button" id="exportDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Export
-                                </button>
-                                <ul class="dropdown-menu  w-100 " aria-labelledby="exportDropdown">
-                                    <li><a class="dropdown-item fs-12" onclick="ExportReportToExcel('@ReportsNamesType.Popup', false)">Export Single</a></li>
-                                    <li><a class="dropdown-item fs-12" onclick="ExportReportToExcel('@ReportsNamesType.Popup', true)">Export Full</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="p-2 fs-20 text-center bg-silver fw-bold" id="ModuleReportTitle"></p>
-                    </div>
-                </div>
+                @{
+                    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Reports/ModuleReportResultTitle.cshtml",
+                    new ModuleReportResultTitleViewModel
+                    {
+                        ReportTypeName = ReportsNamesType.Popup,
+                        ReportTitle = summaryT.Title,
+                        EffectiveFromDate = summaryT.EffectiveFrom,
+                        EffectiveToDate = summaryT.EffectiveTo,
+                        OnBackReportTabClickCallbackFunction = "GoBackToPopupReportTab"
+                    });
+                }
                 <!-- 1. Popup Summary Tab -->
                 <div id="PopupSummaryTab-1" class="report-module-tabs-module px-5 hidden">
                     <div class="report-raw-data ms-0 d-flex">
@@ -73,12 +50,12 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td class="report-piechart-color-darkgreen-dim">Completed</td>
-                                        <td class="report-piechart-color-darkgreen-dim">@summaryT.Completed</td>
+                                        <td class="report-piechart-color-darkgreen-dim">Delivered</td>
+                                        <td class="report-piechart-color-darkgreen-dim">@summaryT.Show</td>
                                         <td class="report-piechart-color-darkgreen-dim">@completedRate</td>
                                     </tr>
                                     <tr>
-                                        <td class="report-piechart-color-crimson-dim">Outstanding</td>
+                                        <td class="report-piechart-color-crimson-dim">Not Delivered</td>
                                         <td class="report-piechart-color-crimson-dim">@summaryT.Outstanding</td>
                                         <td class="report-piechart-color-crimson-dim">@outstandingRate</td>
                                     </tr>
@@ -229,14 +206,16 @@
         //Load Popup Summary
         let apexPieChart = null;
 
-        var completed = parseInt("@summaryT.Completed");
+        var completed = parseInt("@summaryT.Show");
         var outstanding = parseInt("@summaryT.Outstanding");
 
         var data = [completed, outstanding];
-        var pieDataLabel = ["Completed", "Outstanding"];
+        var pieDataLabel = ["Delivered", "Not Delivered"];
         var colorsData = ["#067349", "#DC143C"];
 
-        DrawPieChart(apexPieChart, "#SummaryChart", data, pieDataLabel, colorsData, null, onPieSummaryLabelClick);
+        var dimension = new DimensionType(500);
+
+        DrawPieChart(apexPieChart, "#SummaryChart", data, pieDataLabel, colorsData, dimension, onPieSummaryLabelClick, "#%");
 
         //Load Popup Question Summary
         let apexPieChart2 = null;
@@ -245,13 +224,13 @@
         var dismiss = parseInt("@questionSummary.DismissCount");
         var autoHide = parseInt("@questionSummary.AutohideCount");
         var snooze = parseInt("@questionSummary.SnoozeCount");
-        var show = parseInt("@questionSummary.ReShowCount");
+        var show = parseInt("@questionSummary.ShowCount");
 
         data = [click, dismiss, autoHide, snooze, show];
         pieDataLabel = ["Click", "Dismiss", "AutoHide", "Snooze", "Show"];
         colorsData = ["#4169E1", "#FF8C00", "#DC143C", "#2F4F4F", "#C0C0C0"];
 
-        DrawPieChart(apexPieChart2, "#SummaryChart2", data, pieDataLabel, colorsData, null, onPieQuestionSummaryLabelClick);
+        DrawPieChart(apexPieChart2, "#SummaryChart2", data, pieDataLabel, colorsData, dimension, onPieQuestionSummaryLabelClick, "#");
 
         //Data Tables
         // $("#Popup-SHOW").DataTable();
@@ -282,19 +261,10 @@
         
         HideShowElement("#PopupQuestionDetailsTab-2", HideShow.SHOW);
 
-        $("#ModuleReportGoBackDiv").val("#PopupSummaryTab-1");
+        $("#ModuleReportGoBackDiv").val("SummaryTab");
 
         $("#ModuleReportSubTitle").text("Response Summary");
         $("#ModuleReportActiveReport").val("response_summary");
-    }
-
-    function PopupReportBackButton()
-    {
-        if (backToDivId == "PopupSummaryTab-1")
-            PopupSummaryTab();
-
-        else if (backToDivId == "PopupQuestionDetailsTab-2")
-            QuestionsSummaryTab();
     }
 
     function ResponseBreakdownTypeTab()
@@ -305,12 +275,12 @@
         
         HideShowElement(responseBreakdownType.DivId, HideShow.SHOW);
 
-        var title = `Response Breakdown - ${responseBreakdownType.Title}`;
+        var title = `Response_Breakdown-${responseBreakdownType.Title}`;
         $("#ModuleReportActiveReport").val(title.toLowerCase());
 
         $("#ModuleReportSubTitle").text(title);
 
-        $("#ModuleReportGoBackDiv").val("#PopupQuestionDetailsTab-2");
+        $("#ModuleReportGoBackDiv").val("QuestionDetailsTab");
     }
 
     function onPieQuestionSummaryLabelClick(label)
@@ -335,18 +305,31 @@
 
         $("#ModuleReportSubTitle").text("Outstanding Response Breakdown - No Show");
 
-        $("#ModuleReportGoBackDiv").val("#PopupSummaryTab-1");
+        $("#ModuleReportGoBackDiv").val("SummaryTab");
+        $("#ModuleReportActiveReport").val("noshow");
     }
 
     function onPieSummaryLabelClick(label)
     {
-        if (label === 'Completed')
+        if (label === 'Delivered')
         {
             QuestionsSummaryTab();
         }
-        else if (label === 'Outstanding')
+        else if (label === 'Not Delivered')
         {
             OutstandingTab();
+        }
+    }
+
+    function GoBackToPopupReportTab(destinationDiv)
+    {
+        if (destinationDiv == "SummaryTab")
+        {
+            PopupSummaryTab();
+        }
+        else if(destinationDiv == "QuestionDetailsTab")
+        {
+            QuestionsSummaryTab();
         }
     }
 

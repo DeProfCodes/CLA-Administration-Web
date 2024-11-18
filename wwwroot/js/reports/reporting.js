@@ -179,6 +179,8 @@ function ExportReportToExcel(reportModuleType, isAll)
     };
 
     var reportPageName = !isAll ? $("#ModuleReportActiveReport").val() : "all";
+    reportPageName = (!payload.ShowRawDataOnly || reportPageName == "all") ? reportPageName : "raw_data_only";
+
     var url = GetPageUrl("ExportFileToExcel") + `?reportType=${reportModuleType}&${$.param(payload)}&reportPageName=${reportPageName}`;
 
     if(reportModuleType == "Troubleshoot")

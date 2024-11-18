@@ -46,6 +46,8 @@ namespace CLA_Administration_Web.Models.APIResponses.Reports.Popup
         [JsonProperty("Autohide")]
         public int AutohideCount { get; set; }
 
+        public int ShowCount { get; set; }
+
         [JsonProperty("Perc_Autohide")]
         public int PercentageAutohide { get; set; }
 

@@ -215,6 +215,11 @@
 {
     margin-top: -3px;
 }
+.report-export-btn:hover
+{
+    background: lightslategray;
+    color:white;
+}
 
 @media screen and (max-height: 795px)
 {

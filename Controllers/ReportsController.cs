@@ -107,7 +107,19 @@ namespace CLA_Administration_Web.Controllers
 
             if (parameters.ShowRawDataOnly)
             {
-                return PartialView(AppPagesLinks.Reports.ModuleRawDataPageLink, popupReportVm.PopupReportAllData);
+                var anyFirst = popupReportVm.PopupReportAllData.FirstOrDefault();
+                var effectiveFrom = anyFirst?.EffectiveFrom ?? DateTime.MinValue;
+                var effectiveTo = anyFirst?.EffectiveTo ?? DateTime.MinValue;
+
+                var popupRawData = new ModuleReportRawDataOnlyViewModel
+                {
+                    ReportNameType = ReportsNamesType.Popup,
+                    ReportModuleId = parameters.ModuleId,
+                    EffectiveFrom = effectiveFrom,
+                    EffectiveTo = effectiveTo,
+                    PopupAllRawData = popupReportVm.PopupReportAllData
+                };
+                return PartialView(AppPagesLinks.Reports.ModuleRawDataPageLink, popupRawData);
             }
 
             return PartialView(AppPagesLinks.Reports.PopupReportOnlyPageLink, popupReportVm);

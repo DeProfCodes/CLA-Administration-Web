@@ -27,7 +27,7 @@
 
 <div id="@Model.ComponentId" class="report-module-tabs-module @hideShowCss">
     <div class="report-raw-data ms-0 w-100">
-        <div class="">
+        <div style="overflow-x: auto; width: 100%;">
             <table id="@Model.TableId" class="table table-striped table-bordered table-hover theme-border align-middle report-table-type fs-12">
                 <thead>
                     <tr>
@@ -51,7 +51,7 @@
                     {
                         var propertyValue = item.GetType().GetProperty(Model.LastSyncDateColumnName)?.GetValue(item, null);
                         var parseData = TypesParserHelper.ParseDate(propertyValue?.ToString() ?? "");
-                        var cssBg = CssHtmlHelpers.GetReportRowStatusColor(parseData);
+                        var cssBg = !Model.IsRawDataOnly ? CssHtmlHelpers.GetReportRowStatusColor(parseData) : "";
                         <tr>
                             @foreach (var property in properties)
                             {
@@ -59,8 +59,10 @@
                                 if (hasHideAttribute)
                                     continue;
 
+                                var value = @property.GetValue(item, null);
+
                                 <td class="@cssBg">
-                                    @property.GetValue(item, null)
+                                    @value
                                 </td>
                             }
                         </tr>
@@ -77,8 +79,14 @@
 
     $(document).ready(function()
     {
+        $.fn.dataTable.ext.errMode = function (settings, helpPage, message)
+        {
+            console.error(`DataTables error in table "${settings.sTableId}":`, message);
+            console.warn(`For more information, visit: http://datatables.net/tn/${helpPage}`);
+        };
+
         var tableName = $("#ReportTableId").val();
-        $(`#${tableName}`).DataTable();
+        //$(`#${tableName}`).DataTable();
     });
 
 </script>
