@@ -88,19 +88,6 @@ namespace CLA_Administration_Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> PopupReportForExport([FromQuery] ModuleReportDataFilterViewModel parameters)
-        {
-            var popupReportVm = await reportingHelper.LoadPopupReportsTabs(parameters);
-
-            if (parameters.ShowRawDataOnly)
-            {
-                return PartialView(AppPagesLinks.Reports.ModuleRawDataPageLink, popupReportVm.AllData);
-            }
-
-            return PartialView(AppPagesLinks.Reports.PopupExportPageLink, popupReportVm);
-        }
-
-        [HttpGet]
         public async Task<IActionResult> PopupReportOnly([FromQuery] ModuleReportDataFilterViewModel parameters)
         {
             var popupReportVm = await reportingHelper.LoadPopupReportsData(parameters);
@@ -136,26 +123,25 @@ namespace CLA_Administration_Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> TickerReportForExport([FromQuery] ModuleReportDataFilterViewModel parameters)
-        {
-            var tickerReportVm = await reportingHelper.LoadTickerReportsTabs(parameters);
-
-            if (parameters.ShowRawDataOnly)
-            {
-                return PartialView(AppPagesLinks.Reports.ModuleRawDataPageLink, tickerReportVm.AllData);
-            }
-
-            return PartialView(AppPagesLinks.Reports.TickerExportPageLink, tickerReportVm);
-        }
-
-        [HttpGet]
         public async Task<IActionResult> TickerReportOnly([FromQuery] ModuleReportDataFilterViewModel parameters)
         {
             var tickerReportVm = await reportingHelper.LoadTickerReportsData(parameters);
 
             if (parameters.ShowRawDataOnly)
             {
-                return PartialView(AppPagesLinks.Reports.ModuleRawDataPageLink, tickerReportVm.TickerReportAllData);
+                var anyFirst = tickerReportVm.TickerReportAllData.FirstOrDefault();
+                var effectiveFrom = anyFirst?.EffectiveFrom ?? DateTime.MinValue;
+                var effectiveTo = anyFirst?.EffectiveTo ?? DateTime.MinValue;
+
+                var tickerRawData = new ModuleReportRawDataOnlyViewModel
+                {
+                    ReportNameType = ReportsNamesType.Ticker,
+                    ReportModuleId = parameters.ModuleId,
+                    EffectiveFrom = effectiveFrom,
+                    EffectiveTo = effectiveTo,
+                    TickerAllRawData = tickerReportVm.TickerReportAllData
+                };
+                return PartialView(AppPagesLinks.Reports.ModuleRawDataPageLink, tickerRawData);
             }
 
             return PartialView(AppPagesLinks.Reports.TickerReportOnlyPageLink, tickerReportVm);

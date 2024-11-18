@@ -109,7 +109,8 @@ namespace CLA_Administration_Web.Helpers.Reporting
             {
                 Summary = GetReportExcelBytes(new List<ReportRDLC> { data.Summary }, data.Summary.ReportRDLCPath),
                 Completed = GetReportExcelBytes(new List<ReportRDLC> { data.Completed, data.Outstanding, data.Status }, data.Completed.ReportRDLCPath),
-                Outstanding = GetReportExcelBytes(new List<ReportRDLC> { data.Outstanding, data.Status }, data.Outstanding.ReportRDLCPath)
+                Outstanding = GetReportExcelBytes(new List<ReportRDLC> { data.Outstanding, data.Status }, data.Outstanding.ReportRDLCPath),
+                RawData = GetReportExcelBytes(new List<ReportRDLC> { data.AllData }, data.AllData.ReportRDLCPath),
             };
 
             if (reportPageName == "all")
@@ -123,6 +124,7 @@ namespace CLA_Administration_Web.Helpers.Reporting
                 if (reportPageName == "summary") AddSheetToExcel(workbook, reportData.Summary, "Ticker Summary");
                 if (reportPageName == "completed") AddSheetToExcel(workbook, reportData.Completed, "Ticker Summary (2)");
                 if (reportPageName == "outstanding") AddSheetToExcel(workbook, reportData.Outstanding, "Ticker Outstanding");
+                if (reportPageName == "raw_data_only") AddSheetToExcel(workbook, reportData.RawData, "Ticker Raw");
             }
         }
 

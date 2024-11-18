@@ -538,7 +538,7 @@ namespace CLA_Administration_Web.Helpers.Reporting
                 var allDataJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Ticker, "Ticker_All_DataOnly");
 
                 result.TickerReportSummary = APIResponseParserHelper.ParseJsonToObject<TickerReportSummary>(summaryJson, true);
-                result.TickerReportComplete = APIResponseParserHelper.ParseJsonToObject<List<TickerReportComplete>>(summaryJson);
+                result.TickerReportComplete = APIResponseParserHelper.ParseJsonToObject<List<TickerReportComplete>>(completedJson);
                 result.TickerReportOutstanding = APIResponseParserHelper.ParseJsonToObject<List<TickerReportOutstanding>>(outstandingJson);
                 result.TickerReportAllData = APIResponseParserHelper.ParseJsonToObject<List<TickerReportAllData>>(allDataJson);
 

@@ -1,17 +1,21 @@
-﻿using CLA_Administration_Web.Models.APIResponses.Reports.Ticker;
+﻿using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
+using CLA_Administration_Web.Models.APIResponses.Reports.Popup;
+using CLA_Administration_Web.Models.APIResponses.Reports.Ticker;
 
 namespace CLA_Administration_Web.ViewModels.Reports
 {
-    public class TickerReportsViewModel
+    public class ModuleReportRawDataOnlyViewModel
     {
-        public int TickerId { get; set; }
+        public ReportsNamesType ReportNameType { get; set; }
 
-        public TickerReportSummary TickerReportSummary { get; set; }
+        public int ReportModuleId { get; set; }
 
-        public List<TickerReportComplete> TickerReportComplete { get; set; }
+        public DateTime EffectiveFrom { get; set; }
 
-        public List<TickerReportOutstanding> TickerReportOutstanding { get; set; }
+        public DateTime EffectiveTo { get; set; }
 
-        public List<TickerReportAllData> TickerReportAllData { get; set; }
+        public List<PopupReportAllData> PopupAllRawData { get; set; }
+
+        public List<TickerReportAllData> TickerAllRawData { get; set; }
     }
 }
