@@ -225,6 +225,49 @@
 }
 
 
+/*#region ModuleReportTable */
+
+.top-scrollbar
+{
+    overflow-x: auto; /* Enable horizontal scrolling */
+    width: 100%; /* Match the width of the parent */
+    height: 16px; /* Ensure scrollbar height is sufficient */
+    margin-bottom: -16px; /* Prevent overlap with the table */
+}
+
+.scroll-content
+{
+    width: max-content; /* Match the content width of the table */
+    height: 1px; /* Invisible but ensures width for scrollbar */
+}
+
+.table-scroll-container
+{
+    position: relative;
+    max-height: 430px; /* Adjust as needed */
+    overflow-y: auto;
+    overflow-x: hidden; /* Only the floating scrollbar handles horizontal scrolling */
+}
+
+.floating-scrollbar
+{
+    overflow-x: auto;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 16px; /* Matches the typical scrollbar height */
+    z-index: 10; /* Ensure it stays above the table content */
+    background: #f9f9f9; /* Optional: Background for visibility */
+}
+
+.floating-scrollbar div
+{
+    width: max-content; /* Matches the table width */
+    height: 1px; /* Mimics the height of the table content for scrolling */
+}
+/*#endregion*/
+
 /*#region Scaling*/
 
 @media screen and (max-width:1600px)

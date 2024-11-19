@@ -183,6 +183,19 @@ function ExportReportToExcel(reportModuleType, isAll)
 
     var url = GetPageUrl("ExportFileToExcel") + `?reportType=${reportModuleType}&${$.param(payload)}&reportPageName=${reportPageName}`;
 
+    if(reportModuleType == "Policy")
+    {
+        var policyTargetType = "";
+
+        var idOfSelectedEntity = GetIdOfSelectedRadioInGroup("PolicyReportExtraOptions");
+
+        if(idOfSelectedEntity == "UserOption") policyTargetType = "User";
+        if(idOfSelectedEntity == "MachineOption") policyTargetType = "Machine";
+        if(idOfSelectedEntity == "UserMachineOption") policyTargetType = "Both";
+
+        url += `&policyTargetType=${policyTargetType}`;
+    }
+
     if(reportModuleType == "Troubleshoot")
     {
         var value = $("#TroubleshootReportType").val();

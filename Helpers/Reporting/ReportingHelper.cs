@@ -303,7 +303,7 @@ namespace CLA_Administration_Web.Helpers.Reporting
             var outstandingSummaryJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Popup, "STM_Outstanding_Summary");
             var outstandingJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Popup, "STM_Outstanding");
             var allDataJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Popup, "STM_All_DataOnly");
-                            //await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Popup, "STM_All_DataOnly");
+                            
             var reportsBaseAddress = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "resources", "reports");
 
             var result = new PopupReports
@@ -351,45 +351,6 @@ namespace CLA_Administration_Web.Helpers.Reporting
                 }
             };
 
-            return result;
-        }
-
-        public async Task<PopupReportsRaw> LoadPopupReportsTabs(ModuleReportDataFilterViewModel filters)
-        {
-            PopupReportsRaw result = null;
-
-            try
-            {
-                var data = await GetPopupReportsForExport(filters);
-
-                LocalDataStorage.StagingData.PopupReports = data;
-
-                if (!filters.ShowRawDataOnly)
-                {
-                    result = new PopupReportsRaw()
-                    {
-                        Summary = GetReportHTMLString(new List<ReportRDLC> { data.Summary, data.Status }, data.Summary.ReportRDLCPath) ?? "",
-                        QuestionsSummary = GetReportHTMLString(new List<ReportRDLC> { data.QuestionsSummary, data.OutstandingSummary, data.Status }, data.QuestionsSummary.ReportRDLCPath) ?? "",
-                        ResponseBreakdownClick = GetReportHTMLString(new List<ReportRDLC> { data.ResponseBreakdownData, data.Status }, data.ResponseBreakdownData.ReportRDLCPath, "Bubble_Click_DT") ?? "",
-                        ResponseBreakdownDismiss = GetReportHTMLString(new List<ReportRDLC> { data.ResponseBreakdownData, data.Status }, data.ResponseBreakdownData.ReportRDLCPath, "Bubble_Dismiss_DT") ?? "",
-                        ResponseBreakdownAutoHide = GetReportHTMLString(new List<ReportRDLC> { data.ResponseBreakdownData, data.Status }, data.ResponseBreakdownData.ReportRDLCPath, "Bubble_AutoHide_DT") ?? "",
-                        ResponseBreakdownSnooze = GetReportHTMLString(new List<ReportRDLC> { data.ResponseBreakdownData, data.Status }, data.ResponseBreakdownData.ReportRDLCPath, "Bubble_Snooze_DT") ?? "",
-                        ResponseBreakdownShow = GetReportHTMLString(new List<ReportRDLC> { data.ResponseBreakdownData, data.Status }, data.ResponseBreakdownData.ReportRDLCPath, "Bubble_Show_DT") ?? "",
-                        Outstanding = GetReportHTMLString(new List<ReportRDLC> { data.Outstanding, data.ResponseBreakdownData, data.Status }, data.Outstanding.ReportRDLCPath, "NULL") ?? "",
-                    };
-                }
-                else
-                {
-                    result = new PopupReportsRaw()
-                    {
-                        AllData = GetReportHTMLString(new List<ReportRDLC> { data.AllDataOnly }, data.AllDataOnly.ReportRDLCPath)
-                    };
-                }
-            }
-            catch(Exception ex)
-            {
-                
-            }
             return result;
         }
 
@@ -476,39 +437,6 @@ namespace CLA_Administration_Web.Helpers.Reporting
                 DataSet = ConvertJsonToDataSet(activeUsersMachinesJson)
             };
 
-            return result;
-        }
-
-        public async Task<TickerReportsRaw> LoadTickerReportsTabs(ModuleReportDataFilterViewModel filters)
-        {
-            TickerReportsRaw result = null;
-            try
-            {
-                var data = await GetTickerReports(filters);
-
-                LocalDataStorage.StagingData.TickerReports = data;
-
-                if (!filters.ShowRawDataOnly)
-                {
-                    result = new TickerReportsRaw()
-                    {
-                        Summary = GetReportHTMLString(new List<ReportRDLC> { data.Summary }, data.Summary.ReportRDLCPath),
-                        Completed = GetReportHTMLString(new List<ReportRDLC> { data.Completed, data.Outstanding, data.Status }, data.Completed.ReportRDLCPath),
-                        Outstanding = GetReportHTMLString(new List<ReportRDLC> { data.Outstanding, data.Status }, data.Outstanding.ReportRDLCPath)
-                    };
-                }
-                else
-                {
-                    result = new TickerReportsRaw()
-                    {
-                        AllData = GetReportHTMLString(new List<ReportRDLC> { data.AllData }, data.AllData.ReportRDLCPath),
-                    };
-                }
-            }
-            catch (Exception ex)
-            {
-
-            }
             return result;
         }
 

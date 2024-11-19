@@ -121,17 +121,14 @@
         {
             public const string ModuleRawDataPageLink = "~/Views/Shared/Components/Custom/Reports/ModuleReportRawData.cshtml";
             public const string SurveyPageLink = "~/Views/Reports/Survey/SurveyReport.cshtml";
-            public const string SurveyExportPageLink = "~/Views/Reports/Survey/_SurveyReportDataForExport.cshtml";
             public const string SurveyReportOnlyPageLink = "~/Views/Reports/Survey/_SurveyReportOnly.cshtml";
             public const string PopupPageLink = "~/Views/Reports/Popup/PopupReport.cshtml";
-            public const string PopupExportPageLink = "~/Views/Reports/Popup/_PopupReportDataForExport.cshtml";
             public const string PopupReportOnlyPageLink = "~/Views/Reports/Popup/_PopupReportOnly.cshtml";
             public const string TickerPageLink = "~/Views/Reports/Ticker/TickerReport.cshtml";
-            public const string TickerExportPageLink = "~/Views/Reports/Ticker/_TickerReportDataForExport.cshtml";
             public const string TickerReportOnlyPageLink = "~/Views/Reports/Ticker/_TickerReportDataOnly.cshtml";
             public const string PolicyPageLink = "~/Views/Reports/Policy/PolicyReport.cshtml";
-            public const string PolicyExportPageLink = "~/Views/Reports/Policy/_PolicyReportDataForExport.cshtml";
             public const string PolicyReportOnlyPageLink = "~/Views/Reports/Policy/_PolicyReportOnly.cshtml";
+            public const string PolicyReportRawDataPageLink = "~/Views/Reports/Policy/_PolicyReportRawDetails.cshtml";
             public const string ActiveUsersPageLink = "~/Views/Reports/ActiveUsersMachines/ActiveUsersReport.cshtml";
             public const string ActiveMachinesPageLink = "~/Views/Reports/ActiveUsersMachines/ActiveMachinesReport.cshtml";
             public const string ActiveUserMachineTablePageLink = "~/Views/Reports/ActiveUsersMachines/_ActiveUserMachineTable.cshtml";

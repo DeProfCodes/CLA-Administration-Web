@@ -1,0 +1,180 @@
+﻿@using CLA_Administration_Web.Helpers.Html
+@using CLA_Administration_Web.Models.APIResponses.Reports.Policy
+@using CLA_Administration_Web.ViewModels.Reports.Policy
+@model PolicyReportViewModel
+
+@{
+    int index = 0;
+
+    //User Summary
+    var effectiveFromDate = Model.PolicySummary.SummaryUsers?.EffectiveFrom != null ?
+                                        Model.PolicySummary.SummaryUsers.EffectiveFrom :
+                                        Model.PolicySummary.SummaryMachines.EffectiveFrom;
+
+    var effectiveToDate = Model.PolicySummary.SummaryUsers?.EffectiveTo != null ?
+                                        Model.PolicySummary.SummaryUsers.EffectiveTo :
+                                        Model.PolicySummary.SummaryMachines.EffectiveTo;
+
+}
+
+<input id="ModuleReportId" value="@Model.PopupId" hidden />
+<input id="ModuleReportActiveReport" hidden />
+
+<div class="report-outter-container">
+    <div class="card-body p-0">
+        <div class="row flex-sm-nowrap">
+            <div class="flex-wrap report-body-container">
+                @{
+                    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Reports/ModuleReportResultTitle.cshtml",
+                    new ModuleReportResultTitleViewModel
+                    {
+                        ReportTypeName = ReportsNamesType.Policy,
+                        ReportTitle = "",
+                        EffectiveFromDate = effectiveFromDate ?? DateTime.Now,
+                        EffectiveToDate = effectiveToDate ?? DateTime.Now,
+                        OnBackReportTabClickCallbackFunction = "NaN"
+                    });
+                }
+                
+                <!-- Users Summary-->
+                <div class="hidden" id="PolicyReportUserSummary">
+                    <h4 class="custom-p fw-bold text-center w-100 bg-silver p-1">Summarized Details - Users</h4>
+                    <table class="table table-bordered table-stripped mb-0 w-100 fs-12" id="SummarizedUserDetailsData">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="theme-bg text-white">Summary Info</th>
+                                <th scope="col" class="theme-bg text-white">Last 30 Days Result</th>
+                                <th scope="col" class="theme-bg text-white">Since Popup Active Results</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.PolicySummary.SummarizedDetailsUsers)
+                            {
+                                var css = (index++ % 2 == 0) ? "report-piechart-color-silver-dim" : "";
+                                <tr>
+                                    <td class="@css">@item.SummaryInfo</td>
+                                    <td class="@css">@item.Last30DaysResult</td>
+                                    <td class="@css">@item.SincePopupActiveResult</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Machines Summary-->
+                <div class="hidden" id="PolicyReportMachineSummary">
+                    <h4 class="custom-p fw-bold mt-2 text-center w-100 bg-silver p-1">Summarized Details - Machines</h4>
+                    <table class="table table-bordered table-stripped mb-0 w-100 fs-12" id="SummarizedMachineDetailsData">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="theme-bg text-white">Summary Info</th>
+                                <th scope="col" class="theme-bg text-white">Last 30 Days Result</th>
+                                <th scope="col" class="theme-bg text-white">Since Popup Active Results</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.PolicySummary.SummarizedDetailsMachines)
+                            {
+                                var css = (index++ % 2 == 0) ? "report-piechart-color-silver-dim" : "";
+                                <tr>
+                                    <td class="@css">@item.SummaryInfo</td>
+                                    <td class="@css">@item.Last30DaysResult</td>
+                                    <td class="@css">@item.SincePopupActiveResult</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="CompleteResponseBreakDown">
+                    <h4 class="custom-p fw-bold mt-2 text-center w-100 bg-silver p-1">Completed Response Breakdown</h4>
+                    <table class="table table-bordered table-stripped mb-0 fs-12" id="SummarizedUserDetailsData">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="theme-bg text-white">User ID</th>
+                                <th scope="col" class="theme-bg text-white">User Name</th>
+                                <th scope="col" class="theme-bg text-white">Machine ID</th>
+                                <th scope="col" class="theme-bg text-white">Machine Name</th>
+                                <th scope="col" class="theme-bg text-white">Response DT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="5" class="report-piechart-color-silver-dim text-center"><span class="fst-italic">No Data...</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Policy Outstanding Tab -->
+                <div id="OutstandingResponseBreakDown">
+                    <h4 class="custom-p fw-bold mt-2 text-center w-100 bg-silver p-1 mt-2">Outstanding Response Breakdown</h4>
+                    @{
+                        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Reports/ModuleReportTable.cshtml",
+                        new ReportDataTableViewInputsViewModel
+                        {
+                            ComponentId = "PolicyOutstandingTab",
+                            TableId = "PolicyOutstandingData",
+                            DataSource = Model.PolicyOutstanding.PolicyOutstandingSelected,
+                            IsInitiallyHidden = false,
+                            DefaultFallBackType = typeof(PolicyReportOutstanding),
+                            LastSyncDateColumnName = "LastSyncDate"
+                        });
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+
+<script>
+
+    $(document).ready(function ()
+    {
+        LoadRawData();
+        SummaryTab();
+    });
+
+    function LoadRawData()
+    {
+        var entityType = GetPolicyEntityType();
+
+        if (entityType == "Users") HideShowElement("#PolicyReportUserSummary", HideShow.SHOW);
+        if (entityType == "Machines") HideShowElement("#PolicyReportMachineSummary", HideShow.SHOW);
+
+        if (entityType == "UsersAndMachines")
+        {
+            HideShowElement("#PolicyReportUserSummary", HideShow.SHOW);
+            HideShowElement("#PolicyReportMachineSummary", HideShow.SHOW);
+        }
+
+        $('#SummarizedUserDetailsData').DataTable({
+            dom: 'rtip',
+            pageLength: 10
+        });
+        $('#SummarizedMachineDetailsData').DataTable({
+            dom: 'rtip',
+            pageLength: 10
+        });
+
+        HideShowElement("#PolicyOutstandingTab", HideShow.SHOW);
+    }
+
+    function GetPolicyEntityType()
+    {
+        var activeRadioId = GetIdOfSelectedRadioInGroup("PolicyReportExtraOptions");
+
+        var policyReportEntityType = "";
+
+        if (activeRadioId == "UserOption") policyReportEntityType = "Users";
+        if (activeRadioId == "MachineOption") policyReportEntityType = "Machines";
+        if (activeRadioId == "UserMachineOption") policyReportEntityType = "UsersAndMachines";
+
+        return policyReportEntityType;
+    }
+
+
+</script>

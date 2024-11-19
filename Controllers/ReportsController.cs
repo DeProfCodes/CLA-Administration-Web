@@ -9,6 +9,7 @@ using CLA_Administration_Web.ViewModels.Reports;
 using CLA_Administration_Web.ViewModels.Reports.CampaignDispatch;
 using CLACommonFunctionsLibrary_NET.Helpers.Enums;
 using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Office2010.Excel;
 using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using DocumentFormat.OpenXml.Spreadsheet;
 using Microsoft.AspNetCore.Hosting.Server;
@@ -51,18 +52,6 @@ namespace CLA_Administration_Web.Controllers
         public async Task<IActionResult> SurveyReport()
         {
             return PartialView(AppPagesLinks.Reports.SurveyPageLink);
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> SurveyReportForExport([FromQuery] ModuleReportDataFilterViewModel parameters)
-        {
-            var surveyReportVm = await reportingHelper.LoadSurveyReportsTabs(parameters);
-
-            if (parameters.ShowRawDataOnly)
-            {
-                return PartialView(AppPagesLinks.Reports.ModuleRawDataPageLink, surveyReportVm.AllData);
-            }
-            return PartialView(AppPagesLinks.Reports.SurveyExportPageLink, surveyReportVm);
         }
 
         [HttpGet]
@@ -157,20 +146,6 @@ namespace CLA_Administration_Web.Controllers
             return PartialView(AppPagesLinks.Reports.PolicyPageLink);
         }
 
-
-        [HttpGet]
-        public async Task<IActionResult> PolicyReportForExport([FromQuery] ModuleReportDataFilterViewModel parameters)
-        {
-            var policyReportVm = await reportingHelper.LoadPolicyReportsTabs(parameters);
-
-            if (parameters.ShowRawDataOnly)
-            {
-                return PartialView(AppPagesLinks.Reports.ModuleRawDataPageLink, policyReportVm.AllData);
-            }
-
-            return PartialView(AppPagesLinks.Reports.PolicyExportPageLink, policyReportVm);
-        }
-
         [HttpGet]
         public async Task<IActionResult> PolicyReportOnly([FromQuery] ModuleReportDataFilterViewModel parameters, PolicyReportEntityType policyReportEntityType)
         {
@@ -178,7 +153,7 @@ namespace CLA_Administration_Web.Controllers
 
             if (parameters.ShowRawDataOnly)
             {
-                return PartialView(AppPagesLinks.Reports.ModuleRawDataPageLink, policyReportVm);
+                return PartialView(AppPagesLinks.Reports.PolicyReportRawDataPageLink, policyReportVm);
             }
 
             return PartialView(AppPagesLinks.Reports.PolicyReportOnlyPageLink, policyReportVm);
@@ -186,6 +161,8 @@ namespace CLA_Administration_Web.Controllers
 
         #endregion
 
+        #region Active Users Machines
+        
         [HttpGet]
         public async Task<IActionResult> ActiveUsersReport()
         {
@@ -206,6 +183,10 @@ namespace CLA_Administration_Web.Controllers
             return PartialView(AppPagesLinks.Reports.ActiveUserMachineTablePageLink, activeUserMachineReportVm);
         }
 
+        #endregion
+
+        #region Campaign Dispatch
+        
         [HttpGet]
         public async Task<IActionResult> CampaignDispatchReport()
         {
@@ -219,6 +200,10 @@ namespace CLA_Administration_Web.Controllers
 
             return PartialView(AppPagesLinks.Reports.CampaignDispatchListPageLink, campaignDispatchReportVm);
         }
+
+        #endregion
+
+        #region Troubleshoot
         
         [HttpGet]
         public async Task<IActionResult> TroubleshootReport()
@@ -241,7 +226,10 @@ namespace CLA_Administration_Web.Controllers
             return PartialView(AppPagesLinks.Reports.TroubleshootDataPageLink, troubleshootVm);
         }
 
-        public async Task<IActionResult> ExportFileToExcel(ReportsNamesType reportType, ModuleReportDataFilterViewModel parameters, string reportPageName, CLAEntityType entityType, string entityValue, CampaignDispatchFiltersViewModel dispatchParams)
+        #endregion
+
+        public async Task<IActionResult> ExportFileToExcel(ReportsNamesType reportType, ModuleReportDataFilterViewModel parameters, string reportPageName, 
+                                                           CLAEntityType entityType, string entityValue, CampaignDispatchFiltersViewModel dispatchParams, string policyTargetType)
         {
             var filename = "";
             using (var workbook = new XLWorkbook())
@@ -269,8 +257,10 @@ namespace CLA_Administration_Web.Controllers
                 }
                 else if (reportType == ReportsNamesType.Policy)
                 {
-                    ExportHelper.ExportPolicyReport(workbook);
-                    filename = "rptPolicy.xlsx";
+                    var data = await reportingHelper.GetPolicyReports(parameters);
+
+                    ExportHelper.ExportPolicyReport(workbook, reportPageName, data, policyTargetType);
+                    filename = (reportPageName == "all") ? "rptPolicy.xlsx" : $"rptPolicy-{reportPageName}.xlsx";
                 }
                 else if (reportType == ReportsNamesType.ActiveUsers || reportType == ReportsNamesType.ActiveMachines)
                 {
@@ -305,23 +295,6 @@ namespace CLA_Administration_Web.Controllers
                     return File(excelBytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", filename);
                 }
             }
-        }
-
-        [HttpPost]
-        public IActionResult ExportFileToExcel2([FromBody] ReportExportViewModel exportData)
-        {
-            var content = $"<html><body>{exportData.HTMLData}</body></html>";
-            var bytes = System.Text.Encoding.UTF8.GetBytes(content);
-
-            return File(bytes, "application/vnd.ms-excel", "Report.xls");
-        }
-
-        public async Task<IActionResult> ExportTroubleshootReport(CLAEntityType entityType, string entityValue)
-        {
-            var troubleshootVm = await reportingHelper.GetTroubleshootReportData(entityType, entityValue);
-            ExportHelper.GenerateCSV(troubleshootVm);
-
-            return Ok();
         }
     }
 }

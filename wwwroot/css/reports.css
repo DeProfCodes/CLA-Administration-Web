@@ -20,14 +20,14 @@
 
 .report-data-area
 {
-    height: 650px;
-    min-height: 650px;
+    height: 620px;
+    min-height: 620px;
 }
 .report-outter-container
 {
     min-width: 940px;
-    height: 645px;
-    min-height: 645px;
+    height: 600px;
+    min-height: 600px;
     margin: 15px;
     margin-top: 0;
 }
@@ -35,8 +35,8 @@
 .report-body-container
 {
     overflow: auto;
-    max-height: 640px;
-    height: 640px;
+    max-height: 600px;
+    height: 600px;
     border-bottom: 2px solid var(--theme-blue-clr);
     scrollbar-color: var(--theme-blue-clr) white;
     scrollbar-width: thin;
@@ -45,16 +45,16 @@
 .report-body-container2
 {
     overflow: auto;
-    max-height: 700px;
-    height: 700px;
+    max-height: 600px;
+    height: 600px;
     border-bottom: 2px solid var(--theme-blue-clr);
     scrollbar-color: var(--theme-blue-clr) white;
     scrollbar-width: thin;
 }
 .report-data-area2
 {
-    height: 710px;
-    min-height: 710px;
+    height: 620px;
+    min-height: 620px;
     background: whitesmoke;
 }
 
@@ -220,6 +220,7 @@
     background: lightslategray;
     color:white;
 }
+
 
 @media screen and (max-height: 795px)
 {

@@ -128,18 +128,39 @@ namespace CLA_Administration_Web.Helpers.Reporting
             }
         }
 
-        public static void ExportPolicyReport(XLWorkbook workbook)
+        public static void ExportPolicyReport(XLWorkbook workbook, string reportPageName, PolicyReports data, string policyTargetType)
         {
-            var data = LocalDataStorage.StagingData.PolicyReports;
+            var paramValueForRaw = (policyTargetType == "User" || policyTargetType == "Machine") ? $"{policyTargetType}s" : policyTargetType;
+
+            var params1 = new Dictionary<string, string>
+            {
+                { "pTargetedType", paramValueForRaw},
+                { "pUserOrMachine", policyTargetType},
+            };
 
             var reportData = new 
             {
                 Summary = GetReportExcelBytes(new List<ReportRDLC> { data.Summary, data.SummaryDetails, data.Outstanding, data.ResponseDetails }, data.Summary.ReportRDLCPath),
                 Outstanding = GetReportExcelBytes(new List<ReportRDLC> { data.Summary, data.SummaryDetails, data.Outstanding, data.ResponseDetails, data.Status }, data.Outstanding.ReportRDLCPath),
                 ResponseSummary = GetReportExcelBytes(new List<ReportRDLC> { data.Summary, data.SummaryDetails, data.Outstanding, data.ResponseDetails }, data.ResponseDetails.ReportRDLCPath),
+                RawData = GetReportExcelBytes(new List<ReportRDLC> { data.Summary, data.SummaryDetails, data.Outstanding, data.ResponseDetails, data.Status }, data.AllData.ReportRDLCPath, paramValueForRaw, "pTargetedType")
             };
 
-            AddSheetToExcel(workbook, reportData.ResponseSummary, "Policy Response Summary");
+            if (reportPageName == "all")
+            {
+                AddSheetToExcel(workbook, reportData.Summary, "Summary");
+                AddSheetToExcel(workbook, reportData.ResponseSummary, "Completed");
+                AddSheetToExcel(workbook, reportData.Outstanding, "Outstanding");
+            }
+            else
+            {
+                if (reportPageName == "summary") AddSheetToExcel(workbook, reportData.Summary, "Summary");
+                if (reportPageName == "complete") AddSheetToExcel(workbook, reportData.ResponseSummary, "Completed");
+                if (reportPageName == "outstanding") AddSheetToExcel(workbook, reportData.Outstanding, "Outstanding");
+                if (reportPageName == "raw_data_only") AddSheetToExcel(workbook, reportData.RawData, "Ticker Raw");
+            }
+
+            
         }
 
         public static void ExportActiveUsersReport(XLWorkbook workbook, string reportPageName, ReportRDLC data, ReportRDLC status)
