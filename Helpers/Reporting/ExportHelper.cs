@@ -46,7 +46,7 @@ namespace CLA_Administration_Web.Helpers.Reporting
             }
         }
 
-        public static string GetReportFilename(ReportsNamesType reportNameType, string reportPage, int Id, string title)
+        public static string GetReportFilename(ReportsNamesType reportNameType, string? reportPage, int? Id, string? title)
         {
             var filename = $"rpt{reportNameType.GetDisplayName()}.xlsx";
 
@@ -332,9 +332,9 @@ namespace CLA_Administration_Web.Helpers.Reporting
                 sheet.Cell("A2").Value = "Survey Tile :";
                 sheet.Cell("B2").Value = surveyTransposedVm.SurveySummary.SurveyTitle;
                 sheet.Cell("A3").Value = "Effective From :";
-                sheet.Cell("B3").Value = surveyTransposedVm.SurveySummary.EffFrom.ToString("yyyy/MM/dd");
+                sheet.Cell("B3").Value = surveyTransposedVm.SurveySummary.EffFrom?.ToString("yyyy/MM/dd");
                 sheet.Cell("A4").Value = "Effective To :";
-                sheet.Cell("B4").Value = surveyTransposedVm.SurveySummary.EffTo.ToString("yyyy/MM/dd");
+                sheet.Cell("B4").Value = surveyTransposedVm.SurveySummary.EffTo?.ToString("yyyy/MM/dd");
 
                 sheet.Cell("A2").Style.Font.Bold = true;
                 sheet.Cell("A3").Style.Font.Bold = true;

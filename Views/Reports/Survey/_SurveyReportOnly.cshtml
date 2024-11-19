@@ -7,9 +7,9 @@
     //Summary
     var summary = Model.SurveySummary;
 
-    var completedRate = Math.Round(((double)summary.Complete/ summary.Targeted) * 100, 2);
-    var outstandingRate = Math.Round(((double)summary.Outstanding / summary.Targeted) * 100, 2);
-    var optInRate = Math.Round(((double)summary.OptIn / summary.Targeted) * 100, 2);
+    var completedRate = Math.Round((decimal)((double)summary.Complete/ summary.Targeted) * 100, 2);
+    var outstandingRate = Math.Round((decimal)((double)summary.Outstanding / summary.Targeted) * 100, 2);
+    var optInRate = Math.Round((decimal)((double)summary.OptIn / summary.Targeted) * 100, 2);
 
     int index = 0;
 }

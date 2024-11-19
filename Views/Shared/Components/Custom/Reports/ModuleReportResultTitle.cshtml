@@ -13,8 +13,8 @@
         <div class="w-100">
             <p class="mt-2 fs-30 text-center text-white">@Model.ReportTitle</p>
             <p class="mt-2 fs-20 text-center text-white">
-                Effective from: <span>@Model.EffectiveFromDate.ToString("dddd, dd MMM yyyy")</span>
-                To: <span>@Model.EffectiveToDate.ToString("dddd, dd MMM yyyy")</span>
+                Effective from: <span>@Model.EffectiveFromDate?.ToString("dddd, dd MMM yyyy")</span>
+                To: <span>@Model.EffectiveToDate?.ToString("dddd, dd MMM yyyy")</span>
             </p>
         </div>
         <div id="TickerReportActionBtns">

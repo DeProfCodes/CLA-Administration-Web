@@ -9,9 +9,9 @@ namespace CLA_Administration_Web.ViewModels.Reports
 
         public string ReportTitle { get; set; }
 
-        public DateTime EffectiveFromDate { get; set; }
+        public DateTime? EffectiveFromDate { get; set; }
 
-        public DateTime EffectiveToDate { get; set; }
+        public DateTime? EffectiveToDate { get; set; }
 
         public string OnBackReportTabClickCallbackFunction { get; set; }
     }

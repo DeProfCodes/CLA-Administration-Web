@@ -5,7 +5,7 @@
 @{
     var summaryT = Model.TickerReportSummary;
 
-    var completedRate = summaryT != null ? Math.Round(((double)summaryT.Completed / summaryT.Targeted) * 100, 2) : 0;
+    var completedRate = summaryT != null ? Math.Round((decimal)((double)summaryT.Completed / summaryT.Targeted) * 100, 2) : 0;
     var outstandingRate = summaryT != null ? 100 - completedRate : 0;
 }
 

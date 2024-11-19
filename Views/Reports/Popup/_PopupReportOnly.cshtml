@@ -5,12 +5,12 @@
 @{
     var summaryT = Model.PopupReportSummary;
 
-    var completedRate = Math.Round(((double)summaryT.Show / summaryT.Targeted) * 100, 2);
+    var completedRate = Math.Round((decimal)((double)summaryT.Show / summaryT.Targeted) * 100, 2);
     var outstandingRate = 100 - completedRate;
 
     var questionSummary = Model.PopupReportQuestionSummary;
 
-    var questionSummaryData = new List<int> 
+    var questionSummaryData = new List<int?> 
     { 
         questionSummary.ClickCount, questionSummary.DismissCount, questionSummary.AutohideCount, questionSummary.SnoozeCount, questionSummary.ShowCount
     };
@@ -88,7 +88,7 @@
                                     @for(int i=0; i < questionSummaryTitles.Count; i++)
                                     {
                                         var cssColor = $"report-piechart-color-{questionSummaryColors[i]}-dim";
-                                        var rate = Math.Round(((double)questionSummaryData[i] / totalSummaryQuestionEventsCount) * 100.0, 2); 
+                                        var rate = Math.Round((double)((double)questionSummaryData[i] / totalSummaryQuestionEventsCount) * 100.0, 2); 
 
                                         <tr>
                                             <td class="@cssColor">@questionSummaryTitles[i]</td>
