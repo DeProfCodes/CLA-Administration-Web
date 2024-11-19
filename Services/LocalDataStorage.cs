@@ -74,6 +74,8 @@ namespace CLA_Administration_Web.Services
 
         public static List<ContentLibraryContentModel> AllContentLibraryContents { get; set; }
 
+        public static ReportsDataViewModel ReportsData { get; set; } = new();
+
         public static List<ModulePSTDataViewModel> GetLocalModulePSTAllData(ModuleNamesType moduleName)
         {
             switch (moduleName)

@@ -4,6 +4,7 @@ using CLA_Administration_Web.Helpers.Enums.Shared;
 using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
 using CLA_Administration_Web.Helpers.MockData;
 using CLA_Administration_Web.Helpers.Reporting;
+using CLA_Administration_Web.Services;
 using CLA_Administration_Web.Services.Reporting;
 using CLA_Administration_Web.ViewModels.Reports;
 using CLA_Administration_Web.ViewModels.Reports.CampaignDispatch;
@@ -58,6 +59,7 @@ namespace CLA_Administration_Web.Controllers
         public async Task<IActionResult> SurveyReportOnly([FromQuery] ModuleReportDataFilterViewModel parameters, bool transponsed)
         {
             var surveyReportVm = await reportingHelper.GetSurveyReportsData(parameters, transponsed);
+            LocalDataStorage.ReportsData.SurveyReportsData = surveyReportVm;
 
             if (parameters.ShowRawDataOnly)
             {
@@ -92,6 +94,7 @@ namespace CLA_Administration_Web.Controllers
         public async Task<IActionResult> PopupReportOnly([FromQuery] ModuleReportDataFilterViewModel parameters)
         {
             var popupReportVm = await reportingHelper.LoadPopupReportsData(parameters);
+            LocalDataStorage.ReportsData.PopupReportsData = popupReportVm;
 
             if (parameters.ShowRawDataOnly)
             {
@@ -127,6 +130,7 @@ namespace CLA_Administration_Web.Controllers
         public async Task<IActionResult> TickerReportOnly([FromQuery] ModuleReportDataFilterViewModel parameters)
         {
             var tickerReportVm = await reportingHelper.LoadTickerReportsData(parameters);
+            LocalDataStorage.ReportsData.TickersReportsData = tickerReportVm;
 
             if (parameters.ShowRawDataOnly)
             {
@@ -162,6 +166,7 @@ namespace CLA_Administration_Web.Controllers
         public async Task<IActionResult> PolicyReportOnly([FromQuery] ModuleReportDataFilterViewModel parameters, PolicyReportEntityType policyReportEntityType)
         {
             var policyReportVm = await reportingHelper.GetPolicyReportData(parameters, policyReportEntityType);
+            LocalDataStorage.ReportsData.PolicyReportsData = policyReportVm;
 
             if (parameters.ShowRawDataOnly)
             {
@@ -249,38 +254,45 @@ namespace CLA_Administration_Web.Controllers
                 if (reportType == ReportsNamesType.Popup)
                 {
                     var data = await reportingHelper.GetPopupReportsForExport(parameters);
+                    var summaryData = LocalDataStorage.ReportsData.PopupReportsData.PopupReportSummary;
 
                     ExportHelper.ExportPopupReport(workbook, reportPageName, data);
-                    filename = (reportPageName == "all") ? "rptPopup.xlsx" : $"rptPopup-{reportPageName}.xlsx";
+                    filename = ExportHelper.GetReportFilename(ReportsNamesType.Popup, reportPageName, summaryData.PopupId, summaryData.Title);
                 }
                 else if (reportType == ReportsNamesType.Survey)
                 {
                     if (!surveyTransponsed)
                     {
                         var data = await reportingHelper.GetSurveyReportsForExport(parameters);
+                        var summaryData = LocalDataStorage.ReportsData.SurveyReportsData.SurveySummary;
 
                         ExportHelper.ExportSurveyReport(workbook, reportPageName, data);
-                        filename = (reportPageName == "all") ? "rptSurvey.xlsx" : $"rptSurvey-{reportPageName}.xlsx";
+                        filename = ExportHelper.GetReportFilename(ReportsNamesType.Survey, reportPageName, summaryData.SurveyId, summaryData.SurveyTitle);
                     }
                     else
                     {
                         var data2 = await reportingHelper.GetSurveyReportsData(parameters, surveyTransponsed);
 
+                        var title = data2.SurveySummary.SurveyTitle;
+                        var timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+
                         ExportHelper.ExportSurveyTransposedData(workbook, data2);
-                        filename = "rptSurvey-Transponsed.xlsx";
+                        filename = $"Survey_Report_{title}_{timestamp}.xlsx";
                     }
                     
                 }
                 else if (reportType == ReportsNamesType.Ticker)
                 {
                     var data = await reportingHelper.GetTickerReports(parameters);
+                    var summaryData = LocalDataStorage.ReportsData.TickersReportsData.TickerReportSummary;
 
                     ExportHelper.ExportTickerReport(workbook, reportPageName, data);
-                    filename = (reportPageName == "all") ? "rptTicker.xlsx" : $"rptTicker-{reportPageName}.xlsx";
+                    filename = ExportHelper.GetReportFilename(ReportsNamesType.Ticker, reportPageName, summaryData.TickerId, summaryData.TickerText);
                 }
                 else if (reportType == ReportsNamesType.Policy)
                 {
                     var data = await reportingHelper.GetPolicyReports(parameters);
+                    var summaryData = LocalDataStorage.ReportsData.TickersReportsData.TickerReportSummary;
 
                     ExportHelper.ExportPolicyReport(workbook, reportPageName, data, policyTargetType);
                     filename = (reportPageName == "all") ? "rptPolicy.xlsx" : $"rptPolicy-{reportPageName}.xlsx";
@@ -289,9 +301,9 @@ namespace CLA_Administration_Web.Controllers
                 {
                     var data = await reportingHelper.GetActiveUsersReport(parameters, reportType);
                     var status = reportingHelper.GetStatusReport(parameters);
-
+                    
                     ExportHelper.ExportActiveUsersReport(workbook, reportType.GetDisplayDescription(), data, status);
-                    filename = $"rpt{reportType.GetDisplayName()}.xlsx";
+                    filename = ExportHelper.GetReportFilename(reportType, reportPageName, 0, "");
                 }
                 else if (reportType == ReportsNamesType.CampaignDispatch)
                 {

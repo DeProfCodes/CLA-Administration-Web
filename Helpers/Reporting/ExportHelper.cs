@@ -15,6 +15,8 @@ using System.Text;
 using System.Text.Json.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
+using CLACommonFunctionsLibrary_NET.Helpers.Enums;
 
 namespace CLA_Administration_Web.Helpers.Reporting
 {
@@ -42,6 +44,59 @@ namespace CLA_Administration_Web.Helpers.Reporting
                     }
                 }
             }
+        }
+
+        public static string GetReportFilename(ReportsNamesType reportNameType, string reportPage, int Id, string title)
+        {
+            var filename = $"rpt{reportNameType.GetDisplayName()}.xlsx";
+
+            if (reportNameType == ReportsNamesType.Survey)
+            {
+                if (reportPage == "all") filename = $"rptSurvey_All - ({Id}) {title}.xlsx";
+                if (reportPage == "summary") filename = $"rptSurvey_Summary - ({Id}) {title}.xlsx";
+                if (reportPage == "outstanding") filename = $"rptSurvey_Outstanding.xlsx";
+                if (reportPage == "optInNoResponse") filename = $"rptSurvey_Opt_In_No_Response.xlsx";
+                if (reportPage == "optOut") filename = $"rptSurvey_Opt_In_No_Response.xlsx";
+                if (reportPage == "optIn") filename = $"rptSurvey_Questions_Summary_Opt_In.xlsx";
+                if (reportPage == "questions_summary") filename = $"rptSurvey_Questions_Summary.xlsx";
+                if (reportPage == "completeAndOptOut") filename = $"rptSurvey_Complete_Opt_Out.xlsx";
+                if (reportPage == "raw_data_only") filename = $"rptReporting_Survey_All_Export_Only - ({Id}) {title}.xlsx";
+            }
+            else if (reportNameType == ReportsNamesType.Popup)
+            {
+                if (reportPage == "all") filename = $"rptSTM_All - ({Id}) {title}.xlsx";
+                if (reportPage == "summary") filename = $"rptSTM_Summary - ({Id}) {title}.xlsx";
+                if (reportPage == "response_summary") filename = $"rptSTM_Question_Summary.xlsx";
+                if (reportPage == "response_breakdown-click") filename = $"rptSTM_Responses_Breakdown.xlsx";
+                if (reportPage == "response_breakdown-dismiss") filename = $"rptSTM_Responses_Breakdown.xlsx";
+                if (reportPage == "response_breakdown-autohide") filename = $"rptSTM_Responses_Breakdown.xlsx";
+                if (reportPage == "response_breakdown-show") filename = $"rptSTM_Responses_Breakdown.xlsx";
+                if (reportPage == "response_breakdown-snooze") filename = $"rptSTM_Responses_Breakdown.xlsx";
+                if (reportPage == "noshow") filename = $"rptSMT_Outstanding.xlsx";
+                if (reportPage == "raw_data_only") filename = $"rptReporting_STM_All_Export_Only - ({Id}) {title}.xlsx";
+            }
+            else if (reportNameType == ReportsNamesType.Ticker)
+            {
+                if (reportPage == "all") filename = $"rptTicker_All - ({Id}) {title}.xlsx";
+                if (reportPage == "summary") filename = $"rptTicker_Summary - ({Id}) {title}.xlsx";
+                if (reportPage == "completed") filename = $"rptTicker_Completed.xlsx";
+                if (reportPage == "outstanding") filename = $"rptTicker_Outstanding.xlsx";
+                if (reportPage == "raw_data_only") filename = $"rptReporting_Ticker_All_Export_Only - ({Id}) {title}.xlsx";
+            }
+            else if (reportNameType == ReportsNamesType.Policy)
+            {
+                if (reportPage == "all") filename = $"rptPolicy_All.xlsx";
+                if (reportPage == "summary") filename = $"rptPolicy_Response_Summary.xlsx";
+                if (reportPage == "complete") filename = $"rptPolicy_Completed.xlsx";
+                if (reportPage == "outstanding") filename = $"rptPolicy_Outstanding.xlsx";
+                if (reportPage == "raw_data_only") filename = $"rptReporting_Policy_All_Export_Only.xlsx";
+            }
+            else if (reportNameType == ReportsNamesType.ActiveUsers || reportNameType == ReportsNamesType.ActiveMachines)
+            {
+                if (reportNameType == ReportsNamesType.ActiveUsers) filename = $"rptActiveUsers.xlsx";
+                if (reportNameType == ReportsNamesType.ActiveMachines) filename = $"rptActiveMachines.xlsx";
+            }
+            return filename;
         }
 
         public static void ExportPopupReport(XLWorkbook workbook, string reportPageName, PopupReports data)
@@ -167,7 +222,7 @@ namespace CLA_Administration_Web.Helpers.Reporting
                 if (reportPageName == "summary") AddSheetToExcel(workbook, reportData.Summary, "Summary");
                 if (reportPageName == "complete") AddSheetToExcel(workbook, reportData.ResponseSummary, "Completed");
                 if (reportPageName == "outstanding") AddSheetToExcel(workbook, reportData.Outstanding, "Outstanding");
-                if (reportPageName == "raw_data_only") AddSheetToExcel(workbook, reportData.RawData, "Ticker Raw");
+                if (reportPageName == "raw_data_only") AddSheetToExcel(workbook, reportData.RawData, "Policy Raw");
             }
 
             

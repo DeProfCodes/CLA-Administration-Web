@@ -76,7 +76,7 @@
                         </div>
                         <div class="report-filter-module-status-sliders">
                             <div class="form-check form-switch w-fit-content mb-0">
-                                <input class="form-check-input slider-large" type="checkbox" id="ReportModuleShowRawDataOnly">
+                                <input class="form-check-input slider-large" type="checkbox" id="ReportModuleShowRawDataOnly" onchange="ModuleRawDataClicked()">
                             </div>
                         </div>
                     </div>
@@ -88,7 +88,7 @@
                             </div>
                             <div class="report-filter-module-status-sliders">
                                 <div class="form-check form-switch w-fit-content mb-0">
-                                    <input class="form-check-input slider-large" type="checkbox" id="SurveyTransponsed">
+                                    <input class="form-check-input slider-large" type="checkbox" id="SurveyTransponsed" onchange="SurveyTransponseClick()">
                                 </div>
                             </div>
                         </div>
@@ -126,16 +126,18 @@
         PreloadDatesFilterDates();
     });
 
-    function GenerateReportDataForExport()
-    {
-        var moduleId = $("#ReportModuleSelect").val();
-        ReloadFilteredReport("@Model.ReportName", ReportDataTypes.EXPORT_ONLY, moduleId);
-    }
-
     function GenerateReportOnly()
     {
         var moduleId = $("#ReportModuleSelect").val();
-        ReloadFilteredReport("@Model.ReportName", ReportDataTypes.REPORT_ONLY, moduleId);
+        if (moduleId > 0)
+        {
+            ReloadFilteredReport("@Model.ReportName", ReportDataTypes.REPORT_ONLY, moduleId);
+        }
+        else
+        {
+            var reportName = "@Model.ReportName.GetDisplayName()";
+            swal("Error", `Please select ${reportName}.`, "error");
+        }
     }
 
     function PreloadDatesFilterDates()
@@ -189,6 +191,17 @@
         $("#ModuleReportId").val(moduleId);
     }
     
+    function SurveyTransponseClick()
+    {
+        if (IsCheckboxChecked("SurveyTransponsed"))
+            CheckOrUncheckInput("ReportModuleShowRawDataOnly", false);
+    }
+
+    function ModuleRawDataClicked()
+    {
+        if (IsCheckboxChecked("ReportModuleShowRawDataOnly"))
+            CheckOrUncheckInput("SurveyTransponsed", false);
+    }
 
 
 </script>
