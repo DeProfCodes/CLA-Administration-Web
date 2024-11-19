@@ -6,6 +6,8 @@
 
 
 <!-- Card for Filters -->
+<input id="ModuleReportId" value="" hidden />
+
 <div class="card mb-4 mt-2 overview-filters-card app-card-main-scaling">
     <div class="card-body pt-0 pb-0">
         <div class="row fs-12 mt-1">
@@ -62,7 +64,7 @@
                     </div>
                     <div class="row mt-2">
                         <p class="custom-p w-fit-content fw-bold align-content-center">@moduleName</p>
-                        <select class="custom-input-text w-350p" id="ReportModuleSelect">
+                        <select class="custom-input-text w-350p" id="ReportModuleSelect" onchange="ChangeModuleId()">
                             <option value="0">Please select @moduleName</option>
                         </select>
                     </div>
@@ -180,5 +182,13 @@
         }
         HideLoader("Secondary");
     }
+
+    function ChangeModuleId()
+    {
+        var moduleId = $("#ReportModuleSelect").val();
+        $("#ModuleReportId").val(moduleId);
+    }
+    
+
 
 </script>

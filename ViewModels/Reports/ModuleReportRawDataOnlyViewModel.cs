@@ -1,5 +1,6 @@
 ﻿using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
 using CLA_Administration_Web.Models.APIResponses.Reports.Popup;
+using CLA_Administration_Web.Models.APIResponses.Reports.Survey;
 using CLA_Administration_Web.Models.APIResponses.Reports.Ticker;
 
 namespace CLA_Administration_Web.ViewModels.Reports
@@ -17,5 +18,7 @@ namespace CLA_Administration_Web.ViewModels.Reports
         public List<PopupReportAllData> PopupAllRawData { get; set; }
 
         public List<TickerReportAllData> TickerAllRawData { get; set; }
+
+        public List<SurveyReportAllData> SurveyAllRawData { get; set; }
     }
 }

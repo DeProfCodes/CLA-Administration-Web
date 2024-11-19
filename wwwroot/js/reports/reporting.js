@@ -147,6 +147,18 @@ function ReloadFilteredReport(reportModuleType, reportDataType, reportModuleId)
 
         url += `&policyReportEntityType=${policyReportEntityType}`;
     }
+    else if(reportModuleType == ReportModuleTypes.SURVEY)
+    {
+        var transponsed = IsCheckboxChecked("SurveyTransponsed");
+
+        if(transponsed)
+        {
+            url += `&transponsed=${transponsed}`;
+            ExportReportToExcel(ReportModuleTypes.SURVEY, false);
+            return;
+        }
+        
+    }
 
     LoadPartialViewWithLoader(url, "#ReportModuleData","#SecondaryLoader");
 }
@@ -226,6 +238,11 @@ function ExportReportToExcel(reportModuleType, isAll)
         };
 
         url += `&${$.param(dispatchParams)}`;
+    }
+    if(reportModuleType == ReportModuleTypes.SURVEY)
+    {
+        var transponsed = IsCheckboxChecked("SurveyTransponsed");
+        url += `&surveyTransponsed=${transponsed}`;
     }
 
     ShowLoader("Main", "Exporting Report...");

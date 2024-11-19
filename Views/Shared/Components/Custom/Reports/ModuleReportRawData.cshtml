@@ -1,4 +1,5 @@
 ﻿@using CLA_Administration_Web.Models.APIResponses.Reports.Popup
+@using CLA_Administration_Web.Models.APIResponses.Reports.Survey
 @using CLA_Administration_Web.Models.APIResponses.Reports.Ticker
 @model ModuleReportRawDataOnlyViewModel
 
@@ -39,7 +40,7 @@
                         IsRawDataOnly = true
                     });
                 }
-                <!--  Popup RAW -->
+                <!--  Ticker RAW -->
                 @if (reportType == ReportsNamesType.Ticker)
                 {
                     await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Reports/ModuleReportTable.cshtml",
@@ -49,6 +50,21 @@
                         TableId = "TickerRawTable",
                         DataSource = Model.TickerAllRawData,
                         DefaultFallBackType = typeof(TickerReportAllData),
+                        LastSyncDateColumnName = "NaN",
+                        IsInitiallyHidden = false,
+                        IsRawDataOnly = true
+                    });
+                }
+                <!--  Survey RAW -->
+                @if (reportType == ReportsNamesType.Survey)
+                {
+                    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Reports/ModuleReportTable.cshtml",
+                    new ReportDataTableViewInputsViewModel
+                    {
+                        ComponentId = "SurveyRAW",
+                        TableId = "SurveyRawTable",
+                        DataSource = Model.SurveyAllRawData,
+                        DefaultFallBackType = typeof(SurveyReportAllData),
                         LastSyncDateColumnName = "NaN",
                         IsInitiallyHidden = false,
                         IsRawDataOnly = true

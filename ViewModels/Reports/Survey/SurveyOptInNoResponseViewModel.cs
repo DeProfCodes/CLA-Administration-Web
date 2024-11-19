@@ -2,8 +2,8 @@
 {
     public class SurveyOptInNoResponseViewModel
     {
-        public int Complete { get; set; }
+        public int NoResponse { get; set; }
 
-        public int OptOut { get; set; }
+        public int PartialResponse { get; set; }
     }
 }

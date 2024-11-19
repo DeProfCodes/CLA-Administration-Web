@@ -55,13 +55,25 @@ namespace CLA_Administration_Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> SurveyReportOnly([FromQuery] ModuleReportDataFilterViewModel parameters)
+        public async Task<IActionResult> SurveyReportOnly([FromQuery] ModuleReportDataFilterViewModel parameters, bool transponsed)
         {
-            var surveyReportVm = await reportingHelper.GetSurveyReportsData(parameters);
+            var surveyReportVm = await reportingHelper.GetSurveyReportsData(parameters, transponsed);
 
             if (parameters.ShowRawDataOnly)
             {
-                return PartialView(AppPagesLinks.Reports.ModuleRawDataPageLink, surveyReportVm);
+                var anyFirst = surveyReportVm.SurveyAllData.FirstOrDefault();
+                var effectiveFrom = anyFirst?.EffFrom ?? DateTime.MinValue;
+                var effectiveTo = anyFirst?.EffTo ?? DateTime.MinValue;
+
+                var surveyRawData = new ModuleReportRawDataOnlyViewModel
+                {
+                    ReportNameType = ReportsNamesType.Survey,
+                    ReportModuleId = parameters.ModuleId,
+                    EffectiveFrom = effectiveFrom,
+                    EffectiveTo = effectiveTo,
+                    SurveyAllRawData = surveyReportVm.SurveyAllData
+                };
+                return PartialView(AppPagesLinks.Reports.ModuleRawDataPageLink, surveyRawData);
             }
             return PartialView(AppPagesLinks.Reports.SurveyReportOnlyPageLink, surveyReportVm);
         }
@@ -228,8 +240,8 @@ namespace CLA_Administration_Web.Controllers
 
         #endregion
 
-        public async Task<IActionResult> ExportFileToExcel(ReportsNamesType reportType, ModuleReportDataFilterViewModel parameters, string reportPageName, 
-                                                           CLAEntityType entityType, string entityValue, CampaignDispatchFiltersViewModel dispatchParams, string policyTargetType)
+        public async Task<IActionResult> ExportFileToExcel(ReportsNamesType reportType, ModuleReportDataFilterViewModel parameters, string reportPageName, CLAEntityType entityType, 
+                                                           string entityValue, CampaignDispatchFiltersViewModel dispatchParams, string policyTargetType, bool surveyTransponsed)
         {
             var filename = "";
             using (var workbook = new XLWorkbook())
@@ -243,10 +255,21 @@ namespace CLA_Administration_Web.Controllers
                 }
                 else if (reportType == ReportsNamesType.Survey)
                 {
-                    var data = await reportingHelper.GetSurveyReportsForExport(parameters);
+                    if (!surveyTransponsed)
+                    {
+                        var data = await reportingHelper.GetSurveyReportsForExport(parameters);
 
-                    ExportHelper.ExportSurveyReport(workbook, reportPageName, data);
-                    filename = (reportPageName == "all") ? "rptSurvey.xlsx" : $"rptSurvey-{reportPageName}.xlsx";
+                        ExportHelper.ExportSurveyReport(workbook, reportPageName, data);
+                        filename = (reportPageName == "all") ? "rptSurvey.xlsx" : $"rptSurvey-{reportPageName}.xlsx";
+                    }
+                    else
+                    {
+                        var data2 = await reportingHelper.GetSurveyReportsData(parameters, surveyTransponsed);
+
+                        ExportHelper.ExportSurveyTransposedData(workbook, data2);
+                        filename = "rptSurvey-Transponsed.xlsx";
+                    }
+                    
                 }
                 else if (reportType == ReportsNamesType.Ticker)
                 {

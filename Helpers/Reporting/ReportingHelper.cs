@@ -664,6 +664,11 @@ namespace CLA_Administration_Web.Helpers.Reporting
                     RDLCName = "doesntMatter",
                     DataSet = ConvertJsonToDataSet(summaryDetailsJson)
                 },
+                CompleteAndOptOut = new ReportRDLC
+                {
+                    ReportRDLCPath = $"{reportsBaseAddress}\\survey\\rptSurvey_Complete_Opt_Out.rdlc",
+                    RDLCName = "dsReporting_Surveys",
+                },
                 Outstanding = new ReportRDLC
                 {
                     ReportRDLCPath = $"{reportsBaseAddress}\\survey\\rptSurvey_Outstanding.rdlc",
@@ -672,8 +677,8 @@ namespace CLA_Administration_Web.Helpers.Reporting
                 },
                 AllData = new ReportRDLC
                 {
-                    ReportRDLCPath = $"{reportsBaseAddress}\\survey\\rptReporting_Survey_All_Export_Only",
-                    RDLCName = "doesntMatter",
+                    ReportRDLCPath = $"{reportsBaseAddress}\\survey\\rptReporting_Survey_All_Export_Only.rdlc",
+                    RDLCName = "dsSurvey_All_Data_Only",
                     DataSet = ConvertJsonToDataSet(allDataJson)
                 },
                 Status = new ReportRDLC
@@ -686,7 +691,7 @@ namespace CLA_Administration_Web.Helpers.Reporting
             return result;
         }
 
-        public async Task<SurveyReportViewModel> GetSurveyReportsData(ModuleReportDataFilterViewModel filters)
+        public async Task<SurveyReportViewModel> GetSurveyReportsData(ModuleReportDataFilterViewModel filters, bool transponsed)
         {
             var result = new SurveyReportViewModel() { SurveyId = filters.ModuleId };
 
@@ -710,10 +715,17 @@ namespace CLA_Administration_Web.Helpers.Reporting
             var optInNoResponseJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Survey, "Surveys_Opt_In_No_Response");
             var summaryJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Survey, "Surveys_Summary");
             var summaryDetailsJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Survey, "Surveys_Summary_Detail");
+
+            var legendTransponsed = transponsed ? await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Survey, "Surveys_Transposed_Legend") : "";
+            var usersTransponsed = transponsed ? await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Survey, "Surveys_Transposed_Responses_Users") : "";
+            var machinesTransponsed = transponsed ? await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Survey, "Surveys_Transposed_Responses_Machines") : "";
+
             var allDataJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Survey, "Surveys_All_DataOnly");
 
             result.SurveySummary = APIResponseParserHelper.ParseJsonToObject<SurveyReportSummary>(summaryJson, true);
             result.SummarizedDetails = APIResponseParserHelper.ParseJsonToObject<List<SurveyReportSummaryDetails>>(detailsJson);
+            result.SurveyOptInNoResponseData = APIResponseParserHelper.ParseJsonToObject<List<SurveyOptInNoResponse>>(optInNoResponseJson);
+            result.SurveyAllData = APIResponseParserHelper.ParseJsonToObject<List<SurveyReportAllData>>(allDataJson);
 
             var summaryDetails = APIResponseParserHelper.ParseJsonToObject<List<SurveyOptInNoResponse>>(summaryDetailsJson);
 
@@ -723,11 +735,24 @@ namespace CLA_Administration_Web.Helpers.Reporting
                 //OptOut = summaryDetails.Count(x => x.IsSurveyComplete == 0 && x.SurveyOptIn == 0),
             };
 
+            result.SurveyOptInNoResponse = new SurveyOptInNoResponseViewModel
+            {
+                NoResponse = result.SurveyOptInNoResponseData?.Count ?? 0,
+                PartialResponse = result.SurveySummary.OptIn - result.SurveyOptInNoResponseData?.Count ?? 0
+            };
+
             result.Outstanding = result.SummarizedDetails.Where(x => x.IsComplete == 0).ToList();
             result.Outstanding.ForEach(x => 
             {
                 x.LastSyncDate = x.LastUpdateDtUser != null ? x.LastUpdateDtUser : (x.LastUpdateDtMachine != null ? x.LastUpdateDtMachine : DateTime.MinValue);
             });
+
+            if (transponsed)
+            {
+                result.LegendTransposed = APIResponseParserHelper.ParseJsonToObject<List<SurveyLegendTransposed>>(legendTransponsed);
+                result.UserTransposed = APIResponseParserHelper.ParseJsonToObject<List<SurveyUserTransposed>>(usersTransponsed);
+                result.MachineTransposed = APIResponseParserHelper.ParseJsonToObject<List<SurveyMachineTransposed>>(machinesTransponsed);
+            }
 
             return result;
         }

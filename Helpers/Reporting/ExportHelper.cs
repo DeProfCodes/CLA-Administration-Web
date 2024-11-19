@@ -1,14 +1,20 @@
 ﻿using CLA_Administration_Web.Helpers.MockData;
+using CLA_Administration_Web.Models.APIResponses.Reports.Survey;
 using CLA_Administration_Web.Models.APIResponses.Reports.Troubleshoot;
 using CLA_Administration_Web.Services;
 using CLA_Administration_Web.ViewModels.Reports;
 using CLA_Administration_Web.ViewModels.Reports.CampaignDispatch;
+using CLA_Administration_Web.ViewModels.Reports.Survey;
 using ClosedXML.Excel;
 using DocumentFormat.OpenXml.Spreadsheet;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Reporting.NETCore;
+using System.Data;
 using System.Text;
+using System.Text.Json.Serialization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace CLA_Administration_Web.Helpers.Reporting
 {
@@ -85,6 +91,8 @@ namespace CLA_Administration_Web.Helpers.Reporting
                 Outstanding = GetReportExcelBytes(new List<ReportRDLC> { data.Details, data.Summary, data.SummaryDetails, data.Status }, data.Outstanding.ReportRDLCPath),
                 OptInNoResponse = GetReportExcelBytes(new List<ReportRDLC> { data.OptInNoResponse, data.Summary, data.QuestionsSummaryOptIn, data.Details, data.SummaryDetails, data.Status }, data.OptInNoResponse.ReportRDLCPath),
                 OptOut = GetReportExcelBytes(new List<ReportRDLC> { data.Summary, data.Details, data.Status }, data.OptOut.ReportRDLCPath),
+                CompleteAndOptOut = GetReportExcelBytes(new List<ReportRDLC> { data.Summary, data.SummaryDetails, data.Details, data.OptInNoResponse, data.Status }, data.CompleteAndOptOut.ReportRDLCPath),
+                RawData = GetReportExcelBytes(new List<ReportRDLC> { data.AllData }, data.AllData.ReportRDLCPath),
             };
 
             if (reportPageName == "all")
@@ -100,6 +108,8 @@ namespace CLA_Administration_Web.Helpers.Reporting
                 if (reportPageName == "outstanding") AddSheetToExcel(workbook, reportData.Outstanding, "Survey Outstanding");
                 if (reportPageName == "optInNoResponse") AddSheetToExcel(workbook, reportData.OptInNoResponse, "Survey Opt In - No Response");
                 if (reportPageName == "optOut") AddSheetToExcel(workbook, reportData.OptOut, "Survey Opt Out");
+                if (reportPageName == "completeAndOptOut") AddSheetToExcel(workbook, reportData.CompleteAndOptOut, "Survey Opt Out");
+                if (reportPageName == "raw_data_only") AddSheetToExcel(workbook, reportData.RawData, "Survey Raw");
             }
         }
 
@@ -211,6 +221,110 @@ namespace CLA_Administration_Web.Helpers.Reporting
             }
         }
 
+        public static void ExportSurveyTransposedData(XLWorkbook workbook, SurveyReportViewModel surveyTransposedVm)
+        {
+            int count = 0;
+
+            surveyTransposedVm.LegendTransposed = surveyTransposedVm.LegendTransposed.OrderBy(x => x.QuestionPosition).ToList();
+
+            // Convert the objects to DataTables
+            DataTable legendTable = ConvertToDataTable(surveyTransposedVm.LegendTransposed);
+            DataTable userTable = ConvertToDataTable(surveyTransposedVm.UserTransposed);
+            DataTable machineTable = ConvertToDataTable(surveyTransposedVm.MachineTransposed);
+
+            // Create a list of tables to iterate through
+            var tables = new List<(string TableName, DataTable Table)>
+            {
+                ("Question Legend", legendTable),
+                ("Response User", userTable),
+                ("Response Machine", machineTable)
+            };
+
+            foreach (var (tableName, table) in tables)
+            {
+                // Create a new worksheet for each DataTable
+                var sheet = workbook.Worksheets.Add(tableName);
+
+                // Insert data manually without using InsertTable
+                int startRow = 6; // Starting row for the table
+                int startColumn = 1; // Starting column for the table
+
+                // Add headers
+                for (int i = 0; i < table.Columns.Count; i++)
+                {
+                    var cell = sheet.Cell(startRow, startColumn + i);
+                    cell.Value = table.Columns[i].ColumnName;
+                    cell.Style.Font.Bold = true;
+                    cell.Style.Fill.BackgroundColor = XLColor.LightGray; // Set header background color to gray
+                    cell.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                    cell.Style.Border.BottomBorder = XLBorderStyleValues.Thin;
+                }
+
+                // Add data rows
+                for (int i = 0; i < table.Rows.Count; i++)
+                {
+                    for (int j = 0; j < table.Columns.Count; j++)
+                    {
+                        var cell = sheet.Cell(startRow + 1 + i, startColumn + j);
+                        cell.Value = table.Rows[i][j]?.ToString() ?? string.Empty;
+                    }
+                }
+
+                // Adjust columns to fit content
+                sheet.Columns().AdjustToContents();
+
+                // Optional: Add survey details for each sheet
+                sheet.Cell("A2").Value = "Survey Tile :";
+                sheet.Cell("B2").Value = surveyTransposedVm.SurveySummary.SurveyTitle;
+                sheet.Cell("A3").Value = "Effective From :";
+                sheet.Cell("B3").Value = surveyTransposedVm.SurveySummary.EffFrom.ToString("yyyy/MM/dd");
+                sheet.Cell("A4").Value = "Effective To :";
+                sheet.Cell("B4").Value = surveyTransposedVm.SurveySummary.EffTo.ToString("yyyy/MM/dd");
+
+                sheet.Cell("A2").Style.Font.Bold = true;
+                sheet.Cell("A3").Style.Font.Bold = true;
+                sheet.Cell("A4").Style.Font.Bold = true;
+
+                sheet.Column("A").Width = 15;
+
+                count++;
+            }
+        }
+
+        private static DataTable ConvertToDataTable<T>(IEnumerable<T> objects)
+        {
+            var dataTable = new DataTable(typeof(T).Name);
+
+            var properties = typeof(T).GetProperties();
+
+            foreach (var prop in properties)
+            {
+                var jsonPropertyName = prop.GetCustomAttributes(typeof(JsonPropertyAttribute), false)
+                                           .Cast<JsonPropertyAttribute>()
+                                           .FirstOrDefault()?.PropertyName;
+
+                string columnName = jsonPropertyName ?? prop.Name;
+                dataTable.Columns.Add(columnName, Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType);
+            }
+
+            foreach (var obj in objects)
+            {
+                var row = dataTable.NewRow();
+                foreach (var prop in properties)
+                {
+                    var jsonPropertyName = prop.GetCustomAttributes(typeof(JsonPropertyAttribute), false)
+                                               .Cast<JsonPropertyAttribute>()
+                                               .FirstOrDefault()?.PropertyName;
+
+                    string columnName = jsonPropertyName ?? prop.Name;
+                    row[columnName] = prop.GetValue(obj) ?? DBNull.Value;
+                }
+                dataTable.Rows.Add(row);
+            }
+
+            return dataTable;
+        }
+
         public static string GenerateCSV(TroubleshootReportViewModel troubleshootData)
         {
             StringBuilder csvContent = new StringBuilder();
@@ -218,7 +332,7 @@ namespace CLA_Administration_Web.Helpers.Reporting
             if (troubleshootData.LastSyncDetails != null)
             {
                 csvContent.AppendLine("Exported as per,User" + troubleshootData.LastSyncDetails.UserID);
-                csvContent.AppendLine("Environment,Connected to Staging"); // Adjusted to example text
+                csvContent.AppendLine($"Environment,Connected to {(troubleshootData.ConnectedToLive ? "Live" : "Staging")}");
                 csvContent.AppendLine($"Last Sync To Database,{troubleshootData.LastSyncDetails.LastUpdateDT?.ToString("yyyy/MM/dd HH:mm:ss")}");
                 csvContent.AppendLine($"Last Popup Shown,({troubleshootData.LastSyncDetails.LastSTMID}) {troubleshootData.LastSyncDetails.PopupTitle}");
                 csvContent.AppendLine($"Last Popup ID,{troubleshootData.LastSyncDetails.LastSTMDT?.ToString("yyyy/MM/dd HH:mm:ss")}");

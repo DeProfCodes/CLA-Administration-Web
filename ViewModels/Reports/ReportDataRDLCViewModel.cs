@@ -75,6 +75,8 @@ namespace CLA_Administration_Web.ViewModels.Reports
 
         public ReportRDLC OptOut { get; set; }
 
+        public ReportRDLC CompleteAndOptOut { get; set; }
+
         public ReportRDLC AllData { get; set; }
 
         public ReportRDLC Status { get; set; }
