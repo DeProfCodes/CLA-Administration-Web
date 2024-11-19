@@ -208,7 +208,6 @@ namespace CLA_Administration_Web.Helpers.Reporting
             {
                 var result = new ModuleReportListingViewModel();
 
-                List<ModuleReportListingAPIResponse> data = new();
                 var jsonAPIResponse = "";
 
                 var effectiveFromString = effectiveFrom.ToString("yyyy/MM/dd");
@@ -216,7 +215,7 @@ namespace CLA_Administration_Web.Helpers.Reporting
 
                 jsonAPIResponse = await _reportService.GetModuleListForReporting(reportType, effectiveFromString, effectiveToString);
 
-                data = JsonSerializer.Deserialize<List<ModuleReportListingAPIResponse>>(jsonAPIResponse);
+                var data = JsonSerializer.Deserialize<List<ModuleReportListingAPIResponse>>(jsonAPIResponse) ?? new();
 
                 var moduleTitles = new List<ModuleListingModel>();
 
@@ -265,11 +264,18 @@ namespace CLA_Administration_Web.Helpers.Reporting
 
         private DataSet CreateStatusDataSet(int active, int dormant, int inactive)
         {
-            var json =  "{ \"ResultTable\":[{\"IsActive\" :"+active+", \"IsDormant\" :"+dormant+",\"IsInactive\" :"+inactive+" }] }";
+            try
+            {
+                var json = "{ \"ResultTable\":[{\"IsActive\" :" + active + ", \"IsDormant\" :" + dormant + ",\"IsInactive\" :" + inactive + " }] }";
 
-            var dataSet = Newtonsoft.Json.JsonConvert.DeserializeObject<DataSet>(json);
+                var dataSet = Newtonsoft.Json.JsonConvert.DeserializeObject<DataSet>(json);
 
-            return dataSet;
+                return dataSet;
+            }
+            catch
+            {
+                return new();
+            }
         }
 
         public ReportRDLC GetStatusReport(ModuleReportDataFilterViewModel parameters)
@@ -465,27 +471,24 @@ namespace CLA_Administration_Web.Helpers.Reporting
                 var outstandingJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Ticker, "Ticker_Outstanding");
                 var allDataJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Ticker, "Ticker_All_DataOnly");
 
-                result.TickerReportSummary = APIResponseParserHelper.ParseJsonToObject<TickerReportSummary>(summaryJson, true);
-                result.TickerReportComplete = APIResponseParserHelper.ParseJsonToObject<List<TickerReportComplete>>(completedJson);
-                result.TickerReportOutstanding = APIResponseParserHelper.ParseJsonToObject<List<TickerReportOutstanding>>(outstandingJson);
-                result.TickerReportAllData = APIResponseParserHelper.ParseJsonToObject<List<TickerReportAllData>>(allDataJson);
+                result.TickerReportSummary = APIResponseParserHelper.ParseJsonToObject<TickerReportSummary>(summaryJson, true) ?? new();
+                result.TickerReportComplete = APIResponseParserHelper.ParseJsonToObject<List<TickerReportComplete>>(completedJson) ?? new();
+                result.TickerReportOutstanding = APIResponseParserHelper.ParseJsonToObject<List<TickerReportOutstanding>>(outstandingJson) ?? new();
+                result.TickerReportAllData = APIResponseParserHelper.ParseJsonToObject<List<TickerReportAllData>>(allDataJson) ?? new();
 
                 return result;
             }
             catch(Exception ex)
             {
-                
+                return new TickerReportsViewModel
+                {
+                    TickerId = filters.ModuleId,
+                    TickerReportAllData = new(),
+                    TickerReportComplete = new(),
+                    TickerReportOutstanding = new(),
+                    TickerReportSummary = new()
+                };
             }
-            
-            var emptyModel = new TickerReportsViewModel()
-            {
-                TickerReportAllData = new(),
-                TickerReportOutstanding = new(),
-                TickerReportComplete = new(),
-                TickerReportSummary = new()
-            };
-
-            return emptyModel;
         }
 
         public async Task<PopupReportsViewModel> LoadPopupReportsData(ModuleReportDataFilterViewModel filters)
@@ -515,14 +518,14 @@ namespace CLA_Administration_Web.Helpers.Reporting
                 var outstandingJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Popup, "STM_Outstanding");
                 var allDataJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Popup, "STM_All_DataOnly");
 
-                result.PopupReportSummary = APIResponseParserHelper.ParseJsonToObject<PopupReportSummary>(summaryJson, true);
-                result.PopupReportQuestionSummary = APIResponseParserHelper.ParseJsonToObject<PopupReportQuestionSummary>(questionSummaryJson, true);
+                result.PopupReportSummary = APIResponseParserHelper.ParseJsonToObject<PopupReportSummary>(summaryJson, true) ?? new();
+                result.PopupReportQuestionSummary = APIResponseParserHelper.ParseJsonToObject<PopupReportQuestionSummary>(questionSummaryJson, true) ?? new();
 
                 var qSummary = result?.PopupReportQuestionSummary ?? new();
                 var possibleShowCount = qSummary.PercentageShow - qSummary.ClickCount - qSummary.DismissCount - qSummary.AutohideCount - qSummary.SnoozeCount;
                 result.PopupReportQuestionSummary.ShowCount = possibleShowCount > 0 ? possibleShowCount : 0;
 
-                var popupResponseDetails = APIResponseParserHelper.ParseJsonToObject<List<PopupReportResponseDetails>>(responseDetailsJson);
+                var popupResponseDetails = APIResponseParserHelper.ParseJsonToObject<List<PopupReportResponseDetails>>(responseDetailsJson) ?? new();
 
                 result.PopupResponseSnooze = popupResponseDetails.Where(x => x.BubbleSnoozeDate != null && x.BubbleShowDate != null).ToList();
                 result.PopupResponseAutoHide = popupResponseDetails.Where(x => x.BubbleAutoHideDate != null).ToList();
@@ -530,8 +533,8 @@ namespace CLA_Administration_Web.Helpers.Reporting
                 result.PopupResponseClick = popupResponseDetails.Where(x => x.BubbleClickDate != null).ToList();
                 result.PopupResponseDismiss = popupResponseDetails.Where(x => x.BubbleDismissDate != null).ToList();
 
-                result.PopupReportOutstanding = APIResponseParserHelper.ParseJsonToObject<List<PopupReportOutstanding>>(outstandingJson);
-                result.PopupReportAllData = APIResponseParserHelper.ParseJsonToObject<List<PopupReportAllData>>(allDataJson);
+                result.PopupReportOutstanding = APIResponseParserHelper.ParseJsonToObject<List<PopupReportOutstanding>>(outstandingJson) ?? new();
+                result.PopupReportAllData = APIResponseParserHelper.ParseJsonToObject<List<PopupReportAllData>>(allDataJson) ?? new();
 
                 LocalDataStorage.StagingData.AllPopupReports = result;
 
@@ -539,23 +542,21 @@ namespace CLA_Administration_Web.Helpers.Reporting
             }
             catch (Exception ex)
             {
+                var emptyModel = new PopupReportsViewModel()
+                {
+                    PopupReportSummary = new(),
+                    PopupReportQuestionSummary = new(),
+                    PopupResponseSnooze = new(),
+                    PopupResponseAutoHide = new(),
+                    PopupResponseShow = new(),
+                    PopupResponseClick = new(),
+                    PopupResponseDismiss = new(),
+                    PopupReportOutstanding = new(),
+                    PopupReportAllData = new()
+                };
 
+                return emptyModel;
             }
-
-            var emptyModel = new PopupReportsViewModel()
-            {
-                PopupReportSummary = new(),
-                PopupReportQuestionSummary = new(),
-                PopupResponseSnooze = new(),
-                PopupResponseAutoHide = new(),
-                PopupResponseShow = new(),
-                PopupResponseClick = new(),
-                PopupResponseDismiss = new(),
-                PopupReportOutstanding = new(),
-                PopupReportAllData = new()
-            };
-
-            return emptyModel;
         }
 
         public async Task<SurveyReports> GetSurveyReportsForExport(ModuleReportDataFilterViewModel filters)
@@ -693,68 +694,88 @@ namespace CLA_Administration_Web.Helpers.Reporting
 
         public async Task<SurveyReportViewModel> GetSurveyReportsData(ModuleReportDataFilterViewModel filters, bool transponsed)
         {
-            var result = new SurveyReportViewModel() { SurveyId = filters.ModuleId };
-
-            var apiParams = new ModuleSummaryParamsViewModel
+            try
             {
-                ModuleId = filters.ModuleId,
-                Active = filters.Active,
-                Dormant = filters.NotInstalled,
-                InActive = filters.InActive,
-                Environment = "",
-                ShowActive = false,
-                ShowComplete = true,
-                ShowOutstanding = true,
-                UseMachineId = false,
-                ConnectToLive = false,
-            };
+                var result = new SurveyReportViewModel() { SurveyId = filters.ModuleId };
 
-            var detailsJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Survey, "Surveys_Detail"); //summarized details
-            var questionsSummaryJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Survey, "SurveyQuestions_Summary");
-            var questionDetailsJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Survey, "SurveyQuestions_Detail");
-            var optInNoResponseJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Survey, "Surveys_Opt_In_No_Response");
-            var summaryJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Survey, "Surveys_Summary");
-            var summaryDetailsJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Survey, "Surveys_Summary_Detail");
+                var apiParams = new ModuleSummaryParamsViewModel
+                {
+                    ModuleId = filters.ModuleId,
+                    Active = filters.Active,
+                    Dormant = filters.NotInstalled,
+                    InActive = filters.InActive,
+                    Environment = "",
+                    ShowActive = false,
+                    ShowComplete = true,
+                    ShowOutstanding = true,
+                    UseMachineId = false,
+                    ConnectToLive = false,
+                };
 
-            var legendTransponsed = transponsed ? await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Survey, "Surveys_Transposed_Legend") : "";
-            var usersTransponsed = transponsed ? await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Survey, "Surveys_Transposed_Responses_Users") : "";
-            var machinesTransponsed = transponsed ? await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Survey, "Surveys_Transposed_Responses_Machines") : "";
+                var detailsJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Survey, "Surveys_Detail"); //summarized details
+                var questionsSummaryJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Survey, "SurveyQuestions_Summary");
+                var questionDetailsJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Survey, "SurveyQuestions_Detail");
+                var optInNoResponseJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Survey, "Surveys_Opt_In_No_Response");
+                var summaryJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Survey, "Surveys_Summary");
+                var summaryDetailsJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Survey, "Surveys_Summary_Detail");
 
-            var allDataJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Survey, "Surveys_All_DataOnly");
+                var legendTransponsed = transponsed ? await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Survey, "Surveys_Transposed_Legend") : "";
+                var usersTransponsed = transponsed ? await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Survey, "Surveys_Transposed_Responses_Users") : "";
+                var machinesTransponsed = transponsed ? await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Survey, "Surveys_Transposed_Responses_Machines") : "";
 
-            result.SurveySummary = APIResponseParserHelper.ParseJsonToObject<SurveyReportSummary>(summaryJson, true);
-            result.SummarizedDetails = APIResponseParserHelper.ParseJsonToObject<List<SurveyReportSummaryDetails>>(detailsJson);
-            result.SurveyOptInNoResponseData = APIResponseParserHelper.ParseJsonToObject<List<SurveyOptInNoResponse>>(optInNoResponseJson);
-            result.SurveyAllData = APIResponseParserHelper.ParseJsonToObject<List<SurveyReportAllData>>(allDataJson);
+                var allDataJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Survey, "Surveys_All_DataOnly");
 
-            var summaryDetails = APIResponseParserHelper.ParseJsonToObject<List<SurveyOptInNoResponse>>(summaryDetailsJson);
+                result.SurveySummary = APIResponseParserHelper.ParseJsonToObject<SurveyReportSummary>(summaryJson, true) ?? new();
+                result.SummarizedDetails = APIResponseParserHelper.ParseJsonToObject<List<SurveyReportSummaryDetails>>(detailsJson) ?? new();
+                result.SurveyOptInNoResponseData = APIResponseParserHelper.ParseJsonToObject<List<SurveyOptInNoResponse>>(optInNoResponseJson) ?? new();
+                result.SurveyAllData = APIResponseParserHelper.ParseJsonToObject<List<SurveyReportAllData>>(allDataJson) ?? new();
 
-            result.SurveyCompleteOptOut = new SurveyCompleteOptOutViewModel
-            {
-                Complete = summaryDetails.Count(x => x.IsSurveyComplete == 1 || x.IsSurveyComplete == 0),
-                //OptOut = summaryDetails.Count(x => x.IsSurveyComplete == 0 && x.SurveyOptIn == 0),
-            };
+                var summaryDetails = APIResponseParserHelper.ParseJsonToObject<List<SurveyOptInNoResponse>>(summaryDetailsJson) ?? new();
 
-            result.SurveyOptInNoResponse = new SurveyOptInNoResponseViewModel
-            {
-                NoResponse = result.SurveyOptInNoResponseData?.Count ?? 0,
-                PartialResponse = result.SurveySummary.OptIn - result.SurveyOptInNoResponseData?.Count ?? 0
-            };
+                result.SurveyCompleteOptOut = new SurveyCompleteOptOutViewModel
+                {
+                    Complete = summaryDetails.Count(x => x.IsSurveyComplete == 1 || x.IsSurveyComplete == 0),
+                    //OptOut = summaryDetails.Count(x => x.IsSurveyComplete == 0 && x.SurveyOptIn == 0),
+                };
 
-            result.Outstanding = result.SummarizedDetails.Where(x => x.IsComplete == 0).ToList();
-            result.Outstanding.ForEach(x => 
-            {
-                x.LastSyncDate = x.LastUpdateDtUser != null ? x.LastUpdateDtUser : (x.LastUpdateDtMachine != null ? x.LastUpdateDtMachine : DateTime.MinValue);
-            });
+                result.SurveyOptInNoResponse = new SurveyOptInNoResponseViewModel
+                {
+                    NoResponse = result.SurveyOptInNoResponseData?.Count ?? 0,
+                    PartialResponse = result.SurveySummary?.OptIn - result.SurveyOptInNoResponseData?.Count ?? 0
+                };
 
-            if (transponsed)
-            {
-                result.LegendTransposed = APIResponseParserHelper.ParseJsonToObject<List<SurveyLegendTransposed>>(legendTransponsed);
-                result.UserTransposed = APIResponseParserHelper.ParseJsonToObject<List<SurveyUserTransposed>>(usersTransponsed);
-                result.MachineTransposed = APIResponseParserHelper.ParseJsonToObject<List<SurveyMachineTransposed>>(machinesTransponsed);
+                result.Outstanding = result?.SummarizedDetails.Where(x => x.IsComplete == 0).ToList() ?? new();
+                result.Outstanding.ForEach(x =>
+                {
+                    x.LastSyncDate = x.LastUpdateDtUser != null ? x.LastUpdateDtUser : (x.LastUpdateDtMachine != null ? x.LastUpdateDtMachine : DateTime.MinValue);
+                });
+
+                if (transponsed)
+                {
+                    result.LegendTransposed = APIResponseParserHelper.ParseJsonToObject<List<SurveyLegendTransposed>>(legendTransponsed) ?? new();
+                    result.UserTransposed = APIResponseParserHelper.ParseJsonToObject<List<SurveyUserTransposed>>(usersTransponsed) ?? new();
+                    result.MachineTransposed = APIResponseParserHelper.ParseJsonToObject<List<SurveyMachineTransposed>>(machinesTransponsed) ?? new();
+                }
+
+                return result;
             }
-
-            return result;
+            catch
+            {
+                return new SurveyReportViewModel
+                {
+                    Outstanding = new(),
+                    SummarizedDetails = new(),
+                    SurveyAllData = new(),
+                    SurveyCompleteOptOut = new(),
+                    SurveyId = filters.ModuleId,
+                    SurveyOptInNoResponse = new(),
+                    SurveyOptInNoResponseData = new(),
+                    SurveySummary = new(),
+                    UserTransposed = new(),
+                    LegendTransposed = new(), 
+                    MachineTransposed = new()
+                };
+            }
         }
 
         public async Task<SurveyReportsRaw> LoadSurveyReportsTabs(ModuleReportDataFilterViewModel filters)
@@ -893,142 +914,194 @@ namespace CLA_Administration_Web.Helpers.Reporting
 
         public async Task<PolicyReportViewModel> GetPolicyReportData(ModuleReportDataFilterViewModel filters, PolicyReportEntityType policyReportEntityType)
         {
-            var result = new PolicyReportViewModel()
+            try
             {
-                PopupId = filters.ModuleId
-            };
+                var result = new PolicyReportViewModel()
+                {
+                    PopupId = filters.ModuleId
+                };
 
-            var apiParams = new ModuleSummaryParamsViewModel
+                var apiParams = new ModuleSummaryParamsViewModel
+                {
+                    ModuleId = filters.ModuleId,
+                    Active = filters.Active,
+                    Dormant = filters.NotInstalled,
+                    InActive = filters.InActive,
+                    Environment = "",
+                    ShowActive = false,
+                    ShowComplete = true,
+                    ShowOutstanding = true,
+                    UseMachineId = false,
+                    ConnectToLive = false,
+                };
+
+                var summaryJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Policy, "Policy_Summary");
+                var summaryDetailsJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Policy, "Policy_Summary_Detail");
+                var outstandingJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Policy, "Policy_Outstanding");
+
+                var summaries = APIResponseParserHelper.ParseJsonToObject<List<PolicyReportSummary>>(summaryJson) ?? new();
+                var summaryDetails = APIResponseParserHelper.ParseJsonToObject<List<PolicyReportSummarizedDetail>>(summaryDetailsJson) ?? new();
+                var outstanding = APIResponseParserHelper.ParseJsonToObject<List<PolicyReportOutstanding>>(outstandingJson) ?? new();
+
+                result.PolicySummary = new PolicyReportSummaryViewModel
+                {
+                    SummaryUsers = summaries.FirstOrDefault(x => x.TargetedType.ToLower() == "users") ?? new(),
+                    SummarizedDetailsUsers = summaryDetails.Where(x => x.TargetedType.ToLower() == "users").ToList(),
+                    SummaryMachines = summaries.FirstOrDefault(x => x.TargetedType.ToLower() == "machines") ?? new(),
+                    SummarizedDetailsMachines = summaryDetails.Where(x => x.TargetedType.ToLower() == "machines").ToList()
+                };
+
+                result.PolicyOutstanding = new PolicyReportOutstandingViewModel
+                {
+                    PolicyOutstandingUsers = outstanding.Where(x => x.TargetedType.ToLower() == "users").ToList(),
+                    PolicyOutstandingMachines = outstanding.Where(x => x.TargetedType.ToLower() == "machines").ToList(),
+                    PolicyOutstandingUserMachines = outstanding.Where(x => x.TargetedType.ToLower() == "users-machines").ToList(),
+                };
+
+                result.PolicyOutstanding.PolicyOutstandingUsers.ForEach(x => x.LastSyncDate = (x.LastSyncDTUser != null) ? x.LastSyncDTUser : x.LastSyncDTMachine);
+                result.PolicyOutstanding.PolicyOutstandingMachines.ForEach(x => x.LastSyncDate = (x.LastSyncDTUser != null) ? x.LastSyncDTUser : x.LastSyncDTMachine);
+                result.PolicyOutstanding.PolicyOutstandingUserMachines.ForEach(x => x.LastSyncDate = (x.LastSyncDTUser != null) ? x.LastSyncDTUser : x.LastSyncDTMachine);
+
+                if (policyReportEntityType == PolicyReportEntityType.Users) result.PolicyOutstanding.PolicyOutstandingSelected = result.PolicyOutstanding.PolicyOutstandingUsers;
+                if (policyReportEntityType == PolicyReportEntityType.Machines) result.PolicyOutstanding.PolicyOutstandingSelected = result.PolicyOutstanding.PolicyOutstandingMachines;
+                if (policyReportEntityType == PolicyReportEntityType.UsersAndMachines) result.PolicyOutstanding.PolicyOutstandingSelected = result.PolicyOutstanding.PolicyOutstandingUserMachines;
+
+                result.PolicyOutstanding.PolicyOutstandingSelected = result.PolicyOutstanding.PolicyOutstandingUserMachines;
+
+                return result;
+            }
+            catch
             {
-                ModuleId = filters.ModuleId,
-                Active = filters.Active,
-                Dormant = filters.NotInstalled,
-                InActive = filters.InActive,
-                Environment = "",
-                ShowActive = false,
-                ShowComplete = true,
-                ShowOutstanding = true,
-                UseMachineId = false,
-                ConnectToLive = false,
-            };
-
-            var summaryJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Policy, "Policy_Summary");
-            var summaryDetailsJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Policy, "Policy_Summary_Detail");
-            var outstandingJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Policy, "Policy_Outstanding");
-
-            var summaries = APIResponseParserHelper.ParseJsonToObject<List<PolicyReportSummary>>(summaryJson);
-            var summaryDetails = APIResponseParserHelper.ParseJsonToObject<List<PolicyReportSummarizedDetail>>(summaryDetailsJson);
-            var outstanding = APIResponseParserHelper.ParseJsonToObject<List<PolicyReportOutstanding>>(outstandingJson);
-
-            result.PolicySummary = new PolicyReportSummaryViewModel
-            {
-                SummaryUsers = summaries.FirstOrDefault(x => x.TargetedType.ToLower() == "users"),
-                SummarizedDetailsUsers = summaryDetails.Where(x => x.TargetedType.ToLower() == "users").ToList(),
-                SummaryMachines = summaries.FirstOrDefault(x => x.TargetedType.ToLower() == "machines"),
-                SummarizedDetailsMachines = summaryDetails.Where(x => x.TargetedType.ToLower() == "machines").ToList()
-            };
-
-            result.PolicyOutstanding = new PolicyReportOutstandingViewModel
-            {
-                PolicyOutstandingUsers = outstanding.Where(x => x.TargetedType.ToLower() == "users").ToList(),
-                PolicyOutstandingMachines = outstanding.Where(x => x.TargetedType.ToLower() == "machines").ToList(),
-                PolicyOutstandingUserMachines = outstanding.Where(x => x.TargetedType.ToLower() == "users-machines").ToList(),
-            };
-
-            result.PolicyOutstanding.PolicyOutstandingUsers.ForEach(x => x.LastSyncDate = (x.LastSyncDTUser != null) ? x.LastSyncDTUser : x.LastSyncDTMachine);
-            result.PolicyOutstanding.PolicyOutstandingMachines.ForEach(x => x.LastSyncDate = (x.LastSyncDTUser != null) ? x.LastSyncDTUser : x.LastSyncDTMachine);
-            result.PolicyOutstanding.PolicyOutstandingUserMachines.ForEach(x => x.LastSyncDate = (x.LastSyncDTUser != null) ? x.LastSyncDTUser : x.LastSyncDTMachine);
-
-            if (policyReportEntityType == PolicyReportEntityType.Users) result.PolicyOutstanding.PolicyOutstandingSelected = result.PolicyOutstanding.PolicyOutstandingUsers;
-            if (policyReportEntityType == PolicyReportEntityType.Machines) result.PolicyOutstanding.PolicyOutstandingSelected = result.PolicyOutstanding.PolicyOutstandingMachines;
-            if (policyReportEntityType == PolicyReportEntityType.UsersAndMachines) result.PolicyOutstanding.PolicyOutstandingSelected = result.PolicyOutstanding.PolicyOutstandingUserMachines;
-
-            result.PolicyOutstanding.PolicyOutstandingSelected = result.PolicyOutstanding.PolicyOutstandingUserMachines;
-
-            return result;
+                return new PolicyReportViewModel
+                {
+                    PolicyOutstanding = new()
+                    {
+                        PolicyOutstandingMachines = new(),
+                        PolicyOutstandingSelected = new(),
+                        PolicyOutstandingUserMachines = new(),
+                        PolicyOutstandingUsers = new()
+                    },
+                    PolicySummary = new()
+                    {
+                        SummarizedDetailsMachines = new(),
+                        SummarizedDetailsUsers = new(),
+                        SummaryMachines = new(),
+                        SummaryUsers = new()
+                    },
+                    PopupId = filters.ModuleId
+                };
+            }
         }
 
         public async Task<ActiveUserMachinesViewModel> LoadActiveUserMachineReport(ModuleReportDataFilterViewModel filters, ReportsNamesType reportName)
         {
-            var result = new ActiveUserMachinesViewModel() { ReportName = reportName };
-
-            var apiParams = new ModuleSummaryParamsViewModel
+            try
             {
-                Active = filters.Active,
-                Dormant = filters.NotInstalled,
-                InActive = filters.InActive,
-                ConnectToLive = false,
-            };
+                var result = new ActiveUserMachinesViewModel() { ReportName = reportName };
 
-            var activeUserMachineReportJson = await _reportService.GetActiveUsersMachinesReport(apiParams, reportName);
+                var apiParams = new ModuleSummaryParamsViewModel
+                {
+                    Active = filters.Active,
+                    Dormant = filters.NotInstalled,
+                    InActive = filters.InActive,
+                    ConnectToLive = false,
+                };
 
-            if (reportName == ReportsNamesType.ActiveUsers)
-            {
-                result.ActiveUserReports = APIResponseParserHelper.ParseJsonToObject<List<ActiveUserReport>>(activeUserMachineReportJson);
+                var activeUserMachineReportJson = await _reportService.GetActiveUsersMachinesReport(apiParams, reportName);
+
+                if (reportName == ReportsNamesType.ActiveUsers)
+                {
+                    result.ActiveUserReports = APIResponseParserHelper.ParseJsonToObject<List<ActiveUserReport>>(activeUserMachineReportJson) ?? new();
+                }
+                else if (reportName == ReportsNamesType.ActiveMachines)
+                {
+                    result.ActiveMachineReports = APIResponseParserHelper.ParseJsonToObject<List<ActiveMachineReport>>(activeUserMachineReportJson) ?? new();
+                }
+                return result;
             }
-            else if(reportName == ReportsNamesType.ActiveMachines)
+            catch
             {
-                result.ActiveMachineReports = APIResponseParserHelper.ParseJsonToObject<List<ActiveMachineReport>>(activeUserMachineReportJson);
+                return new ActiveUserMachinesViewModel
+                {
+                    ActiveMachineReports = new(),
+                    ActiveUserReports = new(),
+                    ReportName = reportName
+                };
             }
-            return result;
         }
 
         public async Task<CampaignDispatchViewModel> LoadCampaignDispatchReports(CampaignDispatchFiltersViewModel parameters)
         {
-            var result = new CampaignDispatchViewModel
+            try
             {
-                Filters = parameters,
-                LockedDesktops = new(),
-                Desktops = new(),
-                Screensaver = new(),
-                Popups = new(),
-                Surveys = new(),
-                Tickers = new(),
-            };
-            result.Filters.EffectiveFrom = TypesParserHelper.ParseDate(parameters.StartDate);
-            result.Filters.EffectiveTo = TypesParserHelper.ParseDate(parameters.EndDate);
+                var result = new CampaignDispatchViewModel
+                {
+                    Filters = parameters,
+                    LockedDesktops = new(),
+                    Desktops = new(),
+                    Screensaver = new(),
+                    Popups = new(),
+                    Surveys = new(),
+                    Tickers = new(),
+                };
+                result.Filters.EffectiveFrom = TypesParserHelper.ParseDate(parameters.StartDate);
+                result.Filters.EffectiveTo = TypesParserHelper.ParseDate(parameters.EndDate);
 
-            parameters.IsAutomated = (parameters.ViewType == "automated") ? 1 : 0;
+                parameters.IsAutomated = (parameters.ViewType == "automated") ? 1 : 0;
 
-            var lockscreenJson = "";
-            var desktopJson = "";
-            var screensaverJson = "";
-            var popupJson = "";
-            var surveyJson = "";
-            var tickerJson = "";
+                var lockscreenJson = "";
+                var desktopJson = "";
+                var screensaverJson = "";
+                var popupJson = "";
+                var surveyJson = "";
+                var tickerJson = "";
 
-            if (parameters.LockscreenReport)
-            {
-                lockscreenJson = await _reportService.GetCampaignDispatchReport(parameters, "Dispatch_Listing_Locked_Desktop");
-                result.LockedDesktops = APIResponseParserHelper.ParseJsonToObject<List<DispatchLockedDesktopResponse>>(lockscreenJson); 
-            }
-            if (parameters.DesktopReport)
-            {
-                desktopJson = await _reportService.GetCampaignDispatchReport(parameters, "Dispatch_Listing_Desktop");
-                result.Desktops = APIResponseParserHelper.ParseJsonToObject<List<DispatchDesktopResponse>>(desktopJson);
-            }
-            if (parameters.ScreensaverReport)
-            {
-                screensaverJson = await _reportService.GetCampaignDispatchReport(parameters, "Dispatch_Listing_Screensaver");
-                result.Screensaver = APIResponseParserHelper.ParseJsonToObject<List<DispatchScreensaverResponse>>(screensaverJson);
-            }
-            if (parameters.PopupReport)
-            {
-                popupJson = await _reportService.GetCampaignDispatchReport(parameters, "Dispatch_Listing_STM");
-                result.Popups = APIResponseParserHelper.ParseJsonToObject<List<DispatchPopupResponse>>(popupJson);
-            }
-            if (parameters.SurveyReport)
-            {
-                surveyJson = await _reportService.GetCampaignDispatchReport(parameters, "Dispatch_Listing_Survey");
-                result.Surveys = APIResponseParserHelper.ParseJsonToObject<List<DispatchSurveyResponse>>(surveyJson);
-            }
-            if (parameters.TickerReport)
-            {
-                tickerJson = await _reportService.GetCampaignDispatchReport(parameters, "Dispatch_Listing_Ticker");
-                result.Tickers = APIResponseParserHelper.ParseJsonToObject<List<DispatchTickerResponse>>(tickerJson);
-            }
+                if (parameters.LockscreenReport)
+                {
+                    lockscreenJson = await _reportService.GetCampaignDispatchReport(parameters, "Dispatch_Listing_Locked_Desktop");
+                    result.LockedDesktops = APIResponseParserHelper.ParseJsonToObject<List<DispatchLockedDesktopResponse>>(lockscreenJson) ?? new();
+                }
+                if (parameters.DesktopReport)
+                {
+                    desktopJson = await _reportService.GetCampaignDispatchReport(parameters, "Dispatch_Listing_Desktop");
+                    result.Desktops = APIResponseParserHelper.ParseJsonToObject<List<DispatchDesktopResponse>>(desktopJson) ?? new();
+                }
+                if (parameters.ScreensaverReport)
+                {
+                    screensaverJson = await _reportService.GetCampaignDispatchReport(parameters, "Dispatch_Listing_Screensaver");
+                    result.Screensaver = APIResponseParserHelper.ParseJsonToObject<List<DispatchScreensaverResponse>>(screensaverJson) ?? new();
+                }
+                if (parameters.PopupReport)
+                {
+                    popupJson = await _reportService.GetCampaignDispatchReport(parameters, "Dispatch_Listing_STM");
+                    result.Popups = APIResponseParserHelper.ParseJsonToObject<List<DispatchPopupResponse>>(popupJson) ?? new();
+                }
+                if (parameters.SurveyReport)
+                {
+                    surveyJson = await _reportService.GetCampaignDispatchReport(parameters, "Dispatch_Listing_Survey");
+                    result.Surveys = APIResponseParserHelper.ParseJsonToObject<List<DispatchSurveyResponse>>(surveyJson) ?? new();
+                }
+                if (parameters.TickerReport)
+                {
+                    tickerJson = await _reportService.GetCampaignDispatchReport(parameters, "Dispatch_Listing_Ticker");
+                    result.Tickers = APIResponseParserHelper.ParseJsonToObject<List<DispatchTickerResponse>>(tickerJson) ?? new();
+                }
 
-            return result;
+                return result;
+            }
+            catch
+            {
+                return new CampaignDispatchViewModel
+                {
+                    Desktops = new(),
+                    Filters = new(),
+                    LockedDesktops = new(),
+                    Popups = new(),
+                    Screensaver = new(),
+                    Surveys = new(),
+                    Tickers = new()
+                };
+            }
         }
 
         public async Task<CampainDispatchReports> GetCampaignDispatchListReporting(CampaignDispatchFiltersViewModel parameters)
@@ -1097,58 +1170,73 @@ namespace CLA_Administration_Web.Helpers.Reporting
 
         public async Task<TroubleshootReportViewModel> GetTroubleshootReportData(CLAEntityType entityType, string entityValue)
         {
-            var result = new TroubleshootReportViewModel();
-
-            var entityJson = "";
-            TroubleshootReportEntity entity = null;
-
-            var entityColName = "";
-            var entitySymbol = "";
-
-            if (entityType == CLAEntityType.User)
+            try
             {
-                entityColName = "User_ID";
-                entitySymbol = "U";
+                var result = new TroubleshootReportViewModel();
 
-                entityJson = await _reportService.GetNTUsernameForTroubleshootReporting(entityValue);
+                var entityJson = "";
+                TroubleshootReportEntity entity = null;
+
+                var entityColName = "";
+                var entitySymbol = "";
+
+                if (entityType == CLAEntityType.User)
+                {
+                    entityColName = "User_ID";
+                    entitySymbol = "U";
+
+                    entityJson = await _reportService.GetNTUsernameForTroubleshootReporting(entityValue);
+                }
+                else if (entityType == CLAEntityType.Machine)
+                {
+                    entityColName = "Machine_ID";
+                    entitySymbol = "M";
+
+                    entityJson = await _reportService.GetMachineNameForTroubleshootReporting(entityValue);
+                }
+                else if (entityType == CLAEntityType.IPAddress)
+                {
+                    entityColName = "IP_Address";
+                    entitySymbol = "I";
+                }
+
+                var userEntityParam = entityType == CLAEntityType.User ? entityValue : "--####--";
+                var machineEntityParam = entityType == CLAEntityType.Machine ? entityValue : "--####--";
+                var ipAddressEntityParam = entityType == CLAEntityType.IPAddress ? entityValue : "--####--";
+
+                var userEntityVal = entityType == CLAEntityType.User ? entityValue : ".";
+                var machineEntityVal = entityType == CLAEntityType.Machine ? entityValue : ".";
+                var ipAddressEntityVal = entityType == CLAEntityType.IPAddress ? entityValue : ".";
+
+                var lastSyncDetailsJson = await _reportService.GetLastPostedValuesForTroubleshootReporting(entityColName, entityValue);
+                var userGroup = await _reportService.GetGroupMembershipsForTroubleshootReporting(entityValue, entitySymbol);
+                var activeContentJson = await _reportService.GetActivePopupsSurveysForTroubleshootReporting(userEntityParam, machineEntityParam, ipAddressEntityParam);
+                var targetingJson = await _reportService.GetActiveTargetedContentForTroubleshootReporting(userEntityParam, machineEntityParam, ipAddressEntityParam);
+                var settingsJson = await _reportService.GetSettingsForTroubleshootReporting(userEntityVal, machineEntityVal, ipAddressEntityVal);
+
+                entity = APIResponseParserHelper.ParseJsonToObject<TroubleshootReportEntity>(entityJson, true);
+
+                result.ConnectedToLive = entity == null;
+                result.LastSyncDetails = APIResponseParserHelper.ParseJsonToObject<TroubleshootReportLastSyncDetails>(lastSyncDetailsJson, true) ?? new();
+                result.UserGroups = APIResponseParserHelper.ParseJsonToObject<List<TroubleshootReportUserGroup>>(userGroup) ?? new();
+                result.Targeting = APIResponseParserHelper.ParseJsonToObject<List<TroubleshootReportTargeting>>(targetingJson) ?? new();
+                result.Settings = APIResponseParserHelper.ParseJsonToObject<TroubleshootReportSettings>(settingsJson, true) ?? new();
+
+
+                return result;
             }
-            else if (entityType == CLAEntityType.Machine)
+            catch
             {
-                entityColName = "Machine_ID";
-                entitySymbol = "M";
-
-                entityJson = await _reportService.GetMachineNameForTroubleshootReporting(entityValue);
+                return new TroubleshootReportViewModel
+                {
+                    ConnectedToLive = false,
+                    IsBlank = false,
+                    LastSyncDetails = new(),
+                    Settings = new(),
+                    Targeting = new(),
+                    UserGroups = new()
+                };
             }
-            else if (entityType == CLAEntityType.IPAddress)
-            {
-                entityColName = "IP_Address";
-                entitySymbol = "I";
-            }
-
-            var userEntityParam = entityType == CLAEntityType.User ? entityValue : "--####--";
-            var machineEntityParam = entityType == CLAEntityType.Machine ? entityValue : "--####--";
-            var ipAddressEntityParam = entityType == CLAEntityType.IPAddress ? entityValue : "--####--";
-
-            var userEntityVal = entityType == CLAEntityType.User ? entityValue : ".";
-            var machineEntityVal = entityType == CLAEntityType.Machine ? entityValue : ".";
-            var ipAddressEntityVal = entityType == CLAEntityType.IPAddress ? entityValue : ".";
-
-            var lastSyncDetailsJson = await _reportService.GetLastPostedValuesForTroubleshootReporting(entityColName, entityValue);
-            var userGroup = await _reportService.GetGroupMembershipsForTroubleshootReporting(entityValue, entitySymbol); 
-            var activeContentJson = await _reportService.GetActivePopupsSurveysForTroubleshootReporting(userEntityParam, machineEntityParam, ipAddressEntityParam);
-            var targetingJson = await _reportService.GetActiveTargetedContentForTroubleshootReporting(userEntityParam, machineEntityParam, ipAddressEntityParam);
-            var settingsJson = await _reportService.GetSettingsForTroubleshootReporting(userEntityVal, machineEntityVal, ipAddressEntityVal);
-
-            entity = APIResponseParserHelper.ParseJsonToObject<TroubleshootReportEntity>(entityJson, true);
-
-            result.ConnectedToLive = entity == null;
-            result.LastSyncDetails = APIResponseParserHelper.ParseJsonToObject<TroubleshootReportLastSyncDetails>(lastSyncDetailsJson, true);
-            result.UserGroups = APIResponseParserHelper.ParseJsonToObject<List<TroubleshootReportUserGroup>>(userGroup);
-            result.Targeting = APIResponseParserHelper.ParseJsonToObject<List<TroubleshootReportTargeting>>(targetingJson);
-            result.Settings = APIResponseParserHelper.ParseJsonToObject<TroubleshootReportSettings>(settingsJson, true);
-            
-
-            return result;
         }
     }
 }

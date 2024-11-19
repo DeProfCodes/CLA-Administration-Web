@@ -5,8 +5,8 @@
 @{
     var summaryT = Model.TickerReportSummary;
 
-    var completedRate = Math.Round(((double)summaryT.Completed / summaryT.Targeted) * 100, 2);
-    var outstandingRate = 100 - completedRate;
+    var completedRate = summaryT != null ? Math.Round(((double)summaryT.Completed / summaryT.Targeted) * 100, 2) : 0;
+    var outstandingRate = summaryT != null ? 100 - completedRate : 0;
 }
 
 <input id="ModuleReportId" value="@Model.TickerId" hidden />
