@@ -8,27 +8,27 @@ namespace CLA_Administration_Web.Models.APIResponses.Reports.Popup
     {
         [DisplayName("Domain")]
         [JsonProperty("DomainID")]
-        public string DomainId { get; set; }
+        public string? DomainId { get; set; }
 
         [DisplayName("User ID")]
         [JsonProperty("userID")]
-        public string UserId { get; set; }
+        public string? UserId { get; set; }
 
         [DisplayName("User Name")]
         [JsonProperty("userName")]
-        public string UserName { get; set; }
+        public string? UserName { get; set; }
 
         [DisplayName("Machine ID")]
         [JsonProperty("machineID")]
-        public string MachineId { get; set; }
+        public string? MachineId { get; set; }
 
         [DisplayName("Machine Name")]
         [JsonProperty("machineName")]
-        public string MachineName { get; set; }
+        public string? MachineName { get; set; }
 
         [SkipProperty]
         [JsonProperty("stm_header")]
-        public string PopupHeader { get; set; }
+        public string? PopupHeader { get; set; }
 
         [DisplayName("Last Sync DT")]
         [JsonProperty("max_last_update_DT")]
@@ -36,11 +36,11 @@ namespace CLA_Administration_Web.Models.APIResponses.Reports.Popup
 
         [SkipProperty]
         [JsonProperty("eff_from")]
-        public DateTime EffectiveFrom { get; set; }
+        public DateTime? EffectiveFrom { get; set; }
 
         [SkipProperty]
         [JsonProperty("eff_to")]
-        public DateTime EffectiveTo { get; set; }
+        public DateTime? EffectiveTo { get; set; }
 
         [SkipProperty]
         [JsonProperty("Bubble_Click_DT")]

@@ -11,31 +11,31 @@ namespace CLA_Administration_Web.Models.APIResponses.Reports.Popup
 
         [DisplayName("POPUP ID")]
         [JsonProperty("STM_ID")]
-        public int PopupId { get; set; }
+        public int? PopupId { get; set; }
 
         [DisplayName("POPUP HEADER")]
         [JsonProperty("STM_Title")]
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
         [DisplayName("POPUP TEXT")]
         [JsonProperty("STM_Text")]
-        public string Text { get; set; }
+        public string? Text { get; set; }
 
         [DisplayName("USER_ID")]
         [JsonProperty("User_ID")]
-        public string UserId { get; set; }
+        public string? UserId { get; set; }
 
         [DisplayName("USER_NAME")]
         [JsonProperty("user_Name")]
-        public string UserName { get; set; }
+        public string? UserName { get; set; }
 
         [DisplayName("MACHINE_ID")]
         [JsonProperty("Machine_ID")]
-        public string MachineId { get; set; }
+        public string? MachineId { get; set; }
 
         [DisplayName("MACHINE_NAME")]
         [JsonProperty("machine_Name")]
-        public string MachineName { get; set; }
+        public string? MachineName { get; set; }
 
         [DisplayName("BUBBLE_SHOW_DATE")]
         [JsonProperty("Bubble_Show_DT")]
@@ -67,29 +67,29 @@ namespace CLA_Administration_Web.Models.APIResponses.Reports.Popup
 
         [DisplayName("FEEDBACK_LIKEDISLIKE")]
         [JsonProperty("Feedback_LikeDislike")]
-        public string FeedbackLikeDislike { get; set; }
+        public string? FeedbackLikeDislike { get; set; }
 
         [DisplayName("FEEDBACK_COMMENT")]
         [JsonProperty("Feedback_Comment")]
-        public string FeedbackComment { get; set; }
+        public string? FeedbackComment { get; set; }
 
         [DisplayName("EFF_FROM")]
         [JsonProperty("Eff_From")]
-        public DateTime EffectiveFrom { get; set; }
+        public DateTime? EffectiveFrom { get; set; }
 
         [DisplayName("EFF_TO")]
         [JsonProperty("Eff_To")]
-        public DateTime EffectiveTo { get; set; }
+        public DateTime? EffectiveTo { get; set; }
 
         [DisplayName("TIMESLOT_FROM")]
         [JsonProperty("Timeslot_From")]
-        public string TimeslotFrom { get; set; }
+        public string? TimeslotFrom { get; set; }
 
         [DisplayName("TIMESLOT_TO")]
         [JsonProperty("Timeslot_To")]
-        public string TimeslotTo { get; set; }
+        public string? TimeslotTo { get; set; }
 
         [DisplayName("LAST_UPDATE_DATE")]
-        public string LastUpdateDate { get; set; }
+        public string? LastUpdateDate { get; set; }
     }
 }

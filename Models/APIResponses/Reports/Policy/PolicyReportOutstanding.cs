@@ -8,23 +8,23 @@ namespace CLA_Administration_Web.Models.APIResponses.Reports.Policy
     {
         [DisplayName("Domain")]
         [JsonProperty("Domain")]
-        public string Domain { get; set; }
+        public string? Domain { get; set; }
 
         [DisplayName("User ID")]
         [JsonProperty("User_ID")]
-        public string UserId { get; set; }
+        public string? UserId { get; set; }
 
         [DisplayName("User Name")]
         [JsonProperty("User_Name")]
-        public string UserName { get; set; }
+        public string? UserName { get; set; }
 
         [DisplayName("Machine ID")]
         [JsonProperty("Machine_ID")]
-        public string MachineId { get; set; }
+        public string? MachineId { get; set; }
 
         [DisplayName("Machine Name")]
         [JsonProperty("Machine_Name")]
-        public string MachineName { get; set; }
+        public string? MachineName { get; set; }
 
         [DisplayName("Last Sync DT User")]
         [JsonProperty("Last_Sync_DT_User")]
@@ -42,6 +42,6 @@ namespace CLA_Administration_Web.Models.APIResponses.Reports.Policy
         [DisplayName("")]
         [SkipProperty]
         [JsonProperty("TargetedType")]
-        public string TargetedType { get; set; }
+        public string? TargetedType { get; set; }
     }
 }

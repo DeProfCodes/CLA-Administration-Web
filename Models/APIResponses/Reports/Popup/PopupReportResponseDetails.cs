@@ -8,23 +8,23 @@ namespace CLA_Administration_Web.Models.APIResponses.Reports.Popup
     {
         [DisplayName("Domain")]
         [JsonProperty("Domain_ID")]
-        public string Domain { get; set; }
+        public string? Domain { get; set; }
 
         [DisplayName("UserID")]
         [JsonProperty("user_ID")]
-        public string UserId { get; set; }
+        public string? UserId { get; set; }
 
         [DisplayName("UserName")]
         [JsonProperty("user_Name")]
-        public string UserName { get; set; }
+        public string? UserName { get; set; }
 
         [DisplayName("MachineID")]
         [JsonProperty("machine_ID")]
-        public string MachineId { get; set; }
+        public string? MachineId { get; set; }
 
         [DisplayName("MachineName")]
         [JsonProperty("machine_Name")]
-        public string MachineName { get; set; }
+        public string? MachineName { get; set; }
 
         [DisplayName("Bubble Show DT")]
         [JsonProperty("Bubble_Show_DT")]
@@ -48,11 +48,11 @@ namespace CLA_Administration_Web.Models.APIResponses.Reports.Popup
 
         [DisplayName("Feedback: Like/Dislike")]
         [JsonProperty("Feedback_LikeDislike")]
-        public string FeedbackLikeDislike { get; set; }
+        public string? FeedbackLikeDislike { get; set; }
 
         [DisplayName("Feedback: Comment")]
         [JsonProperty("Feedback_Comment")]
-        public string FeedbackComment { get; set; }
+        public string? FeedbackComment { get; set; }
 
         [DisplayName("LastSyncDT")]
         [JsonProperty("Max_last_Update_DT")]
@@ -66,11 +66,11 @@ namespace CLA_Administration_Web.Models.APIResponses.Reports.Popup
         [DisplayName("")]
         [SkipProperty]
         [JsonProperty("Eff_From")]
-        public DateTime EffectiveFrom { get; set; }
+        public DateTime? EffectiveFrom { get; set; }
 
         [DisplayName("")]
         [SkipProperty]
         [JsonProperty("Eff_To")]
-        public DateTime EffectiveTo { get; set; }
+        public DateTime? EffectiveTo { get; set; }
     }
 }
