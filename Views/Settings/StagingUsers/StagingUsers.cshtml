@@ -1,0 +1,49 @@
+﻿
+<div class="container-fluid">
+
+    @{
+        <!-- Breadcrumb Component -->
+        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Settings/SettingsBreadcrumb.cshtml", new SettingsBreadcrumbViewModel
+        {
+            SettingsCurrentPage = SettingsPages.StagingUsers,
+            HasAddNewButton = true,
+            AddNewPage = SettingsPages.AddNewStagingUser
+        });
+
+        <!-- Settings Filter Component -->
+        <div class="card mb-4 mt-2 overview-filters-card app-card-main-scaling">
+            <div class="card-body pt-0 pb-0">
+                <div class="row fs-12 mt-1 mb-2">
+                    <div class="row col-12 d-flex flex-wrap module-overview-filters">
+                        <div class="w-fit-content ms-auto ms-4">
+                            <p class="theme-txt-clr fw-bold text-center mb-0">View Type</p>
+                            <div class="row mb-3 mb-md-0 mx-auto mt-1">
+                                <p class="theme-txt-clr overview-filter-title2" id="TypeFilterTitle">View Type</p>
+                                <div class="btn-group w-auto overview-filter-btn-group" role="group" aria-label="Status filter" id="TypeStagingLiveBtns">
+                                    <button class="btn module-filter-btn-group filter-type-btn btn-group-active" onclick="">Users</button>
+                                    <button class="btn module-filter-btn-group filter-type-btn" onclick="">Machines</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-auto me-auto mb-1">
+                            <div class="d-flex mt-3">
+                                <button class="btn custom-btn-default btn-sm ms-2 mt-4 px-3" onclick="GenerateActiveUserMachineReport()">Generate Report</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <!-- Card for Popup Report Body -->
+    <div class="card mb-1 mt-1 overview-filters-card theme-txt-clr app-card-main-scaling report-data-area" id="report-data-area">
+        <div id="ReportModuleData">
+            <!-- Inject Partial Here -->
+        </div>
+    </div>
+</div>
+
+<script>
+
+</script>
