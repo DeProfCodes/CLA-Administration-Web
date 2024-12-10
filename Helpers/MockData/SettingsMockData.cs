@@ -34,5 +34,46 @@ namespace CLA_Administration_Web.Helpers.MockData
             }
             return result;
         }
+
+        public static List<SetUpExclusionMachinesViewModel> GetSetUpMachinesExclusions()
+        {
+            var result = new List<SetUpExclusionMachinesViewModel>();
+
+            var rand = new Random();
+
+            for (int i = 0; i < 15; i++)
+            {
+                var item = new SetUpExclusionMachinesViewModel()
+                {
+                    Id = rand.Next(41, 999),
+                    Domain = MockDataHelperFunctions.GetRandomDomainName(),
+                    UserLastModified = MockDataHelperFunctions.GetRandomUserID(),
+                    MachineLastModified = MockDataHelperFunctions.GetRandomMachineID(),
+                    MachineName = MockDataHelperFunctions.GetRandomMachineID(),
+                    MachineDescription = MockDataHelperFunctions.GetRandomMachineID(),
+                };
+                result.Add(item);
+            }
+            return result;
+        }
+        public static List<SetUpExclusionsUsersViewModel> GetSetUpUsersExclusions()
+        {
+            var result = new List<SetUpExclusionsUsersViewModel>();
+
+            var rand = new Random();
+
+            for (int i = 0; i < 15; i++)
+            {
+                var item = new SetUpExclusionsUsersViewModel()
+                {
+                    Id = rand.Next(41, 999),
+                    Domain = MockDataHelperFunctions.GetRandomDomainName(),
+                    UserLastModified = MockDataHelperFunctions.GetRandomUserID(),
+                    MachineLastModified = MockDataHelperFunctions.GetRandomMachineID()
+                };
+                result.Add(item);
+            }
+            return result;
+        }
     }
 }

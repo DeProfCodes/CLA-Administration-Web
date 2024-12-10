@@ -107,10 +107,10 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="CLACommonFunctionsLibrary_NET">
-      <HintPath>bin\Debug\net8.0\CLACommonFunctionsLibrary_NET.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files\#Utilities#\CLACommonFunctionsLibrary_NET.dll</HintPath>
     </Reference>
     <Reference Include="CLAModulesLibrary">
-      <HintPath>bin\Debug\net8.0\CLAModulesLibrary.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files\#Utilities#\CLAModulesLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
 

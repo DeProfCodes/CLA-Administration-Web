@@ -29,6 +29,12 @@ namespace CLA_Administration_Web.Controllers
         [HttpGet]
         public async Task<IActionResult> SetupExclusions()
         {
+            var stagingUsersData = new SetUpExclusionsMainViewModel()
+            {
+                Users = SettingsMockData.StagingUsers,
+                Machines = SettingsMockData.StagingMachines
+            };
+
             return PartialView(AppPagesLinks.Settings.SetupExclusionsPageLink);
         }
 

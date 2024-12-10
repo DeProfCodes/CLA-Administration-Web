@@ -16,6 +16,9 @@ namespace CLA_Administration_Web.Helpers.Enums.AppPages
         [Display(Name = "AddNewStagingUser", Description = "Add New Staging User")]
         AddNewStagingUser,
 
+        [Display(Name = "AddNewExclusions", Description = "Setup Exclusions")]
+        AddNewExclusions,
+
         [Display(Name = "SetupExclusions", Description = "Setup Exclusions")]
         SetupExclusions,
 
