@@ -1,4 +1,6 @@
 using CLA_Administration_Web.Helpers.Constants;
+using CLA_Administration_Web.Helpers.MockData;
+using CLA_Administration_Web.ViewModels.Settings;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CLA_Administration_Web.Controllers
@@ -15,7 +17,13 @@ namespace CLA_Administration_Web.Controllers
         [HttpGet]
         public async Task<IActionResult> StagingUsers()
         {
-            return PartialView(AppPagesLinks.Settings.StagingUsersPageLink);
+            var stagingUsersData = new StagingUsersMainViewModel()
+            {
+                StagingUsers = SettingsMockData.StagingUsers,
+                StagingMachines = SettingsMockData.StagingMachines
+            };
+
+            return PartialView(AppPagesLinks.Settings.StagingUsersPageLink, stagingUsersData);
         }
 
         [HttpGet]

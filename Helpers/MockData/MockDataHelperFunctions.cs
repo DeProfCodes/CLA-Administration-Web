@@ -90,6 +90,20 @@
             }
         }
 
+        public static string GetRandomFirstname()
+        {
+            var usersList = new List<string> { "Ndhuvazi", "Lege", "Sinethemba", "Lebo", "Administrator", "Cathrine", "Larry", "Tarry", "Nyiko", "Proficient" };
+
+            return usersList[Random.Next(usersList.Count)];
+        }
+
+        public static string GetRandomLastname()
+        {
+            var usersList = new List<string> { "Mkansi", "Baloyi", "Ncube", "Scoffield", "Administrator", "Mason", "Larry", "Bonty", "Brice", "Micassa" };
+
+            return usersList[Random.Next(usersList.Count)];
+        }
+
         public static string GetRandomUserID()
         {
             var usersList = new List<string> { "NdhuvaziM", "LegeB", "SinethembaS", "LeboC", "Administrator", "CathrineT", "LarryM", "Tarryn", "NyikoB", "ProficientX" };

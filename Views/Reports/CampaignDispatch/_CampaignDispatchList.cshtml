@@ -478,44 +478,33 @@
         if ("@Model.Filters.LockscreenReport" == "True")
         {
             HideShowElement("#LockscreenData", HideShow.SHOW);
-            setTimeout(() => MakeSimpleDataTable("LockscreenCampaignData"), 100);
+            //setTimeout(() => MakeSimpleDataTable("LockscreenCampaignData"), 100);
         }
         if ("@Model.Filters.DesktopReport" == "True")
         {
             HideShowElement("#DesktopData", HideShow.SHOW);
-            setTimeout(() => MakeSimpleDataTable("DesktopCampaignData"), 100);
+            //setTimeout(() => MakeSimpleDataTable("DesktopCampaignData"), 100);
         }
         if ("@Model.Filters.ScreensaverReport" == "True")
         {
             HideShowElement("#ScreensaverData", HideShow.SHOW);
-            setTimeout(() => MakeSimpleDataTable("ScreensaverCampaignData"), 100);
+            //setTimeout(() => MakeSimpleDataTable("ScreensaverCampaignData"), 100);
         }
         if ("@Model.Filters.PopupReport" == "True")
         {
             HideShowElement("#PopupData", HideShow.SHOW);
-            setTimeout(() => MakeSimpleDataTable("PopupCampaignData"), 100);
+            //setTimeout(() => MakeSimpleDataTable("PopupCampaignData"), 100);
         }
         if ("@Model.Filters.SurveyReport" == "True")
         {
             HideShowElement("#SurveyData", HideShow.SHOW);
-            setTimeout(() => MakeSimpleDataTable("SurveyCampaignData"), 100);
+            //setTimeout(() => MakeSimpleDataTable("SurveyCampaignData"), 100);
         }
         if ("@Model.Filters.TickerReport" == "True")
         {
             HideShowElement("#TickerData", HideShow.SHOW);
-            setTimeout(() => MakeSimpleDataTable("TickerCampaignData"), 100);
+            //setTimeout(() => MakeSimpleDataTable("TickerCampaignData"), 100);
         }
-    }
-
-    function MakeSimpleDataTable(tableId)
-    {
-        return; // Skip Datatable
-
-        $(`#${tableId}`).DataTable({
-            dom: 'rtip',
-            pageLength: 10,
-            responsive: true  // Helps with layout when hidden
-        }).columns.adjust().draw(); // Adjust column layout and redraw to ensure it initializes fully
     }
 
     function ToggleHiddenRow(rowId)

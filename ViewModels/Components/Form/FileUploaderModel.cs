@@ -1,4 +1,4 @@
-﻿namespace CLA_Administration_Web.ViewModels.Modules.Components.Form
+﻿namespace CLA_Administration_Web.ViewModels.Components.Form
 {
     public class FileUploaderModel
     {
@@ -8,9 +8,9 @@
 
         public bool ShowPreviewButton { get; set; }
 
-        public bool InitialHidden {get; set; }
+        public bool InitialHidden { get; set; }
 
-        public string WidthPx {get; set; }
+        public string WidthPx { get; set; }
 
         public string WidthCss { get; set; }
 

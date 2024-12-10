@@ -1,10 +1,10 @@
-﻿namespace CLA_Administration_Web.ViewModels.Modules.Components.Form
+﻿namespace CLA_Administration_Web.ViewModels.Components.Form
 {
     public class HtmlEditorModel
     {
         public string EditorId { get; set; }
 
-        public string WidthPx {get; set; }
+        public string WidthPx { get; set; }
 
         public string Css { get; set; }
 

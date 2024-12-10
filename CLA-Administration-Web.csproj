@@ -115,6 +115,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Views\Shared\Components\Custom\Form\DataTable.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
     <Content Update="Views\Shared\Helpers\HtmlHelpers\AppUrlsHelper.cshtml">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>

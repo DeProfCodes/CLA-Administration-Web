@@ -1,0 +1,115 @@
+﻿@using CLACommonFunctionsLibrary_NET.Helpers
+@using CLA_Administration_Web.Helpers.Html
+@using CLA_Administration_Web.Helpers.Reporting
+@using System.ComponentModel
+@using System.Reflection
+@model ReportDataTableViewInputsViewModel
+
+@{
+    int index = 0;
+
+    var firstItem = Model.DataSource.FirstOrDefault();
+    var properties = firstItem?.GetType().GetProperties().Where(prop => !Attribute.IsDefined(prop, typeof(SkipPropertyAttribute)));
+
+    if (firstItem == null)
+    {
+        properties = Model.DefaultFallBackType.GetProperties().Where(prop => !Attribute.IsDefined(prop, typeof(SkipPropertyAttribute)));
+    }
+
+    var hideShowCss = Model.IsInitiallyHidden ? "hidden" : "";
+
+    string GetDisplayNameOrPropertyName(PropertyInfo property)
+    {
+        var displayNameAttribute = property.GetCustomAttribute<DisplayNameAttribute>();
+        return displayNameAttribute.DisplayName;
+    }
+}
+
+<input id="DataTableId" value="@Model.TableId" hidden />
+
+<div id="@Model.ComponentId" class="component-data-table-container @hideShowCss">
+    <table id="@Model.TableId" class="table table-striped table-bordered table-hover theme-border align-middle report-table-type fs-12">
+        <thead>
+            <tr>
+                @if (properties != null)
+                {
+                    foreach (var property in properties)
+                    {
+                        bool hasHideAttribute = Attribute.IsDefined(property, typeof(HidePropertyAttribute));
+                        if (hasHideAttribute)
+                            continue;
+
+                        var headerTitle = GetDisplayNameOrPropertyName(property);
+
+                        <th class="theme-bg text-white">@headerTitle</th>
+                    }
+                }
+            </tr>
+        </thead>
+        <tbody class="theme-txt-clr">
+            @foreach (var item in Model.DataSource)
+            {
+                var propertyValue = item.GetType().GetProperty(Model.LastSyncDateColumnName)?.GetValue(item, null);
+                var cssBg = ((index++)%2 == 0) ? "bg-silver" : "";
+                <tr>
+                    @foreach (var property in properties)
+                    {
+                        bool hasHideAttribute = Attribute.IsDefined(property, typeof(HidePropertyAttribute));
+                        if (hasHideAttribute)
+                            continue;
+
+                        var value = @property.GetValue(item, null);
+
+                        <td class="@cssBg">
+                            @value
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+
+<script>
+
+    $(document).ready(function()
+    {
+        $.fn.dataTable.ext.errMode = function (settings, helpPage, message)
+        {
+            console.error(`DataTables error in table "${settings.sTableId}":`, message);
+            console.warn(`For more information, visit: http://datatables.net/tn/${helpPage}`);
+        };
+
+        var tableName = $("#ReportTableId").val();
+        //$(`#${tableName}`).DataTable();
+    });
+
+
+    document.addEventListener('DOMContentLoaded', function ()
+    {
+        const topScrollbar = document.querySelector('.top-scrollbar');
+        const bottomScrollbar = document.querySelector('.bottom-scrollbar');
+        const table = document.querySelector('.bottom-scrollbar table');
+        const scrollContent = document.querySelector('.scroll-content');
+
+        if (topScrollbar && bottomScrollbar && table && scrollContent)
+        {
+            // Set top scrollbar width to match the table
+            scrollContent.style.width = `${table.scrollWidth}px`;
+
+            // Sync scrolling
+            topScrollbar.addEventListener('scroll', function ()
+            {
+                bottomScrollbar.scrollLeft = topScrollbar.scrollLeft;
+            });
+
+            bottomScrollbar.addEventListener('scroll', function ()
+            {
+                topScrollbar.scrollLeft = bottomScrollbar.scrollLeft;
+            });
+        }
+    });
+
+</script>

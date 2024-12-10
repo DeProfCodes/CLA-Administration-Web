@@ -1,4 +1,4 @@
-﻿namespace CLA_Administration_Web.ViewModels.Modules.Components.Form
+﻿namespace CLA_Administration_Web.ViewModels.Components.Form
 {
     public class CommonModel
     {

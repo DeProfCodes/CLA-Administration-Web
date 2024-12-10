@@ -94,3 +94,28 @@ function GenerateTimeOptions(id)
         }
     }
 }
+
+// Create a script element
+const script = document.createElement('script');
+
+// Set attributes
+script.type = 'text/javascript';
+script.charset = 'utf8';
+script.src = 'https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js';
+
+// Append the script to the document head or body
+document.head.appendChild(script);
+
+function MakeStandardDataTable(tableId)
+{
+    $(`#${tableId}`).DataTable();
+}
+
+function MakeSimpleDataTable(tableId)
+{
+    $(`#${tableId}`).DataTable({
+        dom: 'rtip',
+        pageLength: 10,
+        responsive: true  // Helps with layout when hidden
+    }).columns.adjust().draw(); // Adjust column layout and redraw to ensure it initializes fully
+}
