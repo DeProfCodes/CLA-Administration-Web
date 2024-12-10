@@ -108,7 +108,7 @@ document.head.appendChild(script);
 
 function MakeStandardDataTable(tableId)
 {
-    $(`#${tableId}`).DataTable();
+   return $(`#${tableId}`).DataTable();
 }
 
 function MakeSimpleDataTable(tableId)

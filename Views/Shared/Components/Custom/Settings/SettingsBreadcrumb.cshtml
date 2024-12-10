@@ -26,8 +26,9 @@
     @if (Model.HasAddNewButton)
     {
         <div class="w-auto ms-auto" id="BreadcrumbBtnContainer">
-            <button class="custom-btn custom-btn-default breadcrumb-btn" onclick="OpenAddNewSetting()">
-                <i class="bi bi-plus-circle-fill custom-btn-icons breadcrumb-btn-icon"></i> @Model.AddNewPage.GetDisplayDescription()
+            <button class="custom-btn custom-btn-default breadcrumb-btn" onclick="OpenAddNewSetting()" id="BreadcrumSettingsBtn">
+                <i class="bi bi-plus-circle-fill custom-btn-icons breadcrumb-btn-icon" id="BreadcrumSettingsBtnIcon"></i>
+                <span id="BreadcrumSettingsBtnText">@Model.AddNewPage.GetDisplayDescription()</span>
             </button>
         </div>
     }
