@@ -105,14 +105,6 @@
     <None Include="wwwroot\resources\reports\rptTicker_Summary.rdlc" />
     <None Include="wwwroot\resources\reports\rtpSTM_Outstanding.rdlc" />
   </ItemGroup>
-  <ItemGroup>
-    <Reference Include="CLACommonFunctionsLibrary_NET">
-      <HintPath>..\..\..\..\..\Program Files\#Utilities#\CLACommonFunctionsLibrary_NET.dll</HintPath>
-    </Reference>
-    <Reference Include="CLAModulesLibrary">
-      <HintPath>..\..\..\..\..\Program Files\#Utilities#\CLAModulesLibrary.dll</HintPath>
-    </Reference>
-  </ItemGroup>
 
   <ItemGroup>
     <Content Update="Views\Shared\Components\Custom\Form\DataTable.cshtml">
@@ -125,4 +117,15 @@
     </Content>
   </ItemGroup>
 
+    <ItemGroup>
+        <Reference Include="CLACommonFunctionsLibrary_NET">
+            <HintPath>dlls\CLACommonFunctionsLibrary_NET.dll</HintPath>
+        </Reference>
+    </ItemGroup>
+    <ItemGroup>
+        <Reference Include="CLAModulesLibrary">
+            <HintPath>dlls\CLAModulesLibrary.dll</HintPath>
+        </Reference>
+    </ItemGroup>
+    
 </Project>
