@@ -1,6 +1,6 @@
-﻿namespace CLA_Administration_Web.ViewModels.Settings
+﻿namespace CLA_Administration_Web.ViewModels.Settings.SetupExclusion
 {
-    public class SetUpExclusionMachinesViewModel
+    public class SetupExclusionMachinesViewModel
     {
         public int Id { get; set; }
 

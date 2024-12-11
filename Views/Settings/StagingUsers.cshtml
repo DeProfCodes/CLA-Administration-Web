@@ -15,7 +15,8 @@
         {
             SettingsCurrentPage = SettingsPages.StagingUsers,
             HasAddNewButton = true,
-            AddNewPage = SettingsPages.AddNewStagingUser
+            BreadcrumbButtonName = "Add New Staging User",
+            BreadcrumbButtonCallbackFunction = "AddNewStagingEntity"
         });
     }
     
@@ -186,9 +187,6 @@
 
 <script>
     
-    let usersDT = null;
-    let machinesDT = null;
-
     var usersDomains = @Html.Raw(Json.Serialize(usersDomains));
     var machinesDomains = @Html.Raw(Json.Serialize(machinesDomains));
 
@@ -250,17 +248,23 @@
         if (selectedDomain === "0")
         {
             if (userActive)
-                usersDT.search("").draw();
+                usersDT.column(0).search("").draw();
             else
-                machinesDT.search("").draw();
+                machinesDT.column(0).search("").draw();
         } 
         else
         {
             if (userActive)
-                usersDT.search(selectedDomain).draw();
+                usersDT.column(0).search(selectedDomain).draw();
             else
-                machinesDT.search(selectedDomain).draw();
+                machinesDT.column(0).search(selectedDomain).draw();
         }
+    }
+
+    //Function to open new modal to begin adding new staging user or machine
+    function AddNewStagingEntity()
+    {
+        alert("Tank You");
     }
 
 </script>

@@ -107,7 +107,7 @@
 
         public class Settings
         {
-            public const string StagingUsersPageLink = "~/Views/Settings/StagingUsers/StagingUsers.cshtml";
+            public const string StagingUsersPageLink = "~/Views/Settings/StagingUsers.cshtml";
             public const string SetupExclusionsPageLink = "~/Views/Settings/SetupExclusions.cshtml";
             public const string AdminAccessPageLink = "~/Views/Settings/AdminAccess.cshtml";
             public const string TargetGroupsPageLink = "~/Views/Settings/TargetGroups.cshtml";

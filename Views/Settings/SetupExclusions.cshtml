@@ -1,5 +1,4 @@
-﻿
-@model SetUpExclusionsMainViewModel
+﻿@model SetupExclusionsMainViewModel
 
 @{
     int index = 0;
@@ -13,11 +12,12 @@
     <!-- Breadcrumb Component -->
     @{
         await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Settings/SettingsBreadcrumb.cshtml", new SettingsBreadcrumbViewModel
-            {
-                SettingsCurrentPage = SettingsPages.SetupExclusions,
-                HasAddNewButton = true,
-                AddNewPage = SettingsPages.AddNewExclusions
-            });
+        {
+            SettingsCurrentPage = SettingsPages.SetupExclusions,
+            HasAddNewButton = true,
+            BreadcrumbButtonName = "Add Excluded User",
+            BreadcrumbButtonCallbackFunction = "AddNewExcludedEntity"
+        });
     }
 
     <!-- Settings Filter Component -->
@@ -138,9 +138,6 @@
 
 <script>
 
-    let usersDT = null;
-    let machinesDT = null;
-
     var usersDomains = @Html.Raw(Json.Serialize(usersDomains));
     var machinesDomains = @Html.Raw(Json.Serialize(machinesDomains));
 
@@ -202,17 +199,22 @@
         if (selectedDomain === "0")
         {
             if (userActive)
-                usersDT.search("").draw();
+                usersDT.column(0).search("").draw();
             else
-                machinesDT.search("").draw();
+                machinesDT.column(0).search("").draw();
         }
         else
         {
             if (userActive)
-                usersDT.search(selectedDomain).draw();
+                usersDT.column(0).search(selectedDomain).draw();
             else
-                machinesDT.search(selectedDomain).draw();
+                machinesDT.column(0).search(selectedDomain).draw();
         }
+    }
+
+    function AddNewExcludedEntity()
+    {
+        alert("Ola!");
     }
 
 </script>

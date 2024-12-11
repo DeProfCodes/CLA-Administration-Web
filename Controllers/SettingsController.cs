@@ -1,6 +1,8 @@
 using CLA_Administration_Web.Helpers.Constants;
 using CLA_Administration_Web.Helpers.MockData;
 using CLA_Administration_Web.ViewModels.Settings;
+using CLA_Administration_Web.ViewModels.Settings.SetupExclusion;
+using CLA_Administration_Web.ViewModels.Settings.StagingUsers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CLA_Administration_Web.Controllers
@@ -29,15 +31,13 @@ namespace CLA_Administration_Web.Controllers
         [HttpGet]
         public async Task<IActionResult> SetupExclusions()
         {
-            /*
-            var stagingUsersData = new SetUpExclusionsMainViewModel()
+            var setupExcludedData = new SetupExclusionsMainViewModel()
             {
-                Users = SettingsMockData.StagingUsers,
-                Machines = SettingsMockData.StagingMachines
+                Users = SettingsMockData.SetupExcludedUsers,
+                Machines = SettingsMockData.SetupExcludedMachines
             };
-            */
 
-            return PartialView(AppPagesLinks.Settings.SetupExclusionsPageLink);
+            return PartialView(AppPagesLinks.Settings.SetupExclusionsPageLink, setupExcludedData);
         }
 
         [HttpGet]

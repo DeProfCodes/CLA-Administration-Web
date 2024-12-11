@@ -5,6 +5,8 @@
     var pageName = pageLink.GetDisplayDescription();
 }
 
+<input type="text" id="BreadcrumbActionButtonCallBackFunction" value="@Model.BreadcrumbButtonCallbackFunction" hidden />
+
 <div class="row mb-2">
     <div class="w-auto">
         <h2 class="theme-txt-clr breadcrumb-title">@pageName</h2>
@@ -18,17 +20,17 @@
             else
             {
                 <span class="breadcrumb-item-nav" onclick="OpenPageWithAnimations('Settings', null, '@pageLink', 'StagingUsersLink');">@pageName</span> 
-                <span> / </span> 
-                <span class="breadcrumb-item">@Model.AddNewPage.GetDisplayDescription()</span>
+                <span> / </span>
+                <span class="breadcrumb-item">@Model.BreadcrumbButtonName</span>
             }
         </p>
     </div>
     @if (Model.HasAddNewButton)
     {
         <div class="w-auto ms-auto" id="BreadcrumbBtnContainer">
-            <button class="custom-btn custom-btn-default breadcrumb-btn" onclick="OpenAddNewSetting()" id="BreadcrumSettingsBtn">
+            <button class="custom-btn custom-btn-default breadcrumb-btn" onclick="OpenBreadcrumbActionButton()" id="BreadcrumSettingsBtn">
                 <i class="bi bi-plus-circle-fill custom-btn-icons breadcrumb-btn-icon" id="BreadcrumSettingsBtnIcon"></i>
-                <span id="BreadcrumSettingsBtnText">@Model.AddNewPage.GetDisplayDescription()</span>
+                <span id="BreadcrumSettingsBtnText">@Model.BreadcrumbButtonName</span>
             </button>
         </div>
     }
@@ -36,9 +38,16 @@
 
 <script>
 
-    function OpenAddNewSetting()
+    function OpenBreadcrumbActionButton()
     {
-        OpenPageWithAnimations('Modules', '@pageLink', '@Model.AddNewPage', null);
+        var callbackFunction = $("#BreadcrumbActionButtonCallBackFunction").val();
+        if (callbackFunction != null)
+        {
+            if (typeof window[callbackFunction] === 'function')
+            {
+                window[callbackFunction]();
+            }
+        }
     }
 
 </script>

@@ -1,6 +1,6 @@
 ﻿using CLA_Administration_Web.Helpers.Enums.AppPages;
 
-namespace CLA_Administration_Web.ViewModels.Settings
+namespace CLA_Administration_Web.ViewModels.Settings.Shared
 {
     public class SettingsBreadcrumbViewModel
     {
@@ -8,6 +8,8 @@ namespace CLA_Administration_Web.ViewModels.Settings
 
         public bool HasAddNewButton { get; set; }
 
-        public SettingsPages AddNewPage { get; set; }
+        public string BreadcrumbButtonName { get; set; }
+
+        public string BreadcrumbButtonCallbackFunction { get; set; }
     }
 }

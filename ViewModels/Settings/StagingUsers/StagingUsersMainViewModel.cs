@@ -1,4 +1,4 @@
-﻿namespace CLA_Administration_Web.ViewModels.Settings
+﻿namespace CLA_Administration_Web.ViewModels.Settings.StagingUsers
 {
     public class StagingUsersMainViewModel
     {
