@@ -1,5 +1,110 @@
-﻿
+﻿@model ActiveConnectionsMainViewModel
 
-<h1 class="text-center">
-    Active Connections
-</h1>
+@{
+    int index = 0;
+
+    var filterTypes = new List<string> { "Normal", "Instant", "Both" };
+}
+
+<div class="container-fluid">
+
+    <!-- Breadcrumb Component -->
+    @{
+        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Settings/SettingsBreadcrumb.cshtml", new SettingsBreadcrumbViewModel
+            {
+                SettingsCurrentPage = SettingsPages.ActiveConnections,
+                HasAddNewButton = false,
+                BreadcrumbButtonName = "Refresh",
+                BreadcrumbButtonCallbackFunction = "RefreshActiveConnections"
+            });
+    }
+
+    <!-- Filter Section -->
+    <div class="card mb-4 mt-2 overview-filters-card app-card-main-scaling">
+        <div class="card-body pt-0 pb-0">
+            <div class="row fs-12 mt-1 mb-2">
+                <p class="theme-txt-clr text-center w-100 fw-bold fs-16" id="FilterTitle">Filters</p>
+                <div class="row col-12 d-flex flex-wrap module-overview-filters">
+                    <div class="w-fit-content ms-auto mb-1">
+                        <div class="d-flex">
+                            <p class="custom-p w-fit-content align-content-center">View Type</p>
+                            <div class="row mx-auto">
+                                <div class="btn-group w-auto overview-filter-btn-group" role="group" aria-label="Status filter" id="ConnectionTypeBtns">
+                                    @foreach (var filter in filterTypes)
+                                    {
+                                        <button class="btn module-filter-btn-group filter-type-btn @((filter == "Normal") ? "btn-group-active" : "")" onclick="ToggleConnectionType(this.id)" id="@filter">@filter</button>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Active Connections Table -->
+    <div class="card mb-1 mt-1 overview-filters-card theme-txt-clr app-card-main-scaling report-data-area p-4" id="report-data-area">
+        <div id="ActiveConnectionsData">
+            <h3 class="w-100 text-center theme-txt-clr">Active Connections</h3>
+            <table id="ActiveConnectionsTable" class="table table-striped table-bordered table-hover theme-border align-middle campain-table-type fs-12">
+                <thead>
+                    <tr>
+                        <th class="theme-bg text-white">Connection ID</th>
+                        <th class="theme-bg text-white">Minutes</th>
+                        <th class="theme-bg text-white">Host</th>
+                        <th class="theme-bg text-white">Login</th>
+                        <th class="theme-bg text-white">Program</th>
+                        <th class="theme-bg text-white">Command</th>
+                        <th class="theme-bg text-white">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var connection in Model.Connections)
+                    {
+                        var cssBg = (index++ % 2 == 0) ? "report-piechart-color-silver-dim" : "";
+                        cssBg += " theme-txt-clr";
+
+                        <tr>
+                            <td class="@cssBg">@connection.ConnectionID</td>
+                            <td class="@cssBg">@connection.Minutes</td>
+                            <td class="@cssBg">@connection.Host</td>
+                            <td class="@cssBg">@connection.Login</td>
+                            <td class="@cssBg">@connection.Program</td>
+                            <td class="@cssBg">@connection.Command</td>
+                            <td class="@cssBg">
+                                <button class="btn btn-sm custom-btn-sm btn-danger" onclick="TerminateConnection(@connection.ConnectionID)">Terminate Selected Connection</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+
+<script>
+    $(document).ready(function () {
+        connectionsDT = MakeStandardDataTable("ActiveConnectionsTable");
+    });
+
+    function ToggleConnectionType(id) {
+        $(".filter-type-btn").removeClass("btn-group-active");
+        $(`#${id}`).addClass("btn-group-active");
+
+        const filterType = id;
+        connectionsDT.column(0).search(filterType === "Both" ? "" : filterType).draw();
+    }
+
+    function RefreshActiveConnections() {
+        location.reload();
+    }
+
+    function TerminateConnection(connectionID) {
+        if (confirm("Are you sure you want to terminate this connection?")) {
+            alert(`Terminating connection: ${connectionID}`);
+        }
+    }
+</script>

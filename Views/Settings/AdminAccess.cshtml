@@ -1,5 +1,131 @@
-﻿
+﻿@model ManageAdminAccessMainViewModel
 
-<h1 class="text-center">
-    Admin Access
-</h1>
+@{
+    int index = 0;
+    var domains = Model.AdminAccess.Select(x => x.Domain).Distinct().ToList();
+}
+
+<div class="container-fluid">
+
+    <!-- Breadcrumb Component -->
+    @{
+        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Settings/SettingsBreadcrumb.cshtml", new SettingsBreadcrumbViewModel
+            {
+                SettingsCurrentPage = SettingsPages.ManageAdminAccess,
+                HasAddNewButton = false,
+                BreadcrumbButtonName = "Add Admin User",
+                BreadcrumbButtonCallbackFunction = "AddNewAdminUser"
+            });
+    }
+
+    <!-- Settings Filter Component -->
+    <div class="card mb-4 mt-2 overview-filters-card app-card-main-scaling">
+        <div class="card-body pt-0 pb-0">
+            <div class="row fs-12 mt-1 mb-2">
+                <p class="theme-txt-clr text-center w-100 fw-bold fs-16" id="TypeFilterTitle">Filters</p>
+                <div class="row col-12 d-flex flex-wrap module-overview-filters">
+                    <div class="w-auto me-auto mb-1">
+                        <div class="d-flex">
+                            <p class="custom-p w-fit-content align-content-center">Domain</p>
+                            <select class="custom-input-text w-200p ms-2" id="ReportModuleSelect" onchange="FilterByDomain()">
+                                <option value="0">Please select Domain Name</option>
+                                @foreach (var domain in domains)
+                                {
+                                    <option value="@domain">@domain</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Access Table -->
+    <div class="card mb-1 mt-1 overview-filters-card theme-txt-clr app-card-main-scaling report-data-area p-4" id="report-data-area">
+        <div id="SettingsData">
+            <h3 class="w-100 text-center theme-txt-clr">
+                Manage Admin Access
+            </h3>
+            <div id="AdminAccessSettings" class="mt-3">
+                <table id="AdminAccessData" class="table table-striped table-bordered table-hover theme-border align-middle campain-table-type fs-12">
+                    <thead>
+                        <tr>
+                            <th class="theme-bg text-white">Domain</th>
+                            <th class="theme-bg text-white">Username</th>
+                            <th class="theme-bg text-white">Desktop (Environment)</th>
+                            <th class="theme-bg text-white">Desktop (Read)</th>
+                            <th class="theme-bg text-white">Desktop (Write)</th>
+                            <th class="theme-bg text-white">Desktop (Report)</th>
+                            <th class="theme-bg text-white">Tickers (Environment)</th>
+                            <th class="theme-bg text-white">Tickers (Read)</th>
+                            <th class="theme-bg text-white">Tickers (Write)</th>
+                            <th class="theme-bg text-white">Tickers (Report)</th>
+                            <th class="theme-bg text-white">RSS (Environment)</th>
+                            <th class="theme-bg text-white">RSS (Read)</th>
+                            <th class="theme-bg text-white">RSS (Write)</th>
+                            <th class="theme-bg text-white">RSS (Report)</th>
+                            <th class="theme-bg text-white">User Last Modified</th>
+                            <th class="theme-bg text-white">Machine Last Modified</th>
+                            <th class="theme-bg text-white">Lockscreen (Environment)</th>
+                            <th class="theme-bg text-white">Lockscreen (Read)</th>
+                            <th class="theme-bg text-white">Lockscreen (Write)</th>
+                            <th class="theme-bg text-white">Lockscreen (Report)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var access in Model.AdminAccess)
+                        {
+                            var cssBg = (index++ % 2 == 0) ? "report-piechart-color-silver-dim" : "";
+                            cssBg += " theme-txt-clr";
+
+                            <tr>
+                                <td class="@cssBg">@access.Domain</td>
+                                <td class="@cssBg">@access.Username</td>
+                                <td class="@cssBg">@access.DesktopEnvironment</td>
+                                <td class="@cssBg">@access.DesktopRead</td>
+                                <td class="@cssBg">@access.DesktopWrite</td>
+                                <td class="@cssBg">@access.DesktopReport</td>
+                                <td class="@cssBg">@access.TickersEnvironment</td>
+                                <td class="@cssBg">@access.TickersRead</td>
+                                <td class="@cssBg">@access.TickersWrite</td>
+                                <td class="@cssBg">@access.TickersReport</td>
+                                <td class="@cssBg">@access.RSSEnvironment</td>
+                                <td class="@cssBg">@access.RSSRead</td>
+                                <td class="@cssBg">@access.RSSWrite</td>
+                                <td class="@cssBg">@access.RSSReport</td>
+                                <td class="@cssBg">@access.UserLastModified</td>
+                                <td class="@cssBg">@access.MachineLastModified</td>
+                                <td class="@cssBg">@access.LockscreenEnvironment</td>
+                                <td class="@cssBg">@access.LockscreenRead</td>
+                                <td class="@cssBg">@access.LockscreenWrite</td>
+                                <td class="@cssBg">@access.LockscreenReport</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+
+<script>
+    // var domains = @Html.Raw(Json.Serialize(domains));
+
+    // $(document).ready(function () {
+    //     adminAccessDT = MakeStandardDataTable("AdminAccessData");
+    // });
+
+    // function FilterByDomain() {
+    //     const selectedDomain = $("#ReportModuleSelect").val();
+
+    //     if (selectedDomain === "0") {
+    //         adminAccessDT.column(0).search("").draw();
+    //     } else {
+    //         adminAccessDT.column(0).search(selectedDomain).draw();
+    //     }
+    // }
+
+</script>
