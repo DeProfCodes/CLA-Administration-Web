@@ -133,13 +133,17 @@
     </div>
 </div>
 
+<div class="modal-dialog modal-dialog-centered">
+    
+</div>
+
 <!-- Create New Staging User Modal -->
-@* <div class="modal fade" id="CreateStagingUserModal" tabindex="-1" aria-labelledby="CreateStagingUserModalLabel" aria-hidden="true">
+<div class="modal fade" id="CreateStagingUserModal" tabindex="-1" aria-labelledby="CreateStagingUserModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="CreateStagingUserModalLabel">Add New Staging User</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal('CreateStagingUserModal')"></button>
             </div>
             <div class="modal-body">
                 <form id="CreateStagingUserForm">
@@ -176,14 +180,63 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="SaveStagingUser()">Save User</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal('CreateStagingUserModal')">Cancel</button>
+                <button type="button" class="btn  custom-btn-default" onclick="SaveStagingUser()">Save User</button>
             </div>
         </div>
     </div>
-</div> *@
+</div> 
+
+<!-- Create New Staging Machine Modal -->
+<div class="modal fade" id="CreateStagingMachineModal" tabindex="-1" aria-labelledby="CreateStagingUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="CreateStagingUserModalLabel">Add New Staging Machine</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal('CreateStagingMachineModal')"></button>
+            </div>
+            <div class="modal-body">
+                <form id="CreateStagingUserForm">
+                    <div class="mb-3">
+                        <label for="StagingUserDomain" class="form-label">Domain</label>
+                        <select class="form-select" id="StagingUserDomain" required>
+                            <option value="">Please select a domain</option>
+                            @foreach (var domain in usersDomains)
+                            {
+                                <option value="@domain">@domain</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="StagingMachinename" class="form-label">Machine Name</label>
+                        <input type="text" class="form-control" id="StagingMachinename" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="StagingMachineDescription" class="form-label">Machine Description</label>
+                        <input type="text" class="form-control" id="StagingMachineDescription" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="StagingUserUserLastModified" class="form-label">User Last Modified</label>
+                        <input type="text" class="form-control" id="StagingUserUserLastModified" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="StagingMachineLastModified" class="form-label">Machine Last Modified</label>
+                        <input type="datetime-local" class="form-control" id="StagingMachineLastModified">
+                    </div>
+                  
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closeModal" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal('CreateStagingMachineModal')">Cancel</button>
+                <button type="button" class="btn custom-btn-default" onclick="SaveStagingMachine()">Save Machine</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
     
@@ -256,15 +309,32 @@
         {
             if (userActive)
                 usersDT.column(0).search(selectedDomain).draw();
+
             else
                 machinesDT.column(0).search(selectedDomain).draw();
         }
     }
 
-    //Function to open new modal to begin adding new staging user or machine
+     
     function AddNewStagingEntity()
     {
-        alert("Tank You");
-    }
+       
+        const buttonText = $("#BreadcrumSettingsBtnText").text();
 
+        if (buttonText.includes("User"))
+        {
+            $('#CreateStagingUserModal').modal('show');
+        } 
+        else if (buttonText.includes("Machine"))
+
+        {
+            $('#CreateStagingMachineModal').modal('show');
+        }
+    } 
+
+  
+    function closeModal(modalId)
+    {
+        $('#' + modalId).modal('hide');  
+    }
 </script>
