@@ -3,7 +3,7 @@
     public class TopNavigationViewModel
     {
         public string ProfilePictureUrl { get; set; }
-        
+
         public string UserFullname { get; set; }
 
         public string CompanyDepartment { get; set; }

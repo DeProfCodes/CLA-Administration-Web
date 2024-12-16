@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System.Text.Json.Serialization;
 
 namespace CLA_Administration_Web.Models.APIResponses.Reports.Survey
 {

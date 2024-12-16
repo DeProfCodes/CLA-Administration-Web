@@ -1,5 +1,4 @@
 ﻿using CLA_Administration_Web.Helpers.Enums.AppPages;
-using CLA_Administration_Web.Helpers.Enums.Shared;
 
 namespace CLA_Administration_Web.ViewModels.Modules
 {
@@ -15,7 +14,7 @@ namespace CLA_Administration_Web.ViewModels.Modules
 
         public bool IsAllModulesBreadcrumb { get; set; }
 
-        public bool IsDetailsPage {get; set; }
+        public bool IsDetailsPage { get; set; }
 
         public int ModuleDetailsId { get; set; }
 

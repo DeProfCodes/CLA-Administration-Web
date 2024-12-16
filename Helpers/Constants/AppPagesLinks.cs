@@ -42,7 +42,7 @@
 
             //PST Modules: Popup, Survey, Ticker
             public const string ModulePSTTableOverviewPageLink = "~/Views/Shared/Components/Custom/Modules/Overviews/PST/ModulePSTTableOverview.cshtml";
-            
+
             //LDS Modules: Lockscreen, Desktop, Screensaver 
             public const string ModuleLDSTableOverviewPageLink = "~/Views/Shared/Components/Custom/Modules/Overviews/LDS/ModuleLDSTableOverview.cshtml";
             public const string ModuleLDSGanttOverviewPageLink = "~/Views/Shared/Components/Custom/Modules/Overviews/LDS/ModuleLDSGanttOverview.cshtml";
@@ -115,6 +115,7 @@
             public const string ActiveConnectionsPageLink = "~/Views/Settings/ActiveConnections.cshtml";
             public const string SkinsOfflineImagesPageLink = "~/Views/Settings/SkinsOfflineImages.cshtml";
             public const string DesktopInformationPageLink = "~/Views/Settings/DesktopInformation.cshtml";
+            public const string EditSettingsModalPageLink = "~/Views/Shared/Components/Custom/Settings/SettingsModalView.cshtml";
         }
 
         public class Reports

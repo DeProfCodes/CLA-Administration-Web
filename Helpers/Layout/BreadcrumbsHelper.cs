@@ -38,7 +38,7 @@ namespace CLA_Administration_Web.Helpers.Layout
                     ModuleSubPage = "Details",
                     HasActionButton = true,
                     IsDetailsPage = true,
-                    ModuleDetailsId = moduleDetailsId, 
+                    ModuleDetailsId = moduleDetailsId,
                     ModulePreviewPage = ModulesPages.PopupOverview,
                     IsAddNewIcon = true,
                     ActionButtonText = "Edit Popup",
@@ -353,7 +353,7 @@ namespace CLA_Administration_Web.Helpers.Layout
             };
             return modulesBreadcrumbs;
         }
-        
+
         public static ModuleBreadcrumbViewModel GetModuleBreadcrumbData(ModulesPages modulePage, int moduleDetailsId = 0)
         {
             var allModulesBreadcrumbs = GetAllModulesBreadcrumbData(moduleDetailsId);

@@ -119,3 +119,23 @@ function MakeSimpleDataTable(tableId)
         responsive: true  // Helps with layout when hidden
     }).columns.adjust().draw(); // Adjust column layout and redraw to ensure it initializes fully
 }
+
+function LoadEditModal(FormData, path, type,formId,btnId)
+{
+    $.ajax({
+        url: url,
+        type: type, 
+        data: formData,
+        success: function (response)
+        {
+          
+            $('#' + formId).html(response);
+          
+            $('#' + btnId).modal("show");
+        },
+        error: function ()
+        {
+            alert("An error occurred while processing the request.");
+        }
+    });
+}

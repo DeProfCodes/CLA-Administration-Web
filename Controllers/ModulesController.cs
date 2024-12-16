@@ -4,11 +4,8 @@ using CLA_Administration_Web.Helpers.Enums.Shared;
 using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
 using CLA_Administration_Web.Helpers.MockData;
 using CLA_Administration_Web.Helpers.Modules;
-using CLA_Administration_Web.Helpers.Shared;
-using CLA_Administration_Web.Models;
 using CLA_Administration_Web.Services;
 using CLA_Administration_Web.Services.Modules;
-using CLA_Administration_Web.ViewModels.Modules;
 using CLA_Administration_Web.ViewModels.Modules.ContentLibrary;
 using CLA_Administration_Web.ViewModels.Modules.GanttChart;
 using CLA_Administration_Web.ViewModels.Modules.LDS;
@@ -17,10 +14,7 @@ using CLA_Administration_Web.ViewModels.Modules.Rss;
 using CLACommonFunctionsLibrary_NET.Helpers;
 using CLACommonFunctionsLibrary_NET.Helpers.Enums;
 using CLACommonFunctionsLibrary_NET.Helpers.Logs;
-using CLAModulesLibrary.Models.Popup.SubModels;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CLA_Administration_Web.Controllers
 {
@@ -119,8 +113,8 @@ namespace CLA_Administration_Web.Controllers
             });
 
             var moduleSearchName = moduleNameType != ModuleNamesType.LockedDesktop ? moduleNameType.GetDisplayName().ToLower() : "lockscreen";
-            
-            contents = contents.Where(x => 
+
+            contents = contents.Where(x =>
                                             x.TargetedModulesFullName.ToLower().Contains(moduleSearchName) &&
                                             x.EffectiveFromDate.ToString("MM/YY") == DateTime.Today.ToString("MM/YY")
                                      ).ToList();
@@ -145,8 +139,8 @@ namespace CLA_Administration_Web.Controllers
             try
             {
                 data.CategoriesTrees = ModulesMockData.AllContentLibraryCategories;
-                
-                data.CategoriesTrees.ForEach(x => 
+
+                data.CategoriesTrees.ForEach(x =>
                 {
                     x.ContentsCount = ModulesMockData.AllContentLibraryContents.Count(c => c.CategoryId == x.CategoryId);
                 });
@@ -155,7 +149,7 @@ namespace CLA_Administration_Web.Controllers
 
                 LocalDataStorage.UpdateContentLibraryCategoriesData(data.CategoriesTrees);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 eventLogger.WriteToEventLog($"Failed to read, details ContentLibraryCategories \n Error: {ex.Message}\n Stacktrace: {ex.StackTrace}\n Full Exception Details: {ex}");
                 _logger.LogError($"Settings file was not read properly, details: {ex.Message}", ex);
@@ -171,11 +165,11 @@ namespace CLA_Administration_Web.Controllers
             return PartialView(AppPagesLinks.Modules.ContentLibraryCategoryDetailsPageLink, data);
         }
 
-        public async Task<IActionResult> AddNewContentLibraryCategory(int categoryId=0)
+        public async Task<IActionResult> AddNewContentLibraryCategory(int categoryId = 0)
         {
             var categoryTreeVm = (categoryId != null && categoryId != 0) ? ModulesHelper.GetCategoryTreeStructure(ModulesMockData.AllContentLibraryCategories, categoryId) : new();
 
-            
+
             return PartialView(AppPagesLinks.Modules.AddNewContentLibraryCategoryPageLink, categoryTreeVm);
         }
 
@@ -193,7 +187,7 @@ namespace CLA_Administration_Web.Controllers
             });
 
             var categoryTree = ModulesHelper.GetCategoryTreeStructure(ModulesMockData.AllContentLibraryCategories, categoryId);
-            
+
             var contentsViewModel = new ContentLibraryContentsViewModel
             {
                 CategoryId = categoryId,
@@ -223,11 +217,11 @@ namespace CLA_Administration_Web.Controllers
         {
             var contentInfo = ModulesMockData.AllContentLibraryContents.FirstOrDefault(x => x.ContentId == contentId);
 
-            var categoryTreeVm = new AddNewContentLibraryCategory 
-            { 
-                ModuleName = moduleName,   
+            var categoryTreeVm = new AddNewContentLibraryCategory
+            {
+                ModuleName = moduleName,
             };
-            
+
             if (moduleName == ModuleNamesType.Screensaver || moduleName == ModuleNamesType.LockedDesktop || moduleName == ModuleNamesType.Desktop || contentId > 0)
             {
                 categoryTreeVm.ContentCategories = ModulesHelper.GetAllCategoriesInTree(ModulesMockData.AllContentLibraryCategories);
@@ -283,7 +277,7 @@ namespace CLA_Administration_Web.Controllers
         {
             return PartialView(AppPagesLinks.Modules.DesktopAddNewPageLink);
         }
-        
+
         #endregion
 
         #region LockedDesktop
@@ -330,7 +324,7 @@ namespace CLA_Administration_Web.Controllers
         {
             var screensaversStaging = await _moduleService.GetAllScreensaversData(StagingLiveType.Staging);
             var screensaversLive = await _moduleService.GetAllScreensaversData(StagingLiveType.Live);
-            
+
             screensaversStaging.ForEach(s =>
             {
                 s.Status = ModulesHelper.GetModuleStatus(s.EffectiveFrom, s.EffectiveTo);
@@ -370,9 +364,9 @@ namespace CLA_Administration_Web.Controllers
         {
             var popupDataViewModel = await _moduleService.GetAllPopupsData();
 
-            popupDataViewModel.ForEach(p => 
+            popupDataViewModel.ForEach(p =>
             {
-                p.Status = ModulesHelper.GetModuleStatus(p.EffectiveFrom, p.EffectiveTo); 
+                p.Status = ModulesHelper.GetModuleStatus(p.EffectiveFrom, p.EffectiveTo);
                 p.EffectiveFromDate = TypesParserHelper.ParseDate(p.EffectiveFrom);
                 p.EffectiveToDate = TypesParserHelper.ParseDate(p.EffectiveTo);
             });
@@ -384,7 +378,7 @@ namespace CLA_Administration_Web.Controllers
 
         public async Task<IActionResult> PopupDetails(int popupId)
         {
-            var popupDetails = LocalDataStorage.StagingData.AllPopupData.Where(x => x.Id == popupId).FirstOrDefault();  
+            var popupDetails = LocalDataStorage.StagingData.AllPopupData.Where(x => x.Id == popupId).FirstOrDefault();
 
             return PartialView(AppPagesLinks.Modules.PopupDetailsPageLink, popupDetails);
         }
@@ -401,11 +395,11 @@ namespace CLA_Administration_Web.Controllers
             {
                 PopupFeedback = new(),
                 Status = new()
-            }; 
+            };
 
             if (popupId > 0)
             {
-                popup = await _moduleService.GetPopupById(popupId, StagingLiveType.Staging) ?? new() { PopupFeedback = new(), Status = new() }; 
+                popup = await _moduleService.GetPopupById(popupId, StagingLiveType.Staging) ?? new() { PopupFeedback = new(), Status = new() };
 
                 if (popup != null)
                 {
@@ -413,7 +407,7 @@ namespace CLA_Administration_Web.Controllers
                     popup.EffectiveToDate = TypesParserHelper.ParseDate(popup.EffectiveTo);
                 }
             }
-            
+
             var addNewPopupVm = new AddNewPopupViewModel
             {
                 ActiveSurveys = allSurveys.Where(s => s.Status.StatusType == StatusType.Active).ToList(),
@@ -519,7 +513,7 @@ namespace CLA_Administration_Web.Controllers
             {
                 SurveyId = surveyId,
                 SurveyQuestionId = questionId,
-                AddOrEditType = (questionId > 0 ) ? AddOrEditType.Edit : AddOrEditType.Add
+                AddOrEditType = (questionId > 0) ? AddOrEditType.Edit : AddOrEditType.Add
             };
 
             return PartialView(AppPagesLinks.Modules.AddNewSurveyQuestionPageLink, surveyQuestionVm);
@@ -550,7 +544,7 @@ namespace CLA_Administration_Web.Controllers
 
             return PartialView(AppPagesLinks.Modules.TickerDetailsPageLink, tickerDetails);
         }
-        
+
         public async Task<IActionResult> AddNewTicker(int tickerId)
         {
             var allSurveys = await _moduleService.GetAllTickersData();
@@ -585,7 +579,7 @@ namespace CLA_Administration_Web.Controllers
         #endregion
 
         #region RSS
-       
+
         public async Task<IActionResult> RssCategoryOverview()
         {
             var rssCategories = await _moduleService.GetAllRssCategories(StagingLiveType.Staging);
@@ -636,7 +630,7 @@ namespace CLA_Administration_Web.Controllers
             var addNewFeedVm = new AddNewRssFeed
             {
                 CurrentCategoryId = rssCategoryId,
-                RssFeedData = rssFeed, 
+                RssFeedData = rssFeed,
                 AddOrEditType = rssFeed.FeedId > 0 ? AddOrEditType.Edit : AddOrEditType.Add,
                 RssCategories = rssCategories
             };
@@ -670,4 +664,3 @@ namespace CLA_Administration_Web.Controllers
         #endregion
     }
 }
- 

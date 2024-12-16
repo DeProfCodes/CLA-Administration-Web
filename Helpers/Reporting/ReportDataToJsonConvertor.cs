@@ -1,6 +1,6 @@
 ﻿using CLA_Administration_Web.ViewModels.Reports;
-using System.Text.Json.Serialization;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace CLA_Administration_Web.Helpers.Reporting
 {
@@ -13,7 +13,7 @@ namespace CLA_Administration_Web.Helpers.Reporting
             {
                 var jsonObject = new
                 {
-                    Eff_From = item.EffectiveFrom, 
+                    Eff_From = item.EffectiveFrom,
                     Eff_To = item.EffectiveTo,
                     user_Name = item.Username,
                     machine_Name = item.MachineName,
@@ -73,7 +73,7 @@ namespace CLA_Administration_Web.Helpers.Reporting
                 Eff_To = model.EffectiveTo,
                 STM_ID = model.PopupId,
                 STM_Title = model.PopupTitle,
-                STM_Text = model.PopupText, 
+                STM_Text = model.PopupText,
                 Num_Targeted = model.Targeted,
                 Perc_Show = model.Show,
                 Click = model.Click,
@@ -82,11 +82,11 @@ namespace CLA_Administration_Web.Helpers.Reporting
                 Perc_Dismiss = model.Dismiss,
                 Snooze = model.Snooze,
                 Perc_Snooze = model.Snooze,
-                ReShow = model.Show, 
+                ReShow = model.Show,
                 Perc_ReShow = model.Show,
                 Autohide = model.AutoHide,
                 Perc_Autohide = model.AutoHide,
-                No_Action = model.Outstanding, 
+                No_Action = model.Outstanding,
                 Perc_No_Action = model.Outstanding
             };
 

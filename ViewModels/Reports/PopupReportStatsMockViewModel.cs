@@ -1,6 +1,4 @@
-﻿using CLAModulesLibrary.Models.Popup;
-using CLAModulesLibrary.Models.Popup.SubModels;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace CLA_Administration_Web.ViewModels.Reports
 {

@@ -1,28 +1,18 @@
-﻿using CLA_Administration_Web.Helpers.MockData;
-using CLA_Administration_Web.Models.APIResponses.Reports.Survey;
-using CLA_Administration_Web.Models.APIResponses.Reports.Troubleshoot;
-using CLA_Administration_Web.Services;
+﻿using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
 using CLA_Administration_Web.ViewModels.Reports;
 using CLA_Administration_Web.ViewModels.Reports.CampaignDispatch;
 using CLA_Administration_Web.ViewModels.Reports.Survey;
+using CLACommonFunctionsLibrary_NET.Helpers.Enums;
 using ClosedXML.Excel;
-using DocumentFormat.OpenXml.Spreadsheet;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Reporting.NETCore;
+using Newtonsoft.Json;
 using System.Data;
 using System.Text;
-using System.Text.Json.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
-using CLACommonFunctionsLibrary_NET.Helpers.Enums;
 
 namespace CLA_Administration_Web.Helpers.Reporting
 {
     public class ExportHelper
     {
-        public static byte[] GetReportExcelBytes(List<ReportRDLC> reportsRDLCs, string reportRDLCPath, Dictionary<string,string> parameters)
+        public static byte[] GetReportExcelBytes(List<ReportRDLC> reportsRDLCs, string reportRDLCPath, Dictionary<string, string> parameters)
         {
             return ReportingHelper.GetReportBytes("EXCELOPENXML", reportsRDLCs, reportRDLCPath, parameters);
         }
@@ -140,7 +130,7 @@ namespace CLA_Administration_Web.Helpers.Reporting
 
         public static void ExportSurveyReport(XLWorkbook workbook, string reportPageName, SurveyReports data)
         {
-            var reportData = new 
+            var reportData = new
             {
                 Summary = GetReportExcelBytes(new List<ReportRDLC> { data.Summary, data.Details, data.SummaryDetails }, data.Summary.ReportRDLCPath),
                 Outstanding = GetReportExcelBytes(new List<ReportRDLC> { data.Details, data.Summary, data.SummaryDetails, data.Status }, data.Outstanding.ReportRDLCPath),
@@ -170,7 +160,7 @@ namespace CLA_Administration_Web.Helpers.Reporting
 
         public static void ExportTickerReport(XLWorkbook workbook, string reportPageName, TickerReports data)
         {
-            var reportData = new 
+            var reportData = new
             {
                 Summary = GetReportExcelBytes(new List<ReportRDLC> { data.Summary }, data.Summary.ReportRDLCPath),
                 Completed = GetReportExcelBytes(new List<ReportRDLC> { data.Completed, data.Outstanding, data.Status }, data.Completed.ReportRDLCPath),
@@ -203,7 +193,7 @@ namespace CLA_Administration_Web.Helpers.Reporting
                 { "pUserOrMachine", policyTargetType},
             };
 
-            var reportData = new 
+            var reportData = new
             {
                 Summary = GetReportExcelBytes(new List<ReportRDLC> { data.Summary, data.SummaryDetails, data.Outstanding, data.ResponseDetails }, data.Summary.ReportRDLCPath),
                 Outstanding = GetReportExcelBytes(new List<ReportRDLC> { data.Summary, data.SummaryDetails, data.Outstanding, data.ResponseDetails, data.Status }, data.Outstanding.ReportRDLCPath),
@@ -225,7 +215,7 @@ namespace CLA_Administration_Web.Helpers.Reporting
                 if (reportPageName == "raw_data_only") AddSheetToExcel(workbook, reportData.RawData, "Policy Raw");
             }
 
-            
+
         }
 
         public static void ExportActiveUsersReport(XLWorkbook workbook, string reportPageName, ReportRDLC data, ReportRDLC status)
@@ -399,7 +389,7 @@ namespace CLA_Administration_Web.Helpers.Reporting
                 csvContent.AppendLine($"SVC Version,{troubleshootData.LastSyncDetails.MSDIMSVCVersion?.ToString("yyyy/MM/dd")}");
                 csvContent.AppendLine();
             }
-            
+
             if (troubleshootData.UserGroups != null)
             {
                 csvContent.AppendLine("Active Current Popups,");

@@ -68,7 +68,7 @@ namespace CLA_Administration_Web.Helpers.Modules
             if (feedback.RequireFeedbackComment) feedbackOptions.Add("Comment");
 
             var feedbackStr = feedbackOptions.Count > 0 ? string.Join(" | ", feedbackOptions) : "No Feedback";
-            
+
             return feedbackStr;
         }
 

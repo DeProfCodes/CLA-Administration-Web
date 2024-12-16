@@ -1,6 +1,4 @@
-﻿using CLA_Administration_Web.Helpers.Enums.Shared;
-
-namespace CLA_Administration_Web.ViewModels.Layouts
+﻿namespace CLA_Administration_Web.ViewModels.Layouts
 {
     public class LeftNavigationViewModel
     {

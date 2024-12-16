@@ -1,7 +1,6 @@
 ﻿using CLA_Administration_Web.Helpers.Reporting;
 using Newtonsoft.Json;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 
 namespace CLA_Administration_Web.Models.APIResponses.Reports.Survey
 {

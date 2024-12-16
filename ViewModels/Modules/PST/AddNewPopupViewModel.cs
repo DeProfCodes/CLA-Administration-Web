@@ -11,7 +11,7 @@ namespace CLA_Administration_Web.ViewModels.Modules.PST
         public List<ModuleSkinViewModel> CustomSkins { get; set; }
 
         public AddOrEditType AddOrEditType { get; set; }
-        
+
         public ModulePSTDataViewModel PopupModel { get; set; }
     }
 }

@@ -2,7 +2,6 @@ using CLA_Administration_Web.Helpers.Constants;
 using CLA_Administration_Web.Helpers.Enums.Reports;
 using CLA_Administration_Web.Helpers.Enums.Shared;
 using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
-using CLA_Administration_Web.Helpers.MockData;
 using CLA_Administration_Web.Helpers.Reporting;
 using CLA_Administration_Web.Services;
 using CLA_Administration_Web.Services.Reporting;
@@ -10,15 +9,7 @@ using CLA_Administration_Web.ViewModels.Reports;
 using CLA_Administration_Web.ViewModels.Reports.CampaignDispatch;
 using CLACommonFunctionsLibrary_NET.Helpers.Enums;
 using ClosedXML.Excel;
-using DocumentFormat.OpenXml.Office2010.Excel;
-using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
-using DocumentFormat.OpenXml.Spreadsheet;
-using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Hosting.Internal;
-using Microsoft.Reporting.NETCore;
-using Newtonsoft.Json;
-using System.Text;
 
 namespace CLA_Administration_Web.Controllers
 {
@@ -179,7 +170,7 @@ namespace CLA_Administration_Web.Controllers
         #endregion
 
         #region Active Users Machines
-        
+
         [HttpGet]
         public async Task<IActionResult> ActiveUsersReport()
         {
@@ -203,7 +194,7 @@ namespace CLA_Administration_Web.Controllers
         #endregion
 
         #region Campaign Dispatch
-        
+
         [HttpGet]
         public async Task<IActionResult> CampaignDispatchReport()
         {
@@ -221,7 +212,7 @@ namespace CLA_Administration_Web.Controllers
         #endregion
 
         #region Troubleshoot
-        
+
         [HttpGet]
         public async Task<IActionResult> TroubleshootReport()
         {
@@ -245,7 +236,7 @@ namespace CLA_Administration_Web.Controllers
 
         #endregion
 
-        public async Task<IActionResult> ExportFileToExcel(ReportsNamesType reportType, ModuleReportDataFilterViewModel parameters, string reportPageName, CLAEntityType entityType, 
+        public async Task<IActionResult> ExportFileToExcel(ReportsNamesType reportType, ModuleReportDataFilterViewModel parameters, string reportPageName, CLAEntityType entityType,
                                                            string entityValue, CampaignDispatchFiltersViewModel dispatchParams, string policyTargetType, bool surveyTransponsed)
         {
             var filename = "";
@@ -279,7 +270,7 @@ namespace CLA_Administration_Web.Controllers
                         ExportHelper.ExportSurveyTransposedData(workbook, data2);
                         filename = $"Survey_Report_{title}_{timestamp}.xlsx";
                     }
-                    
+
                 }
                 else if (reportType == ReportsNamesType.Ticker)
                 {
@@ -301,7 +292,7 @@ namespace CLA_Administration_Web.Controllers
                 {
                     var data = await reportingHelper.GetActiveUsersReport(parameters, reportType);
                     var status = reportingHelper.GetStatusReport(parameters);
-                    
+
                     ExportHelper.ExportActiveUsersReport(workbook, reportType.GetDisplayDescription(), data, status);
                     filename = ExportHelper.GetReportFilename(reportType, reportPageName, 0, "");
                 }
@@ -333,4 +324,3 @@ namespace CLA_Administration_Web.Controllers
         }
     }
 }
- 

@@ -1,6 +1,5 @@
 ﻿using CLA_Administration_Web.Helpers.Constants;
 using CLA_Administration_Web.Helpers.Enums.Module;
-using CLA_Administration_Web.Helpers.Enums.Shared;
 using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
 using CLA_Administration_Web.Helpers.Modules;
 using CLA_Administration_Web.Helpers.Shared;
@@ -8,12 +7,8 @@ using CLA_Administration_Web.ViewModels.Modules.ContentLibrary;
 using CLA_Administration_Web.ViewModels.Modules.LDS;
 using CLA_Administration_Web.ViewModels.Modules.PST;
 using CLA_Administration_Web.ViewModels.Modules.Rss;
-using CLA_Administration_Web.ViewModels.Shared;
 using CLAModulesLibrary.Helpers.Enums.Modules.Popup;
-using CLAModulesLibrary.Models.Popup;
 using CLAModulesLibrary.Models.Popup.SubModels;
-using System;
-using System.Net.Mime;
 
 namespace CLA_Administration_Web.Helpers.MockData
 {
@@ -22,13 +17,13 @@ namespace CLA_Administration_Web.Helpers.MockData
         public static class StagingData
         {
             //PST
-            public static List<ModulePSTDataViewModel> AllPopupsData { get; set; } 
+            public static List<ModulePSTDataViewModel> AllPopupsData { get; set; }
 
-            public static List<ModulePSTDataViewModel> AllTickersData { get; set; } 
+            public static List<ModulePSTDataViewModel> AllTickersData { get; set; }
 
-            public static List<ModulePSTDataViewModel> AllSurveysData { get; set; } 
+            public static List<ModulePSTDataViewModel> AllSurveysData { get; set; }
 
-            public static List<SurveyQuestionViewModel> AllSurveyQuestions { get; set; } 
+            public static List<SurveyQuestionViewModel> AllSurveyQuestions { get; set; }
 
             //LDS
             public static List<ModuleLDSDataViewModel> AllScreensaversData { get; set; } = GenerateLDSRandomData();
@@ -111,7 +106,7 @@ namespace CLA_Administration_Web.Helpers.MockData
                     DisplayHeaderText = random.Next(0, 2) == 1,
                     DisplayBodyText = random.Next(0, 2) == 1,
                     DisplayConclusionText = random.Next(0, 2) == 1,
-                    
+
                     PopupIcon = popupIcons[random.Next(popupIcons.Count)],
                     PopupDisplayType = popupDisplayTypes[random.Next(popupDisplayTypes.Count)],
                     PopupAutoHideSeconds = random.Next(100),
@@ -153,7 +148,7 @@ namespace CLA_Administration_Web.Helpers.MockData
             var surveyQuestionCounters = new Dictionary<int, int>();
 
             var responseTypes = new List<string> { "Single Select", "Multi Select", "Yes/No", "Yes/No/NA", "Agree/Disagree", "Text", "Re-Arrange" };
-            
+
             for (int i = 1; i <= 200; i++)
             {
                 var surveyId = random.Next(1, 51);
@@ -162,13 +157,13 @@ namespace CLA_Administration_Web.Helpers.MockData
                 {
                     surveyQuestionCounters[surveyId] = 1;
                 }
-                
+
                 var questionNo = surveyQuestionCounters[surveyId].ToString();
                 surveyQuestionCounters[surveyId]++;
 
-                var isScored = random.Next(0, 2) == 0 ? "No" : "Yes"; 
+                var isScored = random.Next(0, 2) == 0 ? "No" : "Yes";
 
-                var questionTitle = RandomQuestionTitle(random, 3, 5); 
+                var questionTitle = RandomQuestionTitle(random, 3, 5);
                 var questionText = RandomQuestionText(random, questionTitle, 5, 20);
 
                 var responseType = responseTypes[random.Next(responseTypes.Count)];
@@ -208,7 +203,7 @@ namespace CLA_Administration_Web.Helpers.MockData
 
             var words = new List<string> { questionStarters[random.Next(questionStarters.Count)] };
             words.AddRange(Enumerable.Range(0, random.Next(minWords - 1, maxWords)).Select(_ => wordList[random.Next(wordList.Count)]));
-            
+
             return string.Join(" ", words) + "?";
         }
 
@@ -222,7 +217,7 @@ namespace CLA_Administration_Web.Helpers.MockData
 
             var words = new List<string> { title.Replace("?", ":") };
             words.AddRange(Enumerable.Range(0, random.Next(minWords, maxWords)).Select(_ => wordList[random.Next(wordList.Count)]));
-            
+
             return string.Join(" ", words);
         }
 
@@ -280,7 +275,7 @@ namespace CLA_Administration_Web.Helpers.MockData
 
                 var content = SharedFunctions.CapitalizeFirst(MockDataHelperFunctions.RandomString(3, 5));
 
-                while(savedContent.Contains(content))
+                while (savedContent.Contains(content))
                     content = SharedFunctions.CapitalizeFirst(MockDataHelperFunctions.RandomString(3, 5));
 
                 savedContent.Add(content);
@@ -292,7 +287,7 @@ namespace CLA_Administration_Web.Helpers.MockData
                     CategoryDescription = SharedFunctions.CapitalizeFirst(MockDataHelperFunctions.RandomString(3, 5)),
                     ContentType = SharedFunctions.CapitalizeFirst(contentType[random.Next(contentType.Count)]),
                     ContentDescription = content,
-                    Duration = random.Next(0,61),
+                    Duration = random.Next(0, 61),
                     EffectiveFrom = effectiveFrom.ToString("yyyy/MM/dd"),
                     EffectiveTo = effectiveTo.ToString("yyyy/MM/dd"),
                     TimeslotFrom = MockDataHelperFunctions.RandomTime(),
@@ -336,7 +331,7 @@ namespace CLA_Administration_Web.Helpers.MockData
                     FeedId = i,
                     CategoryName = SharedFunctions.CapitalizeFirst(MockDataHelperFunctions.RandomString(1, 2)),
                     FeedName = SharedFunctions.CapitalizeFirst(MockDataHelperFunctions.RandomString(1, 2)),
-                    FeedURL = $"https://www.{MockDataHelperFunctions.RandomString(1,1)}.com",
+                    FeedURL = $"https://www.{MockDataHelperFunctions.RandomString(1, 1)}.com",
                 };
                 items.Add(rssCat);
             }
@@ -377,11 +372,11 @@ namespace CLA_Administration_Web.Helpers.MockData
                 CategoryId = currentCategoryId,
                 CategoryName = SharedFunctions.CapitalizeFirst(MockDataHelperFunctions.RandomString(1, 1)),
                 CategoryDescription = SharedFunctions.CapitalizeFirst(MockDataHelperFunctions.RandomString(1, 7)),
-                ContentsCount = random.Next(0, 100), 
+                ContentsCount = random.Next(0, 100),
                 _children = null,
             };
 
-            int childrenCount = random.Next(0, 6);  
+            int childrenCount = random.Next(0, 6);
 
             for (int i = 0; i < childrenCount; i++)
             {
@@ -405,8 +400,8 @@ namespace CLA_Administration_Web.Helpers.MockData
             for (int i = 1; i <= 100; i++)
             {
                 var treeCategory = PopulateCategoryTree(i, random.Next(0, 5));
-                
-                if(treeCategory != null)
+
+                if (treeCategory != null)
                     items.Add(treeCategory);
             }
             return items;
@@ -417,11 +412,11 @@ namespace CLA_Administration_Web.Helpers.MockData
             var items = new List<ContentLibraryContentModel>();
 
             var random = new Random();
-            
+
             var contentType = new List<string> { "Picture", "Audio", "Video", "URL" };
 
             var allCategories = ModulesHelper.GetAllCategoriesInTree(ModulesMockData.AllContentLibraryCategories);
-            var allCatIDs = allCategories.Select(c => c.CategoryId).ToList(); 
+            var allCatIDs = allCategories.Select(c => c.CategoryId).ToList();
 
             List<string> options = new List<string> { "SCR", "DSK", "LCK" };
             int numberOfOptions = random.Next(1, options.Count + 1);

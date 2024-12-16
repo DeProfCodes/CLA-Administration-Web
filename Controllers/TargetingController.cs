@@ -1,5 +1,4 @@
 using CLA_Administration_Web.Helpers.Constants;
-using CLA_Administration_Web.Helpers.Enums.AppPages;
 using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
 using CLA_Administration_Web.Helpers.Targeting;
 using CLA_Administration_Web.ViewModels.Shared;
@@ -18,7 +17,7 @@ namespace CLA_Administration_Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> TargetedEntities(ModuleNamesType moduleName, bool isReadonly=false)
+        public async Task<IActionResult> TargetedEntities(ModuleNamesType moduleName, bool isReadonly = false)
         {
             var targetingTree = TargetingHelper.GetTargetedEntities();
             var targetingSelect = TargetingHelper.GetTargetedEntitiesSelect();
@@ -84,4 +83,3 @@ namespace CLA_Administration_Web.Controllers
 
     }
 }
- 

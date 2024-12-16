@@ -1,11 +1,11 @@
-﻿using CLA_Administration_Web.Helpers.Enums.AppPages;
-using CLA_Administration_Web.Helpers.Enums.Shared;
+﻿using CLA_Administration_Web.Helpers.Enums.Shared;
 using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
 using CLA_Administration_Web.ViewModels.Modules.ContentLibrary;
 using CLA_Administration_Web.ViewModels.Modules.LDS;
 using CLA_Administration_Web.ViewModels.Modules.PST;
 using CLA_Administration_Web.ViewModels.Modules.Rss;
 using CLA_Administration_Web.ViewModels.Reports;
+using CLA_Administration_Web.ViewModels.Settings.StagingUsers;
 
 namespace CLA_Administration_Web.Services
 {
@@ -13,6 +13,10 @@ namespace CLA_Administration_Web.Services
     {
         public static class StagingData
         {
+            //Settings 
+            public static List<StagingUserMachineViewModel> SingleStagingMachine { get; set; }
+
+
             // PST Modules
             public static List<ModulePSTDataViewModel> AllPopupData { get; set; }
 
@@ -37,7 +41,7 @@ namespace CLA_Administration_Web.Services
 
             public static PopupReports PopupReports { get; set; }
 
-            public static PopupReportsViewModel AllPopupReports {get; set; }
+            public static PopupReportsViewModel AllPopupReports { get; set; }
 
             public static SurveyReports SurveyReports { get; set; }
 
@@ -67,10 +71,10 @@ namespace CLA_Administration_Web.Services
 
             public static List<RssCategoryOverviewViewModel> AllRSSCategories { get; set; }
 
-            public static List<RssFeedOverviewViewModel> AllRSSFeed { get; set; } 
+            public static List<RssFeedOverviewViewModel> AllRSSFeed { get; set; }
         }
 
-        public static List<ContentLibraryCategoryTree> AllContentLibraryCategories {get; set; }
+        public static List<ContentLibraryCategoryTree> AllContentLibraryCategories { get; set; }
 
         public static List<ContentLibraryContentModel> AllContentLibraryContents { get; set; }
 
@@ -111,6 +115,15 @@ namespace CLA_Administration_Web.Services
             }
             return new();
         }
+
+        //Update Settings Staging User
+
+
+        public static void UpdateStagingUserData(List<StagingUserMachineViewModel> data)
+        {
+            StagingData.SingleStagingMachine = data;
+        }
+
 
         // Update PST Modules Data
         public static void UpdatePopupsData(List<ModulePSTDataViewModel> data)

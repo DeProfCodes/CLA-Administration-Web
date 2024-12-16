@@ -15,7 +15,7 @@ namespace CLA_Administration_Web.Helpers.Enums.AppPages
 
         [Display(Name = "ExportFileToExcel", Description = "ExportFileToExcel", ShortName = "ModuleReport")]
         ExportFileToExcel,
-        
+
         [Display(Name = "SurveyReport", Description = "Survey Report", ShortName = "Survey")]
         SurveyReport,
 
@@ -33,7 +33,7 @@ namespace CLA_Administration_Web.Helpers.Enums.AppPages
 
         [Display(Name = "PopupReportOnly", Description = "Popup Report Only", ShortName = "Popup")]
         PopupReportOnly,
-        
+
         [Display(Name = "TickerReport", Description = "Ticker Report", ShortName = "Ticker")]
         TickerReport,
 
