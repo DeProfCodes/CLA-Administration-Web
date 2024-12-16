@@ -1,5 +1,10 @@
-﻿using CLA_Administration_Web.ViewModels.Settings.SetupExclusion;
+﻿using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
+using CLA_Administration_Web.ViewModels.Modules.PST;
+using CLA_Administration_Web.ViewModels.Settings.ActiveConections;
+using CLA_Administration_Web.ViewModels.Settings.ActiveConnections;
+using CLA_Administration_Web.ViewModels.Settings.SetupExclusion;
 using CLA_Administration_Web.ViewModels.Settings.StagingUsers;
+using Microsoft.AspNetCore.Identity.Data;
 
 namespace CLA_Administration_Web.Helpers.MockData
 {
@@ -12,6 +17,8 @@ namespace CLA_Administration_Web.Helpers.MockData
         public static List<SetupExclusionsUsersViewModel> SetupExcludedUsers { get; set; } = GetSetupUsersExclusions();
 
         public static List<SetupExclusionMachinesViewModel> SetupExcludedMachines { get; set; } = GetSetupMachinesExclusions();
+
+        public static List<ActiveConnection> ActiveConnections { get; set; } = GetActiveConnections();
 
         public static List<StagingUserMachineViewModel> GetStagingUsersOrMachines()
         {
@@ -77,6 +84,29 @@ namespace CLA_Administration_Web.Helpers.MockData
                     Lastname = MockDataHelperFunctions.GetRandomLastname(),
                     UserLastModified = MockDataHelperFunctions.GetRandomUserID(),
                     MachineLastModified = MockDataHelperFunctions.GetRandomMachineID()
+                };
+                result.Add(item);
+            }
+            return result;
+        }
+        public static List<ActiveConnection> GetActiveConnections()
+        {
+
+        var result = new List<ActiveConnection>();
+
+            var rand = new Random();
+
+            for (int i = 0; i < 15; i++)
+            {
+                var item = new ActiveConnection()
+                {
+                    ConnectionID = MockDataHelperFunctions.GetRandomConnectionsID(),
+                    Minutes = MockDataHelperFunctions.GetRandomConnectionsMinutes(),
+                    Host = MockDataHelperFunctions.GetRandomConnectionsHost(),
+                    Login = MockDataHelperFunctions.GetRandomConnectionsLogin(),
+                    Program = MockDataHelperFunctions.GetRandomConnectionsProgram(),
+                    Command = MockDataHelperFunctions.GetRandomConnectionsCommand()
+
                 };
                 result.Add(item);
             }

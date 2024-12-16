@@ -1,6 +1,8 @@
 using CLA_Administration_Web.Helpers.Constants;
 using CLA_Administration_Web.Helpers.MockData;
-using CLA_Administration_Web.Services;
+using CLA_Administration_Web.ViewModels.Settings;
+using CLA_Administration_Web.ViewModels.Settings.ActiveConections;
+using CLA_Administration_Web.ViewModels.Settings.ActiveConnections;
 using CLA_Administration_Web.ViewModels.Settings.SetupExclusion;
 using CLA_Administration_Web.ViewModels.Settings.Shared;
 using CLA_Administration_Web.ViewModels.Settings.StagingUsers;
@@ -135,6 +137,7 @@ namespace CLA_Administration_Web.Controllers
             return PartialView(AppPagesLinks.Settings.SetupExclusionsPageLink, setupExcludedData);
         }
 
+
         [HttpGet]
         public async Task<IActionResult> AdminAccess()
         {
@@ -156,6 +159,12 @@ namespace CLA_Administration_Web.Controllers
         [HttpGet]
         public async Task<IActionResult> ActiveConnections()
         {
+            
+                var connections = new ActiveConnectionsMainViewModel()
+                {
+                    Connections = SettingsMockData.ActiveConnections,
+                };
+        
             return PartialView(AppPagesLinks.Settings.ActiveConnectionsPageLink);
         }
 
