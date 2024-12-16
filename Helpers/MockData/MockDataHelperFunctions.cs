@@ -125,6 +125,56 @@
             return domainsList[Random.Next(domainsList.Count)];
         }
 
+        public static string GetRandomActiveConnections()
+        {
+            var activeconnectionlist = new List<string> { "123", "50", "NTHWEB", "nthuser", ".net SQLClient", "Select" };
+
+            return activeconnectionlist[Random.Next(activeconnectionlist.Count)];
+        }
+
+        public static string GetRandomConnectionsID()
+        {
+            var conectionidslist = new List<string> { "123", "150", "1253", "1203", "1273", "2897" };
+
+            return conectionidslist[Random.Next(conectionidslist.Count)];
+        }
+
+        public static string GetRandomConnectionsMinutes()
+        {
+            var conectionMinuteslist = new List<string> { "3", "5", "7", "9", "10", "50" };
+
+            return conectionMinuteslist[Random.Next(conectionMinuteslist.Count)];
+        }
+
+        public static string GetRandomConnectionsHost()
+        {
+            var conectionHostlist = new List<string> { "NTHWEB", "NTHTERACO", "NTHTERACO2", "NTHDEV", "NTHTERACO3" };
+
+            return conectionHostlist[Random.Next(conectionHostlist.Count)];
+        }
+
+        public static string GetRandomConnectionsLogin()
+        {
+            var conectionLoginlist = new List<string> { "nthuser", "user1", "user2", "user3", "user4" };
+
+            return conectionLoginlist[Random.Next(conectionLoginlist.Count)];
+        }
+        public static string GetRandomConnectionsProgram()
+        {
+            var conectionProgramlist = new List<string> { ".net sqlclient", ".netsql", " ", " ", " " };
+
+            return conectionProgramlist[Random.Next(conectionProgramlist.Count)];
+        }
+
+        public static string GetRandomConnectionsCommand()
+        {
+            var conectionCommandlist = new List<string> { ".net sqlclient", ".netsql", " ", " ", " " };
+
+            return conectionCommandlist[Random.Next(conectionCommandlist.Count)];
+        }
+
+
+
 
     }
 }

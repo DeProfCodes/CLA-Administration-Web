@@ -1,10 +1,11 @@
 using CLA_Administration_Web.Helpers.Constants;
 using CLA_Administration_Web.Helpers.MockData;
-using CLA_Administration_Web.Services;
+using CLA_Administration_Web.ViewModels.Settings.ActiveConnections;
 using CLA_Administration_Web.ViewModels.Settings.SetupExclusion;
 using CLA_Administration_Web.ViewModels.Settings.Shared;
 using CLA_Administration_Web.ViewModels.Settings.StagingUsers;
 using Microsoft.AspNetCore.Mvc;
+using CLA_Administration_Web.Services;
 
 namespace CLA_Administration_Web.Controllers
 {
@@ -62,67 +63,7 @@ namespace CLA_Administration_Web.Controllers
 
             return RedirectToAction("Index");
         }
-        [HttpGet]
-        public async Task<IActionResult> EditEntity(string entityType, int entityId)
-        {
-            SettingsModalView modalViewModel;
-
-            if (entityType == "Machine")
-            {
-                var machine = SettingsMockData.StagingMachines.FirstOrDefault(m => m.Id == entityId);
-                if (machine == null)
-                {
-                    return NotFound("Machine not found.");
-                }
-
-                modalViewModel = new SettingsModalView
-                {
-                    ModalTitle = "Edit Staging Machine",
-                    ActionButtonText = "Save Machine",
-                    ActionButtonCallbackFunction = "SaveMachineChanges()",
-                    EntityType = "Machine",
-                    FormFields = new List<FormField>
-                        {
-                            new FormField { Name = "MachineId", Label = "Machine ID", Value = machine.Id.ToString() },
-                            new FormField { Name = "MachineName", Label = "Machine Name", Value = machine.MachineName },
-                            new FormField { Name = "MachineDescription", Label = "Machine Description", Value = machine.MachineDescription },
-                            new FormField { Name = "UserLastModified", Label = "User Last Modified", Value = machine.UserLastModified },
-                            new FormField { Name = "MachineLastModified", Label = "Machine Last Modified", Value = machine.MachineLastModified }
-                        }
-                };
-            }
-            else if (entityType == "User")
-            {
-                var user = SettingsMockData.StagingUsers.FirstOrDefault(u => u.Id == entityId);
-                if (user == null)
-                {
-                    return NotFound("User not found.");
-                }
-
-                modalViewModel = new SettingsModalView
-                {
-                    ModalTitle = "Edit Staging User",
-                    ActionButtonText = "Save User",
-                    ActionButtonCallbackFunction = "SaveUserChanges()",
-                    EntityType = "User",
-                    FormFields = new List<FormField>
-            {
-                new FormField { Name = "UserId", Label = "User ID", Value = user.Id.ToString() },
-                new FormField { Name = "UserName", Label = "User Name", Value = user.Firstname },
-                new FormField { Name = "UserEmail", Label = "Email", Value = user.Domain },
-                new FormField { Name = "UserRole", Label = "Role", Value = user.MachineName }
-            }
-                };
-            }
-            else
-            {
-                return BadRequest("Invalid entity type.");
-            }
-
-            return PartialView(AppPagesLinks.Settings.EditSettingsModalPageLink, modalViewModel);
-        }
-
-
+    
         [HttpGet]
         public async Task<IActionResult> SetupExclusions()
         {
@@ -134,6 +75,7 @@ namespace CLA_Administration_Web.Controllers
 
             return PartialView(AppPagesLinks.Settings.SetupExclusionsPageLink, setupExcludedData);
         }
+
 
         [HttpGet]
         public async Task<IActionResult> AdminAccess()
@@ -156,6 +98,12 @@ namespace CLA_Administration_Web.Controllers
         [HttpGet]
         public async Task<IActionResult> ActiveConnections()
         {
+            
+                var connections = new ActiveConnectionsMainViewModel()
+                {
+                    Connections = SettingsMockData.ActiveConnections,
+                };
+        
             return PartialView(AppPagesLinks.Settings.ActiveConnectionsPageLink);
         }
 
