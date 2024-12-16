@@ -1,8 +1,9 @@
-﻿@model ManageAdminAccessMainViewModel
+﻿@using CLA_Administration_Web.ViewModels.Settings.ManageAdminAccess
+@model ManageAdminAccessMainViewModel
 
 @{
     int index = 0;
-    var domains = Model.AdminAccess.Select(x => x.Domain).Distinct().ToList();
+    var domains = Model.AdminAccessItems.Select(x => x.Domain).Distinct().ToList();
 }
 
 <div class="container-fluid">
@@ -11,7 +12,7 @@
     @{
         await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Settings/SettingsBreadcrumb.cshtml", new SettingsBreadcrumbViewModel
             {
-                SettingsCurrentPage = SettingsPages.ManageAdminAccess,
+                SettingsCurrentPage = SettingsPages.AdminAccess,
                 HasAddNewButton = false,
                 BreadcrumbButtonName = "Add Admin User",
                 BreadcrumbButtonCallbackFunction = "AddNewAdminUser"
@@ -74,7 +75,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var access in Model.AdminAccess)
+                        @foreach (var access in Model.AdminAccessItems)
                         {
                             var cssBg = (index++ % 2 == 0) ? "report-piechart-color-silver-dim" : "";
                             cssBg += " theme-txt-clr";
@@ -90,10 +91,10 @@
                                 <td class="@cssBg">@access.TickersRead</td>
                                 <td class="@cssBg">@access.TickersWrite</td>
                                 <td class="@cssBg">@access.TickersReport</td>
-                                <td class="@cssBg">@access.RSSEnvironment</td>
-                                <td class="@cssBg">@access.RSSRead</td>
-                                <td class="@cssBg">@access.RSSWrite</td>
-                                <td class="@cssBg">@access.RSSReport</td>
+                                <td class="@cssBg">@access.RSS_Environment</td>
+                                <td class="@cssBg">@access.RSS_Read</td>
+                                <td class="@cssBg">@access.RSS_Write</td>
+                                <td class="@cssBg">@access.RSS_Report</td>
                                 <td class="@cssBg">@access.UserLastModified</td>
                                 <td class="@cssBg">@access.MachineLastModified</td>
                                 <td class="@cssBg">@access.LockscreenEnvironment</td>
