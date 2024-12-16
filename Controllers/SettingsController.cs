@@ -8,6 +8,8 @@ using CLA_Administration_Web.ViewModels.Settings.SetupExclusion;
 using CLA_Administration_Web.ViewModels.Settings.StagingUsers;
 using CLA_Administration_Web.ViewModels.Settings.Shared;
 using Microsoft.AspNetCore.Mvc;
+using CLA_Administration_Web.ViewModels.Targeting;
+using CLA_Administration_Web.ViewModels.Settings.ManageAdminAccess;
 
 namespace CLA_Administration_Web.Controllers
 {
@@ -154,13 +156,19 @@ namespace CLA_Administration_Web.Controllers
         [HttpGet]
         public async Task<IActionResult> AdminAccess()
         {
+           
           return PartialView(AppPagesLinks.Settings.AdminAccessPageLink);
         }
 
         [HttpGet]
         public async Task<IActionResult> TargetGroups()
         {
-            return PartialView(AppPagesLinks.Settings.TargetGroupsPageLink);
+            var targetGroups = new TargetingExposureViewModel()
+            {
+                TargetedUsers = SettingsMockData.TargetGroupUsers
+              
+            };
+            return PartialView(AppPagesLinks.Settings.TargetGroupsPageLink, targetGroups);
         }
 
         [HttpGet]

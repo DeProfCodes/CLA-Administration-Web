@@ -4,6 +4,7 @@ namespace CLA_Administration_Web.ViewModels.Targeting
 {
     public class TargetedUser
     {
+        public string Id { get; set; }
         public string DomainName { get; set; }
 
         public string NTUsername { get; set; }
