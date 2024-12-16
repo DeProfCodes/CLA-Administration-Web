@@ -14,7 +14,7 @@
 
         public static string StringTruncate(string value, int maxLength, string truncationSuffix = "…")
         {
-            var truncated =  value?.Length > maxLength ? value.Substring(0, maxLength) + truncationSuffix : value;
+            var truncated = value?.Length > maxLength ? value.Substring(0, maxLength) + truncationSuffix : value;
 
             return truncated;
         }

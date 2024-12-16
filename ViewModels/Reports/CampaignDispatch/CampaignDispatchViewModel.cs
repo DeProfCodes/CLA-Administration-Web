@@ -9,7 +9,7 @@ namespace CLA_Administration_Web.ViewModels.Reports.CampaignDispatch
         public List<DispatchLockedDesktopResponse> LockedDesktops { get; set; }
 
         public List<DispatchDesktopResponse> Desktops { get; set; }
-        
+
         public List<DispatchScreensaverResponse> Screensaver { get; set; }
 
         public List<DispatchPopupResponse> Popups { get; set; }

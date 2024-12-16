@@ -9,7 +9,7 @@ namespace CLA_Administration_Web.Services.Modules
     public interface IModuleService
     {
         #region Popups
-        
+
         public Task<List<ModulePSTDataViewModel>> GetAllPopupsData();
 
         public Task<ModulePSTDataViewModel> GetPopupById(int popupId, StagingLiveType stagingLiveType);

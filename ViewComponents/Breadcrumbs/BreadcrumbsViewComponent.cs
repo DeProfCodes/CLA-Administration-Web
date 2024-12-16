@@ -1,7 +1,5 @@
 ﻿using CLA_Administration_Web.Helpers.Enums.AppPages;
-using CLA_Administration_Web.Helpers.Enums.Shared;
 using CLA_Administration_Web.Helpers.Layout;
-using CLA_Administration_Web.ViewModels.Modules;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CLA_Administration_Web.ViewComponents.Modules
@@ -18,8 +16,8 @@ namespace CLA_Administration_Web.ViewComponents.Modules
         {
             if (page is ModulesPages)
             {
-                var modulePage = (ModulesPages) page; 
-                
+                var modulePage = (ModulesPages)page;
+
                 var breadcrumbViewModel = BreadcrumbsHelper.GetModuleBreadcrumbData(modulePage, itemId);
 
                 return View("ModuleBreadcrumbs", breadcrumbViewModel);

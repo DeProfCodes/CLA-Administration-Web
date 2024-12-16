@@ -14,7 +14,7 @@ namespace CLA_Administration_Web.Helpers.API
                 if (isOneItem)
                 {
                     var parsedObject = JsonConvert.DeserializeObject<List<T>>(unescapedJson);
-                    
+
                     result = parsedObject.FirstOrDefault();
                 }
                 else

@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace CLA_Administration_Web.ViewModels.Reports.Survey
 {

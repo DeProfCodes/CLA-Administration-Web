@@ -107,8 +107,8 @@
         public static string GetRandomUserID()
         {
             var usersList = new List<string> { "NdhuvaziM", "LegeB", "SinethembaS", "LeboC", "Administrator", "CathrineT", "LarryM", "Tarryn", "NyikoB", "ProficientX" };
-            
-            return usersList[Random.Next(usersList.Count)];   
+
+            return usersList[Random.Next(usersList.Count)];
         }
 
         public static string GetRandomMachineID()

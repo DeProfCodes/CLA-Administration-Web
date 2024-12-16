@@ -1,7 +1,4 @@
-﻿using CLA_Administration_Web.Helpers.Enums.AppPages;
-using CLA_Administration_Web.Helpers.Enums.Shared;
-
-namespace CLA_Administration_Web.Helpers.Html
+﻿namespace CLA_Administration_Web.Helpers.Html
 {
     public class CssHtmlHelpers
     {
@@ -27,7 +24,7 @@ namespace CLA_Administration_Web.Helpers.Html
 
             if (lastSyncDate >= thirtyDaysAgo) return "bg-lime";
             if (lastSyncDate > minDate.AddDays(-30)) return "bg-yellow";
-            
+
             return "bg-red";
         }
     }

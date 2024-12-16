@@ -2,7 +2,6 @@
 using CLA_Administration_Web.Helpers.Enums.Reports;
 using CLA_Administration_Web.Helpers.Enums.Shared;
 using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
-using CLA_Administration_Web.Helpers.MockData;
 using CLA_Administration_Web.Models.APIResponses.Reports.ActiveUserMachine;
 using CLA_Administration_Web.Models.APIResponses.Reports.CampaignDispatch;
 using CLA_Administration_Web.Models.APIResponses.Reports.Policy;
@@ -19,12 +18,8 @@ using CLA_Administration_Web.ViewModels.Reports.CampaignDispatch;
 using CLA_Administration_Web.ViewModels.Reports.Policy;
 using CLA_Administration_Web.ViewModels.Reports.Survey;
 using CLACommonFunctionsLibrary_NET.Helpers;
-using DocumentFormat.OpenXml.Office2010.Excel;
-using DocumentFormat.OpenXml.Spreadsheet;
-using DocumentFormat.OpenXml.Wordprocessing;
 using Microsoft.Reporting.NETCore;
 using Newtonsoft.Json.Linq;
-using System.Collections.Generic;
 using System.Data;
 using System.Text;
 using System.Text.Json;
@@ -38,7 +33,7 @@ namespace CLA_Administration_Web.Helpers.Reporting
         {
             _reportService = reportService;
         }
-        
+
 
         public static string MergeJsonArrays(string jsonArray1, string jsonArray2, string jsonArray3)
         {
@@ -83,7 +78,7 @@ namespace CLA_Administration_Web.Helpers.Reporting
                 var unescapedJson = Newtonsoft.Json.JsonConvert.DeserializeObject<string>(json);
 
                 json = "{\"ResultTable\":" + unescapedJson + "}";
-                
+
                 var dataSet = Newtonsoft.Json.JsonConvert.DeserializeObject<DataSet>(json);
 
                 return dataSet;
@@ -130,7 +125,7 @@ namespace CLA_Administration_Web.Helpers.Reporting
             return null;
         }
 
-        public static byte[] GetReportBytes(string format, List<ReportRDLC> reportsRDLCs, string reportRDLCPath, Dictionary<string,string> parameters)
+        public static byte[] GetReportBytes(string format, List<ReportRDLC> reportsRDLCs, string reportRDLCPath, Dictionary<string, string> parameters)
         {
             try
             {
@@ -198,7 +193,7 @@ namespace CLA_Administration_Web.Helpers.Reporting
                 }
             }
             result.Replace("&nbsp;", " ").Replace("&amp;", "&");
-            
+
             return result.ToString().Trim();
         }
 
@@ -309,7 +304,7 @@ namespace CLA_Administration_Web.Helpers.Reporting
             var outstandingSummaryJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Popup, "STM_Outstanding_Summary");
             var outstandingJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Popup, "STM_Outstanding");
             var allDataJson = await _reportService.GetModuleSummaryReport(apiParams, ReportsNamesType.Popup, "STM_All_DataOnly");
-                            
+
             var reportsBaseAddress = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "resources", "reports");
 
             var result = new PopupReports
@@ -430,7 +425,7 @@ namespace CLA_Administration_Web.Helpers.Reporting
             };
 
             var activeUsersMachinesJson = await _reportService.GetActiveUsersMachinesReport(apiParams, reportsName);
-            
+
             var reportsBaseAddress = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "resources", "reports");
 
             var reportRDLCName = reportsName == ReportsNamesType.ActiveUsers ? "rptActiveUsers.rdlc" : "rptActiveMachines.rdlc";
@@ -478,7 +473,7 @@ namespace CLA_Administration_Web.Helpers.Reporting
 
                 return result;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return new TickerReportsViewModel
                 {
@@ -772,7 +767,7 @@ namespace CLA_Administration_Web.Helpers.Reporting
                     SurveyOptInNoResponseData = new(),
                     SurveySummary = new(),
                     UserTransposed = new(),
-                    LegendTransposed = new(), 
+                    LegendTransposed = new(),
                     MachineTransposed = new()
                 };
             }
@@ -806,7 +801,7 @@ namespace CLA_Administration_Web.Helpers.Reporting
                     };
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }
@@ -883,7 +878,7 @@ namespace CLA_Administration_Web.Helpers.Reporting
             try
             {
                 var data = await GetPolicyReports(filters);
-                
+
                 LocalDataStorage.StagingData.PolicyReports = data;
 
                 if (!filters.ShowRawDataOnly)
@@ -906,7 +901,7 @@ namespace CLA_Administration_Web.Helpers.Reporting
             }
             catch (Exception ex)
             {
-                
+
             }
 
             return result;

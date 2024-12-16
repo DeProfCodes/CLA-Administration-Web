@@ -4,7 +4,7 @@
     {
         public string ComponentId { get; set; }
 
-        public string TableId {get; set; }
+        public string TableId { get; set; }
 
         public IEnumerable<object> DataSource { get; set; }
 

@@ -1,5 +1,4 @@
 ﻿using CLA_Administration_Web.Models.APIResponses.Reports.Popup;
-using CLA_Administration_Web.Models.APIResponses.Reports.Ticker;
 
 namespace CLA_Administration_Web.ViewModels.Reports
 {

@@ -1,5 +1,4 @@
 ﻿using CLA_Administration_Web.Helpers.Enums.Module;
-using CLA_Administration_Web.Helpers.Enums.Shared;
 using CLA_Administration_Web.ViewModels.Shared;
 using CLAModulesLibrary.Helpers.Enums.Modules.Popup;
 using CLAModulesLibrary.Models.Popup.SubModels;

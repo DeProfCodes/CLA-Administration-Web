@@ -1,5 +1,4 @@
 ﻿using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
-using Microsoft.Reporting.NETCore;
 
 namespace CLA_Administration_Web.ViewModels.Reports
 {
@@ -11,7 +10,7 @@ namespace CLA_Administration_Web.ViewModels.Reports
 
         public TickerReportsRaw TickerReportData { get; set; }
 
-        public SurveyReportsRaw SurveyReportData {get; set; }
+        public SurveyReportsRaw SurveyReportData { get; set; }
 
         public PolicyReportsRaw PolicyReportData { get; set; }
     }

@@ -62,7 +62,7 @@ namespace CLA_Administration_Web.Helpers.Modules
             {
                 return allStatuses.FirstOrDefault(s => s.StatusType == StatusType.Pending);
             }
-            
+
             return null;
         }
 
@@ -91,7 +91,7 @@ namespace CLA_Administration_Web.Helpers.Modules
                 result.Add(endDate);
                 endDate = endDate.AddMonths(-1);
             }
-            result = result.OrderByDescending(x => x).ToList(); 
+            result = result.OrderByDescending(x => x).ToList();
             return result;
         }
 
@@ -119,12 +119,12 @@ namespace CLA_Administration_Web.Helpers.Modules
         {
             var startDateTime = TypesParserHelper.ParseDate(startDate);
             var endDateTime = TypesParserHelper.ParseDate(endDate);
-            
+
             status = status.ToLower();
             user = user.ToLower();
 
             var filteredData = data.Where(
-                                           p =>  ((status != "all" && status != "") ? (p.Status.StatusType.GetDisplayName().ToLower() == status) : true) &&
+                                           p => ((status != "all" && status != "") ? (p.Status.StatusType.GetDisplayName().ToLower() == status) : true) &&
                                                  (startDateTime.Date.CompareTo(p.EffectiveFromDate) <= 0 && p.EffectiveToDate.Date.CompareTo(endDateTime) <= 0) &&
                                                  (user != "all" ? (p.UserIdLastModified.ToLower() == user) : true)
                                     ).ToList();
@@ -138,10 +138,10 @@ namespace CLA_Administration_Web.Helpers.Modules
             var endDateTime = TypesParserHelper.ParseDate(endDate);
 
             status = status.ToLower();
-            
+
             var filteredData = data.Where(
                                            p => ((status != "all" && status != "") ? (p.Status.StatusType.GetDisplayName().ToLower() == status) : true) &&
-                                                 startDateTime.Date.CompareTo(p.EffectiveFromDate) <= 0 && p.EffectiveToDate.Date.CompareTo(endDateTime) <= 0 
+                                                 startDateTime.Date.CompareTo(p.EffectiveFromDate) <= 0 && p.EffectiveToDate.Date.CompareTo(endDateTime) <= 0
                                     ).ToList();
 
             return filteredData;
@@ -170,7 +170,7 @@ namespace CLA_Administration_Web.Helpers.Modules
             var difference = (endDate.Date - startDate.Date).Days;
 
             var cssBg = "";
-            
+
             if (difference <= 5) cssBg = "#ff3131";
             if (difference > 5 && difference <= 10) cssBg = "#ffff00";
             if (difference > 10 && difference <= 15) cssBg = "#ffa500";
@@ -182,9 +182,9 @@ namespace CLA_Administration_Web.Helpers.Modules
 
         public static int GetGanttChartHeight(int dataRowsCount)
         {
-            double height = dataRowsCount > 5 ?  dataRowsCount * 40.0 : 200;
+            double height = dataRowsCount > 5 ? dataRowsCount * 40.0 : 200;
 
-            return (int)height;    
+            return (int)height;
         }
 
         public static List<GanttChartToolTipViewModel> GetGanttToolTipDetailsLDS(List<ModuleLDSDataViewModel> filteredData)
@@ -236,14 +236,14 @@ namespace CLA_Administration_Web.Helpers.Modules
                     x = $"{SharedFunctions.StringTruncate(data.ContentDescription, 10)}-{random.Next(10)}";
 
                 savedXVals.Add(x);
-                
+
                 var gantModel = new GanttChartDataModel
                 {
                     x = x,
-                    y = new List<long> 
-                    { 
-                        SharedFunctions.GetTimeInMilliseconds($"{data.EffectiveFrom} {data.TimeslotFrom}"), 
-                        SharedFunctions.GetTimeInMilliseconds($"{data.EffectiveTo} {data.TimeslotTo}") 
+                    y = new List<long>
+                    {
+                        SharedFunctions.GetTimeInMilliseconds($"{data.EffectiveFrom} {data.TimeslotFrom}"),
+                        SharedFunctions.GetTimeInMilliseconds($"{data.EffectiveTo} {data.TimeslotTo}")
                     },
                     fillColor = GetGanttBarBackgroundColor(data.EffectiveFrom, data.EffectiveTo)
                 };
@@ -268,7 +268,7 @@ namespace CLA_Administration_Web.Helpers.Modules
             return string.Join(" | ", fullNames);
         }
 
-        public static bool SearchCategoryPath(ContentLibraryCategoryTree category, List<ContentLibraryCategoryModel> path, int searchId=0)
+        public static bool SearchCategoryPath(ContentLibraryCategoryTree category, List<ContentLibraryCategoryModel> path, int searchId = 0)
         {
             if (category == null) return false;
 
@@ -305,7 +305,7 @@ namespace CLA_Administration_Web.Helpers.Modules
                 return true;
         }
 
-        private static List<ContentLibraryCategoryModel> GetCategoryPath(ContentLibraryCategoryTree root, int searchId=0)
+        private static List<ContentLibraryCategoryModel> GetCategoryPath(ContentLibraryCategoryTree root, int searchId = 0)
         {
             var path = new List<ContentLibraryCategoryModel>();
 
@@ -319,7 +319,7 @@ namespace CLA_Administration_Web.Helpers.Modules
             }
         }
 
-        public static List<ContentLibraryCategoryModel> GetAllCategoriesInTree(List<ContentLibraryCategoryTree> categories, int categoryId=0)
+        public static List<ContentLibraryCategoryModel> GetAllCategoriesInTree(List<ContentLibraryCategoryTree> categories, int categoryId = 0)
         {
             var result = new List<ContentLibraryCategoryModel>();
 

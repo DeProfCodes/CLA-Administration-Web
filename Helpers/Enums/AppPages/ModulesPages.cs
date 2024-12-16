@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Security.Cryptography.X509Certificates;
 
 namespace CLA_Administration_Web.Helpers.Enums.AppPages
 {

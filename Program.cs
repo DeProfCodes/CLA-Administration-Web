@@ -9,7 +9,7 @@ builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
 // Services
 builder.Services.AddScoped<IModuleService, ModuleService>();
-builder.Services.AddScoped<IApiService, ApiService>();  
+builder.Services.AddScoped<IApiService, ApiService>();
 builder.Services.AddScoped<IReportingService, ReportingService>();
 
 var app = builder.Build();

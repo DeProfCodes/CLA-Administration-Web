@@ -64,12 +64,12 @@ namespace CLA_Administration_Web.Helpers.Targeting
                                     Id = 114,
                                     EntityName = "IPRanges",
                                     _children = new List<TargetedEntityTree>
-                                    { 
-                                        new TargetedEntityTree 
-                                        { 
-                                            Id = 1411, 
-                                            EntityName = "196.2.0.140" 
-                                        } 
+                                    {
+                                        new TargetedEntityTree
+                                        {
+                                            Id = 1411,
+                                            EntityName = "196.2.0.140"
+                                        }
                                     }
                                 },
                             }

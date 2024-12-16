@@ -9,137 +9,147 @@
 
 <div class="container-fluid">
 
-    <!-- Breadcrumb Component -->
-    @{
-        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Settings/SettingsBreadcrumb.cshtml", new SettingsBreadcrumbViewModel
-        {
-            SettingsCurrentPage = SettingsPages.StagingUsers,
-            HasAddNewButton = true,
-            BreadcrumbButtonName = "Add New Staging User",
-            BreadcrumbButtonCallbackFunction = "AddNewStagingEntity"
-        });
-    }
-    
-    <!-- Settings Filter Component -->
-    <div class="card mb-4 mt-2 overview-filters-card app-card-main-scaling">
-        <div class="card-body pt-0 pb-0">
-            <div class="row fs-12 mt-1 mb-2">
-                <p class="theme-txt-clr text-center w-100 fw-bold fs-16" id="TypeFilterTitle">Filters</p>
-                <div class="row col-12 d-flex flex-wrap module-overview-filters">
-                    <div class="w-fit-content ms-auto mb-1">
-                        <div class="d-flex">
-                            <p class="custom-p w-fit-content align-content-center">View Type</p>
-                            <div class="row mx-auto">
-                                <div class="btn-group w-auto overview-filter-btn-group" role="group" aria-label="Status filter" id="TypeStagingLiveBtns">
-                                    <button class="btn module-filter-btn-group filter-type-btn btn-group-active" onclick="ToggleStaginUserMachines(this.id)" id="StagingUserBtn">Users</button>
-                                    <button class="btn module-filter-btn-group filter-type-btn" onclick="ToggleStaginUserMachines(this.id)" id="StagingMachinesBtn">Machines</button>
-                                </div>
+<!-- Breadcrumb Component -->
+@{
+    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Settings/SettingsBreadcrumb.cshtml", new SettingsBreadcrumbViewModel
+            {
+                SettingsCurrentPage = SettingsPages.StagingUsers,
+                HasAddNewButton = true,
+                BreadcrumbButtonName = "Add New Staging User",
+                BreadcrumbButtonCallbackFunction = "AddNewStagingEntity"
+            });
+}
+    <button class="btn btn-primary" onclick="openEditEntityModal('Machine', 471)">Edit Machine</button>
+    <button class="btn btn-primary" onclick="openEditEntityModal('User', 458)">Edit User</button>
+    <div id="EditModalContainer"></div>
+
+<!-- Settings Filter Component -->
+<div class="card mb-4 mt-2 overview-filters-card app-card-main-scaling">
+    <div class="card-body pt-0 pb-0">
+        <div class="row fs-12 mt-1 mb-2">
+            <p class="theme-txt-clr text-center w-100 fw-bold fs-16" id="TypeFilterTitle">Filters</p>
+            <div class="row col-12 d-flex flex-wrap module-overview-filters">
+                <div class="w-fit-content ms-auto mb-1">
+                    <div class="d-flex">
+                        <p class="custom-p w-fit-content align-content-center">View Type</p>
+                        <div class="row mx-auto">
+                            <div class="btn-group w-auto overview-filter-btn-group" role="group" aria-label="Status filter" id="TypeStagingLiveBtns">
+                                <button class="btn module-filter-btn-group filter-type-btn btn-group-active" onclick="ToggleStaginUserMachines(this.id)" id="StagingUserBtn">Users</button>
+                                <button class="btn module-filter-btn-group filter-type-btn" onclick="ToggleStaginUserMachines(this.id)" id="StagingMachinesBtn">Machines</button>
                             </div>
                         </div>
                     </div>
-                    <div class="w-auto me-auto mb-1">
-                        <div class="d-flex">
-                            <p class="custom-p w-fit-content align-content-center">Domain</p>
-                            <select class="custom-input-text w-200p ms-2" id="ReportModuleSelect" onchange="FilterByDomain()">
-                                <option value="0">Please select Domain Name</option>
-                                @foreach (var domain in usersDomains)
-                                {
-                                    <option value="@domain">@domain</option>
-                                }
-                            </select>
-                        </div>
+                </div>
+                <div class="w-auto me-auto mb-1">
+                    <div class="d-flex">
+                        <p class="custom-p w-fit-content align-content-center">Domain</p>
+                        <select class="custom-input-text w-200p ms-2" id="ReportModuleSelect" onchange="FilterByDomain()">
+                            <option value="0">Please select Domain Name</option>
+                            @foreach (var domain in usersDomains)
+                            {
+                                <option value="@domain">@domain</option>
+                            }
+                        </select>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
-    <!-- Card for Popup Report Body -->
-    <div class="card mb-1 mt-1 overview-filters-card theme-txt-clr app-card-main-scaling report-data-area p-4" id="report-data-area">
-        <div id="SettingsData">
-            <h3 class="w-100 text-center theme-txt-clr">
-                Staging <span id="StagingUserMachineTitle">Users</span>
-            </h3>
-            <!-- Inject Partial Here -->
-            <div id="StagingUsersSettings" class="mt-3">
-                <table id="StagingUsersData" class="table table-striped table-bordered table-hover theme-border align-middle campain-table-type fs-12">
-                    <thead>
-                        <tr>
-                            <th class="theme-bg text-white">Domain</th>
-                            <th class="theme-bg text-white">NT Username</th>
-                            <th class="theme-bg text-white">Firstname</th>
-                            <th class="theme-bg text-white">Surname</th>
-                            <th class="theme-bg text-white">User Last Modified</th>
-                            <th class="theme-bg text-white">Machine Last Modified</th>
-                            <th class="theme-bg text-white">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var stagingUser in Model.StagingUsers)
-                        {
-                            var cssBg = (index++ % 2 == 0) ? "report-piechart-color-silver-dim" : "";
-                            cssBg += " theme-txt-clr";
+</div>
 
-                            <tr>
-                                <td class="@cssBg">@stagingUser.Domain</td>
-                                <td class="@cssBg">@stagingUser.Username</td>
-                                <td class="@cssBg">@stagingUser.Firstname</td>
-                                <td class="@cssBg">@stagingUser.Lastname</td>
-                                <td class="@cssBg">@stagingUser.UserLastModified</td>
-                                <td class="@cssBg">@stagingUser.MachineLastModified</td>
-                                <td class="@cssBg">
-                                    <button class="btn btn-sm custom-btn-sm btn-danger">Delete</button>
-                                    <button class="btn btn-sm custom-btn-sm btn-success">Edit</button>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-            <div id="StagingMachinesSettings" class="mt-3 hidden">
-                <table id="StagingMachinesData" class="table table-striped table-bordered table-hover theme-border align-middle campain-table-type fs-12">
-                    <thead>
-                        <tr>
-                            <th class="theme-bg text-white">Domain</th>
-                            <th class="theme-bg text-white">Machine Name</th>
-                            <th class="theme-bg text-white">Machine Description</th>
-                            <th class="theme-bg text-white">User Last Modified</th>
-                            <th class="theme-bg text-white">Machine Last Modified</th>
-                            <th class="theme-bg text-white">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var stagingMachine in Model.StagingMachines)
-                        {
-                            var cssBg = (index++ % 2 == 0) ? "report-piechart-color-silver-dim" : "";
-                            cssBg += " theme-txt-clr";
+<!-- Card for Popup Report Body -->
+<div class="card mb-1 mt-1 overview-filters-card theme-txt-clr app-card-main-scaling report-data-area p-4" id="report-data-area">
+    <div id="SettingsData">
+        <h3 class="w-100 text-center theme-txt-clr">
+            Staging <span id="StagingUserMachineTitle">Users</span>
+        </h3>
+        <!-- Inject Partial Here -->
+        <div id="StagingUsersSettings" class="mt-3">
+            <table id="StagingUsersData" class="table table-striped table-bordered table-hover theme-border align-middle campain-table-type fs-12">
+                <thead>
+                    <tr>
+                         <th class="theme-bg text-white">UserID</th>
+                        <th class="theme-bg text-white">Domain</th>
+                        <th class="theme-bg text-white">NT Username</th>
+                        <th class="theme-bg text-white">Firstname</th>
+                        <th class="theme-bg text-white">Surname</th>
+                        <th class="theme-bg text-white">User Last Modified</th>
+                        <th class="theme-bg text-white">Machine Last Modified</th>
+                        <th class="theme-bg text-white">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var stagingUser in Model.StagingUsers)
+                    {
+                        var cssBg = (index++ % 2 == 0) ? "report-piechart-color-silver-dim" : "";
+                        cssBg += " theme-txt-clr";
 
-                            <tr>
-                                <td class="@cssBg">@stagingMachine.Domain</td>
-                                <td class="@cssBg">@stagingMachine.MachineName</td>
-                                <td class="@cssBg">@stagingMachine.MachineDescription</td>
-                                <td class="@cssBg">@stagingMachine.UserLastModified</td>
-                                <td class="@cssBg">@stagingMachine.MachineLastModified</td>
-                                <td class="@cssBg">
-                                    <button class="btn btn-sm custom-btn-sm btn-danger">Delete</button>
-                                    <button class="btn btn-sm custom-btn-sm btn-success">Edit</button>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
+                        <tr>
+                            <td class="@cssBg">@stagingUser.Id</td>
+                            <td class="@cssBg">@stagingUser.Domain</td>
+                            <td class="@cssBg">@stagingUser.Username</td>
+                            <td class="@cssBg">@stagingUser.Firstname</td>
+                            <td class="@cssBg">@stagingUser.Lastname</td>
+                            <td class="@cssBg">@stagingUser.UserLastModified</td>
+                            <td class="@cssBg">@stagingUser.MachineLastModified</td>
+                            <td class="@cssBg">
+                                    <button class="btn btn-sm custom-btn-sm btn-danger" onclick="openEditEntityModal('User', @stagingUser.Id)">Delete</button>
+                                    <button class="btn btn-sm custom-btn-sm btn-success" id="edit-staging-btn" onclick="EditNewStagingEnting(@stagingUser.Id, 'StagingUsersSettings')">Edit</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div id="StagingMachinesSettings" class="mt-3 hidden">
+            <table id="StagingMachinesData" class="table table-striped table-bordered table-hover theme-border align-middle campain-table-type fs-12">
+                <thead>
+                    <tr>
+                        <th class="theme-bg text-white">MachineID</th>
+                        <th class="theme-bg text-white">Domain</th>
+                        <th class="theme-bg text-white">Machine Name</th>
+                        <th class="theme-bg text-white">Machine Description</th>
+                        <th class="theme-bg text-white">User Last Modified</th>
+                        <th class="theme-bg text-white">Machine Last Modified</th>
+                        <th class="theme-bg text-white">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var stagingMachine in Model.StagingMachines)
+                    {
+                        var cssBg = (index++ % 2 == 0) ? "report-piechart-color-silver-dim" : "";
+                        cssBg += " theme-txt-clr";
+
+                        <tr>
+                            <td class="@cssBg">@stagingMachine.Id</td>
+                            <td class="@cssBg">@stagingMachine.Domain</td>
+                            <td class="@cssBg">@stagingMachine.MachineName</td>
+                            <td class="@cssBg">@stagingMachine.MachineDescription</td>
+                            <td class="@cssBg">@stagingMachine.UserLastModified</td>
+                            <td class="@cssBg">@stagingMachine.MachineLastModified</td>
+                            <td class="@cssBg">
+
+                                    <button class="btn btn-sm custom-btn-sm btn-danger" onclick="openEditEntityModal('Machine', @stagingMachine.Id)">Delete</button>
+                                    <button class="btn btn-sm custom-btn-sm btn-success" id="edit-staging-btn" onclick="EditNewStagingEnting(@stagingMachine.Id)">Edit</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
 
+</div>
+
+
 <!-- Create New Staging User Modal -->
-@* <div class="modal fade" id="CreateStagingUserModal" tabindex="-1" aria-labelledby="CreateStagingUserModalLabel" aria-hidden="true">
+<div class="modal fade" id="CreateStagingUserModal" tabindex="-1" aria-labelledby="CreateStagingUserModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="CreateStagingUserModalLabel">Add New Staging User</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal('CreateStagingUserModal')"></button>
             </div>
             <div class="modal-body">
                 <form id="CreateStagingUserForm">
@@ -176,14 +186,113 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="SaveStagingUser()">Save User</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal('CreateStagingUserModal')">Cancel</button>
+                <button type="button" class="btn  custom-btn-default" onclick="SaveStagingUser()">Save User</button>
             </div>
         </div>
     </div>
-</div> *@
+</div> 
+
+<!-- Create New Staging Machine Modal -->
+<div class="modal fade" id="CreateStagingMachineModal" tabindex="-1" aria-labelledby="CreateStagingUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="CreateStagingUserModalLabel">Add New Staging Machine</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal('CreateStagingMachineModal')"></button>
+            </div>
+            <div class="modal-body">
+                <form id="CreateStagingUserForm">
+                    <div class="mb-3">
+                        <label for="StagingUserDomain" class="form-label">Domain</label>
+                        <select class="form-select" id="StagingUserDomain" required>
+                            <option value="">Please select a domain</option>
+                            @foreach (var domain in usersDomains)
+                            {
+                                <option value="@domain">@domain</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="StagingMachinename" class="form-label">Machine Name</label>
+                        <input type="text" class="form-control" id="StagingMachinename" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="StagingMachineDescription" class="form-label">Machine Description</label>
+                        <input type="text" class="form-control" id="StagingMachineDescription" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="StagingUserUserLastModified" class="form-label">User Last Modified</label>
+                        <input type="text" class="form-control" id="StagingUserUserLastModified" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="StagingMachineLastModified" class="form-label">Machine Last Modified</label>
+                        <input type="datetime-local" class="form-control" id="StagingMachineLastModified">
+                    </div>
+                  
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closeModal" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal('CreateStagingMachineModal')">Cancel</button>
+                <button type="button" class="btn custom-btn-default" onclick="SaveStagingMachine()">Save Machine</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Staging Machine Modal -->
+<div class="modal fade" id="editMachineModal" tabindex="-1" aria-labelledby="editMachineModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editMachineModalLabel">Edit New Staging User</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal('editMachineModal')"></button>
+            </div>
+            <div class="modal-body">
+                <div id="editMachineModalContent"></div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal('editUserModal')">Cancel</button>
+                <button type="button" class="btn custom-btn-default" onclick="SaveStagingUser()">Save User</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Staging User Modal -->
+<div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="CreateStagingUserModalLabel">Edit New Staging User</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal('editUserModal')"></button>
+            </div>
+            <div class="modal-body">
+                <div id="editUserModalContent"></div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal('editUserModal')">Cancel</button>
+                <button type="button" class="btn custom-btn-default" onclick="SaveStagingUser()">Save User</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
 
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+<!-- jQuery Library -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 
 <script>
     
@@ -256,15 +365,97 @@
         {
             if (userActive)
                 usersDT.column(0).search(selectedDomain).draw();
+
             else
                 machinesDT.column(0).search(selectedDomain).draw();
         }
     }
 
-    //Function to open new modal to begin adding new staging user or machine
     function AddNewStagingEntity()
     {
-        alert("Tank You");
+    const buttonText = document.getElementById("BreadcrumSettingsBtnText").innerText;
+
+        if (buttonText.includes("User"))
+        {
+            const userModal = new bootstrap.Modal(document.getElementById('CreateStagingUserModal'));
+            userModal.show();
+        } else if (buttonText.includes("Machine"))
+        {
+            const machineModal = new bootstrap.Modal(document.getElementById('CreateStagingMachineModal'));
+            machineModal.show();
+        }
     }
+
+
+    function EditNewStagingEnting(machineId) 
+    {
+        $.ajax({
+            url: '@Url.Action("EditStagingMachine", "Settings")',
+            type: 'GET',
+            data: { machineId: machineId },
+            success: function (response)
+            {
+
+                $('#editMachineModalContent').html(response);
+                $('#editMachineModal').modal('show');
+              
+              
+            },
+            error: function (error)
+            {
+                console.log('Error fetching machine data:', error);
+            }
+        });
+    }
+
+    function SaveEditNewStagingEnting(formdata)
+    {
+
+        LoadEditModal(formData, '@Url.Action("SaveStagingData", "Settings")', 'POST', editMachineForm, edit-machine-btn)
+    }
+
+    function openEditEntityModal(entityType, entityId) {
+        $.ajax({
+            url: '@Url.Action("EditEntity", "Settings")',
+            type: 'GET',
+            data: { entityType: entityType, entityId: entityId },
+            success: function (response) {
+                $('#EditModalContainer').html(response);  
+                $('#EditModal').modal('show'); 
+            },
+            error: function (error) {
+                console.log('Error fetching entity data:', error);
+            }
+        });
+    }
+
+  
+    function closeModal(modalId)
+    {
+        $('#' + modalId).modal('hide');  
+    }
+
+    $(document).ready(function ()
+    {
+      
+        $("#edit-machine-btn").on("click", function () 
+        
+        {
+              
+            var formData =
+            {
+                domain: $(this).data("domain"),
+                machineName: $(this).data("machinename"),
+                machineDescription: $(this).data("machinedescription"),
+                userLastModified: $(this).data("userlastmodified"),
+                machineLastModified: $(this).data("machinelastmodified")
+            };
+
+            $('#EditStagingMachineModal').modal('show');
+           
+           // LoadEditModal(formData, '@Url.Action("EditMachine", "YourController")', 'POST', editMachineForm, edit-machine-btn)
+       
+        });
+    });
 
 </script>

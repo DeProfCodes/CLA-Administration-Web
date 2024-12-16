@@ -50,7 +50,7 @@ namespace CLA_Administration_Web.Helpers.Constants
 
             //PST Modules: Popup, Survey, Ticker
             public static string ModulePSTTableOverview = $"/{modulesController}/{ModulesPages.ModulePSTTableOverview.GetDisplayName()}";
-            
+
             //LDS Modules: Lockscreen, Desktop, Screensaver
             public static string ModuleLDSTableOverview = $"/{modulesController}/{ModulesPages.ModuleLDSTableOverview.GetDisplayName()}";
             public static string ModuleLDSCalendarOverview = $"/{modulesController}/{ModulesPages.ModuleLDSCalendarOverview.GetDisplayName()}";
@@ -135,7 +135,7 @@ namespace CLA_Administration_Web.Helpers.Constants
             public static string Ticker = $"/{reportsController}/{ReportsPages.TickerReport.GetDisplayName()}";
             public static string TickerExport = $"/{reportsController}/{ReportsPages.TickerReportForExport.GetDisplayName()}";
             public static string TickerReportOnly = $"/{reportsController}/{ReportsPages.TickerReportOnly.GetDisplayName()}";
-            public static string Policy = $"/{reportsController}/{ReportsPages.PolicyReport.GetDisplayName()}"; 
+            public static string Policy = $"/{reportsController}/{ReportsPages.PolicyReport.GetDisplayName()}";
             public static string PolicyExport = $"/{reportsController}/{ReportsPages.PolicyReportForExport.GetDisplayName()}";
             public static string PolicyReportOnly = $"/{reportsController}/{ReportsPages.PolicyReportOnly.GetDisplayName()}";
             public static string ActiveUsers = $"/{reportsController}/{ReportsPages.ActiveUsersReport.GetDisplayName()}";

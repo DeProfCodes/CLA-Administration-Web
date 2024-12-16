@@ -26,8 +26,8 @@ namespace CLA_Administration_Web.Services.Modules
         public async Task<ModulePSTDataViewModel> GetPopupById(int popupId, StagingLiveType stagingLiveType)
         {
             ModulePSTDataViewModel popupData = null;
-            
-            if(stagingLiveType == StagingLiveType.Staging)
+
+            if (stagingLiveType == StagingLiveType.Staging)
                 popupData = ModulesMockData.StagingData.AllPopupsData.FirstOrDefault(p => p.Id == popupId);
 
             if (stagingLiveType == StagingLiveType.Live)
@@ -96,7 +96,7 @@ namespace CLA_Administration_Web.Services.Modules
             return surveyQuestions;
         }
 
-        
+
         #endregion
 
         #endregion
