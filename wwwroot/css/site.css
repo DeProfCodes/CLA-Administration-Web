@@ -58,3 +58,7 @@
 {
     min-height: 92vh !important;
 }
+
+.modal {
+    background-color: rgba(0, 0, 0, 0.1) !important
+}

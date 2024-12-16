@@ -1,0 +1,79 @@
+﻿@model StagingUserMachineViewModel
+@{
+    string entityType = ViewBag.EntityType as string;
+}
+
+@if (entityType == "User")
+{
+
+    <form>
+        <div class="mb-3">
+            <label for="UserId" class="form-label">User ID : @Model.Id</label>
+            <input type="hidden" class="form-control" id="UserId" name="Id" value="@Model.Id" readonly>
+        </div>
+
+        <div class="mb-3">
+            <label for="Domain" class="form-label">Domain</label>
+            <input type="text" class="form-control" id="Domain" name="Domain" value="@Model.Domain">
+        </div>
+
+        <div class="mb-3">
+            <label for="NTUserName" class="form-label">NT Username</label>
+            <input type="text" class="form-control" id="NTUserName" name="NTUserName" value="@Model.Username">
+        </div>
+
+        <div class="mb-3">
+            <label for="Firstname" class="form-label">Firstname</label>
+            <input type="text" class="form-control" id="Firstname" name="Firstname" value="@Model.Firstname">
+        </div>
+
+        <div class="mb-3">
+            <label for="Surname" class="form-label">Surname</label>
+            <input type="text" class="form-control" id="Surname" name="Surname" value="@Model.Lastname">
+        </div>
+
+        <div class="mb-3">
+            <label for="UserLastModified" class="form-label">User Last Modified</label>
+            <input type="text" class="form-control" id="UserLastModified" name="UserLastModified" value="@Model.UserLastModified">
+        </div>
+
+        <div class="mb-3">
+            <label for="MachineLastModified" class="form-label">Machine Last Modified</label>
+            <input type="text" class="form-control" id="MachineLastModified" name="MachineLastModified" value="@Model.MachineLastModified">
+        </div>
+    </form>
+
+}
+
+@if (entityType == "Machine")
+{
+    <form>
+        <div class="mb-3">
+            <label for="MachineId" class="form-label">Machine ID : @Model.Id </label>
+            <input type="hidden" class="form-control" id="MachineId" name="Id" value="@Model.Id" readonly>
+        </div>
+        <div class="mb-3">
+            <label for="MachineName" class="form-label">Domain</label>
+            <input type="text" class="form-control" id="MachineName" name="MachineName" value="@Model.Domain">
+        </div>
+        <div class="mb-3">
+            <label for="MachineName" class="form-label">Machine Name</label>
+            <input type="text" class="form-control" id="MachineName" name="MachineName" value="@Model.MachineName">
+        </div>
+        <div class="mb-3">
+            <label for="MachineDescription" class="form-label">Machine Description</label>
+            <input type="text" class="form-control" id="MachineDescription" name="MachineDescription" value="@Model.MachineDescription">
+        </div>
+        <div class="mb-3">
+            <label for="UserLastModified" class="form-label">User Last Modified</label>
+            <input type="text" class="form-control" id="UserLastModified" name="UserLastModified" value="@Model.UserLastModified">
+        </div>
+        <div class="mb-3">
+            <label for="MachineLastModified" class="form-label">Machine Last Modified</label>
+            <input type="text" class="form-control" id="MachineLastModified" name="MachineLastModified" value="@Model.MachineLastModified">
+        </div>
+    </form>
+
+}
+
+

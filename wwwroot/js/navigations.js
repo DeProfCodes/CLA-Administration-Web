@@ -135,6 +135,24 @@ function PerformAction(actionURL, methodType, payload, responseCallback, actionB
     });
 }
 
+function dynamicAjaxRequest(formData, type, url, contentId, modalId) {
+    $.ajax({
+        url: url,
+        type: type,
+        data: formData,
+        success: function (response) {
+
+            console.log(response)
+            $('#' + id).html(response);
+
+            const editModal = new bootstrap.Modal(document.getElementById(modalId));
+            editModal.show();
+        },
+        error: function (error) {
+            console.log('Error fetching data:', error);
+        }
+    });
+}
 function OpenPage(page, id = null, id2 = null)
 {
     LoadPageArea(page, id, id2);

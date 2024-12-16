@@ -1,10 +1,12 @@
 using CLA_Administration_Web.Helpers.Constants;
 using CLA_Administration_Web.Helpers.MockData;
+using CLA_Administration_Web.Services;
 using CLA_Administration_Web.ViewModels.Settings;
 using CLA_Administration_Web.ViewModels.Settings.ActiveConections;
 using CLA_Administration_Web.ViewModels.Settings.ActiveConnections;
 using CLA_Administration_Web.ViewModels.Settings.SetupExclusion;
 using CLA_Administration_Web.ViewModels.Settings.StagingUsers;
+using CLA_Administration_Web.ViewModels.Settings.Shared;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CLA_Administration_Web.Controllers
@@ -31,6 +33,84 @@ namespace CLA_Administration_Web.Controllers
         }
 
         [HttpGet]
+        public ActionResult EditStagingMachine(int machineId, string entityType)
+        {
+           
+            var stagingUsersData = new StagingUsersMainViewModel()
+            {
+                StagingUsers = SettingsMockData.StagingUsers,
+                StagingMachines = SettingsMockData.StagingMachines
+            };
+
+            object selectedEntity = null;
+
+            if (entityType == "Machine")
+            {
+                selectedEntity = stagingUsersData.StagingMachines.FirstOrDefault(m => m.Id == machineId);
+            }
+            else if (entityType == "User")
+            {
+                selectedEntity = stagingUsersData.StagingUsers.FirstOrDefault(u => u.Id == machineId);
+            }
+
+          
+            if (selectedEntity == null)
+            {
+                return NotFound($"{entityType} with ID {machineId} not found.");
+            }
+
+            ViewBag.EntityType = entityType;
+
+            return PartialView(AppPagesLinks.Settings.StagingModalViewPageLink, selectedEntity);
+        }
+
+        [HttpGet]
+        public ActionResult EditSetupExclusions(int machineId, string entityType)
+        {
+            var setupExcludedData = new SetupExclusionsMainViewModel()
+            {
+                Users = SettingsMockData.SetupExcludedUsers,
+                Machines = SettingsMockData.SetupExcludedMachines
+            };
+
+            object selectedEntity = null;
+
+            if (entityType == "Machine")
+            {
+                selectedEntity = setupExcludedData.Machines.FirstOrDefault(m => m.Id == machineId);
+            }
+            else if (entityType == "User")
+            {
+                selectedEntity = setupExcludedData.Users.FirstOrDefault(u => u.Id == machineId);
+            }
+
+            if (selectedEntity == null)
+            {
+                return NotFound($"{entityType} with ID {machineId} not found.");
+            }
+
+            ViewBag.EntityType = entityType;
+            return PartialView(AppPagesLinks.Settings.SetupExclusionModalPageLink, selectedEntity);
+
+        }
+
+        [HttpPost]
+        public ActionResult UpdateStagingMachine(StagingUserMachineViewModel updatedMachine)
+        {
+
+            var machine = LocalDataStorage.StagingData.SingleStagingMachine.FirstOrDefault(m => m.Id == updatedMachine.Id);
+
+
+            machine.MachineName = updatedMachine.MachineName;
+            machine.MachineDescription = updatedMachine.MachineDescription;
+            machine.UserLastModified = updatedMachine.UserLastModified;
+            machine.MachineLastModified = updatedMachine.MachineLastModified;
+
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
         public async Task<IActionResult> SetupExclusions()
         {
             var setupExcludedData = new SetupExclusionsMainViewModel()
@@ -42,11 +122,39 @@ namespace CLA_Administration_Web.Controllers
             return PartialView(AppPagesLinks.Settings.SetupExclusionsPageLink, setupExcludedData);
         }
 
+        [HttpGet]
+        public ActionResult EditSetupExclusionss(int machineId, string entityType)
+        {
+            var setupExcludedData = new BaseSettingsViewModel()
+            {
+                Users = SettingsMockData.SetupExcludedUsers,
+                Machines = SettingsMockData.SetupExcludedMachines
+            };
+
+            object selectedEntity = null;
+
+            if (entityType == "Machine")
+            {
+                selectedEntity = setupExcludedData.Machines.FirstOrDefault(m => m.Id == machineId);
+            }
+            else if (entityType == "User")
+            {
+                selectedEntity = setupExcludedData.Users.FirstOrDefault(u => u.Id == machineId);
+            }
+
+            if (selectedEntity == null)
+            {
+                return NotFound($"{entityType} with ID {machineId} not found.");
+            }
+
+            ViewBag.EntityType = entityType;
+            return PartialView(AppPagesLinks.Settings.EditSettingsModalPageLink, selectedEntity);
+        }
 
         [HttpGet]
         public async Task<IActionResult> AdminAccess()
         {
-            return PartialView(AppPagesLinks.Settings.AdminAccessPageLink);
+          return PartialView(AppPagesLinks.Settings.AdminAccessPageLink);
         }
 
         [HttpGet]

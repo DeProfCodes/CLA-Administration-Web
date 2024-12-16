@@ -115,6 +115,12 @@
             public const string ActiveConnectionsPageLink = "~/Views/Settings/ActiveConnections.cshtml";
             public const string SkinsOfflineImagesPageLink = "~/Views/Settings/SkinsOfflineImages.cshtml";
             public const string DesktopInformationPageLink = "~/Views/Settings/DesktopInformation.cshtml";
+
+            //Modal setting component
+            public const string EditSettingsModalPageLink = "~/Views/Shared/Components/Custom/Settings/SettingsModalViewComponent.cshtml";
+            public const string SetupExclusionModalPageLink = "~/Views/Shared/Components/Custom/Settings/SettingsModal/SetupExclusionModalView.cshtml";
+            public const string StagingModalViewPageLink = "~/Views/Shared/Components/Custom/Settings/SettingsModal/StagingModalView.cshtml";
+
         }
 
         public class Reports

@@ -6,6 +6,7 @@ using CLA_Administration_Web.ViewModels.Modules.LDS;
 using CLA_Administration_Web.ViewModels.Modules.PST;
 using CLA_Administration_Web.ViewModels.Modules.Rss;
 using CLA_Administration_Web.ViewModels.Reports;
+using CLA_Administration_Web.ViewModels.Settings.StagingUsers;
 
 namespace CLA_Administration_Web.Services
 {
@@ -37,7 +38,7 @@ namespace CLA_Administration_Web.Services
 
             public static PopupReports PopupReports { get; set; }
 
-            public static PopupReportsViewModel AllPopupReports {get; set; }
+            public static PopupReportsViewModel AllPopupReports { get; set; }
 
             public static SurveyReports SurveyReports { get; set; }
 
@@ -45,6 +46,11 @@ namespace CLA_Administration_Web.Services
 
 
             public static PolicyReports PolicyReports { get; set; }
+
+            //Settings 
+            public static List<StagingUserMachineViewModel> SingleStagingMachine { get; set; }
+
+
         }
 
         public static class LiveData
@@ -203,5 +209,12 @@ namespace CLA_Administration_Web.Services
         {
             AllContentLibraryContents = data;
         }
+
+
+        public static void UpdateStagingUserData(List<StagingUserMachineViewModel> data)
+        {
+            StagingData.SingleStagingMachine = data;
+        }
+
     }
 }
