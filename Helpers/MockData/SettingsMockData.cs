@@ -2,10 +2,12 @@
 using CLA_Administration_Web.ViewModels.Modules.PST;
 using CLA_Administration_Web.ViewModels.Settings.ActiveConections;
 using CLA_Administration_Web.ViewModels.Settings.ActiveConnections;
+using CLA_Administration_Web.ViewModels.Settings.CustomUser;
 using CLA_Administration_Web.ViewModels.Settings.SetupExclusion;
 using CLA_Administration_Web.ViewModels.Settings.StagingUsers;
 using CLA_Administration_Web.ViewModels.Shared;
 using CLA_Administration_Web.ViewModels.Targeting;
+using DocumentFormat.OpenXml.Presentation;
 using Microsoft.AspNetCore.Identity.Data;
 
 namespace CLA_Administration_Web.Helpers.MockData
@@ -72,6 +74,8 @@ namespace CLA_Administration_Web.Helpers.MockData
             return result;
         }
 
+        public static List<CustomUserViewModel> CustomUserSettings { get; set; } = GetCustomUserSettings();
+
         public static List<SetupExclusionsUsersViewModel> GetSetupUsersExclusions()
         {
             var result = new List<SetupExclusionsUsersViewModel>();
@@ -135,6 +139,29 @@ namespace CLA_Administration_Web.Helpers.MockData
                     NTUsername = MockDataHelperFunctions.GetRandomLastname(),
                     LastSyncDT = MockDataHelperFunctions.GetRandomMachineID(),
                 
+                };
+                result.Add(item);
+            }
+            return result;
+        }
+
+        public static List<CustomUserViewModel> GetCustomUserSettings()
+        {
+            var result = new List<CustomUserViewModel>();
+
+            var rand = new Random();
+
+            for (int i = 0; i < 15; i++)
+            {
+                var item = new CustomUserViewModel()
+                {
+                    //This needs to be fixed , realised that im supposed to use TargetingHelper function
+                    // Id = rand.Next(41, 999),
+                    Description = MockDataHelperFunctions.GetRandomDomainName(),
+                    ScreensaverTimeout = MockDataHelperFunctions.GetRandomFirstname(),
+                    PopupTimeout = MockDataHelperFunctions.GetRandomLastname(),
+                    DeskTopTimeout = MockDataHelperFunctions.GetRandomMachineID(),
+
                 };
                 result.Add(item);
             }
