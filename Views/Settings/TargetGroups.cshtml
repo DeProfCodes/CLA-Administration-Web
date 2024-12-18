@@ -55,9 +55,13 @@
                     <div class="w-auto me-auto mb-1">
                         <div class="d-flex">
                            
-                            <button class="custom-btn custom-btn-default breadcrumb-btn" onclick="OpenBreadcrumbActionButton()" id="BreadcrumSettingsBtn">
+                            <button class="custom-btn custom-btn-default breadcrumb-btn" data-bs-toggle="modal" data-bs-target="#bulkImportModal" id="BreadcrumSettingsBtn">
                                 <i class="bi bi-plus-circle-fill custom-btn-icons breadcrumb-btn-icon" id="BreadcrumSettingsBtnIcon"></i>
                                 <span id="BreadcrumSettingsBtnText">Bulk Import</span>
+                            </button>
+                            <button class="custom-btn custom-btn-default breadcrumb-btn" data-bs-toggle="modal" data-bs-target="#directoryModal" id="BreadcrumSettingsBtn">
+                                <i class="bi bi-plus-circle-fill custom-btn-icons breadcrumb-btn-icon" id="BreadcrumSettingsBtnIcon"></i>
+                                <span id="BreadcrumSettingsBtnText">Membership info</span>
                             </button>
                         </div>
                     </div>
@@ -82,8 +86,8 @@
                             <th class="theme-bg text-white">Domain</th>
                             <th class="theme-bg text-white">NT Username</th>
                             <th class="theme-bg text-white">Firstname</th>
-                            <th class="theme-bg text-white">Surname</th>
                             <th class="theme-bg text-white">User Last Modified</th>
+                            <th class="theme-bg text-white">Status</th>                     
                             <th class="theme-bg text-white">Action</th>
                         </tr>
                     </thead>
@@ -98,8 +102,9 @@
                                 <td class="@cssBg">@stagingUser.DomainName</td>
                                 <td class="@cssBg">@stagingUser.NTUsername</td>
                                 <td class="@cssBg">@stagingUser.DisplayName</td>
-                                <td class="@cssBg">@stagingUser.Status</td>
                                 <td class="@cssBg">@stagingUser.LastSyncDT</td>
+                                <td class="@cssBg">@stagingUser.Status</td>
+                              
                                 <td class="@cssBg">
                                     <button class="btn btn-sm custom-btn-sm btn-danger">Delete</button>
                                     <button class="btn btn-sm custom-btn-sm btn-success" id="edit-staging-btn" onclick="EditNewStagingEnting('@stagingUser.Id', 'User')">Edit</button>
@@ -150,9 +155,9 @@
     </div>*@
 
 </div>
+</div>
 
-
-<!-- Create New Staging User Modal -->
+<!-- Add new targert group -->
 <div class="modal fade" id="CreateStagingUserModal" tabindex="-1" aria-labelledby="CreateStagingUserModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -202,6 +207,55 @@
     </div>
 </div>
 
+<!-- Add new targert group -->
+<div class="modal fade" id="CreateStagingUserModal" tabindex="-1" aria-labelledby="CreateStagingUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="CreateStagingUserModalLabel">Add Target group User</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal('CreateStagingUserModal')"></button>
+            </div>
+            <div class="modal-body">
+                <form id="CreateStagingUserForm">
+                    <div class="mb-3">
+                        <label for="StagingUserDomain" class="form-label">Domain</label>
+                        <select class="form-select" id="StagingUserDomain" required>
+                            <option value="">Please select a domain</option>
+                            @foreach (var domain in usersDomains)
+                            {
+                                <option value="@domain">@domain</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="StagingUserUsername" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="StagingUserUsername" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="StagingUserFirstname" class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="StagingUserFirstname" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="StagingUserLastname" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="StagingUserLastname" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="StagingUserUserLastModified" class="form-label">User Last Modified</label>
+                        <input type="text" class="form-control" id="StagingUserUserLastModified">
+                    </div>
+                    <div class="mb-3">
+                        <label for="StagingUserMachineLastModified" class="form-label">Machine Last Modified</label>
+                        <input type="text" class="form-control" id="StagingUserMachineLastModified">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal('CreateStagingUserModal')">Cancel</button>
+                <button type="button" class="btn  custom-btn-default" onclick="SaveStagingUser()">Save User</button>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Create New Staging Machine Modal -->
 <div class="modal fade" id="CreateStagingMachineModal" tabindex="-1" aria-labelledby="CreateStagingUserModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -269,30 +323,376 @@
 </div>
 
 
+        
+
+        <!--Membership info  Modal -->
+        <div class="modal fade" id="directoryModal" tabindex="-1" aria-labelledby="directoryModalLabel" aria-hidden="true">
+            <div class="modal-dialog  modal-fullscreen">
+                <div class="modal-content">
+               
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="directoryModalLabel">Active Directory Membership Information</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="row">
+                            <!-- Left Side: TreeView with Filter -->
+                            <div class="col-4">
+                                <div class="mb-2">
+                                    <label for="filterInput" class="form-label"><strong>Filter:</strong></label>
+                                    <input type="text" id="filterInput" class="form-control filter-input" placeholder="Search...">
+                                </div>
+                                <div class="scroll-box treeview">
+                                   
+                                    <ul class="tree-view">
+                                        <li>
+                                            <!-- First Level -->
+                                            <input type="checkbox" id="node1" class="tree-toggle">
+                                            <label for="node1" class="tree-toggle-label">Active Directory Objects</label>
+                                            <ul class="tree-content">
+                                                <li>
+                                                    <input type="checkbox" id="node1-1" class="tree-toggle">
+                                                    <label for="node1-1" class="tree-toggle-label">Groups</label>
+                                                    <ul class="tree-content">
+                                                        <li>Admins</li>
+                                                        <li>Developers</li>
+                                                        <li>HR</li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" id="node1-2" class="tree-toggle">
+                                                    <label for="node1-2" class="tree-toggle-label">Users</label>
+                                                    <ul class="tree-content">
+                                                        <li>John Doe</li>
+                                                        <li>Jane Smith</li>
+                                                        <li>Mike Johnson</li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" id="node1-3" class="tree-toggle">
+                                                    <label for="node1-3" class="tree-toggle-label">Machines</label>
+                                                    <ul class="tree-content">
+                                                        <li>Server-1</li>
+                                                        <li>Workstation-5</li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" id="node1-4" class="tree-toggle">
+                                                    <label for="node1-4" class="tree-toggle-label">IP Ranges</label>
+                                                    <ul class="tree-content">
+                                                        <li>192.168.0.0/24</li>
+                                                        <li>10.0.0.0/8</li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <!-- Second Tree -->
+                                        <li>
+                                            <input type="checkbox" id="node2" class="tree-toggle">
+                                            <label for="node2" class="tree-toggle-label">Member Of</label>
+                                            <ul class="tree-content">
+                                                <li>
+                                                    <input type="checkbox" id="node2-1" class="tree-toggle">
+                                                    <label for="node2-1" class="tree-toggle-label">Groups</label>
+                                                    <ul class="tree-content">
+                                                        <li>Corporate</li>
+                                                        <li>Finance</li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Right Side: Members and Member Of -->
+                            <div class="col-8">
+                                <div class="row">
+                                    <div class="col-12 mb-3">
+                                        <div class="section-title">Members</div>
+                                        <div class="scroll-box">
+                                            <div class="scroll-box treeview">
+
+                                                <ul class="tree-view">
+                                                    <li>
+                                                        <!-- First Level -->
+                                                        <input type="checkbox" id="node1" class="tree-toggle">
+                                                        <label for="node1" class="tree-toggle-label">Active Directory Objects</label>
+                                                        <ul class="tree-content">
+                                                            <li>
+                                                                <input type="checkbox" id="node1-1" class="tree-toggle">
+                                                                <label for="node1-1" class="tree-toggle-label">Groups</label>
+                                                                <ul class="tree-content">
+                                                                    <li>Admins</li>
+                                                                    <li>Developers</li>
+                                                                    <li>HR</li>
+                                                                </ul>
+                                                            </li>
+                                                            <li>
+                                                                <input type="checkbox" id="node1-2" class="tree-toggle">
+                                                                <label for="node1-2" class="tree-toggle-label">Users</label>
+                                                                <ul class="tree-content">
+                                                                    <li>John Doe</li>
+                                                                    <li>Jane Smith</li>
+                                                                    <li>Mike Johnson</li>
+                                                                </ul>
+                                                            </li>
+                                                            <li>
+                                                                <input type="checkbox" id="node1-3" class="tree-toggle">
+                                                                <label for="node1-3" class="tree-toggle-label">Machines</label>
+                                                                <ul class="tree-content">
+                                                                    <li>Server-1</li>
+                                                                    <li>Workstation-5</li>
+                                                                </ul>
+                                                            </li>
+                                                            <li>
+                                                                <input type="checkbox" id="node1-4" class="tree-toggle">
+                                                                <label for="node1-4" class="tree-toggle-label">IP Ranges</label>
+                                                                <ul class="tree-content">
+                                                                    <li>192.168.0.0/24</li>
+                                                                    <li>10.0.0.0/8</li>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <!-- Second Tree -->
+                                                    <li>
+                                                        <input type="checkbox" id="node2" class="tree-toggle">
+                                                        <label for="node2" class="tree-toggle-label">Member Of</label>
+                                                        <ul class="tree-content">
+                                                            <li>
+                                                                <input type="checkbox" id="node2-1" class="tree-toggle">
+                                                                <label for="node2-1" class="tree-toggle-label">Groups</label>
+                                                                <ul class="tree-content">
+                                                                    <li>Corporate</li>
+                                                                    <li>Finance</li>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <ul>
+                                                <li>
+                                                    <i class="bi bi-folder"></i> Active Directory Objects
+                                                    <ul>
+                                                        <li>Groups</li>
+                                                        <li>Users</li>
+                                                        <li>Machines</li>
+                                                        <li>IPRanges</li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="btn-group-vertical">
+                                            <button class="btn btn-sm btn-secondary">Modify</button>
+                                            <button class="btn btn-sm btn-secondary mt-1">Import Members</button>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="section-title">Member Of</div>
+                                        <div class="scroll-box">
+                                            <ul>
+                                                <li>
+                                                    <i class="bi bi-folder"></i> Active Directory Objects
+                                                    <ul>
+                                                        <li>Groups</li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <button class="btn btn-sm btn-secondary mt-2">Modify</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    <!--Bulk import  Modal -->
+    <div class="modal fade" id="bulkImportModal" tabindex="-1" aria-labelledby="bulkImportLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="bulkImportLabel">Active Directory Bulk Import</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Browse and Processing -->
+                    <div class="row mb-3">
+                        <div class="col-md-2">
+                            <input type="file" class="form-control" id="fileInput" />
+                        </div>
+                        <div class="col-md-10">
+                            <label class="me-2">Processing:</label>
+                            <div class="progress" id="progressBarContainer">
+                                <div class="progress-bar" id="progressBar" role="progressbar" style="width: 0%;"
+                                     aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                    0%
+                                </div>
+                            </div>
+                            <div class="form-check form-check-inline mt-2">
+                                <input class="form-check-input" type="radio" name="processOption" id="users" value="users">
+                                <label class="form-check-label" for="users">Users</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="processOption" id="machines" value="machines">
+                                <label class="form-check-label" for="machines">Machines</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="processOption" id="both" value="both">
+                                <label class="form-check-label" for="both">Both</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Users Section -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="section-border">
+                                <div class="section-title">Users</div>
+                                <div class="mb-2">
+                                    <label class="form-label">User ID:</label>
+                                    <input type="text" class="form-control">
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label">Firstname:</label>
+                                    <input type="text" class="form-control">
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label">Lastname:</label>
+                                    <input type="text" class="form-control">
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label">Employee Identifier:</label>
+                                    <input type="text" class="form-control">
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label">Group:</label>
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Machines Section -->
+                        <div class="col-md-6">
+                            <div class="section-border">
+                                <div class="section-title">Machines</div>
+                                <div class="mb-2">
+                                    <label class="form-label">Machine ID:</label>
+                                    <input type="text" class="form-control">
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label">Description:</label>
+                                    <input type="text" class="form-control">
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label">Group:</label>
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Excel File Contents -->
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <div class="file-contents p-2" id="fileContents">
+                                <div class="section-title">Excel File Contents</div>
+                                <!-- Content placeholder -->
+                                <p class="text-muted">Uploaded file data will appear here...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="text-center">
+                        <button class="btn btn-outline-secondary btn-verify me-2">Verify</button>
+                        <button class="btn btn-outline-primary btn-process">Process</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
 
 <script>
 
+
+
+
+        const fileInput = document.getElementById('fileInput');
+        const progressBarContainer = document.getElementById('progressBarContainer');
+        const progressBar = document.getElementById('progressBar');
+        const fileContents = document.getElementById('fileContents');
+
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                progressBarContainer.style.display = 'block';
+                let progress = 0;
+
+                // Simulate file upload progress
+                const interval = setInterval(() => {
+                    progress += 10;
+                    progressBar.style.width = `${progress}%`;
+                    progressBar.setAttribute('aria-valuenow', progress);
+                    progressBar.innerText = `${progress}%`;
+
+                    if (progress >= 100) {
+                        clearInterval(interval);
+                        progressBar.innerText = "Upload Complete!";
+                        fileContents.innerHTML = `<p>File "${file.name}" uploaded successfully.</p>`;
+                    }
+                }, 200);
+            }
+        });
+
+
     var usersDomains = @Html.Raw(Json.Serialize(usersDomains));
             var machinesDomains = @Html.Raw(Json.Serialize(usersDomains));
 
-    $(document).ready(function () {
+    $(document).ready(function ()
+    {
         usersDT = MakeStandardDataTable("StagingUsersData");
         machinesDT = MakeStandardDataTable("StagingMachinesData");
     });
 
-    function ToggleStaginUserMachines(id) {
+    function ToggleStaginUserMachines(id) 
+    {
         $(".filter-type-btn").removeClass("btn-group-active");
         $(`#${id}`).addClass("btn-group-active");
 
-        if (id.includes("User")) {
+        if (id.includes("User"))
+        {
             $("#BreadcrumSettingsBtnText").text("Add New Target Group User");
             $("#StagingUserMachineTitle").text("Users");
             HideShowElement("#StagingUsersSettings", HideShow.SHOW);
             HideShowElement("#StagingMachinesSettings", HideShow.HIDE);
             SwitchDomainsSelectDataSource(usersDomains);
         }
-        else if (id.includes("Machine")) {
+        else if (id.includes("Machine"))
+        {
             $("#BreadcrumSettingsBtnText").text("Add New Target Group Machine");
             $("#StagingUserMachineTitle").text("Machines");
             HideShowElement("#StagingUsersSettings", HideShow.HIDE);
@@ -301,7 +701,8 @@
         }
     }
 
-    function SwitchDomainsSelectDataSource(dataSource) {
+    function SwitchDomainsSelectDataSource(dataSource) 
+    {
         const selectList = document.getElementById("ReportModuleSelect");
 
         selectList.innerHTML = "";
@@ -311,7 +712,8 @@
         defaultOption.textContent = "Please select Domain Name";
         selectList.appendChild(defaultOption);
 
-        dataSource.forEach(domain => {
+        dataSource.forEach(domain =>
+            {
             const option = document.createElement("option");
             option.value = domain;
             option.textContent = domain;
@@ -319,7 +721,8 @@
         });
     }
 
-    function FilterByDomain() {
+    function FilterByDomain()
+    {
         const selectedDomain = $("#ReportModuleSelect").val();
 
         var userActive = $("#StagingUserBtn").hasClass("btn-group-active");
@@ -330,7 +733,8 @@
             else
                 machinesDT.column(0).search("").draw();
         }
-        else {
+        else
+        {
             if (userActive)
                 usersDT.column(0).search(selectedDomain).draw();
 
