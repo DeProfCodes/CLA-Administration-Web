@@ -16,7 +16,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Views\Settings\TargetGroup\" />
     <Folder Include="Views\Shared\Components\Custom\Modules\Views\" />
+    <Folder Include="Views\Shared\Components\Custom\Settings\TargetGroupModal\" />
     <Folder Include="wwwroot\assets\plugins\bootstrap-material-datetimepicker\css\" />
     <Folder Include="wwwroot\resources\reports\policy\" />
     <Folder Include="wwwroot\resources\reports\survey\" />
@@ -56,12 +58,15 @@
     <TypeScriptCompile Remove="node_modules\**" />
   </ItemGroup>
   <ItemGroup>
+    <Content Remove="Views\Settings\DefaultFonts.cshtml" />
     <Content Remove="wwwroot\js\reports\piechart.js" />
   </ItemGroup>
   <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Settings\DefaultFonts.cshtml" />
     <_ContentIncludedByDefault Remove="wwwroot\js\reports\piechart.js" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Views\Settings\DefaultFonts.cshtml" />
     <None Include="wwwroot\js\reports\piechart.js" />
     <None Include="wwwroot\resources\reports\rptActiveUsers.rdlc" />
     <None Include="wwwroot\resources\reports\rptActiveMachines.rdlc" />
@@ -126,6 +131,9 @@
         <Reference Include="CLAModulesLibrary">
             <HintPath>dlls\CLAModulesLibrary.dll</HintPath>
         </Reference>
+    </ItemGroup>
+    <ItemGroup>
+      <UpToDateCheckInput Remove="Views\Settings\DefaultFonts.cshtml" />
     </ItemGroup>
     
 </Project>

@@ -2,7 +2,6 @@ using CLA_Administration_Web.Helpers.Constants;
 using CLA_Administration_Web.Helpers.MockData;
 using CLA_Administration_Web.Services;
 using CLA_Administration_Web.ViewModels.Settings;
-using CLA_Administration_Web.ViewModels.Settings.ActiveConections;
 using CLA_Administration_Web.ViewModels.Settings.ActiveConnections;
 using CLA_Administration_Web.ViewModels.Settings.SetupExclusion;
 using CLA_Administration_Web.ViewModels.Settings.StagingUsers;
@@ -10,6 +9,7 @@ using CLA_Administration_Web.ViewModels.Settings.Shared;
 using Microsoft.AspNetCore.Mvc;
 using CLA_Administration_Web.ViewModels.Targeting;
 using CLA_Administration_Web.ViewModels.Settings.ManageAdminAccess;
+using CLA_Administration_Web.ViewModels.Settings.CustomUser;
 
 namespace CLA_Administration_Web.Controllers
 {
@@ -22,6 +22,7 @@ namespace CLA_Administration_Web.Controllers
             _logger = logger;
         }
 
+        #region Stagingusers
         [HttpGet]
         public async Task<IActionResult> StagingUsers()
         {
@@ -154,11 +155,19 @@ namespace CLA_Administration_Web.Controllers
         }
 
         [HttpGet]
+
+        #endregion
+
+        #region Admin
         public async Task<IActionResult> AdminAccess()
         {
            
           return PartialView(AppPagesLinks.Settings.AdminAccessPageLink);
         }
+
+        #endregion  
+
+        #region Target
 
         [HttpGet]
         public async Task<IActionResult> TargetGroups()
@@ -171,12 +180,39 @@ namespace CLA_Administration_Web.Controllers
             return PartialView(AppPagesLinks.Settings.TargetGroupsPageLink, targetGroups);
         }
 
+        #endregion
+
+        #region  CustomUser
         [HttpGet]
         public async Task<IActionResult> CustomUserSettings()
+
         {
-            return PartialView(AppPagesLinks.Settings.CustomUserSettingsPageLink);
+            var customUserData = new CustomUserMainViewModel()
+            {
+                CustomUsersSettings = SettingsMockData.CustomUserSettings,
+       
+            };
+            return PartialView(AppPagesLinks.Settings.CustomUserSettingsPageLink, customUserData);
         }
 
+        public async Task<IActionResult> CustomUserSettingsDetails(int desktopId)
+        {
+
+            var desktopVm = LocalDataStorage.StagingData.AllDesktops.FirstOrDefault(x => x.Id == desktopId);
+
+            return PartialView(AppPagesLinks.Settings.CustomUserSettingsDetailsPageLink, desktopVm);
+        }
+
+        #endregion
+
+        #region Defaults
+        public async Task<IActionResult> DefaultFonts()
+        {
+            return PartialView(AppPagesLinks.Settings.DefaultFontsPageLink);
+        }
+        #endregion Defaults
+
+        #region ActiveConnections
         [HttpGet]
         public async Task<IActionResult> ActiveConnections()
         {
@@ -189,17 +225,25 @@ namespace CLA_Administration_Web.Controllers
             return PartialView(AppPagesLinks.Settings.ActiveConnectionsPageLink);
         }
 
+        #endregion
+
+        #region SkinsOffline
         [HttpGet]
         public async Task<IActionResult> SkinsOfflineImages()
         {
             return PartialView(AppPagesLinks.Settings.SkinsOfflineImagesPageLink);
         }
+        #endregion
 
+        #region Desktopinfo
         [HttpGet]
         public async Task<IActionResult> DesktopInformation()
         {
             return PartialView(AppPagesLinks.Settings.DesktopInformationPageLink);
         }
+
+        #endregion
     }
+
 }
  

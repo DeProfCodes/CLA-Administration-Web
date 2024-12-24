@@ -156,11 +156,13 @@ namespace CLA_Administration_Web.Helpers.MockData
                 var item = new CustomUserViewModel()
                 {
                     //This needs to be fixed , realised that im supposed to use TargetingHelper function
-                    // Id = rand.Next(41, 999),
-                    Description = MockDataHelperFunctions.GetRandomDomainName(),
-                    ScreensaverTimeout = MockDataHelperFunctions.GetRandomFirstname(),
-                    PopupTimeout = MockDataHelperFunctions.GetRandomLastname(),
-                    DeskTopTimeout = MockDataHelperFunctions.GetRandomMachineID(),
+                    Id = rand.Next(41, 999),
+                    Description = MockDataHelperFunctions.GetRandomUserID(),
+                    ScreensaverTimeout = MockDataHelperFunctions.GetRandomCustomUserNumbers(),
+                    PopupTimeout = MockDataHelperFunctions.GetRandomCustomUserNumbers(),
+                    DeskTopTimeout = MockDataHelperFunctions.GetRandomCustomUserNumbers(),
+                    SyncTimeout = MockDataHelperFunctions.GetRandomCustomUserNumbers(),
+                    Network = MockDataHelperFunctions.GetRandomCustomUserNumbers(),
 
                 };
                 result.Add(item);

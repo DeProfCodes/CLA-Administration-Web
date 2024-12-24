@@ -67,7 +67,7 @@ namespace CLA_Administration_Web.Controllers
                         GroupId = 1,
                     }
                 },
-                TargetedMachines = new List<TargetedMachine>
+                TargetedMachines = new List<TargetedMachine> 
                 {
                     new TargetedMachine
                     {

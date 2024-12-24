@@ -111,6 +111,21 @@
             return usersList[Random.Next(usersList.Count)];   
         }
 
+        public static string GetRandomCustomUserNumbers()
+        {
+            var usersListnumber = new List<string>
+            {
+                "100", "900", "80", "200", "50", "1000", "800", "62002", "2985", "6033",
+                "1234", "5678", "91011", "31415", "1617", "1820", "2122", "2324", "2500",
+                "3333", "4444", "5555", "6666", "7777", "8888", "9999", "1020", "3060",
+                "4050", "5060", "6070", "7080", "8090", "9000", "10000", "12000", "15000"
+            };
+
+            return usersListnumber[Random.Next(usersListnumber.Count)];
+        }
+
+
+
         public static string GetRandomMachineID()
         {
             var machinesList = new List<string> { "NdhuvaziM-PC", "LegeB-PC", "Sinethemba-PC", "LeboC-PC", "Administrator-PC", "CathrineT-PC", "LarryM-PC", "Tarryn-PC" };

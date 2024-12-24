@@ -155,3 +155,38 @@
     max-width: 100%;
 }
 /* Tree View Container close */
+
+
+#table-scroll {
+    height:100%;
+    overflow: scroll;
+    margin-top: 20px;
+}
+
+.settings-data-area {
+   
+    min-height: 620px;
+}
+
+.settings-outter-container {
+    min-width: 100%; /* Set width to 100% to fit the screen */
+    max-width: 100%; /* Ensure it doesn't exceed the screen width */
+    height: auto; /* Allow the height to adjust based on content */
+    min-height: 400px; /* Keep the minimum height for consistency */
+    margin: 15px; /* Maintain a small margin around the container */
+    box-sizing: border-box; /* Ensure padding and borders are included in width/height calculations */
+}
+
+@media (max-width: 768px) {
+    .settings-outter-container {
+        min-width: 100%; /* Ensure the container fits smaller screens */
+        height: auto; /* Adjust height based on content */
+    }
+}
+
+@media (max-width: 576px) {
+    .settings-outter-container {
+        min-width: 100%; /* Ensure the container fits very small screens */
+        margin: 10px; /* Reduce margin for small screens */
+    }
+}

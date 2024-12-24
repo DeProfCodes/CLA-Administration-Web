@@ -1,5 +1,120 @@
 ﻿
 
-<h1 class="text-center">
-    Skins & Offline Images
-</h1>
+
+<div class="container mt-4">
+    <h3 class="text-center mb-4">Maintain Skins & Offline Images</h3>
+
+    <div class="row">
+        <!-- Left Panel: Existing Categories -->
+        <div class="col-md-6">
+            <ul class="nav nav-tabs" id="categoriesTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="existing-categories-tab" data-bs-toggle="tab" data-bs-target="#existing-categories" type="button" role="tab" aria-controls="existing-categories" aria-selected="true">Existing Categories</button>
+                </li>
+            </ul>
+            <div class="tab-content border p-3" id="categoriesTabContent">
+                <div class="tab-pane fade show active" id="existing-categories" role="tabpanel" aria-labelledby="existing-categories-tab">
+                    <ul class="list-unstyled">
+                        <li>
+                            Offline Skins
+                            <ul>
+                                <li>Offline Desktop</li>
+                                <li>Offline Lockscreen Wallpaper</li>
+                                <li>Offline Screensaver</li>
+                                <li>
+                                    Popups
+                                    <ul>
+                                        <li>Skin</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>Surveys</li>
+                        <li>Tickets</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Panel: Category Details -->
+        <div class="col-md-6">
+            <ul class="nav nav-tabs" id="detailsTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="category-details-tab" data-bs-toggle="tab" data-bs-target="#category-details" type="button" role="tab" aria-controls="category-details" aria-selected="true">Category Details</button>
+                </li>
+            </ul>
+            <div class="tab-content border p-3" id="detailsTabContent">
+                <div class="tab-pane fade show active" id="category-details" role="tabpanel" aria-labelledby="category-details-tab">
+                    <form>
+                        <div class="mb-3">
+                            <label for="categoryName" class="form-label">Category Name</label>
+                            <input type="text" class="form-control" id="categoryName">
+                        </div>
+                        <div class="mb-3">
+                            <label for="userModified" class="form-label">User Last Modified</label>
+                            <input type="text" class="form-control" id="userModified">
+                        </div>
+                        <div class="mb-3">
+                            <label for="machineModified" class="form-label">Machine Last Modified</label>
+                            <input type="text" class="form-control" id="machineModified">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Existing Skins & Offline Images Table -->
+    <div class="mt-4">
+        <h5>Existing Skins & Offline Images</h5>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Item Path</th>
+                    <th>View</th>
+                    <th>Default?</th>
+                    <th>Description</th>
+                    <th>User Last Modified</th>
+                    <th>Machine Last Modified</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><button class="btn btn-sm btn-primary">Select New Item</button></td>
+                    <td><button class="btn btn-sm btn-secondary">View</button></td>
+                    <td><input type="radio" name="default"></td>
+                    <td>V6 STMBackground</td>
+                    <td>NDHUVAZIM</td>
+                    <td>Sarveshan-Asus</td>
+                </tr>
+                <tr>
+                    <td><button class="btn btn-sm btn-primary">Select New Item</button></td>
+                    <td><button class="btn btn-sm btn-secondary">View</button></td>
+                    <td><input type="radio" name="default"></td>
+                    <td>Default STM Skin</td>
+                    <td>NDHUVAZIM</td>
+                    <td>Sarveshan-Asus</td>
+                </tr>
+                <!-- Add more rows as needed -->
+            </tbody>
+            
+        </table>
+    </div>
+
+    <!-- Buttons Section -->
+    <div class="d-flex justify-content-between mt-3">
+        <div>
+            <button class="btn btn-primary">Import New Item</button>
+            <button class="btn btn-success">Mark As Default</button>
+        </div>
+        <div>
+            <button class="btn btn-danger">Remove Selected</button>
+            <button class="btn btn-warning">Delete Selected</button>
+        </div>
+    </div>
+
+    <div class="text-center mt-3">
+        <button class="btn btn-secondary">Save</button>
+        <button class="btn btn-light">Clear</button>
+    </div>
+</div>
