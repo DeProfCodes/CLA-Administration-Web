@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using CLA_Administration_Web.ViewModels.Targeting;
 using CLA_Administration_Web.ViewModels.Settings.ManageAdminAccess;
 using CLA_Administration_Web.ViewModels.Settings.CustomUser;
+using CLA_Administration_Web.Models.APIResponses.Reports.Troubleshoot;
 
 namespace CLA_Administration_Web.Controllers
 {
@@ -188,9 +189,16 @@ namespace CLA_Administration_Web.Controllers
 
         {
             var customUserData = new CustomUserMainViewModel()
-            {
-                CustomUsersSettings = SettingsMockData.CustomUserSettings,
-       
+            {   IsBlank = false,
+               CustomUsersSettings = SettingsMockData.CustomUserSettings,
+    
+                ConnectedToLive = true,
+              
+                LastSyncDetails = new TroubleshootReportLastSyncDetails(),
+                UserGroups = new List<TroubleshootReportUserGroup>(),
+                Targeting = new List<TroubleshootReportTargeting>(),
+                Settings = new TroubleshootReportSettings()
+
             };
             return PartialView(AppPagesLinks.Settings.CustomUserSettingsPageLink, customUserData);
         }

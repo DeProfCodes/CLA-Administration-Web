@@ -1,5 +1,6 @@
-﻿@model CLA_Administration_Web.ViewModels.Settings.CustomUser.CustomUserMainViewModel
-@using CLA_Administration_Web.ViewModels.Settings
+﻿@using CLA_Administration_Web.ViewModels.Settings.CustomUser
+
+@model CustomUserMainViewModel
 @using static CLA_Administration_Web.ViewModels.Modules.LDS.AddNewContentLibraryCategory
 @using CLA_Administration_Web.Helpers.Enums.AppPages
 @using CLA_Administration_Web.Helpers.Enums.Shared
@@ -7,66 +8,10 @@
 
 
 
-<div class="container">
-    <h2>Custom User Settings</h2>
 
-    <!-- Display Live Connection Status -->
-    <div>
-        <label>Connected to Live:</label>
-        <span>@Model.ConnectedToLive ? "Yes" : "No"</span>
-    </div>
 
-    <!-- Check if the model is not blank -->
-    @if (!Model.IsBlank)
-    {
-        <div>
-            <h3>Custom User Settings</h3>
-            <ul>
-                @foreach (var userSetting in Model.CustomUsersSettings)
-                {
-                    <li>
-                        <strong>@userSetting.UserName</strong> - @userSetting.UserDetail
-                    </li>
-                }
-            </ul>
-        </div>
 
-        <div>
-            <h3>Last Sync Details</h3>
-            <p>@Model.LastSyncDetails?.SyncDate</p>
-            <p>@Model.LastSyncDetails?.SyncStatus</p>
-        </div>
 
-        <div>
-            <h3>User Groups</h3>
-            <ul>
-                @foreach (var group in Model.UserGroups)
-                {
-                    <li>@group.GroupName</li>
-                }
-            </ul>
-        </div>
-
-        <div>
-            <h3>Targeting</h3>
-            <ul>
-                @foreach (var targeting in Model.Targeting)
-                {
-                    <li>@targeting.TargetName</li>
-                }
-            </ul>
-        </div>
-
-        <div>
-            <h3>Settings</h3>
-            <p>@Model.Settings?.SettingDetail</p>
-        </div>
-    }
-    else
-    {
-        <p>No data available for custom user settings.</p>
-    }
-</div>
 
 @{
     var connectServer = "";
@@ -244,6 +189,7 @@
                 <table id="StagingUsersData" class="table table-striped table-bordered table-hover theme-border align-middle campain-table-type fs-12">
                     <thead>
                         <tr>
+                            <th class="theme-bg text-white">CustomuserID</th>
                             <th class="theme-bg text-white">Description</th>
                             <th class="theme-bg text-white">Screensaver Timeout</th>
                             <th class="theme-bg text-white">Popup Timeout</th>
@@ -255,24 +201,28 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="theme-txt-clr">Taryn</td>
-                            <td class="theme-txt-clr">900</td>
-                            <td class="theme-txt-clr">300</td>
-                            <td class="theme-txt-clr">600</td>
-                            <td class="theme-txt-clr">300</td>
-                            <td class="theme-txt-clr">300</td>
-                            <td class="theme-txt-clr">Microsoft</td>
-                            <td class="theme-txt-clr">
-                                <button class="btn btn-sm custom-btn-sm btn-danger">Delete</button>
-                                <button class="btn btn-sm custom-btn-sm btn-success" id="edit-staging-btn" onclick="EditNewStagingEnting(1, 'User')">Edit</button>
-                            </td>
-                        </tr>
+                          @foreach (var userSetting in Model.CustomUsersSettings)
+                            {
+                                <tr>
+                                <td class="theme-txt-clr">@userSetting.Id</td>
+                                    <td class="theme-txt-clr">@userSetting.Description</td>
+                                    <td class="theme-txt-clr">@userSetting.ScreensaverTimeout</td>
+                                    <td class="theme-txt-clr">@userSetting.PopupTimeout</td>
+                                    <td class="theme-txt-clr">@userSetting.DeskTopTimeout</td>
+                                    <td class="theme-txt-clr">@userSetting.TickerTimeout</td>
+                                    <td class="theme-txt-clr">@userSetting.SyncTimeout</td>
+                                    <td class="theme-txt-clr">@userSetting.Network</td>
+                                    <td class="theme-txt-clr">
+                                        <button class="btn btn-sm custom-btn-sm btn-danger">Delete</button>
+                                        <button class="btn btn-sm custom-btn-sm btn-success" id="edit-staging-btn" onclick="EditNewStagingEnting(1, 'User')">Edit</button>
+                                    </td>
+                                </tr>
+                            }
+                         
                     </tbody>
                 </table>
             </div>
-                  
-
+              
             </div>
 
 
@@ -508,10 +458,10 @@
                 </div>
             </div>
         </div>
-
+          
     </div>
 
-
+    </div>
 
 </div>
 

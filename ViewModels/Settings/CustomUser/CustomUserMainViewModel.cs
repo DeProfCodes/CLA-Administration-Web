@@ -1,5 +1,7 @@
 ﻿using CLA_Administration_Web.Models.APIResponses.Reports.Troubleshoot;
 using System.Collections.Generic;
+using CLA_Administration_Web.ViewModels.Settings.CustomUser;
+
 
 namespace CLA_Administration_Web.ViewModels.Settings.CustomUser
 {
@@ -29,4 +31,5 @@ namespace CLA_Administration_Web.ViewModels.Settings.CustomUser
             Targeting = new List<TroubleshootReportTargeting>();
         }
     }
+
 }

@@ -162,7 +162,8 @@ namespace CLA_Administration_Web.Helpers.MockData
                     PopupTimeout = MockDataHelperFunctions.GetRandomCustomUserNumbers(),
                     DeskTopTimeout = MockDataHelperFunctions.GetRandomCustomUserNumbers(),
                     SyncTimeout = MockDataHelperFunctions.GetRandomCustomUserNumbers(),
-                    Network = MockDataHelperFunctions.GetRandomCustomUserNumbers(),
+                    Network = MockDataHelperFunctions.GetRandomDomainName(),
+                    TickerTimeout= MockDataHelperFunctions.GetRandomCustomUserNumbers()
 
                 };
                 result.Add(item);
