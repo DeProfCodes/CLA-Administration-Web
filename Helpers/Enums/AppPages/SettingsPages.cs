@@ -30,6 +30,8 @@ namespace CLA_Administration_Web.Helpers.Enums.AppPages
 
         [Display(Name = "CustomUserSettings", Description = "Custom User Settings")]
         CustomUserSettings,
+        [Display(Name = "CustomUserSettingsDetails", ShortName = "Custom User Settings Details")]
+        CustomUserSettingsDetails,
 
         [Display(Name = "ActiveConnections", Description = "Active Connections")]
         ActiveConnections,
