@@ -1,16 +1,29 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model CLA_Administration_Web.ViewModels.Targeting.TargetingExposureViewModel
+
+@using static CLA_Administration_Web.ViewModels.Modules.LDS.AddNewContentLibraryCategory
+@using CLA_Administration_Web.ViewModels.Targeting
+@using CLA_Administration_Web.Helpers.Enums.AppPages
+@using CLA_Administration_Web.Helpers.Enums.Shared
+@using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
+
 @{
+    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Settings/SettingsBreadcrumb.cshtml", new SettingsBreadcrumbViewModel
+            {
+                SettingsCurrentPage = SettingsPages.DefaultFonts,
+                HasAddNewButton = true,
+                BreadcrumbButtonName = "Add New Target Group",
+                BreadcrumbButtonCallbackFunction = "AddNewStagingEntity"
+            });
 }
 
 
-<div class="container my-4 border p-3 rounded shadow">
+
+<div class="container-fluid my-4 border p-3 rounded ">
     <h4 class="text-center mb-4">Default Fonts</h4>
 
     <!-- Popups Section -->
     <div class="border p-3 mb-3">
-        <h5 class="text-center">Popups</h5>
+        <h5 class="text-center">Popups</h5> 
         <div class="row mb-3 align-items-center">
             <div class="col-1 text-center">
                 <img src="https://via.placeholder.com/30" alt="Icon">

@@ -117,9 +117,11 @@ namespace CLA_Administration_Web.Helpers.Constants
             public static string AdminAccess = $"/{settingsController}/{SettingsPages.AdminAccess.GetDisplayName()}";
             public static string TargetGroups = $"/{settingsController}/{SettingsPages.TargetGroups.GetDisplayName()}";
             public static string CustomUserSettings = $"/{settingsController}/{SettingsPages.CustomUserSettings.GetDisplayName()}";
+            public static string CustomUserSettingsDetails = $"/{settingsController}/{SettingsPages.CustomUserSettingsDetails.GetDisplayName()}";
             public static string ActiveConnections = $"/{settingsController}/{SettingsPages.ActiveConnections.GetDisplayName()}";
             public static string SkinsOfflineImages = $"/{settingsController}/{SettingsPages.SkinsOfflineImages.GetDisplayName()}";
             public static string DesktopInformation = $"/{settingsController}/{SettingsPages.DesktopInformation.GetDisplayName()}";
+            public static string DefaultFonts = $"/{settingsController}/{SettingsPages.DefaultFonts.GetDisplayName()}";
         }
 
         public class Reports

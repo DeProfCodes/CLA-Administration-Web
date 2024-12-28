@@ -28,8 +28,10 @@ namespace CLA_Administration_Web.Helpers.Enums.AppPages
         [Display(Name = "TargetGroups", Description = "Target Groups")]
         TargetGroups,
 
+        //custom user settings
         [Display(Name = "CustomUserSettings", Description = "Custom User Settings")]
         CustomUserSettings,
+
         [Display(Name = "CustomUserSettingsDetails", ShortName = "Custom User Settings Details")]
         CustomUserSettingsDetails,
 

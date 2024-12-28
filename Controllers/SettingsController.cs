@@ -1,16 +1,14 @@
 using CLA_Administration_Web.Helpers.Constants;
 using CLA_Administration_Web.Helpers.MockData;
-using CLA_Administration_Web.Services;
-using CLA_Administration_Web.ViewModels.Settings;
-using CLA_Administration_Web.ViewModels.Settings.ActiveConnections;
-using CLA_Administration_Web.ViewModels.Settings.SetupExclusion;
-using CLA_Administration_Web.ViewModels.Settings.StagingUsers;
-using CLA_Administration_Web.ViewModels.Settings.Shared;
-using Microsoft.AspNetCore.Mvc;
-using CLA_Administration_Web.ViewModels.Targeting;
-using CLA_Administration_Web.ViewModels.Settings.ManageAdminAccess;
-using CLA_Administration_Web.ViewModels.Settings.CustomUser;
 using CLA_Administration_Web.Models.APIResponses.Reports.Troubleshoot;
+using CLA_Administration_Web.Services;
+using CLA_Administration_Web.ViewModels.Settings.ActiveConnections;
+using CLA_Administration_Web.ViewModels.Settings.CustomUser;
+using CLA_Administration_Web.ViewModels.Settings.SetupExclusion;
+using CLA_Administration_Web.ViewModels.Settings.Shared;
+using CLA_Administration_Web.ViewModels.Settings.StagingUsers;
+using CLA_Administration_Web.ViewModels.Targeting;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CLA_Administration_Web.Controllers
 {
@@ -39,7 +37,7 @@ namespace CLA_Administration_Web.Controllers
         [HttpGet]
         public ActionResult EditStagingMachine(int machineId, string entityType)
         {
-           
+
             var stagingUsersData = new StagingUsersMainViewModel()
             {
                 StagingUsers = SettingsMockData.StagingUsers,
@@ -57,7 +55,7 @@ namespace CLA_Administration_Web.Controllers
                 selectedEntity = stagingUsersData.StagingUsers.FirstOrDefault(u => u.Id == machineId);
             }
 
-          
+
             if (selectedEntity == null)
             {
                 return NotFound($"{entityType} with ID {machineId} not found.");
@@ -162,8 +160,8 @@ namespace CLA_Administration_Web.Controllers
         #region Admin
         public async Task<IActionResult> AdminAccess()
         {
-           
-          return PartialView(AppPagesLinks.Settings.AdminAccessPageLink);
+
+            return PartialView(AppPagesLinks.Settings.AdminAccessPageLink);
         }
 
         #endregion  
@@ -176,7 +174,7 @@ namespace CLA_Administration_Web.Controllers
             var targetGroups = new TargetingExposureViewModel()
             {
                 TargetedUsers = SettingsMockData.TargetGroupUsers
-              
+
             };
             return PartialView(AppPagesLinks.Settings.TargetGroupsPageLink, targetGroups);
         }
@@ -189,11 +187,12 @@ namespace CLA_Administration_Web.Controllers
 
         {
             var customUserData = new CustomUserMainViewModel()
-            {   IsBlank = false,
-               CustomUsersSettings = SettingsMockData.CustomUserSettings,
-    
+            {
+                IsBlank = false,
+                CustomUsersSettings = SettingsMockData.CustomUserSettings,
+
                 ConnectedToLive = true,
-              
+
                 LastSyncDetails = new TroubleshootReportLastSyncDetails(),
                 UserGroups = new List<TroubleshootReportUserGroup>(),
                 Targeting = new List<TroubleshootReportTargeting>(),
@@ -206,7 +205,7 @@ namespace CLA_Administration_Web.Controllers
         public async Task<IActionResult> CustomUserSettingsDetails(int desktopId)
         {
 
-            var desktopVm = LocalDataStorage.StagingData.AllDesktops.FirstOrDefault(x => x.Id == desktopId);
+            var desktopVm = SettingsMockData.CustomUserSettings.FirstOrDefault(x => x.Id == desktopId);
 
             return PartialView(AppPagesLinks.Settings.CustomUserSettingsDetailsPageLink, desktopVm);
         }
@@ -224,12 +223,12 @@ namespace CLA_Administration_Web.Controllers
         [HttpGet]
         public async Task<IActionResult> ActiveConnections()
         {
-            
-                var connections = new ActiveConnectionsMainViewModel()
-                {
-                    Connections = SettingsMockData.ActiveConnections,
-                };
-        
+
+            var connections = new ActiveConnectionsMainViewModel()
+            {
+                Connections = SettingsMockData.ActiveConnections,
+            };
+
             return PartialView(AppPagesLinks.Settings.ActiveConnectionsPageLink);
         }
 
@@ -251,7 +250,8 @@ namespace CLA_Administration_Web.Controllers
         }
 
         #endregion
+
+        
     }
 
 }
- 

@@ -1,5 +1,13 @@
 ﻿
-
+@{
+    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Settings/SettingsBreadcrumb.cshtml", new SettingsBreadcrumbViewModel
+            {
+                SettingsCurrentPage = SettingsPages.SkinsOfflineImages,
+                HasAddNewButton = true,
+                BreadcrumbButtonName = "Add New Skin and Offline images",
+                BreadcrumbButtonCallbackFunction = "AddNewStagingEntity"
+            });
+}
 
 <div class="container mt-4">
     <h3 class="text-center mb-4">Maintain Skins & Offline Images</h3>
@@ -9,7 +17,7 @@
         <div class="col-md-6">
             <ul class="nav nav-tabs" id="categoriesTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="existing-categories-tab" data-bs-toggle="tab" data-bs-target="#existing-categories" type="button" role="tab" aria-controls="existing-categories" aria-selected="true">Existing Categories</button>
+                    <button class="nav-link active" id="existing-categories-tab" data-bs-toggle="tab" data-<img src="C:\Users\IT-SPARE\Downloads\Settings\Settings\Skins & Offline.png" />bs-target="#existing-categories" type="button" role="tab" aria-controls="existing-categories" aria-selected="true">Existing Categories</button>
                 </li>
             </ul>
             <div class="tab-content border p-3" id="categoriesTabContent">
@@ -70,7 +78,8 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>Item Path</th>
+                    <th>
+                    <td><input type="checkbox" name="default"></td>Item Path</th>
                     <th>View</th>
                     <th>Default?</th>
                     <th>Description</th>
@@ -82,7 +91,7 @@
                 <tr>
                     <td><button class="btn btn-sm btn-primary">Select New Item</button></td>
                     <td><button class="btn btn-sm btn-secondary">View</button></td>
-                    <td><input type="radio" name="default"></td>
+                    <td><input type="checkbox" name="default"></td>
                     <td>V6 STMBackground</td>
                     <td>NDHUVAZIM</td>
                     <td>Sarveshan-Asus</td>
@@ -90,7 +99,7 @@
                 <tr>
                     <td><button class="btn btn-sm btn-primary">Select New Item</button></td>
                     <td><button class="btn btn-sm btn-secondary">View</button></td>
-                    <td><input type="radio" name="default"></td>
+                    <td><input type="checkbox" name="default"></td>
                     <td>Default STM Skin</td>
                     <td>NDHUVAZIM</td>
                     <td>Sarveshan-Asus</td>

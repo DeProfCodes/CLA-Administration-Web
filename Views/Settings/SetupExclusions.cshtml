@@ -350,10 +350,15 @@
     function EditSetupExclusions(machineId, entityType)
     {
 
+        formdata = {
+            machineId: machineId,
+            entityType: entityType
+        }
+
         $.ajax({
             url: '@Url.Action("EditSetupExclusions", "Settings")',
             type: 'GET',
-            data: { machineId: machineId, entityType: entityType },
+            data: formdata,
             success: function (response)
             {
                 console.log(response)
