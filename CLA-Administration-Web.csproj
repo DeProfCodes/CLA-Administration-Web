@@ -16,6 +16,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Views\Settings\SkinsOfflineImage\" />
     <Folder Include="Views\Settings\TargetGroup\" />
     <Folder Include="Views\Shared\Components\Custom\Modules\Views\" />
     <Folder Include="Views\Shared\Components\Custom\Settings\TargetGroupModal\" />

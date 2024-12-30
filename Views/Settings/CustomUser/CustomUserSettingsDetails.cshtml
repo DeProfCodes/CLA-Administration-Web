@@ -13,16 +13,27 @@
 }
 
 
-
+@{
+    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Settings/SettingsBreadcrumb.cshtml", new SettingsBreadcrumbViewModel
+            {
+                SettingsCurrentPage = SettingsPages.SkinsOfflineImages,
+                HasAddNewButton = true,
+                BreadcrumbButtonName = "Add New Skin and Offline images",
+                BreadcrumbButtonCallbackFunction = "AddNewStagingEntity"
+            });
+}
 
 
 <div class="container-fluid my-4">
+
+
+
     <div class="card mb-4 mt-2 overview-filters-card">
         <div class="card-body">
             <h4 class="w-100 text-center theme-txt-clr">Custom user settings for ID: @Model</h4>
         </div>
     </div>
-    <h4 class="text-center mb-4">Manage User Settings</h4>
+  
 
     <!-- Existing User Settings -->
   @*  <div class="bordered-section">

@@ -1,4 +1,13 @@
-﻿
+﻿@model StagingUsersMainViewModel
+
+@{
+    int index = 0;
+
+  //  var usersDomains = Model.StagingUsers.Select(x => x.Domain).Distinct().ToList();
+  //  var machinesDomains = Model.StagingMachines.Select(x => x.Domain).Distinct().ToList();
+}
+
+
 @{
     await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Settings/SettingsBreadcrumb.cshtml", new SettingsBreadcrumbViewModel
             {
@@ -10,81 +19,86 @@
 }
 
 <div class="container mt-4">
-    <h3 class="text-center mb-4">Maintain Skins & Offline Images</h3>
 
-    <div class="row">
-        <!-- Left Panel: Existing Categories -->
-        <div class="col-md-6">
-            <ul class="nav nav-tabs" id="categoriesTab" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="existing-categories-tab" data-bs-toggle="tab" data-<img src="C:\Users\IT-SPARE\Downloads\Settings\Settings\Skins & Offline.png" />bs-target="#existing-categories" type="button" role="tab" aria-controls="existing-categories" aria-selected="true">Existing Categories</button>
-                </li>
-            </ul>
-            <div class="tab-content border p-3" id="categoriesTabContent">
-                <div class="tab-pane fade show active" id="existing-categories" role="tabpanel" aria-labelledby="existing-categories-tab">
-                    <ul class="list-unstyled">
-                        <li>
-                            Offline Skins
-                            <ul>
-                                <li>Offline Desktop</li>
-                                <li>Offline Lockscreen Wallpaper</li>
-                                <li>Offline Screensaver</li>
-                                <li>
-                                    Popups
-                                    <ul>
-                                        <li>Skin</li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>Surveys</li>
-                        <li>Tickets</li>
-                    </ul>
-                </div>
-            </div>
+      <!-- Settings Filter Component -->
+    <div class="card mb-4 mt-2 overview-filters-card app-card-main-scaling">
+        <div class="card-body pt-0 pb-0">
+            <div class="row fs-12 mt-1 mb-2">
+                <p class="theme-txt-clr text-center w-100 fw-bold fs-16" id="TypeFilterTitle">Filters</p>
+                <div class="row col-12 d-flex flex-wrap module-overview-filters">
+                           <!-- Buttons Section -->
+    <div class="d-flex justify-content-between mt-3">
+        <div>
+            <button class="btn btn-primary">Import New Item</button>
+            <button class="btn btn-success">Mark As Default</button>
         </div>
-
-        <!-- Right Panel: Category Details -->
-        <div class="col-md-6">
-            <ul class="nav nav-tabs" id="detailsTab" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="category-details-tab" data-bs-toggle="tab" data-bs-target="#category-details" type="button" role="tab" aria-controls="category-details" aria-selected="true">Category Details</button>
-                </li>
-            </ul>
-            <div class="tab-content border p-3" id="detailsTabContent">
-                <div class="tab-pane fade show active" id="category-details" role="tabpanel" aria-labelledby="category-details-tab">
-                    <form>
-                        <div class="mb-3">
-                            <label for="categoryName" class="form-label">Category Name</label>
-                            <input type="text" class="form-control" id="categoryName">
+        <div>
+            <button class="btn btn-danger">Remove Selected</button>
+            <button class="btn btn-warning">Delete Selected</button>
+        </div>
+          <div class="text-center">
+            <button class="btn btn-secondary">Save</button>
+           <button class="btn btn-light">Clear</button>
+         </div>
+    </div>
+                    <div class="w-fit-content ms-auto mb-1">
+                        <div class="d-flex">
+                            <p class="custom-p w-fit-content align-content-center">View Type</p>
+                            <div class="row mx-auto">
+                                <div class="btn-group w-auto overview-filter-btn-group" role="group" aria-label="Status filter" id="TypeStagingLiveBtns">
+                                    <button class="btn module-filter-btn-group filter-type-btn btn-group-active" onclick="ToggleStaginUserMachines(this.id)" id="StagingUserBtn">Users</button>
+                                    <button class="btn module-filter-btn-group filter-type-btn" onclick="ToggleStaginUserMachines(this.id)" id="StagingMachinesBtn">Machines</button>
+                                </div>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="userModified" class="form-label">User Last Modified</label>
-                            <input type="text" class="form-control" id="userModified">
+                    </div>
+                    <div class="w-auto me-auto mb-1">
+                        <div class="d-flex">
+                            <p class="custom-p w-fit-content align-content-center">Domain</p>
+                            <select class="custom-input-text w-200p ms-2" id="ReportModuleSelect" onchange="FilterByDomain()">
+                                <option value="0">Please select Domain Name</option>
+                             
+                            </select>
                         </div>
-                        <div class="mb-3">
-                            <label for="machineModified" class="form-label">Machine Last Modified</label>
-                            <input type="text" class="form-control" id="machineModified">
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <h3 class="text-center mb-4">Maintain Skins & Offline Images</h3>
+
+        <!-- Buttons Section -->
+    <div class="d-flex justify-content-between mt-3">
+        <div>
+            <button class="btn btn-primary">Import New Item</button>
+            <button class="btn btn-success">Mark As Default</button>
+        </div>
+        <div>
+            <button class="btn btn-danger">Remove Selected</button>
+            <button class="btn btn-warning">Delete Selected</button>
+        </div>
+          <div class="text-center">
+            <button class="btn btn-secondary">Save</button>
+           <button class="btn btn-light">Clear</button>
+         </div>
+    </div>
+
+  
     <!-- Existing Skins & Offline Images Table -->
     <div class="mt-4">
         <h5>Existing Skins & Offline Images</h5>
-        <table class="table table-bordered">
+        <table class="table table-striped table-bordered table-hover theme-border align-middle campain-table-type fs-12"  id="StagingMachinesData" >
             <thead>
                 <tr>
                     <th>
-                    <td><input type="checkbox" name="default"></td>Item Path</th>
+                    Item Path</th>
                     <th>View</th>
                     <th>Default?</th>
                     <th>Description</th>
                     <th>User Last Modified</th>
                     <th>Machine Last Modified</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -95,6 +109,8 @@
                     <td>V6 STMBackground</td>
                     <td>NDHUVAZIM</td>
                     <td>Sarveshan-Asus</td>
+                    <td> <button class="btn btn-sm custom-btn-sm btn-danger" onclick="openEditEntityModal('Machine', 1)">Delete</button>
+                       <button class="btn btn-sm custom-btn-sm btn-success" id="edit-staging-btn" onclick="EditNewStagingEnting(11, 'Machine')">Edit</button></th>
                 </tr>
                 <tr>
                     <td><button class="btn btn-sm btn-primary">Select New Item</button></td>
@@ -103,6 +119,8 @@
                     <td>Default STM Skin</td>
                     <td>NDHUVAZIM</td>
                     <td>Sarveshan-Asus</td>
+                    <td> <button class="btn btn-sm custom-btn-sm btn-danger" onclick="openEditEntityModal('Machine', 1)">Delete</button>
+                       <button class="btn btn-sm custom-btn-sm btn-success" id="edit-staging-btn" onclick="EditNewStagingEnting(11, 'Machine')">Edit</button></th>
                 </tr>
                 <!-- Add more rows as needed -->
             </tbody>
@@ -110,20 +128,139 @@
         </table>
     </div>
 
-    <!-- Buttons Section -->
-    <div class="d-flex justify-content-between mt-3">
-        <div>
-            <button class="btn btn-primary">Import New Item</button>
-            <button class="btn btn-success">Mark As Default</button>
-        </div>
-        <div>
-            <button class="btn btn-danger">Remove Selected</button>
-            <button class="btn btn-warning">Delete Selected</button>
-        </div>
-    </div>
 
-    <div class="text-center mt-3">
-        <button class="btn btn-secondary">Save</button>
-        <button class="btn btn-light">Clear</button>
-    </div>
 </div>
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+
+
+<script>
+
+ 
+
+$(document).ready(function ()
+{
+    usersDT = MakeStandardDataTable("StagingUsersData");
+    machinesDT = MakeStandardDataTable("StagingMachinesData");
+});
+
+function ToggleStaginUserMachines(id)
+{
+    $(".filter-type-btn").removeClass("btn-group-active");
+    $(`#${id}`).addClass("btn-group-active");
+
+    if(id.includes("User"))
+    {
+        $("#BreadcrumSettingsBtnText").text("Add New Staging User");
+        $("#StagingUserMachineTitle").text("Users");
+        HideShowElement("#StagingUsersSettings", HideShow.SHOW);
+        HideShowElement("#StagingMachinesSettings", HideShow.HIDE);
+        SwitchDomainsSelectDataSource(usersDomains);
+    }
+    else if (id.includes("Machine"))
+    {
+        $("#BreadcrumSettingsBtnText").text("Add New Staging Machine");
+        $("#StagingUserMachineTitle").text("Machines");
+        HideShowElement("#StagingUsersSettings", HideShow.HIDE);
+        HideShowElement("#StagingMachinesSettings", HideShow.SHOW);
+        SwitchDomainsSelectDataSource(machinesDomains);
+    }
+}
+
+function SwitchDomainsSelectDataSource(dataSource)
+{
+    const selectList = document.getElementById("ReportModuleSelect");
+
+    selectList.innerHTML = "";
+
+    const defaultOption = document.createElement("option");
+    defaultOption.value = "0";
+    defaultOption.textContent = "Please select Domain Name";
+    selectList.appendChild(defaultOption);
+
+    dataSource.forEach(domain =>
+    {
+        const option = document.createElement("option");
+        option.value = domain;
+        option.textContent = domain;
+        selectList.appendChild(option);
+    });
+}
+
+function FilterByDomain()
+{
+    const selectedDomain = $("#ReportModuleSelect").val();
+
+    var userActive = $("#StagingUserBtn").hasClass("btn-group-active");
+
+    if (selectedDomain === "0")
+    {
+        if (userActive)
+            usersDT.column(0).search("").draw();
+        else
+            machinesDT.column(0).search("").draw();
+    }
+    else
+    {
+        if (userActive)
+            usersDT.column(0).search(selectedDomain).draw();
+        else
+            machinesDT.column(0).search(selectedDomain).draw();
+    }
+}
+
+function AddNewExcludedEntity() {
+    const buttonText = document.getElementById("BreadcrumSettingsBtnText").innerText;
+
+    if (buttonText.includes("User"))
+    {
+        const userModal = new bootstrap.Modal(document.getElementById('CreateStagingUserModal'));
+        userModal.show();
+    } else if (buttonText.includes("Machine"))
+    {
+        const machineModal = new bootstrap.Modal(document.getElementById('CreateStagingMachineModal'));
+        machineModal.show();
+    }
+}
+
+function EditSetupExclusions(machineId, entityType)
+{
+
+    formdata = {
+        machineId: machineId,
+        entityType: entityType
+    }
+
+    $.ajax({
+        url: '@Url.Action("EditSetupExclusions", "Settings")',
+        type: 'GET',
+        data: formdata,
+        success: function (response)
+        {
+            console.log(response)
+            $('#EditModalContainer').html(response);
+            const editModal = new bootstrap.Modal(document.getElementById('EditModal'));
+            editModal.show();
+
+        },
+        error: function (error) 
+        {
+            console.log('Error fetching machine data:', error);
+        }
+    });
+    
+    // const formData = {
+    //      "machineId": machineId,
+    //      "entityType": entityType
+    //  };
+
+    // dynamicAjaxRequest(formData, "GET", '@Url.Action("EditSetupExclusions", "Settings")', 'EditModalContainer', 'EditModal');
+}
+
+ 
+function SaveEditNewStagingEnting(formdata)
+{
+
+    LoadEditModal(formData, '@Url.Action("SaveStagingData", "Settings")', 'POST', editMachineForm, edit - machine - btn)
+}
+    </script>

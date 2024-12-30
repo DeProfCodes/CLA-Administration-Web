@@ -1,37 +1,61 @@
-﻿@model CLA_Administration_Web.ViewModels.Targeting.TargetingExposureViewModel
-
-@using static CLA_Administration_Web.ViewModels.Modules.LDS.AddNewContentLibraryCategory
-@using CLA_Administration_Web.ViewModels.Targeting
-@using CLA_Administration_Web.Helpers.Enums.AppPages
-@using CLA_Administration_Web.Helpers.Enums.Shared
-@using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
+﻿@model StagingUsersMainViewModel
 
 @{
     await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Settings/SettingsBreadcrumb.cshtml", new SettingsBreadcrumbViewModel
-            {
-                SettingsCurrentPage = SettingsPages.DefaultFonts,
-                HasAddNewButton = true,
-                BreadcrumbButtonName = "Add New Target Group",
-                BreadcrumbButtonCallbackFunction = "AddNewStagingEntity"
-            });
+    {
+        SettingsCurrentPage = SettingsPages.DefaultFonts,
+        HasAddNewButton = true,
+        BreadcrumbButtonName = "Add New Default Fonts",
+        BreadcrumbButtonCallbackFunction = "AddNewDefaultFonts"
+    });
 }
 
+<div class="container-fluid">
 
+    <!-- Settings Filter Component -->
+    <div class="card mb-4 mt-2 overview-filters-card app-card-main-scaling">
+        <div class="card-body pt-0 pb-0">
+            <div class="row fs-12 mt-1 mb-2">
+                <p class="theme-txt-clr text-center w-100 fw-bold fs-16" id="TypeFilterTitle">Filters</p>
+                <div class="row col-12 d-flex flex-wrap module-overview-filters">
+                    <div class="w-fit-content ms-auto mb-1">
+                        <div class="d-flex">
+                            <p class="custom-p w-fit-content align-content-center">View Type</p>
+                            <div class="row mx-auto">
+                                <div class="btn-group w-auto overview-filter-btn-group" role="group" aria-label="Status filter" id="TypeStagingLiveBtns">
+                                    <button class="btn module-filter-btn-group filter-type-btn btn-group-active" onclick="ToggleStaginUserMachines(this.id)" id="StagingUserBtn">Skins</button>
+                                    <button class="btn module-filter-btn-group filter-type-btn" onclick="ToggleStaginUserMachines(this.id)" id="StagingMachinesBtn">Categories</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-auto me-auto mb-1">
+                        <div class="d-flex">
+                            <p class="custom-p w-fit-content align-content-center">Domain</p>
+                            <select class="custom-input-text w-200p ms-2" id="ReportModuleSelect" onchange="FilterByDomain()">
+                                <option value="0">Please select Domain Name</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<div class="container-fluid my-4 border p-3 rounded ">
-    <h4 class="text-center mb-4">Default Fonts</h4>
+<div class="container-fluid my-4 border p-3 rounded">
 
     <!-- Popups Section -->
     <div class="border p-3 mb-3">
-        <h5 class="text-center">Popups</h5> 
+        <h5 class="text-center">Popups</h5>
         <div class="row mb-3 align-items-center">
             <div class="col-1 text-center">
                 <img src="https://via.placeholder.com/30" alt="Icon">
             </div>
-            <div class="col-5">
+            <div class="col-4">
                 <label for="popupTitle" class="form-label">Popup Title</label>
             </div>
-            <div class="col-6">
+            <div class="col-7">
                 <input type="text" id="popupTitle" class="form-control" value="CLA - Corporate LAN Advertising">
             </div>
         </div>
@@ -39,10 +63,10 @@
             <div class="col-1 text-center">
                 <img src="https://via.placeholder.com/30" alt="Icon">
             </div>
-            <div class="col-5">
+            <div class="col-4">
                 <label for="popupText" class="form-label">Popup Text</label>
             </div>
-            <div class="col-6">
+            <div class="col-7">
                 <input type="text" id="popupText" class="form-control" value="CLA - Corporate LAN Advertising">
             </div>
         </div>
@@ -55,10 +79,10 @@
             <div class="col-1 text-center">
                 <img src="https://via.placeholder.com/30" alt="Icon">
             </div>
-            <div class="col-5">
+            <div class="col-4">
                 <label for="surveyTitle" class="form-label">Survey Title</label>
             </div>
-            <div class="col-6">
+            <div class="col-7">
                 <input type="text" id="surveyTitle" class="form-control" value="CLA - Corporate LAN Advertising">
             </div>
         </div>
@@ -66,10 +90,10 @@
             <div class="col-1 text-center">
                 <img src="https://via.placeholder.com/30" alt="Icon">
             </div>
-            <div class="col-5">
+            <div class="col-4">
                 <label for="questionTitle" class="form-label">Question Title</label>
             </div>
-            <div class="col-6">
+            <div class="col-7">
                 <input type="text" id="questionTitle" class="form-control" value="CLA - Corporate LAN Advertising">
             </div>
         </div>
@@ -77,10 +101,10 @@
             <div class="col-1 text-center">
                 <img src="https://via.placeholder.com/30" alt="Icon">
             </div>
-            <div class="col-5">
+            <div class="col-4">
                 <label for="surveyText" class="form-label">Survey/Question Text</label>
             </div>
-            <div class="col-6">
+            <div class="col-7">
                 <input type="text" id="surveyText" class="form-control" value="CLA - Corporate LAN Advertising">
             </div>
         </div>
@@ -93,10 +117,10 @@
             <div class="col-1 text-center">
                 <img src="https://via.placeholder.com/30" alt="Icon">
             </div>
-            <div class="col-5">
+            <div class="col-4">
                 <label for="tickerText" class="form-label">Ticker Text</label>
             </div>
-            <div class="col-6">
+            <div class="col-7">
                 <input type="text" id="tickerText" class="form-control" value="CLA - Corporate LAN Advertising">
             </div>
         </div>
@@ -109,10 +133,10 @@
             <div class="col-1 text-center">
                 <img src="https://via.placeholder.com/30" alt="Icon">
             </div>
-            <div class="col-5">
+            <div class="col-4">
                 <label for="rssText" class="form-label">RSS Text</label>
             </div>
-            <div class="col-6">
+            <div class="col-7">
                 <input type="text" id="rssText" class="form-control" value="CLA - Corporate LAN Advertising">
             </div>
         </div>
@@ -125,12 +149,113 @@
             <div class="col-1 text-center">
                 <img src="https://via.placeholder.com/30" alt="Icon">
             </div>
-            <div class="col-5">
+            <div class="col-4">
                 <label for="desktopInfo" class="form-label">Desktop Info</label>
             </div>
-            <div class="col-6">
+            <div class="col-7">
                 <input type="text" id="desktopInfo" class="form-control" value="CLA - Corporate LAN Advertising">
             </div>
         </div>
     </div>
+
 </div>
+
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+<script>
+    $(document).ready(function () {
+        usersDT = MakeStandardDataTable("StagingUsersData");
+        machinesDT = MakeStandardDataTable("StagingMachinesData");
+    });
+
+    function ToggleStaginUserMachines(id) {
+        $(".filter-type-btn").removeClass("btn-group-active");
+        $(`#${id}`).addClass("btn-group-active");
+
+        if (id.includes("User")) {
+            $("#BreadcrumSettingsBtnText").text("Add New Staging User");
+            $("#StagingUserMachineTitle").text("Users");
+            HideShowElement("#StagingUsersSettings", HideShow.SHOW);
+            HideShowElement("#StagingMachinesSettings", HideShow.HIDE);
+            SwitchDomainsSelectDataSource(usersDomains);
+        } else if (id.includes("Machine")) {
+            $("#BreadcrumSettingsBtnText").text("Add New Staging Machine");
+            $("#StagingUserMachineTitle").text("Machines");
+            HideShowElement("#StagingUsersSettings", HideShow.HIDE);
+            HideShowElement("#StagingMachinesSettings", HideShow.SHOW);
+            SwitchDomainsSelectDataSource(machinesDomains);
+        }
+    }
+
+    function SwitchDomainsSelectDataSource(dataSource) {
+        const selectList = document.getElementById("ReportModuleSelect");
+        selectList.innerHTML = "";
+
+        const defaultOption = document.createElement("option");
+        defaultOption.value = "0";
+        defaultOption.textContent = "Please select Domain Name";
+        selectList.appendChild(defaultOption);
+
+        dataSource.forEach(domain => {
+            const option = document.createElement("option");
+            option.value = domain;
+            option.textContent = domain;
+            selectList.appendChild(option);
+        });
+    }
+
+    function FilterByDomain() {
+        const selectedDomain = $("#ReportModuleSelect").val();
+        const userActive = $("#StagingUserBtn").hasClass("btn-group-active");
+
+        if (selectedDomain === "0") {
+            if (userActive) {
+                usersDT.column(0).search("").draw();
+            } else {
+                machinesDT.column(0).search("").draw();
+            }
+        } else {
+            if (userActive) {
+                usersDT.column(0).search(selectedDomain).draw();
+            } else {
+                machinesDT.column(0).search(selectedDomain).draw();
+            }
+        }
+    }
+
+    function AddNewExcludedEntity() {
+        const buttonText = document.getElementById("BreadcrumSettingsBtnText").innerText;
+
+        if (buttonText.includes("User")) {
+            const userModal = new bootstrap.Modal(document.getElementById('CreateStagingUserModal'));
+            userModal.show();
+        } else if (buttonText.includes("Machine")) {
+            const machineModal = new bootstrap.Modal(document.getElementById('CreateStagingMachineModal'));
+            machineModal.show();
+        }
+    }
+
+    function EditSetupExclusions(machineId, entityType) {
+        const formData = {
+            machineId: machineId,
+            entityType: entityType
+        };
+
+        $.ajax({
+            url: '@Url.Action("EditSetupExclusions", "Settings")',
+            type: 'GET',
+            data: formData,
+            success: function (response) {
+                $('#EditModalContainer').html(response);
+                const editModal = new bootstrap.Modal(document.getElementById('EditModal'));
+                editModal.show();
+            },
+            error: function (error) {
+                console.error('Error fetching machine data:', error);
+            }
+        });
+    }
+
+    function SaveEditNewStagingEntity(formData) {
+        LoadEditModal(formData, '@Url.Action("SaveStagingData", "Settings")', 'POST', editMachineForm, editMachineBtn);
+    }
+</script>
