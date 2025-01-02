@@ -202,12 +202,12 @@ namespace CLA_Administration_Web.Controllers
             return PartialView(AppPagesLinks.Settings.CustomUserSettingsPageLink, customUserData);
         }
 
-        public async Task<IActionResult> CustomUserSettingsDetails(int desktopId)
+        public async Task<IActionResult> CustomUserSettingsDetails(int customId)
         {
 
-            var desktopVm = SettingsMockData.CustomUserSettings.FirstOrDefault(x => x.Id == desktopId);
+            var customVm = SettingsMockData.CustomUserSettings.FirstOrDefault(x => x.Id == customId);
 
-            return PartialView(AppPagesLinks.Settings.CustomUserSettingsDetailsPageLink, desktopVm);
+            return PartialView(AppPagesLinks.Settings.CustomUserSettingsDetailsPageLink, customVm);
         }
 
         #endregion
@@ -251,7 +251,7 @@ namespace CLA_Administration_Web.Controllers
 
         #endregion
 
-        
+
     }
 
 }

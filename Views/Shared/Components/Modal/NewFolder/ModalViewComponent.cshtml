@@ -1,0 +1,32 @@
+﻿@model CLA_Administration_Web.ViewModels.Shared.ModalViewModel
+
+<div class="modal fade" id="@Model.ModalId" tabindex="-1" aria-labelledby="@Model.ModalLabelId" aria-hidden="true">
+    <div class="modal-dialog @Model.ModalSize">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="@Model.ModalLabelId">@Model.ModalTitle</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal('@Model.ModalId')"></button>
+            </div>
+            <div class="modal-body" id="@Model.ModalContainerId">
+                <!-- Dynamic content will be injected here -->
+                @RenderBody()
+            </div>
+            <div class="modal-footer">
+                @if (Model.ShowCancelButton)
+                {
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal('@Model.ModalId')">@Model.CancelButtonText</button>
+                }
+                @if (Model.ShowSaveButton)
+                {
+                    <button type="button" class="btn custom-btn-default" onclick="@Model.SaveButtonAction">@Model.SaveButtonText</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function closeModal(modalId) {
+        $('#' + modalId).modal('hide');
+    }
+</script>

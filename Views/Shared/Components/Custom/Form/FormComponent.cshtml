@@ -1,0 +1,70 @@
+﻿@model CLA_Administration_Web.ViewModels.Shared.FormViewModel.DynamicFormViewModel
+
+<form id="@Model.FormId" action="@Model.SubmitAction" method="post" enctype="multipart/form-data">
+    <div class="row">
+        @foreach (var field in Model.Fields)
+        {
+            <div class="mb-3 col-@field.ColumnWidth">
+                <label for="@field.FieldId" class="form-label">@field.Label</label>
+                @if (field.Type == "text" || field.Type == "email" || field.Type == "password")
+                {
+                    <input type="@field.Type" class="form-control" id="@field.FieldId" name="@field.Name" value="@field.Value"
+                           placeholder="@field.Placeholder" @if (field.IsRequired)
+                    {
+                        <text>required</text>
+                    } />
+                }
+                else if (field.Type == "textarea")
+                {
+                    <textarea class="form-control" id="@field.FieldId" name="@field.Name" rows="3"
+                              placeholder="@field.Placeholder" @if (field.IsRequired)
+                    {
+                        <text>required</text>
+                    }>@field.Value</textarea>
+                }
+                else if (field.Type == "select")
+                {
+                    <select class="form-select" id="@field.FieldId" name="@field.Name" @if (field.IsRequired)
+                    {
+                        <text>required</text>
+                    }>
+                        @foreach (var option in field.Options)
+                        {
+                            @*<option value="@option.Value" @if (option. == field.Value) { <text>selected</text> }>@option.Text</option>*@
+
+                        }
+                            </select>
+                }
+                else if (field.Type == "checkbox")
+                {
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="@field.FieldId" name="@field.Name"
+                               value="true" @if (field.Value == "true")
+                        {
+                            <text>checked</text>
+                        } />
+                        <label class="form-check-label" for="@field.FieldId">@field.Label</label>
+                    </div>
+                }
+                else if (field.Type == "radio")
+                {
+                    @foreach (var option in field.Options)
+                    {
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input" id="@option.Value" name="@field.Name"
+                                   value="@option.Value" @if (option.Value == field.Value)
+                            {
+                                <text>checked</text>
+                            } />
+                            <label class="form-check-label" for="@option.Value">@option.Text</label>
+                        </div>
+                    }
+                }
+                @if (!string.IsNullOrEmpty(field.ErrorMessage))
+                {
+                    <div class="invalid-feedback">@field.ErrorMessage</div>
+                }
+            </div>
+        }
+    </div>
+</form>

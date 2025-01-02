@@ -84,7 +84,7 @@
         if (page == '@SettingsPages.AdminAccess') url = '@AppPagesUrl.Setttings.AdminAccess';
         if (page == '@SettingsPages.TargetGroups') url = '@AppPagesUrl.Setttings.TargetGroups';
         if (page == '@SettingsPages.CustomUserSettings') url = '@AppPagesUrl.Setttings.CustomUserSettings';
-        if (page == '@SettingsPages.CustomUserSettingsDetails') url = '@AppPagesUrl.Setttings.CustomUserSettingsDetails';
+        if (page == '@SettingsPages.CustomUserSettingsDetails') url = '@AppPagesUrl.Setttings.CustomUserSettingsDetails' + `?customId=${id}`;
         if (page == '@SettingsPages.ActiveConnections') url = '@AppPagesUrl.Setttings.ActiveConnections';
         if (page == '@SettingsPages.SkinsOfflineImages') url = '@AppPagesUrl.Setttings.SkinsOfflineImages';
         if (page == '@SettingsPages.DesktopInformation') url = '@AppPagesUrl.Setttings.DesktopInformation';
@@ -203,6 +203,7 @@
         if (page == '@SettingsPages.AdminAccess') title = "Admin Access";
         if (page == '@SettingsPages.TargetGroups') title = "Manage Targeting Groups";
         if (page == '@SettingsPages.CustomUserSettings') title = "Custom User Settings";
+        if (page == '@SettingsPages.CustomUserSettingsDetails') title = "Custom User Settings Details";
         if (page == '@SettingsPages.ActiveConnections') title = "Manage Active Connections";
         if (page == '@SettingsPages.SkinsOfflineImages') title = "Manage Skins & Offline Images";
         if (page == '@SettingsPages.DesktopInformation') title = "Desktop Information";
