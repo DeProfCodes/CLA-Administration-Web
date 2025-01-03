@@ -1,1 +1,12 @@
-﻿<p>Hello world </p>
+﻿@using CLA_Administration_Web.ViewModels.Settings.CustomUser
+@model CustomUserViewModel
+@using CLA_Administration_Web.Helpers.Enums.AppPages
+@using CLA_Administration_Web.Helpers.Enums.Shared
+@using CLA_Administration_Web.Helpers.Enums.Shared.PageNames
+@using CLA_Administration_Web.Helpers.Constants
+
+<p>Hello world </p>
+
+ @{
+     await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Settings/FontSettingsCustomization.cshtml");
+ }

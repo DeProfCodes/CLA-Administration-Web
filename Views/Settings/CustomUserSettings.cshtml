@@ -355,8 +355,16 @@ function closeModal(modalId)
 {
     $('#' + modalId).modal('hide');
 }
-   
-   
 
-   
+    $(document).ready(function () {
+        $('#StagingUsersData').DataTable({
+            "paging": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false
+        });
+    });
+
+
 </script>
