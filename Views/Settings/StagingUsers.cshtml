@@ -265,23 +265,27 @@ var machinesDomains = Model.StagingMachines.Select(x => x.Domain).Distinct().ToL
 var usersDomains = @Html.Raw(Json.Serialize(usersDomains));
 var machinesDomains = @Html.Raw(Json.Serialize(machinesDomains));
 
-$(document).ready(function () {
+$(document).ready(function () 
+{
     usersDT = MakeStandardDataTable("StagingUsersData");
     machinesDT = MakeStandardDataTable("StagingMachinesData");
 });
 
-function ToggleStaginUserMachines(id) {
+function ToggleStaginUserMachines(id)
+{
     $(".filter-type-btn").removeClass("btn-group-active");
     $(`#${id}`).addClass("btn-group-active");
 
-    if (id.includes("User")) {
+    if (id.includes("User")) 
+    {
         $("#BreadcrumSettingsBtnText").text("Add New Staging User");
         $("#StagingUserMachineTitle").text("Users");
         HideShowElement("#StagingUsersSettings", HideShow.SHOW);
         HideShowElement("#StagingMachinesSettings", HideShow.HIDE);
         SwitchDomainsSelectDataSource(usersDomains);
     }
-    else if (id.includes("Machine")) {
+    else if (id.includes("Machine"))
+    {
         $("#BreadcrumSettingsBtnText").text("Add New Staging Machine");
         $("#StagingUserMachineTitle").text("Machines");
         HideShowElement("#StagingUsersSettings", HideShow.HIDE);
@@ -290,7 +294,8 @@ function ToggleStaginUserMachines(id) {
     }
 }
 
-function SwitchDomainsSelectDataSource(dataSource) {
+function SwitchDomainsSelectDataSource(dataSource)
+{
     const selectList = document.getElementById("ReportModuleSelect");
 
     selectList.innerHTML = "";
@@ -300,7 +305,8 @@ function SwitchDomainsSelectDataSource(dataSource) {
     defaultOption.textContent = "Please select Domain Name";
     selectList.appendChild(defaultOption);
 
-    dataSource.forEach(domain => {
+    dataSource.forEach(domain => 
+        {
         const option = document.createElement("option");
         option.value = domain;
         option.textContent = domain;
@@ -308,18 +314,21 @@ function SwitchDomainsSelectDataSource(dataSource) {
     });
 }
 
-function FilterByDomain() {
+function FilterByDomain()
+{
     const selectedDomain = $("#ReportModuleSelect").val();
 
     var userActive = $("#StagingUserBtn").hasClass("btn-group-active");
 
-    if (selectedDomain === "0") {
+    if (selectedDomain === "0") 
+    {
         if (userActive)
             usersDT.column(0).search("").draw();
         else
             machinesDT.column(0).search("").draw();
     }
-    else {
+    else 
+    {
         if (userActive)
             usersDT.column(0).search(selectedDomain).draw();
 
@@ -336,7 +345,8 @@ function AddNewStagingEntity()
     {
         const userModal = new bootstrap.Modal(document.getElementById('CreateStagingUserModal'));
         userModal.show();
-    } else if (buttonText.includes("Machine"))
+    }
+    else if (buttonText.includes("Machine"))
     {
         const machineModal = new bootstrap.Modal(document.getElementById('CreateStagingMachineModal'));
         machineModal.show();
@@ -352,7 +362,7 @@ function EditNewStagingEnting(machineId, entityType)
         data: { machineId: machineId, entityType: entityType },
         success: function (response)
         {
-            console.log(response)
+            
             $('#EditModalContainer').html(response);
             const editModal = new bootstrap.Modal(document.getElementById('EditModal'));
             editModal.show();

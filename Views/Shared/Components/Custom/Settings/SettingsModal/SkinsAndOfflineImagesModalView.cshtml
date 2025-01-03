@@ -1,0 +1,56 @@
+﻿
+@model CLA_Administration_Web.ViewModels.Modules.PST.AddNewPopupViewModel
+
+@using CLACommonFunctionsLibrary_NET.Helpers.Enums
+@using CLAModulesLibrary.Helpers.Enums.Modules.Popup
+@using CLA_Administration_Web.Helpers.Constants
+@using CLA_Administration_Web.Helpers.Enums.AppPages
+@using CLA_Administration_Web.Helpers.Enums.Module
+@using CLA_Administration_Web.Helpers.Enums.Shared
+@using CLA_Administration_Web.Helpers.Enums.Shared.PageNames
+@using CLA_Administration_Web.Helpers.Html
+@using CLA_Administration_Web.Helpers.Modules
+@using CLA_Administration_Web.ViewModels.Modules.PST
+
+@{
+    string entityType = ViewBag.EntityType as string;
+}
+
+
+    <form>
+        <div class="mb-3">
+            <label for="UserId" class="form-label">Item Path: @Model</label>
+            <input type="checkbox" class="form-control" id="UserId" name="Id" value="" readonly>
+        </div>
+
+        <div class="mb-3">
+            <label for="Domain" class="form-label">Image</label>
+            @{
+                await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Form/FileUploader.cshtml",
+                new FileUploaderModel { ComponentId = "PopupLinkType", InputId = "PopupLinkTypeUploadInput", ShowPreviewButton = true, InitialHidden = false, WidthPx = "396px", OnFileUploadCallback = null });
+            }
+        </div>
+
+        <div class="mb-3">
+            <label for="NTUserName" class="form-label">Default?</label>
+        <input type="checkbox" class="form-control" id="DefaultId" name="Default" value="">
+        </div>
+
+        <div class="mb-3">
+            <label for="Firstname" class="form-label">Description</label>
+        <input type="text" class="form-control" id="DescriptionId" name="Description" value="">
+        </div>
+
+   
+
+        <div class="mb-3">
+            <label for="UserLastModified" class="form-label">User Last Modified</label>
+            <input type="text" class="form-control" id="UserLastModified" name="UserLastModified" value="">
+        </div>
+
+        <div class="mb-3">
+            <label for="MachineLastModified" class="form-label">Machine Last Modified</label>
+            <input type="text" class="form-control" id="MachineLastModified" name="MachineLastModified" value="">
+        </div>
+    </form>
+

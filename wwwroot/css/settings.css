@@ -2,22 +2,26 @@
 
 
 /* Bulk import */
-.label-title {
+.label-title
+{
     font-weight: bold;
     text-transform: uppercase;
     font-size: 14px;
 }
-.modal-content {
+.modal-content
+{
     overflow:auto;
 }
 
 /* Progress bar styles */
-#progressBarContainer {
+#progressBarContainer 
+{
     display: none;
     margin-top: 10px;
 }
 
-.section-title {
+.section-title 
+{
     font-weight: bold;
     font-size: 12px;
     position: absolute;
@@ -27,7 +31,8 @@
     left: 10px;
 }
 
-.section-border {
+.section-border
+{
     border: 1px solid #ddd;
     padding: 15px;
     position: relative;
@@ -35,13 +40,15 @@
     background-color: #f8f9fa;
 }
 
-.file-contents {
+.file-contents
+{
     height: 200px;
     border: 1px solid #ddd;
     background-color: #eee;
 }
 
-.btn-verify, .btn-process {
+.btn-verify, .btn-process 
+{
     width: 100px;
 }
 
@@ -49,35 +56,40 @@
 
 
 /* Tree View Container */
-.tree-view {
+.tree-view 
+{
     list-style-type: none;
     padding-left: 20px;
 }
 
-    .tree-view li {
-        position: relative;
-        margin: 5px 0;
-        padding-left: 20px;
-    }
+.tree-view li
+{
+    position: relative;
+    margin: 5px 0;
+    padding-left: 20px;
+}
 
-        .tree-view li::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 10px;
-            height: 10px;
-            border: 1px solid #007bff;
-            background-color: #ffffff;
-            border-radius: 50%;
-        }
+.tree-view li::before 
+{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 10px;
+    height: 10px;
+    border: 1px solid #007bff;
+    background-color: #ffffff;
+    border-radius: 50%;
+}
 
 /* Collapsible Checkbox */
-.tree-toggle {
+.tree-toggle
+{
     display: none;
 }
 
-.tree-toggle-label {
+.tree-toggle-label 
+{
     cursor: pointer;
     font-weight: bold;
     display: flex;
@@ -85,58 +97,69 @@
     gap: 5px;
 }
 
-    .tree-toggle-label::before {
-        content: '+';
-        color: #007bff;
-        font-weight: bold;
-        display: inline-block;
-        margin-right: 5px;
-    }
+.tree-toggle-label::before
+{
+    content: '+';
+    color: #007bff;
+    font-weight: bold;
+    display: inline-block;
+    margin-right: 5px;
+}
 
-.tree-toggle:checked + .tree-toggle-label::before {
+.tree-toggle:checked + .tree-toggle-label::before
+{
     content: '-';
 }
 
 /* Nested Content */
-.tree-content {
+.tree-content
+{
     display: none;
     margin-left: 15px;
     border-left: 1px dashed #007bff;
     padding-left: 10px;
 }
 
-.tree-toggle:checked ~ .tree-content {
+.tree-toggle:checked ~ .tree-content
+{
     display: block;
 }
 
 /* Custom Styles */
-.treeview ul {
+.treeview ul 
+{
     list-style-type: none;
     padding-left: 1rem;
 }
 
-.treeview li {
+.treeview li
+{
     margin: 4px 0;
     cursor: pointer;
 }
 
-.treeview i {
+.treeview i
+{
     margin-right: 5px;
 }
 
-.modal-header {
+.modal-header
+{
     border-bottom: none;
 }
 
-.modal-title {
+.modal-title
+{
     font-size: 1.2rem;
 }
 
-.btn-group-vertical {
+.btn-group-vertical
+{
     margin-top: 10px;
 }
 
-.scroll-box {
+.scroll-box
+{
     border: 1px solid #ccc;
     height: 100%x;
     overflow-y: auto;
@@ -144,49 +167,74 @@
     background-color: #f8f9fa;
 }
 
-.section-title {
+.section-title
+{
     font-weight: bold;
     text-transform: uppercase;
     margin-bottom: 10px;
     font-size: 0.9rem;
 }
 
-.filter-input {
+.filter-input
+{
     max-width: 100%;
+}
+
+.card-bordered-section
+{
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
 }
 /* Tree View Container close */
 
 
-#table-scroll {
+#table-scroll
+{
     height:100%;
     overflow: scroll;
     margin-top: 20px;
 }
 
-.settings-data-area {
+.settings-data-area
+{
    
     min-height: 620px;
 }
 
-.settings-outter-container {
-    min-width: 100%; /* Set width to 100% to fit the screen */
-    max-width: 100%; /* Ensure it doesn't exceed the screen width */
-    height: auto; /* Allow the height to adjust based on content */
-    min-height: 400px; /* Keep the minimum height for consistency */
-    margin: 15px; /* Maintain a small margin around the container */
-    box-sizing: border-box; /* Ensure padding and borders are included in width/height calculations */
+.settings-outter-container
+{
+    min-width: 100%; 
+    max-width: 100%;
+    height: auto; 
+    min-height: 400px; 
+    margin: 15px; 
+    box-sizing: border-box;
 }
 
-@media (max-width: 768px) {
-    .settings-outter-container {
-        min-width: 100%; /* Ensure the container fits smaller screens */
-        height: auto; /* Adjust height based on content */
+@media (max-width: 768px
+{
+    .settings-outter-container
+    {
+        min-width: 100%; 
+        height: auto; 
     }
 }
 
-@media (max-width: 576px) {
-    .settings-outter-container {
-        min-width: 100%; /* Ensure the container fits very small screens */
-        margin: 10px; /* Reduce margin for small screens */
+@media (max-width: 576px) 
+{
+    .settings-outter-container
+    {
+        min-width: 100%;
+        margin: 10px; 
     }
+}
+
+/* defaults*/
+
+.default-fonts-subheading 
+{
+    border: none;
+    background-color: darkgray
 }

@@ -1,4 +1,5 @@
-﻿@model StagingUsersMainViewModel
+﻿@using CLA_Administration_Web.ViewModels.Settings.SkinAndOfflineImage;
+@model SkinsAndOfflineImageMainViewModel
 
 @{
 int index = 0;
@@ -14,10 +15,9 @@ await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Settings/Setting
             SettingsCurrentPage = SettingsPages.SkinsOfflineImages,
             HasAddNewButton = true,
             BreadcrumbButtonName = "Add New Skin and Offline images",
-            BreadcrumbButtonCallbackFunction = "AddNewStagingEntity"
+                BreadcrumbButtonCallbackFunction = "AddNewSkinsAndOfflineImages"
         });
 }
-
 
 
 <div class="container mt-4">
@@ -55,68 +55,61 @@ await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Settings/Setting
     </div>
 </div>
 
-    <div class="container mt-4">
+    
         <!-- Card with White Background -->
         <div class="card bg-white shadow-sm">
             <div class="card-body">
-                <h5 class="card-title">Existing Skins & Offline Images</h5>
+         
+            <h3 class="card-title text-center theme-txt-clr" id="StagingUserMachineTitle">Existing Skins & Offline Images</h3>
 
                 <!-- Table -->
-                <table class="table table-striped table-bordered table-hover theme-border align-middle campain-table-type fs-12" id="StagingMachinesData">
+            <table class="table table-striped table-bordered table-hover theme-border align-middle campain-table-type fs-12" id="StagingMachinesData">
                     <thead>
                         <tr>
                             <th>
                                 <input type="checkbox" id="select-all">
                             </th>
-                            <th>Item path</th>
-                            <th>View</th>
-                            <th>Default?</th>
-                            <th>Description</th>
-                            <th>User Last Modified</th>
-                            <th>Machine Last Modified</th>
-                            <th>Action</th>
+                            <th theme-bg text-white>Item path</th>
+                            <th theme-bg text-white>View</th>
+                            <th theme-bg text-white>Default?</th>
+                            <th theme-bg text-white>Description</th>
+                            <th theme-bg text-white>User Last Modified</th>
+                            <th theme-bg text-white>Machine Last Modified</th>
+                            <th theme-bg text-white>Action</th>
                         </tr>
                     </thead>
                     <tbody>
+                    @foreach(var skins in Model.SkinAndOfflineImage)
+                    {
+                        var cssBg = (index++ % 2 == 0) ? "report-piechart-color-silver-dim" : "";
+                        cssBg += " theme-txt-clr";
                         <tr>
-                            <td><input type="checkbox" name="select-item"></td>
-                            <td>Select New Item</td>
-                            <td><img src="https://via.placeholder.com/50" alt="View Image" class="img-thumbnail"></td>
-                            <td><input type="checkbox" name="default"></td>
-                            <td>V6 STMBackground</td>
-                            <td>NDHUVAZIM</td>
-                            <td>Sarveshan-Asus</td>
-                            <td>
-                                <button class="btn btn-sm btn-danger" onclick="openEditEntityModal('Machine', 1)">Delete</button>
-                                <button class="btn btn-sm btn-success" onclick="EditNewStagingEnting(11, 'Machine')">Edit</button>
+                            <td class="@cssBg"><input type="checkbox" name="select-item"></td>
+                            <td class="@cssBg">Select New Item</td>
+                            <td class="@cssBg"><img src="https://via.placeholder.com/50" alt="View Image" class="img-thumbnail"></td>
+                            <td class="@cssBg"><input type="checkbox" name="default"></td>
+                            <td class="@cssBg">@skins.Description</td>
+                            <td class="@cssBg">@skins.UserLastModified</td>
+                            <td class="@cssBg">@skins.MachineLastModified</td>
+                            <td class="@cssBg">
+                                <button class="btn btn-sm custom-btn-sm btn-danger">Delete</button>
+                                <button class="btn btn-sm custom-btn-sm btn-success" id="edit-staging-btn" onclick="EditNewStagingEnting(@skins.Id)">Edit</button>
                             </td>
                         </tr>
-                        <tr>
-                            <td><input type="checkbox" name="select-item"></td>
-                            <td>Select New Item</td>
-                            <td><img src="https://via.placeholder.com/50" alt="View Image" class="img-thumbnail"></td>
-                            <td><input type="checkbox" name="default"></td>
-                            <td>Default STM Skin</td>
-                            <td>NDHUVAZIM</td>
-                            <td>Sarveshan-Asus</td>
-                            <td>
-                                <button class="btn btn-sm btn-danger" onclick="openEditEntityModal('Machine', 1)">Delete</button>
-                                <button class="btn btn-sm btn-success" onclick="EditNewStagingEnting(11, 'Machine')">Edit</button>
-                            </td>
-                        </tr>
-                        <!-- Add more rows as needed -->
+                    }
+                
                     </tbody>
                 </table>
 
                 <!-- Buttons Section -->
                 <div class="d-flex justify-content-between mt-3">
                     <div>
-                        <button class="btn btn-primary">Import New Item</button>
-                        <button class="btn btn-success">Mark As Default</button>
+                    <button class="custom-btn custom-btn-default">Import New Item</button>
+                    <button class="custom-btn custom-btn-default">Mark As Default</button>
                     </div>
                     <div>
-                        <button class="btn btn-danger">Remove Selected</button>
-                        <button class="btn btn-warning">Delete Selected</button>
+                    <button class="custom-btn custom-btn-default">Remove Selected</button>
+                    <button class="custom-btn custom-btn-default">Delete Selected</button>
                     </div>
                     <div class="text-center">
                         <button class="btn btn-secondary">Save</button>
@@ -125,28 +118,79 @@ await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Settings/Setting
                 </div>
             </div>
         </div>
+   
+        </div>
+
+<!--------add new skins and offline images modal--->
+<div class="modal fade" id="EditModal" tabindex="-1" aria-labelledby="EditModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="EditModalLabel">Edit Skins and Offline Images </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal('EditModal')"></button>
+            </div>
+            <div class="modal-body" id="EditModalContainer">
+                <form>
+                    <div class="mb-3">
+                        <label for="UserId" class="form-label">Item Path: </label>
+                        <input type="text" class="form-control" id="Path" name="Path" value="" readonly>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="Domain" class="form-label">Image</label>
+                        @{
+                            await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Form/FileUploader.cshtml",
+                            new FileUploaderModel { ComponentId = "SkinsAndOfllineImage", InputId = "SkinsAndOfllineImageUploadInput", ShowPreviewButton = true, InitialHidden = false, WidthPx = "396px", OnFileUploadCallback = null });
+                        }
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="NTUserName" class="form-label">Default?</label>
+                        <input type="checkbox" class="form-control" id="DefaultId" name="Default" value="">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="Firstname" class="form-label">Description</label>
+                        <input type="text" class="form-control" id="DescriptionId" name="Description" value="">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="UserLastModified" class="form-label">User Last Modified</label>
+                        <input type="text" class="form-control" id="UserLastModified" name="UserLastModified" value="">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="MachineLastModified" class="form-label">Machine Last Modified</label>
+                        <input type="text" class="form-control" id="MachineLastModified" name="MachineLastModified" value="">
+                    </div>
+                </form>
+              
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal('EditModal')">Cancel</button>
+                <button type="button" class="btn custom-btn-default" onclick="SaveStagingUser()">Save User</button>
+            </div>
+        </div>
     </div>
-
-
 </div>
+
 
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
 
 
 <script>
-
  
 
 $(document).ready(function ()
 {
-usersDT = MakeStandardDataTable("StagingUsersData");
-machinesDT = MakeStandardDataTable("StagingMachinesData");
+    usersDT = MakeStandardDataTable("StagingUsersData");
+    machinesDT = MakeStandardDataTable("StagingMachinesData");
 });
 
 function ToggleStaginUserMachines(id)
 {
-$(".filter-type-btn").removeClass("btn-group-active");
-$(`#${id}`).addClass("btn-group-active");
+    $(".filter-type-btn").removeClass("btn-group-active");
+    $(`#${id}`).addClass("btn-group-active");
 
 if(id.includes("User"))
 {
@@ -168,22 +212,22 @@ else if (id.includes("Machine"))
 
 function SwitchDomainsSelectDataSource(dataSource)
 {
-const selectList = document.getElementById("ReportModuleSelect");
+    const selectList = document.getElementById("ReportModuleSelect");
 
-selectList.innerHTML = "";
+    selectList.innerHTML = "";
 
-const defaultOption = document.createElement("option");
-defaultOption.value = "0";
-defaultOption.textContent = "Please select Domain Name";
-selectList.appendChild(defaultOption);
+    const defaultOption = document.createElement("option");
+    defaultOption.value = "0";
+    defaultOption.textContent = "Please select Domain Name";
+    selectList.appendChild(defaultOption);
 
-dataSource.forEach(domain =>
-{
-    const option = document.createElement("option");
-    option.value = domain;
-    option.textContent = domain;
-    selectList.appendChild(option);
-});
+    dataSource.forEach(domain =>
+    {
+        const option = document.createElement("option");
+        option.value = domain;
+        option.textContent = domain;
+        selectList.appendChild(option);
+    });
 }
 
 function FilterByDomain()
@@ -208,44 +252,37 @@ else
 }
 }
 
-function AddNewExcludedEntity() {
-const buttonText = document.getElementById("BreadcrumSettingsBtnText").innerText;
-
-if (buttonText.includes("User"))
+function AddNewSkinsAndOfflineImages() 
 {
-    const userModal = new bootstrap.Modal(document.getElementById('CreateStagingUserModal'));
-    userModal.show();
-} else if (buttonText.includes("Machine"))
-{
-    const machineModal = new bootstrap.Modal(document.getElementById('CreateStagingMachineModal'));
-    machineModal.show();
-}
-}
-
-function EditSetupExclusions(machineId, entityType)
-{
-
-formdata = {
-    machineId: machineId,
-    entityType: entityType
-}
-
-$.ajax({
-    url: '@Url.Action("EditSetupExclusions", "Settings")',
-    type: 'GET',
-    data: formdata,
-    success: function (response)
-    {
-        console.log(response)
-        $('#EditModalContainer').html(response);
         const editModal = new bootstrap.Modal(document.getElementById('EditModal'));
         editModal.show();
+}
 
-    },
-    error: function (error) 
+function EditSkinsAndOfflineImages(machineId)
+{
+
+    formdata =
     {
-        console.log('Error fetching machine data:', error);
+        machineId: machineId,
+       
     }
+
+    $.ajax({
+        url: '@Url.Action("EditSkinsAndOfflineImages", "Settings")',
+        type: 'GET',
+        data: formdata,
+        success: function (response)
+        {
+            console.log(response)
+            $('#EditModalContainer').html(response);
+            const editModal = new bootstrap.Modal(document.getElementById('EditModal'));
+            editModal.show();
+
+        },
+        error: function (error) 
+        {
+            console.log('Error fetching machine data:', error);
+        }
 });
     
 // const formData = {

@@ -32,6 +32,42 @@
             return string.Join(" ", words);
         }
 
+        private static string GenerateCorrectAnswer(string responseType, Random random)
+        {
+            switch (responseType)
+            {
+                case "Single Select":
+                    return GetSingleSelectAnswer(random);
+
+                case "Multi Select":
+                    return string.Join("; ", Enumerable.Range(0, random.Next(1, 4)).Select(_ => GetSingleSelectAnswer(random)));
+
+                case "Yes/No":
+                    return random.Next(0, 2) == 0 ? "Yes" : "No";
+
+                case "Yes/No/NA":
+                    return new List<string> { "Yes", "No", "NA" }[random.Next(3)];
+
+                case "Agree/Disagree":
+                    return random.Next(0, 2) == 0 ? "Agree" : "Disagree";
+
+                case "Text":
+                    return "Free Text Response"; // For Text, just use a placeholder response
+
+                case "Re-Arrange":
+                    return string.Join("; ", Enumerable.Range(1, 3).OrderBy(_ => random.Next()));
+
+                default:
+                    return "";
+            }
+        }
+
+
+        private static string GetSingleSelectAnswer(Random random)
+        {
+            var options = new List<string> { "1", "2", "3", "4", "5", "A", "B", "C", "D", "Yes", "No" };
+            return options[random.Next(options.Count)];
+        }
 
         public static DateTime RandomDateInSameMonth(DateTime effectiveFrom)
         {
@@ -188,8 +224,87 @@
             return conectionCommandlist[Random.Next(conectionCommandlist.Count)];
         }
 
+        // Font-Related Mock Data
+        public static string FontFamilies()
+        {
+            var fontFamilies = new List<string> { "Arial", "Verdana", "Times New Roman", "Courier New", "Georgia" };
+            return fontFamilies[Random.Next(fontFamilies.Count)];
+        }
 
+        public static string FontWeight()
+        {
+            var fontWeights = new List<string> { "normal", "bold", "lighter" };
+            return fontWeights[Random.Next(fontWeights.Count)];
+        }
 
+        public static int FontSize()
+        {
+            // Random font size between 10 and 50
+            return Random.Next(10, 51);
+        }
+
+        public static string FontFamily()
+        {
+            return FontFamilies();
+        }
+
+        public static int FontWidth()
+        {
+            // Random font width between 100 and 900 (CSS valid font-weight values)
+            var fontWidths = new List<int> { 100, 200, 300, 400, 500, 600, 700, 800, 900 };
+            return fontWidths[Random.Next(fontWidths.Count)];
+        }
+
+        public static string HeadingFontFamily()
+        {
+            return FontFamilies();
+        }
+
+        // Color-Related Mock Data
+        public static string RandomHexColor()
+        {
+            // Generate a random color in hex format
+            return $"#{Random.Next(0x1000000):X6}";
+        }
+
+        public static string NamedColor()
+        {
+            var namedColors = new List<string>
+            {
+                "Red", "Green", "Blue", "Yellow", "Orange", "Purple", "Cyan", "Magenta", "Black", "White", "Gray"
+            };
+            return namedColors[Random.Next(namedColors.Count)];
+        }
+        public static string FontStyle()
+        {
+            var fontStyles = new List<string> { "normal", "italic", "oblique" };
+            return fontStyles[Random.Next(fontStyles.Count)];
+        }
+
+        public static string RGBAColor()
+        {
+            // Generate a random RGBA color
+            int r = Random.Next(256);
+            int g = Random.Next(256);
+            int b = Random.Next(256);
+            double a = Math.Round(Random.NextDouble(), 2); // Alpha between 0.0 and 1.0
+            return $"rgba({r}, {g}, {b}, {a})";
+        }
+
+        public static string BackgroundColor()
+        {
+            return RandomHexColor(); // Use RandomHexColor for background colors
+        }
+
+        public static string TextColor()
+        {
+            return RandomHexColor(); // Use RandomHexColor for text colors
+        }
+
+        public static string BorderColor()
+        {
+            return NamedColor(); // Use NamedColor for border colors
+        }
 
     }
 }

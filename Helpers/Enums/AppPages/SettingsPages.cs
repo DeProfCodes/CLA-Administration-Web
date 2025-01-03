@@ -44,6 +44,9 @@ namespace CLA_Administration_Web.Helpers.Enums.AppPages
         [Display(Name = "DefaultFonts", Description = "Default Fonts")]
         DefaultFonts,
 
+        [Display(Name = "DefaultFontsDetails", Description = "Default Fonts Details")]
+        DefaultFontsDetails,
+
         [Display(Name = "DesktopInformation", Description = "Desktop Information")]
         DesktopInformation
     }

@@ -212,8 +212,6 @@ usersGroups = string.Join(Environment.NewLine, users);
 </div>
 </div>
 
-
-
     <!------Add new settings modal--------->
 <div class="modal fade" id="CreateStagingMachineModal" tabindex="-1" aria-labelledby="CreateStagingUserModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-lg">
@@ -257,13 +255,9 @@ usersGroups = string.Join(Environment.NewLine, users);
 </div>
 
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+
 <script>
-//open custom user settings details
-function OpenUserSettingsDetails(categoryId)
-{
-    OpenPage('@SettingsPages.CustomUserSettingsDetails', categoryId);
-}
-   
+  
    
 function ToggleStaginUserMachines(id) 
 {
@@ -338,18 +332,21 @@ function AddNewCustomSettingsUser()
     {
         const userModal = new bootstrap.Modal(document.getElementById('CreateStagingUserModal'));
         userModal.show();
-    } else if (buttonText.includes("Machine"))
+    }
+    else if (buttonText.includes("Machine"))
     {
         const machineModal = new bootstrap.Modal(document.getElementById('CreateStagingMachineModal'));
         machineModal.show();
     }
 }
    
-function EditNewStagingEnting(customID) {
+function EditNewStagingEnting(customID
+) {
   OpenPage('@SettingsPages.CustomUserSettingsDetails', customID)
 }
    
-function SaveEditNewStagingEnting(formdata) {
+function SaveEditNewStagingEnting(formdata)
+{
    
     LoadEditModal(formData, '@Url.Action("SaveStagingData", "Settings")', 'POST', editMachineForm, edit - machine - btn)
 }

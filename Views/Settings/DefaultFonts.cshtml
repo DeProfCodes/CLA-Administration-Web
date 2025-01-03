@@ -1,5 +1,8 @@
-﻿@model StagingUsersMainViewModel
-
+﻿@using CLA_Administration_Web.ViewModels.Settings.DefaultFonts
+@model IEnumerable<DefaultFontsViewModel>
+@using CLA_Administration_Web.Helpers.Enums.AppPages
+@using CLA_Administration_Web.Helpers.Enums.Shared
+@using CLA_Administration_Web.Helpers.Enums.Shared.PageNames
 @{
     await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Settings/SettingsBreadcrumb.cshtml", new SettingsBreadcrumbViewModel
     {
@@ -11,7 +14,6 @@
 }
 
 <div class="container-fluid">
-
     <!-- Settings Filter Component -->
     <div class="card mb-4 mt-2 overview-filters-card app-card-main-scaling">
         <div class="card-body pt-0 pb-0">
@@ -44,140 +46,82 @@
 </div>
 
 <div class="container-fluid my-4 border p-3 rounded">
+    @foreach (var data in Model)
+    {
+        <div class="border p-3 mb-3">
+            <h5 class="text-center">
+                <span class="clickable-title" data-id="@data.Id" style="cursor: pointer;">
+                    @data.DefaultHeading
+                </span>
+            </h5>
 
-    <!-- Popups Section -->
-    <div class="border p-3 mb-3">
-        <h5 class="text-center">Popups</h5>
-        <div class="row mb-3 align-items-center">
-            <div class="col-1 text-center">
-                <img src="https://via.placeholder.com/30" alt="Icon">
+            <div class="row mb-3 align-items-center">
+                <div class="col-1 text-center">
+                    <span class="clickable-icon" data-id="@data.Id" style="cursor: pointer;">
+                        <img src="@data.Icon" alt="Icon" />
+                    </span>
+                </div>
+                <div class="col-4">
+                    <label for="popupTitle" class="form-label">@data.Title</label>
+                </div>
+                <div class="col-7">
+                    <div class="form-control" style="border: none; background-color: transparent;">
+                        @data.Text
+                    </div>
+                </div>
             </div>
-            <div class="col-4">
-                <label for="popupTitle" class="form-label">Popup Title</label>
-            </div>
-            <div class="col-7">
-                <input type="text" id="popupTitle" class="form-control" value="CLA - Corporate LAN Advertising">
-            </div>
-        </div>
-        <div class="row align-items-center">
-            <div class="col-1 text-center">
-                <img src="https://via.placeholder.com/30" alt="Icon">
-            </div>
-            <div class="col-4">
-                <label for="popupText" class="form-label">Popup Text</label>
-            </div>
-            <div class="col-7">
-                <input type="text" id="popupText" class="form-control" value="CLA - Corporate LAN Advertising">
-            </div>
-        </div>
-    </div>
 
-    <!-- Surveys Section -->
-    <div class="border p-3 mb-3">
-        <h5 class="text-center">Surveys</h5>
-        <div class="row mb-3 align-items-center">
-            <div class="col-1 text-center">
-                <img src="https://via.placeholder.com/30" alt="Icon">
-            </div>
-            <div class="col-4">
-                <label for="surveyTitle" class="form-label">Survey Title</label>
-            </div>
-            <div class="col-7">
-                <input type="text" id="surveyTitle" class="form-control" value="CLA - Corporate LAN Advertising">
-            </div>
-        </div>
-        <div class="row mb-3 align-items-center">
-            <div class="col-1 text-center">
-                <img src="https://via.placeholder.com/30" alt="Icon">
-            </div>
-            <div class="col-4">
-                <label for="questionTitle" class="form-label">Question Title</label>
-            </div>
-            <div class="col-7">
-                <input type="text" id="questionTitle" class="form-control" value="CLA - Corporate LAN Advertising">
-            </div>
-        </div>
-        <div class="row align-items-center">
-            <div class="col-1 text-center">
-                <img src="https://via.placeholder.com/30" alt="Icon">
-            </div>
-            <div class="col-4">
-                <label for="surveyText" class="form-label">Survey/Question Text</label>
-            </div>
-            <div class="col-7">
-                <input type="text" id="surveyText" class="form-control" value="CLA - Corporate LAN Advertising">
-            </div>
-        </div>
-    </div>
+            @if (data.SubHeadings != null && data.SubHeadings.Any())
+            {
+                @foreach (var subheading in data.SubHeadings)
+                {
+                    <div class="row mb-3 align-items-center">
+                        <div class="col-1 text-center">
+                            <span class="clickable-icon" data-id="@subheading.Id" style="cursor: pointer;">
+                                <img src="@subheading.Icon" alt="Icon" />
+                            </span>
+                        </div>
+                        <div class="col-4">
+                            <label for="subheadingTitle_@subheading.Id" class="form-label">@subheading.Title</label>
+                        </div>
+                        <div class="col-7">
+                            <div class="form-control" style="border: none; background-color: transparent;">
+                                @subheading.Text
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
 
-    <!-- Tickers Section -->
-    <div class="border p-3 mb-3">
-        <h5 class="text-center">Tickers</h5>
-        <div class="row align-items-center">
-            <div class="col-1 text-center">
-                <img src="https://via.placeholder.com/30" alt="Icon">
-            </div>
-            <div class="col-4">
-                <label for="tickerText" class="form-label">Ticker Text</label>
-            </div>
-            <div class="col-7">
-                <input type="text" id="tickerText" class="form-control" value="CLA - Corporate LAN Advertising">
-            </div>
         </div>
-    </div>
-
-    <!-- RSS Section -->
-    <div class="border p-3 mb-3">
-        <h5 class="text-center">RSS</h5>
-        <div class="row align-items-center">
-            <div class="col-1 text-center">
-                <img src="https://via.placeholder.com/30" alt="Icon">
-            </div>
-            <div class="col-4">
-                <label for="rssText" class="form-label">RSS Text</label>
-            </div>
-            <div class="col-7">
-                <input type="text" id="rssText" class="form-control" value="CLA - Corporate LAN Advertising">
-            </div>
-        </div>
-    </div>
-
-    <!-- Desktop Information Section -->
-    <div class="border p-3">
-        <h5 class="text-center">Desktop Information</h5>
-        <div class="row align-items-center">
-            <div class="col-1 text-center">
-                <img src="https://via.placeholder.com/30" alt="Icon">
-            </div>
-            <div class="col-4">
-                <label for="desktopInfo" class="form-label">Desktop Info</label>
-            </div>
-            <div class="col-7">
-                <input type="text" id="desktopInfo" class="form-control" value="CLA - Corporate LAN Advertising">
-            </div>
-        </div>
-    </div>
-
+    }
 </div>
 
-<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
 <script>
-    $(document).ready(function () {
+
+  
+
+    $(document).ready(function () 
+    {
         usersDT = MakeStandardDataTable("StagingUsersData");
         machinesDT = MakeStandardDataTable("StagingMachinesData");
     });
 
-    function ToggleStaginUserMachines(id) {
+    function ToggleStaginUserMachines(id)
+    {
         $(".filter-type-btn").removeClass("btn-group-active");
         $(`#${id}`).addClass("btn-group-active");
 
-        if (id.includes("User")) {
+        if (id.includes("User")) 
+        {
             $("#BreadcrumSettingsBtnText").text("Add New Staging User");
             $("#StagingUserMachineTitle").text("Users");
             HideShowElement("#StagingUsersSettings", HideShow.SHOW);
             HideShowElement("#StagingMachinesSettings", HideShow.HIDE);
             SwitchDomainsSelectDataSource(usersDomains);
-        } else if (id.includes("Machine")) {
+        }
+        else if (id.includes("Machine"))
+        {
             $("#BreadcrumSettingsBtnText").text("Add New Staging Machine");
             $("#StagingUserMachineTitle").text("Machines");
             HideShowElement("#StagingUsersSettings", HideShow.HIDE);
@@ -186,8 +130,10 @@
         }
     }
 
-    function SwitchDomainsSelectDataSource(dataSource) {
+    function SwitchDomainsSelectDataSource(dataSource)
+    {
         const selectList = document.getElementById("ReportModuleSelect");
+
         selectList.innerHTML = "";
 
         const defaultOption = document.createElement("option");
@@ -195,7 +141,8 @@
         defaultOption.textContent = "Please select Domain Name";
         selectList.appendChild(defaultOption);
 
-        dataSource.forEach(domain => {
+        dataSource.forEach(domain =>
+            {
             const option = document.createElement("option");
             option.value = domain;
             option.textContent = domain;
@@ -203,59 +150,62 @@
         });
     }
 
-    function FilterByDomain() {
-        const selectedDomain = $("#ReportModuleSelect").val();
-        const userActive = $("#StagingUserBtn").hasClass("btn-group-active");
-
-        if (selectedDomain === "0") {
-            if (userActive) {
-                usersDT.column(0).search("").draw();
-            } else {
-                machinesDT.column(0).search("").draw();
-            }
-        } else {
-            if (userActive) {
-                usersDT.column(0).search(selectedDomain).draw();
-            } else {
-                machinesDT.column(0).search(selectedDomain).draw();
-            }
-        }
-    }
-
-    function AddNewExcludedEntity() {
+  
+    function AddNewStagingEntity()
+    {
         const buttonText = document.getElementById("BreadcrumSettingsBtnText").innerText;
 
-        if (buttonText.includes("User")) {
+        if (buttonText.includes("User"))
+        {
             const userModal = new bootstrap.Modal(document.getElementById('CreateStagingUserModal'));
             userModal.show();
-        } else if (buttonText.includes("Machine")) {
+        } 
+        else if (buttonText.includes("Machine"))
+        {
             const machineModal = new bootstrap.Modal(document.getElementById('CreateStagingMachineModal'));
             machineModal.show();
         }
     }
 
-    function EditSetupExclusions(machineId, entityType) {
-        const formData = {
-            machineId: machineId,
-            entityType: entityType
-        };
-
+    function EditNewStagingEnting(machineId, entityType)
+    {
+        // LoadEditModal(formData, '@Url.Action("EditStagingMachine", "Settings")', 'POST', editMachineForm, edit-machine-btn)
         $.ajax({
-            url: '@Url.Action("EditSetupExclusions", "Settings")',
+            url: '@Url.Action("GetDefaultFontsDetails", "Settings")',
             type: 'GET',
-            data: formData,
-            success: function (response) {
+            data: { machineId: machineId, entityType: entityType },
+            success: function (response)
+            {
+                console.log(response)
                 $('#EditModalContainer').html(response);
                 const editModal = new bootstrap.Modal(document.getElementById('EditModal'));
                 editModal.show();
+
             },
-            error: function (error) {
-                console.error('Error fetching machine data:', error);
+            error: function (error)
+            {
+                console.log('Error fetching machine data:', error);
             }
         });
     }
 
-    function SaveEditNewStagingEntity(formData) {
-        LoadEditModal(formData, '@Url.Action("SaveStagingData", "Settings")', 'POST', editMachineForm, editMachineBtn);
+    $(document).ready(function () 
+    {
+        $('.clickable-title, .clickable-icon').click(function ()
+        {
+            var id = $(this).data('id');
+            OpenPage('@SettingsPages.DefaultFontsDetails', id)
+        
+    });
+
+    function SaveEditNewStagingEnting(formdata) 
+    {
+
+        LoadEditModal(formData, '@Url.Action("SaveStagingData", "Settings")', 'POST', editMachineForm, edit - machine - btn)
     }
+
+    function closeModal(modalId) {
+        $('#' + modalId).modal('hide');
+    }
+
 </script>

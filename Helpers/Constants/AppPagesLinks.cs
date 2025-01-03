@@ -114,7 +114,10 @@
             public const string ActiveConnectionsPageLink = "~/Views/Settings/ActiveConnections.cshtml";
             public const string SkinsOfflineImagesPageLink = "~/Views/Settings/SkinsOfflineImages.cshtml";
             public const string DesktopInformationPageLink = "~/Views/Settings/DesktopInformation.cshtml";
+
+            //Default fonts
             public const string DefaultFontsPageLink = "~/Views/Settings/DefaultFonts.cshtml";
+            public const string DefaultFontsDetailsPageLink = "~/Views/Settings/DefaultFonts/DefaultFontsDetails.cshtml";
 
             //custom user settings
             public const string CustomUserSettingsDetailsPageLink = "~/Views/Settings/CustomUser/CustomUserSettingsDetails.cshtml";

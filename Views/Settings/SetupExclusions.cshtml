@@ -333,14 +333,16 @@
         }
     }
 
-    function AddNewExcludedEntity() {
+    function AddNewExcludedEntity()
+    {
         const buttonText = document.getElementById("BreadcrumSettingsBtnText").innerText;
 
         if (buttonText.includes("User"))
         {
             const userModal = new bootstrap.Modal(document.getElementById('CreateStagingUserModal'));
             userModal.show();
-        } else if (buttonText.includes("Machine"))
+        } 
+        else if (buttonText.includes("Machine"))
         {
             const machineModal = new bootstrap.Modal(document.getElementById('CreateStagingMachineModal'));
             machineModal.show();
@@ -350,7 +352,8 @@
     function EditSetupExclusions(machineId, entityType)
     {
 
-        formdata = {
+        formdata = 
+        {
             machineId: machineId,
             entityType: entityType
         }

@@ -4,11 +4,16 @@ using CLA_Administration_Web.Models.APIResponses.Reports.Troubleshoot;
 using CLA_Administration_Web.Services;
 using CLA_Administration_Web.ViewModels.Settings.ActiveConnections;
 using CLA_Administration_Web.ViewModels.Settings.CustomUser;
+using CLA_Administration_Web.ViewModels.Settings.DefaultFonts;
 using CLA_Administration_Web.ViewModels.Settings.SetupExclusion;
 using CLA_Administration_Web.ViewModels.Settings.Shared;
+using CLA_Administration_Web.ViewModels.Settings.SkinAndOfflineImage;
 using CLA_Administration_Web.ViewModels.Settings.StagingUsers;
+
+
 using CLA_Administration_Web.ViewModels.Targeting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
 namespace CLA_Administration_Web.Controllers
 {
@@ -213,10 +218,28 @@ namespace CLA_Administration_Web.Controllers
         #endregion
 
         #region Defaults
+        [HttpGet]
         public async Task<IActionResult> DefaultFonts()
         {
-            return PartialView(AppPagesLinks.Settings.DefaultFontsPageLink);
+            var defaultFontsData = SettingsMockData.GetDefaultFontsData();
+
+
+            return PartialView(AppPagesLinks.Settings.DefaultFontsPageLink, defaultFontsData);
         }
+
+        public IActionResult GetDefaultFontsDetails(int id)
+        {
+            var defaultFontsData = SettingsMockData.GetDefaultFontsData();
+            var data = defaultFontsData.FirstOrDefault(x => x.Id == id);
+
+            if (data == null)
+            {
+                return NotFound();
+            }
+
+            return View(AppPagesLinks.Settings.DefaultFontsDetailsPageLink, data);
+        }
+
         #endregion Defaults
 
         #region ActiveConnections
@@ -234,11 +257,50 @@ namespace CLA_Administration_Web.Controllers
 
         #endregion
 
-        #region SkinsOffline
+        #region SkinsandOfflineImages
         [HttpGet]
         public async Task<IActionResult> SkinsOfflineImages()
         {
-            return PartialView(AppPagesLinks.Settings.SkinsOfflineImagesPageLink);
+
+            var skinsAndOfflineImageData = new SkinsAndOfflineImageMainViewModel()
+            {
+                SkinAndOfflineImage = SettingsMockData.SkinsAndOfflineImage,
+               
+            };
+
+            return PartialView(AppPagesLinks.Settings.SkinsOfflineImagesPageLink, skinsAndOfflineImageData);
+        }
+
+        [HttpGet]
+        public ActionResult EditSkinsAndOfflineImages(int machineId, string entityType)
+        {
+
+            var stagingUsersData = new StagingUsersMainViewModel()
+            {
+                StagingUsers = SettingsMockData.StagingUsers,
+                StagingMachines = SettingsMockData.StagingMachines
+            };
+
+            object selectedEntity = null;
+
+            if (entityType == "Machine")
+            {
+                selectedEntity = stagingUsersData.StagingMachines.FirstOrDefault(m => m.Id == machineId);
+            }
+            else if (entityType == "User")
+            {
+                selectedEntity = stagingUsersData.StagingUsers.FirstOrDefault(u => u.Id == machineId);
+            }
+
+
+            if (selectedEntity == null)
+            {
+                return NotFound($"{entityType} with ID {machineId} not found.");
+            }
+
+            ViewBag.EntityType = entityType;
+
+            return PartialView(AppPagesLinks.Settings.StagingModalViewPageLink, selectedEntity);
         }
         #endregion
 

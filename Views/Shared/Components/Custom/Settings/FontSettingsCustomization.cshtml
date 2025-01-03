@@ -1,0 +1,76 @@
+﻿@model CLA_Administration_Web.ViewModels.Settings.DefaultFonts.FontCustomizationModel
+@using CLA_Administration_Web.Helpers.MockData
+
+@{
+    var fontFamilies = MockDataHelperFunctions.FontFamilies();
+    var fontWeights = MockDataHelperFunctions.FontWeight();
+    var fontStyles = MockDataHelperFunctions.FontStyle();
+}
+
+<div class="border p-3 mb-3">
+    <h5 class="text-center">Font Customization</h5>
+
+<div class="border p-3 mb-3">
+    <h5 class="text-center">Font Customization</h5>
+
+    <form id="fontCustomizationForm">
+        <!-- Heading Font Family Selection -->
+        <div class="row mb-3 align-items-center">
+            <div class="col-4">
+                <label for="HeadingFontFamily" class="form-label">Select Heading Font</label>
+            </div>
+            <div class="col-7">
+                <select id="HeadingFontFamily" name="HeadingFontFamily" class="form-control">
+                    @foreach (var font in fontFamilies)
+                    {
+                        var fontString = font.ToString();
+                        var isSelected = Model.HeadingFontFamily == fontString ? "selected" : "";
+                        <option value="@fontString" isSelected>@fontString</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <!-- Font Weight Selection -->
+        <div class="row mb-3 align-items-center">
+            <div class="col-4">
+                <label for="FontWeight" class="form-label">Select Font Weight</label>
+            </div>
+            <div class="col-7">
+                <select id="FontWeight" name="FontWeight" class="form-control">
+                    @foreach (var weight in fontWeights)
+                    {
+                        var weightString = weight.ToString(); 
+                        var isSelected = Model.FontWeight == weightString ? "selected" : "";
+                        <option value="@weightString" isSelected>@weightString</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <!-- Font Style Selection -->
+        <div class="row mb-3 align-items-center">
+            <div class="col-4">
+                <label for="FontStyle" class="form-label">Select Font Style</label>
+            </div>
+            <div class="col-7">
+                <select id="FontStyle" name="FontStyle" class="form-control">
+                    @foreach (var style in fontStyles)
+                    {
+                        var styleString = style.ToString(); 
+                        var isSelected = Model.FontStyle == styleString ? "selected" : "";
+                        <option value="@styleString" isSelected>@styleString</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="button" id="submitButton" class="btn btn-primary">Apply Changes</button>
+    </form>
+</div>
+
+
+<script>
+    // JavaScript for AJAX handling
+</script>
