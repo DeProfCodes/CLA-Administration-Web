@@ -227,7 +227,7 @@ namespace CLA_Administration_Web.Controllers
             return PartialView(AppPagesLinks.Settings.DefaultFontsPageLink, defaultFontsData);
         }
 
-        public IActionResult GetDefaultFontsDetails(int id)
+        public IActionResult DefaultFontsDetails(int id)
         {
             var defaultFontsData = SettingsMockData.GetDefaultFontsData();
             var data = defaultFontsData.FirstOrDefault(x => x.Id == id);

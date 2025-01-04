@@ -275,6 +275,9 @@ namespace CLA_Administration_Web.Helpers.MockData
 
         public static List<DefaultFontsViewModel> GetDefaultFontsData()
         {
+            var rand = new Random();
+
+
             return new List<DefaultFontsViewModel>
         {
             new DefaultFontsViewModel
@@ -283,7 +286,7 @@ namespace CLA_Administration_Web.Helpers.MockData
                 Title = "Popup Title",
                 Icon = "https://via.placeholder.com/30",
                 Text = "CLA - Corporate LAN Advertising",
-                Id = 1,
+                Id = rand.Next(41, 999),
                 SubHeadings = new List<SubHeadingViewModel>
                 {
                     new SubHeadingViewModel
@@ -301,26 +304,26 @@ namespace CLA_Administration_Web.Helpers.MockData
                 Title = "Survey Title",
                 Icon = "https://via.placeholder.com/30",
                 Text = "CLA - Corporate LAN Advertising",
-                Id = 2,
+                Id = rand.Next(41, 999),
                 SubHeadings = new List<SubHeadingViewModel>
                 {
                     new SubHeadingViewModel
                     {
-                        Id = 1,
+                        Id =rand.Next(41, 999),
                         Title = "Survey Title",
                         Icon = "https://via.placeholder.com/30",
                         Text = "Survey Subheading Text"
                     },
                     new SubHeadingViewModel
                     {
-                        Id = 2,
+                        Id =rand.Next(41, 999),
                         Title = "Question Title",
                         Icon = "https://via.placeholder.com/30",
                         Text = "Survey Subheading Text"
                     },
                     new SubHeadingViewModel
                     {
-                        Id = 3,
+                        Id = rand.Next(41, 999),
                         Title = "Survey/Question Text",
                         Icon = "https://via.placeholder.com/30",
                         Text = "Survey Subheading Text"
@@ -333,7 +336,7 @@ namespace CLA_Administration_Web.Helpers.MockData
                     Title = "Ticker Text",
                     Icon = "https://via.placeholder.com/30",
                     Text = "CLA - Corporate LAN Advertising",
-                    Id = 3
+                    Id = rand.Next(41, 999)
                 },
                 new DefaultFontsViewModel
                 {
@@ -341,7 +344,7 @@ namespace CLA_Administration_Web.Helpers.MockData
                     Title = "RSS Text",
                     Icon = "https://via.placeholder.com/30",
                     Text = "CLA - Corporate LAN Advertising",
-                    Id = 4
+                    Id = rand.Next(41, 999)
                 },
                 new DefaultFontsViewModel
                 {
@@ -349,7 +352,7 @@ namespace CLA_Administration_Web.Helpers.MockData
                     Title = "Desktop Info",
                     Icon = "https://via.placeholder.com/30",
                     Text = "CLA - Corporate LAN Advertising",
-                    Id = 5
+                    Id = rand.Next(41, 999)
                 }
             };
         }

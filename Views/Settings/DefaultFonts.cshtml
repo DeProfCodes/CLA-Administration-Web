@@ -189,14 +189,55 @@
         });
     }
 
-    $(document).ready(function () 
-    {
-        $('.clickable-title, .clickable-icon').click(function ()
-        {
+    $(document).ready(function () {
+        // Handle title and icon clicks
+        $('.clickable-title, .clickable-icon').click(function () {
             var id = $(this).data('id');
-            OpenPage('@SettingsPages.DefaultFontsDetails', id)
-        
+
+            $.ajax({
+                url: '@Url.Action("DefaultFontsDetails", "Settings")',
+                data: { id: id },
+                method: 'GET',
+                success: function (data) {
+                    var detailsHtml = `
+                            <div class="container my-4">
+                                <h2>${data.DefaultHeading}</h2>
+                                <p>${data.Text}</p>
+                                <div class="row">
+                                    <div class="col-2">
+                                        <img src="${data.Icon}" alt="Icon" />
+                                    </div>
+                                    <div class="col-10">
+                                        <h4>${data.Title}</h4>
+                                        <p>${data.Text}</p>
+                                    </div>
+                                </div>`;
+
+                    if (data.SubHeadings && data.SubHeadings.length > 0) {
+                        detailsHtml += `<h5>Subheadings:</h5>`;
+                        $.each(data.SubHeadings, function (index, subheading) {
+                            detailsHtml += `
+                                    <div>
+                                        <h6>${subheading.Title}</h6>
+                                        <p>${subheading.Text}</p>
+                                    </div>`;
+                        });
+                    }
+
+                    detailsHtml += `</div>`;
+
+                    // Insert the details HTML into the details section
+                    $('#details-section').html(detailsHtml);
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error fetching details:', error);
+                }
+            });
+        });
     });
+
+
+  ;
 
     function SaveEditNewStagingEnting(formdata) 
     {
