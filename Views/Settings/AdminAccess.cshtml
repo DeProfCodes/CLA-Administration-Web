@@ -3,7 +3,7 @@
 
 @{
     int index = 0;
-    var domains = Model.AdminAccessItems?.Select(x => x.Domain).Distinct().ToList() ?? new List<string>();
+    //var domains = Model.AdminAccessItems?.Select(x => x.Domain).Distinct().ToList() ?? new List<string>();
    
 }
 
@@ -31,10 +31,7 @@
                             <p class="custom-p w-fit-content align-content-center">Domain</p>
                             <select class="custom-input-text w-200p ms-2" id="ReportModuleSelect" onchange="FilterByDomain()">
                                 <option value="0">Please select Domain Name</option>
-                                @foreach (var domain in domains)
-                                {
-                                    <option value="@domain">@domain</option>
-                                }
+                              
                             </select>
                         </div>
                     </div>
@@ -114,20 +111,5 @@
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
 
 <script>
-    // var domains = @Html.Raw(Json.Serialize(domains));
-
-    // $(document).ready(function () {
-    //     adminAccessDT = MakeStandardDataTable("AdminAccessData");
-    // });
-
-    // function FilterByDomain() {
-    //     const selectedDomain = $("#ReportModuleSelect").val();
-
-    //     if (selectedDomain === "0") {
-    //         adminAccessDT.column(0).search("").draw();
-    //     } else {
-    //         adminAccessDT.column(0).search(selectedDomain).draw();
-    //     }
-    // }
 
 </script>

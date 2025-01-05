@@ -326,7 +326,7 @@ namespace CLA_Administration_Web.Controllers
                 Connections = SettingsMockData.ActiveConnections,
             };
 
-            return PartialView(AppPagesLinks.Settings.ActiveConnectionsPageLink);
+            return PartialView(AppPagesLinks.Settings.ActiveConnectionsPageLink, connections);
         }
 
         #endregion

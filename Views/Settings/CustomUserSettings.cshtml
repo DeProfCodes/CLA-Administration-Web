@@ -114,7 +114,7 @@ usersGroups = string.Join(Environment.NewLine, users);
     SettingsCurrentPage = SettingsPages.CustomUserSettings,
     HasAddNewButton = true,
     BreadcrumbButtonName = "Add New User Settings",
-    BreadcrumbButtonCallbackFunction = "AddNewCustomSettingsUser()"
+    BreadcrumbButtonCallbackFunction = "AddNewCustomSettingsUser"
 })
     ;
     await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/ContentPreviewers/AllContentPreviewer.cshtml");
@@ -213,7 +213,7 @@ usersGroups = string.Join(Environment.NewLine, users);
 </div>
 
     <!------Add new settings modal--------->
-<div class="modal fade" id="CreateStagingMachineModal" tabindex="-1" aria-labelledby="CreateStagingUserModalLabel" aria-hidden="true">
+<div class="modal fade" id="AddNewCustomUserModal" tabindex="-1" aria-labelledby="CreateStagingUserModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-lg">
 <div class="modal-content">
     <div class="modal-header">
@@ -223,10 +223,8 @@ usersGroups = string.Join(Environment.NewLine, users);
     <div class="modal-body">
     <form id="CreateStagingUserForm">
         <div class="mb-3">
-            <label for="StagingUserDomain" class="form-label">Domain</label>
-            <select class="form-select" id="StagingUserDomain" required>
-                <option value="">Please select a domain</option>
-            </select>
+            <label for="StagingMachinename" class="form-label">Description</label>
+           <input type="text" class="form-control" id="StagingMachinename" required>
         </div>
         <div class="mb-3">
             <label for="StagingMachinename" class="form-label">Machine Name</label>
@@ -242,7 +240,7 @@ usersGroups = string.Join(Environment.NewLine, users);
         </div>
         <div class="mb-3">
             <label for="StagingMachineLastModified" class="form-label">Machine Last Modified</label>
-            <input type="datetime-local" class="form-control" id="StagingMachineLastModified">
+            <input type="text" class="form-control" id="StagingMachineLastModified">
         </div>
     </form>
     </div>
@@ -328,17 +326,9 @@ function FilterByDomain() {
 function AddNewCustomSettingsUser()
 {
     const buttonText = document.getElementById("BreadcrumSettingsBtnText").innerText;
-   
-    if (buttonText.includes("User"))
-    {
-        const userModal = new bootstrap.Modal(document.getElementById('CreateStagingUserModal'));
+        const userModal = new bootstrap.Modal(document.getElementById('AddNewCustomUserModal'));
         userModal.show();
-    }
-    else if (buttonText.includes("Machine"))
-    {
-        const machineModal = new bootstrap.Modal(document.getElementById('CreateStagingMachineModal'));
-        machineModal.show();
-    }
+  
 }
    
 function EditNewStagingEnting(customID)

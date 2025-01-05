@@ -23,7 +23,7 @@ await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Settings/Setting
 <div class="container mt-4">
 
     <!-- Settings Filter Component -->
-<div class="card mb-4 mt-2 overview-filters-card app-card-main-scaling">
+<div class="card mb-4 mt-2 overview-filters-card app-card-main-scaling hidden">
     <div class="card-body pt-0 pb-0">
         <div class="row fs-12 mt-1 mb-2">
             <p class="theme-txt-clr text-center w-100 fw-bold fs-16" id="TypeFilterTitle">Filters</p>
@@ -56,103 +56,95 @@ await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Settings/Setting
 </div>
 
     <!-- Existing Categories Section -->
-    <div class="row">
-        <div class="col-md-6">
-            <div class="section-border">
-                <div class="section-title">Existing Categories</div>
-                <div class="row">
-                    <!-- Left Side: TreeView with Filter -->
-                    <div>
-                        <div class="mb-2">
-                            <label for="filterInput" class="form-label"><strong>Filter:</strong></label>
-                            <input type="text" id="filterInput" class="form-control filter-input" placeholder="Search...">
-                        </div>
-                        <div class="scroll-box treeview">
+    <div class=" overview-filters-card app-card-main-scaling">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="section-border">
+                    <div class="section-title theme-txt-clr ">Existing Categories</div>
+                    <div class="row">
+                        <!-- Left Side: TreeView with Filter -->
+                        <div>
+                            <div class="mb-2">
+                                <label for="filterInput hidden" class="form-label"><strong>Filter:</strong></label>
+                                <input type="text" id="filterInput" class="form-control filter-input" placeholder="Search...">
+                            </div>
+                            <div class="existing-tree-category treeview">
 
-                            <ul class="tree-view">
-                                <li>
-                                    <!-- First Level -->
-                                    <input type="checkbox" id="node1" class="tree-toggle">
-                                    <label for="node1" class="tree-toggle-label">Existing Skins</label>
-                                    <ul class="tree-content">
-                                        <li>
-                                            <input type="checkbox" id="node1-1" class="tree-toggle">
-                                            <label for="node1-1" class="tree-toggle-label">Offline Deskop</label>
-                                            <ul class="tree-content">
-                                                <li>Admins</li>
-                                                <li>Developers</li>
-                                                <li>HR</li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="node1-2" class="tree-toggle">
-                                            <label for="node1-2" class="tree-toggle-label">Offline Lockscreen Wallpaper</label>
-                                            <ul class="tree-content">
-                                                <li>John Doe</li>
-                                                <li>Jane Smith</li>
-                                                <li>Mike Johnson</li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="node1-3" class="tree-toggle">
-                                            <label for="node1-3" class="tree-toggle-label">Offline Screensaver</label>
-                                            <ul class="tree-content">
-                                                <li>Server-1</li>
-                                                <li>Workstation-5</li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="node1-4" class="tree-toggle">
-                                            <label for="node1-4" class="tree-toggle-label">Popupss</label>
-                                            <ul class="tree-content">
-                                                <li>192.168.0.0/24</li>
-                                                <li>10.0.0.0/8</li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>                             
-                            </ul>
+                                <ul class="tree-view">
+                                    <li>
+                                        <!-- First Level -->
+                                        <input type="checkbox" id="node1" class="tree-toggle">
+                                        <label for="node1" class="tree-toggle-label">Existing Skins</label>
+                                        <ul class="tree-content">
+                                            <li>
+                                                <input type="checkbox" id="node1-1" class="tree-toggle">
+                                                <label for="node1-1" class="tree-toggle-label">Offline Deskop</label>
+                                                <ul class="tree-content">
+                                                    <li>Admins</li>
+                                                    <li>Developers</li>
+                                                    <li>HR</li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <input type="checkbox" id="node1-2" class="tree-toggle">
+                                                <label for="node1-2" class="tree-toggle-label">Offline Lockscreen Wallpaper</label>
+                                                <ul class="tree-content">
+                                                    <li>John Doe</li>
+                                                    <li>Jane Smith</li>
+                                                    <li>Mike Johnson</li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <input type="checkbox" id="node1-3" class="tree-toggle">
+                                                <label for="node1-3" class="tree-toggle-label">Offline Screensaver</label>
+                                                <ul class="tree-content">
+                                                    <li>Server-1</li>
+                                                    <li>Workstation-5</li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <input type="checkbox" id="node1-4" class="tree-toggle">
+                                                <label for="node1-4" class="tree-toggle-label">Popupss</label>
+                                                <ul class="tree-content">
+                                                    <li>192.168.0.0/24</li>
+                                                    <li>10.0.0.0/8</li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
+
                     </div>
 
                 </div>
-
             </div>
-        </div>
 
-        <!-- Categories Details Section -->
-        <div class="col-md-6">
-            <div class="section-border">
-                <div class="section-title">Category Details</div>
-                <form>
-                    <div class="mb-2">
-                        <label class="form-label">Machine ID:</label>
-                        <select class="form-control">
-                            <option value="M001">M001</option>
-                            <option value="M002">M002</option>
-                            <option value="M003">M003</option>
-                        </select>
-                    </div>
-                    <div class="mb-2">
-                        <label class="form-label">Description:</label>
-                        <select class="form-control">
-                            <option value="Printer">Printer</option>
-                            <option value="Scanner">Scanner</option>
-                            <option value="Projector">Projector</option>
-                        </select>
-                    </div>
-                    <div class="mb-2">
-                        <label class="form-label">Group:</label>
-                        <select class="form-control">
-                            <option value="Office">Office</option>
-                            <option value="Lab">Lab</option>
-                            <option value="Workshop">Workshop</option>
-                        </select>
-                    </div>
-                </form>
+            <!-- Categories Details Section -->
+            <div class="col-md-6">
+                <div class="section-border">
+                    <div class="section-title theme-txt-clr ">Category Details</div>
+                    <form>
+                        <div class="mb-2">
+                            <label class="form-label">Category Name:</label>
+                            <input type="text" id="filterInput" class="form-control filter-input" placeholder="Search...">
+                         
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label">User Last Modified:</label>
+                            <input type="text" id="filterInput" class="form-control filter-input" placeholder="Search...">
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label">Machine Last Modified:</label>
+                            <input type="text" id="filterInput" class="form-control filter-input" placeholder="Search...">
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
+    
 
     
         <!-- Card with White Background -->
