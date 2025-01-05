@@ -122,7 +122,7 @@
             //custom user settings
             public const string CustomUserSettingsDetailsPageLink = "~/Views/Settings/CustomUser/CustomUserSettingsDetails.cshtml";
             public const string CustomUserSettingsPageLink = "~/Views/Settings/CustomUserSettings.cshtml";
-
+           
             //Modal setting component
             public const string EditSettingsModalPageLink = "~/Views/Shared/Components/Custom/Settings/SettingsModalViewComponent.cshtml";
             public const string SetupExclusionModalPageLink = "~/Views/Shared/Components/Custom/Settings/SettingsModal/SetupExclusionModalView.cshtml";

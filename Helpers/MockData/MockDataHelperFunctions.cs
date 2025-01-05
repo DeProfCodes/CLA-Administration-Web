@@ -239,7 +239,7 @@
 
         public static int FontSize()
         {
-            // Random font size between 10 and 50
+         
             return Random.Next(10, 51);
         }
 
@@ -250,7 +250,7 @@
 
         public static int FontWidth()
         {
-            // Random font width between 100 and 900 (CSS valid font-weight values)
+          
             var fontWidths = new List<int> { 100, 200, 300, 400, 500, 600, 700, 800, 900 };
             return fontWidths[Random.Next(fontWidths.Count)];
         }
@@ -260,10 +260,10 @@
             return FontFamilies();
         }
 
-        // Color-Related Mock Data
+    
         public static string RandomHexColor()
         {
-            // Generate a random color in hex format
+         
             return $"#{Random.Next(0x1000000):X6}";
         }
 
@@ -283,27 +283,27 @@
 
         public static string RGBAColor()
         {
-            // Generate a random RGBA color
+           
             int r = Random.Next(256);
             int g = Random.Next(256);
             int b = Random.Next(256);
-            double a = Math.Round(Random.NextDouble(), 2); // Alpha between 0.0 and 1.0
+            double a = Math.Round(Random.NextDouble(), 2); 
             return $"rgba({r}, {g}, {b}, {a})";
         }
 
         public static string BackgroundColor()
         {
-            return RandomHexColor(); // Use RandomHexColor for background colors
+            return RandomHexColor(); 
         }
 
         public static string TextColor()
         {
-            return RandomHexColor(); // Use RandomHexColor for text colors
+            return RandomHexColor();
         }
 
         public static string BorderColor()
         {
-            return NamedColor(); // Use NamedColor for border colors
+            return NamedColor(); 
         }
 
     }

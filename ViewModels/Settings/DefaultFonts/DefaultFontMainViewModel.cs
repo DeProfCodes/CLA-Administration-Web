@@ -2,9 +2,7 @@
 {
     public class DefaultFontMainViewModel
     {
-        
         public List<FontCustomizationModel> CustomFonts { get; set; }
         public List<DefaultFontsViewModel> DefaultFonts { get; set; }
-
     }
 }

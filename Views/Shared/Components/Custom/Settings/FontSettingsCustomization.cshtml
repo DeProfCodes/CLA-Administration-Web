@@ -1,10 +1,14 @@
-﻿@model CLA_Administration_Web.ViewModels.Settings.DefaultFonts.FontCustomizationModel
+﻿@model CLA_Administration_Web.ViewModels.Settings.DefaultFonts.SubHeadingViewModel
 @using CLA_Administration_Web.Helpers.MockData
 
 @{
     var fontFamilies = MockDataHelperFunctions.FontFamilies();
     var fontWeights = MockDataHelperFunctions.FontWeight();
     var fontStyles = MockDataHelperFunctions.FontStyle();
+
+
+
+
 }
 
 <div class="border p-3 mb-3">
@@ -15,18 +19,22 @@
 
     <form id="fontCustomizationForm">
         <!-- Heading Font Family Selection -->
+            <input type="hidden" name="Id" value ="@Model.SubId" value="fonts." />
+
         <div class="row mb-3 align-items-center">
             <div class="col-4">
                 <label for="HeadingFontFamily" class="form-label">Select Heading Font</label>
             </div>
             <div class="col-7">
                 <select id="HeadingFontFamily" name="HeadingFontFamily" class="form-control">
-                    @foreach (var font in fontFamilies)
+                 @foreach (var font in fontFamilies)
                     {
+                        
                         var fontString = font.ToString();
                         var isSelected = Model.HeadingFontFamily == fontString ? "selected" : "";
                         <option value="@fontString" isSelected>@fontString</option>
                     }
+
                 </select>
             </div>
         </div>
@@ -40,8 +48,9 @@
                 <select id="FontWeight" name="FontWeight" class="form-control">
                     @foreach (var weight in fontWeights)
                     {
-                        var weightString = weight.ToString(); 
-                        var isSelected = Model.FontWeight == weightString ? "selected" : "";
+                        var weightString = weight.ToString();
+                            var isSelected = Model.FontWeight == weightString ? "selected" : "";
+                  
                         <option value="@weightString" isSelected>@weightString</option>
                     }
                 </select>
@@ -57,9 +66,9 @@
                 <select id="FontStyle" name="FontStyle" class="form-control">
                     @foreach (var style in fontStyles)
                     {
-                        var styleString = style.ToString(); 
+                        var styleString = style.ToString();
                         var isSelected = Model.FontStyle == styleString ? "selected" : "";
-                        <option value="@styleString" isSelected>@styleString</option>
+                       <option value="@styleString" isSelected>@styleString</option>
                     }
                 </select>
             </div>

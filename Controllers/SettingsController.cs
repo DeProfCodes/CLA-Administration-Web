@@ -12,8 +12,10 @@ using CLA_Administration_Web.ViewModels.Settings.StagingUsers;
 
 
 using CLA_Administration_Web.ViewModels.Targeting;
+using DocumentFormat.OpenXml.Wordprocessing;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
+using System;
 
 namespace CLA_Administration_Web.Controllers
 {
@@ -221,24 +223,32 @@ namespace CLA_Administration_Web.Controllers
         [HttpGet]
         public async Task<IActionResult> DefaultFonts()
         {
-            var defaultFontsData = SettingsMockData.GetDefaultFontsData();
-
+            var defaultFontsData = new DefaultFontMainViewModel
+            {
+                DefaultFonts = SettingsMockData.GetDefaultFontsData(),
+                CustomFonts = SettingsMockData.GetFontSettings()
+            };
 
             return PartialView(AppPagesLinks.Settings.DefaultFontsPageLink, defaultFontsData);
         }
 
-        public IActionResult DefaultFontsDetails(int id)
-        {
-            var defaultFontsData = SettingsMockData.GetDefaultFontsData();
-            var data = defaultFontsData.FirstOrDefault(x => x.Id == id);
 
-            if (data == null)
+        [HttpGet]
+      public IActionResult DefaultFontsDetails(int subId)
             {
-                return NotFound();
-            }
+                var defaultFontsData = SettingsMockData.GetDefaultFontsData();
 
-            return View(AppPagesLinks.Settings.DefaultFontsDetailsPageLink, data);
-        }
+                var subheading = defaultFontsData
+                    .SelectMany(df => df.SubHeadings)
+                    .FirstOrDefault(sh => sh.SubId == subId);
+
+                if (subheading == null)
+                {
+                    return NotFound("Subheading not found.");
+                }
+
+                return View("~/Views/Settings/DefaultFonts/DefaultFontsDetails.cshtml", subheading);
+            }
 
         #endregion Defaults
 

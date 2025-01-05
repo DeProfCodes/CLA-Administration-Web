@@ -80,7 +80,7 @@ await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Settings/Setting
                     @foreach(var skins in Model.SkinAndOfflineImage)
                     {
                         var cssBg = (index++ % 2 == 0) ? "report-piechart-color-silver-dim" : "";
-                        cssBg += " theme-txt-clr";
+                        cssBg += "theme-txt-clr";
                         <tr>
                             <td class="@cssBg"><input type="checkbox" name="select-item"></td>
                             <td class="@cssBg">Select New Item</td>

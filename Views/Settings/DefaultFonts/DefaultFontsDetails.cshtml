@@ -1,0 +1,167 @@
+﻿@using CLA_Administration_Web.ViewModels.Settings.DefaultFonts
+@model SubHeadingViewModel
+@using CLA_Administration_Web.Helpers.Enums.AppPages
+@using CLA_Administration_Web.Helpers.Enums.Shared
+@using CLA_Administration_Web.Helpers.Enums.Shared.PageNames
+@using CLA_Administration_Web.Helpers.Constants
+
+@using CLA_Administration_Web.Helpers.MockData
+
+@{
+   // var fontFamilies = MockDataHelperFunctions.FontFamilies();
+    //var fontWeights = MockDataHelperFunctions.FontWeight();
+    //var fontStyles = MockDataHelperFunctions.FontStyle();
+
+    var fontFamilies = new List<string> { "Arial", "Verdana", "Times New Roman", "Courier New", "Georgia" };
+    var fontWeights = new List<string> { "normal", "bold", "lighter" };
+    var fontStyles = new List<string> { "normal", "italic", "oblique" };
+    var namedColors = new List<string> {"Red", "Green", "Blue", "Yellow", "Orange", "Purple", "Cyan", "Magenta", "Black", "White", "Gray"};
+
+
+
+
+}
+
+<div class="container">
+    <h2 class="text-center mb-4">Font Customization for ID: @Model.SubId</h2>
+</div>
+
+<div class="container">
+    <div class="row">
+        <!-- Form Column -->
+        <div class="col-lg-8 col-12">
+            <div class="border p-3 mb-3">
+                
+                <form id="fontCustomizationForm">
+                    <!-- Heading Font Family Selection -->
+                    <input type="hidden" name="Id" value="@Model.SubId" />
+
+                    <div class="row mb-3 align-items-center">
+                        <div class="col-md-4">
+                            <label for="HeadingFontFamily" class="form-label">Select Heading Font</label>
+                        </div>
+                        <div class="col-md-8">
+                            <select id="HeadingFontFamily" name="HeadingFontFamily" class="form-select">
+                                @foreach (var font in fontFamilies)
+                                {
+                                    var fontString = font.ToString();
+                                    var isSelected = Model.HeadingFontFamily == fontString ? "selected" : "";
+                                    <option value="@fontString" isSelected>@fontString</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Font Weight Selection -->
+                    <div class="row mb-3 align-items-center">
+                        <div class="col-md-4">
+                            <label for="FontWeight" class="form-label">Select Font Weight</label>
+                        </div>
+                        <div class="col-md-8">
+                            <select id="FontWeight" name="FontWeight" class="form-select">
+                                @foreach (var weight in fontWeights)
+                                {
+                                    var weightString = weight.ToString();
+                                    var isSelected = Model.FontWeight == weightString ? "selected" : "";
+                                    <option value="@weightString" isSelected>@weightString</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Font Style Selection -->
+                    <div class="row mb-3 align-items-center">
+                        <div class="col-md-4">
+                            <label for="FontStyle" class="form-label">Select Font Style</label>
+                        </div>
+                        <div class="col-md-8">
+                            <select id="FontStyle" name="FontStyle" class="form-select">
+                                @foreach (var style in fontStyles)
+                                {
+                                    var styleString = style.ToString();
+                                    var isSelected = Model.FontStyle == styleString ? "selected" : "";
+                                    <option value="@styleString" isSelected>@styleString</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="text-center">
+                        <button type="button" id="submitButton" class="custom-btn custom-btn-default">Apply Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Preview Column -->
+        <div class="col-lg-4 col-12">
+            <div class="border mb-3 p-3 text-center" id="fontCustomizationContainer">
+                <p id="previewText" style="font-family:@Model.HeadingFontFamily; font-weight:@Model.FontWeight; font-style:@Model.FontStyle;">
+                    @Model.Text
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/settings.js"></script>
+<script>
+
+
+    $(document).ready(function () {
+       
+        applyRealTimeStyles("previewText", "HeadingFontFamily", "FontWeight", "FontStyle");
+    });
+
+
+function applyRealTimeStyles(previewTextId, fontFamilyDropdownId, fontWeightDropdownId, fontStyleDropdownId) 
+{
+       
+    var $previewText = $("#" + previewTextId);
+    var $fontFamilyDropdown = $("#" + fontFamilyDropdownId);
+    var $fontWeightDropdown = $("#" + fontWeightDropdownId);
+    var $fontStyleDropdown = $("#" + fontStyleDropdownId);
+
+       
+    if ($previewText.length)
+    {
+        $previewText.css("font-family", $fontFamilyDropdown.length ? $fontFamilyDropdown.val() : "Arial");
+        $previewText.css("font-weight", $fontWeightDropdown.length ? $fontWeightDropdown.val() : "normal");
+        $previewText.css("font-style", $fontStyleDropdown.length ? $fontStyleDropdown.val() : "normal");
+    }
+
+    if ($fontFamilyDropdown.length) 
+    {
+        $fontFamilyDropdown.on("change", function ()
+        {
+            if ($previewText.length)
+            {
+                $previewText.css("font-family", $(this).val());
+            }
+        });
+    }
+
+    if ($fontWeightDropdown.length)
+    {
+        $fontWeightDropdown.on("change", function ()
+        {
+            if ($previewText.length) 
+            {
+                $previewText.css("font-weight", $(this).val());
+            }
+        });
+    }
+
+    if ($fontStyleDropdown.length)
+    {
+        $fontStyleDropdown.on("change", function () 
+        {
+            if ($previewText.length) 
+            {
+                $previewText.css("font-style", $(this).val());
+            }
+        });
+    }
+}
+</script>

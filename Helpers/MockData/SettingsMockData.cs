@@ -36,6 +36,7 @@ namespace CLA_Administration_Web.Helpers.MockData
 
         public static List<FontCustomizationModel> CustomFontSettings { get; set; } = GetFontSettings();
 
+
         public static List<StagingUserMachineViewModel> GetStagingUsersOrMachines()
         {
             var result = new List<StagingUserMachineViewModel>();
@@ -178,7 +179,7 @@ namespace CLA_Administration_Web.Helpers.MockData
         }
 
 
-      private static List<SurveyQuestionViewModel> GenerateSurveyQuestions()
+        private static List<SurveyQuestionViewModel> GenerateSurveyQuestions()
         {
             var random = new Random();
             var items = new List<SurveyQuestionViewModel>();
@@ -227,7 +228,7 @@ namespace CLA_Administration_Web.Helpers.MockData
             return items;
         }
       
-           public static List<SkinsAndOfflineModel> GetSkinsAndOfflineImage()
+        public static List<SkinsAndOfflineModel> GetSkinsAndOfflineImage()
         {
             var random = new Random();
             var result = new List<SkinsAndOfflineModel>();
@@ -272,91 +273,7 @@ namespace CLA_Administration_Web.Helpers.MockData
             }
             return result;
         }
-
-        public static List<DefaultFontsViewModel> GetDefaultFontsData()
-        {
-            var rand = new Random();
-
-
-            return new List<DefaultFontsViewModel>
-        {
-            new DefaultFontsViewModel
-            {
-                DefaultHeading = "Popups",
-                Title = "Popup Title",
-                Icon = "https://via.placeholder.com/30",
-                Text = "CLA - Corporate LAN Advertising",
-                Id = rand.Next(41, 999),
-                SubHeadings = new List<SubHeadingViewModel>
-                {
-                    new SubHeadingViewModel
-                    {
-                        Id = 1,
-                        Title = "Popup Text",
-                        Icon = "https://via.placeholder.com/30",
-                        Text = "Popup Subheading Text"
-                    }
-                }
-            },
-            new DefaultFontsViewModel
-            {
-                DefaultHeading = "Surveys",
-                Title = "Survey Title",
-                Icon = "https://via.placeholder.com/30",
-                Text = "CLA - Corporate LAN Advertising",
-                Id = rand.Next(41, 999),
-                SubHeadings = new List<SubHeadingViewModel>
-                {
-                    new SubHeadingViewModel
-                    {
-                        Id =rand.Next(41, 999),
-                        Title = "Survey Title",
-                        Icon = "https://via.placeholder.com/30",
-                        Text = "Survey Subheading Text"
-                    },
-                    new SubHeadingViewModel
-                    {
-                        Id =rand.Next(41, 999),
-                        Title = "Question Title",
-                        Icon = "https://via.placeholder.com/30",
-                        Text = "Survey Subheading Text"
-                    },
-                    new SubHeadingViewModel
-                    {
-                        Id = rand.Next(41, 999),
-                        Title = "Survey/Question Text",
-                        Icon = "https://via.placeholder.com/30",
-                        Text = "Survey Subheading Text"
-                    }
-                    }
-                },
-                new DefaultFontsViewModel
-                {
-                    DefaultHeading = "Tickers",
-                    Title = "Ticker Text",
-                    Icon = "https://via.placeholder.com/30",
-                    Text = "CLA - Corporate LAN Advertising",
-                    Id = rand.Next(41, 999)
-                },
-                new DefaultFontsViewModel
-                {
-                    DefaultHeading = "RSS",
-                    Title = "RSS Text",
-                    Icon = "https://via.placeholder.com/30",
-                    Text = "CLA - Corporate LAN Advertising",
-                    Id = rand.Next(41, 999)
-                },
-                new DefaultFontsViewModel
-                {
-                    DefaultHeading = "Desktop Information",
-                    Title = "Desktop Info",
-                    Icon = "https://via.placeholder.com/30",
-                    Text = "CLA - Corporate LAN Advertising",
-                    Id = rand.Next(41, 999)
-                }
-            };
-        }
-
+         
         public static List<FontCustomizationModel> GetFontSettings()
         {
             var random = new Random();
@@ -380,6 +297,124 @@ namespace CLA_Administration_Web.Helpers.MockData
 
             return result;
         }
+
+        public static List<DefaultFontsViewModel> GetDefaultFontsData()
+        {
+
+
+            var rand = new Random();
+            return new List<DefaultFontsViewModel>
+        {
+            new DefaultFontsViewModel
+            {
+                DefaultHeading = "Popups",
+                Id =998,
+                SubHeadings = new List<SubHeadingViewModel>
+                {
+                    new SubHeadingViewModel
+                    {
+                        SubId =1,
+                        Title = "Popup Text",
+                        Icon = "https://via.placeholder.com/30",
+                        Text = "Popup Subheading Text"
+                    },
+                     new SubHeadingViewModel
+                    {
+                        SubId =2,
+                        Title = "Popup Title",
+                        Icon = "https://via.placeholder.com/30",
+                        Text = "CLA - Corporate LAN Advertising",
+
+                    }
+
+                }
+            },
+            new DefaultFontsViewModel
+            {
+                DefaultHeading = "Surveys",
+                Id = rand.Next(41, 999),
+                SubHeadings = new List<SubHeadingViewModel>
+                {
+                    new SubHeadingViewModel
+                    {
+                        SubId =rand.Next(41, 999),
+                        Title = "Survey Title",
+                        Icon = "https://via.placeholder.com/30",
+                        Text = "Survey Subheading Text"
+                    },
+                    new SubHeadingViewModel
+                    {
+                        SubId =rand.Next(41, 999),
+                        Title = "Question Title",
+                        Icon = "https://via.placeholder.com/30",
+                        Text = "Survey Subheading Text"
+                    },
+                    new SubHeadingViewModel
+                    {
+                        SubId = rand.Next(41, 999),
+                        Title = "Survey/Question Text",
+                        Icon = "https://via.placeholder.com/30",
+                        Text = "Survey Subheading Text"
+                    }
+                    }
+                },
+                new DefaultFontsViewModel
+                {
+                    DefaultHeading = "Tickers",
+
+                    Id = rand.Next(41, 999),
+                      SubHeadings = new List<SubHeadingViewModel>
+                {
+                    new SubHeadingViewModel
+                    {
+                        SubId =rand.Next(41, 999),
+                        Title = "Ticker Text",
+                        Icon = "https://via.placeholder.com/30",
+                        Text = "CLA - Corporate LAN Advertising",
+                    },
+
+                    }
+
+
+                },
+                new DefaultFontsViewModel
+                {
+                    DefaultHeading = "RSS",
+
+                    Id = rand.Next(41, 999),
+                          SubHeadings = new List<SubHeadingViewModel>
+                {
+                    new SubHeadingViewModel
+                    {
+                        SubId =rand.Next(41, 999),
+                       Title = "RSS Text",
+                        Icon = "https://via.placeholder.com/30",
+                        Text = "CLA - Corporate LAN Advertising",
+                    },
+
+
+                }
+                },
+                new DefaultFontsViewModel
+                {
+                    DefaultHeading = "Desktop Information",
+                    Id = rand.Next(41, 999),
+                    SubHeadings = new List<SubHeadingViewModel>
+                {
+                    new SubHeadingViewModel
+                    {
+                        SubId =rand.Next(41, 999),
+                        Title = "Desktop Info",
+                    Icon = "https://via.placeholder.com/30",
+                    Text = "CLA - Corporate LAN Advertising",
+                    },
+
+
+                }
+                }
+            };
+        }
+
 
     }
 }

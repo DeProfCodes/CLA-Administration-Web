@@ -1,5 +1,4 @@
-﻿@using CLA_Administration_Web.ViewModels.Settings.DefaultFonts
-@model IEnumerable<DefaultFontsViewModel>
+﻿@model CLA_Administration_Web.ViewModels.Settings.DefaultFonts.DefaultFontMainViewModel
 @using CLA_Administration_Web.Helpers.Enums.AppPages
 @using CLA_Administration_Web.Helpers.Enums.Shared
 @using CLA_Administration_Web.Helpers.Enums.Shared.PageNames
@@ -45,31 +44,16 @@
     </div>
 </div>
 
+
+
 <div class="container-fluid my-4 border p-3 rounded">
-    @foreach (var data in Model)
+    @foreach (var data in Model.DefaultFonts) // Use the correct property name here
     {
         <div class="border p-3 mb-3">
             <h5 class="text-center">
-                <span class="clickable-title" data-id="@data.Id" style="cursor: pointer;">
-                    @data.DefaultHeading
-                </span>
+                <p>@data.Id</p>
+                <span>@data.DefaultHeading</span>
             </h5>
-
-            <div class="row mb-3 align-items-center">
-                <div class="col-1 text-center">
-                    <span class="clickable-icon" data-id="@data.Id" style="cursor: pointer;">
-                        <img src="@data.Icon" alt="Icon" />
-                    </span>
-                </div>
-                <div class="col-4">
-                    <label for="popupTitle" class="form-label">@data.Title</label>
-                </div>
-                <div class="col-7">
-                    <div class="form-control" style="border: none; background-color: transparent;">
-                        @data.Text
-                    </div>
-                </div>
-            </div>
 
             @if (data.SubHeadings != null && data.SubHeadings.Any())
             {
@@ -77,12 +61,12 @@
                 {
                     <div class="row mb-3 align-items-center">
                         <div class="col-1 text-center">
-                            <span class="clickable-icon" data-id="@subheading.Id" style="cursor: pointer;">
+                            <span  data-sub="@subheading.SubId" style="cursor: pointer;" onclick="Test(@subheading.SubId)">
                                 <img src="@subheading.Icon" alt="Icon" />
                             </span>
                         </div>
                         <div class="col-4">
-                            <label for="subheadingTitle_@subheading.Id" class="form-label">@subheading.Title</label>
+                            <label for="subheadingTitle_@subheading.SubId" class="form-label">@subheading.Title</label>
                         </div>
                         <div class="col-7">
                             <div class="form-control" style="border: none; background-color: transparent;">
@@ -92,14 +76,18 @@
                     </div>
                 }
             }
-
         </div>
     }
 </div>
 
+<div id="details-section" class="mt-4"></div>
+
+
 <script>
 
-  
+    function Test(subId) {
+        OpenPage('@SettingsPages.DefaultFontsDetails', subId)
+    }
 
     $(document).ready(function () 
     {
@@ -171,7 +159,7 @@
     {
         // LoadEditModal(formData, '@Url.Action("EditStagingMachine", "Settings")', 'POST', editMachineForm, edit-machine-btn)
         $.ajax({
-            url: '@Url.Action("GetDefaultFontsDetails", "Settings")',
+            url: '@Url.Action("DefaultFontsDetails", "Settings")',
             type: 'GET',
             data: { machineId: machineId, entityType: entityType },
             success: function (response)
@@ -188,56 +176,19 @@
             }
         });
     }
-
+ 
     $(document).ready(function () {
-        // Handle title and icon clicks
-        $('.clickable-title, .clickable-icon').click(function () {
-            var id = $(this).data('id');
+        // Handle button click for details
+        $('.details-button').click(function () {
+            var id = $(this).data('sub'); 
 
-            $.ajax({
-                url: '@Url.Action("DefaultFontsDetails", "Settings")',
-                data: { id: id },
-                method: 'GET',
-                success: function (data) {
-                    var detailsHtml = `
-                            <div class="container my-4">
-                                <h2>${data.DefaultHeading}</h2>
-                                <p>${data.Text}</p>
-                                <div class="row">
-                                    <div class="col-2">
-                                        <img src="${data.Icon}" alt="Icon" />
-                                    </div>
-                                    <div class="col-10">
-                                        <h4>${data.Title}</h4>
-                                        <p>${data.Text}</p>
-                                    </div>
-                                </div>`;
-
-                    if (data.SubHeadings && data.SubHeadings.length > 0) {
-                        detailsHtml += `<h5>Subheadings:</h5>`;
-                        $.each(data.SubHeadings, function (index, subheading) {
-                            detailsHtml += `
-                                    <div>
-                                        <h6>${subheading.Title}</h6>
-                                        <p>${subheading.Text}</p>
-                                    </div>`;
-                        });
-                    }
-
-                    detailsHtml += `</div>`;
-
-                    // Insert the details HTML into the details section
-                    $('#details-section').html(detailsHtml);
-                },
-                error: function (xhr, status, error) {
-                    console.error('Error fetching details:', error);
-                }
-            });
+            OpenPage('@SettingsPages.DefaultFontsDetails', subId)
+            // AJAX call to fetch details
+         
         });
     });
 
-
-  ;
+ 
 
     function SaveEditNewStagingEnting(formdata) 
     {

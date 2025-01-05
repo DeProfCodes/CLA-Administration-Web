@@ -89,7 +89,7 @@
         if (page == '@SettingsPages.SkinsOfflineImages') url = '@AppPagesUrl.Setttings.SkinsOfflineImages';
         if (page == '@SettingsPages.DesktopInformation') url = '@AppPagesUrl.Setttings.DesktopInformation';
         if (page == '@SettingsPages.DefaultFonts') url = '@AppPagesUrl.Setttings.DefaultFonts';
-        if (page == '@SettingsPages.DefaultFontsDetails') url = '@AppPagesUrl.Setttings.DefaultFontsDetails';
+        if (page == '@SettingsPages.DefaultFontsDetails') url = '@AppPagesUrl.Setttings.DefaultFontsDetails' + `?subId=${id}`;
 
 
 
@@ -210,6 +210,8 @@
         if (page == '@SettingsPages.ActiveConnections') title = "Manage Active Connections";
         if (page == '@SettingsPages.SkinsOfflineImages') title = "Manage Skins & Offline Images";
         if (page == '@SettingsPages.DesktopInformation') title = "Desktop Information";
+        if (page == '@SettingsPages.DefaultFonts') title = "Default Fonts";
+        if (page == '@SettingsPages.DefaultFontsDetails') title = "Default Fonts Details";
 
         // Reports Section
         if (page == '@ReportsPages.SurveyReport') title = "Survey Report";

@@ -111,3 +111,53 @@ function SaveEditNewStagingEnting(formdata) {
 function closeModal(modalId) {
     $('#' + modalId).modal('hide');
 }
+
+function applyRealTimeStyles(previewTextId, fontFamilyDropdownId, fontWeightDropdownId, fontStyleDropdownId)
+{
+
+    var $previewText = $("#" + previewTextId);
+    var $fontFamilyDropdown = $("#" + fontFamilyDropdownId);
+    var $fontWeightDropdown = $("#" + fontWeightDropdownId);
+    var $fontStyleDropdown = $("#" + fontStyleDropdownId);
+
+
+    if ($previewText.length)
+    {
+        $previewText.css("font-family", $fontFamilyDropdown.length ? $fontFamilyDropdown.val() : "Arial");
+        $previewText.css("font-weight", $fontWeightDropdown.length ? $fontWeightDropdown.val() : "normal");
+        $previewText.css("font-style", $fontStyleDropdown.length ? $fontStyleDropdown.val() : "normal");
+    }
+
+    if ($fontFamilyDropdown.length)
+    {
+        $fontFamilyDropdown.on("change", function ()
+        {
+            if ($previewText.length)
+            {
+                $previewText.css("font-family", $(this).val());
+            }
+        });
+    }
+
+    if ($fontWeightDropdown.length)
+    {
+        $fontWeightDropdown.on("change", function ()
+        {
+            if ($previewText.length)
+            {
+                $previewText.css("font-weight", $(this).val());
+            }
+        });
+    }
+
+    if ($fontStyleDropdown.length)
+    {
+        $fontStyleDropdown.on("change", function ()
+        {
+            if ($previewText.length)
+            {
+                $previewText.css("font-style", $(this).val());
+            }
+        });
+    }
+}
