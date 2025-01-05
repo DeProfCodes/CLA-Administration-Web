@@ -1,4 +1,6 @@
 ﻿using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
+using CLA_Administration_Web.Helpers.Shared;
+using CLA_Administration_Web.ViewModels.Modules.ContentLibrary;
 using CLA_Administration_Web.ViewModels.Modules.PST;
 using CLA_Administration_Web.ViewModels.Settings.ActiveConections;
 using CLA_Administration_Web.ViewModels.Settings.ActiveConnections;
@@ -27,7 +29,7 @@ namespace CLA_Administration_Web.Helpers.MockData
         public static List<SetupExclusionMachinesViewModel> SetupExcludedMachines { get; set; } = GetSetupMachinesExclusions();
 
         public static List<TargetedUser> TargetGroupUsers { get; set; } = GetTargetGroupUsers();
-   
+
         public static List<ActiveConnection> ActiveConnections { get; set; } = GetActiveConnections();
 
         public static List<CustomUserViewModel> CustomUserSettings { get; set; } = GetCustomUserSettings();
@@ -35,6 +37,8 @@ namespace CLA_Administration_Web.Helpers.MockData
         public static List<SkinsAndOfflineModel> SkinsAndOfflineImage { get; set; } = GetSkinsAndOfflineImage();
 
         public static List<FontCustomizationModel> CustomFontSettings { get; set; } = GetFontSettings();
+
+        public static List<SkinOfflineCategortyTree> AllContentLibraryCategories { get; set; } = GenerateDummyDataContentLibraryCategories();
 
 
         public static List<StagingUserMachineViewModel> GetStagingUsersOrMachines()
@@ -84,7 +88,7 @@ namespace CLA_Administration_Web.Helpers.MockData
             return result;
         }
 
-              public static List<SetupExclusionsUsersViewModel> GetSetupUsersExclusions()
+        public static List<SetupExclusionsUsersViewModel> GetSetupUsersExclusions()
         {
             var result = new List<SetupExclusionsUsersViewModel>();
 
@@ -109,7 +113,7 @@ namespace CLA_Administration_Web.Helpers.MockData
         public static List<ActiveConnection> GetActiveConnections()
         {
 
-        var result = new List<ActiveConnection>();
+            var result = new List<ActiveConnection>();
 
             var rand = new Random();
 
@@ -145,7 +149,7 @@ namespace CLA_Administration_Web.Helpers.MockData
                     DisplayName = MockDataHelperFunctions.GetRandomFirstname(),
                     NTUsername = MockDataHelperFunctions.GetRandomLastname(),
                     LastSyncDT = MockDataHelperFunctions.GetRandomMachineID(),
-                
+
                 };
                 result.Add(item);
             }
@@ -170,7 +174,7 @@ namespace CLA_Administration_Web.Helpers.MockData
                     DeskTopTimeout = MockDataHelperFunctions.GetRandomCustomUserNumbers(),
                     SyncTimeout = MockDataHelperFunctions.GetRandomCustomUserNumbers(),
                     Network = MockDataHelperFunctions.GetRandomDomainName(),
-                    TickerTimeout= MockDataHelperFunctions.GetRandomCustomUserNumbers()
+                    TickerTimeout = MockDataHelperFunctions.GetRandomCustomUserNumbers()
 
                 };
                 result.Add(item);
@@ -201,17 +205,17 @@ namespace CLA_Administration_Web.Helpers.MockData
 
                 var isScored = random.Next(0, 2) == 0 ? "No" : "Yes";
 
-          
+
 
                 var responseType = responseTypes[random.Next(responseTypes.Count)];
                 var correctAnswer = isScored == "Yes" ? "No" : "";
-            
+
                 var item = new SurveyQuestionViewModel
                 {
                     QuestionId = i,
                     QuestionNo = questionNo,
                     SurveyId = surveyId,
-                   
+
                     CorrectAnswer = correctAnswer,
                     Dependencies = random.Next(0, 2) == 0 ? "" : $"Q{random.Next(1, i)}",
                     IsAnonymous = random.Next(0, 2) == 0 ? "No" : "Yes",
@@ -227,7 +231,7 @@ namespace CLA_Administration_Web.Helpers.MockData
             }
             return items;
         }
-      
+
         public static List<SkinsAndOfflineModel> GetSkinsAndOfflineImage()
         {
             var random = new Random();
@@ -252,7 +256,7 @@ namespace CLA_Administration_Web.Helpers.MockData
         {
             var random = new Random();
             var result = new List<SkinsAndOfflineModel>();
-            
+
             var rand = new Random();
 
             for (int i = 0; i < 15; i++)
@@ -260,7 +264,7 @@ namespace CLA_Administration_Web.Helpers.MockData
 
                 var item = new SkinsAndOfflineModel()
                 {
-                  
+
                     Id = rand.Next(41, 999),
                     IsDefault = random.Next(0, 2) == 0 ? "No" : "Yes",
                     Description = MockDataHelperFunctions.GetRandomConnectionsMinutes(),
@@ -273,7 +277,7 @@ namespace CLA_Administration_Web.Helpers.MockData
             }
             return result;
         }
-         
+
         public static List<FontCustomizationModel> GetFontSettings()
         {
             var random = new Random();
@@ -413,6 +417,74 @@ namespace CLA_Administration_Web.Helpers.MockData
                 }
                 }
             };
+        }
+
+
+        private static List<SkinOfflineCategortyTree> GenerateDummyDataContentLibraryCategories()
+        {
+            int idCounter = 1;
+            var rootCategory = new SkinOfflineCategortyTree
+            {
+                CategoryId = idCounter++, 
+                CategoryName = "Existing Skin", 
+                CategoryDescription = "This is the root category for Existing Skin",
+                ContentsCount = 0, 
+                UserLastModified = MockDataHelperFunctions.GetRandomUserID(),
+                MachineLastModified = MockDataHelperFunctions.GetRandomMachineID(),
+                _children = new List<SkinOfflineCategortyTree>
+        {
+          
+            new SkinOfflineCategortyTree
+            {
+                CategoryId = idCounter++,
+                CategoryName = "popups",
+                CategoryDescription = "This is the popups category",
+                UserLastModified = MockDataHelperFunctions.GetRandomUserID(),
+                MachineLastModified = MockDataHelperFunctions.GetRandomMachineID(),
+                      
+                ContentsCount = 0,
+                _children = GenerateRandomChildren(ref idCounter) 
+            },
+           
+            new SkinOfflineCategortyTree
+            {
+                CategoryId = idCounter++, 
+                CategoryName = "skin",
+                CategoryDescription = "This is the skin category",
+                ContentsCount = 0,
+                UserLastModified = MockDataHelperFunctions.GetRandomUserID(),
+                MachineLastModified = MockDataHelperFunctions.GetRandomMachineID(),
+                _children = GenerateRandomChildren(ref idCounter) 
+            }
+        }
+            };
+
+           
+            return new List<SkinOfflineCategortyTree> { rootCategory };
+        }
+
+     
+        private static List<SkinOfflineCategortyTree> GenerateRandomChildren(ref int idCounter)
+        {
+            Random random = new Random();
+            var children = new List<SkinOfflineCategortyTree>();
+            int childrenCount = random.Next(1, 4); 
+
+            for (int i = 0; i < childrenCount; i++)
+            {
+                children.Add(new SkinOfflineCategortyTree
+                {
+                    CategoryId = idCounter++, 
+                    CategoryName = SharedFunctions.CapitalizeFirst(MockDataHelperFunctions.RandomString(1,3)),
+                    CategoryDescription = SharedFunctions.CapitalizeFirst(MockDataHelperFunctions.RandomString(5, 15)),
+                    ContentsCount = random.Next(0, 100),
+                    UserLastModified = MockDataHelperFunctions.GetRandomUserID(),
+                    MachineLastModified = MockDataHelperFunctions.GetRandomMachineID(),
+                    _children = null 
+                });
+            }
+
+            return children;
         }
 
 

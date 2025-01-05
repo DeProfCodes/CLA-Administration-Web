@@ -112,7 +112,7 @@
             public const string AdminAccessPageLink = "~/Views/Settings/AdminAccess.cshtml";
             public const string TargetGroupsPageLink = "~/Views/Settings/TargetGroups.cshtml";
             public const string ActiveConnectionsPageLink = "~/Views/Settings/ActiveConnections.cshtml";
-            public const string SkinsOfflineImagesPageLink = "~/Views/Settings/SkinsOfflineImages.cshtml";
+           
             public const string DesktopInformationPageLink = "~/Views/Settings/DesktopInformation.cshtml";
 
             //Default fonts
@@ -122,7 +122,12 @@
             //custom user settings
             public const string CustomUserSettingsDetailsPageLink = "~/Views/Settings/CustomUser/CustomUserSettingsDetails.cshtml";
             public const string CustomUserSettingsPageLink = "~/Views/Settings/CustomUserSettings.cshtml";
-           
+
+            //Skins and Offline
+            public const string SkinsOfflineImagesPageLink = "~/Views/Settings/SkinsOfflineImages.cshtml";
+            public const string SkinsOfflineImagesDetailsPageLink = "~/Views/Settings/SkinsOfflineImage/SkinsAndOfflineImageDetails.cshtml";
+
+
             //Modal setting component
             public const string EditSettingsModalPageLink = "~/Views/Shared/Components/Custom/Settings/SettingsModalViewComponent.cshtml";
             public const string SetupExclusionModalPageLink = "~/Views/Shared/Components/Custom/Settings/SettingsModal/SetupExclusionModalView.cshtml";

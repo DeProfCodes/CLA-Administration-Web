@@ -339,10 +339,20 @@ namespace CLA_Administration_Web.Controllers
             var skinsAndOfflineImageData = new SkinsAndOfflineImageMainViewModel()
             {
                 SkinAndOfflineImage = SettingsMockData.SkinsAndOfflineImage,
-               
+               // CategoriesTrees = SettingsMockData.AllContentLibraryCategories,
+                SkinOfflineCategortyTrees = SettingsMockData.AllContentLibraryCategories,
+
             };
 
             return PartialView(AppPagesLinks.Settings.SkinsOfflineImagesPageLink, skinsAndOfflineImageData);
+        }
+
+        public async Task<IActionResult> SkinsAndOfflineImageDetails(int customId)
+        {
+
+            var customVm = ModulesMockData.AllContentLibraryCategories.FirstOrDefault(x => x.CategoryId == customId);
+
+            return PartialView(AppPagesLinks.Settings.SkinsOfflineImagesDetailsPageLink, customVm);
         }
 
         [HttpGet]

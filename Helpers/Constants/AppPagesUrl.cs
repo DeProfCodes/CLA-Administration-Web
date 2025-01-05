@@ -120,6 +120,7 @@ namespace CLA_Administration_Web.Helpers.Constants
             public static string CustomUserSettingsDetails = $"/{settingsController}/{SettingsPages.CustomUserSettingsDetails.GetDisplayName()}";
             public static string ActiveConnections = $"/{settingsController}/{SettingsPages.ActiveConnections.GetDisplayName()}";
             public static string SkinsOfflineImages = $"/{settingsController}/{SettingsPages.SkinsOfflineImages.GetDisplayName()}";
+            public static string SkinsOfflineImagesDetails = $"/{settingsController}/{SettingsPages.SkinsAndOfflineImageDetails.GetDisplayName()}";
             public static string DesktopInformation = $"/{settingsController}/{SettingsPages.DesktopInformation.GetDisplayName()}";
             public static string DefaultFonts = $"/{settingsController}/{SettingsPages.DefaultFonts.GetDisplayName()}";
             public static string DefaultFontsDetails = $"/{settingsController}/{SettingsPages.DefaultFontsDetails.GetDisplayName()}";

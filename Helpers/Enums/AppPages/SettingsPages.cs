@@ -41,6 +41,9 @@ namespace CLA_Administration_Web.Helpers.Enums.AppPages
         [Display(Name = "SkinsOfflineImages", Description = "Skins And Offline Images")]
         SkinsOfflineImages,
 
+        [Display(Name = "SkinsAndOfflineImageDetails", Description = "Skins And Offline Images Details")]
+        SkinsAndOfflineImageDetails,
+
         [Display(Name = "DefaultFonts", Description = "Default Fonts")]
         DefaultFonts,
 
