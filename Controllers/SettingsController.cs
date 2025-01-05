@@ -12,6 +12,7 @@ using CLA_Administration_Web.ViewModels.Settings.StagingUsers;
 
 
 using CLA_Administration_Web.ViewModels.Targeting;
+using DocumentFormat.OpenXml.InkML;
 using DocumentFormat.OpenXml.Wordprocessing;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
@@ -180,7 +181,68 @@ namespace CLA_Administration_Web.Controllers
         {
             var targetGroups = new TargetingExposureViewModel()
             {
-                TargetedUsers = SettingsMockData.TargetGroupUsers
+                TargetedUsers = SettingsMockData.TargetGroupUsers,
+                
+                TargetedMachines = new List<TargetedMachine>
+                {
+                    new TargetedMachine
+                    {
+                        DomainName = "nthdmi",
+                        LastSyncDT = DateTime.Now.AddHours(-99).AddMinutes(-147).ToString("yyyy/MM/dd HH:mm"),
+                        DisplayName = "NdhuvaziM",
+                        NTUsername = "NdhuvaziM-WIN",
+                        //Status = new StatusViewModel { CustomStatusText = "INACTIVE", CssClass = "badge bg-warning" }
+                    },
+                         new TargetedMachine
+                    {
+                        DomainName = "nthdmi",
+                        LastSyncDT = DateTime.Now.AddHours(-99).AddMinutes(-147).ToString("yyyy/MM/dd HH:mm"),
+                        DisplayName = "Ndhuvazi",
+                        NTUsername = "NdhuvaziM-",
+                       // Status = new StatusViewModel { CustomStatusText = "INACTIVE", CssClass = "badge bg-warning" }
+                    },
+                   new TargetedMachine
+                    {
+                        DomainName = "nthdmi",
+                        LastSyncDT = DateTime.Now.AddHours(-99).AddMinutes(-147).ToString("yyyy/MM/dd HH:mm"),
+                        DisplayName = "NdhuvaziM",
+                        NTUsername = "NdhuvaziM-WIN",
+                       // Status = new StatusViewModel { CustomStatusText = "INACTIVE", CssClass = "badge bg-warning" }
+                    }
+
+                } ,
+
+                TargetedGroups = new List<TargetedGroup>
+                {
+                       new TargetedGroup
+                    {
+                        DomainName = "NTHDIM",
+                        DisplayName = "Corporate voice Rebranded",
+                        GroupId = 1,
+                    },
+                    new TargetedGroup
+                    {
+                        DomainName = "nthdmi",
+                        GroupId = 2,
+                        DisplayName = "NdhuvaziM",
+                        
+                       
+                    },
+                         new TargetedGroup
+                    {
+                        DomainName = "nthdmi",
+                        GroupId = 3,
+                        DisplayName = "NdhuvaziM",
+                    },
+                   new TargetedGroup
+                    {
+                        DomainName = "nthdmi",
+                        GroupId = 4,
+                        DisplayName = "NdhuvaziM",
+                    }
+
+                },
+
 
             };
             return PartialView(AppPagesLinks.Settings.TargetGroupsPageLink, targetGroups);
@@ -249,6 +311,8 @@ namespace CLA_Administration_Web.Controllers
 
                 return View("~/Views/Settings/DefaultFonts/DefaultFontsDetails.cshtml", subheading);
             }
+
+  
 
         #endregion Defaults
 

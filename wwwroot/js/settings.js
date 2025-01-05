@@ -84,24 +84,6 @@ function AddNewStagingEntity() {
     }
 }
 
-function EditNewStagingEnting(machineId, entityType) {
-    // LoadEditModal(formData, '@Url.Action("EditStagingMachine", "Settings")', 'POST', editMachineForm, edit-machine-btn)
-    $.ajax({
-        url: '@Url.Action("EditStagingMachine", "Settings")',
-        type: 'GET',
-        data: { machineId: machineId, entityType: entityType },
-        success: function (response) {
-
-            $('#EditModalContainer').html(response);
-            const editModal = new bootstrap.Modal(document.getElementById('EditModal'));
-            editModal.show();
-
-        },
-        error: function (error) {
-            console.log('Error fetching machine data:', error);
-        }
-    });
-}
 
 function SaveEditNewStagingEnting(formdata) {
 
@@ -160,4 +142,35 @@ function applyRealTimeStyles(previewTextId, fontFamilyDropdownId, fontWeightDrop
             }
         });
     }
+}
+
+function triggerDelete(customID, confirmMessage, successMessage, deleteCallback) {
+    
+    Swal.fire({
+        title: `Are you sure you want to delete ${customID}?`,
+        text: confirmMessage || "This action cannot be undone!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            if (deleteCallback && typeof deleteCallback === 'function') {
+                deleteCallback(customID);
+            }
+            Swal.fire(
+                'Deleted!',
+                successMessage || `${customID} has been successfully deleted.`,
+                'success'
+            );
+        } else {
+            Swal.fire(
+                'Cancelled',
+                `${customID} has not been deleted.`,
+                'info'
+            );
+        }
+    });
 }

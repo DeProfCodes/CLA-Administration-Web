@@ -32,7 +32,7 @@
         <div class="col-lg-8 col-12">
             <div class="border p-3 mb-3">
                 
-                <form id="fontCustomizationForm">
+                <div id="fontCustomizationForm">
                     <!-- Heading Font Family Selection -->
                     <input type="hidden" name="Id" value="@Model.SubId" />
 
@@ -88,18 +88,18 @@
 
                     <!-- Submit Button -->
                     <div class="text-center">
-                        <button type="button" id="submitButton" class="custom-btn custom-btn-default">Apply Changes</button>
+                        <button type="submit" id="submitButton" class="custom-btn custom-btn-default" onclick="SubmitModifiedDefaultFonts()">Apply Changes</button>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
 
         <!-- Preview Column -->
         <div class="col-lg-4 col-12">
             <div class="border mb-3 p-3 text-center" id="fontCustomizationContainer">
-                <p id="previewText" style="font-family:@Model.HeadingFontFamily; font-weight:@Model.FontWeight; font-style:@Model.FontStyle;">
+                <H3 id="previewText" style="font-family:@Model.HeadingFontFamily; font-weight:@Model.FontWeight; font-style:@Model.FontStyle;">
                     @Model.Text
-                </p>
+                </H3>
             </div>
         </div>
     </div>
@@ -107,6 +107,15 @@
 
 <script src="~/js/settings.js"></script>
 <script>
+
+
+    function SubmitModifiedDefaultFonts() {
+        var valid = SubmitModifiedDefaultFonts();
+
+        if (valid) {
+            swal("New Category Success", "Content Library Category (will be) Added Successfully.", "success");
+        }
+    }
 
 
     $(document).ready(function () {
