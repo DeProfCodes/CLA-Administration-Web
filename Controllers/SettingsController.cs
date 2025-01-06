@@ -341,7 +341,6 @@ namespace CLA_Administration_Web.Controllers
             var skinsAndOfflineImageData = new SkinsAndOfflineImageMainViewModel()
             {
                 SkinAndOfflineImage = SettingsMockData.SkinsAndOfflineImage,
-               // CategoriesTrees = SettingsMockData.AllContentLibraryCategories,
                 SkinOfflineCategortyTrees = SettingsMockData.AllSkinsOfflineImageCategories,
 
             };
