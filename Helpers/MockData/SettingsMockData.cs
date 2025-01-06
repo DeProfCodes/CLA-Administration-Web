@@ -490,7 +490,7 @@ namespace CLA_Administration_Web.Helpers.MockData
         }
 
 
-        public static SkinOfflineCategortyTree GetCategoryTreeStructure(List<SkinOfflineCategortyTree> categories, int categoryId)
+        @* public static SkinOfflineCategortyTree GetCategoryTreeStructure(List<SkinOfflineCategortyTree> categories, int categoryId)
         {
             var contentLibraryVm = new SkinOfflineCategortyTree { CategoryId = categoryId };
 
@@ -518,7 +518,7 @@ namespace CLA_Administration_Web.Helpers.MockData
             }
 
             return contentLibraryVm;
-        }
+        }*@
 
         public static List<ContentLibraryCategoryModel> GetAllCategoriesInTree(List<ContentLibraryCategoryTree> categories, int categoryId = 0)
         {

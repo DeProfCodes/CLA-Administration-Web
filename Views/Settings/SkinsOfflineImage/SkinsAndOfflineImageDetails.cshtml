@@ -26,92 +26,170 @@
 }
 
 
-<h4 class="w-100 text-center theme-txt-clr">
-    @if (Model != null && Model.Id != 0)
-    {
-        @:Custom user settings for ID: @Model.Id
-    }
-    else
-    {
-        @:Custom user settings not available.
-    }
-</h4>
 
-<div class="card mb-4 mt-2 overview-filters-card">
-    <div class="card-body">
-        <h4 class="w-100 text-center theme-txt-clr">Custom user settings for ID: Model.Id</h4>
+<div class="container-fluid">
+    <div class="card mb-4 mt-2 overview-filters-card">
+        <div class="card-body">
+            <h4 class="w-100 text-center theme-txt-clr">Skins And Offline Images  for ID: Model.Id</h4>
+        </div>
     </div>
+
+    <div class="card bg-white shadow-sm">
+        <div class="card-body">
+
+            <!-- Table -->
+            <table class="table table-striped table-bordered table-hover theme-border align-middle campain-table-type fs-12" id="StagingMachinesData">
+                <thead>
+                    <tr>
+                        <th class="theme-bg text-white">
+                            <input type="checkbox" id="select-all" aria-label="Select All">
+                        </th>
+                        <th class="theme-bg text-white">Item Path</th>
+                        <th class="theme-bg text-white">View</th>
+                        <th class="theme-bg text-white">Default?</th>
+                        <th class="theme-bg text-white">Description</th>
+                        <th class="theme-bg text-white">User Last Modified</th>
+                        <th class="theme-bg text-white">Machine Last Modified</th>
+                        <th class="theme-bg text-white">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="cssBg">
+                            <input type="checkbox" name="select-item" aria-label="Select Item">
+                        </td>
+                        <td class="cssBg">
+                            <button class="btn btn-sm btn-info custom-btn-sm" onclick="PreviewContentType(ContentTypes.IMAGE, `${APP_BASE_ADDRESS}/images/others/modules/skins/Popup_Skin_Default.png`)">Open</button>
+                        </td>
+                        <td class="cssBg">
+                            <img src="https://via.placeholder.com/50" alt="View Image" class="img-thumbnail">
+                        </td>
+                        <td class="@cssBg">
+                            <input type="checkbox" name="default" aria-label="Set as Default">
+                        </td>
+                        <td class="@cssBg">
+                            Model.Description
+                        </td>
+                        <td class="@cssBg">
+                            Model.UserLastModified
+                        </td>
+                        <td class="@cssBg">
+                            Model.MachineLastModified
+                        </td>
+                        <td class="@cssBg">
+                            <button class="btn btn-sm custom-btn-sm btn-danger" aria-label="Delete" onclick="deleteSkine(3)">
+                                Delete
+                            </button>
+                            <button class="btn btn-sm custom-btn-sm btn-success" id="edit-staging-btn" onclick="EditNewStagingEntry(Model.Id)" aria-label="Edit">
+                                Edit
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div id="ImagePreviewModal" class="modal">
+                <span class="close text-danger" onclick="CloseImagePreviewerModal()">&times;</span>
+                <img class="modal-content" id="ImagePreviewer" />
+                <div id="caption">
+                    <button class="btn btn-warning" onclick="OpenImageInNewWindow()">Open New Window</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 </div>
 
 
-<!-- Card with White Background -->
-<div class="card bg-white shadow-sm">
-    <div class="card-body">
 
-        <h3 class="card-title text-center theme-txt-clr" id="StagingUserMachineTitle">Existing Skins & Offline Images for ID: Model.Id</h3>
-
-        <!-- Table -->
-        <table class="table table-striped table-bordered table-hover theme-border align-middle campain-table-type fs-12" id="StagingMachinesData">
-            <thead>
-                <tr>
-                    <th class="theme-bg text-white">
-                        <input type="checkbox" id="select-all" aria-label="Select All">
-                    </th>
-                    <th class="theme-bg text-white">Item Path</th>
-                    <th class="theme-bg text-white">View</th>
-                    <th class="theme-bg text-white">Default?</th>
-                    <th class="theme-bg text-white">Description</th>
-                    <th class="theme-bg text-white">User Last Modified</th>
-                    <th class="theme-bg text-white">Machine Last Modified</th>
-                    <th class="theme-bg text-white">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class="cssBg">
-                        <input type="checkbox" name="select-item" aria-label="Select Item">
-                    </td>
-                    <td class="cssBg">
-                        <button class="btn btn-sm btn-info custom-btn-sm" onclick="PreviewContentType(ContentTypes.IMAGE, `${APP_BASE_ADDRESS}/images/others/modules/skins/Popup_Skin_Default.png`)">Open</button>
-                    </td>
-                    <td class="cssBg">
-                        <img src="https://via.placeholder.com/50" alt="View Image" class="img-thumbnail">
-                    </td>
-                    <td class="@cssBg">
-                        <input type="checkbox" name="default" aria-label="Set as Default">
-                    </td>
-                    <td class="@cssBg">
-                        Model.Description
-                    </td>
-                    <td class="@cssBg">
-                        Model.UserLastModified
-                    </td>
-                    <td class="@cssBg">
-                        Model.MachineLastModified
-                    </td>
-                    <td class="@cssBg">
-                        <button class="btn btn-sm custom-btn-sm btn-danger" aria-label="Delete">
-                            Delete
-                        </button>
-                        <button class="btn btn-sm custom-btn-sm btn-success" id="edit-staging-btn" onclick="EditNewStagingEntry(Model.Id)" aria-label="Edit">
-                            Edit
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <div id="ImagePreviewModal" class="modal">
-            <span class="close text-danger" onclick="CloseImagePreviewerModal()">&times;</span>
-            <img class="modal-content" id="ImagePreviewer" />
-            <div id="caption">
-                <button class="btn btn-warning" onclick="OpenImageInNewWindow()">Open New Window</button>
+<!-------- Add New Skins and Offline Images Modal -------->
+<div class="modal fade" id="EditModal" tabindex="-1" aria-labelledby="EditModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h5 class="modal-title" id="EditModalLabel">Edit Skins and Offline Images</h5>
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                        onclick="closeModal('EditModal')">
+                </button>
             </div>
 
+            <!-- Modal Body -->
+            <div class="modal-body" id="EditModalContainer">
+                <div class="mb-3">
+                    <label for="Path" class="form-label">Item Path:</label>
+                    <input type="text" class="form-control" id="Path" name="Path" value="" readonly>
+                </div>
+
+                <div class="mb-3">
+                    <label for="Domain" class="form-label">Image</label>
+                    @{
+                        await Html.RenderPartialAsync(
+                        "~/Views/Shared/Components/Custom/Form/FileUploader.cshtml",
+                        new FileUploaderModel
+            {
+                ComponentId = "SkinsAndOfflineImage",
+                InputId = "SkinsAndOfflineImageUploadInput",
+                ShowPreviewButton = true,
+                InitialHidden = false,
+                WidthPx = "396px",
+                OnFileUploadCallback = null
+            }
+                        );
+                    }
+                </div>
+
+                <div class="mb-3">
+                    <label for="DefaultId" class="form-label">Default?</label>
+                    <input type="checkbox" class="form-check-input" id="DefaultId" name="Default">
+                </div>
+
+                <div class="mb-3">
+                    <label for="DescriptionId" class="form-label">Description</label>
+                    <input type="text" class="form-control" id="DescriptionId" name="Description">
+                </div>
+
+                <div class="mb-3">
+                    <label for="UserLastModified" class="form-label">User Last Modified</label>
+                    <input type="text" class="form-control" id="UserLastModified" name="UserLastModified">
+                </div>
+
+                <div class="mb-3">
+                    <label for="MachineLastModified" class="form-label">Machine Last Modified</label>
+                    <input type="text" class="form-control" id="MachineLastModified" name="MachineLastModified">
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                        onclick="closeModal('EditModal')">
+                    Cancel
+                </button>
+                <button type="button"
+                        class="btn custom-btn-default"
+                        onclick="SaveStagingUser()">
+                    Save User
+                </button>
+            </div>
         </div>
+    </div>
+</div>
 
-      
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<script>
+    <script>
+
+        function AddNewSkinsAndOfflineImages() {
+            const editModal = new bootstrap.Modal(document.getElementById('EditModal'));
+            editModal.show();
+        }
 
             function OpenImagePreviewModal(imgSrc) {
                 $("#ImagePreviewModal").fadeIn();
@@ -141,4 +219,26 @@
                     OpenDocumentPreviewModal(contentURL);
                 }
             }
+
+            function deleteSkine(categoryId)
+            {
+                   
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your file has been deleted.",
+                        icon: "success"
+                    });
+                }
+            });
+          }
 </script>
