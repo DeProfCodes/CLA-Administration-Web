@@ -174,3 +174,35 @@ function triggerDelete(customID, confirmMessage, successMessage, deleteCallback)
         }
     });
 }
+
+
+
+function closeModal(modalId)
+{
+
+    if (typeof modalId === 'string') {
+        const modalElement = document.getElementById(modalId);
+        if (modalElement) {
+            const bootstrapModal = bootstrap.Modal.getInstance(modalElement) || new bootstrap.Modal(modalElement);
+            bootstrapModal.hide();
+        } else {
+            console.error(`Modal with ID "${modalId}" not found.`);
+        }
+    } else {
+        console.error("closeModal expects a string ID.");
+    }
+}
+
+function SaveModal(modalId, successMessage)
+{
+    closeModal(modalId);
+    setTimeout(() => {
+        Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: successMessage,
+            showConfirmButton: false,
+            timer: 1500
+        });
+    }, 300);
+}

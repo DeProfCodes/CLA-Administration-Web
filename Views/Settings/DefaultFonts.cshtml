@@ -17,28 +17,8 @@
     <div class="card mb-4 mt-2 overview-filters-card app-card-main-scaling">
         <div class="card-body pt-0 pb-0">
             <div class="row fs-12 mt-1 mb-2">
-                <p class="theme-txt-clr text-center w-100 fw-bold fs-16" id="TypeFilterTitle">Filters</p>
-                <div class="row col-12 d-flex flex-wrap module-overview-filters">
-                    <div class="w-fit-content ms-auto mb-1">
-                        <div class="d-flex">
-                            <p class="custom-p w-fit-content align-content-center">View Type</p>
-                            <div class="row mx-auto">
-                                <div class="btn-group w-auto overview-filter-btn-group" role="group" aria-label="Status filter" id="TypeStagingLiveBtns">
-                                    <button class="btn module-filter-btn-group filter-type-btn btn-group-active" onclick="ToggleStaginUserMachines(this.id)" id="StagingUserBtn">Skins</button>
-                                    <button class="btn module-filter-btn-group filter-type-btn" onclick="ToggleStaginUserMachines(this.id)" id="StagingMachinesBtn">Categories</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="w-auto me-auto mb-1">
-                        <div class="d-flex">
-                            <p class="custom-p w-fit-content align-content-center">Domain</p>
-                            <select class="custom-input-text w-200p ms-2" id="ReportModuleSelect" onchange="FilterByDomain()">
-                                <option value="0">Please select Domain Name</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
+                <H4 class="theme-txt-clr text-center w-100 fw-bold fs-16" id="TypeFilterTitle">Filters To be Added</H4>
+                
             </div>
         </div>
     </div>
@@ -47,29 +27,28 @@
 
 
 <div class="container-fluid my-4 border p-3 rounded">
-    @foreach (var data in Model.DefaultFonts) // Use the correct property name here
+    @foreach (var data in Model.DefaultFonts) 
     {
         <div class="border p-3 mb-3">
             <h5 class="text-center">
-                <p>@data.Id</p>
-                <span>@data.DefaultHeading</span>
+               <span>@data.DefaultHeading</span>
             </h5>
 
             @if (data.SubHeadings != null && data.SubHeadings.Any())
             {
                 @foreach (var subheading in data.SubHeadings)
                 {
-                    <div class="row mb-3 align-items-center">
-                        <div class="col-1 text-center">
-                            <span  data-sub="@subheading.SubId" style="cursor: pointer;" onclick="Test(@subheading.SubId)">
+                    <div class="row mb-3 align-items-center fs-14">
+                        <div class="col-1 text-center fs-14">
+                            <span data-sub="@subheading.SubId" style="cursor: pointer;" onclick=" EditNewStagingEnting(@subheading.SubId)">
                                 <img src="@subheading.Icon" alt="Icon" />
                             </span>
                         </div>
-                        <div class="col-4">
+                        <div class="col-4 fs-14">
                             <label for="subheadingTitle_@subheading.SubId" class="form-label">@subheading.Title</label>
                         </div>
-                        <div class="col-7">
-                            <div class="form-control" style="border: none; background-color: transparent;">
+                        <div class="col-7 fs-14">
+                            <div class="form-control" style="border: none; background-color: gray;">
                                 @subheading.Text
                             </div>
                         </div>
@@ -83,90 +62,106 @@
 <div id="details-section" class="mt-4"></div>
 
 
+<!-- Add New Default fonts Modal -->
+<div class="modal fade" id="DefaultfontsModal" tabindex="-1" aria-labelledby="CreateStagingUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="CreateStagingUserModalLabel">Add New Staging User</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal('CreateStagingUserModal')"></button>
+            </div>
+            <div class="modal-body">
+                <form id="CreateStagingUserForm">
+                    <div class="mb-3">
+                        <label for="StagingUserDomain" class="form-label">Module Name</label>
+                        <select class="form-select" id="StagingUserDomain" required>
+                            <option value="">Please select a Module</option>
+                           
+                            @foreach(var data in Model.DefaultFonts)
+                            {
+                            <option value="@data.DefaultHeading">@data.DefaultHeading</option>
+                            }
+                        </select>
+                    </div>           
+
+                    <div class="mb-3">
+                        <label for="StagingUserUsername" class="form-label">Title</label>
+                        <input type="text" class="form-control" id="StagingUserUsername" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="StagingUserFirstname" class="form-label">Description</label>
+                        <input type="text" class="form-control" id="StagingUserFirstname" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="StagingUserLastname" class="form-label">Font Size</label>
+                        <input type="text" class="form-control" id="StagingUserLastname" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="StagingUserUserLastModified" class="form-label">Font Family</label>
+                        <input type="text" class="form-control" id="StagingUserUserLastModified">
+                    </div>
+                    <div class="mb-3">
+                            <label for="StagingUserMachineLastModified" class="form-label">FontWeight</label>
+                        <input type="text" class="form-control" id="StagingUserMachineLastModified">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal('CreateStagingUserModal')">Cancel</button>
+                <button type="button" class="btn  custom-btn-default" onclick="SaveModal('DefaultfontsModal', 'Successfuly save fonts')">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Default fonts Modal -->
+<div class="modal fade" id="EditDefaultFontsModal" tabindex="-1" aria-labelledby="EditModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="EditModalLabel">Edit Staging Entity</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal('EditModal')"></button>
+            </div>
+            <div class="modal-body" id="EditModalContainer">
+                <!-- Dynamic content for the modal goes here -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal('EditModal')">Cancel</button>
+                <button type="button" class="btn custom-btn-default" onclick="SaveModal('EditDefaultFontsModal', 'Default fonts saved successfully!' )">Save User</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
 
     function Test(subId) {
         OpenPage('@SettingsPages.DefaultFontsDetails', subId)
     }
 
-    $(document).ready(function () 
-    {
-        usersDT = MakeStandardDataTable("StagingUsersData");
-        machinesDT = MakeStandardDataTable("StagingMachinesData");
-    });
-
-    function ToggleStaginUserMachines(id)
-    {
-        $(".filter-type-btn").removeClass("btn-group-active");
-        $(`#${id}`).addClass("btn-group-active");
-
-        if (id.includes("User")) 
-        {
-            $("#BreadcrumSettingsBtnText").text("Add New Staging User");
-            $("#StagingUserMachineTitle").text("Users");
-            HideShowElement("#StagingUsersSettings", HideShow.SHOW);
-            HideShowElement("#StagingMachinesSettings", HideShow.HIDE);
-            SwitchDomainsSelectDataSource(usersDomains);
-        }
-        else if (id.includes("Machine"))
-        {
-            $("#BreadcrumSettingsBtnText").text("Add New Staging Machine");
-            $("#StagingUserMachineTitle").text("Machines");
-            HideShowElement("#StagingUsersSettings", HideShow.HIDE);
-            HideShowElement("#StagingMachinesSettings", HideShow.SHOW);
-            SwitchDomainsSelectDataSource(machinesDomains);
-        }
-    }
-
-    function SwitchDomainsSelectDataSource(dataSource)
-    {
-        const selectList = document.getElementById("ReportModuleSelect");
-
-        selectList.innerHTML = "";
-
-        const defaultOption = document.createElement("option");
-        defaultOption.value = "0";
-        defaultOption.textContent = "Please select Domain Name";
-        selectList.appendChild(defaultOption);
-
-        dataSource.forEach(domain =>
-            {
-            const option = document.createElement("option");
-            option.value = domain;
-            option.textContent = domain;
-            selectList.appendChild(option);
-        });
-    }
-
   
-    function AddNewStagingEntity()
+    function AddNewDefaultFonts()
     {
         const buttonText = document.getElementById("BreadcrumSettingsBtnText").innerText;
-
-        if (buttonText.includes("User"))
-        {
-            const userModal = new bootstrap.Modal(document.getElementById('CreateStagingUserModal'));
-            userModal.show();
-        } 
-        else if (buttonText.includes("Machine"))
-        {
-            const machineModal = new bootstrap.Modal(document.getElementById('CreateStagingMachineModal'));
-            machineModal.show();
-        }
+        const userModal = new bootstrap.Modal(document.getElementById('DefaultfontsModal'));
+        userModal.show();
+   
     }
 
-    function EditNewStagingEnting(machineId, entityType)
-    {
+    function EditNewStagingEnting(SubId) {
         // LoadEditModal(formData, '@Url.Action("EditStagingMachine", "Settings")', 'POST', editMachineForm, edit-machine-btn)
         $.ajax({
             url: '@Url.Action("DefaultFontsDetails", "Settings")',
             type: 'GET',
-            data: { machineId: machineId, entityType: entityType },
+            data: { SubId: SubId },
             success: function (response)
             {
                 console.log(response)
                 $('#EditModalContainer').html(response);
-                const editModal = new bootstrap.Modal(document.getElementById('EditModal'));
+                const editModal = new bootstrap.Modal(document.getElementById('EditDefaultFontsModal'));
                 editModal.show();
 
             },
@@ -188,16 +183,35 @@
         });
     });
 
- 
 
-    function SaveEditNewStagingEnting(formdata) 
-    {
 
-        LoadEditModal(formData, '@Url.Action("SaveStagingData", "Settings")', 'POST', editMachineForm, edit - machine - btn)
+    function SaveModal(modalId, successMessage) {
+        closeModal(modalId); 
+        setTimeout(() => {
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: successMessage,
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }, 300); 
     }
+
 
     function closeModal(modalId) {
-        $('#' + modalId).modal('hide');
+        const modalElement = document.getElementById(modalId);
+        if (modalElement) {
+            const bootstrapModal = bootstrap.Modal.getInstance(modalElement) || new bootstrap.Modal(modalElement);
+            bootstrapModal.hide(); // Hides the specified modal
+        } else {
+            console.error(`Modal with ID "${modalId}" not found.`);
+        }
     }
+
+
+    // function closeModal(modalId) {
+    //     $('#' + modalId).modal('hide');
+    // }
 
 </script>

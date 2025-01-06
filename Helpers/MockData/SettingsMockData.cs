@@ -40,7 +40,7 @@ namespace CLA_Administration_Web.Helpers.MockData
 
         public static List<FontCustomizationModel> CustomFontSettings { get; set; } = GetFontSettings();
 
-        public static List<SkinOfflineCategortyTree> AllSkinsOfflineImageCategories { get; set; } = GenerateDummyDataContentLibraryCategories();
+        public static List<SkinOfflineCategortyTree> AllSkinsOfflineImageCategories { get; set; } = GenerateDummyDataSkinsOfflineImage();
 
 
         public static List<StagingUserMachineViewModel> GetStagingUsersOrMachines()
@@ -306,123 +306,112 @@ namespace CLA_Administration_Web.Helpers.MockData
 
         public static List<DefaultFontsViewModel> GetDefaultFontsData()
         {
+            int idCounter = 1; // Counter for DefaultHeading Ids
+            int subIdCounter = 1; // Counter for SubHeading SubIds
 
-
-            var rand = new Random();
             return new List<DefaultFontsViewModel>
+    {
+        new DefaultFontsViewModel
         {
-            new DefaultFontsViewModel
+            DefaultHeading = "Popups",
+            Id = idCounter++, // Increment Id for each DefaultFontsViewModel
+            SubHeadings = new List<SubHeadingViewModel>
             {
-                DefaultHeading = "Popups",
-                Id =998,
-                SubHeadings = new List<SubHeadingViewModel>
+                new SubHeadingViewModel
                 {
-                    new SubHeadingViewModel
-                    {
-                        SubId =1,
-                        Title = "Popup Text",
-                        Icon = "https://via.placeholder.com/30",
-                        Text = "Popup Subheading Text"
-                    },
-                     new SubHeadingViewModel
-                    {
-                        SubId =2,
-                        Title = "Popup Title",
-                        Icon = "https://via.placeholder.com/30",
-                        Text = "CLA - Corporate LAN Advertising",
-
-                    }
-
-                }
-            },
-            new DefaultFontsViewModel
-            {
-                DefaultHeading = "Surveys",
-                Id = rand.Next(41, 999),
-                SubHeadings = new List<SubHeadingViewModel>
-                {
-                    new SubHeadingViewModel
-                    {
-                        SubId =rand.Next(41, 999),
-                        Title = "Survey Title",
-                        Icon = "https://via.placeholder.com/30",
-                        Text = "Survey Subheading Text"
-                    },
-                    new SubHeadingViewModel
-                    {
-                        SubId =rand.Next(41, 999),
-                        Title = "Question Title",
-                        Icon = "https://via.placeholder.com/30",
-                        Text = "Survey Subheading Text"
-                    },
-                    new SubHeadingViewModel
-                    {
-                        SubId = rand.Next(41, 999),
-                        Title = "Survey/Question Text",
-                        Icon = "https://via.placeholder.com/30",
-                        Text = "Survey Subheading Text"
-                    }
-                    }
-                },
-                new DefaultFontsViewModel
-                {
-                    DefaultHeading = "Tickers",
-
-                    Id = rand.Next(41, 999),
-                      SubHeadings = new List<SubHeadingViewModel>
-                {
-                    new SubHeadingViewModel
-                    {
-                        SubId =rand.Next(41, 999),
-                        Title = "Ticker Text",
-                        Icon = "https://via.placeholder.com/30",
-                        Text = "CLA - Corporate LAN Advertising",
-                    },
-
-                    }
-
-
-                },
-                new DefaultFontsViewModel
-                {
-                    DefaultHeading = "RSS",
-
-                    Id = rand.Next(41, 999),
-                          SubHeadings = new List<SubHeadingViewModel>
-                {
-                    new SubHeadingViewModel
-                    {
-                        SubId =rand.Next(41, 999),
-                       Title = "RSS Text",
-                        Icon = "https://via.placeholder.com/30",
-                        Text = "CLA - Corporate LAN Advertising",
-                    },
-
-
-                }
-                },
-                new DefaultFontsViewModel
-                {
-                    DefaultHeading = "Desktop Information",
-                    Id = rand.Next(41, 999),
-                    SubHeadings = new List<SubHeadingViewModel>
-                {
-                    new SubHeadingViewModel
-                    {
-                        SubId =rand.Next(41, 999),
-                        Title = "Desktop Info",
+                    SubId = subIdCounter++, // Increment SubId for each SubHeadingViewModel
+                    Title = "Popup Text",
                     Icon = "https://via.placeholder.com/30",
-                    Text = "CLA - Corporate LAN Advertising",
-                    },
-
-
+                    Text = "Popup Subheading Text"
+                },
+                new SubHeadingViewModel
+                {
+                    SubId = subIdCounter++,
+                    Title = "Popup Title",
+                    Icon = "https://via.placeholder.com/30",
+                    Text = "CLA - Corporate LAN Advertising"
                 }
+            }
+        },
+        new DefaultFontsViewModel
+        {
+            DefaultHeading = "Surveys",
+            Id = idCounter++,
+            SubHeadings = new List<SubHeadingViewModel>
+            {
+                new SubHeadingViewModel
+                {
+                    SubId = subIdCounter++,
+                    Title = "Survey Title",
+                    Icon = "https://via.placeholder.com/30",
+                    Text = "Survey Subheading Text"
+                },
+                new SubHeadingViewModel
+                {
+                    SubId = subIdCounter++,
+                    Title = "Question Title",
+                    Icon = "https://via.placeholder.com/30",
+                    Text = "Survey Subheading Text"
+                },
+                new SubHeadingViewModel
+                {
+                    SubId = subIdCounter++,
+                    Title = "Survey/Question Text",
+                    Icon = "https://via.placeholder.com/30",
+                    Text = "Survey Subheading Text"
                 }
-            };
+            }
+        },
+        new DefaultFontsViewModel
+        {
+            DefaultHeading = "Tickers",
+            Id = idCounter++,
+            SubHeadings = new List<SubHeadingViewModel>
+            {
+                new SubHeadingViewModel
+                {
+                    SubId = subIdCounter++,
+                    Title = "Ticker Text",
+                    Icon = "https://via.placeholder.com/30",
+                    Text = "CLA - Corporate LAN Advertising"
+                }
+            }
+        },
+        new DefaultFontsViewModel
+        {
+            DefaultHeading = "RSS",
+            Id = idCounter++,
+            SubHeadings = new List<SubHeadingViewModel>
+            {
+                new SubHeadingViewModel
+                {
+                    SubId = subIdCounter++,
+                    Title = "RSS Text",
+                    Icon = "https://via.placeholder.com/30",
+                    Text = "CLA - Corporate LAN Advertising"
+                }
+            }
+        },
+        new DefaultFontsViewModel
+        {
+            DefaultHeading = "Desktop Information",
+            Id = idCounter++,
+            SubHeadings = new List<SubHeadingViewModel>
+            {
+                new SubHeadingViewModel
+                {
+                    SubId = subIdCounter++,
+                    Title = "Desktop Info",
+                    Icon = "https://via.placeholder.com/30",
+                    Text = "CLA - Corporate LAN Advertising"
+                }
+            }
+        }
+    };
         }
 
 
-        private static List<SkinOfflineCategortyTree> GenerateDummyDataContentLibraryCategories()
+        private static List<SkinOfflineCategortyTree> GenerateDummyDataSkinsOfflineImage()
         {
             int idCounter = 1;
             var rootCategory = new SkinOfflineCategortyTree
@@ -439,24 +428,76 @@ namespace CLA_Administration_Web.Helpers.MockData
             new SkinOfflineCategortyTree
             {
                 CategoryId = idCounter++,
-                CategoryName = "popups",
+                CategoryName = "Popups",
                 CategoryDescription = "This is the popups category",
                 UserLastModified = MockDataHelperFunctions.GetRandomUserID(),
                 MachineLastModified = MockDataHelperFunctions.GetRandomMachineID(),
                       
                 ContentsCount = 0,
-                _children = GenerateRandomChildren(ref idCounter) 
+                _children = GenerateRandomTreeChildren(ref idCounter) 
             },
-           
+             new SkinOfflineCategortyTree
+            {
+                CategoryId = idCounter++,
+                CategoryName = "Offline Desktop",
+                CategoryDescription = "This is the offline desktop category",
+                UserLastModified = MockDataHelperFunctions.GetRandomUserID(),
+                MachineLastModified = MockDataHelperFunctions.GetRandomMachineID(),
+
+                ContentsCount = 0,
+                _children = GenerateRandomTreeChildren(ref idCounter)
+            },  new SkinOfflineCategortyTree
+            {
+                CategoryId = idCounter++,
+                CategoryName = "Offline Lockscreen Wallpaper",
+                CategoryDescription = "This is the offline lockscreen wallpaper category",
+                UserLastModified = MockDataHelperFunctions.GetRandomUserID(),
+                MachineLastModified = MockDataHelperFunctions.GetRandomMachineID(),
+
+                ContentsCount = 0,
+                _children = GenerateRandomTreeChildren(ref idCounter)
+            },  new SkinOfflineCategortyTree
+            {
+                CategoryId = idCounter++,
+                CategoryName = "Offline Screensaver",
+                CategoryDescription = "This is the offline screensaver category",
+                UserLastModified = MockDataHelperFunctions.GetRandomUserID(),
+                MachineLastModified = MockDataHelperFunctions.GetRandomMachineID(),
+
+                ContentsCount = 0,
+                _children = GenerateRandomTreeChildren(ref idCounter)
+            },
+               new SkinOfflineCategortyTree
+            {
+                CategoryId = idCounter++,
+                CategoryName = "Popups",
+                CategoryDescription = "This is the popups category",
+                UserLastModified = MockDataHelperFunctions.GetRandomUserID(),
+                MachineLastModified = MockDataHelperFunctions.GetRandomMachineID(),
+
+                ContentsCount = 0,
+                _children = GenerateRandomTreeChildren(ref idCounter)
+            },
             new SkinOfflineCategortyTree
             {
                 CategoryId = idCounter++, 
-                CategoryName = "skin",
+                CategoryName = "Surveys",
                 CategoryDescription = "This is the skin category",
                 ContentsCount = 0,
                 UserLastModified = MockDataHelperFunctions.GetRandomUserID(),
                 MachineLastModified = MockDataHelperFunctions.GetRandomMachineID(),
-                _children = GenerateRandomChildren(ref idCounter) 
+                _children = GenerateRandomTreeChildren(ref idCounter) 
+            },
+              new SkinOfflineCategortyTree
+            {
+                CategoryId = idCounter++,
+                CategoryName = "Tickers",
+                CategoryDescription = "This is the popups category",
+                UserLastModified = MockDataHelperFunctions.GetRandomUserID(),
+                MachineLastModified = MockDataHelperFunctions.GetRandomMachineID(),
+
+                ContentsCount = 0,
+                _children = GenerateRandomTreeChildren(ref idCounter)
             }
         }
             };
@@ -466,7 +507,7 @@ namespace CLA_Administration_Web.Helpers.MockData
         }
 
      
-        private static List<SkinOfflineCategortyTree> GenerateRandomChildren(ref int idCounter)
+        private static List<SkinOfflineCategortyTree> GenerateRandomTreeChildren(ref int idCounter)
         {
             Random random = new Random();
             var children = new List<SkinOfflineCategortyTree>();

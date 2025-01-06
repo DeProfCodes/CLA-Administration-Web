@@ -25,7 +25,7 @@
                 SettingsCurrentPage = SettingsPages.TargetGroups,
                 HasAddNewButton = true,
                 BreadcrumbButtonName = "Add New Target Group",
-                BreadcrumbButtonCallbackFunction = "AddNewStagingEntity"
+                BreadcrumbButtonCallbackFunction = "AddNewTargetGroup"
             });
 
         await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/ContentPreviewers/AllContentPreviewer.cshtml");
@@ -797,20 +797,11 @@
         }
     }
 
-    function AddNewStagingEntity()
-    {
+    function AddNewTargetGroup() {
         const buttonText = document.getElementById("BreadcrumSettingsBtnText").innerText;
 
-        if (buttonText.includes("User"))
-        {
-            const userModal = new bootstrap.Modal(document.getElementById('CreateStagingUserModal'));
-            userModal.show();
-        }
-        else if (buttonText.includes("Machine"))
-        {
-            const machineModal = new bootstrap.Modal(document.getElementById('CreateStagingMachineModal'));
-            machineModal.show();
-        }
+        const userModal = new bootstrap.Modal(document.getElementById('CreateTargetGroupModal'));
+        userModal.show();
     }
 
     function EditNewStagingEnting(machineId, entityType)

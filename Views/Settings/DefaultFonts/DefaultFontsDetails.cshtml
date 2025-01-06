@@ -23,7 +23,7 @@
 }
 
 <div class="container">
-    <h2 class="text-center mb-4">Font Customization for ID: @Model.SubId</h2>
+    <h4 class="text-center mb-4">Font Customization for ID: @Model.SubId</h4>
 </div>
 
 <div class="container">
@@ -86,20 +86,17 @@
                         </div>
                     </div>
 
-                    <!-- Submit Button -->
-                    <div class="text-center">
-                        <button type="submit" id="submitButton" class="custom-btn custom-btn-default" onclick="SubmitModifiedDefaultFonts()">Apply Changes</button>
-                    </div>
+                  
                 </div>
             </div>
         </div>
 
         <!-- Preview Column -->
         <div class="col-lg-4 col-12">
-            <div class="border mb-3 p-3 text-center" id="fontCustomizationContainer">
-                <H3 id="previewText" style="font-family:@Model.HeadingFontFamily; font-weight:@Model.FontWeight; font-style:@Model.FontStyle;">
+            <div class="border mb-3 p-3 text-center" id="fontCustomizationContainer" style="overflow: auto;">
+                <H4 id="previewText" style="font-family:@Model.HeadingFontFamily; font-weight:@Model.FontWeight; font-style:@Model.FontStyle;">
                     @Model.Text
-                </H3>
+                </H4>
             </div>
         </div>
     </div>

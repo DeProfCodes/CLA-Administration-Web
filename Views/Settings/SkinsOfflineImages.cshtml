@@ -9,7 +9,7 @@ await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Settings/Setting
             SettingsCurrentPage = SettingsPages.SkinsOfflineImages,
             HasAddNewButton = true,
             BreadcrumbButtonName = "Add New Skin and Offline images",
-                BreadcrumbButtonCallbackFunction = "AddNewSkinsAndOfflineImages"
+            BreadcrumbButtonCallbackFunction = "AddNewSkinsAndOfflineImages"
         });
 }
 
@@ -248,83 +248,11 @@ await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Settings/Setting
         
 
 
-    function OpenSkinsCategories(categoryId) {
-        OpenPage('@SettingsPages.SkinsAndOfflineImageDetails', categoryId);
-    }
-
-
-
-
-$(document).ready(function ()
+function OpenSkinsCategories(categoryId) 
 {
-    usersDT = MakeStandardDataTable("StagingUsersData");
-    machinesDT = MakeStandardDataTable("StagingMachinesData");
-});
-
-function ToggleStaginUserMachines(id)
-{
-    $(".filter-type-btn").removeClass("btn-group-active");
-    $(`#${id}`).addClass("btn-group-active");
-
-if(id.includes("User"))
-{
-    $("#BreadcrumSettingsBtnText").text("Add New Staging User");
-    $("#StagingUserMachineTitle").text("Users");
-    HideShowElement("#StagingUsersSettings", HideShow.SHOW);
-    HideShowElement("#StagingMachinesSettings", HideShow.HIDE);
-    SwitchDomainsSelectDataSource(usersDomains);
-}
-else if (id.includes("Machine"))
-{
-    $("#BreadcrumSettingsBtnText").text("Add New Staging Machine");
-    $("#StagingUserMachineTitle").text("Machines");
-    HideShowElement("#StagingUsersSettings", HideShow.HIDE);
-    HideShowElement("#StagingMachinesSettings", HideShow.SHOW);
-    SwitchDomainsSelectDataSource(machinesDomains);
-}
+    OpenPage('@SettingsPages.SkinsAndOfflineImageDetails', categoryId);
 }
 
-function SwitchDomainsSelectDataSource(dataSource)
-{
-    const selectList = document.getElementById("ReportModuleSelect");
-
-    selectList.innerHTML = "";
-
-    const defaultOption = document.createElement("option");
-    defaultOption.value = "0";
-    defaultOption.textContent = "Please select Domain Name";
-    selectList.appendChild(defaultOption);
-
-    dataSource.forEach(domain =>
-    {
-        const option = document.createElement("option");
-        option.value = domain;
-        option.textContent = domain;
-        selectList.appendChild(option);
-    });
-}
-
-function FilterByDomain()
-{
-const selectedDomain = $("#ReportModuleSelect").val();
-
-var userActive = $("#StagingUserBtn").hasClass("btn-group-active");
-
-if (selectedDomain === "0")
-{
-    if (userActive)
-        usersDT.column(0).search("").draw();
-    else
-        machinesDT.column(0).search("").draw();
-}
-else
-{
-    if (userActive)
-        usersDT.column(0).search(selectedDomain).draw();
-    else
-        machinesDT.column(0).search(selectedDomain).draw();
-}
-}
 
 function AddNewSkinsAndOfflineImages() 
 {
@@ -332,7 +260,7 @@ function AddNewSkinsAndOfflineImages()
         editModal.show();
 }
 
-function EditSkinsAndOfflineImages(machineId)
+function OpenSkinsCategoriesss(machineId)
 {
 
     formdata =
@@ -342,15 +270,17 @@ function EditSkinsAndOfflineImages(machineId)
     }
 
     $.ajax({
-        url: '@Url.Action("EditSkinsAndOfflineImages", "Settings")',
+            url: '@Url.Action("SkinsAndOfflineImageDetails", "Settings")',
         type: 'GET',
         data: formdata,
         success: function (response)
         {
             console.log(response)
-            $('#EditModalContainer').html(response);
-            const editModal = new bootstrap.Modal(document.getElementById('EditModal'));
-            editModal.show();
+
+                var redirectPage = "@SettingsPages.SkinsAndOfflineImageDetails";
+            
+
+                OpenPage(machineId);
 
         },
         error: function (error) 
@@ -359,12 +289,7 @@ function EditSkinsAndOfflineImages(machineId)
         }
 });
     
-// const formData = {
-//      "machineId": machineId,
-//      "entityType": entityType
-//  };
 
-// dynamicAjaxRequest(formData, "GET", '@Url.Action("EditSetupExclusions", "Settings")', 'EditModalContainer', 'EditModal');
 }
 
  
