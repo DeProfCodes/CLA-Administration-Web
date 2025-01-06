@@ -40,7 +40,7 @@ namespace CLA_Administration_Web.Helpers.MockData
 
         public static List<FontCustomizationModel> CustomFontSettings { get; set; } = GetFontSettings();
 
-        public static List<SkinOfflineCategortyTree> AllContentLibraryCategories { get; set; } = GenerateDummyDataContentLibraryCategories();
+        public static List<SkinOfflineCategortyTree> AllSkinsOfflineImageCategories { get; set; } = GenerateDummyDataContentLibraryCategories();
 
 
         public static List<StagingUserMachineViewModel> GetStagingUsersOrMachines()

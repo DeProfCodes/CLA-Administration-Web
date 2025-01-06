@@ -342,7 +342,7 @@ namespace CLA_Administration_Web.Controllers
             {
                 SkinAndOfflineImage = SettingsMockData.SkinsAndOfflineImage,
                // CategoriesTrees = SettingsMockData.AllContentLibraryCategories,
-                SkinOfflineCategortyTrees = SettingsMockData.AllContentLibraryCategories,
+                SkinOfflineCategortyTrees = SettingsMockData.AllSkinsOfflineImageCategories,
 
             };
 
@@ -352,7 +352,7 @@ namespace CLA_Administration_Web.Controllers
         public async Task<IActionResult> SkinsAndOfflineImageDetails(int customId)
         {
             //var categoryTreeVm = (customId != null && customId != 0) ? ModulesHelper.GetCategoryTreeStructure(SettingsMockData.AllContentLibraryCategories, customId) : new();
-            var customVm = SettingsMockData.AllContentLibraryCategories.FirstOrDefault(x => x.CategoryId == customId);
+            var customVm = SettingsMockData.AllSkinsOfflineImageCategories.FirstOrDefault(x => x.CategoryId == customId);
             return PartialView(AppPagesLinks.Settings.SkinsOfflineImagesDetailsPageLink, customVm);
         }
 
