@@ -1,6 +1,8 @@
-﻿using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
+﻿using CLA_Administration_Web.Helpers.Enums.Shared;
+using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
 using CLA_Administration_Web.Helpers.Shared;
 using CLA_Administration_Web.ViewModels.Modules.ContentLibrary;
+using CLA_Administration_Web.ViewModels.Modules.LDS;
 using CLA_Administration_Web.ViewModels.Modules.PST;
 using CLA_Administration_Web.ViewModels.Settings.ActiveConections;
 using CLA_Administration_Web.ViewModels.Settings.ActiveConnections;
@@ -488,5 +490,101 @@ namespace CLA_Administration_Web.Helpers.MockData
         }
 
 
+        public static SkinOfflineCategortyTree GetCategoryTreeStructure(List<SkinOfflineCategortyTree> categories, int categoryId)
+        {
+            var contentLibraryVm = new SkinOfflineCategortyTree { CategoryId = categoryId };
+
+            var tree = GetAllCategoriesInTree(categories, categoryId);
+
+            var category = tree?.LastOrDefault() ?? null;
+
+            if (category != null)
+            {
+                contentLibraryVm.CategoryName = category.CategoryName;
+                contentLibraryVm.CategoryId = categoryId;
+                contentLibraryVm.CategoryDescription = category.CategoryDescription;
+               
+            }
+
+            if (tree?.Count > 1)
+            {
+                tree.RemoveAt(tree.Count - 1);
+                var categoryList = tree.Select(x => x.CategoryName);
+
+                var structure = string.Join(" > ", categoryList);
+
+                contentLibraryVm.ContentLibraryParents = structure;
+
+            }
+
+            return contentLibraryVm;
+        }
+
+        public static List<ContentLibraryCategoryModel> GetAllCategoriesInTree(List<ContentLibraryCategoryTree> categories, int categoryId = 0)
+        {
+            var result = new List<ContentLibraryCategoryModel>();
+
+            foreach (var category in categories)
+            {
+                var data = GetCategoryPath(category, categoryId);
+                if (data != null)
+                {
+                    result.AddRange(data);
+                }
+            }
+            return result;
+        }
+
+
+        public static bool SearchCategoryPath(ContentLibraryCategoryTree category, List<ContentLibraryCategoryModel> path, int searchId = 0)
+        {
+            if (category == null) return false;
+
+            // Add current category data to the path
+            path.Add(new ContentLibraryCategoryModel
+            {
+                CategoryId = category.CategoryId,
+                CategoryName = category.CategoryName,
+                CategoryDescription = category.CategoryDescription,
+                ContentsCount = category.ContentsCount,
+                DateLastModified = "2024-01-01",  // Example date
+                UserLastModified = "UserA",       // Example user
+                MachineLastModified = "Machine1"  // Example machine
+            });
+
+            // Check if the current category ID matches the search ID
+            if (searchId != 0 && category.CategoryId == searchId) return true;
+
+            // If category has children, search in them
+            if (category._children != null)
+            {
+                foreach (var child in category._children)
+                {
+                    if (SearchCategoryPath(child, path, searchId)) return true;
+                }
+            }
+
+            // If not found, remove the current category from the path
+            path.RemoveAt(path.Count - 1);
+
+            if (searchId != 0)
+                return false;
+            else
+                return true;
+        }
+
+        private static List<ContentLibraryCategoryModel> GetCategoryPath(ContentLibraryCategoryTree root, int searchId = 0)
+        {
+            var path = new List<ContentLibraryCategoryModel>();
+
+            if (SearchCategoryPath(root, path, searchId))
+            {
+                return path;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

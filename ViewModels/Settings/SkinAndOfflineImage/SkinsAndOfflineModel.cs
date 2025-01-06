@@ -11,6 +11,7 @@ namespace CLA_Administration_Web.ViewModels.Settings.SkinAndOfflineImage
         public string Description { get; set; }
         public string UserLastModified { get; set; }
         public string MachineLastModified { get; set; }
+        public List<SkinOfflineCategortyTree> SkinOfflineCategortyTrees { get; set; }
 
     }
 }

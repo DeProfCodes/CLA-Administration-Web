@@ -1,5 +1,6 @@
 using CLA_Administration_Web.Helpers.Constants;
 using CLA_Administration_Web.Helpers.MockData;
+using CLA_Administration_Web.Helpers.Modules;
 using CLA_Administration_Web.Models.APIResponses.Reports.Troubleshoot;
 using CLA_Administration_Web.Services;
 using CLA_Administration_Web.ViewModels.Settings.ActiveConnections;
@@ -12,6 +13,7 @@ using CLA_Administration_Web.ViewModels.Settings.StagingUsers;
 
 
 using CLA_Administration_Web.ViewModels.Targeting;
+using DocumentFormat.OpenXml.Drawing.Diagrams;
 using DocumentFormat.OpenXml.InkML;
 using DocumentFormat.OpenXml.Wordprocessing;
 using Microsoft.AspNetCore.Mvc;
@@ -349,10 +351,9 @@ namespace CLA_Administration_Web.Controllers
 
         public async Task<IActionResult> SkinsAndOfflineImageDetails(int customId)
         {
-
-            var customVm = ModulesMockData.AllContentLibraryCategories.FirstOrDefault(x => x.CategoryId == customId);
-
-            return PartialView(AppPagesLinks.Settings.SkinsOfflineImagesDetailsPageLink, customVm);
+            var categoryTreeVm = (customId != null && customId != 0) ? ModulesHelper.GetCategoryTreeStructure(SettingsMockData.AllContentLibraryCategories, customId) : new();
+            var customVm = SettingsMockData.AllContentLibraryCategories.FirstOrDefault(x => x.CategoryId == customId);
+            return PartialView(AppPagesLinks.Settings.SkinsOfflineImagesDetailsPageLink, categoryTreeVm);
         }
 
         [HttpGet]

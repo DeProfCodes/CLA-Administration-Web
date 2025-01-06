@@ -3,15 +3,6 @@
 @model SkinsAndOfflineImageMainViewModel;
 
 
-
-@{
-int index = 0;
-
-//  var usersDomains = Model.StagingUsers.Select(x => x.Domain).Distinct().ToList();
-//  var machinesDomains = Model.StagingMachines.Select(x => x.Domain).Distinct().ToList();
-}
-
-
 @{
 await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Settings/SettingsBreadcrumb.cshtml", new SettingsBreadcrumbViewModel
         {
@@ -23,7 +14,7 @@ await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Settings/Setting
 }
 
 
-<div class="container mt-4">
+<div class="container-fluid">
 
     <!-- Settings Filter Component -->
 <div class="card mb-4 mt-2 overview-filters-card app-card-main-scaling hidden">
