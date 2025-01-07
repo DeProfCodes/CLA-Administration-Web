@@ -207,36 +207,55 @@ function SaveModal(modalId, successMessage)
     }, 300);
 }
 
-function GetImageDimensions(imageURL) {
+function ValidateImage(file, module) {
     return new Promise((resolve, reject) => {
-        if (imageURL) {
-            const reader = new FileReader();
+        const reader = new FileReader();
 
-            reader.readAsDataURL(imageURL);
+        reader.onload = function (e) {
+            const image = new Image();
+            image.src = e.target.result;
 
-            reader.onload = function (e) {
-                const image = new Image();
+            image.onload = function () {
+                const width = image.width;
+                const height = image.height;
+                const fileType = file.type.split("/")[1].toUpperCase();
 
-                image.src = e.target.result;
-
-                image.onload = function () {
-                    const width = image.width;
-                    const height = image.height;
-
-                    resolve(new DimensionType(width, height));
+                const validationRules = {
+                    "Offline": { formats: ["JPG", "PNG"], width: null, height: null },
+                    "Popups": { formats: ["BMP"], width: [314, 414], height: [188, 288] },
+                    "Surveys": { formats: ["BMP"], width: [485], height: [600] },
+                    "SingleTicker": { formats: ["BMP"], width: [80], height: [40] },
+                    "DoubleTicker": { formats: ["BMP"], width: [80], height: [80] }
                 };
 
-                image.onerror = function () {
-                    reject(new DimensionType(-1, -1));
-                };
+                const rules = validationRules[module];
+                if (!rules.formats.includes(fileType)) {
+                    reject(`Invalid file type. Allowed: ${rules.formats.join(", ")}`);
+                    return;
+                }
+
+                if (rules.width && (!Array.isArray(rules.width) || !rules.width.includes(width))) {
+                    reject(`Invalid width. Expected: ${rules.width.join(", ")}`);
+                    return;
+                }
+
+                if (rules.height && (!Array.isArray(rules.height) || !rules.height.includes(height))) {
+                    reject(`Invalid height. Expected: ${rules.height.join(", ")}`);
+                    return;
+                }
+
+                resolve(true);
             };
 
-            reader.onerror = function () {
-                reject(new DimensionType(-1, -1));
+            image.onerror = function () {
+                reject("Invalid image file.");
             };
-        }
-        else {
-            reject(new DimensionType(-1, -1));
-        }
+        };
+
+        reader.onerror = function () {
+            reject("File read error.");
+        };
+
+        reader.readAsDataURL(file);
     });
 }

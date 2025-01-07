@@ -5,6 +5,7 @@
 
     var usersDomains = Model.Users.Select(x => x.Domain).Distinct().ToList();
     var machinesDomains = Model.Machines.Select(x => x.Domain).Distinct().ToList();
+    var users = Model.Users.Select(x => x.UserLastModified).Distinct().ToList();
 }
 
 <div class="container-fluid">
@@ -160,7 +161,13 @@
                     </div>
                     <div class="mb-3">
                         <label for="StagingUserUsername" class="form-label">Username</label>
-                        <input type="text" class="form-control" id="StagingUserUsername" required>
+                        <select class="form-select" id="StagingUserDomain" required>
+                            <option value="">Please select a user</option>
+                            @foreach (var user in users)
+                            {
+                                <option value="@user">@user</option>
+                            }
+                        </select>
                     </div>
                     <div class="mb-3">
                         <label for="StagingUserFirstname" class="form-label">First Name</label>
