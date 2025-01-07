@@ -143,12 +143,93 @@ await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Settings/Setting
             </div>
         </div>
     </div>
-    
+
+
+<!-------- Add New Skins and Offline Images Modal -------->
+<div class="modal fade" id="EditModal" tabindex="-1" aria-labelledby="EditModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h5 class="modal-title" id="EditModalLabel">Add New Skins and Offline Images</h5>
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                        onclick="closeModal('EditModal')">
+                </button>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body" id="EditModalContainer">
+                <div class="mb-3">
+                    <label for="Path" class="form-label">Item Path:</label>
+                    <input type="text" class="form-control" id="Path" name="Path" value="" readonly>
+                </div>
+
+                <div class="mb-3">
+                    <label for="Module" class="form-label">Module:</label>
+                    <select class="form-select" id="Module" name="Module" onchange="handleModuleChange()">
+                        <option value="Offline">Offline</option>
+                        <option value="Popups">Popups</option>
+                        <option value="Surveys">Surveys</option>
+                        <option value="SingleTicker">Single Ticker</option>
+                        <option value="DoubleTicker">Double Ticker</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="ImageUpload" class="form-label">Image</label>
+                    <input type="file" class="form-control" id="SkinsAndOfflineImageUploadInput" accept="image/*">
+                </div>
+
+                <!-- Placeholder for displaying validation errors -->
+                <div class="mb-3 text-danger" id="ValidationErrorContainer"></div>
+
+                <div class="mb-3">
+                    <label for="DefaultId" class="form-label">Default?</label>
+                    <input type="checkbox" class="form-check-input" id="DefaultId" name="Default">
+                </div>
+
+                <div class="mb-3">
+                    <label for="DescriptionId" class="form-label">Description</label>
+                    <input type="text" class="form-control" id="DescriptionId" name="Description">
+                </div>
+
+                <div class="mb-3">
+                    <label for="UserLastModified" class="form-label">User Last Modified</label>
+                    <input type="text" class="form-control" id="UserLastModified" name="UserLastModified">
+                </div>
+
+                <div class="mb-3">
+                    <label for="MachineLastModified" class="form-label">Machine Last Modified</label>
+                    <input type="text" class="form-control" id="MachineLastModified" name="MachineLastModified">
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                        onclick="closeModal('EditModal')">
+                    Cancel
+                </button>
+                <button type="button"
+                        class="btn btn-primary"
+                        onclick="SaveImage()">
+                    Save Image
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
     
 
 <!--------add new skins and offline images modal--->
-<div class="modal fade" id="EditModal" tabindex="-1" aria-labelledby="EditModalLabel" aria-hidden="true">
+<div class="modal fade" id="EditModfffal" tabindex="-1" aria-labelledby="EditModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -211,43 +292,137 @@ await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Settings/Setting
 <script>
 
 
-    var tableDataNested2 = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.SkinOfflineCategortyTrees));
+var tableDataNested2 = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.SkinOfflineCategortyTrees));
 
-
-    var targetingBtn = function (cell, formatterParams) {
-        return `<button class='btn btn-sm btn-info custom-btn-sm' onclick="OpenTargetedEntities()">Open</button>`;
-    };
-
-    var targetingExposureBtn = function (cell, formatterParams) {
-        return `<button class='btn btn-sm btn-success custom-btn-sm' onclick="OpenTargetingExposure(${cell.getRow().getData().CategoryId})">Open</button>`;
-    };
-
-    var actionButtons = function (cell, formatterParams) {
-        return `<button class='btn btn-sm btn-info custom-btn-sm' onclick="OpenSkinsCategories(${cell.getRow().getData().CategoryId})">Open Content</button>
+var actionButtons = function (cell, formatterParams)
+{
+    return `<button class='btn btn-sm btn-info custom-btn-sm' onclick="OpenSkinsCategories(${cell.getRow().getData().CategoryId})">Open Content</button>
                                           
-               <button class='btn btn-sm btn-danger me-2 me-2 custom-btn-sm' onclick="alert('Delete = ${cell.getRow().getData().CategoryId}');">Delete</button>`;
-    };
-    var table = new Tabulator("#example-table", {
-        layout: "fitColumns",
-        data: tableDataNested2,
-        dataTree: true,
-        dataTreeStartExpanded: false,
-        pagination: "local",
-        paginationSize: 10,
-        paginationSizeSelector: [10, 25, 50, 100],
-        movableColumns: true,
-        paginationCounter: "rows",
-        columns: [
-            { title: "CategoryID", field: "CategoryId", responsive: 0, visible: false },
-            { title: "Category Name", field: "CategoryName", responsive: 0 },
-            { title: "Category Description", field: "CategoryDescription" },
-            { title: "Machine Last Modified", field: "MachineLastModified" },
-            { title: "User Last Modified", field: "UserLastModified" },
-           { title: "Actions", formatter: actionButtons, hozAlign: "center" },
-        ],
-    });
+            <button class='btn btn-sm btn-danger me-2 me-2 custom-btn-sm' onclick="alert('Delete = ${cell.getRow().getData().CategoryId}');">Delete</button>`;
+};
+var table = new Tabulator("#example-table",
+{
+    layout: "fitColumns",
+    data: tableDataNested2,
+    dataTree: true,
+    dataTreeStartExpanded: false,
+    pagination: "local",
+    paginationSize: 10,
+    paginationSizeSelector: [10, 25, 50, 100],
+    movableColumns: true,
+    paginationCounter: "rows",
+    columns: [
+        { title: "CategoryID", field: "CategoryId", responsive: 0, visible: false },
+        { title: "Category Name", field: "CategoryName", responsive: 0 },
+        { title: "Category Description", field: "CategoryDescription" },
+        { title: "Machine Last Modified", field: "MachineLastModified" },
+        { title: "User Last Modified", field: "UserLastModified" },
+        { title: "Actions", formatter: actionButtons, hozAlign: "center" },
+    ],
+});
 
-        
+
+
+function handleModuleChange()
+{
+    const selectedModule = document.getElementById("Module").value;
+    console.log("Selected Module:", selectedModule);
+    document.getElementById("ValidationErrorContainer").innerText = ""; 
+}
+
+function SaveImage() 
+{
+    const module = document.getElementById("Module").value;
+    const fileInput = document.getElementById("SkinsAndOfflineImageUploadInput").files[0];
+
+    if (!fileInput)
+    {
+        swal("Validation Error", "Please upload an image.", "error");
+        return;
+    }
+
+    ValidateImage(fileInput, module).then(isValid =>
+        {
+        if (isValid) 
+        {
+            swal("Success", "New Skin and offline Images is saved.", "success");
+            // Proceed with saving
+        } 
+        else
+        {
+            swal("Success", "Image validation failed.", "error");
+            console.error("Image validation failed.");
+        }
+    }).catch(err =>
+        {
+        console.error("Error during validation:", err);
+        const errorMessageDiv = document.getElementById("ValidationErrorContainer");
+        errorMessageDiv.style.display = "block";
+        errorMessageDiv.innerText = `Error: ${err}`;
+    });
+}
+
+
+function ValidateImage(file, module)
+{
+    return new Promise((resolve, reject) =>
+    {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            const image = new Image();
+            image.src = e.target.result;
+
+            image.onload = function () {
+                const width = image.width;
+                const height = image.height;
+                const fileType = file.type.split("/")[1].toUpperCase();
+
+                const validationRules = {
+                    "Offline": { formats: ["JPG", "PNG"], width: null, height: null },
+                    "Popups": { formats: ["BMP"], width: [314, 414], height: [188, 288] },
+                    "Surveys": { formats: ["BMP"], width: [485], height: [600] },
+                    "SingleTicker": { formats: ["BMP"], width: [80], height: [40] },
+                    "DoubleTicker": { formats: ["BMP"], width: [80], height: [80] }
+                };
+
+                const rules = validationRules[module];
+                if (!rules.formats.includes(fileType))
+                {
+                    reject(`Invalid file type. Allowed: ${rules.formats.join(", ")}`);
+                    return;
+                }
+
+                if (rules.width && (!Array.isArray(rules.width) || !rules.width.includes(width)))
+                {
+                    reject(`Invalid width. Expected: ${rules.width.join(", ")}`);
+                    return;
+                }
+
+                if (rules.height && (!Array.isArray(rules.height) || !rules.height.includes(height)))
+                {
+                    reject(`Invalid height. Expected: ${rules.height.join(", ")}`);
+                    return;
+                }
+
+                resolve(true);
+            };
+
+            image.onerror = function () 
+            {
+                reject("Invalid image file.");
+            };
+        };
+
+        reader.onerror = function () 
+        {
+            reject("File read error.");
+        };
+
+        reader.readAsDataURL(file);
+    });
+}
+
 
 
 function OpenSkinsCategories(categoryId) 
@@ -260,38 +435,6 @@ function AddNewSkinsAndOfflineImages()
 {
         const editModal = new bootstrap.Modal(document.getElementById('EditModal'));
         editModal.show();
-}
-
-function OpenSkinsCategoriesss(machineId)
-{
-
-    formdata =
-    {
-        machineId: machineId,
-       
-    }
-
-    $.ajax({
-            url: '@Url.Action("SkinsAndOfflineImageDetails", "Settings")',
-        type: 'GET',
-        data: formdata,
-        success: function (response)
-        {
-            console.log(response)
-
-                var redirectPage = "@SettingsPages.SkinsAndOfflineImageDetails";
-            
-
-                OpenPage(machineId);
-
-        },
-        error: function (error) 
-        {
-            console.log('Error fetching machine data:', error);
-        }
-});
-    
-
 }
 
  
