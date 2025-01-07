@@ -6,6 +6,7 @@ using CLA_Administration_Web.Services;
 using CLA_Administration_Web.ViewModels.Settings.ActiveConnections;
 using CLA_Administration_Web.ViewModels.Settings.CustomUser;
 using CLA_Administration_Web.ViewModels.Settings.DefaultFonts;
+using CLA_Administration_Web.ViewModels.Settings.ManageAdminAccess;
 using CLA_Administration_Web.ViewModels.Settings.SetupExclusion;
 using CLA_Administration_Web.ViewModels.Settings.Shared;
 using CLA_Administration_Web.ViewModels.Settings.SkinAndOfflineImage;
@@ -171,7 +172,13 @@ namespace CLA_Administration_Web.Controllers
         public async Task<IActionResult> AdminAccess()
         {
 
-            return PartialView(AppPagesLinks.Settings.AdminAccessPageLink);
+            var adminAccessData = new ManageAdminAccessMainViewModel()
+            {
+                AdminAccessItems = SettingsMockData.AdminAccess,
+               
+            };
+
+            return PartialView(AppPagesLinks.Settings.AdminAccessPageLink, adminAccessData);
         }
 
         #endregion  
@@ -244,6 +251,38 @@ namespace CLA_Administration_Web.Controllers
                     }
 
                 },
+                TargetedIPRanges = new List<TargetedIPRange>
+                {
+                new TargetedIPRange
+                {
+                    RangeId = 1,
+                    StartIP = "192.168.1.1",
+                    EndIP = "192.168.1.255",
+                    Description = "Corporate Network"
+                },
+                new TargetedIPRange
+                {
+                    RangeId = 2,
+                    StartIP = "10.0.0.1",
+                    EndIP = "10.0.0.255",
+                    Description = "VPN Network"
+                },
+                new TargetedIPRange
+                {
+                    RangeId = 3,
+                    StartIP = "172.16.0.1",
+                    EndIP = "172.16.0.255",
+                    Description = "Development Network"
+                },
+                new TargetedIPRange
+                {
+                    RangeId = 4,
+                    StartIP = "192.168.2.1",
+                    EndIP = "192.168.2.255",
+                    Description = "Guest Network"
+                }
+                }
+
 
 
             };

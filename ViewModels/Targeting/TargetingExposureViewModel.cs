@@ -7,5 +7,9 @@
         public List<TargetedUser> TargetedUsers { get; set; }
 
         public List<TargetedMachine> TargetedMachines { get; set; }
+
+        public  List<TargetedIPRange> TargetedIPRanges { get; set; }
+
+
     }
 }

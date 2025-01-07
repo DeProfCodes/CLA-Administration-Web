@@ -8,6 +8,7 @@ using CLA_Administration_Web.ViewModels.Settings.ActiveConections;
 using CLA_Administration_Web.ViewModels.Settings.ActiveConnections;
 using CLA_Administration_Web.ViewModels.Settings.CustomUser;
 using CLA_Administration_Web.ViewModels.Settings.DefaultFonts;
+using CLA_Administration_Web.ViewModels.Settings.ManageAdminAccess;
 using CLA_Administration_Web.ViewModels.Settings.SetupExclusion;
 using CLA_Administration_Web.ViewModels.Settings.SkinAndOfflineImage;
 using CLA_Administration_Web.ViewModels.Settings.StagingUsers;
@@ -39,6 +40,7 @@ namespace CLA_Administration_Web.Helpers.MockData
         public static List<SkinsAndOfflineModel> SkinsAndOfflineImage { get; set; } = GetSkinsAndOfflineImage();
 
         public static List<FontCustomizationModel> CustomFontSettings { get; set; } = GetFontSettings();
+        public static List<AdminAccessItem> AdminAccess { get; set; } = GetAdminAccessData();
 
         public static List<SkinOfflineCategortyTree> AllSkinsOfflineImageCategories { get; set; } = GenerateDummyDataSkinsOfflineImage();
 
@@ -184,6 +186,71 @@ namespace CLA_Administration_Web.Helpers.MockData
             return result;
         }
 
+
+        private static List<AdminAccessItem> GetAdminAccessData()
+        {
+            var random = new Random();
+            var items = new List<AdminAccessItem>();
+            var surveyQuestionCounters = new Dictionary<int, int>();
+
+            var responseTypes = new List<string> { "Single Select", "Multi Select", "Yes/No", "Yes/No/NA", "Agree/Disagree", "Text", "Re-Arrange" };
+
+            for (int i = 1; i <= 200; i++)
+            {
+                // Generate random survey ID between 1 and 50
+                var surveyId = random.Next(1, 51);
+
+                // Initialize or increment question counter for the survey
+                if (!surveyQuestionCounters.ContainsKey(surveyId))
+                {
+                    surveyQuestionCounters[surveyId] = 1;
+                }
+                var questionNo = surveyQuestionCounters[surveyId].ToString();
+                surveyQuestionCounters[surveyId]++;
+
+                // Randomize scoring and response type
+                var isScored = random.Next(0, 2) == 0 ? "No" : "Yes";
+                var responseType = responseTypes[random.Next(responseTypes.Count)];
+                var correctAnswer = isScored == "Yes" ? "Yes" : "No";
+
+                // Generate dummy data for other fields
+                var domain = $"Domain{random.Next(1, 101)}";
+                var username = $"User{random.Next(1, 101)}";
+                var desktopEnvironment = $"Environment{random.Next(1, 6)}";
+                var userLastModified = DateTime.Now.AddDays(-random.Next(1, 365)).ToString("yyyy-MM-dd");
+                var machineLastModified = $"Machine{random.Next(1, 21)}";
+
+                // Add the item to the list
+                var item = new AdminAccessItem
+                {
+                    
+                    Domain = domain,
+                    Username = username,
+                    DesktopEnvironment = desktopEnvironment,
+                    DesktopRead = random.Next(0, 2) == 0 ? "Allowed" : "Restricted",
+                    DesktopWrite = random.Next(0, 2) == 0 ? "Allowed" : "Restricted",
+                    DesktopReport = random.Next(0, 2) == 0 ? "Enabled" : "Disabled",
+                    TickersEnvironment = $"TickersEnv{random.Next(1, 6)}",
+                    TickersRead = random.Next(0, 2) == 0 ? "Allowed" : "Restricted",
+                    TickersWrite = random.Next(0, 2) == 0 ? "Allowed" : "Restricted",
+                    TickersReport = random.Next(0, 2) == 0 ? "Enabled" : "Disabled",
+                    RSS_Environment = $"RSS_Env{random.Next(1, 6)}",
+                    RSS_Read = random.Next(0, 2) == 0 ? "Allowed" : "Restricted",
+                    RSS_Write = random.Next(0, 2) == 0 ? "Allowed" : "Restricted",
+                    RSS_Report = random.Next(0, 2) == 0 ? "Enabled" : "Disabled",
+                    LockscreenEnvironment = $"LockscreenEnv{random.Next(1, 6)}",
+                    LockscreenRead = random.Next(0, 2) == 0 ? "Allowed" : "Restricted",
+                    LockscreenWrite = random.Next(0, 2) == 0 ? "Allowed" : "Restricted",
+                    LockscreenReport = random.Next(0, 2) == 0 ? "Enabled" : "Disabled",
+                    UserLastModified = userLastModified,
+                    MachineLastModified = machineLastModified,
+                   
+                };
+
+                items.Add(item);
+            }
+            return items;
+        }
 
         private static List<SurveyQuestionViewModel> GenerateSurveyQuestions()
         {

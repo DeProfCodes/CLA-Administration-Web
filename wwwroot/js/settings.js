@@ -206,3 +206,37 @@ function SaveModal(modalId, successMessage)
         });
     }, 300);
 }
+
+function GetImageDimensions(imageURL) {
+    return new Promise((resolve, reject) => {
+        if (imageURL) {
+            const reader = new FileReader();
+
+            reader.readAsDataURL(imageURL);
+
+            reader.onload = function (e) {
+                const image = new Image();
+
+                image.src = e.target.result;
+
+                image.onload = function () {
+                    const width = image.width;
+                    const height = image.height;
+
+                    resolve(new DimensionType(width, height));
+                };
+
+                image.onerror = function () {
+                    reject(new DimensionType(-1, -1));
+                };
+            };
+
+            reader.onerror = function () {
+                reject(new DimensionType(-1, -1));
+            };
+        }
+        else {
+            reject(new DimensionType(-1, -1));
+        }
+    });
+}

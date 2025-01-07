@@ -59,7 +59,7 @@
                             <input type="checkbox" name="select-item" aria-label="Select Item">
                         </td>
                         <td class="cssBg">
-                            <button class="btn btn-sm btn-info custom-btn-sm" onclick="PreviewContentType(ContentTypes.IMAGE, `${APP_BASE_ADDRESS}/images/others/modules/skins/Popup_Skin_Default.png`)">Open</button>
+                           Select Item Path
                         </td>
                         <td class="cssBg">
 
@@ -110,7 +110,7 @@
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
-                <h5 class="modal-title" id="EditModalLabel">Edit Skins and Offline Images</h5>
+                <h5 class="modal-title" id="EditModalLabel">Add New Skins and Offline Images</h5>
                 <button type="button"
                         class="btn-close"
                         data-bs-dismiss="modal"
@@ -127,22 +127,23 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="Domain" class="form-label">Image</label>
-                    @{
-                        await Html.RenderPartialAsync(
-                        "~/Views/Shared/Components/Custom/Form/FileUploader.cshtml",
-                        new FileUploaderModel
-            {
-                ComponentId = "SkinsAndOfflineImage",
-                InputId = "SkinsAndOfflineImageUploadInput",
-                ShowPreviewButton = true,
-                InitialHidden = false,
-                WidthPx = "396px",
-                OnFileUploadCallback = null
-            }
-                        );
-                    }
+                    <label for="Module" class="form-label">Module:</label>
+                    <select class="form-select" id="Module" name="Module" onchange="handleModuleChange()">
+                        <option value="Offline">Offline</option>
+                        <option value="Popups">Popups</option>
+                        <option value="Surveys">Surveys</option>
+                        <option value="SingleTicker">Single Ticker</option>
+                        <option value="DoubleTicker">Double Ticker</option>
+                    </select>
                 </div>
+
+                <div class="mb-3">
+                    <label for="ImageUpload" class="form-label">Image</label>
+                    <input type="file" class="form-control" id="SkinsAndOfflineImageUploadInput" accept="image/*">
+                </div>
+
+                <!-- Placeholder for displaying validation errors -->
+                <div class="mb-3 text-danger" id="ValidationErrorContainer"></div>
 
                 <div class="mb-3">
                     <label for="DefaultId" class="form-label">Default?</label>
@@ -174,19 +175,104 @@
                     Cancel
                 </button>
                 <button type="button"
-                        class="btn custom-btn-default"
-                        onclick="SaveStagingUser()">
-                    Save User
+                        class="btn btn-primary"
+                        onclick="SaveImage()">
+                    Save Image
                 </button>
             </div>
         </div>
     </div>
 </div>
 
+
+
+
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <script>
+
+    function handleModuleChange() {
+        const selectedModule = document.getElementById("Module").value;
+        console.log("Selected Module:", selectedModule);
+        document.getElementById("ValidationErrorContainer").innerText = ""; // Clear errors on change
+    }
+
+    function SaveImage() {
+        const module = document.getElementById("Module").value;
+        const fileInput = document.getElementById("SkinsAndOfflineImageUploadInput").files[0];
+
+        if (!fileInput) {
+            swal("Validation Error", "Please upload an image.", "error");
+            return;
+        }
+
+        ValidateImage(fileInput, module).then(isValid => {
+            if (isValid) {
+                swal("Success", "New Skin and offline Images is saved.", "success");
+                // Proceed with saving
+            } else {
+                console.error("Image validation failed.");
+            }
+        }).catch(err => {
+            console.error("Error during validation:", err);
+        });
+    }
+
+    function ValidateImage(file, module) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                const image = new Image();
+                image.src = e.target.result;
+
+                image.onload = function () {
+                    const width = image.width;
+                    const height = image.height;
+                    const fileType = file.type.split("/")[1].toUpperCase();
+
+                    const validationRules = {
+                        "Offline": { formats: ["JPG", "PNG"], width: null, height: null },
+                        "Popups": { formats: ["BMP"], width: [314, 414], height: [188, 288] },
+                        "Surveys": { formats: ["BMP"], width: [485], height: [600] },
+                        "SingleTicker": { formats: ["BMP"], width: [80], height: [40] },
+                        "DoubleTicker": { formats: ["BMP"], width: [80], height: [80] }
+                    };
+
+                    const rules = validationRules[module];
+                    if (!rules.formats.includes(fileType)) {
+                        reject(`Invalid file type. Allowed: ${rules.formats.join(", ")}`);
+                        return;
+                    }
+
+                    if (rules.width && (!Array.isArray(rules.width) || !rules.width.includes(width))) {
+                        reject(`Invalid width. Expected: ${rules.width.join(", ")}`);
+                        return;
+                    }
+
+                    if (rules.height && (!Array.isArray(rules.height) || !rules.height.includes(height))) {
+                        reject(`Invalid height. Expected: ${rules.height.join(", ")}`);
+                        return;
+                    }
+
+                    resolve(true);
+                };
+
+                image.onerror = function () {
+                    reject("Invalid image file.");
+                };
+            };
+
+            reader.onerror = function () {
+                reject("File read error.");
+            };
+
+            reader.readAsDataURL(file);
+        });
+    }
+
+
 
         function AddNewSkinsAndOfflineImages() {
             const editModal = new bootstrap.Modal(document.getElementById('EditModal'));

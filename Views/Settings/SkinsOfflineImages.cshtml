@@ -163,6 +163,8 @@ await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Settings/Setting
                     </div>
 
                     <div class="mb-3">
+                        <div class="error-message" id="errorMessage" style="color: red; display: none;"></div>
+
                         <label for="Domain" class="form-label">Image</label>
                         @{
                             await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Form/FileUploader.cshtml",
