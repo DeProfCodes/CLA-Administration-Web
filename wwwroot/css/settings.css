@@ -55,33 +55,29 @@
 
 /* Bulk import  close*/
 
-
 /* Tree View Container */
-.tree-view 
-{
+.tree-view {
     list-style-type: none;
     padding-left: 20px;
 }
 
-.tree-view li
-{
-    position: relative;
-    margin: 5px 0;
-    padding-left: 20px;
-}
+    .tree-view li {
+        position: relative;
+        margin: 5px 0;
+        padding-left: 20px;
+    }
 
-.tree-view li::before 
-{
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 10px;
-    height: 10px;
-    border: 1px solid #007bff;
-    background-color: #ffffff;
-    border-radius: 50%;
-}
+        .tree-view li::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 10px;
+            height: 10px;
+            border: 1px solid #007bff;
+            background-color: #ffffff;
+            border-radius: 50%;
+        }
 
 /* Adjust button alignment */
 .btn-group-vertical {
@@ -96,22 +92,24 @@
     overflow-y: auto;
 }
 
-/* Enhanced spacing and alignment */
-.section-title-button {
+/* Member Title Styling */
+.member-title {
     font-size: 1.1rem;
     font-weight: bold;
     margin-bottom: 10px;
+    color: #007bff;
+    text-transform: uppercase;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
 }
 
-
 /* Collapsible Checkbox */
-.tree-toggle
-{
+.tree-toggle {
     display: none;
 }
 
-.tree-toggle-label 
-{
+.tree-toggle-label {
     cursor: pointer;
     font-weight: bold;
     display: flex;
@@ -119,69 +117,58 @@
     gap: 5px;
 }
 
-.tree-toggle-label::before
-{
-    content: '+';
-    color: #007bff;
-    font-weight: bold;
-    display: inline-block;
-    margin-right: 5px;
-}
+    .tree-toggle-label::before {
+        content: '+';
+        color: #007bff;
+        font-weight: bold;
+        display: inline-block;
+        margin-right: 5px;
+    }
 
-.tree-toggle:checked + .tree-toggle-label::before
-{
+.tree-toggle:checked + .tree-toggle-label::before {
     content: '-';
 }
 
 /* Nested Content */
-.tree-content
-{
+.tree-content {
     display: none;
     margin-left: 15px;
     border-left: 1px dashed #007bff;
     padding-left: 10px;
 }
 
-.tree-toggle:checked ~ .tree-content
-{
+.tree-toggle:checked ~ .tree-content {
     display: block;
 }
 
 /* Custom Styles */
-.treeview ul 
-{
+.treeview ul {
     list-style-type: none;
     padding-left: 1rem;
 }
 
-.treeview li
-{
+.treeview li {
     margin: 4px 0;
     cursor: pointer;
 }
 
-.treeview i
-{
+.treeview i {
     margin-right: 5px;
 }
-
-.modal-header
-{
+/* End Tree View Container */
+.modal-header {
     border-bottom: none;
 }
 
-.modal-title
-{
+.modal-title {
     font-size: 1.2rem;
 }
 
-.btn-group-vertical
-{
+.btn-group-vertical {
     margin-top: 10px;
 }
 
-.scroll-box
-{
+.scroll-box {
     border: 1px solid #ccc;
     height: 100%;
     overflow-y: auto;
@@ -189,27 +176,16 @@
     background-color: #f8f9fa;
 }
 
-.section-title
-{
-    font-weight: bold;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-    font-size: 0.9rem;
-}
-
-.filter-input
-{
+.filter-input {
     max-width: 100%;
 }
 
-.card-bordered-section
-{
+.card-bordered-section {
     border: 1px solid #ccc;
     padding: 15px;
     margin-bottom: 20px;
     border-radius: 5px;
 }
-/* Tree View Container close */
 
 
 #table-scroll
