@@ -236,6 +236,47 @@
     border: none;
     background-color: darkgray
 }
+ /*tool bar */
+.toolbar {
+    display: flex;
+    gap: 15px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.toolbar-item {
+    display: flex;
+    align-items: center;
+}
+
+.form-select {
+    width: 150px;
+}
+
+.btn-light {
+    border: 1px solid #ddd;
+    padding: 5px 10px;
+    font-size: 14px;
+}
+
+.editor-area {
+    margin-top: 20px;
+    border: 1px solid #ddd;
+    padding: 20px;
+    background-color: #fff;
+    min-height: 300px;
+}
+
+.editor {
+    outline: none;
+}
+
+
+
+
 
 
 /*  skin and offline*/

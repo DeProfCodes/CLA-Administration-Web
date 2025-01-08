@@ -1,0 +1,107 @@
+﻿@* _TextEditorToolbar.cshtml *@
+<div class="toolbar">
+    <!-- Font Family -->
+    <select id="fontFamily" class="form-control-sm">
+        <option value="Arial">Arial</option>
+        <option value="Verdana">Verdana</option>
+        <option value="Times New Roman">Times New Roman</option>
+        <option value="Courier New">Courier New</option>
+        <option value="Georgia">Georgia</option>
+    </select>
+
+    <!-- Font Size -->
+    <select id="fontSize" class="form-control-sm">
+        <option value="12">12</option>
+        <option value="14">14</option>
+        <option value="16">16</option>
+        <option value="18">18</option>
+        <option value="24">24</option>
+        <option value="36">36</option>
+    </select>
+
+    <!-- Bold -->
+    <button class="btn btn-light" id="boldBtn"><i class="fas fa-bold"></i></button>
+
+    <!-- Italic -->
+    <button class="btn btn-light" id="italicBtn"><i class="fas fa-italic"></i></button>
+
+    <!-- Underline -->
+    <button class="btn btn-light" id="underlineBtn"><i class="fas fa-underline"></i></button>
+
+    <!-- Text Color -->
+    <input type="color" id="textColor" class="form-control-sm" title="Text Color">
+
+    <!-- Background Color -->
+    <input type="color" id="backgroundColor" class="form-control-sm" title="Background Color">
+</div>
+
+<!-- Editable Document Area -->
+<div class="document-editor" id="documentEditor" contenteditable="true">
+    <p>Start typing your document here...</p>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+
+<script>
+    document.getElementById("fontFamily").addEventListener("change", function () {
+        document.getElementById("documentEditor").style.fontFamily = this.value;
+    });
+
+    document.getElementById("fontSize").addEventListener("change", function () {
+        document.getElementById("documentEditor").style.fontSize = this.value + "px";
+    });
+
+    document.getElementById("boldBtn").addEventListener("click", function () {
+        document.execCommand("bold", false, null);
+    });
+
+    document.getElementById("italicBtn").addEventListener("click", function () {
+        document.execCommand("italic", false, null);
+    });
+
+    document.getElementById("underlineBtn").addEventListener("click", function () {
+        document.execCommand("underline", false, null);
+    });
+
+    document.getElementById("textColor").addEventListener("input", function () {
+        document.getElementById("documentEditor").style.color = this.value;
+    });
+
+    document.getElementById("backgroundColor").addEventListener("input", function () {
+        document.getElementById("documentEditor").style.backgroundColor = this.value;
+    });
+</script>
+
+<style>
+    .toolbar {
+        display: flex;
+        gap: 15px;
+        padding: 10px;
+        background-color: #f8f9fa;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+
+    .form-select, .form-control-sm {
+        width: 150px;
+    }
+
+    .btn-light {
+        border: 1px solid #ddd;
+        padding: 5px 10px;
+        font-size: 14px;
+    }
+
+    .document-editor {
+        margin-top: 20px;
+        border: 1px solid #ddd;
+        padding: 20px;
+        background-color: #fff;
+        min-height: 300px;
+    }
+
+    .document-editor {
+        outline: none;
+    }
+</style>

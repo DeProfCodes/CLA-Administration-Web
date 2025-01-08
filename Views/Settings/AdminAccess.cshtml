@@ -106,8 +106,8 @@
                                     <td class="@cssBg">@access.LockscreenWrite</td>
                                     <td class="@cssBg">@access.LockscreenReport</td>
                                       <td class="@cssBg">
-                                <button class="btn btn-sm custom-btn-sm btn-danger" onclick="4 (@access.AdminID)" >Delete</button>
-                                <button class="btn btn-sm custom-btn-sm btn-success" id="edit-staging-btn" onclick="EditNewStagingEnting(@access.Domain)">Edit</button>
+                                        <button class="btn btn-sm custom-btn-sm btn-danger" onclick="DeleteAdminAccess(@access.AdminID)">Delete</button>
+                                        <button class="btn btn-sm custom-btn-sm btn-success" id="edit-staging-btn" onclick="EdiAdminAccess(@access.AdminID)">Edit</button>
                             </td>
                                 </tr>
                             }
@@ -177,8 +177,28 @@
     </div>
 </div>
 
+<!-- Edit Staging Modal -->
+<div class="modal fade" id="EditModal" tabindex="-1" aria-labelledby="EditModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="EditModalLabel">Admin Access Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal('EditModal')"></button>
+            </div>
+            <div class="modal-body" id="EditModalContainer">
+                <!-- Dynamic content for the modal goes here -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal('EditModal')">Cancel</button>
+                <button type="button" class="btn custom-btn-default" onclick="SaveStagingUser()">Save User</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
 
 <script>
@@ -217,15 +237,15 @@
 
 
 
-    function EditNewStagingEnting(machineId, entityType)
+    function EdiAdminAccess(machineId)
     {
      
         $.ajax({
-            url: '@Url.Action("EditStagingMachine", "Settings")',
+            url: '@Url.Action("EditAdminAccess", "Settings")',
             type: 'GET',
-            data: { machineId: machineId, entityType: entityType },
+            data: { adminID: machineId },
             success: function (response)
-            {e
+            {
 
                 $('#EditModalContainer').html(response);
                 const editModal = new bootstrap.Modal(document.getElementById('EditModal'));

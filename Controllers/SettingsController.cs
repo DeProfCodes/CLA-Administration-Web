@@ -162,7 +162,7 @@ namespace CLA_Administration_Web.Controllers
             }
 
             ViewBag.EntityType = entityType;
-            return PartialView(AppPagesLinks.Settings.EditSettingsModalPageLink, selectedEntity);
+            return PartialView(AppPagesLinks.Settings.EditAdminModalPageLink, selectedEntity);
         }
 
         [HttpGet]
@@ -180,6 +180,31 @@ namespace CLA_Administration_Web.Controllers
             };
 
             return PartialView(AppPagesLinks.Settings.AdminAccessPageLink, adminAccessData);
+        }
+
+
+        [HttpGet]
+        public ActionResult EditAdminAccess(int adminID, string entityType = null)
+        {
+
+            var adminAccessData = new ManageAdminAccessMainViewModel()
+            {
+                AdminAccessItems = SettingsMockData.AdminAccess,
+
+            };
+
+            var data = adminAccessData.AdminAccessItems.FirstOrDefault(m => m.AdminID == adminID);
+            //var adminAccessData = SettingsMockData.AdminAccess.FirstOrDefault(m => m.AdminID == adminID);
+
+         
+
+
+            if (data == null)
+            {
+                return NotFound($"{entityType} with ID {adminID} not found.");
+            }
+
+            return PartialView(AppPagesLinks.Settings.EditAdminModalPageLink, data);
         }
 
         #endregion  

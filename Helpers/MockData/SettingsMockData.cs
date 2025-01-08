@@ -199,7 +199,7 @@ namespace CLA_Administration_Web.Helpers.MockData
             for (int i = 1; i <= 15; i++)
             {            
               
-                var domain = $"Domain{random.Next(1, 101)}";
+                var domain = MockDataHelperFunctions.GetRandomDomainName();
                 var username = $"User{random.Next(1, 101)}";
                 var id = random.Next(1, 100);
                 var desktopEnvironment = $"Environment{random.Next(1, 6)}";

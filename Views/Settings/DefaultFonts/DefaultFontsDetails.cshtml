@@ -8,166 +8,143 @@
 @using CLA_Administration_Web.Helpers.MockData
 
 @{
-   // var fontFamilies = MockDataHelperFunctions.FontFamilies();
-    //var fontWeights = MockDataHelperFunctions.FontWeight();
-    //var fontStyles = MockDataHelperFunctions.FontStyle();
-
-    var fontFamilies = new List<string> { "Arial", "Verdana", "Times New Roman", "Courier New", "Georgia" };
+    var fontFamilies = new List<string> { "Arial", "Verdana", "Times New Roman", "Courier New", "Georgia", "Lucida Console", "Comic Sans MS", "Trebuchet MS", "Impact", "Palatino Linotype", "Gill Sans", "Helvetica", "Garamond", "Brush Script MT", "Arial Black", "Lucida Sans", "Segoe UI", "Optima", "Futura", "Baskerville", "Century Gothic", "Franklin Gothic Medium" };
     var fontWeights = new List<string> { "normal", "bold", "lighter" };
     var fontStyles = new List<string> { "normal", "italic", "oblique" };
-    var namedColors = new List<string> {"Red", "Green", "Blue", "Yellow", "Orange", "Purple", "Cyan", "Magenta", "Black", "White", "Gray"};
-
-
-
-
+    var namedColors = new List<string> { "Red", "Green", "Blue", "Yellow", "Orange", "Purple", "Cyan", "Magenta", "Black", "White", "Gray" };
 }
 
 <div class="container">
-    <h4 class="text-center mb-4">Font Customization for ID: @Model.SubId</h4>
-</div>
+    <h5 class="text-center mb-4 theme-txt-clr">Font Customization for ID: @Model.SubId</h5>
 
-<div class="container">
-    <div class="row">
-        <!-- Form Column -->
-        <div class="col-lg-8 col-12">
-            <div class="border p-3 mb-3">
-                
-                <div id="fontCustomizationForm">
-                    <!-- Heading Font Family Selection -->
-                    <input type="hidden" name="Id" value="@Model.SubId" />
-
-                    <div class="row mb-3 align-items-center">
-                        <div class="col-md-4">
-                            <label for="HeadingFontFamily" class="form-label">Select Heading Font</label>
-                        </div>
-                        <div class="col-md-8">
-                            <select id="HeadingFontFamily" name="HeadingFontFamily" class="form-select">
-                                @foreach (var font in fontFamilies)
-                                {
-                                    var fontString = font.ToString();
-                                    var isSelected = Model.HeadingFontFamily == fontString ? "selected" : "";
-                                    <option value="@fontString" isSelected>@fontString</option>
-                                }
-                            </select>
-                        </div>
-                    </div>
-
-                    <!-- Font Weight Selection -->
-                    <div class="row mb-3 align-items-center">
-                        <div class="col-md-4">
-                            <label for="FontWeight" class="form-label">Select Font Weight</label>
-                        </div>
-                        <div class="col-md-8">
-                            <select id="FontWeight" name="FontWeight" class="form-select">
-                                @foreach (var weight in fontWeights)
-                                {
-                                    var weightString = weight.ToString();
-                                    var isSelected = Model.FontWeight == weightString ? "selected" : "";
-                                    <option value="@weightString" isSelected>@weightString</option>
-                                }
-                            </select>
-                        </div>
-                    </div>
-
-                    <!-- Font Style Selection -->
-                    <div class="row mb-3 align-items-center">
-                        <div class="col-md-4">
-                            <label for="FontStyle" class="form-label">Select Font Style</label>
-                        </div>
-                        <div class="col-md-8">
-                            <select id="FontStyle" name="FontStyle" class="form-select">
-                                @foreach (var style in fontStyles)
-                                {
-                                    var styleString = style.ToString();
-                                    var isSelected = Model.FontStyle == styleString ? "selected" : "";
-                                    <option value="@styleString" isSelected>@styleString</option>
-                                }
-                            </select>
-                        </div>
-                    </div>
-
-                  
-                </div>
-            </div>
+    <!-- Word-like Text Editor Toolbar -->
+    <div class="toolbar">
+        <!-- Font Family -->
+        <div class="toolbar-item">
+            <label for="HeadingFontFamily" class="mr-2">Font</label>
+            <select id="HeadingFontFamily" name="HeadingFontFamily" class="form-select" onchange="updatePreview()">
+                @foreach (var font in fontFamilies)
+                {
+                    var fontString = font.ToString();
+                    var isSelected = Model.HeadingFontFamily == fontString ? "selected" : "";
+                    <option value="@fontString" isSelected>@fontString</option>
+                }
+            </select>
         </div>
 
-        <!-- Preview Column -->
-        <div class="col-lg-4 col-12">
-            <div class="border mb-3 p-3 text-center" id="fontCustomizationContainer" style="overflow: auto;">
-                <H4 id="previewText" style="font-family:@Model.HeadingFontFamily; font-weight:@Model.FontWeight; font-style:@Model.FontStyle;">
-                    @Model.Text
-                </H4>
-            </div>
+        <!-- Font Size -->
+        <div class="toolbar-item">
+            <label for="FontSize" class="mr-2">Size</label>
+            <select id="FontSize" name="FontSize" class="form-select" onchange="updatePreview()">
+                <option value="12">12</option>
+                <option value="14">14</option>
+                <option value="16">16</option>
+                <option value="18">18</option>
+                <option value="24">24</option>
+                <option value="36">36</option>
+            </select>
+        </div>
+
+        <!-- Bold -->
+        <div class="toolbar-item">
+            <button type="button" id="boldBtn" class="btn btn-light" onclick="toggleBold()"><i class="fas fa-bold"></i></button>
+        </div>
+
+        <!-- Italic -->
+        <div class="toolbar-item">
+            <button type="button" id="italicBtn" class="btn btn-light" onclick="toggleItalic()"><i class="fas fa-italic"></i></button>
+        </div>
+
+        <!-- Underline -->
+        <div class="toolbar-item">
+            <button type="button" id="underlineBtn" class="btn btn-light" onclick="toggleUnderline()"><i class="fas fa-underline"></i></button>
+        </div>
+
+        <!-- Text Color -->
+        <div class="toolbar-item">
+            <input type="color" id="TextColor" name="TextColor" class="form-control" onchange="updatePreview()">
+        </div>
+
+        <!-- Background Color -->
+        <div class="toolbar-item">
+            <input type="color" id="BackgroundColor" name="BackgroundColor" class="form-control" onchange="updatePreview()">
+        </div>
+    </div>
+
+    <!-- Editable Document Area -->
+    <div class="editor-area mt-3">
+        <div class="editor" id="documentEditor" contenteditable="true" style="border: 1px solid #ccc; padding: 20px; background-color: @Model.BackgroundColor; color: @Model.TextColor; font-family: @Model.HeadingFontFamily; font-size: @Model.FontSize; font-weight: @Model.FontWeight; font-style: @Model.FontStyle;">
+            @Model.Text
         </div>
     </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
 
-<script src="~/js/settings.js"></script>
 <script>
+    function updatePreview() {
+        const editor = document.getElementById('documentEditor');
+        const fontFamily = document.getElementById('HeadingFontFamily').value;
+        const fontSize = document.getElementById('FontSize').value;
+        const textColor = document.getElementById('TextColor').value;
+        const backgroundColor = document.getElementById('BackgroundColor').value;
 
-
-    function SubmitModifiedDefaultFonts() {
-        var valid = SubmitModifiedDefaultFonts();
-
-        if (valid) {
-            swal("New Category Success", "Content Library Category (will be) Added Successfully.", "success");
-        }
+        editor.style.fontFamily = fontFamily;
+        editor.style.fontSize = fontSize + 'px';
+        editor.style.color = textColor;
+        editor.style.backgroundColor = backgroundColor;
     }
 
-
-    $(document).ready(function () {
-       
-        applyRealTimeStyles("previewText", "HeadingFontFamily", "FontWeight", "FontStyle");
-    });
-
-
-function applyRealTimeStyles(previewTextId, fontFamilyDropdownId, fontWeightDropdownId, fontStyleDropdownId) 
-{
-       
-    var $previewText = $("#" + previewTextId);
-    var $fontFamilyDropdown = $("#" + fontFamilyDropdownId);
-    var $fontWeightDropdown = $("#" + fontWeightDropdownId);
-    var $fontStyleDropdown = $("#" + fontStyleDropdownId);
-
-       
-    if ($previewText.length)
-    {
-        $previewText.css("font-family", $fontFamilyDropdown.length ? $fontFamilyDropdown.val() : "Arial");
-        $previewText.css("font-weight", $fontWeightDropdown.length ? $fontWeightDropdown.val() : "normal");
-        $previewText.css("font-style", $fontStyleDropdown.length ? $fontStyleDropdown.val() : "normal");
+    function toggleBold() {
+        document.execCommand('bold', false, null);
     }
 
-    if ($fontFamilyDropdown.length) 
-    {
-        $fontFamilyDropdown.on("change", function ()
-        {
-            if ($previewText.length)
-            {
-                $previewText.css("font-family", $(this).val());
-            }
-        });
+    function toggleItalic() {
+        document.execCommand('italic', false, null);
     }
 
-    if ($fontWeightDropdown.length)
-    {
-        $fontWeightDropdown.on("change", function ()
-        {
-            if ($previewText.length) 
-            {
-                $previewText.css("font-weight", $(this).val());
-            }
-        });
+    function toggleUnderline() {
+        document.execCommand('underline', false, null);
     }
-
-    if ($fontStyleDropdown.length)
-    {
-        $fontStyleDropdown.on("change", function () 
-        {
-            if ($previewText.length) 
-            {
-                $previewText.css("font-style", $(this).val());
-            }
-        });
-    }
-}
 </script>
+
+<style>
+ 
+.toolbar {
+display: flex;
+gap: 15px;
+padding: 10px;
+background-color: #f8f9fa;
+border: 1px solid #ddd;
+border-radius: 5px;
+margin-bottom: 20px;
+}
+
+.toolbar-item {
+    display: flex;
+    align-items: center;
+}
+
+.form-select {
+    width: 150px;
+}
+
+.btn-light {
+    border: 1px solid #ddd;
+    padding: 5px 10px;
+    font-size: 14px;
+}
+
+.editor-area {
+    margin-top: 20px;
+    border: 1px solid #ddd;
+    padding: 20px;
+    background-color: #fff;
+    min-height: 200px;
+}
+
+.editor {
+    outline: none;
+}
+
+
+</style>

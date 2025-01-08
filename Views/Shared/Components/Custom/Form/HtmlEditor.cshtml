@@ -136,4 +136,28 @@
     }
 
 
+
+
+    function CheckCharacterLimit(editorId, maxLength, validateId, writeToDestination, destinationDivId) {
+        const currentText = $(`#${editorId}`).text().trim();
+        const validateElement = $(`#${validateId}`);
+
+        if (currentText.length >= maxLength) {
+            $(`#${validateId}`).text(`Character limit of ${maxLength} reached`);
+            $(`#${editorId}`).text(currentText.substring(0, maxLength));
+        } else {
+            $(`#${validateId}`).text("");
+            UpdatePreviews(editorId, writeToDestination, destinationDivId);
+        }
+    }
+
+    function UpdatePreviews(editorDivId, writeToDestination, destinationDivId) {
+        const editorContent = document.getElementById(editorDivId).innerHTML;
+        const destinationElement = document.getElementById(destinationDivId);
+
+        if (writeToDestination === "True" && destinationElement) {
+            destinationElement.innerHTML = editorContent;
+        }
+    }
+
 </script>
