@@ -1,5 +1,211 @@
-﻿
+﻿@using CLA_Administration_Web.Helpers.Enums.AppPages
+@using CLA_Administration_Web.Helpers.Enums.Shared.PageNames
 
-<h1 class="text-center">
-    Desktop Information
-</h1>
+
+
+
+
+
+
+
+
+<div class="container-fluid">
+    @{
+        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Settings/SettingsBreadcrumb.cshtml", new SettingsBreadcrumbViewModel { SettingsCurrentPage = SettingsPages.DesktopInformation, HasAddNewButton = true, BreadcrumbButtonName = "Add New Desktop Info", BreadcrumbButtonCallbackFunction = "AddNewStagingEntity" });
+    }
+    <!-- Environment Selection -->
+    <div class="mb-3">
+        <div class="card mb-4 mt-2 overview-filters-card">
+            <div class="card-body pt-0 pb-0">
+                <div class="row align-items-center">
+                    <!-- Filters Section -->
+                    <div class="col-md-6 d-flex flex-column justify-content-center  mb-2" id="StatusFilterContainer">
+                        <p class="theme-txt-clr fw-bold text-center mb-1">Filters</p>
+                        <div class="row mb-3 mb-md-0 mx-auto mt-1">
+                            <p class="theme-txt-clr overview-filter-title2 text-center" id="TypeFilterTitle">Type</p>
+                            <div class="btn-group w-auto overview-filter-btn-group" role="group" aria-label="Status filter" id="TypeStagingLiveBtns">
+                                <button class="btn module-filter-btn-group filter-type-btn btn-group-active Screensaver" onclick="FilterModuleDataOverviewByStagingLive('Screensaver','ScreensaverStagingFilter', 'Staging')" id="ScreensaverStagingFilter"> Staging </button>
+                                <button class="btn module-filter-btn-group filter-type-btn Screensaver" onclick="FilterModuleDataOverviewByStagingLive('Screensaver','ScreensaverLiveFilter', 'Live')" id="ScreensaverLiveFilter"> Live </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons Section -->
+                    <div class="col-md-6 d-flex flex-column justify-content-center align-items-end mb-2" id="ModuleFilterActionButtonsContainer">
+                        <p class="theme-txt-clr fw-bold text-center mb-2" id="ModuleActionBtsFilterTitle">Action Buttons</p>
+                        <div class="mb-2 d-flex justify-content-end">
+                            <button class="btn btn-sm btn-success me-2" id="PromoteModuleBtn" onclick="OpenTargetedEntityPreviewModal('@SettingsNamesType.DesktopInformation', true)">Target Users</button>
+                            <button class="btn btn-warning btn-sm" id="RepeatModuleBtn" onclick="OpenTargetingExposurePreviewModal('@SettingsNamesType.DesktopInformation')">Who is Targeted</button>
+                        </div>
+                        <div class="mb-2 d-flex justify-content-end">
+                            <button class="btn btn-sm theme-bg text-white me-2" id="DuplicateModuleBtn">Replicated To Live</button>
+                            <button class="btn btn-sm btn-danger" id="RemoveModuleBtn" onclick="ApplyChanges()">Apply</button>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <button class="btn btn-sm btn-primary" id="ScreensaverTransitionBtn">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- This is for testing  -->
+    <div class="row mt-4 hidden ">
+        <div class="col-12 text-center">
+            <div id="TestDiv" style="width: 100px; height: 50px; background-color: lightgrey; position: relative; text-align: center;">
+                <p id="TestText" style="margin: 0; position: absolute;">Test Positions</p>
+            </div>
+        </div>
+    </div>
+    <!-- Info Position and Information To Display -->
+   
+    <div class="row mb-4">
+        <!-- Info Position Section -->
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <p class="theme-txt-clr fw-bold mb-2">Info Position</p>
+                            <div class="grid-container justify-content-center">
+                                @foreach (var position in Model.positions[0].Positions)
+                                {
+                                    var isActive = Model.positions[0].SelectedPosition == position ? "active" : "";
+                                    <div class="popup-pos grid-item @isActive text-center"
+                                         id="PopupPosition@(position.Replace(" ", string.Empty))"
+                                         onclick="SetDesktopInformationData(this.id)">
+                                        @position
+                                    </div>
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Information to Display Section -->
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-body">
+                    <p class="form-label theme-txt-clr text-center fw-bold">Information To Display</p>
+                    <div class="row">
+                        @foreach (var checkbox in Model.positions[0].Checkboxes)
+                        {
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="@checkbox.Key.Replace(" ", string.Empty)" @(checkbox.Value ? "checked" : "")>
+                                    <label class="form-check-label" for="@checkbox.Key.Replace(" ", string.Empty)">
+                                        @checkbox.Key
+                                    </label>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                    <!-- Enable Desktop Information -->
+                    <div class="col-12">
+                        <div class="form-check mb-3 mt">
+                            <input class="form-check-input" type="checkbox" id="enableDesktopInfo">
+                            <label class="form-check-label" for="enableDesktopInfo">Enable Desktop Information</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+  
+</div>
+
+
+
+@{
+    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Targeting/TargetedEntityModal.cshtml");
+    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Targeting/TargetingExposureModal.cshtml");
+}
+
+<style>
+
+  
+
+</style>
+
+<script>
+
+
+
+    function SetDesktopInformationData(id) {
+        // Remove 'active' class from all grid items
+        document.querySelectorAll('.grid-item').forEach(item => {
+            item.classList.remove('active');
+        });
+
+    // Add 'active' class to the clicked element
+    const selectedElement = document.getElementById(id);
+    selectedElement.classList.add('active');
+
+    // Update the test position
+    const testText = document.getElementById('TestText');
+    testText.style.position = 'absolute';
+
+    switch (id) {
+    case 'PopupPositionTL': // Top Left
+    testText.style.top = '0';
+    testText.style.left = '0';
+    testText.style.transform = 'translate(0, 0)';
+    break;
+    case 'PopupPositionTC': // Top Center
+    testText.style.top = '0';
+    testText.style.left = '50%';
+    testText.style.transform = 'translate(-50%, 0)';
+    break;
+    case 'PopupPositionTR': // Top Right
+    testText.style.top = '0';
+    testText.style.left = 'auto';
+    testText.style.right = '0';
+    testText.style.transform = 'translate(0, 0)';
+    break;
+    case 'PopupPositionML': // Middle Left
+    testText.style.top = '50%';
+    testText.style.left = '0';
+    testText.style.transform = 'translate(0, -50%)';
+    break;
+    case 'PopupPositionC': // Center
+    testText.style.top = '50%';
+    testText.style.left = '50%';
+    testText.style.transform = 'translate(-50%, -50%)';
+    break;
+    case 'PopupPositionMR': // Middle Right
+    testText.style.top = '50%';
+    testText.style.left = 'auto';
+    testText.style.right = '0';
+    testText.style.transform = 'translate(0, -50%)';
+    break;
+    case 'PopupPositionBL': // Bottom Left
+    testText.style.bottom = '0';
+    testText.style.left = '0';
+    testText.style.transform = 'translate(0, 0)';
+    break;
+    case 'PopupPositionBC': // Bottom Center
+    testText.style.bottom = '0';
+    testText.style.left = '50%';
+    testText.style.transform = 'translate(-50%, 0)';
+    break;
+    case 'PopupPositionBR': // Bottom Right
+    testText.style.bottom = '0';
+    testText.style.left = 'auto';
+    testText.style.right = '0';
+    testText.style.transform = 'translate(0, 0)';
+    break;
+        }
+    }
+
+
+    function ApplyChanges(){
+        swal("success","Desktop information has been saved")
+    }
+</script>

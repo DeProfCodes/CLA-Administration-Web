@@ -2,6 +2,7 @@
 {
     public class AdminAccessItem
     {
+        public int AdminID { get; set; }
         public string Domain { get; set; }
         public string Username { get; set; }
 

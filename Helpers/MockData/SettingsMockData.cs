@@ -8,6 +8,7 @@ using CLA_Administration_Web.ViewModels.Settings.ActiveConections;
 using CLA_Administration_Web.ViewModels.Settings.ActiveConnections;
 using CLA_Administration_Web.ViewModels.Settings.CustomUser;
 using CLA_Administration_Web.ViewModels.Settings.DefaultFonts;
+using CLA_Administration_Web.ViewModels.Settings.DesktopInformation;
 using CLA_Administration_Web.ViewModels.Settings.ManageAdminAccess;
 using CLA_Administration_Web.ViewModels.Settings.SetupExclusion;
 using CLA_Administration_Web.ViewModels.Settings.SkinAndOfflineImage;
@@ -41,6 +42,8 @@ namespace CLA_Administration_Web.Helpers.MockData
 
         public static List<FontCustomizationModel> CustomFontSettings { get; set; } = GetFontSettings();
         public static List<AdminAccessItem> AdminAccess { get; set; } = GetAdminAccessData();
+
+        public static List<PositionViewModel> DesktopPosition { get; set; } = GetDesktopPositionData();
 
         public static List<SkinOfflineCategortyTree> AllSkinsOfflineImageCategories { get; set; } = GenerateDummyDataSkinsOfflineImage();
 
@@ -191,41 +194,23 @@ namespace CLA_Administration_Web.Helpers.MockData
         {
             var random = new Random();
             var items = new List<AdminAccessItem>();
-            var surveyQuestionCounters = new Dictionary<int, int>();
+         
 
-            var responseTypes = new List<string> { "Single Select", "Multi Select", "Yes/No", "Yes/No/NA", "Agree/Disagree", "Text", "Re-Arrange" };
-
-            for (int i = 1; i <= 200; i++)
-            {
-                // Generate random survey ID between 1 and 50
-                var surveyId = random.Next(1, 51);
-
-                // Initialize or increment question counter for the survey
-                if (!surveyQuestionCounters.ContainsKey(surveyId))
-                {
-                    surveyQuestionCounters[surveyId] = 1;
-                }
-                var questionNo = surveyQuestionCounters[surveyId].ToString();
-                surveyQuestionCounters[surveyId]++;
-
-                // Randomize scoring and response type
-                var isScored = random.Next(0, 2) == 0 ? "No" : "Yes";
-                var responseType = responseTypes[random.Next(responseTypes.Count)];
-                var correctAnswer = isScored == "Yes" ? "Yes" : "No";
-
-                // Generate dummy data for other fields
+            for (int i = 1; i <= 15; i++)
+            {            
+              
                 var domain = $"Domain{random.Next(1, 101)}";
                 var username = $"User{random.Next(1, 101)}";
+                var id = random.Next(1, 100);
                 var desktopEnvironment = $"Environment{random.Next(1, 6)}";
                 var userLastModified = DateTime.Now.AddDays(-random.Next(1, 365)).ToString("yyyy-MM-dd");
                 var machineLastModified = $"Machine{random.Next(1, 21)}";
 
-                // Add the item to the list
                 var item = new AdminAccessItem
                 {
-                    
+                    AdminID =id,
                     Domain = domain,
-                    Username = username,
+                    Username = MockDataHelperFunctions.GetRandomMachineID(),
                     DesktopEnvironment = desktopEnvironment,
                     DesktopRead = random.Next(0, 2) == 0 ? "Allowed" : "Restricted",
                     DesktopWrite = random.Next(0, 2) == 0 ? "Allowed" : "Restricted",
@@ -251,6 +236,96 @@ namespace CLA_Administration_Web.Helpers.MockData
             }
             return items;
         }
+
+
+        private static List<PositionViewModel> GetDesktopPositionData()
+        {
+           
+            var positions = new List<string>
+            {
+            "Top Left", "Top Center", "Top Right",
+            "Middle Left", "Center", "Middle Right",
+            "Bottom Left", "Bottom Center", "Bottom Right"
+            };
+
+          
+            var selectedPosition = "Top Left"; 
+
+            
+            var informationToDisplay = new Dictionary<string, bool>
+            {
+                { "IP Address", false },
+                { "CPU Details", false },
+                { "Memory Details", false },
+                { "User Name", false },
+                { "Machine Name", false },
+                { "Operating System", false },
+                { "Domain Name", false },
+                { "HDD Free", false },
+                { "Network Status", false },
+                { "Domain Controller", false },
+                { "Last Boot Time", false },
+                { "Serial Number", false }
+            };
+
+            var item = new PositionViewModel
+            {
+                Positions = positions,
+                SelectedPosition = selectedPosition,
+                Checkboxes = informationToDisplay
+            };
+
+        
+            return new List<PositionViewModel> { item };
+        }
+
+
+
+        private static List<PositionViewModel> GetDesktopPositionDatas()
+        {
+            var random = new Random();
+            var items = new List<PositionViewModel>();
+
+            // Generate a random position list
+            var positions = new List<string>
+            {
+                "Top Left", "Top Center", "Top Right",
+                "Middle Left", "Center", "Middle Right",
+                "Bottom Left", "Bottom Center", "Bottom Right"
+            };
+
+            // Generate random selected position
+            var selectedPosition = positions[random.Next(positions.Count)];
+
+            var checkboxes = new Dictionary<string, bool>
+            {
+                { "IP Address", random.Next(0, 2) == 0 },
+                { "CPU Details", random.Next(0, 2) == 0 },
+                { "Memory Details", random.Next(0, 2) == 0 },
+                { "User Name", random.Next(0, 2) == 0 },
+                { "Machine Name", random.Next(0, 2) == 0 },
+                { "Operating System", random.Next(0, 2) == 0 },
+                { "Domain Name", random.Next(0, 2) == 0 },
+                { "HDD Free", random.Next(0, 2) == 0 },
+                { "Network Status", random.Next(0, 2) == 0 },
+                { "Domain Controller", random.Next(0, 2) == 0 },
+                { "Last Boot Time", random.Next(0, 2) == 0 },
+                { "Serial Number", random.Next(0, 2) == 0 }
+            };
+
+
+            var item = new PositionViewModel
+            {            
+                Positions = positions,
+                SelectedPosition = selectedPosition,
+                Checkboxes = checkboxes
+            };
+
+            items.Add(item);
+
+            return items;
+        }
+
 
         private static List<SurveyQuestionViewModel> GenerateSurveyQuestions()
         {
@@ -373,20 +448,20 @@ namespace CLA_Administration_Web.Helpers.MockData
 
         public static List<DefaultFontsViewModel> GetDefaultFontsData()
         {
-            int idCounter = 1; // Counter for DefaultHeading Ids
-            int subIdCounter = 1; // Counter for SubHeading SubIds
+            int idCounter = 1;
+            int subIdCounter = 1; 
 
             return new List<DefaultFontsViewModel>
     {
         new DefaultFontsViewModel
         {
             DefaultHeading = "Popups",
-            Id = idCounter++, // Increment Id for each DefaultFontsViewModel
+            Id = idCounter++, 
             SubHeadings = new List<SubHeadingViewModel>
             {
                 new SubHeadingViewModel
                 {
-                    SubId = subIdCounter++, // Increment SubId for each SubHeadingViewModel
+                    SubId = subIdCounter++, 
                     Title = "Popup Text",
                     Icon = "https://via.placeholder.com/30",
                     Text = "Popup Subheading Text"

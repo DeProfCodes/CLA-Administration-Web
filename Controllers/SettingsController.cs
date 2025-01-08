@@ -6,6 +6,7 @@ using CLA_Administration_Web.Services;
 using CLA_Administration_Web.ViewModels.Settings.ActiveConnections;
 using CLA_Administration_Web.ViewModels.Settings.CustomUser;
 using CLA_Administration_Web.ViewModels.Settings.DefaultFonts;
+using CLA_Administration_Web.ViewModels.Settings.DesktopInformation;
 using CLA_Administration_Web.ViewModels.Settings.ManageAdminAccess;
 using CLA_Administration_Web.ViewModels.Settings.SetupExclusion;
 using CLA_Administration_Web.ViewModels.Settings.Shared;
@@ -431,7 +432,14 @@ namespace CLA_Administration_Web.Controllers
         [HttpGet]
         public async Task<IActionResult> DesktopInformation()
         {
-            return PartialView(AppPagesLinks.Settings.DesktopInformationPageLink);
+            var desktopData = new DesktopInformantionMainModel()
+            {
+                positions = SettingsMockData.DesktopPosition,
+         
+
+            };
+
+            return PartialView(AppPagesLinks.Settings.DesktopInformationPageLink, desktopData);
         }
 
         #endregion
