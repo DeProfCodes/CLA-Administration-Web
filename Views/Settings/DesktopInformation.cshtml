@@ -24,8 +24,8 @@
                         <div class="row mb-3 mb-md-0 mx-auto mt-1">
                             <p class="theme-txt-clr overview-filter-title2 text-center" id="TypeFilterTitle">Type</p>
                             <div class="btn-group w-auto overview-filter-btn-group" role="group" aria-label="Status filter" id="TypeStagingLiveBtns">
-                                <button class="btn module-filter-btn-group filter-type-btn btn-group-active Screensaver" onclick="FilterModuleDataOverviewByStagingLive('Screensaver','ScreensaverStagingFilter', 'Staging')" id="ScreensaverStagingFilter"> Staging </button>
-                                <button class="btn module-filter-btn-group filter-type-btn Screensaver" onclick="FilterModuleDataOverviewByStagingLive('Screensaver','ScreensaverLiveFilter', 'Live')" id="ScreensaverLiveFilter"> Live </button>
+                                <button class="btn module-filter-btn-group filter-type-btn btn-group-active Screensaver" onclick="ToggleStaginLive(this.id)" id="Staging"> Staging </button>
+                                <button class="btn module-filter-btn-group filter-type-btn Screensaver" onclick="ToggleStaginLive(this.id)" id="Live"> Live </button>
                             </div>
                         </div>
                     </div>
@@ -50,47 +50,31 @@
         </div>
     </div>
 
-    <!-- This is for testing  -->
-    <div class="row mt-4 hidden ">
-        <div class="col-12 text-center">
-            <div id="TestDiv" style="width: 100px; height: 50px; background-color: lightgrey; position: relative; text-align: center;">
-                <p id="TestText" style="margin: 0; position: absolute;">Test Positions</p>
-            </div>
-        </div>
-    </div>
-    <!-- Info Position and Information To Display -->
-   
-    <div class="row mb-4">
-        <!-- Info Position Section -->
+
+    <!-- Staging Section -->
+    <div class="row mb-4" id="DesktopStaging">
         <div class="col-md-6">
             <div class="card h-100">
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-12 text-center">
-                            <p class="theme-txt-clr fw-bold mb-2">Info Position</p>
-                            <div class="grid-container justify-content-center">
-                                @foreach (var position in Model.positions[0].Positions)
-                                {
-                                    var isActive = Model.positions[0].SelectedPosition == position ? "active" : "";
-                                    <div class="popup-pos grid-item @isActive text-center"
-                                         id="PopupPosition@(position.Replace(" ", string.Empty))"
-                                         onclick="SetDesktopInformationData(this.id)">
-                                        @position
-                                    </div>
-                                }
-
+                    <p class="theme-txt-clr fw-bold mb-2 text-center">Staging Info Position</p>
+                    <div class="grid-container justify-content-center">
+                        @foreach (var position in Model.positions[0].Positions)
+                        {
+                            var isActive = Model.positions[0].SelectedPosition == position ? "active" : "";
+                            <div class="popup-pos grid-item @isActive text-center"
+                                 id="PopupPosition@(position.Replace(" ", string.Empty))"
+                                 onclick="SetDesktopInformationData(this.id)">
+                                @position
                             </div>
-                        </div>
+                        }
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- Information to Display Section -->
         <div class="col-md-6">
             <div class="card h-100">
                 <div class="card-body">
-                    <p class="form-label theme-txt-clr text-center fw-bold">Information To Display</p>
+                    <p class="theme-txt-clr fw-bold text-center">Staging Information to Display</p>
                     <div class="row">
                         @foreach (var checkbox in Model.positions[0].Checkboxes)
                         {
@@ -104,41 +88,77 @@
                             </div>
                         }
                     </div>
-
-                    <!-- Enable Desktop Information -->
-                    <div class="col-12">
-                        <div class="form-check mb-3 mt">
-                            <input class="form-check-input" type="checkbox" id="enableDesktopInfo">
-                            <label class="form-check-label" for="enableDesktopInfo">Enable Desktop Information</label>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Live Section -->
+    <div class="row mb-4 d-none" id="DesktopLive">
+        <div class="col-md-12">
+            <div class="card h-100">
+                <div class="card-body">
+                    <p class="theme-txt-clr fw-bold text-center">Live Information to Display</p>
+                    <table id="infoTable" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Option</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var checkbox in Model.positions[0].Checkboxes)
+                            {
+                                var isChecked = checkbox.Value ? "checked" : "";
+                                <tr>
+                                    <td>@checkbox.Key</td>
+                                    <td>
+                                        <input type="checkbox"
+                                               class="form-check-input update-status"
+                                               data-id="@checkbox.Key.Replace(" ", string.Empty)"
+                                        @(isChecked)>
+                                        <span class="status-label">@checkbox.Value ? "Enable" : "Not Enable"</span>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>  
 </div>
-
-  
-</div>
-
-
 
 @{
     await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Targeting/TargetedEntityModal.cshtml");
     await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Targeting/TargetingExposureModal.cshtml");
 }
 
-<style>
-
-  
-
-</style>
 
 <script>
 
+    function ToggleStaginLive(activeSection) {
+        $(".filter-type-btn").removeClass("btn-group-active");
+        $(`#${activeSection}`).addClass("btn-group-active");
+
+        if (activeSection === "Staging") {
+            $("#DesktopStaging").removeClass("d-none");
+            $("#DesktopLive").addClass("d-none");
+        } else if (activeSection === "Live") {
+            $("#DesktopStaging").addClass("d-none");
+            $("#DesktopLive").removeClass("d-none");
+        }
+    }
+
+    $(document).ready(function () {
+
+        MakeStandardDataTable("infoTable");
+    });
 
 
-    function SetDesktopInformationData(id) {
+    function SetDesktopInformationData(id)
+    {
         // Remove 'active' class from all grid items
         document.querySelectorAll('.grid-item').forEach(item => {
             item.classList.remove('active');
