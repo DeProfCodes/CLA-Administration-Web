@@ -280,53 +280,6 @@ namespace CLA_Administration_Web.Helpers.MockData
         }
 
 
-
-        private static List<PositionViewModel> GetDesktopPositionDatas()
-        {
-            var random = new Random();
-            var items = new List<PositionViewModel>();
-
-            // Generate a random position list
-            var positions = new List<string>
-            {
-                "Top Left", "Top Center", "Top Right",
-                "Middle Left", "Center", "Middle Right",
-                "Bottom Left", "Bottom Center", "Bottom Right"
-            };
-
-            // Generate random selected position
-            var selectedPosition = positions[random.Next(positions.Count)];
-
-            var checkboxes = new Dictionary<string, bool>
-            {
-                { "IP Address", random.Next(0, 2) == 0 },
-                { "CPU Details", random.Next(0, 2) == 0 },
-                { "Memory Details", random.Next(0, 2) == 0 },
-                { "User Name", random.Next(0, 2) == 0 },
-                { "Machine Name", random.Next(0, 2) == 0 },
-                { "Operating System", random.Next(0, 2) == 0 },
-                { "Domain Name", random.Next(0, 2) == 0 },
-                { "HDD Free", random.Next(0, 2) == 0 },
-                { "Network Status", random.Next(0, 2) == 0 },
-                { "Domain Controller", random.Next(0, 2) == 0 },
-                { "Last Boot Time", random.Next(0, 2) == 0 },
-                { "Serial Number", random.Next(0, 2) == 0 }
-            };
-
-
-            var item = new PositionViewModel
-            {            
-                Positions = positions,
-                SelectedPosition = selectedPosition,
-                Checkboxes = checkboxes
-            };
-
-            items.Add(item);
-
-            return items;
-        }
-
-
         private static List<SurveyQuestionViewModel> GenerateSurveyQuestions()
         {
             var random = new Random();
