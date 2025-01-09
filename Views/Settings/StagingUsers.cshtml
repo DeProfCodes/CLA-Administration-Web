@@ -1,4 +1,5 @@
-﻿@model StagingUsersMainViewModel
+﻿
+@model StagingUsersMainViewModel
 
 @{
     int index = 0;
@@ -21,7 +22,7 @@
         });
 }
 
-
+    <link rel="stylesheet" href="~/css/settings.css"/>
 <!-- Settings Filter Component -->
 <div class="card mb-4 mt-2 overview-filters-card app-card-main-scaling">
     <div class="card-body pt-0 pb-0">
@@ -141,61 +142,153 @@
 
 </div>
 
-
 <!-- Create New Staging User Modal -->
 <div class="modal fade" id="CreateStagingUserModal" tabindex="-1" aria-labelledby="CreateStagingUserModalLabel" aria-hidden="true">
-<div class="modal-dialog modal-lg">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="CreateStagingUserModalLabel">Add New Staging User</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal('CreateStagingUserModal')"></button>
-        </div>
-        <div class="modal-body">
-            <form id="CreateStagingUserForm">
-                <div class="mb-3">
-                    <label for="StagingUserDomain" class="form-label">Domain</label>
-                    <select class="form-select" id="StagingUserDomain" required>
-                        <option value="">Please select a domain</option>
-                        @foreach (var domain in usersDomains)
-                        {
-                            <option value="@domain">@domain</option>
-                        }
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label for="StagingUserUsername" class="form-label">Username</label>
-                        <select class="form-select" id="StagingUserDomain" required>
-                            <option value="">Please select a user</option>
-                            @foreach (var user in users)
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="CreateStagingUserModalLabel">Add New Staging User</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal('CreateStagingUserModal')"></button>
+            </div>
+            <div class="modal-body">
+                <form id="CreateStagingUserForm">
+                    <!-- UserID -->
+                    <div class="mb-3">
+                        <label for="UserID" class="form-label">UserID</label>
+                        <input type="text" class="form-control" id="UserID" readonly>
+                    </div>
+
+                    <!-- Domain -->
+                    <div class="mb-3">
+                        <label for="StagingUserDomain" class="form-label">Domain</label>
+                           <select class="custom-input-text w-200p ms-2" id="ReportModuleSelect" onchange="FilterByDomain()">
+                            <option value="0">Please select Domain Name</option>
+                            @foreach (var domain in usersDomains)
                             {
-                                <option value="@user">@user</option>
+                                <option value="@domain">@domain</option>
                             }
                         </select>
-                </div>
-                <div class="mb-3">
-                    <label for="StagingUserFirstname" class="form-label">First Name</label>
-                    <input type="text" class="form-control" id="StagingUserFirstname" required>
-                </div>
-                <div class="mb-3">
-                    <label for="StagingUserLastname" class="form-label">Last Name</label>
-                    <input type="text" class="form-control" id="StagingUserLastname" required>
-                </div>
-                <div class="mb-3">
-                    <label for="StagingUserUserLastModified" class="form-label">User Last Modified</label>
-                    <input type="text" class="form-control" id="StagingUserUserLastModified">
-                </div>
-                <div class="mb-3">
-                    <label for="StagingUserMachineLastModified" class="form-label">Machine Last Modified</label>
-                    <input type="text" class="form-control" id="StagingUserMachineLastModified">
-                </div>
-            </form>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal('CreateStagingUserModal')">Cancel</button>
-            <button type="button" class="btn  custom-btn-default" onclick="SaveStagingUser()">Save User</button>
+                    </div>
+
+                    <!-- NT Username -->
+                    <div class="mb-3">
+                        <label for="StagingUserUsername" class="form-label">NT Username</label>
+                        <input type="text" class="form-control" id="StagingUserUsername" >
+                    </div>
+
+                    <!-- First Name -->
+                    <div class="mb-3">
+                        <label for="StagingUserFirstname" class="form-label">Firstname</label>
+                        <input type="text" class="form-control" id="StagingUserFirstname" required>
+                    </div>
+
+                    <!-- Surname -->
+                    <div class="mb-3">
+                        <label for="StagingUserLastname" class="form-label">Surname</label>
+                        <input type="text" class="form-control" id="StagingUserLastname" required>
+                    </div>
+
+                    <!-- User Last Modified -->
+                    <div class="mb-3">
+                        <label for="StagingUserUserLastModified" class="form-label">User Last Modified</label>
+                        <input type="text" class="form-control" id="StagingUserUserLastModified" required>
+                    </div>
+
+                    <!-- Machine Last Modified -->
+                    <div class="mb-3">
+                        <label for="StagingMachineLastModified" class="form-label">Machine Last Modified</label>
+                        <input type="datetime-local" class="form-control" id="StagingMachineLastModified" required>
+                    </div>
+
+                    <!-- Button to open Users Modal -->
+                    <div class="mb-3">
+                        <label for="SelectUser" class="form-label">Select User</label>
+                        <button class="btn btn-secondary" type="button" id="StagingUserBtn" onclick="openUsersModal()">Select User</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal('CreateStagingUserModal')">Cancel</button>
+                <button type="button" class="btn custom-btn-default" onclick="SaveStagingUser()">Save User</button>
+            </div>
         </div>
     </div>
 </div>
+
+
+
+<!-- Users Modal -->
+<div class="modal fade" id="UsersModal" tabindex="-1" aria-labelledby="UsersModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="UsersModalLabel">Select User</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeUsersModal()"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Search Box for Filtering -->
+                <div class="mb-3">
+                    <label for="filterInputMember" class="form-label">Filter:</label>
+                    <input type="text" id="filterInputMember" placeholder="Search..." oninput="filterTreeView('filterInputMember', '.tree-view')">
+
+                </div>
+                <!-- Tree View for Active Directory Objects -->
+                <div class="scroll-box treeview mt-3">
+                    <ul id="directoryTree" class="tree-view">
+                        <!-- Root Node: Active Directory Objects -->
+                        <li>
+                            <input type="checkbox" id="node1" class="tree-toggle">
+                            <label for="node1" class="tree-toggle-label"><i class="bi bi-folder"></i> Active Directory Objects</label>
+                            <ul class="tree-content">
+                                <!-- Groups Node -->
+                                <li>
+                                    <input type="checkbox" id="node1-1" class="tree-toggle">
+                                    <label for="node1-1" class="tree-toggle-label"><i class="bi bi-people"></i> Groups</label>
+                                    <ul class="tree-content">
+                                        <li data-type="group" data-name="Admins"><input type="checkbox" id="group_admins"> Admins</li>
+                                        <li data-type="group" data-name="Developers"><input type="checkbox" id="group_developers"> Developers</li>
+                                        <li data-type="group" data-name="HR"><input type="checkbox" id="group_hr"> HR</li>
+                                    </ul>
+                                </li>
+                                <!-- Users Node -->
+                                <li>
+                                    <input type="checkbox" id="node1-2" class="tree-toggle">
+                                    <label for="node1-2" class="tree-toggle-label"><i class="bi bi-person"></i> Users</label>
+                                    <ul class="tree-content">
+                                        <li data-username="nhlamulo"><input type="checkbox" class="user-checkbox" id="user_nhlamulo"> nhlamulo</li>
+                                        <li data-username="jane_smith"><input type="checkbox" class="user-checkbox" id="user_jane_smith"> Jane Smith</li>
+                                        <li data-username="john_doe"><input type="checkbox" class="user-checkbox" id="user_john_doe"> John Doe</li>
+                                    </ul>
+                                </li>
+                                <!-- Machines Node -->
+                                <li>
+                                    <input type="checkbox" id="node1-3" class="tree-toggle">
+                                    <label for="node1-3" class="tree-toggle-label"><i class="bi bi-laptop"></i> Machines</label>
+                                    <ul class="tree-content">
+                                        <li data-type="machine" data-name="Server-1"><input type="checkbox" id="machine_server_1"> Server-1</li>
+                                        <li data-type="machine" data-name="Workstation-5"><input type="checkbox" id="machine_workstation_5"> Workstation-5</li>
+                                    </ul>
+                                </li>
+                                <!-- IP Ranges Node -->
+                                <li>
+                                    <input type="checkbox" id="node1-4" class="tree-toggle">
+                                    <label for="node1-4" class="tree-toggle-label"><i class="bi bi-globe"></i> IP Ranges</label>
+                                    <ul class="tree-content">
+                                        <li data-type="iprange" data-name="192.168.0.0/24"><input type="checkbox" id="iprange_192_168_0_0"> 192.168.0.0/24</li>
+                                        <li data-type="iprange" data-name="10.0.0.0/8"><input type="checkbox" id="iprange_10_0_0_0"> 10.0.0.0/8</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeUsersModal()">Close</button>
+                <button type="button" class="btn btn-primary" onclick="saveSelections()">Save Selection</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Create New Staging Machine Modal -->
@@ -267,7 +360,108 @@
 
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="~/js/settings.js"></script>
 <script>
+
+function openUsersModal() {
+    var createStagingUserModal = new bootstrap.Modal(document.getElementById('CreateStagingUserModal'));
+    createStagingUserModal.hide(); 
+    
+    var usersModal = new bootstrap.Modal(document.getElementById('UsersModal'));
+    usersModal.show(); 
+    
+
+    document.body.style.overflow = "hidden"; 
+}
+
+const usersData = { 
+    users: {
+        nhlamulo: { groups: ["Admins", "HR"], machines: ["Server-1"], ipRanges: ["192.168.0.0/24"] },
+        jane_smith: { groups: ["Developers"], machines: ["Workstation-5"], ipRanges: [] },
+        john_doe: { groups: ["HR"], machines: [], ipRanges: ["10.0.0.0/8"] },
+    },
+    groups: {
+        Admins: { users: ["nhlamulo"], machines: ["Server-1"] },
+        Developers: { users: ["jane_smith"], machines: [] },
+        HR: { users: ["nhlamulo", "john_doe"], machines: [] },
+    },
+    machines: {
+        "Server-1": { users: ["nhlamulo"], groups: ["Admins"], ipRanges: ["192.168.0.0/24"] },
+        "Workstation-5": { users: ["jane_smith"], groups: [], ipRanges: [] },
+    },
+    ipRanges: {
+        "192.168.0.0/24": { users: ["nhlamulo"], machines: ["Server-1"] },
+        "10.0.0.0/8": { users: ["john_doe"], machines: [] },
+    },
+};
+
+// Function to handle filtering the tree view
+function filterTree() {
+    const filter = document.getElementById('filterInputMember').value.toLowerCase();
+    const treeViewItems = document.querySelectorAll('.tree-view li');
+
+    treeViewItems.forEach(item => {
+        const label = item.querySelector('label');
+        const labelText = label ? label.textContent.toLowerCase() : '';
+        const shouldHide = labelText.indexOf(filter) === -1;
+        item.style.display = shouldHide ? 'none' : '';
+    });
+}
+
+
+function saveSelections() {
+    let selectedUsers = [];
+    let selectedGroups = [];
+    let selectedMachines = [];
+    let selectedIpRanges = [];
+
+
+    document.querySelectorAll('.user-checkbox:checked').forEach(item => {
+        selectedUsers.push(item.parentNode.textContent.trim());
+    });
+
+    document.querySelectorAll('.tree-content input[type="checkbox"]:checked').forEach(item => {
+        if (item.id.includes('group_')) {
+            selectedGroups.push(item.parentNode.textContent.trim());
+        } else if (item.id.includes('machine_')) {
+            selectedMachines.push(item.parentNode.textContent.trim());
+        } else if (item.id.includes('iprange_')) {
+            selectedIpRanges.push(item.parentNode.textContent.trim());
+        }
+    });
+
+
+    console.log("Selected Users: ", selectedUsers);
+    console.log("Selected Groups: ", selectedGroups);
+    console.log("Selected Machines: ", selectedMachines);
+    console.log("Selected IP Ranges: ", selectedIpRanges);
+
+    closeUsersModal();
+
+
+    document.getElementById('StagingUserFirstname').value = selectedUsers.join(', ');
+    document.getElementById('StagingUserLastname').value = selectedGroups.join(', ');
+    document.getElementById('StagingMachineLastModified').value = selectedMachines.join(', ');
+}
+
+
+function openUsersModal() {
+    const usersModal = new bootstrap.Modal(document.getElementById('UsersModal'));
+    usersModal.show();
+}
+
+function closeUsersModal() {
+    const usersModal = new bootstrap.Modal(document.getElementById('UsersModal'));
+    usersModal.hide();
+}
+
+function SaveStagingUser() {
+
+    console.log("User data saved successfully!");
+    closeModal('CreateStagingUserModal');
+}
+
+
 
 var usersDomains = @Html.Raw(Json.Serialize(usersDomains));
 var machinesDomains = @Html.Raw(Json.Serialize(machinesDomains));

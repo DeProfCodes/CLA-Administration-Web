@@ -259,3 +259,157 @@ function ValidateImage(file, module) {
         reader.readAsDataURL(file);
     });
 }
+
+
+// Function to filter tree view based on input
+/*
+function filterTreeView(inputId, treeContainerSelector) {
+    const filter = document.getElementById(inputId).value.toLowerCase();
+    const treeViewItems = document.querySelectorAll(`${treeContainerSelector} li`);
+
+    treeViewItems.forEach(item => {
+        const label = item.querySelector('label');
+        const labelText = label ? label.textContent.toLowerCase() : '';
+        const shouldHide = labelText.indexOf(filter) === -1;
+        item.style.display = shouldHide ? 'none' : '';
+    });
+}
+
+// Function to save selected items from the tree view and populate a form
+function saveSelections(treeViewSelector, userCheckboxClass, groupPrefix, machinePrefix, ipRangePrefix, outputFields) {
+    let selectedUsers = [];
+    let selectedGroups = [];
+    let selectedMachines = [];
+    let selectedIpRanges = [];
+
+    // Get selected users
+    document.querySelectorAll(`${treeViewSelector} .${userCheckboxClass}:checked`).forEach(item => {
+        selectedUsers.push(item.parentNode.textContent.trim());
+    });
+
+    // Get selected groups, machines, and IP ranges
+    document.querySelectorAll(`${treeViewSelector} input[type="checkbox"]:checked`).forEach(item => {
+        const parentText = item.parentNode.textContent.trim();
+        if (item.id.includes(groupPrefix)) {
+            selectedGroups.push(parentText);
+        } else if (item.id.includes(machinePrefix)) {
+            selectedMachines.push(parentText);
+        } else if (item.id.includes(ipRangePrefix)) {
+            selectedIpRanges.push(parentText);
+        }
+    });
+
+    // Populate fields with selected data (if specified)
+    if (outputFields) {
+        if (outputFields.users) document.getElementById(outputFields.users).value = selectedUsers.join(', ');
+        if (outputFields.groups) document.getElementById(outputFields.groups).value = selectedGroups.join(', ');
+        if (outputFields.machines) document.getElementById(outputFields.machines).value = selectedMachines.join(', ');
+        if (outputFields.ipRanges) document.getElementById(outputFields.ipRanges).value = selectedIpRanges.join(', ');
+    }
+
+    // Optionally log the selections (for debugging or further processing)
+    console.log("Selected Users: ", selectedUsers);
+    console.log("Selected Groups: ", selectedGroups);
+    console.log("Selected Machines: ", selectedMachines);
+    console.log("Selected IP Ranges: ", selectedIpRanges);
+}
+
+// Function to open a modal by its ID
+function openModal(modalId) {
+    const modal = new bootstrap.Modal(document.getElementById(modalId));
+    modal.show();
+}
+
+
+// Function to close a modal by its ID
+function closeModal(modalId) {
+    const modal = new bootstrap.Modal(document.getElementById(modalId));
+    modal.hide();
+}
+
+
+*/
+
+
+// Reusable function to render a tree view
+function renderTreeView(containerId, data) {
+    const container = document.getElementById(containerId);
+    container.innerHTML = createTreeHTML(data);
+}
+
+// Helper function to generate tree HTML recursively
+function createTreeHTML(data) {
+    let html = "<ul>";
+    for (const key in data) {
+        const value = data[key];
+        if (typeof value === "object" && !Array.isArray(value)) {
+            html += `
+                <li>
+                    <input type="checkbox" id="node_${key}" class="tree-toggle">
+                    <label for="node_${key}" class="tree-toggle-label">${key}</label>
+                    ${createTreeHTML(value)}
+                </li>
+            `;
+        } else {
+            html += `
+                <li>
+                    <input type="checkbox" id="${key}" class="item-checkbox">
+                    <label for="${key}" class="item-label">${key}</label>
+                </li>
+            `;
+        }
+    }
+    html += "</ul>";
+    return html;
+}
+
+// Function to filter tree view dynamically
+function filterTree(containerId, inputId) {
+    const filter = document.getElementById(inputId).value.toLowerCase();
+    const container = document.getElementById(containerId);
+    const items = container.querySelectorAll(".tree-view li");
+
+    items.forEach(item => {
+        const label = item.querySelector("label");
+        const labelText = label ? label.textContent.toLowerCase() : "";
+        item.style.display = labelText.indexOf(filter) === -1 ? "none" : "";
+    });
+}
+
+// Function to collect selected items from the tree
+function collectSelectedItems(containerId) {
+    const container = document.getElementById(containerId);
+    const selected = {
+        users: [],
+        groups: [],
+        machines: [],
+        ipRanges: []
+    };
+
+    container.querySelectorAll(".item-checkbox:checked").forEach(checkbox => {
+        const label = checkbox.nextElementSibling.textContent.trim();
+        if (checkbox.id.includes("user")) selected.users.push(label);
+        else if (checkbox.id.includes("group")) selected.groups.push(label);
+        else if (checkbox.id.includes("machine")) selected.machines.push(label);
+        else if (checkbox.id.includes("iprange")) selected.ipRanges.push(label);
+    });
+
+    return selected;
+}
+
+// Function to populate the main modal with selected data
+function populateModal(data, modalFields) {
+    document.getElementById(modalFields.userId).value = data.users.join(", ");
+    document.getElementById(modalFields.domain).value = data.groups.join(", ");
+    document.getElementById(modalFields.ntUsername).value = data.machines.join(", ");
+    document.getElementById(modalFields.firstName).value = data.ipRanges.join(", ");
+}
+
+// Example of rendering and handling filtering
+document.addEventListener("DOMContentLoaded", () => {
+    renderTreeView("directoryTree", usersData);
+
+    document.getElementById("filterInputMember").addEventListener("input", () => {
+        filterTree("directoryTree", "filterInputMember");
+    });
+});
