@@ -897,6 +897,7 @@ function ToogleBulkImport(id) {
     }
 }
 
+
 function ToggleStaginUserMachines(id) { 
     $(".filter-type-btn").removeClass("btn-group-active");
     $(`#${id}`).addClass("btn-group-active");
@@ -999,36 +1000,75 @@ function ToggleStaginUserMachines(id) {
         }
     }
 
-function AddNewTargetGroup() {
-    const buttonText = document.getElementById("BreadcrumSettingsBtnText").innerText;
+    function AddNewTargetGroup() {
+        const buttonText = document.getElementById("BreadcrumSettingsBtnText").innerText;
 
-    let modalId = "";
+        let modalId = "";
+        let formFields = "";
 
-    switch (true) {
-        case buttonText.includes("User"):
-            modalId = "CreateStagingUserModal";
-            break;
+        switch (true) {
+            case buttonText.includes("User"):
+                modalId = "EditModal";
+                formFields = `
+                    <div class="mb-3">
+                        <label for="userName" class="form-label">User Name</label>
+                        <input type="text" class="form-control" id="userName" placeholder="Enter user name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="userEmail" class="form-label">User Email</label>
+                        <input type="email" class="form-control" id="userEmail" placeholder="Enter user email">
+                    </div>`;
+                break;
 
-        case buttonText.includes("Group"):
-            modalId = "CreateTargetGroupModal";
-            break;
+            case buttonText.includes("Group"):
+                modalId = "EditModal";
+                formFields = `
+                    <div class="mb-3">
+                        <label for="groupName" class="form-label">Group Name</label>
+                        <input type="text" class="form-control" id="groupName" placeholder="Enter group name">
+                    </div>`;
+                break;
 
-        case buttonText.includes("Machine"):
-            modalId = "CreateStagingMachineModal";
-            break;
+            case buttonText.includes("Machine"):
+                modalId = "EditModal";
+                formFields = `
+                        <div class="mb-3">
+                            <label for="machineName" class="form-label">Machine Name</label>
+                            <input type="text" class="form-control" id="machineName" placeholder="Enter machine name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="machineIP" class="form-label">Machine IP Address</label>
+                            <input type="text" class="form-control" id="machineIP" placeholder="Enter machine IP address">
+                        </div>`;
+            case buttonText.includes("IPRanges"):
+                modalId = "EditModal";
+                formFields = `
+                    <div class="mb-3">
+                        <label for="machineName" class="form-label">Machine Name</label>
+                        <input type="text" class="form-control" id="machineName" placeholder="Enter machine name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="machineIP" class="form-label">Machine IP Address</label>
+                        <input type="text" class="form-control" id="machineIP" placeholder="Enter machine IP address">
+                    </div>`;
+                break;
 
-        case buttonText.includes("IPRanges"):
-            modalId = "CreateStagingMachineModal";
-            break;
+            default:
+                console.error("No matching modal found for the button text.");
+                return;
+        }
 
-        default:
-            console.error("No matching modal found for the button text.");
-            return;
+        // Dynamically update modal content
+        const modalContainer = document.querySelector(`#${modalId} .modal-body`);
+        if (modalContainer) {
+            modalContainer.innerHTML = formFields;
+        }
+
+        // Show the modal
+        const modal = new bootstrap.Modal(document.getElementById(modalId));
+        modal.show();
     }
 
-    const modal = new bootstrap.Modal(document.getElementById(modalId));
-    modal.show();
-}
 
  
  

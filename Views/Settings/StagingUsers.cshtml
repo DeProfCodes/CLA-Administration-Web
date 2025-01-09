@@ -152,16 +152,16 @@
             </div>
             <div class="modal-body">
                 <form id="CreateStagingUserForm">
-                    <!-- UserID -->
+                    <!-- Button to open Users Modal -->
                     <div class="mb-3">
-                        <label for="UserID" class="form-label">UserID</label>
-                        <input type="text" class="form-control" id="UserID" readonly>
+                        <label for="SelectUser" class="form-label">Select User</label>
+                        <button class="btn btn-secondary" type="button" id="StagingUserBtn" onclick="openUsersModal()">Select User</button>
                     </div>
 
                     <!-- Domain -->
                     <div class="mb-3">
                         <label for="StagingUserDomain" class="form-label">Domain</label>
-                           <select class="custom-input-text w-200p ms-2" id="ReportModuleSelect" onchange="FilterByDomain()">
+                           <select class="custom-input-text w-200p ms-2" id="StagingDomainSelect" onchange="FilterByDomain()">
                             <option value="0">Please select Domain Name</option>
                             @foreach (var domain in usersDomains)
                             {
@@ -200,11 +200,7 @@
                         <input type="text" class="form-control" id="StagingMachineLastModified" readonly>
                     </div>
 
-                    <!-- Button to open Users Modal -->
-                    <div class="mb-3">
-                        <label for="SelectUser" class="form-label">Select User</label>
-                        <button class="btn btn-secondary" type="button" id="StagingUserBtn" onclick="openUsersModal()">Select User</button>
-                    </div>
+                  
                 </form>
             </div>
             <div class="modal-footer">
