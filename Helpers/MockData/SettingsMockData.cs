@@ -208,8 +208,7 @@ namespace CLA_Administration_Web.Helpers.MockData
                 var username = $"User{random.Next(1, 101)}";
                 var id = random.Next(1, 100);
                 var desktopEnvironment = $"Environment{random.Next(1, 6)}";
-                var userLastModified = DateTime.Now.AddDays(-random.Next(1, 365)).ToString("yyyy-MM-dd");
-                var machineLastModified = $"Machine{random.Next(1, 21)}";
+             
 
                 var item = new AdminAccessItem
                 {
@@ -232,9 +231,9 @@ namespace CLA_Administration_Web.Helpers.MockData
                     LockscreenRead = random.Next(0, 2) == 0 ? "Allowed" : "Restricted",
                     LockscreenWrite = random.Next(0, 2) == 0 ? "Allowed" : "Restricted",
                     LockscreenReport = random.Next(0, 2) == 0 ? "Enabled" : "Disabled",
-                    UserLastModified = userLastModified,
-                    MachineLastModified = machineLastModified,
-                   
+                    UserLastModified = MockDataHelperFunctions.GetRandomUserID(),
+                    MachineLastModified = MockDataHelperFunctions.GetRandomMachineID()
+
                 };
 
                 items.Add(item);

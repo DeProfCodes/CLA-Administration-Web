@@ -185,7 +185,7 @@ namespace CLA_Administration_Web.Controllers
 
 
         [HttpGet]
-        public ActionResult EditAdminAccess(int adminID, string entityType = null)
+        public ActionResult EditAdminAccess(int adminID)
         {
 
             var adminAccessData = new ManageAdminAccessMainViewModel()
@@ -202,7 +202,7 @@ namespace CLA_Administration_Web.Controllers
 
             if (data == null)
             {
-                return NotFound($"{entityType} with ID {adminID} not found.");
+                return NotFound($" with ID {adminID} not found.");
             }
 
             return PartialView(AppPagesLinks.Settings.EditAdminModalPageLink, data);

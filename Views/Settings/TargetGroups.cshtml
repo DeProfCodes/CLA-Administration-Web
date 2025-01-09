@@ -871,6 +871,8 @@ const fileInput = document.getElementById("fileInput");
 
     var usersDomains = @Html.Raw(Json.Serialize(usersDomains));
     var machinesDomains = @Html.Raw(Json.Serialize(usersDomains));
+    var groupsDomain = @Html.Raw(Json.Serialize(groupsDomain));
+    var ipRangesDomain = @Html.Raw(Json.Serialize(ipRangesDomain));
 
     $(document).ready(function ()
     {
