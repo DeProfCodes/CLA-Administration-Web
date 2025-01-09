@@ -33,6 +33,12 @@ namespace CLA_Administration_Web.Helpers.MockData
         public static List<SetupExclusionMachinesViewModel> SetupExcludedMachines { get; set; } = GetSetupMachinesExclusions();
 
         public static List<TargetedUser> TargetGroupUsers { get; set; } = GetTargetGroupUsers();
+        public static List<TargetedMachine> TargetedMachines { get; set; } = GetTargetedMachines();
+
+        public static List<TargetedGroup> TargetedGroups { get; set; } = GetTargetedGroups();
+
+        public static List<TargetedIPRange> TargetedIPRanges { get; set; } = GetTargetedIPRanges();
+
 
         public static List<ActiveConnection> ActiveConnections { get; set; } = GetActiveConnections();
 
@@ -189,7 +195,6 @@ namespace CLA_Administration_Web.Helpers.MockData
             return result;
         }
 
-
         private static List<AdminAccessItem> GetAdminAccessData()
         {
             var random = new Random();
@@ -237,7 +242,6 @@ namespace CLA_Administration_Web.Helpers.MockData
             return items;
         }
 
-
         private static List<PositionViewModel> GetDesktopPositionData()
         {
            
@@ -278,8 +282,6 @@ namespace CLA_Administration_Web.Helpers.MockData
         
             return new List<PositionViewModel> { item };
         }
-
-
         private static List<SurveyQuestionViewModel> GenerateSurveyQuestions()
         {
             var random = new Random();
@@ -328,7 +330,6 @@ namespace CLA_Administration_Web.Helpers.MockData
             }
             return items;
         }
-
         public static List<SkinsAndOfflineModel> GetSkinsAndOfflineImage()
         {
             var random = new Random();
@@ -398,7 +399,6 @@ namespace CLA_Administration_Web.Helpers.MockData
 
             return result;
         }
-
         public static List<DefaultFontsViewModel> GetDefaultFontsData()
         {
             int idCounter = 1;
@@ -504,8 +504,6 @@ namespace CLA_Administration_Web.Helpers.MockData
         }
     };
         }
-
-
         private static List<SkinOfflineCategortyTree> GenerateDummyDataSkinsOfflineImage()
         {
             int idCounter = 1;
@@ -600,8 +598,7 @@ namespace CLA_Administration_Web.Helpers.MockData
            
             return new List<SkinOfflineCategortyTree> { rootCategory };
         }
-
-     
+            
         private static List<SkinOfflineCategortyTree> GenerateRandomTreeChildren(ref int idCounter)
         {
             Random random = new Random();
@@ -624,6 +621,62 @@ namespace CLA_Administration_Web.Helpers.MockData
 
             return children;
         }
+
+
+        public static List<TargetedMachine> GetTargetedMachines()
+        {
+            var result = new List<TargetedMachine>();
+
+            for (int i = 0; i < 15; i++)
+            {
+                result.Add(new TargetedMachine
+                {
+                    DomainName = MockDataHelperFunctions.GetRandomDomainName(),
+                    LastSyncDT = DateTime.Now.AddHours(-new Random().Next(1, 100)).ToString("yyyy/MM/dd HH:mm"),
+                    DisplayName = MockDataHelperFunctions.GetRandomFirstname(),
+                    NTUsername = MockDataHelperFunctions.GetRandomLastname(),
+                });
+            }
+
+            return result;
+        }
+
+        public static List<TargetedGroup> GetTargetedGroups()
+        {
+            var result = new List<TargetedGroup>();
+
+            for (int i = 0; i < 15; i++)
+            {
+                result.Add(new TargetedGroup
+                {
+                    DomainName = MockDataHelperFunctions.GetRandomDomainName(),
+                    GroupId = i + 1,
+                    DisplayName = MockDataHelperFunctions.GetRandomUserID(),
+                });
+            }
+
+            return result;
+        }
+
+        public static List<TargetedIPRange> GetTargetedIPRanges()
+        {
+            var result = new List<TargetedIPRange>();
+
+            for (int i = 0; i < 10; i++)
+            {
+                var ipRange = MockDataHelperFunctions.GetRandomIPRange();
+                result.Add(new TargetedIPRange
+                {
+                    RangeId = i + 1,
+                    StartIP = ipRange.StartIP,
+                    EndIP = ipRange.EndIP,
+                    Description = MockDataHelperFunctions.GetRandomUserID(),
+                });
+            }
+
+            return result;
+        }
+
 
 
         /* public static SkinOfflineCategortyTree GetCategoryTreeStructure(List<SkinOfflineCategortyTree> categories, int categoryId)

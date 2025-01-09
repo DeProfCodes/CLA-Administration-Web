@@ -191,13 +191,13 @@
                     <!-- User Last Modified -->
                     <div class="mb-3">
                         <label for="StagingUserUserLastModified" class="form-label">User Last Modified</label>
-                        <input type="text" class="form-control" id="StagingUserUserLastModified" required>
+                        <input type="text" class="form-control" id="StagingUserUserLastModified" >
                     </div>
 
                     <!-- Machine Last Modified -->
                     <div class="mb-3">
                         <label for="StagingMachineLastModified" class="form-label">Machine Last Modified</label>
-                        <input type="datetime-local" class="form-control" id="StagingMachineLastModified" required>
+                        <input type="text" class="form-control" id="StagingMachineLastModified" readonly>
                     </div>
 
                     <!-- Button to open Users Modal -->
@@ -237,45 +237,45 @@
                     <ul id="directoryTree" class="tree-view">
                         <!-- Root Node: Active Directory Objects -->
                         <li>
-                            <input type="checkbox" id="node1" class="tree-toggle">
+                            <input type="checkbox" id="node1" class="tree-toggle" hidden>
                             <label for="node1" class="tree-toggle-label"><i class="bi bi-folder"></i> Active Directory Objects</label>
                             <ul class="tree-content">
                                 <!-- Groups Node -->
                                 <li>
-                                    <input type="checkbox" id="node1-1" class="tree-toggle">
+                                    <input type="radio" id="node1-1" class="tree-toggle">
                                     <label for="node1-1" class="tree-toggle-label"><i class="bi bi-people"></i> Groups</label>
                                     <ul class="tree-content">
-                                        <li data-type="group" data-name="Admins"><input type="checkbox" id="group_admins"> Admins</li>
-                                        <li data-type="group" data-name="Developers"><input type="checkbox" id="group_developers"> Developers</li>
-                                        <li data-type="group" data-name="HR"><input type="checkbox" id="group_hr"> HR</li>
+                                        <li data-type="group" data-name="Admins"><input type="radio" id="group_admins"> Admins</li>
+                                        <li data-type="group" data-name="Developers"><input type="radio" id="group_developers"> Developers</li>
+                                        <li data-type="group" data-name="HR"><input type="radio" id="group_hr"> HR</li>
                                     </ul>
                                 </li>
                                 <!-- Users Node -->
                                 <li>
-                                    <input type="checkbox" id="node1-2" class="tree-toggle">
+                                    <input type="radio" id="node1-2" class="tree-toggle">
                                     <label for="node1-2" class="tree-toggle-label"><i class="bi bi-person"></i> Users</label>
                                     <ul class="tree-content">
-                                        <li data-username="nhlamulo"><input type="checkbox" class="user-checkbox" id="user_nhlamulo"> nhlamulo</li>
-                                        <li data-username="jane_smith"><input type="checkbox" class="user-checkbox" id="user_jane_smith"> Jane Smith</li>
-                                        <li data-username="john_doe"><input type="checkbox" class="user-checkbox" id="user_john_doe"> John Doe</li>
+                                        <li data-username="nhlamulo"><input type="radio" class="user-checkbox" id="user_nhlamulo"> nhlamulo</li>
+                                        <li data-username="jane_smith"><input type="radio" class="user-checkbox" id="user_jane_smith"> Jane Smith</li>
+                                        <li data-username="john_doe"><input type="radio" class="user-checkbox" id="user_john_doe"> John Doe</li>
                                     </ul>
                                 </li>
                                 <!-- Machines Node -->
                                 <li>
-                                    <input type="checkbox" id="node1-3" class="tree-toggle">
+                                    <input type="radio" id="node1-3" class="tree-toggle">
                                     <label for="node1-3" class="tree-toggle-label"><i class="bi bi-laptop"></i> Machines</label>
                                     <ul class="tree-content">
-                                        <li data-type="machine" data-name="Server-1"><input type="checkbox" id="machine_server_1"> Server-1</li>
-                                        <li data-type="machine" data-name="Workstation-5"><input type="checkbox" id="machine_workstation_5"> Workstation-5</li>
+                                        <li data-type="machine" data-name="Server-1"><input type="radio" id="machine_server_1"> Server-1</li>
+                                        <li data-type="machine" data-name="Workstation-5"><input type="radio" id="machine_workstation_5"> Workstation-5</li>
                                     </ul>
                                 </li>
                                 <!-- IP Ranges Node -->
                                 <li>
-                                    <input type="checkbox" id="node1-4" class="tree-toggle">
+                                    <input type="radio" id="node1-4" class="tree-toggle">
                                     <label for="node1-4" class="tree-toggle-label"><i class="bi bi-globe"></i> IP Ranges</label>
                                     <ul class="tree-content">
-                                        <li data-type="iprange" data-name="192.168.0.0/24"><input type="checkbox" id="iprange_192_168_0_0"> 192.168.0.0/24</li>
-                                        <li data-type="iprange" data-name="10.0.0.0/8"><input type="checkbox" id="iprange_10_0_0_0"> 10.0.0.0/8</li>
+                                        <li data-type="iprange" data-name="192.168.0.0/24"><input type="radio" id="iprange_192_168_0_0"> 192.168.0.0/24</li>
+                                        <li data-type="iprange" data-name="10.0.0.0/8"><input type="radio" id="iprange_10_0_0_0"> 10.0.0.0/8</li>
                                     </ul>
                                 </li>
                             </ul>
@@ -363,6 +363,21 @@
 <script src="~/js/settings.js"></script>
 <script>
 
+
+
+
+document.addEventListener('click', (event) => {
+    if (event.target.closest('.tree-toggle')) {
+        const toggle = event.target.closest('.tree-toggle');
+        toggle.classList.toggle('opened');
+        const content = toggle.nextElementSibling;
+        if (content && content.classList.contains('tree-content')) {
+            content.style.display = toggle.classList.contains('opened') ? 'block' : 'none';
+        }
+    }
+});
+
+
 function openUsersModal() {
     var createStagingUserModal = new bootstrap.Modal(document.getElementById('CreateStagingUserModal'));
     createStagingUserModal.hide(); 
@@ -420,7 +435,7 @@ function saveSelections() {
         selectedUsers.push(item.parentNode.textContent.trim());
     });
 
-    document.querySelectorAll('.tree-content input[type="checkbox"]:checked').forEach(item => {
+    document.querySelectorAll('.tree-content input[type="radio"]:checked').forEach(item => {
         if (item.id.includes('group_')) {
             selectedGroups.push(item.parentNode.textContent.trim());
         } else if (item.id.includes('machine_')) {

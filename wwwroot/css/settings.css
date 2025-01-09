@@ -106,10 +106,6 @@
 
 /* Collapsible Checkbox */
 .tree-toggle {
-    display: none;
-}
-
-.tree-toggle-label {
     cursor: pointer;
     font-weight: bold;
     display: flex;
@@ -117,17 +113,28 @@
     gap: 5px;
 }
 
-    .tree-toggle-label::before {
-        content: '+';
-        color: #007bff;
-        font-weight: bold;
-        display: inline-block;
-        margin-right: 5px;
-    }
+.tree-toggle::before {
+    content: '+';
+    color: #007bff;
+    font-weight: bold;
+    margin-right: 5px;
+}
 
-.tree-toggle:checked + .tree-toggle-label::before {
+.tree-toggle.opened::before {
     content: '-';
 }
+
+.tree-content {
+    display: none;
+    margin-left: 15px;
+    border-left: 1px dashed #007bff;
+    padding-left: 10px;
+}
+
+.tree-toggle.opened + .tree-content {
+    display: block;
+}
+
 
 /* Nested Content */
 .tree-content {

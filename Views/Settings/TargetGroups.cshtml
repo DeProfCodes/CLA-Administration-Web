@@ -1,5 +1,5 @@
 ﻿@model CLA_Administration_Web.ViewModels.Targeting.TargetingExposureViewModel
-@using static CLA_Administration_Web.ViewModels.Modules.LDS.AddNewContentLibraryCategory
+
 @using  CLA_Administration_Web.ViewModels.Targeting
 @using CLA_Administration_Web.Helpers.Enums.AppPages
 @using CLA_Administration_Web.Helpers.Enums.Shared
@@ -7,10 +7,11 @@
 @{
 
     int index = 0;
-
     var usersDomains = Model.TargetedUsers?.Select(x => x.DomainName).Distinct().ToList() ?? new List<string>();
     var groupsDomain = Model.TargetedGroups?.Select(x => x.DomainName).Distinct().ToList() ?? new List<string>();
     var machinesDomains = Model.TargetedMachines?.Select(x => x.DomainName).Distinct().ToList() ?? new List<string>();
+    var ipRangesDomain = Model.TargetedIPRanges?.Select(x => x.Description).Distinct().ToList() ?? new List<string>();
+
 
 }
 
@@ -117,7 +118,7 @@
                                 <td><span class="@cssBg">Active</span></td>
                               
                                 <td class="@cssBg">
-                                    <button class="btn btn-sm custom-btn-sm btn-danger">Delete</button>
+                                    <button class="btn btn-sm custom-btn-sm btn-danger" onclick="DeleteAdminAccess(@stagingUser.Id)">Delete</button>
                                     <button class="btn btn-sm custom-btn-sm btn-success" id="edit-staging-btn" onclick="EditNewStagingEnting('@stagingUser.Id', 'User')">Edit</button>
                                 </td>
                             </tr>
@@ -146,14 +147,14 @@
                             cssBg += " theme-txt-clr";
 
                             <tr>
-                                <td class="@cssBg"></td>
+                                <td class="@cssBg">@stagingMachine.DisplayName</td>
                                 <td class="@cssBg">@stagingMachine.DomainName</td>
                                 <td class="@cssBg">@stagingMachine.DisplayName</td>
                                 <td class="@cssBg">@stagingMachine.LastSyncDT</td>
                                 <td class="@cssBg">@stagingMachine.DomainName</td>
                                 <td class="@cssBg">@stagingMachine.NTUsername</td>
                                 <td class="@cssBg">
-                                    <button class="btn btn-sm custom-btn-sm btn-danger">Delete</button>
+                                    <button class="btn btn-sm custom-btn-sm btn-danger"  onclick="DeleteAdminAccess(@stagingMachine.DisplayName)">Delete</button>
                                     <button class="btn btn-sm custom-btn-sm btn-success" id="edit-staging-btn" onclick="EditNewStagingEnting('@stagingMachine.DomainName', 'Machine')">Edit</button>
                                 </td>
                             </tr>
@@ -185,7 +186,7 @@
                                 <td class="@cssBg">@targetgroups.DisplayName</td>
                                                     
                                 <td class="@cssBg">
-                                    <button class="btn btn-sm custom-btn-sm btn-danger">Delete</button>
+                                    <button class="btn btn-sm custom-btn-sm btn-danger"  onclick="DeleteAdminAccess(@targetgroups.GroupId)">Delete</button>
                                     <button class="btn btn-sm custom-btn-sm btn-success" id="edit-staging-btn" onclick="EditNewStagingEnting('@targetgroups.GroupId', 'Groups')">Edit</button>
                                 </td>
                             </tr>
@@ -194,7 +195,7 @@
                 </table>
             </div>
 
-            <div id="IPRangesSettings" class="mt-3 hidden">
+  <div id="IPRangesSettings" class="mt-3 hidden">
     <table id="IPRangesData" class="table table-striped table-bordered table-hover theme-border align-middle campain-table-type fs-12">
         <thead>
             <tr>
@@ -217,7 +218,7 @@
                     <td class="@cssBg">@ipRange.EndIP</td>
                     <td class="@cssBg">@ipRange.Description</td>
                     <td class="@cssBg">
-                        <button class="btn btn-sm custom-btn-sm btn-danger">Delete</button>
+                        <button class="btn btn-sm custom-btn-sm btn-danger" onclick="DeleteAdminAccess(@ipRange.RangeId)">Delete</button>
                         <button class="btn btn-sm custom-btn-sm btn-success" id="edit-iprange-btn" onclick="EditNewStagingEnting('@ipRange.RangeId', 'IPRanges')">Edit</button>
                     </td>
                 </tr>
@@ -233,11 +234,11 @@
 
 </div>
 <!-- Add new targert group -->
-<div class="modal fade" id="CreateStagingUserModal" tabindex="-1" aria-labelledby="CreateStagingUserModalLabel" aria-hidden="true">
+<div class="modal fade" id="CreateTargetGroupModal" tabindex="-1" aria-labelledby="CreateTargetGroupModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="CreateStagingUserModalLabel">Add Target group User</h5>
+                <h5 class="modal-title" id="CreateTargetGroupModalLabel">Add Target group User</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal('CreateStagingUserModal')"></button>
             </div>
             <div class="modal-body">
@@ -722,14 +723,12 @@ function showDetails(type, key) {
     if (type === "users") {
         const userData = directoryData.users[key];
 
-        // Populate "Members" (groups, machines, IP ranges associated with the user)
         membersList.innerHTML += `
             <li><strong>Groups:</strong> ${userData.groups.join(", ") || "None"}</li>
             <li><strong>Machines:</strong> ${userData.machines.join(", ") || "None"}</li>
             <li><strong>IP Ranges:</strong> ${userData.ipRanges.join(", ") || "None"}</li>
         `;
 
-        // Populate "Member Of" (list of entities the user belongs to)
         const memberOf = Object.keys(directoryData.groups)
             .filter(group => directoryData.groups[group].users.includes(key))
             .map(group => `<li>${group}</li>`)
@@ -758,10 +757,8 @@ function filterTree() {
         const text = item.textContent.toLowerCase();
         const matches = text.includes(query);
 
-        // Show or hide the current item based on the search query
+  
         item.style.display = matches ? "list-item" : "none";
-
-        // If it matches, ensure its ancestors are visible
         if (matches) {
             let parent = item.parentElement;
             while (parent && parent.tagName === "UL") {
@@ -771,24 +768,16 @@ function filterTree() {
         }
     });
 
-    // Ensure parents of visible children are also shown
-    allItems.forEach(item => {
-        const children = item.querySelectorAll("li");
-        const anyChildVisible = Array.from(children).some(child => child.style.display === "list-item");
-        if (anyChildVisible) {
-            item.style.display = "list-item"; // Show the parent if any child is visible
-        }
-    });
+
+allItems.forEach(item => {
+const children = item.querySelectorAll("li");
+const anyChildVisible = Array.from(children).some(child => child.style.display === "list-item");
+if (anyChildVisible) {
+    item.style.display = "list-item";
 }
-
-
-
-
-
-
-
-
-  const fileInput = document.getElementById("fileInput");
+});
+}
+const fileInput = document.getElementById("fileInput");
         const fileContentsDiv = document.getElementById("fileContents");
         const progressBar = document.getElementById("progressBar");
 
@@ -830,15 +819,13 @@ function filterTree() {
                     alert("Error reading file!");
                 };
 
-                // Check file type
                 const fileExtension = file.name.split('.').pop().toLowerCase();
                 if (fileExtension === 'csv') {
                     reader.readAsText(file);
                 } else if (fileExtension === 'xls' || fileExtension === 'xlsx') {
-                    // For Excel files, consider using SheetJS or handle server-side
-                    // Here, we'll notify the user that Excel files are not handled client-side
+                    
                     alert("Excel file processing is not implemented client-side. Please use CSV files.");
-                    // Optionally, you can implement server-side processing or use SheetJS
+                  
                 } else {
                     alert("Unsupported file type. Please upload a CSV or Excel file.");
                 }
@@ -846,7 +833,7 @@ function filterTree() {
         });
 
         function displayFileContent(content, fileName) {
-            // Assuming CSV format for simplicity
+           
             const rows = content.split(/\r?\n/);
             if (rows.length === 0) {
                 fileContentsDiv.innerHTML = `
@@ -890,6 +877,7 @@ function filterTree() {
         usersDT = MakeStandardDataTable("StagingUsersData");
         machinesDT = MakeStandardDataTable("StagingMachinesData");
         targetGroupDT = MakeStandardDataTable("TargetGroupsData");
+        ipRangeDT = MakeStandardDataTable("IPRangesData");
 
     });
 
@@ -907,43 +895,61 @@ function ToogleBulkImport(id) {
     }
 }
 
-
-function ToggleStaginUserMachines(id) {
+function ToggleStaginUserMachines(id) { 
     $(".filter-type-btn").removeClass("btn-group-active");
     $(`#${id}`).addClass("btn-group-active");
 
-    if (id.includes("User")) {
-        $("#BreadcrumSettingsBtnText").text("Add New Target Group User");
-        $("#StagingUserMachineTitle").text("Users");
-        HideShowElement("#StagingUsersSettings", HideShow.SHOW);
-        HideShowElement("#StagingMachinesSettings", HideShow.HIDE);
-        HideShowElement("#TargetGroups", HideShow.HIDE);
-        HideShowElement("#IPRangesSettings", HideShow.HIDE);
-        SwitchDomainsSelectDataSource(usersDomains);
-    } else if (id.includes("Machine")) {
-        $("#BreadcrumSettingsBtnText").text("Add New Target Group Machine");
-        $("#StagingUserMachineTitle").text("Machines");
-        HideShowElement("#StagingUsersSettings", HideShow.HIDE);
-        HideShowElement("#StagingMachinesSettings", HideShow.SHOW);
-        HideShowElement("#TargetGroups", HideShow.HIDE);
-        HideShowElement("#IPRangesSettings", HideShow.HIDE);
-        SwitchDomainsSelectDataSource(machinesDomains);
-    } else if (id.includes("Group")) {
-        $("#BreadcrumSettingsBtnText").text("Add New Target Groups");
-        $("#StagingUserMachineTitle").text("Groups");
-        HideShowElement("#StagingUsersSettings", HideShow.HIDE);
-        HideShowElement("#StagingMachinesSettings", HideShow.HIDE);
-        HideShowElement("#TargetGroups", HideShow.SHOW);
-        HideShowElement("#IPRangesSettings", HideShow.HIDE);
-        SwitchDomainsSelectDataSource(groupsDomain);
-    } else if (id.includes("IPRanges")) {
-        $("#BreadcrumSettingsBtnText").text("Add New IP Range");
-        $("#StagingUserMachineTitle").text("IP Ranges");
-        HideShowElement("#StagingUsersSettings", HideShow.HIDE);
-        HideShowElement("#StagingMachinesSettings", HideShow.HIDE);
-        HideShowElement("#TargetGroups", HideShow.HIDE);
-        HideShowElement("#IPRangesSettings", HideShow.SHOW);
-        SwitchDomainsSelectDataSource(ipRangesDomain);
+    let btnText = "";
+    let title = "";
+    let usersSettings = HideShow.HIDE;
+    let machinesSettings = HideShow.HIDE;
+    let groupsSettings = HideShow.HIDE;
+    let ipRangesSettings = HideShow.HIDE;
+    let dataSource = null;
+
+    switch (true) {
+        case id.includes("User"):
+            btnText = "Add New Target Group User";
+            title = "Users";
+            usersSettings = HideShow.SHOW;
+            dataSource = usersDomains;
+            break;
+
+        case id.includes("Machine"):
+            btnText = "Add New Target Group Machine";
+            title = "Machines";
+            machinesSettings = HideShow.SHOW;
+            dataSource = machinesDomains;
+            break;
+
+        case id.includes("Group"):
+            btnText = "Add New Target Groups";
+            title = "Groups";
+            groupsSettings = HideShow.SHOW;
+            dataSource = groupsDomain;
+            break;
+
+        case id.includes("IPRanges"):
+            btnText = "Add New IP Range";
+            title = "IP Ranges";
+            ipRangesSettings = HideShow.SHOW;
+            dataSource = ipRangesDomain;
+            break;
+
+        default:
+            console.error("Unknown id type");
+            return; 
+    }
+
+    $("#BreadcrumSettingsBtnText").text(btnText);
+    $("#StagingUserMachineTitle").text(title);
+    HideShowElement("#StagingUsersSettings", usersSettings);
+    HideShowElement("#StagingMachinesSettings", machinesSettings);
+    HideShowElement("#TargetGroups", groupsSettings);
+    HideShowElement("#IPRangesSettings", ipRangesSettings);
+
+    if (dataSource) {
+        SwitchDomainsSelectDataSource(dataSource);
     }
 }
 
@@ -991,18 +997,45 @@ function ToggleStaginUserMachines(id) {
         }
     }
 
-    function AddNewTargetGroup() {
-        const buttonText = document.getElementById("BreadcrumSettingsBtnText").innerText;
+function AddNewTargetGroup() {
+    const buttonText = document.getElementById("BreadcrumSettingsBtnText").innerText;
 
-        const userModal = new bootstrap.Modal(document.getElementById('CreateTargetGroupModal'));
-        userModal.show();
+    let modalId = "";
+
+    switch (true) {
+        case buttonText.includes("User"):
+            modalId = "CreateStagingUserModal";
+            break;
+
+        case buttonText.includes("Group"):
+            modalId = "CreateTargetGroupModal";
+            break;
+
+        case buttonText.includes("Machine"):
+            modalId = "CreateStagingMachineModal";
+            break;
+
+        case buttonText.includes("IPRanges"):
+            modalId = "CreateStagingMachineModal";
+            break;
+
+        default:
+            console.error("No matching modal found for the button text.");
+            return;
     }
+
+    const modal = new bootstrap.Modal(document.getElementById(modalId));
+    modal.show();
+}
+
+ 
+ 
 
     function EditNewStagingEnting(machineId, entityType)
     {
         // LoadEditModal(formData, '@Url.Action("EditStagingMachine", "Settings")', 'POST', editMachineForm, edit-machine-btn)
         $.ajax({
-            url: '@Url.Action("EditStagingMachine", "Settings")',
+            url: '@Url.Action("EditTargetGroups", "Settings")',
             type: 'GET',
             data: { machineId: machineId, entityType: entityType },
             success: function (response)
@@ -1029,6 +1062,13 @@ function ToggleStaginUserMachines(id) {
     function closeModal(modalId)
     {
         $('#' + modalId).modal('hide');
+    }
+
+    
+      function DeleteAdminAccess(connectionID) {
+        if (confirm("Are you sure you want to terminate this connection?")) {
+            alert(`Delete admin: ${connectionID}`);
+        }
     }
 
 </script>

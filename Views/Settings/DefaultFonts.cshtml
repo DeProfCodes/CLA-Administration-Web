@@ -127,7 +127,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal('EditModal')">Cancel</button>
-                <button type="button" class="btn custom-btn-default" onclick="SaveModal('EditDefaultFontsModal', 'Default fonts saved successfully!' )">Save User</button>
+                <button type="button" class="btn custom-btn-default" onclick="SaveModal('EditDefaultFontsModal', 'Default fonts saved successfully!' )">Save</button>
             </div>
         </div>
     </div>
@@ -151,9 +151,9 @@
    
     }
 
-    function EditNewStagingEnting(SubId)
+    function EditNewStagingEnting(SubId, entityType)
     {
-        // LoadEditModal(formData, '@Url.Action("EditStagingMachine", "Settings")', 'POST', editMachineForm, edit-machine-btn)
+        
         $.ajax({
             url: '@Url.Action("DefaultFontsDetails", "Settings")',
             type: 'GET',

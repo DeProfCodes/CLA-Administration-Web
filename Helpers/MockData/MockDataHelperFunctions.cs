@@ -32,6 +32,24 @@
             return string.Join(" ", words);
         }
 
+        public static string GetRandomIPAddress()
+        {
+            var rand = new Random();
+            return $"{rand.Next(1, 255)}.{rand.Next(0, 255)}.{rand.Next(0, 255)}.{rand.Next(1, 255)}";
+        }
+
+        public static (string StartIP, string EndIP) GetRandomIPRange()
+        {
+            string startIP = GetRandomIPAddress();
+            string[] startSegments = startIP.Split('.');
+            int lastSegment = int.Parse(startSegments[3]);
+
+            // Ensure EndIP has a higher last segment
+            string endIP = $"{startSegments[0]}.{startSegments[1]}.{startSegments[2]}.{Math.Min(255, lastSegment + new Random().Next(1, 10))}";
+            return (startIP, endIP);
+        }
+
+
         private static string GenerateCorrectAnswer(string responseType, Random random)
         {
             switch (responseType)

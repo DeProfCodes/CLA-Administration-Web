@@ -15,6 +15,7 @@ using CLA_Administration_Web.ViewModels.Settings.StagingUsers;
 
 
 using CLA_Administration_Web.ViewModels.Targeting;
+using ClosedXML.Excel;
 using DocumentFormat.OpenXml.Drawing.Diagrams;
 using DocumentFormat.OpenXml.InkML;
 using DocumentFormat.OpenXml.Wordprocessing;
@@ -217,102 +218,56 @@ namespace CLA_Administration_Web.Controllers
             var targetGroups = new TargetingExposureViewModel()
             {
                 TargetedUsers = SettingsMockData.TargetGroupUsers,
-                
-                TargetedMachines = new List<TargetedMachine>
-                {
-                    new TargetedMachine
-                    {
-                        DomainName = "nthdmi",
-                        LastSyncDT = DateTime.Now.AddHours(-99).AddMinutes(-147).ToString("yyyy/MM/dd HH:mm"),
-                        DisplayName = "NdhuvaziM",
-                        NTUsername = "NdhuvaziM-WIN",
-                        //Status = new StatusViewModel { CustomStatusText = "INACTIVE", CssClass = "badge bg-warning" }
-                    },
-                         new TargetedMachine
-                    {
-                        DomainName = "nthdmi",
-                        LastSyncDT = DateTime.Now.AddHours(-99).AddMinutes(-147).ToString("yyyy/MM/dd HH:mm"),
-                        DisplayName = "Ndhuvazi",
-                        NTUsername = "NdhuvaziM-",
-                       // Status = new StatusViewModel { CustomStatusText = "INACTIVE", CssClass = "badge bg-warning" }
-                    },
-                   new TargetedMachine
-                    {
-                        DomainName = "nthdmi",
-                        LastSyncDT = DateTime.Now.AddHours(-99).AddMinutes(-147).ToString("yyyy/MM/dd HH:mm"),
-                        DisplayName = "NdhuvaziM",
-                        NTUsername = "NdhuvaziM-WIN",
-                       // Status = new StatusViewModel { CustomStatusText = "INACTIVE", CssClass = "badge bg-warning" }
-                    }
-
-                } ,
-
-                TargetedGroups = new List<TargetedGroup>
-                {
-                       new TargetedGroup
-                    {
-                        DomainName = "NTHDIM",
-                        DisplayName = "Corporate voice Rebranded",
-                        GroupId = 1,
-                    },
-                    new TargetedGroup
-                    {
-                        DomainName = "nthdmi",
-                        GroupId = 2,
-                        DisplayName = "NdhuvaziM",
-                        
-                       
-                    },
-                         new TargetedGroup
-                    {
-                        DomainName = "nthdmi",
-                        GroupId = 3,
-                        DisplayName = "NdhuvaziM",
-                    },
-                   new TargetedGroup
-                    {
-                        DomainName = "nthdmi",
-                        GroupId = 4,
-                        DisplayName = "NdhuvaziM",
-                    }
-
-                },
-                TargetedIPRanges = new List<TargetedIPRange>
-                {
-                new TargetedIPRange
-                {
-                    RangeId = 1,
-                    StartIP = "192.168.1.1",
-                    EndIP = "192.168.1.255",
-                    Description = "Corporate Network"
-                },
-                new TargetedIPRange
-                {
-                    RangeId = 2,
-                    StartIP = "10.0.0.1",
-                    EndIP = "10.0.0.255",
-                    Description = "VPN Network"
-                },
-                new TargetedIPRange
-                {
-                    RangeId = 3,
-                    StartIP = "172.16.0.1",
-                    EndIP = "172.16.0.255",
-                    Description = "Development Network"
-                },
-                new TargetedIPRange
-                {
-                    RangeId = 4,
-                    StartIP = "192.168.2.1",
-                    EndIP = "192.168.2.255",
-                    Description = "Guest Network"
-                }
-                }
-
-
-
+                TargetedMachines = SettingsMockData.TargetedMachines,
+                TargetedGroups = SettingsMockData.TargetedGroups,
+                TargetedIPRanges = SettingsMockData.TargetedIPRanges
             };
+
             return PartialView(AppPagesLinks.Settings.TargetGroupsPageLink, targetGroups);
+        }
+
+
+        [HttpGet]
+        public ActionResult EditTargetGroups(int machineId, string entityType)
+        {
+
+            var stagingUsersData = new StagingUsersMainViewModel()
+            {
+                StagingUsers = SettingsMockData.StagingUsers,
+                StagingMachines = SettingsMockData.StagingMachines
+            };
+
+            object selectedEntity = null;
+
+            if (entityType == "Machine")
+            {
+                selectedEntity = stagingUsersData.StagingMachines.FirstOrDefault(m => m.Id == machineId);
+            }
+            else if (entityType == "User")
+            {
+                selectedEntity = stagingUsersData.StagingUsers.FirstOrDefault(u => u.Id == machineId);
+            }
+            else if (entityType == "Group")
+            {
+                
+                selectedEntity = stagingUsersData.StagingUsers.FirstOrDefault(u => u.Id == machineId);
+            }
+            else if (entityType == "IPRanges")
+            {
+                
+                selectedEntity = stagingUsersData.StagingUsers.FirstOrDefault(u => u.Id == machineId);
+            }
+
+
+
+            if (selectedEntity == null)
+            {
+                return NotFound($"{entityType} with ID {machineId} not found.");
+            }
+
+            ViewBag.EntityType = entityType;
+
+            return PartialView(AppPagesLinks.Settings.StagingModalViewPageLink, selectedEntity);
         }
 
         #endregion
