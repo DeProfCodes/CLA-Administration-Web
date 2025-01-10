@@ -60,7 +60,7 @@
                             {
                                 <thead class="sticky-top theme-bg text-white">
                                     <tr>
-                                        <th>ID</th>
+                                        
                                         <th>Domain</th>
                                         <th>Username</th>
                                         <th>Desktop (Environment)</th>
@@ -91,7 +91,7 @@
                                         cssBg += " theme-txt-clr";
 
                                         <tr>
-                                            <td class="@cssBg">@access.AdminID</td>
+                                            
                                             <td class="@cssBg">@access.Domain</td>
                                             <td class="@cssBg">@access.Username</td>
                                             <td class="@cssBg">@access.DesktopEnvironment</td>
@@ -113,8 +113,8 @@
                                             <td class="@cssBg">@access.LockscreenWrite</td>
                                             <td class="@cssBg">@access.LockscreenReport</td>
                                             <td class="sticky-action-column @cssBg">
-                                                <button class="btn btn-sm custom-btn-sm btn-danger" onclick="DeleteAdminAccess(@access.AdminID)">Delete</button>
-                                                <button class="btn btn-sm custom-btn-sm btn-success" id="edit-staging-btn" onclick="EditAdminAccess(@access.AdminID)">Edit</button>
+                                               <button class="btn btn-sm custom-btn-sm btn-danger" onclick="DeleteAdminAccess(@access.AdminID)">Delete</button>
+                                               <button class="btn btn-sm custom-btn-sm btn-success" id="edit-staging-btn" onclick="EditAdminAccess(@access.AdminID)">Edit</button>
                                             </td>
                                         </tr>
                                     }
@@ -141,7 +141,7 @@
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="CreateStagingUserModalLabel">Add New Staging User</h5>
+                <h5 class="modal-title" id="CreateStagingUserModalLabel">Add New Admin User</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal('CreateStagingUserModal')"></button>
             </div>
             <div class="modal-body">
