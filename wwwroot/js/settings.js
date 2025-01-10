@@ -413,3 +413,44 @@ document.addEventListener("DOMContentLoaded", () => {
         filterTree("directoryTree", "filterInputMember");
     });
 });
+
+
+
+
+To make your modal opening and closing functions reusable for any pair of modals, we can generalize the functionality into two functions: openTreeViewModal and closeTreeViewModal.These functions can accept modal IDs as parameters, making them reusable for different modals.
+
+    Here’s the updated code:
+
+Reusable openTreeViewModal Function
+javascript
+Copy code
+function openTreeViewModal(triggerButton, modal1Id, modal2Id) {
+    // Get modal elements by their IDs
+    var modal1 = document.getElementById(modal1Id);  // The second modal (partial modal)
+    var modal2 = document.getElementById(modal2Id);  // The main modal
+
+    // Ensure modal1 (second modal) is fully visible
+    modal1.style.display = 'block';
+    modal1.style.opacity = '1';
+    modal1.style.zIndex = '1055'; // Bring modal1 on top of modal2
+
+    // Ensure modal2 (main modal) is beneath modal1
+    modal2.style.zIndex = '0';
+
+    // Remove or hide the backdrop of modal2
+    var backdrop = document.querySelector('.modal-backdrop');
+    if (backdrop) {
+        backdrop.style.zIndex = '0';  // Move the backdrop behind modal1
+        backdrop.style.opacity = '0'; // Make the backdrop invisible
+    }
+
+    // Retrieve the fields and callback dynamically from the trigger button
+    const lastModifiedField = triggerButton.getAttribute('data-lastmodified-field');
+    const callbackFunction = triggerButton.getAttribute('data-callback');
+
+    // Store these globally or pass to the modal
+    window.selectedFields = {
+        lastModifiedField,
+        callbackFunction,
+    };
+}

@@ -1,0 +1,101 @@
+﻿@model CLA_Administration_Web.ViewModels.Shared.ModalViewModel
+
+<div class="modal fade" id="UsersModal" tabindex="-1" aria-labelledby="UsersModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="UsersModalLabel">@Model.ModalTitle</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container mt-4">
+                    <!-- Search Field -->
+                    <div class="mb-3">
+                        <input type="text" id="custom-searchInput" class="form-control" placeholder="Search..." onkeyup="customFilterTree()">
+                    </div>
+
+                    <!-- Tree Structure -->
+                    <div class="custom-tree" id="custom-directoryTree">
+                        <ul>
+                            @foreach (var entity in Model.TargetedEntities)
+                            {
+                                @Html.Raw(RenderTreeNode(entity))
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeUsersModal()"></button>
+
+                <button type="button" class="btn btn-primary" onclick="saveSelections('@Model.CallbackFunction')">Save Selection</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@functions {
+    string RenderTreeNode(CLA_Administration_Web.ViewModels.Targeting.TargetedEntityTree node)
+    {
+        var html = $@"
+        <li class='custom-folder'>
+            <span class='custom-toggle-icon' onclick='customToggleFolder(this)'>+</span>
+            <label><i class='bi bi-folder'></i> {node.EntityName}</label>";
+
+        if (node._children != null && node._children.Any())
+        {
+            html += "<ul class='custom-tree-content'>";
+            foreach (var child in node._children)
+            {
+
+                if (child._children != null && child._children.Any())
+                {
+                    html += RenderTreeNode(child);
+                }
+                else
+                {
+                    html += $"<li class='custom-file' onclick='customSelectValue(this)'>{child.EntityName}</li>";
+                }
+            }
+            html += "</ul>";
+        }
+
+        html += "</li>";
+        return html;
+    }
+}
+
+
+
+@section Scripts {
+    <script>
+    
+
+
+
+        function saveSelections() {
+            const { lastModifiedField, callbackFunction } = window.selectedFields;
+
+            const selectedUsers = [];
+            document.querySelectorAll('.custom-file.active').forEach(item => {
+                const selectedItem = item.textContent.trim();
+                selectedUsers.push(selectedItem);
+            });
+
+            if (lastModifiedField) {
+                document.getElementById(lastModifiedField).value = selectedUsers.join(', ');
+            }
+
+           
+            if (callbackFunction && typeof window[callbackFunction] === 'function') {
+                window[callbackFunction](selectedUsers);
+            }
+
+           
+            closeUsersModal();
+        }
+
+
+    </script>
+}
+

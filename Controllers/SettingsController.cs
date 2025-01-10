@@ -1,6 +1,7 @@
 using CLA_Administration_Web.Helpers.Constants;
 using CLA_Administration_Web.Helpers.MockData;
 using CLA_Administration_Web.Helpers.Modules;
+using CLA_Administration_Web.Helpers.Targeting;
 using CLA_Administration_Web.Models.APIResponses.Reports.Troubleshoot;
 using CLA_Administration_Web.Services;
 using CLA_Administration_Web.ViewModels.Settings.ActiveConnections;
@@ -38,10 +39,18 @@ namespace CLA_Administration_Web.Controllers
         [HttpGet]
         public async Task<IActionResult> StagingUsers()
         {
+
+            var targetingTree = TargetingHelper.GetTargetedEntities();
+            var targetingSelect = TargetingHelper.GetTargetedEntitiesSelect();
+
             var stagingUsersData = new StagingUsersMainViewModel()
             {
                 StagingUsers = SettingsMockData.StagingUsers,
-                StagingMachines = SettingsMockData.StagingMachines
+                StagingMachines = SettingsMockData.StagingMachines,
+                // ModuleName = moduleName,
+                TargetedEntities = targetingTree,
+                TargetedAccepted = targetingSelect,
+                TargetedGroups = targetingSelect,
             };
 
             return PartialView(AppPagesLinks.Settings.StagingUsersPageLink, stagingUsersData);
@@ -128,11 +137,18 @@ namespace CLA_Administration_Web.Controllers
         [HttpGet]
         public async Task<IActionResult> SetupExclusions()
         {
+            var targetingTree = TargetingHelper.GetTargetedEntities();
+            var targetingSelect = TargetingHelper.GetTargetedEntitiesSelect();
             var setupExcludedData = new SetupExclusionsMainViewModel()
             {
                 Users = SettingsMockData.SetupExcludedUsers,
-                Machines = SettingsMockData.SetupExcludedMachines
+                Machines = SettingsMockData.SetupExcludedMachines,
+                     // ModuleName = moduleName,
+                TargetedEntities = targetingTree,
+                TargetedAccepted = targetingSelect,
+                TargetedGroups = targetingSelect,
             };
+        
 
             return PartialView(AppPagesLinks.Settings.SetupExclusionsPageLink, setupExcludedData);
         }

@@ -1,5 +1,6 @@
 ﻿@model SetupExclusionsMainViewModel
-
+@using CLA_Administration_Web.ViewModels.Targeting
+@using CLA_Administration_Web.ViewModels.Shared
 @{
     int index = 0;
 
@@ -139,6 +140,18 @@
 
 </div>
 
+
+
+@{
+    await Html.RenderPartialAsync("~/Views/Shared/Components/Modal/_UserSelectionModal.cshtml", new ModalViewModel
+            {
+                ModalTitle = "Select Usersssssssss",
+                TargetedEntities = Model.TargetedEntities,
+                CallbackFunction = "handleUserSelection"
+            });
+}
+
+
 <!-- Create New Staging User Modal -->
 <div class="modal fade" id="CreateStagingUserModal" tabindex="-1" aria-labelledby="CreateStagingUserModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -148,63 +161,62 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal('CreateStagingUserModal')"></button>
             </div>
             <div class="modal-body">
-                <form id="CreateStagingUserForm">
-                    <div class="mb-3">
-                        <label for="StagingUserDomain" class="form-label">Domain</label>
-                        <select class="form-select" id="StagingUserDomain" required>
-                            <option value="">Please select a domain</option>
-                            @foreach (var domain in usersDomains)
-                            {
-                                <option value="@domain">@domain</option>
-                            }
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="StagingUserUsername" class="form-label">Username</label>
-                        <select class="form-select" id="StagingUserDomain" required>
-                            <option value="">Please select a user</option>
-                            @foreach (var user in users)
-                            {
-                                <option value="@user">@user</option>
-                            }
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="StagingUserFirstname" class="form-label">First Name</label>
-                        <input type="text" class="form-control" id="StagingUserFirstname" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="StagingUserLastname" class="form-label">Last Name</label>
-                        <input type="text" class="form-control" id="StagingUserLastname" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="StagingUserUserLastModified" class="form-label">User Last Modified</label>
-                        <input type="text" class="form-control" id="StagingUserUserLastModified">
-                    </div>
-                    <div class="mb-3">
-                        <label for="StagingUserMachineLastModified" class="form-label">Machine Last Modified</label>
-                        <input type="text" class="form-control" id="StagingUserMachineLastModified">
-                    </div>
-                </form>
+                <div class="mb-3">
+                    <label for="SelectUser" class="form-label">Select User</label>
+                    <button class="btn btn-secondary"
+                            type="button"
+                            id="StagingUserBtn"
+                            data-callback="updateStagingMachineFields"
+                            data-lastmodified-field="StagingUserUserLastModified"
+                            onclick=" openTreeViewModal(this,'UsersModal', 'CreateStagingUserModal')">
+                        Select User
+                    </button>
+                </div>
+                <div class="mb-3">
+                    <label for="StagingUserDomain" class="form-label">Domain</label>
+                    <select class="form-control" id="StagingUserDomain" required>
+                        <option value="">Please select a domain</option>
+                        @foreach (var domain in usersDomains)
+                        {
+                            <option value="@domain">@domain</option>
+                        }
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="StagingUserFirstname" class="form-label">First Name</label>
+                    <input type="text" class="form-control" id="StagingUserFirstname" required>
+                </div>
+                <div class="mb-3">
+                    <label for="StagingUserLastname" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="StagingUserLastname" required>
+                </div>
+                <div class="mb-3">
+                    <label for="StagingUserUserLastModified" class="form-label">User Last Modified</label>
+                    <input type="text" class="form-control" id="StagingUserUserLastModified">
+                </div>
+                <div class="mb-3">
+                    <label for="StagingUserMachineLastModified" class="form-label">Machine Last Modified</label>
+                    <input type="text" class="form-control" id="StagingUserMachineLastModified">
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal('CreateStagingUserModal')">Cancel</button>
-                <button type="button" class="btn  custom-btn-default" onclick="SaveStagingUser()">Save User</button>
+                <button type="button" class="btn custom-btn-default" onclick="SaveStagingUser()">Save User</button>
             </div>
         </div>
     </div>
 </div>
 
 <!-- Create New Staging Machine Modal -->
-<div class="modal fade" id="CreateStagingMachineModal" tabindex="-1" aria-labelledby="CreateStagingUserModalLabel" aria-hidden="true">
+<div class="modal fade" id="CreateStagingMachineModal" tabindex="-1" aria-labelledby="CreateStagingMachineModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="CreateStagingUserModalLabel">Add New Staging Machine</h5>
+                <h5 class="modal-title" id="CreateStagingMachineModalLabel">Add New Staging Machine</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal('CreateStagingMachineModal')"></button>
             </div>
             <div class="modal-body">
-                <form id="CreateStagingUserForm">
+                <form id="CreateStagingMachineForm">
                     <div class="mb-3">
                         <label for="StagingUserDomain" class="form-label">Domain</label>
                         <select class="form-select" id="StagingUserDomain" required>
@@ -231,11 +243,10 @@
                         <label for="StagingMachineLastModified" class="form-label">Machine Last Modified</label>
                         <input type="datetime-local" class="form-control" id="StagingMachineLastModified">
                     </div>
-
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" id="closeModal" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal('CreateStagingMachineModal')">Cancel</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal('CreateStagingMachineModal')">Cancel</button>
                 <button type="button" class="btn custom-btn-default" onclick="SaveStagingMachine()">Save Machine</button>
             </div>
         </div>
@@ -261,10 +272,89 @@
     </div>
 </div>
 
+
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
+
+
+
+    function handleUserSelection(selectedUsers, selectedGroups, selectedMachines, selectedIpRanges) {
+        console.log("Callback executed!");
+        console.log("Selected Users: ", selectedUsers);
+        console.log("Selected Groups: ", selectedGroups);
+        console.log("Selected Machines: ", selectedMachines);
+        console.log("Selected IP Ranges: ", selectedIpRanges);
+
+        Swal("Saved users", "success");
+    }
+
+
+    function closeModal(modalId) {
+        var modal = document.getElementById(modalId);
+        var backdrop = document.querySelector('.modal-backdrop');
+
+        modal.style.display = 'none';
+
+        if (backdrop) {
+            backdrop.style.display = 'none'; 
+        }
+    }
+
+
+
+    function openTreeViewModal(triggerButton, modal1Id, modal2Id) {
+     
+        var modal1 = document.getElementById(modal1Id);
+        var modal2 = document.getElementById(modal2Id);  
+
+        // Ensure modal1 (second modal) is fully visible
+        modal1.style.display = 'block';
+        modal1.style.opacity = '1';
+        modal1.style.zIndex = '1055';
+
+        // Ensure modal2 (main modal) is beneath modal1
+        modal2.style.zIndex = '0';
+
+      
+        var backdrop = document.querySelector('.modal-backdrop');
+        if (backdrop) {
+            backdrop.style.zIndex = '0'; 
+            backdrop.style.opacity = '0'; 
+        }
+
+     
+        const lastModifiedField = triggerButton.getAttribute('data-lastmodified-field');
+        const callbackFunction = triggerButton.getAttribute('data-callback');
+
+       
+        window.selectedFields = {
+            lastModifiedField,
+            callbackFunction,
+        };
+    }
+
+    function closeUsersModal() {
+        var usersModal = document.getElementById('UsersModal');
+        var mainModal = document.getElementById('CreateStagingUserModal');
+
+ 
+        usersModal.style.display = 'none';
+
+        
+        mainModal.style.zIndex = '1050'; 
+        usersModal.style.zIndex = '0';
+        usersModal.style.opacity = '0';
+
+        var backdrop = document.querySelector('.modal-backdrop');
+        if (backdrop) {
+            backdrop.style.zIndex = '1040'; 
+           backdrop.style.position = 'relative'
+        }
+    }
+
+
 
     var usersDomains = @Html.Raw(Json.Serialize(usersDomains));
     var machinesDomains = @Html.Raw(Json.Serialize(machinesDomains));
@@ -348,6 +438,11 @@
         {
             const userModal = new bootstrap.Modal(document.getElementById('CreateStagingUserModal'));
             userModal.show();
+            var backdrop = document.querySelector('.modal-backdrop');
+            if (backdrop) {
+               
+                backdrop.style.position = 'relative'
+            }
         } 
         else if (buttonText.includes("Machine"))
         {

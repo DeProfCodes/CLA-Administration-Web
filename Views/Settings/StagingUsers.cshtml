@@ -1,4 +1,5 @@
-﻿
+﻿@using CLA_Administration_Web.ViewModels.Targeting
+@using CLA_Administration_Web.ViewModels.Shared
 @model StagingUsersMainViewModel
 
 @{
@@ -7,9 +8,13 @@
     var usersDomains = Model.StagingUsers.Select(x => x.Domain).Distinct().ToList();
     var machinesDomains = Model.StagingMachines.Select(x => x.Domain).Distinct().ToList();
     var users = Model.StagingUsers.Select(x => x.UserLastModified).Distinct().ToList();
+    var target = Model.TargetedEntities;
 }
 
 <div class="container-fluid">
+
+
+
 
 <!-- Breadcrumb Component -->
 @{
@@ -56,6 +61,7 @@
         </div>
     </div>
 </div>
+
 
 <!-- Card for Popup Report Body -->
 <div class="card mb-1 mt-1 card mb-4 mt-2 overview-filters-card app-card-main-scaling p-4" id="report-data-area">
@@ -212,7 +218,6 @@
 </div>
 
 
-
 <!-- Users Modal -->
 <div class="modal fade" id="UsersModal" tabindex="-1" aria-labelledby="UsersModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -223,7 +228,7 @@
             </div>
             <div class="modal-body">
                 <div class="container mt-4">
-                   <!-- Search Field -->
+                    <!-- Search Field -->
                     <div class="mb-3">
                         <input type="text" id="custom-searchInput" class="form-control" placeholder="Search..." onkeyup="customFilterTree()">
                     </div>
@@ -231,38 +236,10 @@
                     <!-- Tree Structure -->
                     <div class="custom-tree" id="custom-directoryTree">
                         <ul>
-                            <li class="custom-folder">
-                                <span class="custom-toggle-icon" onclick="customToggleFolder(this)">+</span>
-                                <label><i class="bi bi-folder"></i> Active Directory Objects</label>
-                                <ul class="custom-tree-content">
-                                    <li class="custom-folder">
-                                        <span class="custom-toggle-icon" onclick="customToggleFolder(this)">+</span>
-                                        <label><i class="bi bi-people"></i> Groups</label>
-                                        <ul class="custom-tree-content">
-                                            <li class="custom-file" onclick="customSelectValue(this)">Admins</li>
-                                            <li class="custom-file" onclick="customSelectValue(this)">Developers</li>
-                                            <li class="custom-file" onclick="customSelectValue(this)">HR</li>
-                                        </ul>
-                                    </li>
-                                    <li class="custom-folder">
-                                        <span class="custom-toggle-icon" onclick="customToggleFolder(this)">+</span>
-                                        <label><i class="bi bi-person"></i> Users</label>
-                                        <ul class="custom-tree-content">
-                                            <li class="custom-file" onclick="customSelectValue(this)" data-username="nhlamulo">nhlamulo</li>
-                                            <li class="custom-file" onclick="customSelectValue(this)" data-username="jane_smith">Jane Smith</li>
-                                            <li class="custom-file" onclick="customSelectValue(this)" data-username="john_doe">John Doe</li>
-                                        </ul>
-                                    </li>
-                                    <li class="custom-folder">
-                                        <span class="custom-toggle-icon" onclick="customToggleFolder(this)">+</span>
-                                        <label><i class="bi bi-laptop"></i> Machines</label>
-                                        <ul class="custom-tree-content">
-                                            <li class="custom-file" onclick="customSelectValue(this)">Server-1</li>
-                                            <li class="custom-file" onclick="customSelectValue(this)">Workstation-5</li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
+                            @foreach (var entity in Model.TargetedEntities)
+                            {
+                                @Html.Raw(RenderTreeNode(entity))
+                            }
                         </ul>
                     </div>
                 </div>
@@ -274,6 +251,38 @@
         </div>
     </div>
 </div>
+
+@functions {
+    string RenderTreeNode(CLA_Administration_Web.ViewModels.Targeting.TargetedEntityTree node)
+    {
+        var html = $@"
+        <li class='custom-folder'>
+            <span class='custom-toggle-icon' onclick='customToggleFolder(this)'>+</span>
+            <label><i class='bi bi-folder'></i> {node.EntityName}</label>";
+
+        if (node._children != null && node._children.Any())
+        {
+            html += "<ul class='custom-tree-content'>";
+            foreach (var child in node._children)
+            {
+                
+                if (child._children != null && child._children.Any())
+                {
+                    html += RenderTreeNode(child); 
+                }
+                else
+                {
+                    html += $"<li class='custom-file' onclick='customSelectValue(this)'>{child.EntityName}</li>"; 
+                }
+            }
+            html += "</ul>";
+        }
+
+        html += "</li>";
+        return html;
+    }
+}
+
 
 <!-- Create New Staging Machine Modal -->
 <div class="modal fade" id="CreateStagingMachineModal" tabindex="-1" aria-labelledby="CreateStagingUserModalLabel" aria-hidden="true">
@@ -342,17 +351,27 @@
 </div>
 
 
+
+
+
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="~/js/settings.js"></script>
 <script>
 
 
+    function handleUserSelection(selectedUsers, selectedGroups, selectedMachines, selectedIpRanges) {
+        console.log("Callback executed!");
+        console.log("Selected Users: ", selectedUsers);
+        console.log("Selected Groups: ", selectedGroups);
+        console.log("Selected Machines: ", selectedMachines);
+        console.log("Selected IP Ranges: ", selectedIpRanges);
+    }
 
 
 
 
-
+    // Toggle folder visibility
     function customToggleFolder(element) {
         var parent = element.parentElement;
         if (parent.classList.contains("custom-collapsed")) {
@@ -364,13 +383,14 @@
         }
     }
 
-
-    // Select value and allow only one selection per folder
+    // Select value and allow only one selection at a time (like radio buttons)
     function customSelectValue(element) {
         const parentFolder = element.closest('.custom-folder');
-        // Deselect previously selected file in the same folder
-        parentFolder.querySelectorAll('.custom-file.active').forEach(file => file.classList.remove('active'));
-        // Select the current file
+
+        // Deselect previously selected file across all folders
+        document.querySelectorAll('.custom-file.active').forEach(file => file.classList.remove('active'));
+
+        // Select the current file (radio button-like behavior)
         element.classList.add('active');
     }
 
@@ -410,129 +430,60 @@
         });
     }
 
+    // Save the selections from the tree and update the form fields
+    function saveSelections() {
+        let selectedUsers = [];
+        let selectedGroups = [];
+        let selectedMachines = [];
+        let selectedIpRanges = [];
 
+        // Get selected users (if any)
+        document.querySelectorAll('.user-checkbox:checked').forEach(item => {
+            selectedUsers.push(item.parentNode.textContent.trim());
+        });
 
+        // Get selected groups, machines, or IP ranges from the tree
+        document.querySelectorAll('.custom-file.active').forEach(item => {
+            const parentFolder = item.closest('.custom-folder').querySelector('label').textContent.trim(); // Get parent folder name
+            const selectedItem = item.textContent.trim();
 
+            if (parentFolder.includes('Groups')) {
+                selectedGroups.push(selectedItem);
+            } else if (parentFolder.includes('Machines')) {
+                selectedMachines.push(selectedItem);
+            } else if (parentFolder.includes('IPRanges')) {
+                selectedIpRanges.push(selectedItem);
+            }
+        });
 
+        console.log("Selected Users: ", selectedUsers);
+        console.log("Selected Groups: ", selectedGroups);
+        console.log("Selected Machines: ", selectedMachines);
+        console.log("Selected IP Ranges: ", selectedIpRanges);
 
+        // Close the modal after saving selections
+        closeUsersModal();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-document.addEventListener('click', (event) => {
-    if (event.target.closest('.tree-toggle')) {
-        const toggle = event.target.closest('.tree-toggle');
-        toggle.classList.toggle('opened');
-        const content = toggle.nextElementSibling;
-        if (content && content.classList.contains('tree-content')) {
-            content.style.display = toggle.classList.contains('opened') ? 'block' : 'none';
-        }
+        // Set the selected values to the appropriate input fields
+        document.getElementById('StagingUserFirstname').value = selectedUsers.join(', ');
+        document.getElementById('StagingUserLastname').value = selectedGroups.join(', ');
+        document.getElementById('StagingMachineLastModified').value = selectedMachines.join(', ');
     }
-});
+
+    // Open the modal
+    function openUsersModal() {
+        const usersModal = new bootstrap.Modal(document.getElementById('UsersModal'));
+        usersModal.show();
+    }
+
+    // Close the modal
+    function closeUsersModal() {
+        const usersModal = new bootstrap.Modal(document.getElementById('UsersModal'));
+        usersModal.hide();
+    }
 
 
-function openUsersModal() {
-    var createStagingUserModal = new bootstrap.Modal(document.getElementById('CreateStagingUserModal'));
-    createStagingUserModal.hide(); 
-    
-    var usersModal = new bootstrap.Modal(document.getElementById('UsersModal'));
-    usersModal.show(); 
-    
 
-    document.body.style.overflow = "hidden"; 
-}
-
-const usersData = { 
-    users: {
-        nhlamulo: { groups: ["Admins", "HR"], machines: ["Server-1"], ipRanges: ["192.168.0.0/24"] },
-        jane_smith: { groups: ["Developers"], machines: ["Workstation-5"], ipRanges: [] },
-        john_doe: { groups: ["HR"], machines: [], ipRanges: ["10.0.0.0/8"] },
-    },
-    groups: {
-        Admins: { users: ["nhlamulo"], machines: ["Server-1"] },
-        Developers: { users: ["jane_smith"], machines: [] },
-        HR: { users: ["nhlamulo", "john_doe"], machines: [] },
-    },
-    machines: {
-        "Server-1": { users: ["nhlamulo"], groups: ["Admins"], ipRanges: ["192.168.0.0/24"] },
-        "Workstation-5": { users: ["jane_smith"], groups: [], ipRanges: [] },
-    },
-    ipRanges: {
-        "192.168.0.0/24": { users: ["nhlamulo"], machines: ["Server-1"] },
-        "10.0.0.0/8": { users: ["john_doe"], machines: [] },
-    },
-};
-
-// Function to handle filtering the tree view
-function filterTree() {
-    const filter = document.getElementById('filterInputMember').value.toLowerCase();
-    const treeViewItems = document.querySelectorAll('.tree-view li');
-
-    treeViewItems.forEach(item => {
-        const label = item.querySelector('label');
-        const labelText = label ? label.textContent.toLowerCase() : '';
-        const shouldHide = labelText.indexOf(filter) === -1;
-        item.style.display = shouldHide ? 'none' : '';
-    });
-}
-
-
-function saveSelections() {
-    let selectedUsers = [];
-    let selectedGroups = [];
-    let selectedMachines = [];
-    let selectedIpRanges = [];
-
-
-    document.querySelectorAll('.user-checkbox:checked').forEach(item => {
-        selectedUsers.push(item.parentNode.textContent.trim());
-    });
-
-    document.querySelectorAll('.tree-content input[type="radio"]:checked').forEach(item => {
-        if (item.id.includes('group_')) {
-            selectedGroups.push(item.parentNode.textContent.trim());
-        } else if (item.id.includes('machine_')) {
-            selectedMachines.push(item.parentNode.textContent.trim());
-        } else if (item.id.includes('iprange_')) {
-            selectedIpRanges.push(item.parentNode.textContent.trim());
-        }
-    });
-
-
-    console.log("Selected Users: ", selectedUsers);
-    console.log("Selected Groups: ", selectedGroups);
-    console.log("Selected Machines: ", selectedMachines);
-    console.log("Selected IP Ranges: ", selectedIpRanges);
-
-    closeUsersModal();
-
-
-    document.getElementById('StagingUserFirstname').value = selectedUsers.join(', ');
-    document.getElementById('StagingUserLastname').value = selectedGroups.join(', ');
-    document.getElementById('StagingMachineLastModified').value = selectedMachines.join(', ');
-}
-
-
-function openUsersModal() {
-    const usersModal = new bootstrap.Modal(document.getElementById('UsersModal'));
-    usersModal.show();
-}
-
-function closeUsersModal() {
-    const usersModal = new bootstrap.Modal(document.getElementById('UsersModal'));
-    usersModal.hide();
-}
 
 function SaveStagingUser() {
 
