@@ -1,0 +1,174 @@
+﻿@{
+    ViewData["Title"] = "Custom Tree View with Search";
+}
+
+<div class="container mt-4">
+    <h2>Custom Tree View with Search and Per Folder Selection</h2>
+
+    <!-- Search Field -->
+    <div class="mb-3">
+        <input type="text" id="custom-searchInput" class="form-control" placeholder="Search..." onkeyup="customFilterTree()">
+    </div>
+
+    <!-- Tree Structure -->
+    <div class="custom-tree" id="custom-directoryTree">
+        <ul>
+            <li class="custom-folder">
+                <span class="custom-toggle-icon" onclick="customToggleFolder(this)">+</span>
+                <label><i class="bi bi-folder"></i> Active Directory Objects</label>
+                <ul class="custom-tree-content">
+                    <li class="custom-folder">
+                        <span class="custom-toggle-icon" onclick="customToggleFolder(this)">+</span>
+                        <label><i class="bi bi-people"></i> Groups</label>
+                        <ul class="custom-tree-content">
+                            <li class="custom-file" onclick="customSelectValue(this)">Admins</li>
+                            <li class="custom-file" onclick="customSelectValue(this)">Developers</li>
+                            <li class="custom-file" onclick="customSelectValue(this)">HR</li>
+                        </ul>
+                    </li>
+                    <li class="custom-folder">
+                        <span class="custom-toggle-icon" onclick="customToggleFolder(this)">+</span>
+                        <label><i class="bi bi-person"></i> Users</label>
+                        <ul class="custom-tree-content">
+                            <li class="custom-file" onclick="customSelectValue(this)" data-username="nhlamulo">nhlamulo</li>
+                            <li class="custom-file" onclick="customSelectValue(this)" data-username="jane_smith">Jane Smith</li>
+                            <li class="custom-file" onclick="customSelectValue(this)" data-username="john_doe">John Doe</li>
+                        </ul>
+                    </li>
+                    <li class="custom-folder">
+                        <span class="custom-toggle-icon" onclick="customToggleFolder(this)">+</span>
+                        <label><i class="bi bi-laptop"></i> Machines</label>
+                        <ul class="custom-tree-content">
+                            <li class="custom-file" onclick="customSelectValue(this)">Server-1</li>
+                            <li class="custom-file" onclick="customSelectValue(this)">Workstation-5</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+@section Scripts {
+
+    <script>
+
+        // Toggle folder open/close with plus/minus icon
+        function customToggleFolder(element) {
+            const folder = element.parentElement;
+            const content = folder.querySelector('.custom-tree-content');
+            const isCollapsed = folder.classList.contains('custom-collapsed');
+
+            if (isCollapsed) {
+                folder.classList.remove('custom-collapsed');
+                element.textContent = '-';
+                content.style.display = 'block';
+            } else {
+                folder.classList.add('custom-collapsed');
+                element.textContent = '+';
+                content.style.display = 'none';
+            }
+        }
+
+        // Select value and allow only one selection per folder
+        function customSelectValue(element) {
+            const parentFolder = element.closest('.custom-folder');
+            // Deselect previously selected file in the same folder
+            parentFolder.querySelectorAll('.custom-file.active').forEach(file => file.classList.remove('active'));
+            // Select the current file
+            element.classList.add('active');
+        }
+
+        // Filter tree nodes based on search input
+        function customFilterTree() {
+            const query = document.getElementById('custom-searchInput').value.toLowerCase();
+            const allItems = document.querySelectorAll("#custom-directoryTree li");
+
+            allItems.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                const matches = text.includes(query);
+
+                // Toggle the visibility of the items based on the search query
+                item.style.display = matches ? "list-item" : "none";
+
+                if (matches) {
+                    // Ensure parent folders of visible items remain open
+                    let parent = item.parentElement;
+                    while (parent && parent.tagName === "UL") {
+                        parent.style.display = "block"; // Make the parent list visible
+                        parent = parent.parentElement; // Traverse up to the parent <li>
+                        if (parent && parent.querySelector('.custom-toggle-icon')) {
+                            parent.classList.remove('custom-collapsed');
+                            parent.querySelector('.custom-toggle-icon').textContent = '-';
+                        }
+                    }
+                }
+            });
+
+            // Show parents of visible children
+            allItems.forEach(item => {
+                const children = item.querySelectorAll("li");
+                const anyChildVisible = Array.from(children).some(child => child.style.display === "list-item");
+                if (anyChildVisible) {
+                    item.style.display = "list-item";
+                }
+            });
+        }
+
+    </script>
+}
+
+
+<style>
+
+    .custom-tree ul {
+    list-style-type: none;
+    padding-left: 1.5rem;
+    border-left: 1px dotted #ccc;
+    margin-left: 0.5rem;
+    }
+
+    .custom-tree li {
+    position: relative;
+    line-height: 1.6;
+    padding-left: 0.8rem;
+    }
+
+    .custom-tree li .custom-toggle-icon {
+    display: inline-block;
+    width: 1.2rem;
+    height: 1.2rem;
+    line-height: 1.1rem;
+    text-align: center;
+    border: 1px solid #007bff;
+    margin-right: 0.5rem;
+    font-weight: bold;
+    color: #007bff;
+    cursor: pointer;
+    font-size: 0.85rem;
+    }
+
+    .custom-tree li .custom-toggle-icon:hover {
+    background-color: #e7f3ff;
+    }
+
+    .custom-tree li .custom-file {
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    }
+
+    .custom-tree li .custom-file.active {
+    background-color: #007bff;
+    color: white;
+    }
+
+    .custom-tree li.custom-collapsed > ul {
+    display: none;
+    }
+
+    .custom-tree li.custom-folder > ul {
+    display: block;
+    }
+</style>
+
