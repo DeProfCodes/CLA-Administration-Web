@@ -161,7 +161,7 @@
                     <!-- Domain -->
                     <div class="mb-3">
                         <label for="StagingUserDomain" class="form-label">Domain</label>
-                           <select class="form-select ms-2" style="width:100%;" id="StagingDomainSelect" onchange="FilterByDomain()">
+                        <select class="form-control  ms-2" style="width:100%" id="StagingDomainSelect" onchange="FilterByDomain()">
                             <option value="0">Please select Domain Name</option>
                             @foreach (var domain in usersDomains)
                             {
@@ -215,68 +215,56 @@
 
 <!-- Users Modal -->
 <div class="modal fade" id="UsersModal" tabindex="-1" aria-labelledby="UsersModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="UsersModalLabel">Select User</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeUsersModal()"></button>
             </div>
             <div class="modal-body">
-                <!-- Search Box for Filtering -->
-                <div class="mb-3">
-                    <label for="filterInputMember" class="form-label">Filter:</label>
-                    <input type="text" id="filterInputMember" placeholder="Search..." oninput="filterTreeView('filterInputMember', '.tree-view')">
+                <div class="container mt-4">
+                   <!-- Search Field -->
+                    <div class="mb-3">
+                        <input type="text" id="custom-searchInput" class="form-control" placeholder="Search..." onkeyup="customFilterTree()">
+                    </div>
 
-                </div>
-                <!-- Tree View for Active Directory Objects -->
-                <div class="scroll-box treeview mt-3">
-                    <ul id="directoryTree" class="tree-view">
-                        <!-- Root Node: Active Directory Objects -->
-                        <li>
-                            <input type="checkbox" id="node1" class="tree-toggle" hidden>
-                            <label for="node1" class="tree-toggle-label"><i class="bi bi-folder"></i> Active Directory Objects</label>
-                            <ul class="tree-content">
-                                <!-- Groups Node -->
-                                <li>
-                                    <input type="radio" id="node1-1" class="tree-toggle">
-                                    <label for="node1-1" class="tree-toggle-label"><i class="bi bi-people"></i> Groups</label>
-                                    <ul class="tree-content">
-                                        <li data-type="group" data-name="Admins"><input type="radio" id="group_admins"> Admins</li>
-                                        <li data-type="group" data-name="Developers"><input type="radio" id="group_developers"> Developers</li>
-                                        <li data-type="group" data-name="HR"><input type="radio" id="group_hr"> HR</li>
-                                    </ul>
-                                </li>
-                                <!-- Users Node -->
-                                <li>
-                                    <input type="radio" id="node1-2" class="tree-toggle">
-                                    <label for="node1-2" class="tree-toggle-label"><i class="bi bi-person"></i> Users</label>
-                                    <ul class="tree-content">
-                                        <li data-username="nhlamulo"><input type="radio" class="user-checkbox" id="user_nhlamulo"> nhlamulo</li>
-                                        <li data-username="jane_smith"><input type="radio" class="user-checkbox" id="user_jane_smith"> Jane Smith</li>
-                                        <li data-username="john_doe"><input type="radio" class="user-checkbox" id="user_john_doe"> John Doe</li>
-                                    </ul>
-                                </li>
-                                <!-- Machines Node -->
-                                <li>
-                                    <input type="radio" id="node1-3" class="tree-toggle">
-                                    <label for="node1-3" class="tree-toggle-label"><i class="bi bi-laptop"></i> Machines</label>
-                                    <ul class="tree-content">
-                                        <li data-type="machine" data-name="Server-1"><input type="radio" id="machine_server_1"> Server-1</li>
-                                        <li data-type="machine" data-name="Workstation-5"><input type="radio" id="machine_workstation_5"> Workstation-5</li>
-                                    </ul>
-                                </li>
-                                <!-- IP Ranges Node -->
-                                <li>
-                                    <input type="radio" id="node1-4" class="tree-toggle">
-                                    <label for="node1-4" class="tree-toggle-label"><i class="bi bi-globe"></i> IP Ranges</label>
-                                    <ul class="tree-content">
-                                        <li data-type="iprange" data-name="192.168.0.0/24"><input type="radio" id="iprange_192_168_0_0"> 192.168.0.0/24</li>
-                                        <li data-type="iprange" data-name="10.0.0.0/8"><input type="radio" id="iprange_10_0_0_0"> 10.0.0.0/8</li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
+                    <!-- Tree Structure -->
+                    <div class="custom-tree" id="custom-directoryTree">
+                        <ul>
+                            <li class="custom-folder">
+                                <span class="custom-toggle-icon" onclick="customToggleFolder(this)">+</span>
+                                <label><i class="bi bi-folder"></i> Active Directory Objects</label>
+                                <ul class="custom-tree-content">
+                                    <li class="custom-folder">
+                                        <span class="custom-toggle-icon" onclick="customToggleFolder(this)">+</span>
+                                        <label><i class="bi bi-people"></i> Groups</label>
+                                        <ul class="custom-tree-content">
+                                            <li class="custom-file" onclick="customSelectValue(this)">Admins</li>
+                                            <li class="custom-file" onclick="customSelectValue(this)">Developers</li>
+                                            <li class="custom-file" onclick="customSelectValue(this)">HR</li>
+                                        </ul>
+                                    </li>
+                                    <li class="custom-folder">
+                                        <span class="custom-toggle-icon" onclick="customToggleFolder(this)">+</span>
+                                        <label><i class="bi bi-person"></i> Users</label>
+                                        <ul class="custom-tree-content">
+                                            <li class="custom-file" onclick="customSelectValue(this)" data-username="nhlamulo">nhlamulo</li>
+                                            <li class="custom-file" onclick="customSelectValue(this)" data-username="jane_smith">Jane Smith</li>
+                                            <li class="custom-file" onclick="customSelectValue(this)" data-username="john_doe">John Doe</li>
+                                        </ul>
+                                    </li>
+                                    <li class="custom-folder">
+                                        <span class="custom-toggle-icon" onclick="customToggleFolder(this)">+</span>
+                                        <label><i class="bi bi-laptop"></i> Machines</label>
+                                        <ul class="custom-tree-content">
+                                            <li class="custom-file" onclick="customSelectValue(this)">Server-1</li>
+                                            <li class="custom-file" onclick="customSelectValue(this)">Workstation-5</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
@@ -358,6 +346,86 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="~/js/settings.js"></script>
 <script>
+
+
+
+
+
+
+
+    function customToggleFolder(element) {
+        var parent = element.parentElement;
+        if (parent.classList.contains("custom-collapsed")) {
+            parent.classList.remove("custom-collapsed");
+            parent.classList.add("custom-expanded");
+        } else {
+            parent.classList.remove("custom-expanded");
+            parent.classList.add("custom-collapsed");
+        }
+    }
+
+
+    // Select value and allow only one selection per folder
+    function customSelectValue(element) {
+        const parentFolder = element.closest('.custom-folder');
+        // Deselect previously selected file in the same folder
+        parentFolder.querySelectorAll('.custom-file.active').forEach(file => file.classList.remove('active'));
+        // Select the current file
+        element.classList.add('active');
+    }
+
+    // Filter tree nodes based on search input
+    function customFilterTree() {
+        const query = document.getElementById('custom-searchInput').value.toLowerCase();
+        const allItems = document.querySelectorAll("#custom-directoryTree li");
+
+        allItems.forEach(item => {
+            const text = item.textContent.toLowerCase();
+            const matches = text.includes(query);
+
+            // Toggle the visibility of the items based on the search query
+            item.style.display = matches ? "list-item" : "none";
+
+            if (matches) {
+                // Ensure parent folders of visible items remain open
+                let parent = item.parentElement;
+                while (parent && parent.tagName === "UL") {
+                    parent.style.display = "block"; // Make the parent list visible
+                    parent = parent.parentElement; // Traverse up to the parent <li>
+                    if (parent && parent.querySelector('.custom-toggle-icon')) {
+                        parent.classList.remove('custom-collapsed');
+                        parent.querySelector('.custom-toggle-icon').textContent = '-';
+                    }
+                }
+            }
+        });
+
+        // Show parents of visible children
+        allItems.forEach(item => {
+            const children = item.querySelectorAll("li");
+            const anyChildVisible = Array.from(children).some(child => child.style.display === "list-item");
+            if (anyChildVisible) {
+                item.style.display = "list-item";
+            }
+        });
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -212,7 +212,7 @@ namespace CLA_Administration_Web.Helpers.MockData
 
                 var item = new AdminAccessItem
                 {
-                    AdminID =id,
+                   
                     Domain = domain,
                     Username = MockDataHelperFunctions.GetRandomMachineID(),
                     DesktopEnvironment = desktopEnvironment,
