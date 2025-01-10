@@ -247,31 +247,34 @@ namespace CLA_Administration_Web.Controllers
         public ActionResult EditTargetGroups(int machineId, string entityType)
         {
 
-            var stagingUsersData = new StagingUsersMainViewModel()
+            var targetGroups = new TargetingExposureViewModel()
             {
-                StagingUsers = SettingsMockData.StagingUsers,
-                StagingMachines = SettingsMockData.StagingMachines
+                TargetedUsers = SettingsMockData.TargetGroupUsers,
+                TargetedMachines = SettingsMockData.TargetedMachines,
+                TargetedGroups = SettingsMockData.TargetedGroups,
+                TargetedIPRanges = SettingsMockData.TargetedIPRanges
             };
+
 
             object selectedEntity = null;
 
             if (entityType == "Machine")
             {
-                selectedEntity = stagingUsersData.StagingMachines.FirstOrDefault(m => m.Id == machineId);
+                selectedEntity = targetGroups.TargetedUsers.FirstOrDefault(m => m.Id == machineId);
             }
             else if (entityType == "User")
             {
-                selectedEntity = stagingUsersData.StagingUsers.FirstOrDefault(u => u.Id == machineId);
+                selectedEntity = targetGroups.TargetedMachines.FirstOrDefault(u => u.machineId == machineId);
             }
             else if (entityType == "Group")
             {
                 
-                selectedEntity = stagingUsersData.StagingUsers.FirstOrDefault(u => u.Id == machineId);
+                selectedEntity = targetGroups.TargetedGroups.FirstOrDefault(u => u.GroupId == machineId);
             }
             else if (entityType == "IPRanges")
             {
                 
-                selectedEntity = stagingUsersData.StagingUsers.FirstOrDefault(u => u.Id == machineId);
+                selectedEntity = targetGroups.TargetedIPRanges.FirstOrDefault(u => u.RangeId == machineId);
             }
 
 
@@ -283,7 +286,7 @@ namespace CLA_Administration_Web.Controllers
 
             ViewBag.EntityType = entityType;
 
-            return PartialView(AppPagesLinks.Settings.StagingModalViewPageLink, selectedEntity);
+            return PartialView(AppPagesLinks.Settings.TargeGroupEditModal, selectedEntity);
         }
 
         #endregion

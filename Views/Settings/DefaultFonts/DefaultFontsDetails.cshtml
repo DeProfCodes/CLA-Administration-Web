@@ -8,133 +8,161 @@
 @using CLA_Administration_Web.Helpers.MockData
 
 @{
-    var fontFamilies = new List<string> { "Arial", "Verdana", "Times New Roman", "Courier New", "Georgia", "Lucida Console", "Comic Sans MS", "Trebuchet MS", "Impact", "Palatino Linotype", "Gill Sans", "Helvetica", "Garamond", "Brush Script MT", "Arial Black", "Lucida Sans", "Segoe UI", "Optima", "Futura", "Baskerville", "Century Gothic", "Franklin Gothic Medium" };
-    var fontWeights = new List<string> { "normal", "bold", "lighter" };
-    var fontStyles = new List<string> { "normal", "italic", "oblique" };
-    var namedColors = new List<string> { "Red", "Green", "Blue", "Yellow", "Orange", "Purple", "Cyan", "Magenta", "Black", "White", "Gray" };
+var fontFamilies = new List<string> { "Arial", "Verdana", "Times New Roman", "Courier New", "Georgia", "Lucida Console", "Comic Sans MS", "Trebuchet MS", "Impact", "Palatino Linotype", "Gill Sans", "Helvetica", "Garamond", "Brush Script MT", "Arial Black", "Lucida Sans", "Segoe UI", "Optima", "Futura", "Baskerville", "Century Gothic", "Franklin Gothic Medium" };
+var fontWeights = new List<string> { "normal", "bold", "lighter" };
+var fontStyles = new List<string> { "normal", "italic", "oblique" };
+var namedColors = new List<string> { "Red", "Green", "Blue", "Yellow", "Orange", "Purple", "Cyan", "Magenta", "Black", "White", "Gray" };
 }
 
+<head>
+
+<link rel="stylesheet" href="~/css/settings.css" />
+</head>
+
+
 <div class="container">
-    <h5 class="text-center mb-4 theme-txt-clr">Font Customization for ID: @Model.SubId</h5>
+<h5 class="text-center mb-4 theme-txt-clr">Font Customization for ID: @Model.SubId</h5>
 
-    <!-- Word-like Text Editor Toolbar -->
-    <div class="toolbar">
-        <!-- Font Family -->
-        <div class="toolbar-item">
-            <label for="HeadingFontFamily" class="mr-2">Font</label>
-            <select id="HeadingFontFamily" name="HeadingFontFamily" class="form-select" onchange="updatePreview()">
-                @foreach (var font in fontFamilies)
-                {
-                    var fontString = font.ToString();
-                    var isSelected = Model.HeadingFontFamily == fontString ? "selected" : "";
-                    <option value="@fontString" isSelected>@fontString</option>
-                }
-            </select>
-        </div>
-
-        <!-- Font Size -->
-        <div class="toolbar-item">
-            <label for="FontSize" class="mr-2">Size</label>
-            <select id="FontSize" name="FontSize" class="form-select" onchange="updatePreview()">
-                <option value="12">12</option>
-                <option value="14">14</option>
-                <option value="16">16</option>
-                <option value="18">18</option>
-                <option value="24">24</option>
-                <option value="36">36</option>
-            </select>
-        </div>
-
-        <!-- Bold -->
-        <div class="toolbar-item">
-            <button type="button" id="boldBtn" class="btn btn-light" onclick="toggleBold()"><i class="fas fa-bold"></i></button>
-        </div>
-
-        <!-- Italic -->
-        <div class="toolbar-item">
-            <button type="button" id="italicBtn" class="btn btn-light" onclick="toggleItalic()"><i class="fas fa-italic"></i></button>
-        </div>
-
-        <!-- Underline -->
-        <div class="toolbar-item">
-            <button type="button" id="underlineBtn" class="btn btn-light" onclick="toggleUnderline()"><i class="fas fa-underline"></i></button>
-        </div>
-
-        <!-- Text Color -->
-        <div class="toolbar-item">
-            <input type="color" id="TextColor" name="TextColor" class="form-control" onchange="updatePreview()">
-        </div>
-
-        <!-- Background Color -->
-        <div class="toolbar-item">
-            <input type="color" id="BackgroundColor" name="BackgroundColor" class="form-control" onchange="updatePreview()">
-        </div>
+<!-- Word-like Text Editor Toolbar -->
+<div class="default-toolbar">
+    <!-- Font Family -->
+    <div class="default-toolbar-item">
+        <label for="HeadingFontFamily" class="mr-2">Font</label>
+        <select id="HeadingFontFamily" name="HeadingFontFamily" class="default-form-select" onchange="updatePreview()">
+            @foreach (var font in fontFamilies)
+            {
+                var fontString = font.ToString();
+                var isSelected = Model.HeadingFontFamily == fontString ? "selected" : "";
+                <option value="@fontString" isSelected>@fontString</option>
+            }
+        </select>
     </div>
 
-    <!-- Editable Document Area -->
-    <div class="editor-area mt-3">
-        <div class="editor" id="documentEditor" contenteditable="true" style="border: 1px solid #ccc; padding: 20px; background-color: @Model.BackgroundColor; color: @Model.TextColor; font-family: @Model.HeadingFontFamily; font-size: @Model.FontSize; font-weight: @Model.FontWeight; font-style: @Model.FontStyle;">
-            @Model.Text
-        </div>
+    <!-- Font Size -->
+    <div class="default-toolbar-item">
+        <label for="FontSize" class="mr-2">Size</label>
+        <select id="FontSize" name="FontSize" class="default-form-select" onchange="updatePreview()">
+            <option value="12">12</option>
+            <option value="14">14</option>
+            <option value="16">16</option>
+            <option value="18">18</option>
+            <option value="24">24</option>
+            <option value="36">36</option>
+        </select>
+    </div>
+
+    <!-- Bold -->
+    <div class="default-toolbar-item">
+        <button type="button" id="boldBtn" class="default-btn-light" onclick="toggleBold()"><i class="fas fa-bold"></i></button>
+    </div>
+
+    <!-- Italic -->
+    <div class="default-toolbar-item">
+        <button type="button" id="italicBtn" class="default-btn-light" onclick="toggleItalic()"><i class="fas fa-italic"></i></button>
+    </div>
+
+    <!-- Underline -->
+    <div class="default-toolbar-item">
+        <button type="button" id="underlineBtn" class="default-btn-light" onclick="toggleUnderline()"><i class="fas fa-underline"></i></button>
+    </div>
+
+    <!-- Text Color -->
+    <div class="default-toolbar-item">
+        <input type="color" id="TextColor" name="TextColor" class="form-control" onchange="updatePreview()">
+    </div>
+
+    <!-- Background Color -->
+    <div class="default-toolbar-item">
+        <input type="color" id="BackgroundColor" name="BackgroundColor" class="form-control" onchange="updatePreview()">
     </div>
 </div>
+
+<!-- Editable Document Area -->
+<div class="default-editor-area mt-3">
+    <div class="default-editor" id="documentEditor" contenteditable="true" style="border: 1px solid #ccc; padding: 20px; background-color: @Model.BackgroundColor; color: @Model.TextColor; font-family: @Model.HeadingFontFamily; font-size: @Model.FontSize; font-weight: @Model.FontWeight; font-style: @Model.FontStyle;">
+        @Model.Text
+    </div>
+</div>
+</div>
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
 
 <script>
-    function updatePreview() {
-        const editor = document.getElementById('documentEditor');
-        const fontFamily = document.getElementById('HeadingFontFamily').value;
-        const fontSize = document.getElementById('FontSize').value;
-        const textColor = document.getElementById('TextColor').value;
-        const backgroundColor = document.getElementById('BackgroundColor').value;
 
-        editor.style.fontFamily = fontFamily;
-        editor.style.fontSize = fontSize + 'px';
-        editor.style.color = textColor;
-        editor.style.backgroundColor = backgroundColor;
-    }
+function updatePreview()
+{
 
-    function toggleBold() {
-        document.execCommand('bold', false, null);
-    }
+    var editor = document.getElementById('documentEditor');
 
-    function toggleItalic() {
-        document.execCommand('italic', false, null);
-    }
-
-    function toggleUnderline() {
-        document.execCommand('underline', false, null);
-    }
-</script>
-
-<style>
  
-.toolbar {
-display: flex;
-gap: 15px;
-padding: 10px;
-background-color: #f8f9fa;
-border: 1px solid #ddd;
-border-radius: 5px;
-margin-bottom: 20px;
+    var fontFamily = document.getElementById('HeadingFontFamily').value;
+    var fontSize = document.getElementById('FontSize').value;
+    var textColor = document.getElementById('TextColor').value;
+    var backgroundColor = document.getElementById('BackgroundColor').value;
+
+    editor.style.fontFamily = fontFamily;
+    editor.style.fontSize = fontSize + "px"; 
+    editor.style.color = textColor;
+    editor.style.backgroundColor = backgroundColor;  
 }
 
-.toolbar-item {
+
+function toggleBold()
+{
+    document.execCommand('bold');
+}
+
+function toggleItalic()
+{
+    document.execCommand('italic');
+}
+
+function toggleUnderline() 
+{
+    document.execCommand('underline');
+}
+
+
+
+
+</script>
+
+
+<style>
+
+
+.default-toolbar
+{
+    display: flex;
+    gap: 15px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.default-toolbar-item 
+{
     display: flex;
     align-items: center;
 }
 
-.form-select {
+.default-form-select 
+{
     width: 150px;
 }
 
-.btn-light {
+.default-btn-light
+{
     border: 1px solid #ddd;
     padding: 5px 10px;
     font-size: 14px;
 }
 
-.editor-area {
+.default-editor-area
+{
     margin-top: 20px;
     border: 1px solid #ddd;
     padding: 20px;
@@ -142,7 +170,8 @@ margin-bottom: 20px;
     min-height: 200px;
 }
 
-.editor {
+.default-editor
+{
     outline: none;
 }
 

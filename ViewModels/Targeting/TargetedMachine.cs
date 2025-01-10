@@ -4,6 +4,7 @@ namespace CLA_Administration_Web.ViewModels.Targeting
 {
     public class TargetedMachine
     {
+        public int machineId { get; set; }
         public string DomainName { get; set; }
 
         public string NTUsername { get; set; }

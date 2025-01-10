@@ -133,6 +133,7 @@
             public const string SetupExclusionModalPageLink = "~/Views/Shared/Components/Custom/Settings/SettingsModal/SetupExclusionModalView.cshtml";
             public const string StagingModalViewPageLink = "~/Views/Shared/Components/Custom/Settings/SettingsModal/StagingModalView.cshtml";
             public const string AdminAccessModalPageLink = "~/Views/Shared/Components/Custom/Settings/SettingsModal/StagingModalView.cshtml";
+            public const string TargeGroupEditModal = "~/Views/Shared/Components/Custom/Settings/SettingsModal/TargetGroupEditModal.cshtml";
 
         }
 

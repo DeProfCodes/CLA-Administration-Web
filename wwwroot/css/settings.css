@@ -288,13 +288,7 @@
 
 /* defaults font*/
 
-.default-fonts-subheading 
-{
-    border: none;
-    background-color: darkgray
-}
- /*tool bar */
-.toolbar {
+.default-toolbar {
     display: flex;
     gap: 15px;
     padding: 10px;
@@ -304,33 +298,32 @@
     margin-bottom: 20px;
 }
 
-.toolbar-item {
+.default-toolbar-item {
     display: flex;
     align-items: center;
 }
 
-.form-select {
+.default-form-select {
     width: 150px;
 }
 
-.btn-light {
+.default-btn-light {
     border: 1px solid #ddd;
     padding: 5px 10px;
     font-size: 14px;
 }
 
-.editor-area {
+.default-editor-area {
     margin-top: 20px;
     border: 1px solid #ddd;
     padding: 20px;
     background-color: #fff;
-    min-height: 300px;
+    min-height: 200px;
 }
 
-.editor {
+.default-editor {
     outline: none;
 }
-
 
 
 

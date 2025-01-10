@@ -1,4 +1,6 @@
 ﻿@model CLA_Administration_Web.ViewModels.Shared.ModalViewModel
+@using CLA_Administration_Web.ViewModels.Targeting
+
 
 <div class="modal fade" id="UsersModal" tabindex="-1" aria-labelledby="UsersModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -35,7 +37,7 @@
 </div>
 
 @functions {
-    string RenderTreeNode(CLA_Administration_Web.ViewModels.Targeting.TargetedEntityTree node)
+    string RenderTreeNode(TargetedEntityTree node)
     {
         var html = $@"
         <li class='custom-folder'>

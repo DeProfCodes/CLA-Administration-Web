@@ -1,0 +1,153 @@
+﻿@using CLA_Administration_Web.ViewModels.Targeting
+@model TargetingExposureViewModel
+
+
+@{
+    string entityType = ViewBag.EntityType as string;
+
+
+}
+
+@if (entityType == "Group" && Model.TargetedGroups != null && Model.TargetedGroups.Any())
+{
+    var group = Model.TargetedGroups.FirstOrDefault();
+
+    <form method="post" asp-action="EditTargetGroup">
+        <div class="mb-3">
+            <label for="GroupId" class="form-label">Group ID: @group.GroupId</label>
+            <input type="hidden" class="form-control" id="GroupId" name="GroupId" value="@group.GroupId" readonly>
+        </div>
+
+        <div class="mb-3">
+            <label for="DomainName" class="form-label">Domain Name</label>
+            <input type="text" class="form-control" id="DomainName" name="DomainName" value="@group.DomainName" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="DisplayName" class="form-label">Display Name</label>
+            <input type="text" class="form-control" id="DisplayName" name="DisplayName" value="@group.DisplayName" required>
+        </div>
+
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+    </form>
+}
+
+@if (entityType == "User" && Model.TargetedUsers != null && Model.TargetedUsers.Any())
+{
+    var user = Model.TargetedUsers.FirstOrDefault();
+
+    <form method="post" asp-action="EditTargetUser">
+        <div class="mb-3">
+            <label for="UserId" class="form-label">User ID: @user.Id</label>
+            <input type="hidden" class="form-control" id="UserId" name="Id" value="@user.Id" readonly>
+        </div>
+
+        <div class="mb-3">
+            <label for="DomainName" class="form-label">Domain Name</label>
+            <input type="text" class="form-control" id="DomainName" name="DomainName" value="@user.DomainName" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="NTUsername" class="form-label">NT Username</label>
+            <input type="text" class="form-control" id="NTUsername" name="NTUsername" value="@user.NTUsername" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="DisplayName" class="form-label">Display Name</label>
+            <input type="text" class="form-control" id="DisplayName" name="DisplayName" value="@user.DisplayName" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="LastSyncDT" class="form-label">Last Sync Date</label>
+            <input type="text" class="form-control" id="LastSyncDT" name="LastSyncDT" value="@user.LastSyncDT" readonly>
+        </div>
+
+        <div class="mb-3">
+            <label for="Status" class="form-label">Status</label>
+            <input type="text" class="form-control" id="Status" name="Status" value="@user.Status" readonly>
+        </div>
+
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+    </form>
+}
+
+
+@if (entityType == "Machine" && Model.TargetedMachines != null && Model.TargetedMachines.Any())
+{
+    var machine = Model.TargetedMachines.FirstOrDefault();
+
+    <form method="post" asp-action="EditTargetMachine">
+        <div class="mb-3">
+            <label for="MachineId" class="form-label">Machine ID: @machine.machineId</label>
+            <input type="hidden" class="form-control" id="MachineId" name="machineId" value="@machine.machineId" readonly>
+        </div>
+
+        <div class="mb-3">
+            <label for="DomainName" class="form-label">Domain Name</label>
+            <input type="text" class="form-control" id="DomainName" name="DomainName" value="@machine.DomainName" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="NTUsername" class="form-label">NT Username</label>
+            <input type="text" class="form-control" id="NTUsername" name="NTUsername" value="@machine.NTUsername" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="DisplayName" class="form-label">Display Name</label>
+            <input type="text" class="form-control" id="DisplayName" name="DisplayName" value="@machine.DisplayName" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="LastSyncDT" class="form-label">Last Sync Date</label>
+            <input type="text" class="form-control" id="LastSyncDT" name="LastSyncDT" value="@machine.LastSyncDT" readonly>
+        </div>
+
+        <div class="mb-3">
+            <label for="Status" class="form-label">Status</label>
+            <input type="text" class="form-control" id="Status" name="Status" value="@machine.Status" readonly>
+        </div>
+
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+    </form>
+}
+
+
+@if (entityType == "IPRange" && Model.TargetedIPRanges != null && Model.TargetedIPRanges.Any())
+{
+    var ipRange = Model.TargetedIPRanges.FirstOrDefault();
+
+    <form method="post" asp-action="EditTargetIPRange">
+        <div class="mb-3">
+            <label for="RangeId" class="form-label">Range ID: @ipRange.RangeId</label>
+            <input type="hidden" class="form-control" id="RangeId" name="RangeId" value="@ipRange.RangeId" readonly>
+        </div>
+
+        <div class="mb-3">
+            <label for="StartIP" class="form-label">Start IP</label>
+            <input type="text" class="form-control" id="StartIP" name="StartIP" value="@ipRange.StartIP" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="EndIP" class="form-label">End IP</label>
+            <input type="text" class="form-control" id="EndIP" name="EndIP" value="@ipRange.EndIP" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="Description" class="form-label">Description</label>
+            <input type="text" class="form-control" id="Description" name="Description" value="@ipRange.Description" required>
+        </div>
+
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+    </form>
+}
+
+
+
