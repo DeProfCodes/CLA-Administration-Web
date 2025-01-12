@@ -53,7 +53,6 @@
 
     <script>
 
-        // Toggle folder open/close with plus/minus icon
         function customToggleFolder(element) {
             const folder = element.parentElement;
             const content = folder.querySelector('.custom-tree-content');
@@ -70,16 +69,14 @@
             }
         }
 
-        // Select value and allow only one selection per folder
         function customSelectValue(element) {
             const parentFolder = element.closest('.custom-folder');
-            // Deselect previously selected file in the same folder
+       
             parentFolder.querySelectorAll('.custom-file.active').forEach(file => file.classList.remove('active'));
-            // Select the current file
+      
             element.classList.add('active');
         }
 
-        // Filter tree nodes based on search input
         function customFilterTree() {
             const query = document.getElementById('custom-searchInput').value.toLowerCase();
             const allItems = document.querySelectorAll("#custom-directoryTree li");
@@ -88,15 +85,15 @@
                 const text = item.textContent.toLowerCase();
                 const matches = text.includes(query);
 
-                // Toggle the visibility of the items based on the search query
+       
                 item.style.display = matches ? "list-item" : "none";
 
                 if (matches) {
-                    // Ensure parent folders of visible items remain open
+            
                     let parent = item.parentElement;
                     while (parent && parent.tagName === "UL") {
-                        parent.style.display = "block"; // Make the parent list visible
-                        parent = parent.parentElement; // Traverse up to the parent <li>
+                        parent.style.display = "block";
+                        parent = parent.parentElement; 
                         if (parent && parent.querySelector('.custom-toggle-icon')) {
                             parent.classList.remove('custom-collapsed');
                             parent.querySelector('.custom-toggle-icon').textContent = '-';
@@ -105,7 +102,7 @@
                 }
             });
 
-            // Show parents of visible children
+           
             allItems.forEach(item => {
                 const children = item.querySelectorAll("li");
                 const anyChildVisible = Array.from(children).some(child => child.style.display === "list-item");

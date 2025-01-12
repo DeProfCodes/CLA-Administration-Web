@@ -94,7 +94,7 @@ var ipRangesDomain = Model.TargetedIPRanges?.Select(x => x.Description).Distinct
             <table id="StagingUsersData" class="table table-striped table-bordered table-hover theme-border align-middle campain-table-type fs-12">
                 <thead>
                     <tr>
-                        <th class="theme-bg text-white">UserID</th>
+                      
                         <th class="theme-bg text-white">Domain</th>
                         <th class="theme-bg text-white">NT Username</th>
                         <th class="theme-bg text-white">Firstname</th>
@@ -110,7 +110,7 @@ var ipRangesDomain = Model.TargetedIPRanges?.Select(x => x.Description).Distinct
                         cssBg += " theme-txt-clr";
 
                         <tr>
-                            <td class="@cssBg">@stagingUser.Id</td>
+                           
                             <td class="@cssBg">@stagingUser.DomainName</td>
                             <td class="@cssBg">@stagingUser.NTUsername</td>
                             <td class="@cssBg">@stagingUser.DisplayName</td>
@@ -131,7 +131,7 @@ var ipRangesDomain = Model.TargetedIPRanges?.Select(x => x.Description).Distinct
             <table id="StagingMachinesData" class="table table-striped table-bordered table-hover theme-border align-middle campain-table-type fs-12">
                 <thead>
                     <tr>
-                        <th class="theme-bg text-white">MachineID</th>
+                       
                         <th class="theme-bg text-white">Domain</th>
                         <th class="theme-bg text-white">Machine Name</th>
                         <th class="theme-bg text-white">Machine Description</th>
@@ -141,21 +141,21 @@ var ipRangesDomain = Model.TargetedIPRanges?.Select(x => x.Description).Distinct
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var stagingMachine in Model.TargetedMachines)
+                    @foreach (var targetMachine in Model.TargetedMachines)
                     {
                         var cssBg = (index++ % 2 == 0) ? "report-piechart-color-silver-dim" : "";
                         cssBg += " theme-txt-clr";
 
                         <tr>
-                            <td class="@cssBg">@stagingMachine.DisplayName</td>
-                            <td class="@cssBg">@stagingMachine.DomainName</td>
-                            <td class="@cssBg">@stagingMachine.DisplayName</td>
-                            <td class="@cssBg">@stagingMachine.LastSyncDT</td>
-                            <td class="@cssBg">@stagingMachine.DomainName</td>
-                            <td class="@cssBg">@stagingMachine.NTUsername</td>
+                               
+                                <td class="@cssBg">@targetMachine.DomainName</td>
+                                <td class="@cssBg">@targetMachine.DisplayName</td>
+                                <td class="@cssBg">@targetMachine.LastSyncDT</td>
+                                <td class="@cssBg">@targetMachine.DomainName</td>
+                                <td class="@cssBg">@targetMachine.NTUsername</td>
                             <td class="@cssBg">
-                                <button class="btn btn-sm custom-btn-sm btn-danger"  onclick="DeleteAdminAccess(@stagingMachine.DisplayName)">Delete</button>
-                                <button class="btn btn-sm custom-btn-sm btn-success" id="edit-staging-btn" onclick="EditNewStagingEnting('@stagingMachine.machineId', 'Machine')">Edit</button>
+                                    <button class="btn btn-sm custom-btn-sm btn-danger" onclick="DeleteAdminAccess(@targetMachine.machineId)">Delete</button>
+                                    <button class="btn btn-sm custom-btn-sm btn-success" id="edit-staging-btn" onclick="EditNewStagingEnting('@targetMachine.machineId', 'Machine')">Edit</button>
                             </td>
                         </tr>
                     }
@@ -167,7 +167,7 @@ var ipRangesDomain = Model.TargetedIPRanges?.Select(x => x.Description).Distinct
             <table id="TargetGroupsData" class="table table-striped table-bordered table-hover theme-border align-middle campain-table-type fs-12">
                 <thead>
                     <tr>
-                        <th class="theme-bg text-white">GroupId</th>
+                       
                         <th class="theme-bg text-white">DomainName</th>
                         <th class="theme-bg text-white">DisplayName</th>                           
                         <th class="theme-bg text-white">Action</th>
@@ -199,7 +199,7 @@ var ipRangesDomain = Model.TargetedIPRanges?.Select(x => x.Description).Distinct
 <table id="IPRangesData" class="table table-striped table-bordered table-hover theme-border align-middle campain-table-type fs-12">
     <thead>
         <tr>
-            <th class="theme-bg text-white">Range ID</th>
+           
             <th class="theme-bg text-white">Start IP</th>
             <th class="theme-bg text-white">End IP</th>
             <th class="theme-bg text-white">Description</th>
@@ -213,7 +213,7 @@ var ipRangesDomain = Model.TargetedIPRanges?.Select(x => x.Description).Distinct
             cssBg += " theme-txt-clr";
 
             <tr>
-                <td class="@cssBg">@ipRange.RangeId</td>
+              
                 <td class="@cssBg">@ipRange.StartIP</td>
                 <td class="@cssBg">@ipRange.EndIP</td>
                 <td class="@cssBg">@ipRange.Description</td>
@@ -424,7 +424,7 @@ var ipRangesDomain = Model.TargetedIPRanges?.Select(x => x.Description).Distinct
 <div class="modal-dialog modal-lg">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="EditModalLabel">Edit Staging Entity</h5>
+            <h5 class="modal-title" id="EditModalLabel">Edit Target Group Entity</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal('EditModal')"></button>
         </div>
         <div class="modal-body" id="EditModalContainer">
@@ -714,9 +714,6 @@ var ipRangesDomain = Model.TargetedIPRanges?.Select(x => x.Description).Distinct
     </div>
 </div>
 </div>
-
-
-
 
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
 
@@ -1066,13 +1063,13 @@ function FilterByDomain()
 
 
 
-function EditNewStagingEnting(machineId, entityType)
+function EditNewStagingEnting(targetId, entityType)
 {
         // LoadEditModal(formData, '@Url.Action("EditTargetGroups", "Settings")', 'POST', editMachineForm, edit-machine-btn)
     $.ajax({
         url: '@Url.Action("EditTargetGroups", "Settings")',
         type: 'GET',
-        data: { machineId: machineId, entityType: entityType },
+            data: { targetId: targetId, entityType: entityType },
         success: function (response)
         {
               

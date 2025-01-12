@@ -15,6 +15,7 @@ using CLA_Administration_Web.ViewModels.Settings.SkinAndOfflineImage;
 using CLA_Administration_Web.ViewModels.Settings.StagingUsers;
 using CLA_Administration_Web.ViewModels.Shared;
 using CLA_Administration_Web.ViewModels.Targeting;
+using DocumentFormat.OpenXml.Office2010.Excel;
 using DocumentFormat.OpenXml.Presentation;
 using Microsoft.AspNetCore.Identity.Data;
 
@@ -150,14 +151,15 @@ namespace CLA_Administration_Web.Helpers.MockData
         {
             var result = new List<TargetedUser>();
 
-            var rand = new Random();
 
+            var rand = new Random();
             for (int i = 0; i < 15; i++)
             {
+                
                 var item = new TargetedUser()
                 {
-                    //This needs to be fixed , realised that im supposed to use TargetingHelper function
-                    // Id = rand.Next(41, 999),
+                   
+                    Id = rand.Next(41, 999),
                     DomainName = MockDataHelperFunctions.GetRandomDomainName(),
                     DisplayName = MockDataHelperFunctions.GetRandomFirstname(),
                     NTUsername = MockDataHelperFunctions.GetRandomLastname(),
@@ -625,11 +627,11 @@ namespace CLA_Administration_Web.Helpers.MockData
         public static List<TargetedMachine> GetTargetedMachines()
         {
             var result = new List<TargetedMachine>();
-
+            var random = new Random();
             for (int i = 0; i < 15; i++)
             {
                 result.Add(new TargetedMachine
-                {
+                {  machineId = random.Next(41, 999),
                     DomainName = MockDataHelperFunctions.GetRandomDomainName(),
                     LastSyncDT = DateTime.Now.AddHours(-new Random().Next(1, 100)).ToString("yyyy/MM/dd HH:mm"),
                     DisplayName = MockDataHelperFunctions.GetRandomFirstname(),
@@ -643,13 +645,13 @@ namespace CLA_Administration_Web.Helpers.MockData
         public static List<TargetedGroup> GetTargetedGroups()
         {
             var result = new List<TargetedGroup>();
-
+            var random = new Random();
             for (int i = 0; i < 15; i++)
             {
                 result.Add(new TargetedGroup
                 {
                     DomainName = MockDataHelperFunctions.GetRandomDomainName(),
-                    GroupId = i + 1,
+                    GroupId = random.Next(41, 999),
                     DisplayName = MockDataHelperFunctions.GetRandomUserID(),
                 });
             }
@@ -660,13 +662,13 @@ namespace CLA_Administration_Web.Helpers.MockData
         public static List<TargetedIPRange> GetTargetedIPRanges()
         {
             var result = new List<TargetedIPRange>();
-
+            var random = new Random();
             for (int i = 0; i < 10; i++)
             {
                 var ipRange = MockDataHelperFunctions.GetRandomIPRange();
                 result.Add(new TargetedIPRange
                 {
-                    RangeId = i + 1,
+                    RangeId = random.Next(41, 999),
                     StartIP = ipRange.StartIP,
                     EndIP = ipRange.EndIP,
                     Description = MockDataHelperFunctions.GetRandomUserID(),

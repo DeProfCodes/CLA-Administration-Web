@@ -1,5 +1,5 @@
-﻿@using CLA_Administration_Web.ViewModels.Targeting
-@model TargetingExposureViewModel
+﻿@model CLA_Administration_Web.ViewModels.Targeting.TargetingExposureViewModel
+
 
 
 @{
@@ -8,11 +8,10 @@
 
 }
 
-@if (entityType == "Group" && Model.TargetedGroups != null && Model.TargetedGroups.Any())
+@if (entityType == "Groups" && Model.TargetedGroups != null && Model.TargetedGroups.Any())
 {
     var group = Model.TargetedGroups.FirstOrDefault();
 
-    <form method="post" asp-action="EditTargetGroup">
         <div class="mb-3">
             <label for="GroupId" class="form-label">Group ID: @group.GroupId</label>
             <input type="hidden" class="form-control" id="GroupId" name="GroupId" value="@group.GroupId" readonly>
@@ -28,17 +27,12 @@
             <input type="text" class="form-control" id="DisplayName" name="DisplayName" value="@group.DisplayName" required>
         </div>
 
-        <div class="mb-3">
-            <button type="submit" class="btn btn-primary">Save Changes</button>
-        </div>
-    </form>
 }
 
 @if (entityType == "User" && Model.TargetedUsers != null && Model.TargetedUsers.Any())
 {
     var user = Model.TargetedUsers.FirstOrDefault();
 
-    <form method="post" asp-action="EditTargetUser">
         <div class="mb-3">
             <label for="UserId" class="form-label">User ID: @user.Id</label>
             <input type="hidden" class="form-control" id="UserId" name="Id" value="@user.Id" readonly>
@@ -69,10 +63,6 @@
             <input type="text" class="form-control" id="Status" name="Status" value="@user.Status" readonly>
         </div>
 
-        <div class="mb-3">
-            <button type="submit" class="btn btn-primary">Save Changes</button>
-        </div>
-    </form>
 }
 
 
@@ -80,7 +70,7 @@
 {
     var machine = Model.TargetedMachines.FirstOrDefault();
 
-    <form method="post" asp-action="EditTargetMachine">
+   
         <div class="mb-3">
             <label for="MachineId" class="form-label">Machine ID: @machine.machineId</label>
             <input type="hidden" class="form-control" id="MachineId" name="machineId" value="@machine.machineId" readonly>
@@ -106,23 +96,14 @@
             <input type="text" class="form-control" id="LastSyncDT" name="LastSyncDT" value="@machine.LastSyncDT" readonly>
         </div>
 
-        <div class="mb-3">
-            <label for="Status" class="form-label">Status</label>
-            <input type="text" class="form-control" id="Status" name="Status" value="@machine.Status" readonly>
-        </div>
-
-        <div class="mb-3">
-            <button type="submit" class="btn btn-primary">Save Changes</button>
-        </div>
-    </form>
 }
 
 
-@if (entityType == "IPRange" && Model.TargetedIPRanges != null && Model.TargetedIPRanges.Any())
+@if (entityType == "IPRanges" && Model.TargetedIPRanges != null && Model.TargetedIPRanges.Any())
 {
     var ipRange = Model.TargetedIPRanges.FirstOrDefault();
 
-    <form method="post" asp-action="EditTargetIPRange">
+    
         <div class="mb-3">
             <label for="RangeId" class="form-label">Range ID: @ipRange.RangeId</label>
             <input type="hidden" class="form-control" id="RangeId" name="RangeId" value="@ipRange.RangeId" readonly>
@@ -143,10 +124,7 @@
             <input type="text" class="form-control" id="Description" name="Description" value="@ipRange.Description" required>
         </div>
 
-        <div class="mb-3">
-            <button type="submit" class="btn btn-primary">Save Changes</button>
-        </div>
-    </form>
+      
 }
 
 

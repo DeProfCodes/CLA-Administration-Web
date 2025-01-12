@@ -110,10 +110,14 @@
             public const string StagingUsersPageLink = "~/Views/Settings/StagingUsers.cshtml";
             public const string SetupExclusionsPageLink = "~/Views/Settings/SetupExclusions.cshtml";
             public const string AdminAccessPageLink = "~/Views/Settings/AdminAccess.cshtml";
-            public const string TargetGroupsPageLink = "~/Views/Settings/TargetGroups.cshtml";
+            
             public const string ActiveConnectionsPageLink = "~/Views/Settings/ActiveConnections.cshtml";
            
             public const string DesktopInformationPageLink = "~/Views/Settings/DesktopInformation.cshtml";
+
+            //Target group
+            public const string TargetGroupsPageLink = "~/Views/Settings/TargetGroups.cshtml";
+
 
             //Default fonts
             public const string DefaultFontsPageLink = "~/Views/Settings/DefaultFonts.cshtml";

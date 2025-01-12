@@ -142,8 +142,7 @@ namespace CLA_Administration_Web.Controllers
             var setupExcludedData = new SetupExclusionsMainViewModel()
             {
                 Users = SettingsMockData.SetupExcludedUsers,
-                Machines = SettingsMockData.SetupExcludedMachines,
-                     // ModuleName = moduleName,
+                Machines = SettingsMockData.SetupExcludedMachines,                 
                 TargetedEntities = targetingTree,
                 TargetedAccepted = targetingSelect,
                 TargetedGroups = targetingSelect,
@@ -226,7 +225,7 @@ namespace CLA_Administration_Web.Controllers
 
         #endregion  
 
-        #region Target
+        #region TargetGroup
 
         [HttpGet]
         public async Task<IActionResult> TargetGroups()
@@ -244,9 +243,8 @@ namespace CLA_Administration_Web.Controllers
 
 
         [HttpGet]
-        public ActionResult EditTargetGroups(int machineId, string entityType)
+        public ActionResult EditTargetGroups(int targetId, string entityType)
         {
-
             var targetGroups = new TargetingExposureViewModel()
             {
                 TargetedUsers = SettingsMockData.TargetGroupUsers,
@@ -255,39 +253,35 @@ namespace CLA_Administration_Web.Controllers
                 TargetedIPRanges = SettingsMockData.TargetedIPRanges
             };
 
-
             object selectedEntity = null;
 
-            if (entityType == "Machine")
+            if (entityType == "User")
             {
-                selectedEntity = targetGroups.TargetedUsers.FirstOrDefault(m => m.Id == machineId);
+                selectedEntity = targetGroups.TargetedUsers.FirstOrDefault(m => m.Id == targetId);
             }
-            else if (entityType == "User")
+            else if (entityType == "Machine")
             {
-                selectedEntity = targetGroups.TargetedMachines.FirstOrDefault(u => u.machineId == machineId);
+                selectedEntity = targetGroups.TargetedMachines.FirstOrDefault(u => u.machineId == targetId);
             }
-            else if (entityType == "Group")
+            else if (entityType == "Groups")
             {
-                
-                selectedEntity = targetGroups.TargetedGroups.FirstOrDefault(u => u.GroupId == machineId);
+                selectedEntity = targetGroups.TargetedGroups.FirstOrDefault(u => u.GroupId == targetId);
             }
             else if (entityType == "IPRanges")
             {
-                
-                selectedEntity = targetGroups.TargetedIPRanges.FirstOrDefault(u => u.RangeId == machineId);
+                selectedEntity = targetGroups.TargetedIPRanges.FirstOrDefault(u => u.RangeId == targetId);
             }
-
-
 
             if (selectedEntity == null)
             {
-                return NotFound($"{entityType} with ID {machineId} not found.");
+                return NotFound($"{entityType} with ID {targetId} not found.");
             }
 
             ViewBag.EntityType = entityType;
 
-            return PartialView(AppPagesLinks.Settings.TargeGroupEditModal, selectedEntity);
+            return PartialView(AppPagesLinks.Settings.TargeGroupEditModal, targetGroups);
         }
+
 
         #endregion
 
