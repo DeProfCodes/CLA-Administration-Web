@@ -16,18 +16,29 @@
 
 }
 @{
-    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Settings/SettingsBreadcrumb.cshtml", new SettingsBreadcrumbViewModel
-            {
-                SettingsCurrentPage = SettingsPages.SkinsAndOfflineImageDetails,
-                HasAddNewButton = true,
-                BreadcrumbButtonName = "Add New Skin and Offline images",
-                BreadcrumbButtonCallbackFunction = "AddNewSkinsAndOfflineImages"
-            });
+  
 }
 
 
 
 <div class="container-fluid">
+
+    <div class="row ">
+        <div class="w-auto">
+            <h2 class="theme-txt-clr breadcrumb-title">Custom User Settings Details</h2>
+            <p class="breadcrumb-nav-body">
+                <span class="breadcrumb-item-nav" onclick="OpenPageWithAnimations('Dashboard', null, 'Dashboard', 'DashboardSubLink')">Dashboard</span> /
+                <span class="breadcrumb-item-nav" onclick="OpenPageWithAnimations('Modules', null, 'AllModules', 'AllModulesLink', true)">Settings</span> /
+                <span class="breadcrumb-item-nav" onclick="OpenPageWithAnimations('Settings', 'null', '@SettingsPages.SkinsOfflineImages', 'SurveyOverviewLink')">Custom User Settings</span> /
+                <span class="breadcrumb-item">Custom User Settings Details</span>
+            </p>
+        </div>
+        <div class="w-auto ms-auto" id="BreadcrumbBtnContainer">
+            <button class="custom-btn custom-btn-default breadcrumb-btn" onclick="OpenPage('@SettingsPages.SkinsOfflineImages')"><i class="bi bi-plus-circle-fill custom-btn-icons breadcrumb-btn-icon"></i>Custom User Settings</button>
+        </div>
+    </div>
+
+
     <div class="card mb-4 mt-2 overview-filters-card">
         <div class="card-body">
             <h4 class="w-100 text-center theme-txt-clr">Skins And Offline Images  for ID: Model.Id</h4>
@@ -59,7 +70,7 @@
                             <input type="checkbox" name="select-item" aria-label="Select Item">
                         </td>
                         <td class="cssBg">
-                           Select Item Path
+                            <button class="btn btn-sm btn-info custom-btn-sm" onclick="AddNewTargetGroup() ">Select Item Path</button>
                         </td>
                         <td class="cssBg">
 
@@ -121,10 +132,6 @@
 
             <!-- Modal Body -->
             <div class="modal-body" id="EditModalContainer">
-                <div class="mb-3">
-                    <label for="Path" class="form-label">Item Path:</label>
-                    <input type="text" class="form-control" id="Path" name="Path" value="" readonly>
-                </div>
 
                 <div class="mb-3">
                     <label for="Module" class="form-label">Module:</label>
@@ -137,33 +144,10 @@
                     </select>
                 </div>
 
-                <div class="mb-3">
-                    <label for="ImageUpload" class="form-label">Image</label>
-                    <input type="file" class="form-control" id="SkinsAndOfflineImageUploadInput" accept="image/*">
-                </div>
-
-                <!-- Placeholder for displaying validation errors -->
-                <div class="mb-3 text-danger" id="ValidationErrorContainer"></div>
-
-                <div class="mb-3">
-                    <label for="DefaultId" class="form-label">Default?</label>
-                    <input type="checkbox" class="form-check-input" id="DefaultId" name="Default">
-                </div>
-
-                <div class="mb-3">
-                    <label for="DescriptionId" class="form-label">Description</label>
-                    <input type="text" class="form-control" id="DescriptionId" name="Description">
-                </div>
-
-                <div class="mb-3">
-                    <label for="UserLastModified" class="form-label">User Last Modified</label>
-                    <input type="text" class="form-control" id="UserLastModified" name="UserLastModified">
-                </div>
-
-                <div class="mb-3">
-                    <label for="MachineLastModified" class="form-label">Machine Last Modified</label>
-                    <input type="text" class="form-control" id="MachineLastModified" name="MachineLastModified">
-                </div>
+                @{
+                    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Form/FileUploader.cshtml",
+                    new FileUploaderModel { ComponentId = "SkinsAndOfllineImage", InputId = "SkinsAndOfllineImageUploadInput", ShowPreviewButton = true, InitialHidden = false, WidthPx = "396px", OnFileUploadCallback = null });
+                }
             </div>
 
             <!-- Modal Footer -->
@@ -192,31 +176,31 @@
 
     <script>
 
-    function handleModuleChange() {
-        const selectedModule = document.getElementById("Module").value;
-        console.log("Selected Module:", selectedModule);
-        document.getElementById("ValidationErrorContainer").innerText = ""; // Clear errors on change
+    function AddNewTargetGroup() {
+      
+        const userModal = new bootstrap.Modal(document.getElementById('EditModal'));
+        userModal.show();
+       
     }
+
 
     function SaveImage() {
         const module = document.getElementById("Module").value;
-        const fileInput = document.getElementById("SkinsAndOfflineImageUploadInput").files[0];
+        const fileInput = document.getElementById("SkinsAndOfllineImageUploadInput").files[0];
 
         if (!fileInput) {
             swal("Validation Error", "Please upload an image.", "error");
             return;
         }
 
-        ValidateImage(fileInput, module).then(isValid => {
-            if (isValid) {
-                swal("Success", "New Skin and offline Images is saved.", "success");
-                // Proceed with saving
-            } else {
-                console.error("Image validation failed.");
-            }
-        }).catch(err => {
-            console.error("Error during validation:", err);
-        });
+        ValidateImage(fileInput, module)
+            .then(() => {
+                swal("Success", "New Skin and Offline Image is saved.", "success");
+                // Proceed with saving logic here
+            })
+            .catch(errMessage => {
+                swal("Validation Error", errMessage, "error");
+            });
     }
 
     function ValidateImage(file, module) {
@@ -241,72 +225,37 @@
                     };
 
                     const rules = validationRules[module];
+
                     if (!rules.formats.includes(fileType)) {
-                        reject(`Invalid file type. Allowed: ${rules.formats.join(", ")}`);
+                        reject(`Invalid file type. Allowed formats: ${rules.formats.join(", ")}`);
                         return;
                     }
 
                     if (rules.width && (!Array.isArray(rules.width) || !rules.width.includes(width))) {
-                        reject(`Invalid width. Expected: ${rules.width.join(", ")}`);
+                        reject(`Invalid width (${width}px). Expected: ${rules.width.join(", ")}px`);
                         return;
                     }
 
                     if (rules.height && (!Array.isArray(rules.height) || !rules.height.includes(height))) {
-                        reject(`Invalid height. Expected: ${rules.height.join(", ")}`);
+                        reject(`Invalid height (${height}px). Expected: ${rules.height.join(", ")}px`);
                         return;
                     }
 
-                    resolve(true);
+                    resolve();
                 };
 
                 image.onerror = function () {
-                    reject("Invalid image file.");
+                    reject("The uploaded file is not a valid image.");
                 };
             };
 
             reader.onerror = function () {
-                reject("File read error.");
+                reject("An error occurred while reading the file.");
             };
 
             reader.readAsDataURL(file);
         });
     }
-
-
-
-        function AddNewSkinsAndOfflineImages() {
-            const editModal = new bootstrap.Modal(document.getElementById('EditModal'));
-            editModal.show();
-        }
-
-            function OpenImagePreviewModal(imgSrc) {
-                $("#ImagePreviewModal").fadeIn();
-                $("#ImagePreviewer").attr("src", imgSrc);
-            }
-
-            function CloseImagePreviewerModal() {
-                $("#ImagePreviewModal").fadeOut();
-            }
-
-            function OpenImageInNewWindow() {
-                var image = document.getElementById('ImagePreviewer');
-                var url = image.getAttribute('src');
-                window.open(url);
-            }
-            function PreviewContentType(contentType, contentURL) {
-                if (contentType == ContentTypes.IMAGE) {
-                    OpenImagePreviewModal(contentURL);
-                }
-                else if (contentType == ContentTypes.AUDIO) {
-                    OpenAudioPreviewModal(contentURL);
-                }
-                else if (contentType == ContentTypes.VIDEO) {
-                    OpenVideoPreviewModal(contentURL);
-                }
-                else if (contentType == ContentTypes.DOCUMENT) {
-                    OpenDocumentPreviewModal(contentURL);
-                }
-            }
 
             function deleteSkine(categoryId)
             {
