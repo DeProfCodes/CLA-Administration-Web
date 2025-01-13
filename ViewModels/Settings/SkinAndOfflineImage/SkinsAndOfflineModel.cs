@@ -1,4 +1,6 @@
 ﻿
+using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
+
 namespace CLA_Administration_Web.ViewModels.Settings.SkinAndOfflineImage
 {
     public class SkinsAndOfflineModel
@@ -11,6 +13,10 @@ namespace CLA_Administration_Web.ViewModels.Settings.SkinAndOfflineImage
         public string Description { get; set; }
         public string UserLastModified { get; set; }
         public string MachineLastModified { get; set; }
+        public ModuleNamesType ModuleName { get; set; }
+
+        public string CategoryName { get; set; }
+
         public List<SkinOfflineCategortyTree> SkinOfflineCategortyTrees { get; set; }
 
     }

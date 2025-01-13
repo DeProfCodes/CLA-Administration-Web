@@ -310,7 +310,7 @@ var table = new Tabulator("#example-table",
     movableColumns: true,
     paginationCounter: "rows",
     columns: [
-        { title: "CategoryID", field: "CategoryId", responsive: 0, visible: false },
+        { title: "CategoryID", field: "CategoryId", responsive: 0, visible: true },
         { title: "Category Name", field: "CategoryName", responsive: 0 },
         { title: "Category Description", field: "CategoryDescription" },
         { title: "Machine Last Modified", field: "MachineLastModified" },
@@ -423,9 +423,9 @@ function ValidateImage(file, module)
 
 
 
-function OpenSkinsCategories(categoryId) 
-{
-    OpenPage('@SettingsPages.SkinsAndOfflineImageDetails', categoryId);
+    function OpenSkinsCategories(CategoryId) {
+        console.log(CategoryId)
+        OpenPage('@SettingsPages.SkinsAndOfflineImageDetails', CategoryId);
 }
 
 

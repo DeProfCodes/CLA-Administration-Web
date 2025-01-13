@@ -1,4 +1,5 @@
 using CLA_Administration_Web.Helpers.Constants;
+using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
 using CLA_Administration_Web.Helpers.MockData;
 using CLA_Administration_Web.Helpers.Modules;
 using CLA_Administration_Web.Helpers.Targeting;
@@ -367,7 +368,7 @@ namespace CLA_Administration_Web.Controllers
         #endregion
 
         #region SkinsandOfflineImages
-        [HttpGet]
+      
         public async Task<IActionResult> SkinsOfflineImages()
         {
 
@@ -381,12 +382,74 @@ namespace CLA_Administration_Web.Controllers
             return PartialView(AppPagesLinks.Settings.SkinsOfflineImagesPageLink, skinsAndOfflineImageData);
         }
 
-        public async Task<IActionResult> SkinsAndOfflineImageDetails(int customId)
+        [HttpGet]
+
+        public async Task<IActionResult> SkinsAndOfflineImageDetails(int CategoryId)
         {
-            //var categoryTreeVm = (customId != null && customId != 0) ? ModulesHelper.GetCategoryTreeStructure(SettingsMockData.AllContentLibraryCategories, customId) : new();
-            var customVm = SettingsMockData.AllSkinsOfflineImageCategories.FirstOrDefault(x => x.CategoryId == customId);
-            return PartialView(AppPagesLinks.Settings.SkinsOfflineImagesDetailsPageLink, customVm);
+            // Recursive function to find the category and track its parent and grandparent names
+            SkinOfflineCategortyTree FindCategoryById(
+                List<SkinOfflineCategortyTree> categories,
+                int id,
+                ref string parentName,
+                ref string grandparentName)
+            {
+                foreach (var category in categories)
+                {
+                    if (category.CategoryId == id)
+                    {
+                        return category; // Found the category
+                    }
+
+                    if (category._children != null && category._children.Any())
+                    {
+                        // Set the parent and grandparent names before recursion
+                        grandparentName = parentName;
+                        parentName = category.CategoryName;
+
+                        var found = FindCategoryById(category._children, id, ref parentName, ref grandparentName);
+                        if (found != null)
+                        {
+                            return found; // Found in children
+                        }
+
+                        // Revert the names if not found in this branch
+                        parentName = grandparentName;
+                        grandparentName = string.Empty;
+                    }
+                }
+
+                return null; // Not found
+            }
+
+            // Variables to hold the parent and grandparent names
+            string parentName = string.Empty;
+            string grandparentName = string.Empty;
+
+            // Find the category
+            var customVm = FindCategoryById(SettingsMockData.AllSkinsOfflineImageCategories, CategoryId, ref parentName, ref grandparentName);
+
+            // Prepare the view model
+            var model = new SkinsAndOfflineModel
+            {
+                Id = customVm?.CategoryId ?? 0,
+                ItemPath = "path/to/item",
+                ViewImagePath = "path/to/image",
+                IsDefault = "No",
+                Description = customVm?.CategoryDescription ?? "",
+                UserLastModified = customVm?.UserLastModified ?? "",
+                MachineLastModified = customVm?.MachineLastModified ?? "",
+                CategoryName = customVm?.CategoryName ?? "",
+                SkinOfflineCategortyTrees = customVm?._children ?? new List<SkinOfflineCategortyTree>()
+            };
+
+            // Pass parent and grandparent names to the view using ViewBag (optional approach)
+            ViewBag.ParentCategoryName = parentName;
+            ViewBag.GrandparentCategoryName = grandparentName;
+
+            return PartialView(AppPagesLinks.Settings.SkinsOfflineImagesDetailsPageLink, model);
         }
+
+
 
         [HttpGet]
         public ActionResult EditSkinsAndOfflineImages(int machineId, string entityType)

@@ -15,6 +15,7 @@ using CLA_Administration_Web.ViewModels.Settings.SkinAndOfflineImage;
 using CLA_Administration_Web.ViewModels.Settings.StagingUsers;
 using CLA_Administration_Web.ViewModels.Shared;
 using CLA_Administration_Web.ViewModels.Targeting;
+using CLAModulesLibrary.Enums;
 using DocumentFormat.OpenXml.Office2010.Excel;
 using DocumentFormat.OpenXml.Presentation;
 using Microsoft.AspNetCore.Identity.Data;
@@ -181,7 +182,7 @@ namespace CLA_Administration_Web.Helpers.MockData
             {
                 var item = new CustomUserViewModel()
                 {
-                    //This needs to be fixed , realised that im supposed to use TargetingHelper function
+                    
                     Id = rand.Next(41, 999),
                     Description = MockDataHelperFunctions.GetRandomUserID(),
                     ScreensaverTimeout = MockDataHelperFunctions.GetRandomCustomUserNumbers(),
@@ -505,12 +506,14 @@ namespace CLA_Administration_Web.Helpers.MockData
         }
     };
         }
-        private static List<SkinOfflineCategortyTree> GenerateDummyDataSkinsOfflineImage()
+        public static List<SkinOfflineCategortyTree> GenerateDummyDataSkinsOfflineImage()
         {
             int idCounter = 1;
+               var random = new Random();
+            ModuleNamesType module;
             var rootCategory = new SkinOfflineCategortyTree
             {
-                CategoryId = idCounter++, 
+                CategoryId = random.Next(41, 99),
                 CategoryName = "Existing Skin", 
                 CategoryDescription = "This is the root category for Existing Skin",
                 ContentsCount = 0, 
@@ -521,8 +524,8 @@ namespace CLA_Administration_Web.Helpers.MockData
           
             new SkinOfflineCategortyTree
             {
-                CategoryId = idCounter++,
-                CategoryName = "Popups",
+                CategoryId = random.Next(41, 99),
+                CategoryName = ModuleNamesType.Popup.GetDisplayName(),
                 CategoryDescription = "This is the popups category",
                 UserLastModified = MockDataHelperFunctions.GetRandomUserID(),
                 MachineLastModified = MockDataHelperFunctions.GetRandomMachineID(),
@@ -532,7 +535,7 @@ namespace CLA_Administration_Web.Helpers.MockData
             },
              new SkinOfflineCategortyTree
             {
-                CategoryId = idCounter++,
+                CategoryId = random.Next(41, 99),
                 CategoryName = "Offline Desktop",
                 CategoryDescription = "This is the offline desktop category",
                 UserLastModified = MockDataHelperFunctions.GetRandomUserID(),
@@ -542,7 +545,7 @@ namespace CLA_Administration_Web.Helpers.MockData
                 _children = GenerateRandomTreeChildren(ref idCounter)
             },  new SkinOfflineCategortyTree
             {
-                CategoryId = idCounter++,
+                CategoryId = random.Next(41, 99),
                 CategoryName = "Offline Lockscreen Wallpaper",
                 CategoryDescription = "This is the offline lockscreen wallpaper category",
                 UserLastModified = MockDataHelperFunctions.GetRandomUserID(),
@@ -552,7 +555,7 @@ namespace CLA_Administration_Web.Helpers.MockData
                 _children = GenerateRandomTreeChildren(ref idCounter)
             },  new SkinOfflineCategortyTree
             {
-                CategoryId = idCounter++,
+                CategoryId = random.Next(41, 99),
                 CategoryName = "Offline Screensaver",
                 CategoryDescription = "This is the offline screensaver category",
                 UserLastModified = MockDataHelperFunctions.GetRandomUserID(),
@@ -561,21 +564,11 @@ namespace CLA_Administration_Web.Helpers.MockData
                 ContentsCount = 0,
                 _children = GenerateRandomTreeChildren(ref idCounter)
             },
-               new SkinOfflineCategortyTree
-            {
-                CategoryId = idCounter++,
-                CategoryName = "Popups",
-                CategoryDescription = "This is the popups category",
-                UserLastModified = MockDataHelperFunctions.GetRandomUserID(),
-                MachineLastModified = MockDataHelperFunctions.GetRandomMachineID(),
-
-                ContentsCount = 0,
-                _children = GenerateRandomTreeChildren(ref idCounter)
-            },
+          
             new SkinOfflineCategortyTree
             {
-                CategoryId = idCounter++, 
-                CategoryName = "Surveys",
+                CategoryId = random.Next(41, 99),
+                CategoryName =  ModuleNamesType.Survey.GetDisplayName(),
                 CategoryDescription = "This is the skin category",
                 ContentsCount = 0,
                 UserLastModified = MockDataHelperFunctions.GetRandomUserID(),
@@ -584,8 +577,8 @@ namespace CLA_Administration_Web.Helpers.MockData
             },
               new SkinOfflineCategortyTree
             {
-                CategoryId = idCounter++,
-                CategoryName = "Tickers",
+                CategoryId = random.Next(41, 99),
+                CategoryName = ModuleNamesType.Ticker.GetDisplayName(),
                 CategoryDescription = "This is the popups category",
                 UserLastModified = MockDataHelperFunctions.GetRandomUserID(),
                 MachineLastModified = MockDataHelperFunctions.GetRandomMachineID(),
@@ -599,24 +592,24 @@ namespace CLA_Administration_Web.Helpers.MockData
            
             return new List<SkinOfflineCategortyTree> { rootCategory };
         }
-            
-        private static List<SkinOfflineCategortyTree> GenerateRandomTreeChildren(ref int idCounter)
+
+        public static List<SkinOfflineCategortyTree> GenerateRandomTreeChildren(ref int idCounter)
         {
             Random random = new Random();
             var children = new List<SkinOfflineCategortyTree>();
-            int childrenCount = random.Next(1, 4); 
+            int childrenCount = random.Next(1, 4); // Random number of children
 
             for (int i = 0; i < childrenCount; i++)
             {
                 children.Add(new SkinOfflineCategortyTree
                 {
-                    CategoryId = idCounter++, 
-                    CategoryName = SharedFunctions.CapitalizeFirst(MockDataHelperFunctions.RandomString(1,3)),
+                    CategoryId = random.Next(41, 99),
+                    CategoryName = SharedFunctions.CapitalizeFirst(MockDataHelperFunctions.RandomString(1, 3)),
                     CategoryDescription = SharedFunctions.CapitalizeFirst(MockDataHelperFunctions.RandomString(5, 15)),
                     ContentsCount = random.Next(0, 100),
                     UserLastModified = MockDataHelperFunctions.GetRandomUserID(),
                     MachineLastModified = MockDataHelperFunctions.GetRandomMachineID(),
-                    _children = null 
+                    _children = null
                 });
             }
 
