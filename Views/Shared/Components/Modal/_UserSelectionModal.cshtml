@@ -3,11 +3,11 @@
 
 
 <div class="modal fade" id="UsersModal" tabindex="-1" aria-labelledby="UsersModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog ">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="UsersModalLabel">@Model.ModalTitle</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeUsersModal()"></button>
             </div>
             <div class="modal-body">
                 <div class="container mt-4">
@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeUsersModal()"></button>
+                <button type="button" class="btn" data-bs-dismiss="modal" onclick="closeUsersModal()">Cancel</button>
 
                 <button type="button" class="btn btn-primary" onclick="saveSelections('@Model.CallbackFunction')">Save Selection</button>
             </div>
@@ -41,15 +41,15 @@
     {
         var html = $@"
         <li class='custom-folder'>
-            <span class='custom-toggle-icon' onclick='customToggleFolder(this)'>+</span>
-            <label><i class='bi bi-folder'></i> {node.EntityName}</label>";
+            <input type='checkbox' id='toggle-{node.Id}' class='custom-toggle-checkbox'>
+            <label for='toggle-{node.Id}' class='custom-toggle-icon'>+</label>
+            <span><i class='bi bi-folder'></i> {node.EntityName}</span>";
 
         if (node._children != null && node._children.Any())
         {
             html += "<ul class='custom-tree-content'>";
             foreach (var child in node._children)
             {
-
                 if (child._children != null && child._children.Any())
                 {
                     html += RenderTreeNode(child);
@@ -67,11 +67,46 @@
     }
 }
 
-
-
 @section Scripts {
     <script>
-    
+
+        function saveSelectionss() {
+            let selectedUsers = [];
+            let selectedGroups = [];
+            let selectedMachines = [];
+
+            // Collect selected users
+            document.querySelectorAll('.custom-tree .custom-file.selected').forEach(item => {
+                if (item.closest('ul').previousElementSibling && item.closest('ul').previousElementSibling.textContent.includes('Users')) {
+                    selectedUsers.push(item.textContent.trim());
+                }
+            });
+
+            // Collect selected groups and machines
+            document.querySelectorAll('.custom-tree .custom-file.selected').forEach(item => {
+                if (item.closest('ul').previousElementSibling && item.closest('ul').previousElementSibling.textContent.includes('Groups')) {
+                    selectedGroups.push(item.textContent.trim());
+                } else if (item.closest('ul').previousElementSibling && item.closest('ul').previousElementSibling.textContent.includes('Machines')) {
+                    selectedMachines.push(item.textContent.trim());
+                }
+            });
+
+            console.log("Selected Users: ", selectedUsers);
+            console.log("Selected Groups: ", selectedGroups);
+            console.log("Selected Machines: ", selectedMachines);
+
+            // Get the target field to populate
+            const modal = document.getElementById('UsersModal');
+            const targetFieldId = modal.dataset.targetField;
+
+            // Populate the target field with selected users (modify as needed)
+            if (targetFieldId) {
+                document.getElementById(targetFieldId).value = selectedUsers.join(', ');
+            }
+
+            // Close the modal after saving
+            closeUsersModal();
+        }
 
 
 
@@ -88,14 +123,67 @@
                 document.getElementById(lastModifiedField).value = selectedUsers.join(', ');
             }
 
-           
+
             if (callbackFunction && typeof window[callbackFunction] === 'function') {
                 window[callbackFunction](selectedUsers);
             }
 
-           
+
             closeUsersModal();
         }
+
+        // Toggle Folder Function
+        function customToggleFolder(toggleElement) {
+            const parentLi = toggleElement.closest('li'); // Find the parent <li> of the toggle button
+
+            if (parentLi.classList.contains('custom-collapsed')) {
+                // Expand: Show children
+                parentLi.classList.remove('custom-collapsed');
+                toggleElement.textContent = '-'; // Change icon to '-'
+            } else {
+                // Collapse: Hide children
+                parentLi.classList.add('custom-collapsed');
+                toggleElement.textContent = '+'; // Change icon to '+'
+            }
+        }
+
+
+        // Filter tree nodes based on search input
+        function customFilterTree() {
+            const query = document.getElementById('custom-searchInput').value.toLowerCase();
+            const allItems = document.querySelectorAll("#custom-directoryTree li");
+
+            allItems.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                const matches = text.includes(query);
+
+                // Toggle the visibility of the items based on the search query
+                item.style.display = matches ? "list-item" : "none";
+
+                if (matches) {
+                    // Ensure parent folders of visible items remain open
+                    let parent = item.parentElement;
+                    while (parent && parent.tagName === "UL") {
+                        parent.style.display = "block"; // Make the parent list visible
+                        parent = parent.parentElement; // Traverse up to the parent <li>
+                        if (parent && parent.querySelector('.custom-toggle-icon')) {
+                            parent.classList.remove('custom-collapsed');
+                            parent.querySelector('.custom-toggle-icon').textContent = '-';
+                        }
+                    }
+                }
+            });
+
+            // Show parents of visible children
+            allItems.forEach(item => {
+                const children = item.querySelectorAll("li");
+                const anyChildVisible = Array.from(children).some(child => child.style.display === "list-item");
+                if (anyChildVisible) {
+                    item.style.display = "list-item";
+                }
+            });
+        }
+
 
 
     </script>

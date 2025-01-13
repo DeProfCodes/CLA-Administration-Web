@@ -145,19 +145,19 @@
 @{
     await Html.RenderPartialAsync("~/Views/Shared/Components/Modal/_UserSelectionModal.cshtml", new ModalViewModel
             {
-                ModalTitle = "Select Usersssssssss",
+                ModalTitle = "Select Excluded User",
                 TargetedEntities = Model.TargetedEntities,
                 CallbackFunction = "handleUserSelection"
             });
 }
-
+  
 
 <!-- Create New Staging User Modal -->
 <div class="modal fade" id="CreateStagingUserModal" tabindex="-1" aria-labelledby="CreateStagingUserModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="CreateStagingUserModalLabel">Add New Staging User</h5>
+                <h5 class="modal-title" id="CreateStagingUserModalLabel">Add New Exclusion User</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal('CreateStagingUserModal')"></button>
             </div>
             <div class="modal-body">
@@ -168,10 +168,25 @@
                             id="StagingUserBtn"
                             data-callback="updateStagingMachineFields"
                             data-lastmodified-field="StagingUserUserLastModified"
-                            onclick=" openTreeViewModal(this,'UsersModal', 'CreateStagingUserModal')">
+                            onclick=" openTreeViewModals(this,'UsersModal', 'CreateStagingUserModal')">
                         Select User
                     </button>
                 </div>
+
+                <div class="mb-3">
+                    <label for="SelectUser" class="form-label">Select User</label>
+                    <input type="text"
+                           id="StagingUserInput"
+                           class="form-control"
+                           placeholder="Click to select a user"
+                           data-callback="updateUsernameField"
+                           data-username-field="username"
+                           readonly
+                           onclick="openTreeViewModals(this, 'UsersModal', 'CreateStagingUserModal')">
+                </div>
+
+
+
                 <div class="mb-3">
                     <label for="StagingUserDomain" class="form-label">Domain</label>
                     <select class="form-control" id="StagingUserDomain" required>
@@ -302,6 +317,49 @@
         }
     }
 
+    function openTreeViewModals(triggerInput, modal1Id, modal2Id) {
+        const modal1 = document.getElementById(modal1Id); // Secondary modal
+        const modal2 = document.getElementById(modal2Id); // Main modal
+        const backdrop = document.querySelector('.modal-backdrop');
+
+        if (!modal1 || !modal2) {
+            console.error("Modal IDs provided do not exist.");
+            return;
+        }
+
+        // Adjust styles for modal1 to ensure it's fully visible
+        modal1.style.display = 'block';
+        modal1.style.opacity = '1';
+        modal1.style.zIndex = '1055'; // Higher z-index to ensure it is above modal2
+
+        // Adjust styles for modal2 to ensure it is beneath modal1
+        modal2.style.zIndex = '1040'; // Lower z-index to push it below modal1
+
+        // Handle the backdrop for better visibility
+        if (backdrop) {
+            backdrop.style.zIndex = '1040'; // Align backdrop with modal2
+            backdrop.style.opacity = '0.5'; // Maintain some transparency
+        } else {
+            console.warn("Backdrop not found. Ensure the modal system is initialized correctly.");
+        }
+
+        // Retrieve attributes from the input field
+        const lastModifiedField = triggerInput.getAttribute('data-username-field');
+        const callbackFunction = triggerInput.getAttribute('data-callback');
+
+        if (!lastModifiedField || !callbackFunction) {
+            console.warn("Missing data attributes on the trigger input.");
+        }
+
+        // Save the retrieved attributes to a global object for later use
+        window.selectedFields = {
+            lastModifiedField,
+            callbackFunction,
+            inputFieldId: triggerInput.id, // Save the input field's ID for updating later
+        };
+
+        console.log("Selected fields for callback:", window.selectedFields);
+    }
 
 
     function openTreeViewModal(triggerButton, modal1Id, modal2Id) {

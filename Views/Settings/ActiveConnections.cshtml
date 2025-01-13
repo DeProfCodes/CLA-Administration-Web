@@ -14,7 +14,7 @@
         await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Settings/SettingsBreadcrumb.cshtml", new SettingsBreadcrumbViewModel
             {
                 SettingsCurrentPage = SettingsPages.ActiveConnections,
-                HasAddNewButton = false,
+                HasAddNewButton = true,
                 BreadcrumbButtonName = "Refresh",
                 BreadcrumbButtonCallbackFunction = "RefreshActiveConnections"
             });

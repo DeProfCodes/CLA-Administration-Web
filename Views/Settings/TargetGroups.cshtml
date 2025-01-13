@@ -35,51 +35,43 @@ var ipRangesDomain = Model.TargetedIPRanges?.Select(x => x.Description).Distinct
     
 }
 
-<!-- Settings Filter Component -->
-<div class="card mb-4 mt-2">
-    <div class="card-body pt-3 pb-3">
-        <div class="row fs-12 mt-1 mb-2">
-                
-            <p class="theme-txt-clr text-center w-100 fw-bold fs-16" id="TypeFilterTitle">Filters</p>
 
-            <div class="row col-12 gx-3 gy-2">
-                    
-                <div class="col-12 col-md-6 col-lg-6 d-flex align-items-center">
-                    <p class="custom-p me-2 mb-0">View Type</p>
-                    <div class="btn-group w-100" role="group" aria-label="View Type Filter" id="TypeStagingLiveBtns">
-                        <button class="btn module-filter-btn-group filter-type-btn btn-group-active" onclick="ToggleStaginUserMachines(this.id)" id="TargetUsers">Users</button>
-                        <button class="btn module-filter-btn-group filter-type-btn" onclick="ToggleStaginUserMachines(this.id)" id="StagingGroupdBtn">Groups</button>
-                        <button class="btn module-filter-btn-group filter-type-btn" onclick="ToggleStaginUserMachines(this.id)" id="StagingMachinesBtn">Machines</button>
-                        <button class="btn module-filter-btn-group filter-type-btn" onclick="ToggleStaginUserMachines(this.id)" id="StagingIPRangesBtn">IP Ranges</button>
+
+    <div class="mb-3">
+        <div class="card mb-4 mt-2 overview-filters-card">
+            <div class="card-body pt-0 pb-0">
+                <div class="row align-items-center">
+                    <!-- Filters Section -->
+                    <div class="col-md-6 d-flex flex-column justify-content-start mb-2" id="StatusFilterContainer">
+                        <p class="theme-txt-clr fw-bold text-center mb-1">Filters</p>
+                        <div class="row mx-auto mt-1 justify-content-start">
+                            <p class="theme-txt-clr overview-filter-title2 text-center" id="TypeFilterTitle">Type</p>
+                            <div class="btn-group w-auto overview-filter-btn-group" role="group" aria-label="Status filter" id="TypeStagingLiveBtns">
+                                <button class="btn module-filter-btn-group filter-type-btn Screensaver btn-group-active" onclick="ToggleStaginUserMachines(this.id)" id="TargetUsers">Staging</button>
+                                <button class="btn module-filter-btn-group filter-type-btn Screensaver" onclick="ToggleStaginUserMachines(this.id)" id="StagingGroupdBtn">Groups</button>
+                                <button class="btn module-filter-btn-group filter-type-btn Screensaver" onclick="ToggleStaginUserMachines(this.id)" id="StagingMachinesBtn">Machines</button>
+                                <button class="btn module-filter-btn-group filter-type-btn Screensaver" onclick="ToggleStaginUserMachines(this.id)" id="StagingIPRangesBtn">IP Ranges</button>
+                            </div>
+                        </div>
                     </div>
-                </div>
 
-                    
-                <div class="col-12 col-md-6 col-lg-4 d-flex align-items-center hidden">
-                    <p class="custom-p me-2 mb-0">Domain</p>
-                    <select class="custom-input-text w-200p ms-2 w-100" id="ReportModuleSelect" onchange="FilterByDomain()">
-                        <option value="0">Please select Domain Name</option>
-                        @foreach (var domain in usersDomains)
-                        {
-                            <option value="@domain">@domain</option>
-                        }
-                    </select>
-                </div>
+                    <div class="col-md-6 d-flex flex-column align-items-end mb-2" id="ModuleFilterActionButtonsContainer">
+                        <p class="theme-txt-clr fw-bold text-center mb-2" id="ModuleActionBtsFilterTitle">Action Buttons</p>
+                        <div class="row mb-3 mb-md-0 w-fit-content gap-2">
+                          
+                            <button class="custom-btn custom-btn-default  w-fit-content" data-bs-toggle="modal" data-bs-target="#bulkImportModal" id="BulkImportBtn"> <i class="bi bi-plus-circle-fill"></i>Bulk Import</button>
+                            <button class="custom-btn custom-btn-default w-fit-content" data-bs-toggle="modal" data-bs-target="#directoryModal" id="MembershipInfoBtn"> <i class="bi bi-plus-circle-fill"></i>MembershipInfo</button>
+                        </div>
+               
+                    </div>
 
-                    
-                <div class="col-12 col-lg-6 d-flex justify-content-end align-items-center flex-wrap gap-2">
-                    <button class=" btn-sm btn-primary  custom-btn" data-bs-toggle="modal" data-bs-target="#bulkImportModal" id="BulkImportBtn">
-                        <i class="bi bi-plus-circle-fill"></i> Bulk Import
-                    </button>
-                     
-                    <button class=" btn-sm btn-info custom-btn" data-bs-toggle="modal" data-bs-target="#directoryModal" id="MembershipInfoBtn">
-                        <i class="bi bi-info-circle-fill"></i> Membership Info
-                    </button>
+                 
                 </div>
             </div>
         </div>
     </div>
-</div>
+
+
 
 
 <!-- Card for Popup Report Body -->
@@ -181,7 +173,7 @@ var ipRangesDomain = Model.TargetedIPRanges?.Select(x => x.Description).Distinct
 
                         <tr>
                                 
-                            <td class="@cssBg">@targetgroups.GroupId</td>
+                            
                             <td class="@cssBg">@targetgroups.DomainName</td>
                             <td class="@cssBg">@targetgroups.DisplayName</td>
                                                     

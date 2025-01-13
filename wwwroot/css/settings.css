@@ -1,4 +1,5 @@
-﻿.custom-tree ul {
+﻿/* Basic tree styling */
+.custom-tree ul {
     list-style-type: none;
     padding-left: 1.5rem;
     border-left: 1px dotted #ccc;
@@ -11,24 +12,42 @@
     padding-left: 0.8rem;
 }
 
+    /* Hidden checkbox for toggling */
+    .custom-tree li .custom-toggle-checkbox {
+        display: none;
+    }
+
+    /* Label styles for toggle button */
     .custom-tree li .custom-toggle-icon {
         display: inline-block;
         width: 1.2rem;
         height: 1.2rem;
         line-height: 1.1rem;
         text-align: center;
-        border: 1px solid #007bff;
+        border: 1px solid gray;
         margin-right: 0.5rem;
         font-weight: bold;
-        color: #007bff;
+        color: gray;
         cursor: pointer;
         font-size: 0.85rem;
     }
 
-        .custom-tree li .custom-toggle-icon:hover {
-            background-color: #e7f3ff;
-        }
+    /* Change toggle icon on checked */
+    .custom-tree li .custom-toggle-checkbox:checked + .custom-toggle-icon {
+        content: "-";
+        background-color: #e7f3ff;
+    }
 
+    /* Hide/Show child elements based on checkbox */
+    .custom-tree li .custom-toggle-checkbox:not(:checked) ~ ul {
+        display: none;
+    }
+
+    .custom-tree li .custom-toggle-checkbox:checked ~ ul {
+        display: block;
+    }
+
+    /* File and active file styles */
     .custom-tree li .custom-file {
         padding: 0.2rem 0.5rem;
         border-radius: 4px;
@@ -39,15 +58,6 @@
             background-color: #007bff;
             color: white;
         }
-
-    .custom-tree li.custom-collapsed > ul {
-        display: none;
-    }
-
-    .custom-tree li.custom-folder > ul {
-        display:  block;
-    }
-
 
 
 

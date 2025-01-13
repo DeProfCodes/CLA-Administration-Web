@@ -383,11 +383,10 @@ namespace CLA_Administration_Web.Controllers
         }
 
         [HttpGet]
-
-        public async Task<IActionResult> SkinsAndOfflineImageDetails(int CategoryId)
+        public async Task<IActionResult> SkinsAndOfflineImageDetailss(int CategoryId)
         {
-            // Recursive function to find the category and track its parent and grandparent names
-            SkinOfflineCategortyTree FindCategoryById(
+            // Recursive function to find the category by ID and track parent/grandparent names
+            SkinOfflineCategortyTree FindSkinOfflineImageById(
                 List<SkinOfflineCategortyTree> categories,
                 int id,
                 ref string parentName,
@@ -397,22 +396,22 @@ namespace CLA_Administration_Web.Controllers
                 {
                     if (category.CategoryId == id)
                     {
-                        return category; // Found the category
+                        return category; // Found the matching category
                     }
 
                     if (category._children != null && category._children.Any())
                     {
-                        // Set the parent and grandparent names before recursion
+                        // Track the current parent and grandparent names
                         grandparentName = parentName;
                         parentName = category.CategoryName;
 
-                        var found = FindCategoryById(category._children, id, ref parentName, ref grandparentName);
+                        var found = FindSkinOfflineImageById(category._children, id, ref parentName, ref grandparentName);
                         if (found != null)
                         {
                             return found; // Found in children
                         }
 
-                        // Revert the names if not found in this branch
+                        // Reset names if not found in this branch
                         parentName = grandparentName;
                         grandparentName = string.Empty;
                     }
@@ -421,14 +420,79 @@ namespace CLA_Administration_Web.Controllers
                 return null; // Not found
             }
 
-            // Variables to hold the parent and grandparent names
+            // Variables to hold parent and grandparent names
             string parentName = string.Empty;
             string grandparentName = string.Empty;
 
-            // Find the category
-            var customVm = FindCategoryById(SettingsMockData.AllSkinsOfflineImageCategories, CategoryId, ref parentName, ref grandparentName);
+            // Find the category by ID
+            var customVm = FindSkinOfflineImageById(SettingsMockData.AllSkinsOfflineImageCategories, CategoryId, ref parentName, ref grandparentName);
 
-            // Prepare the view model
+            // Prepare the model, but exclude nested rows (children)
+            var model = new SkinsAndOfflineModel
+            {
+                Id = customVm?.CategoryId ?? 0,
+                ItemPath = "path/to/item",
+                ViewImagePath = "path/to/image",
+                IsDefault = "No",
+                Description = customVm?.CategoryDescription ?? "",
+                UserLastModified = customVm?.UserLastModified ?? "",
+                MachineLastModified = customVm?.MachineLastModified ?? "",
+                CategoryName = customVm?.CategoryName ?? "",
+                SkinOfflineCategortyTrees = new List<SkinOfflineCategortyTree>() // Exclude nested children
+            };
+
+            // Pass parent and grandparent names to the view using ViewBag
+            ViewBag.ParentCategoryName = parentName;
+            ViewBag.GrandparentCategoryName = grandparentName;
+
+            // Return the view with the model
+            return PartialView(AppPagesLinks.Settings.SkinsOfflineImagesDetailsPageLink, model);
+        }
+
+        public async Task<IActionResult> SkinsAndOfflineImageDetails(int CategoryId)
+        {
+            SkinOfflineCategortyTree FindSkinOfflineImageById(
+                List<SkinOfflineCategortyTree> categories,
+                int id,
+                ref string parentName,
+                ref string grandparentName,
+                ref string grandchildName)
+            {
+                foreach (var category in categories)
+                {
+                    if (category.CategoryId == id)
+                    {
+                        return category;
+                    }
+
+                    if (category._children != null && category._children.Any())
+                    {
+                        grandchildName = parentName; // Save the parent as grandchild
+                        grandparentName = parentName;
+                        parentName = category.CategoryName;
+
+                        var found = FindSkinOfflineImageById(category._children, id, ref parentName, ref grandparentName, ref grandchildName);
+                        if (found != null)
+                        {
+                            return found;
+                        }
+
+                        // Reset the names if not found in this branch
+                        parentName = grandparentName;
+                        grandparentName = grandchildName;
+                        grandchildName = string.Empty;
+                    }
+                }
+
+                return null;
+            }
+
+            string parentName = string.Empty;
+            string grandparentName = string.Empty;
+            string grandchildName = string.Empty;
+
+            var customVm = FindSkinOfflineImageById(SettingsMockData.AllSkinsOfflineImageCategories, CategoryId, ref parentName, ref grandparentName, ref grandchildName);
+
             var model = new SkinsAndOfflineModel
             {
                 Id = customVm?.CategoryId ?? 0,
@@ -442,13 +506,12 @@ namespace CLA_Administration_Web.Controllers
                 SkinOfflineCategortyTrees = customVm?._children ?? new List<SkinOfflineCategortyTree>()
             };
 
-            // Pass parent and grandparent names to the view using ViewBag (optional approach)
             ViewBag.ParentCategoryName = parentName;
             ViewBag.GrandparentCategoryName = grandparentName;
+            ViewBag.GrandchildCategoryName = grandchildName;
 
             return PartialView(AppPagesLinks.Settings.SkinsOfflineImagesDetailsPageLink, model);
         }
-
 
 
         [HttpGet]
