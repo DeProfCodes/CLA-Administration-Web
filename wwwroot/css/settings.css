@@ -1,76 +1,87 @@
 ﻿/* Basic tree styling */
-.custom-tree ul {
-    list-style-type: none;
-    padding-left: 1.5rem;
-    border-left: 1px dotted #ccc;
-    margin-left: 0.5rem;
+.custom-tree ul
+{
+list-style-type: none;
+padding-left: 1.5rem;
+border-left: 1px dotted #ccc;
+margin-left: 0.5rem;
 }
 
-.custom-tree li {
-    position: relative;
-    line-height: 1.6;
-    padding-left: 0.8rem;
+.custom-tree li
+{
+position: relative;
+line-height: 1.6;
+padding-left: 0.8rem;
 }
 
-    /* Hidden checkbox for toggling */
-    .custom-tree li .custom-toggle-checkbox {
-        display: none;
-    }
-
-    /* Label styles for toggle button */
-    .custom-tree li .custom-toggle-icon {
-        display: inline-block;
-        width: 1.2rem;
-        height: 1.2rem;
-        line-height: 1.1rem;
-        text-align: center;
-        border: 1px solid gray;
-        margin-right: 0.5rem;
-        font-weight: bold;
-        color: gray;
-        cursor: pointer;
-        font-size: 0.85rem;
-    }
-
-    /* Change toggle icon on checked */
-    .custom-tree li .custom-toggle-checkbox:checked + .custom-toggle-icon {
-        content: "-";
-        background-color: #e7f3ff;
-    }
-
-    /* Hide/Show child elements based on checkbox */
-    .custom-tree li .custom-toggle-checkbox:not(:checked) ~ ul {
-        display: none;
-    }
-
-    .custom-tree li .custom-toggle-checkbox:checked ~ ul {
-        display: block;
-    }
-
-    /* File and active file styles */
-    .custom-tree li .custom-file {
-        padding: 0.2rem 0.5rem;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-
-        .custom-tree li .custom-file.active {
-            background-color: #007bff;
-            color: white;
-        }
-
-
-#UsersModal {
-    z-index: 1055 !important;
+/* Hidden checkbox for toggling */
+.custom-tree li .custom-toggle-checkbox
+{
+    display: none;
 }
 
-#CreateStagingUserModal {
-    z-index: 1040 !important;
+/* Label styles for toggle button */
+.custom-tree li .custom-toggle-icon
+{
+    display: inline-block;
+    width: 1.2rem;
+    height: 1.2rem;
+    line-height: 1.1rem;
+    text-align: center;
+    border: 1px solid gray;
+    margin-right: 0.5rem;
+    font-weight: bold;
+    color: gray;
+    cursor: pointer;
+    font-size: 0.85rem;
 }
 
-.modal-backdrop {
-    z-index: 1030 !important;
-    opacity: 0.5;
+/* Change toggle icon on checked */
+.custom-tree li .custom-toggle-checkbox:checked + .custom-toggle-icon 
+{
+    content: "-";
+    background-color: #e7f3ff;
+}
+
+/* Hide/Show child elements based on checkbox */
+.custom-tree li .custom-toggle-checkbox:not(:checked) ~ ul
+{
+    display: none;
+}
+
+.custom-tree li .custom-toggle-checkbox:checked ~ ul
+{
+    display: block;
+}
+
+/* File and active file styles */
+.custom-tree li .custom-file
+{
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+    .custom-tree li .custom-file.active {
+        background-color: #1d457b;
+        color: white;
+    }
+
+
+#UsersModal
+{
+z-index: 1055 !important;
+}
+
+#CreateStagingUserModal 
+{
+z-index: 1040 !important;
+}
+
+.modal-backdrop 
+{
+z-index: 1030 !important;
+opacity: 0.5;
 }
 
 
@@ -81,275 +92,301 @@
 /* Bulk import */
 .label-title
 {
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 14px;
+font-weight: bold;
+text-transform: uppercase;
+font-size: 14px;
 }
 .modal-content
 {
-    overflow:auto;
+overflow:auto;
 }
 
 /* Progress bar styles */
 #progressBarContainer 
 {
-    display: none;
-    margin-top: 10px;
+display: none;
+margin-top: 10px;
 }
 
 .section-title 
 {
-    font-weight: bold;
-    font-size: 12px;
-    position: absolute;
-    background: #fff;
-    padding: 0 10px;
-    top: -10px;
-    left: 10px;
+font-weight: bold;
+font-size: 12px;
+position: absolute;
+background: #fff;
+padding: 0 10px;
+top: -10px;
+left: 10px;
 
 }
 
 .section-border
 {
-    border: 1px solid #ddd;
-    padding: 15px;
-    position: relative;
-    margin-bottom: 20px;
-    background-color: #f8f9fa;
+border: 1px solid #ddd;
+padding: 15px;
+position: relative;
+margin-bottom: 20px;
+background-color: #f8f9fa;
 }
 
 .file-contents
 {
-    height: 200px;
-    border: 1px solid #ddd;
-    background-color: #eee;
+height: 200px;
+border: 1px solid #ddd;
+background-color: #eee;
 }
 
 .btn-verify, .btn-process 
 {
-    width: 100px;
+width: 100px;
 }
 
 /* Bulk import  close*/
 
 /* Tree View Container */
 .tree-view {
-    list-style-type: none;
+list-style-type: none;
+padding-left: 20px;
+}
+
+.tree-view li {
+    position: relative;
+    margin: 5px 0;
     padding-left: 20px;
 }
 
-    .tree-view li {
-        position: relative;
-        margin: 5px 0;
-        padding-left: 20px;
-    }
-
-        .tree-view li::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 10px;
-            height: 10px;
-            border: 1px solid #007bff;
-            background-color: #ffffff;
-            border-radius: 50%;
-        }
+.tree-view li::before
+{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 10px;
+    height: 10px;
+    border: 1px solid #007bff;
+    background-color: #ffffff;
+    border-radius: 50%;
+}
 
 /* Adjust button alignment */
-.btn-group-vertical {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+.btn-group-vertical
+{
+display: flex;
+flex-direction: column;
+align-items: flex-start;
 }
 
 /* Adjust scroll-box dimensions */
-.scroll-box {
-    max-height: 300px;
-    overflow-y: auto;
+.scroll-box 
+{
+max-height: 300px;
+overflow-y: auto;
 }
 
 /* Member Title Styling */
-.member-title {
-    font-size: 1.1rem;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: #007bff;
-    text-transform: uppercase;
-    text-align: center;
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 10px;
+.member-title 
+{
+font-size: 1.1rem;
+font-weight: bold;
+margin-bottom: 10px;
+color: #007bff;
+text-transform: uppercase;
+text-align: center;
+border-bottom: 1px solid #ccc;
+padding-bottom: 10px;
 }
 
 /* Collapsible Checkbox */
-.tree-toggle {
-    cursor: pointer;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    gap: 5px;
+.tree-toggle
+{
+cursor: pointer;
+font-weight: bold;
+display: flex;
+align-items: center;
+gap: 5px;
 }
 
-.tree-toggle::before {
-    content: '+';
-    color: #007bff;
-    font-weight: bold;
-    margin-right: 5px;
+.tree-toggle::before
+{
+content: '+';
+color: #007bff;
+font-weight: bold;
+margin-right: 5px;
 }
 
-.tree-toggle.opened::before {
-    content: '-';
+.tree-toggle.opened::before
+{
+content: '-';
 }
 
-.tree-content {
-    display: none;
-    margin-left: 15px;
-    border-left: 1px dashed #007bff;
-    padding-left: 10px;
+.tree-content
+{
+display: none;
+margin-left: 15px;
+border-left: 1px dashed #007bff;
+padding-left: 10px;
 }
 
-.tree-toggle.opened + .tree-content {
-    display: block;
+.tree-toggle.opened + .tree-content
+{
+display: block;
 }
 
 
 /* Nested Content */
-.tree-content {
-    display: none;
-    margin-left: 15px;
-    border-left: 1px dashed #007bff;
-    padding-left: 10px;
+.tree-content
+{
+display: none;
+margin-left: 15px;
+border-left: 1px dashed #007bff;
+padding-left: 10px;
 }
 
-.tree-toggle:checked ~ .tree-content {
-    display: block;
+.tree-toggle:checked ~ .tree-content
+{
+display: block;
 }
 
 /* Custom Styles */
-.treeview ul {
-    list-style-type: none;
-    padding-left: 1rem;
+.treeview ul
+{
+list-style-type: none;
+padding-left: 1rem;
 }
 
-.treeview li {
-    margin: 4px 0;
-    cursor: pointer;
+.treeview li
+{
+margin: 4px 0;
+cursor: pointer;
 }
 
-.treeview i {
-    margin-right: 5px;
+.treeview i
+{
+margin-right: 5px;
 }
 /* End Tree View Container */
-.modal-header {
-    border-bottom: none;
+.modal-header
+{
+border-bottom: none;
 }
 
-.modal-title {
-    font-size: 1.2rem;
+.modal-title
+{
+font-size: 1.2rem;
 }
 
-.btn-group-vertical {
-    margin-top: 10px;
+
+.btn-group-vertical
+{
+margin-top: 10px;
 }
 
-.scroll-box {
-    border: 1px solid #ccc;
-    height: 100%;
-    overflow-y: auto;
-    padding: 5px;
-    background-color: #f8f9fa;
+.scroll-box
+{
+border: 1px solid #ccc;
+height: 100%;
+overflow-y: auto;
+padding: 5px;
+background-color: #f8f9fa;
 }
 
-.filter-input {
-    max-width: 100%;
+.filter-input
+{
+max-width: 100%;
 }
 
-.card-bordered-section {
-    border: 1px solid #ccc;
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 5px;
+.card-bordered-section
+{
+border: 1px solid #ccc;
+padding: 15px;
+margin-bottom: 20px;
+border-radius: 5px;
 }
 
 
 #table-scroll
 {
-    height:100%;
-    overflow: scroll;
-    margin-top: 20px;
+height:100%;
+overflow: scroll;
+margin-top: 20px;
 }
 
 .settings-data-area
 {
    
-    min-height: 620px;
+min-height: 620px;
 }
 
 .settings-outter-container
 {
-    min-width: 100%; 
-    max-width: 100%;
-    height: auto; 
-    min-height: 400px; 
-    margin: 15px; 
-    box-sizing: border-box;
+min-width: 100%; 
+max-width: 100%;
+height: auto; 
+min-height: 400px; 
+margin: 15px; 
+box-sizing: border-box;
 }
 
 @media (max-width: 768px)
 {
-    .settings-outter-container
-    {
-        min-width: 100%; 
-        height: auto; 
-    }
+.settings-outter-container
+{
+    min-width: 100%; 
+    height: auto; 
+}
 }
 
 @media (max-width: 576px) 
 {
-    .settings-outter-container
-    {
-        min-width: 100%;
-        margin: 10px; 
-    }
+.settings-outter-container
+{
+    min-width: 100%;
+    margin: 10px; 
+}
 }
 
 /* defaults font*/
 
 .default-toolbar {
-    display: flex;
-    gap: 15px;
-    padding: 10px;
-    background-color: #f8f9fa;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    margin-bottom: 20px;
+display: flex;
+gap: 15px;
+padding: 10px;
+background-color: #f8f9fa;
+border: 1px solid #ddd;
+border-radius: 5px;
+margin-bottom: 20px;
 }
 
-.default-toolbar-item {
-    display: flex;
-    align-items: center;
+.default-toolbar-item
+{
+display: flex;
+align-items: center;
 }
 
-.default-form-select {
-    width: 150px;
+.default-form-select 
+{
+width: 150px;
 }
 
-.default-btn-light {
-    border: 1px solid #ddd;
-    padding: 5px 10px;
-    font-size: 14px;
+.default-btn-light
+{
+border: 1px solid #ddd;
+padding: 5px 10px;
+font-size: 14px;
 }
 
-.default-editor-area {
-    margin-top: 20px;
-    border: 1px solid #ddd;
-    padding: 20px;
-    background-color: #fff;
-    min-height: 200px;
+.default-editor-area
+{
+margin-top: 20px;
+border: 1px solid #ddd;
+padding: 20px;
+background-color: #fff;
+min-height: 200px;
 }
 
-.default-editor {
-    outline: none;
+.default-editor
+{
+outline: none;
 }
 
 
@@ -360,37 +397,42 @@
 
 .existing-tree-category
 {
-    overflow-y: auto;
-    padding: 5px;
-    background-color: #f8f9fa;
+overflow-y: auto;
+padding: 5px;
+background-color: #f8f9fa;
 }
 
 @media (max-width: 768px)
 {
-    .custom-btn {
-        width: 100%;
-    }
+.custom-btn
+{
+    width: 100%;
+}
 }
 
 
 /*Desktop information*/
-.info-card {
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
+.info-card
+{
+cursor: pointer;
+transition: transform 0.2s, box-shadow 0.2s;
 }
 
-    .info-card:hover {
-        transform: scale(1.05);
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    }
+.info-card:hover
+{
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
 
-    .info-card.active {
-        border: 2px solid #0d6efd;
-    }
+.info-card.active 
+{
+    border: 2px solid #0d6efd;
+}
 
-    .info-card.inactive {
-        opacity: 0.5;
-    }
+.info-card.inactive
+{
+    opacity: 0.5;
+}
 
 
 /*Desktop information close*/

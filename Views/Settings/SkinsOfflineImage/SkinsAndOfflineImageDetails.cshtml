@@ -43,7 +43,7 @@
 
     <div class="card mb-4 mt-2 overview-filters-card">
         <div class="card-body">
-            <h4 class="w-100 text-center theme-txt-clr">Edit Skins And Offline Images @Model.Id  for @Model.CategoryName</h4>
+            <h4 class="w-100 text-center theme-txt-clr">Edit Skins And Offline Images  for @Model.CategoryName  category</h4>
         </div>
     </div>
  
@@ -216,11 +216,7 @@
             <!-- Modal Header -->
             <div class="modal-header">
                 <h5 class="modal-title" id="EditModalLabel">Select Item Path</h5>
-                <button type="button"
-                        class="btn-close"
-                        data-bs-dismiss="modal"
-                        aria-label="Close"
-                        onclick="closeModal('EditModal')">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal('EditModal')">
                 </button>
             </div>
 
@@ -256,12 +252,61 @@
     </div>
 </div>
 
+<!-- Edit Skins and Offline Image Modal -->
+<div class="modal fade" id="EditModal" tabindex="-1" aria-labelledby="EditModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="EditModalLabel">Edit Staging Entity</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal('EditModal')"></button>
+            </div>
+            <div class="modal-body" id="EditModalContainer">
+                <!-- Dynamic content for the modal goes here -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn custom-btn  btn-secondary" data-bs-dismiss="modal" onclick="closeModal('EditModal')">Cancel</button>
+                <button type="button" class="custom-btn  custom-btn-default" onclick="SaveStagingUser()">Save User</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+
+
+
     <script>
+
+
+
+    // Function to open the modal and load data via AJAX
+    function EditNewStagingEntry(CategoryId) {
+        $.ajax({
+            url: '@Url.Action("EditSkinsAndOfflineImage", "Settings")/' + CategoryId,
+            type: 'GET',
+            success: function (data) {
+                // Inject the dynamic content into the modal container
+                $('#EditModalContainer').html(data);
+                $('#EditModal').modal('show'); // Show the modal
+            },
+            error: function () {
+                alert('Error fetching the skin details.');
+            }
+        });
+        };
+
+
+    // Function to close the modal
+    function closeModal(modalId) {
+        $('#' + modalId).modal('hide');
+    }
 
     function AddNewTargetGroup() {
       
@@ -392,7 +437,7 @@
                 if (result.isConfirmed) {
                     Swal.fire({
                         title: "Deleted!",
-                        text: "Your file has been deleted.",
+                        text: "Your"+ categoryId + " file has been deleted.",
                         icon: "success"
                     });
                 }

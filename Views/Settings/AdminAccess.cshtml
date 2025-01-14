@@ -23,31 +23,11 @@
             });
     }
 
-    <!-- Settings Filter Component -->
-    <div class="card mb-4 mt-2 overview-filters-card app-card-main-scaling">
-        <div class="card-body pt-0 pb-0">
-            <div class="row fs-12 mt-1 mb-2">
-                <p class="theme-txt-clr text-center w-100 fw-bold fs-16" id="TypeFilterTitle">Filters</p>
-                <div class="row col-12 d-flex flex-wrap ">
-                    <div class="w-auto me-auto mb-1">
-                        <div class="d-flex">
-                            <p class="custom-p w-fit-content align-content-center">Domain</p>
-                            <select class="custom-input-text w-200p ms-2" id="ReportModuleSelect" onchange="FilterByDomain()">
-                                <option value="0">Please select Domain Name</option>
-                                @foreach (var domain in usersDomains)
-                                {
-                                    <option value="@domain">@domain.</option>
-                                }
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+ 
+
 
     <!-- Admin Access Table -->
-    <div class="card mb-1 mt-1 p-3" id="report-data-area">
+    <div class="card mb-4 mt-1 p-3" id="report-data-area">
         <div id="SettingsData">
             <h3 class="w-100 text-center theme-txt-clr">
                 Manage Admin Access
@@ -56,8 +36,7 @@
                 <div class="table-responsive" style="position: relative;">
                     <div style="overflow-x: auto;">
                         <table id="AdminAccessData" class="table table-striped table-bordered table-hover theme-border align-middle campain-table-type fs-12">
-                            @if (Model?.AdminAccessItems != null)
-                            {
+                         
                                 <thead class="sticky-top theme-bg text-white">
                                     <tr>
                                         
@@ -119,16 +98,12 @@
                                         </tr>
                                     }
                                 </tbody>
-                            }
-                            else
-                            {
-                                <p>No Admin Access data available or Model is null.</p>
-                            }
+                          
+                         
                         </table>
                     </div>
                 </div>
-
-             
+                           
 
             </div>
         </div>
@@ -136,7 +111,7 @@
 
 </div>
 
-<!-- Create New Staging User Modal -->
+
 <div class="modal fade" id="CreateStagingUserModal" tabindex="-1" aria-labelledby="CreateStagingUserModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
@@ -174,8 +149,10 @@
                             <!-- Username and Desktop Environment (Read-only) -->
                             <div class="col-md-4">
                                 <label for="username" class="form-label">Username</label>
-                                <input type="text" class="form-control" id="username" value="MockDataHelperFunctions.GetRandomMachineID()" readonly>
-                            </div>
+                                <input type="text" class="form-control" id="username" value="" >
+
+
+                             </div>
                             <div class="col-md-4">
                                 <label for="desktopEnvironment" class="form-label">Desktop Environment</label>
                                 <input type="text" class="form-control" id="desktopEnvironment" value="desktopEnvironment" readonly>
@@ -291,8 +268,8 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal('CreateStagingUserModal')">Cancel</button>
-                <button type="button" class="btn  custom-btn-default" onclick="SaveStagingUser()">Save User</button>
+                <button type="button"  class="btn custom-btn  btn-secondary" data-bs-dismiss="modal" onclick="closeModal('CreateStagingUserModal')">Cancel</button>
+                <button type="button" class="custom-btn  custom-btn-default" onclick="SaveStagingUser()">Save User</button>
             </div>
         </div>
     </div>
@@ -310,60 +287,67 @@
                 <!-- Dynamic content for the modal goes here -->
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal('EditModal')">Cancel</button>
-                <button type="button" class="btn custom-btn-default" onclick="SaveStagingUser()">Save User</button>
+                <button type="button"  class="btn custom-btn  btn-secondary"  data-bs-dismiss="modal" onclick="closeModal('EditModal')">Cancel</button>
+                <button type="button" class="custom-btn  custom-btn-default" onclick="SaveStagingUser()">Save User</button>
             </div>
         </div>
     </div>
 </div>
 
-
-
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
 
 <style>
-    .sticky-action-column {
-        position: sticky;
-        right: 0;
-        background-color: white;
-        z-index: 2;
-    }
+.sticky-action-column
+{
+    position: sticky;
+    right: 0;
+    background-color: white;
+    z-index: 2;
+}
 
-    .form-select {
-        width: 100%;
-    }
+.form-select
+{
+    width: 100%;
+}
 </style>
 <script>
 
-      function DeleteAdminAccess(connectionID) {
-        if (confirm("Are you sure you want to terminate this connection?")) {
+      function DeleteAdminAccess(connectionID) 
+      {
+        if (confirm("Are you sure you want to terminate this connection?"))
+        {
             alert(`Delete admin: ${connectionID}`);
         }
     }
 
-    $(document).ready(function () {
+    $(document).ready(function ()
+    {
         usersDT = MakeStandardDataTable("AdminAccessData");
      
     });
 
-    function AddNewAdminUser() {
+    function AddNewAdminUser()
+    {
         const usersModal = new bootstrap.Modal(document.getElementById('CreateStagingUserModal'));
         usersModal.show();
     }
 
-    function FilterByDomain() {
+    function FilterByDomain() 
+    {
         const selectedDomain = $("#ReportModuleSelect").val();
 
         var userActive = $("#StagingUserBtn").hasClass("btn-group-active");
 
-        if (selectedDomain === "0") {
+        if (selectedDomain === "0")
+        {
             if (userActive)
                 usersDT.column(0).search("").draw();
             else
                 machinesDT.column(0).search("").draw();
         }
-        else {
+        else
+        {
             if (userActive)
                 usersDT.column(0).search(selectedDomain).draw();
 

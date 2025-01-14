@@ -138,6 +138,7 @@
             public const string StagingModalViewPageLink = "~/Views/Shared/Components/Custom/Settings/SettingsModal/StagingModalView.cshtml";
             public const string AdminAccessModalPageLink = "~/Views/Shared/Components/Custom/Settings/SettingsModal/StagingModalView.cshtml";
             public const string TargeGroupEditModal = "~/Views/Shared/Components/Custom/Settings/SettingsModal/TargetGroupEditModal.cshtml";
+            public const string SkinsOfflineImagesModalPageLink = "~/Views/Shared/Components/Custom/Settings/SettingsModal/SkinsAndOfflineImagesModalView.cshtml";
 
         }
 

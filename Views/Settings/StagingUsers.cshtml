@@ -228,8 +228,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal('CreateStagingUserModal')">Cancel</button>
-                <button type="button" class="btn custom-btn-default" onclick="SaveStagingUser()">Save User</button>
+                <button type="button"  class="btn custom-btn  btn-secondary" data-bs-dismiss="modal" onclick="closeModal('CreateStagingUserModal')">Cancel</button>
+                <button type="button" class="custom-btn  custom-btn-default" onclick="SaveStagingUser()">Save User</button>
             </div>
         </div>
     </div>
@@ -278,8 +278,8 @@
             </form>
         </div>
         <div class="modal-footer">
-            <button type="button" id="closeModal" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal('CreateStagingMachineModal')">Cancel</button>
-            <button type="button" class="btn custom-btn-default" onclick="SaveStagingMachine()">Save Machine</button>
+            <button type="button" id="closeModal" class="btn custom-btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal('CreateStagingMachineModal')">Cancel</button>
+            <button type="button" class="custom-btn custom-btn-default" onclick="SaveStagingMachine()">Save Machine</button>
         </div>
     </div>
 </div>
@@ -297,8 +297,8 @@
             <!-- Dynamic content for the modal goes here -->
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal('EditModal')">Cancel</button>
-            <button type="button" class="btn custom-btn-default" onclick="SaveStagingUser()">Save User</button>
+                <button type="button"  class="btn custom-btn  btn-secondary" data-bs-dismiss="modal" onclick="closeModal('EditModal')">Cancel</button>
+                <button type="button" class="custom-btn  custom-btn-default" onclick="SaveStagingUser()">Save User</button>
         </div>
     </div>
 </div>
@@ -434,10 +434,6 @@ function SaveEditNewStagingEnting(formdata)
     LoadEditModal(formData, '@Url.Action("SaveStagingData", "Settings")', 'POST', editMachineForm, edit - machine - btn)
 }
 
-function closeModal(modalId)
-{
-    $('#' + modalId).modal('hide');
-}
 
 function DeleteExistingUser(customID)
 
@@ -478,7 +474,7 @@ function DeleteExistingUser(customID)
     function handleUserSelection(selectedUsers, selectedGroups, selectedMachines, selectedIpRanges) {
 
 
-        Swal("Saved users", "success");
+        swal("Saved users", "success");
     }
 
 
@@ -522,7 +518,6 @@ function DeleteExistingUser(customID)
             inputFieldId: triggerInput.id,
         };
 
-        console.log("Selected fields for callback:", window.selectedFields);
     }
 
     function closeUsersModal()
@@ -566,8 +561,7 @@ function DeleteExistingUser(customID)
     function SaveStagingUser()
     {
 
-        console.log("User data saved successfully!");
-        closeModal('CreateStagingUserModal');
+        Swal("Saved users", "success");
     }
 
 
