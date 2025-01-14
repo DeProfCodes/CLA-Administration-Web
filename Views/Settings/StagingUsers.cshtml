@@ -25,6 +25,9 @@
             BreadcrumbButtonName = "Add New Staging User",
             BreadcrumbButtonCallbackFunction = "AddNewStagingEntity"
         });
+
+
+    
 }
 
     <link rel="stylesheet" href="~/css/settings.css"/>
@@ -148,6 +151,14 @@
 
 </div>
 
+
+@{await Html.RenderPartialAsync("~/Views/Shared/Components/Modal/_UserSelectionModal.cshtml", new ModalViewModel
+            {
+                ModalTitle = "Select Excluded User",
+                TargetedEntities = Model.TargetedEntities,
+                CallbackFunction = "handleUserSelection"
+            });
+            }
 <!-- Create New Staging User Modal -->
 <div class="modal fade" id="CreateStagingUserModal" tabindex="-1" aria-labelledby="CreateStagingUserModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -158,12 +169,19 @@
             </div>
             <div class="modal-body">
                 <form id="CreateStagingUserForm">
-                    <!-- Button to open Users Modal -->
+                   
                     <div class="mb-3">
                         <label for="SelectUser" class="form-label">Select User</label>
-                        <button class="btn btn-secondary" type="button" id="StagingUserBtn" onclick="openUsersModal()">Select User</button>
+                        <input type="text"
+                               id="stagingUserInput"
+                               class="form-control"
+                               placeholder="Click to select a user"
+                               data-callback="updateStagingUserField"
+                               data-username-field="stagingUserInput"
+                               value=""
+                               readonly
+                               onclick="openTreeViewModals(this, 'UsersModal', 'CreateStagingUserModal')">
                     </div>
-
                     <!-- Domain -->
                     <div class="mb-3">
                         <label for="StagingUserDomain" class="form-label">Domain</label>
@@ -218,70 +236,6 @@
 </div>
 
 
-<!-- Users Modal -->
-<div class="modal fade" id="UsersModal" tabindex="-1" aria-labelledby="UsersModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="UsersModalLabel">Select Staging User</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeUsersModal()"></button>
-            </div>
-            <div class="modal-body">
-                <div class="container mt-4">
-                    <!-- Search Field -->
-                    <div class="mb-3">
-                        <input type="text" id="custom-searchInput" class="form-control" placeholder="Search..." onkeyup="customFilterTree()">
-                    </div>
-
-                    <!-- Tree Structure -->
-                    <div class="custom-tree" id="custom-directoryTree">
-                        <ul>
-                            @foreach (var entity in Model.TargetedEntities)
-                            {
-                                @Html.Raw(RenderTreeNode(entity))
-                            }
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeUsersModal()">Close</button>
-                <button type="button" class="btn btn-primary" onclick="saveSelections()">Save Selection</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-@functions {
-    string RenderTreeNode(CLA_Administration_Web.ViewModels.Targeting.TargetedEntityTree node)
-    {
-        var html = $@"
-        <li class='custom-folder'>
-            <span class='custom-toggle-icon' onclick='customToggleFolder(this)'>+</span>
-            <label><i class='bi bi-folder'></i> {node.EntityName}</label>";
-
-        if (node._children != null && node._children.Any())
-        {
-            html += "<ul class='custom-tree-content'>";
-            foreach (var child in node._children)
-            {
-                
-                if (child._children != null && child._children.Any())
-                {
-                    html += RenderTreeNode(child); 
-                }
-                else
-                {
-                    html += $"<li class='custom-file' onclick='customSelectValue(this)'>{child.EntityName}</li>"; 
-                }
-            }
-            html += "</ul>";
-        }
-
-        html += "</li>";
-        return html;
-    }
-}
 
 
 <!-- Create New Staging Machine Modal -->
@@ -366,8 +320,76 @@
         console.log("Selected Groups: ", selectedGroups);
         console.log("Selected Machines: ", selectedMachines);
         console.log("Selected IP Ranges: ", selectedIpRanges);
+
+        Swal("Saved users", "success");
     }
 
+
+
+    function openTreeViewModals(triggerInput, modal1Id, modal2Id) {
+        const modal1 = document.getElementById(modal1Id); // Secondary modal
+        const modal2 = document.getElementById(modal2Id); // Main modal
+        const backdrop = document.querySelector('.modal-backdrop');
+
+        if (!modal1 || !modal2) {
+            console.error("Modal IDs provided do not exist.");
+            return;
+        }
+
+
+        modal1.style.display = 'block';
+        modal1.style.opacity = '1';
+        modal1.style.zIndex = '1055';
+
+
+        modal2.style.zIndex = '1040';
+
+
+        if (backdrop) {
+            backdrop.style.zIndex = '1040';
+            backdrop.style.opacity = '0.5';
+        } else {
+            console.warn("Backdrop not found. Ensure the modal system is initialized correctly.");
+        }
+
+
+        const lastModifiedField = triggerInput.getAttribute('data-username-field');
+        const callbackFunction = triggerInput.getAttribute('data-callback');
+
+        if (!lastModifiedField || !callbackFunction) {
+            console.warn("Missing data attributes on the trigger input.");
+        }
+
+
+        window.selectedFields = {
+            lastModifiedField,
+            callbackFunction,
+            inputFieldId: triggerInput.id,
+        };
+
+        console.log("Selected fields for callback:", window.selectedFields);
+    }
+
+
+
+    function closeUsersModal() {
+        var usersModal = document.getElementById('UsersModal');
+        var mainModal = document.getElementById('CreateStagingUserModal');
+
+
+        usersModal.style.display = 'none';
+
+
+        mainModal.style.zIndex = '1050';
+        usersModal.style.zIndex = '0';
+        usersModal.style.opacity = '0';
+
+        var backdrop = document.querySelector('.modal-backdrop');
+        if (backdrop) {
+            backdrop.style.zIndex = '1040';
+            backdrop.style.position = 'relative'
+        }
+    }
 
 
 
@@ -430,59 +452,18 @@
         });
     }
 
-    // Save the selections from the tree and update the form fields
-    function saveSelections() {
-        let selectedUsers = [];
-        let selectedGroups = [];
-        let selectedMachines = [];
-        let selectedIpRanges = [];
+ 
 
-        // Get selected users (if any)
-        document.querySelectorAll('.user-checkbox:checked').forEach(item => {
-            selectedUsers.push(item.parentNode.textContent.trim());
-        });
+    function closeModal(modalId) {
+        var modal = document.getElementById(modalId);
+        var backdrop = document.querySelector('.modal-backdrop');
 
-        // Get selected groups, machines, or IP ranges from the tree
-        document.querySelectorAll('.custom-file.active').forEach(item => {
-            const parentFolder = item.closest('.custom-folder').querySelector('label').textContent.trim(); // Get parent folder name
-            const selectedItem = item.textContent.trim();
+        modal.style.display = 'none';
 
-            if (parentFolder.includes('Groups')) {
-                selectedGroups.push(selectedItem);
-            } else if (parentFolder.includes('Machines')) {
-                selectedMachines.push(selectedItem);
-            } else if (parentFolder.includes('IPRanges')) {
-                selectedIpRanges.push(selectedItem);
-            }
-        });
-
-        console.log("Selected Users: ", selectedUsers);
-        console.log("Selected Groups: ", selectedGroups);
-        console.log("Selected Machines: ", selectedMachines);
-        console.log("Selected IP Ranges: ", selectedIpRanges);
-
-        // Close the modal after saving selections
-        closeUsersModal();
-
-        // Set the selected values to the appropriate input fields
-        document.getElementById('StagingUserFirstname').value = selectedUsers.join(', ');
-        document.getElementById('StagingUserLastname').value = selectedGroups.join(', ');
-        document.getElementById('StagingMachineLastModified').value = selectedMachines.join(', ');
+        if (backdrop) {
+            backdrop.style.display = 'none';
+        }
     }
-
-    // Open the modal
-    function openUsersModal() {
-        const usersModal = new bootstrap.Modal(document.getElementById('UsersModal'));
-        usersModal.show();
-    }
-
-    // Close the modal
-    function closeUsersModal() {
-        const usersModal = new bootstrap.Modal(document.getElementById('UsersModal'));
-        usersModal.hide();
-    }
-
-
 
 
 function SaveStagingUser() {

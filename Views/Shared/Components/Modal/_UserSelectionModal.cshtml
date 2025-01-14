@@ -3,7 +3,7 @@
 
 
 <div class="modal fade" id="UsersModal" tabindex="-1" aria-labelledby="UsersModalLabel" aria-hidden="true">
-    <div class="modal-dialog ">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="UsersModalLabel">@Model.ModalTitle</h5>
@@ -28,13 +28,13 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn" data-bs-dismiss="modal" onclick="closeUsersModal()">Cancel</button>
-
-                <button type="button" class="btn btn-primary" onclick="saveSelections('@Model.CallbackFunction')">Save Selection</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeUsersModal()">Cancel</button>
+                <button type="button" class="btn btn-primary" id="saveButton">Save Selection</button>
             </div>
         </div>
     </div>
 </div>
+
 
 @functions {
     string RenderTreeNode(TargetedEntityTree node)
@@ -67,125 +67,45 @@
     }
 }
 
-@section Scripts {
-    <script>
+<script>
+    // Save selections and populate input field
+    function saveSelections() {
+        const { lastModifiedField, callbackFunction, inputFieldId } = window.selectedFields;
 
-        function saveSelectionss() {
-            let selectedUsers = [];
-            let selectedGroups = [];
-            let selectedMachines = [];
+        const selectedUsers = [];
 
-            // Collect selected users
-            document.querySelectorAll('.custom-tree .custom-file.selected').forEach(item => {
-                if (item.closest('ul').previousElementSibling && item.closest('ul').previousElementSibling.textContent.includes('Users')) {
-                    selectedUsers.push(item.textContent.trim());
-                }
-            });
+        document.querySelectorAll('.custom-file.active').forEach(item => {
+            const selectedItem = item.textContent.trim();
+            selectedUsers.push(selectedItem);
+        });
 
-            // Collect selected groups and machines
-            document.querySelectorAll('.custom-tree .custom-file.selected').forEach(item => {
-                if (item.closest('ul').previousElementSibling && item.closest('ul').previousElementSibling.textContent.includes('Groups')) {
-                    selectedGroups.push(item.textContent.trim());
-                } else if (item.closest('ul').previousElementSibling && item.closest('ul').previousElementSibling.textContent.includes('Machines')) {
-                    selectedMachines.push(item.textContent.trim());
-                }
-            });
-
-            console.log("Selected Users: ", selectedUsers);
-            console.log("Selected Groups: ", selectedGroups);
-            console.log("Selected Machines: ", selectedMachines);
-
-            // Get the target field to populate
-            const modal = document.getElementById('UsersModal');
-            const targetFieldId = modal.dataset.targetField;
-
-            // Populate the target field with selected users (modify as needed)
-            if (targetFieldId) {
-                document.getElementById(targetFieldId).value = selectedUsers.join(', ');
-            }
-
-            // Close the modal after saving
-            closeUsersModal();
+        if (lastModifiedField) {
+            document.getElementById(lastModifiedField).value = selectedUsers.join(', ');
         }
 
-
-
-        function saveSelections() {
-            const { lastModifiedField, callbackFunction } = window.selectedFields;
-
-            const selectedUsers = [];
-            document.querySelectorAll('.custom-file.active').forEach(item => {
-                const selectedItem = item.textContent.trim();
-                selectedUsers.push(selectedItem);
-            });
-
-            if (lastModifiedField) {
-                document.getElementById(lastModifiedField).value = selectedUsers.join(', ');
-            }
-
-
-            if (callbackFunction && typeof window[callbackFunction] === 'function') {
-                window[callbackFunction](selectedUsers);
-            }
-
-
-            closeUsersModal();
+        if (callbackFunction && typeof window[callbackFunction] === 'function') {
+            window[callbackFunction](selectedUsers);
         }
 
-        // Toggle Folder Function
-        function customToggleFolder(toggleElement) {
-            const parentLi = toggleElement.closest('li'); // Find the parent <li> of the toggle button
+        closeUsersModal();
+    }
 
-            if (parentLi.classList.contains('custom-collapsed')) {
-                // Expand: Show children
-                parentLi.classList.remove('custom-collapsed');
-                toggleElement.textContent = '-'; // Change icon to '-'
+  
+    document.getElementById('saveButton').addEventListener('click', saveSelections);
+
+    function customFilterTree() {
+        const searchInput = document.getElementById('custom-searchInput').value.toLowerCase();
+        const treeNodes = document.querySelectorAll('#custom-directoryTree .custom-file, #custom-directoryTree .custom-folder span');
+
+        treeNodes.forEach(node => {
+            const text = node.textContent.trim().toLowerCase();
+            const parentLi = node.closest('li');
+            if (text.includes(searchInput)) {
+                parentLi.style.display = ''; 
             } else {
-                // Collapse: Hide children
-                parentLi.classList.add('custom-collapsed');
-                toggleElement.textContent = '+'; // Change icon to '+'
+                parentLi.style.display = 'none'; 
             }
-        }
-
-
-        // Filter tree nodes based on search input
-        function customFilterTree() {
-            const query = document.getElementById('custom-searchInput').value.toLowerCase();
-            const allItems = document.querySelectorAll("#custom-directoryTree li");
-
-            allItems.forEach(item => {
-                const text = item.textContent.toLowerCase();
-                const matches = text.includes(query);
-
-                // Toggle the visibility of the items based on the search query
-                item.style.display = matches ? "list-item" : "none";
-
-                if (matches) {
-                    // Ensure parent folders of visible items remain open
-                    let parent = item.parentElement;
-                    while (parent && parent.tagName === "UL") {
-                        parent.style.display = "block"; // Make the parent list visible
-                        parent = parent.parentElement; // Traverse up to the parent <li>
-                        if (parent && parent.querySelector('.custom-toggle-icon')) {
-                            parent.classList.remove('custom-collapsed');
-                            parent.querySelector('.custom-toggle-icon').textContent = '-';
-                        }
-                    }
-                }
-            });
-
-            // Show parents of visible children
-            allItems.forEach(item => {
-                const children = item.querySelectorAll("li");
-                const anyChildVisible = Array.from(children).some(child => child.style.display === "list-item");
-                if (anyChildVisible) {
-                    item.style.display = "list-item";
-                }
-            });
-        }
-
-
-
-    </script>
-}
+        });
+    }
+</script>
 

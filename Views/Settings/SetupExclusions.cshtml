@@ -161,29 +161,21 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal('CreateStagingUserModal')"></button>
             </div>
             <div class="modal-body">
-                <div class="mb-3">
-                    <label for="SelectUser" class="form-label">Select User</label>
-                    <button class="btn btn-secondary"
-                            type="button"
-                            id="StagingUserBtn"
-                            data-callback="updateStagingMachineFields"
-                            data-lastmodified-field="StagingUserUserLastModified"
-                            onclick=" openTreeViewModals(this,'UsersModal', 'CreateStagingUserModal')">
-                        Select User
-                    </button>
-                </div>
-
+           
                 <div class="mb-3">
                     <label for="SelectUser" class="form-label">Select User</label>
                     <input type="text"
-                           id="StagingUserInput"
+                           id="stagingUserInput"
                            class="form-control"
                            placeholder="Click to select a user"
-                           data-callback="updateUsernameField"
-                           data-username-field="username"
+                           data-callback="updateStagingUserField"
+                           data-username-field="stagingUserInput"
+                           value=""
                            readonly
                            onclick="openTreeViewModals(this, 'UsersModal', 'CreateStagingUserModal')">
                 </div>
+
+
 
 
 
@@ -327,23 +319,23 @@
             return;
         }
 
-        // Adjust styles for modal1 to ensure it's fully visible
+      
         modal1.style.display = 'block';
         modal1.style.opacity = '1';
-        modal1.style.zIndex = '1055'; // Higher z-index to ensure it is above modal2
+        modal1.style.zIndex = '1055'; 
 
-        // Adjust styles for modal2 to ensure it is beneath modal1
-        modal2.style.zIndex = '1040'; // Lower z-index to push it below modal1
+        
+        modal2.style.zIndex = '1040'; 
 
-        // Handle the backdrop for better visibility
+    
         if (backdrop) {
-            backdrop.style.zIndex = '1040'; // Align backdrop with modal2
-            backdrop.style.opacity = '0.5'; // Maintain some transparency
+            backdrop.style.zIndex = '1040';
+            backdrop.style.opacity = '0.5'; 
         } else {
             console.warn("Backdrop not found. Ensure the modal system is initialized correctly.");
         }
 
-        // Retrieve attributes from the input field
+        
         const lastModifiedField = triggerInput.getAttribute('data-username-field');
         const callbackFunction = triggerInput.getAttribute('data-callback');
 
@@ -351,47 +343,16 @@
             console.warn("Missing data attributes on the trigger input.");
         }
 
-        // Save the retrieved attributes to a global object for later use
+      
         window.selectedFields = {
             lastModifiedField,
             callbackFunction,
-            inputFieldId: triggerInput.id, // Save the input field's ID for updating later
+            inputFieldId: triggerInput.id,
         };
 
         console.log("Selected fields for callback:", window.selectedFields);
     }
 
-
-    function openTreeViewModal(triggerButton, modal1Id, modal2Id) {
-     
-        var modal1 = document.getElementById(modal1Id);
-        var modal2 = document.getElementById(modal2Id);  
-
-        // Ensure modal1 (second modal) is fully visible
-        modal1.style.display = 'block';
-        modal1.style.opacity = '1';
-        modal1.style.zIndex = '1055';
-
-        // Ensure modal2 (main modal) is beneath modal1
-        modal2.style.zIndex = '0';
-
-      
-        var backdrop = document.querySelector('.modal-backdrop');
-        if (backdrop) {
-            backdrop.style.zIndex = '0'; 
-            backdrop.style.opacity = '0'; 
-        }
-
-     
-        const lastModifiedField = triggerButton.getAttribute('data-lastmodified-field');
-        const callbackFunction = triggerButton.getAttribute('data-callback');
-
-       
-        window.selectedFields = {
-            lastModifiedField,
-            callbackFunction,
-        };
-    }
 
     function closeUsersModal() {
         var usersModal = document.getElementById('UsersModal');
