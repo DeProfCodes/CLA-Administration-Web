@@ -180,7 +180,7 @@
                                data-username-field="stagingUserInput"
                                value=""
                                readonly
-                               onclick="openTreeViewModals(this, 'UsersModal', 'CreateStagingUserModal')">
+                               onclick="openTreeViewModals(this,'CreateStagingUserModal', 'UsersModal')">
                     </div>
                     <!-- Domain -->
                     <div class="mb-3">
@@ -311,168 +311,9 @@
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="~/js/settings.js"></script>
+
+
 <script>
-
-
-    function handleUserSelection(selectedUsers, selectedGroups, selectedMachines, selectedIpRanges) {
-        console.log("Callback executed!");
-        console.log("Selected Users: ", selectedUsers);
-        console.log("Selected Groups: ", selectedGroups);
-        console.log("Selected Machines: ", selectedMachines);
-        console.log("Selected IP Ranges: ", selectedIpRanges);
-
-        Swal("Saved users", "success");
-    }
-
-
-
-    function openTreeViewModals(triggerInput, modal1Id, modal2Id) {
-        const modal1 = document.getElementById(modal1Id); // Secondary modal
-        const modal2 = document.getElementById(modal2Id); // Main modal
-        const backdrop = document.querySelector('.modal-backdrop');
-
-        if (!modal1 || !modal2) {
-            console.error("Modal IDs provided do not exist.");
-            return;
-        }
-
-
-        modal1.style.display = 'block';
-        modal1.style.opacity = '1';
-        modal1.style.zIndex = '1055';
-
-
-        modal2.style.zIndex = '1040';
-
-
-        if (backdrop) {
-            backdrop.style.zIndex = '1040';
-            backdrop.style.opacity = '0.5';
-        } else {
-            console.warn("Backdrop not found. Ensure the modal system is initialized correctly.");
-        }
-
-
-        const lastModifiedField = triggerInput.getAttribute('data-username-field');
-        const callbackFunction = triggerInput.getAttribute('data-callback');
-
-        if (!lastModifiedField || !callbackFunction) {
-            console.warn("Missing data attributes on the trigger input.");
-        }
-
-
-        window.selectedFields = {
-            lastModifiedField,
-            callbackFunction,
-            inputFieldId: triggerInput.id,
-        };
-
-        console.log("Selected fields for callback:", window.selectedFields);
-    }
-
-
-
-    function closeUsersModal() {
-        var usersModal = document.getElementById('UsersModal');
-        var mainModal = document.getElementById('CreateStagingUserModal');
-
-
-        usersModal.style.display = 'none';
-
-
-        mainModal.style.zIndex = '1050';
-        usersModal.style.zIndex = '0';
-        usersModal.style.opacity = '0';
-
-        var backdrop = document.querySelector('.modal-backdrop');
-        if (backdrop) {
-            backdrop.style.zIndex = '1040';
-            backdrop.style.position = 'relative'
-        }
-    }
-
-
-
-    // Toggle folder visibility
-    function customToggleFolder(element) {
-        var parent = element.parentElement;
-        if (parent.classList.contains("custom-collapsed")) {
-            parent.classList.remove("custom-collapsed");
-            parent.classList.add("custom-expanded");
-        } else {
-            parent.classList.remove("custom-expanded");
-            parent.classList.add("custom-collapsed");
-        }
-    }
-
-    // Select value and allow only one selection at a time (like radio buttons)
-    function customSelectValue(element) {
-        const parentFolder = element.closest('.custom-folder');
-
-        // Deselect previously selected file across all folders
-        document.querySelectorAll('.custom-file.active').forEach(file => file.classList.remove('active'));
-
-        // Select the current file (radio button-like behavior)
-        element.classList.add('active');
-    }
-
-    // Filter tree nodes based on search input
-    function customFilterTree() {
-        const query = document.getElementById('custom-searchInput').value.toLowerCase();
-        const allItems = document.querySelectorAll("#custom-directoryTree li");
-
-        allItems.forEach(item => {
-            const text = item.textContent.toLowerCase();
-            const matches = text.includes(query);
-
-            // Toggle the visibility of the items based on the search query
-            item.style.display = matches ? "list-item" : "none";
-
-            if (matches) {
-                // Ensure parent folders of visible items remain open
-                let parent = item.parentElement;
-                while (parent && parent.tagName === "UL") {
-                    parent.style.display = "block"; // Make the parent list visible
-                    parent = parent.parentElement; // Traverse up to the parent <li>
-                    if (parent && parent.querySelector('.custom-toggle-icon')) {
-                        parent.classList.remove('custom-collapsed');
-                        parent.querySelector('.custom-toggle-icon').textContent = '-';
-                    }
-                }
-            }
-        });
-
-        // Show parents of visible children
-        allItems.forEach(item => {
-            const children = item.querySelectorAll("li");
-            const anyChildVisible = Array.from(children).some(child => child.style.display === "list-item");
-            if (anyChildVisible) {
-                item.style.display = "list-item";
-            }
-        });
-    }
-
- 
-
-    function closeModal(modalId) {
-        var modal = document.getElementById(modalId);
-        var backdrop = document.querySelector('.modal-backdrop');
-
-        modal.style.display = 'none';
-
-        if (backdrop) {
-            backdrop.style.display = 'none';
-        }
-    }
-
-
-function SaveStagingUser() {
-
-    console.log("User data saved successfully!");
-    closeModal('CreateStagingUserModal');
-}
-
-
 
 var usersDomains = @Html.Raw(Json.Serialize(usersDomains));
 var machinesDomains = @Html.Raw(Json.Serialize(machinesDomains));
@@ -567,7 +408,7 @@ function AddNewStagingEntity()
 
 function EditNewStagingEnting(machineId, entityType)
 {
-    // LoadEditModal(formData, '@Url.Action("EditStagingMachine", "Settings")', 'POST', editMachineForm, edit-machine-btn)
+   
     $.ajax({
         url: '@Url.Action("EditStagingMachine", "Settings")',
         type: 'GET',
@@ -632,5 +473,102 @@ function DeleteExistingUser(customID)
         }
     });
 }
+
+
+    function handleUserSelection(selectedUsers, selectedGroups, selectedMachines, selectedIpRanges) {
+
+
+        Swal("Saved users", "success");
+    }
+
+
+
+    function openTreeViewModals(triggerInput, modal1Id, modal2Id) 
+    {
+        const modal1 = document.getElementById(modal1Id);
+        const modal2 = document.getElementById(modal2Id);
+        const backdrop = document.querySelector('.modal-backdrop');
+
+        if (!modal1 || !modal2) 
+        {
+            console.error("Modal IDs provided do not exist.");
+            return;
+        }
+
+        modal2.style.display = 'block';
+        modal2.style.zIndex = '1055';
+        modal2.style.opacity = '1';
+        modal2.setAttribute('aria-hidden', 'false');
+        modal2.removeAttribute('inert');
+
+
+        modal1.style.zIndex = '1040';
+        modal1.setAttribute('inert', '');
+        modal1.setAttribute('aria-hidden', 'true');
+
+        if (backdrop)
+        {
+            backdrop.style.zIndex = '1040';
+            backdrop.style.opacity = '0.5';
+        }
+
+        const lastModifiedField = triggerInput.getAttribute('data-username-field');
+        const callbackFunction = triggerInput.getAttribute('data-callback');
+
+        window.selectedFields =
+        {
+            lastModifiedField,
+            callbackFunction,
+            inputFieldId: triggerInput.id,
+        };
+
+        console.log("Selected fields for callback:", window.selectedFields);
+    }
+
+    function closeUsersModal()
+    {
+        const modal1 = document.getElementById('CreateStagingUserModal');
+        const modal2 = document.getElementById('UsersModal');
+
+        modal2.style.display = 'none';
+        modal2.setAttribute('aria-hidden', 'true');
+        modal2.setAttribute('inert', '');
+
+        modal1.style.zIndex = '1055';
+        modal1.removeAttribute('aria-hidden');
+        modal1.removeAttribute('inert');
+    }
+
+
+    function customSelectValue(element)
+    {
+        const parentFolder = element.closest('.custom-folder');
+        document.querySelectorAll('.custom-file.active').forEach(file => file.classList.remove('active'));
+        element.classList.add('active');
+    }
+
+
+
+    function closeModal(modalId)
+    {
+        var modal = document.getElementById(modalId);
+        var backdrop = document.querySelector('.modal-backdrop');
+
+        modal.style.display = 'none';
+
+        if (backdrop) 
+        {
+            backdrop.style.display = 'none';
+        }
+    }
+
+
+    function SaveStagingUser()
+    {
+
+        console.log("User data saved successfully!");
+        closeModal('CreateStagingUserModal');
+    }
+
 
 </script>

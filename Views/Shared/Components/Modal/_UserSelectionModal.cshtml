@@ -11,6 +11,7 @@
             </div>
             <div class="modal-body">
                 <div class="container mt-4">
+
                     <!-- Search Field -->
                     <div class="mb-3">
                         <input type="text" id="custom-searchInput" class="form-control" placeholder="Search..." onkeyup="customFilterTree()">
@@ -68,7 +69,7 @@
 }
 
 <script>
-    // Save selections and populate input field
+
     function saveSelections() {
         const { lastModifiedField, callbackFunction, inputFieldId } = window.selectedFields;
 
@@ -94,18 +95,27 @@
     document.getElementById('saveButton').addEventListener('click', saveSelections);
 
     function customFilterTree() {
-        const searchInput = document.getElementById('custom-searchInput').value.toLowerCase();
-        const treeNodes = document.querySelectorAll('#custom-directoryTree .custom-file, #custom-directoryTree .custom-folder span');
+        const searchInput = document.getElementById('custom-searchInput');
+        const filter = searchInput.value.toLowerCase();
+        const treeItems = document.querySelectorAll('.custom-file, .custom-folder label');
 
-        treeNodes.forEach(node => {
-            const text = node.textContent.trim().toLowerCase();
-            const parentLi = node.closest('li');
-            if (text.includes(searchInput)) {
-                parentLi.style.display = ''; 
+        treeItems.forEach((item) => {
+            const text = item.textContent || item.innerText;
+            if (text.toLowerCase().includes(filter)) {
+                item.closest('li').style.display = '';
             } else {
-                parentLi.style.display = 'none'; 
+                item.closest('li').style.display = 'none';
             }
         });
     }
+
+
+    document.querySelector('#UsersModal').addEventListener('click', (e) => {
+        e.stopPropagation(); 
+    });
+
+
+
+
 </script>
 

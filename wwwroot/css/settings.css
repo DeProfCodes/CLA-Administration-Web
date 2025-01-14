@@ -60,6 +60,23 @@
         }
 
 
+#UsersModal {
+    z-index: 1055 !important;
+}
+
+#CreateStagingUserModal {
+    z-index: 1040 !important;
+}
+
+.modal-backdrop {
+    z-index: 1030 !important;
+    opacity: 0.5;
+}
+
+
+
+/* Close Tree */
+
 
 /* Bulk import */
 .label-title
