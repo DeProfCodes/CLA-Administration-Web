@@ -112,176 +112,230 @@
 
 </div>
 
-
-
+<!-- First Modal -->
 <div class="modal fade" id="CreateStagingUserModal" tabindex="-1" aria-labelledby="CreateStagingUserModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="CreateStagingUserModalLabel">Add New Admin User</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal('CreateStagingUserModal')"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+             
+
                 <form id="CreateStagingUserForm">
-                   
-                        <div class="row g-3">
-                            
-                          
-                            <!-- Modified Dates (Read-only) -->
-                            <div class="col-md-4">
-                                <label for="userLastModified" class="form-label">Modified by</label>
-                                <input type="text" class="form-control" id="userLastModified" value="Proficient Mkansi" readonly>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="machineLastModified" class="form-label">Machine </label>
-                                <input type="text" class="form-control" id="machineLastModified" value="LegeB-PC" readonly>
-                            </div>
-                            <div class="col-md-4">
 
-                                <label for="domain" class="form-label">Domain</label>
-                                <select class="form-select form-control" id="domain">
-                                    @foreach (var domain in usersDomains)
-                                    {
-                                        <option value="@domain">@domain</option>
-                                    }
-                                </select>
-                              
-                            </div>
+                    <div class="row g-3">
 
-                            <!-- Username and Desktop Environment (Read-only) -->
+
+                        <!-- Modified Dates (Read-only) -->
                         <div class="col-md-4">
-                            <label for="username" class="form-label">Username</label>
-                            <input type="text"
-                                   id="stagingUserInput"
-                                   class="form-control"
-                                   placeholder=""
-                                   data-callback="updateStagingUserField"
-                                   data-username-field="stagingUserInput"
-                                   value=""
-                                   
-                                   onclick="openTreeViewModals(this, 'UsersModal', 'CreateStagingUserModal')">
+                            <label for="userLastModified" class="form-label">Modified by</label>
+                            <input type="text" class="form-control" id="userLastModified" value="Proficient Mkansi" readonly>
                         </div>
-                            <div class="col-md-4">
-                                <label for="desktopEnvironment" class="form-label">Desktop Environment</label>
-                                <input type="text" class="form-control" id="desktopEnvironment" value="desktopEnvironment" readonly>
-                            </div>
-
-                            <!-- Desktop Permissions -->
-                            <div class="col-md-4">
-                                <label for="desktopRead" class="form-label">Desktop Read</label>
-                                <select class="form-select form-control" id="desktopRead">
-                                    <option value="Allowed">Allowed</option>
-                                    <option value="Restricted">Restricted</option>
-                                </select>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="desktopWrite" class="form-label">Desktop Write</label>
-                                <select class="form-select form-control" id="desktopWrite">
-                                    <option value="Allowed">Allowed</option>
-                                    <option value="Restricted">Restricted</option>
-                                </select>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="desktopReport" class="form-label">Desktop Report</label>
-                                <select class="form-select form-control" id="desktopReport">
-                                    <option value="Enabled">Enabled</option>
-                                    <option value="Disabled">Disabled</option>
-                                </select>
-                            </div>
-
-                            <!-- Tickers Permissions -->
-                            <div class="col-md-4">
-                                <label for="tickersEnvironment" class="form-label">Tickers Environment</label>
-                                <input type="text" class="form-control" id="tickersEnvironment" value="TickersEnv1">
-                            </div>
-                            <div class="col-md-4">
-                                <label for="tickersRead" class="form-label">Tickers Read</label>
-                                <select class="form-select form-control" id="tickersRead">
-                                    <option value="Allowed">Allowed</option>
-                                    <option value="Restricted">Restricted</option>
-                                </select>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="tickersWrite" class="form-label">Tickers Write</label>
-                                <select class="form-select form-control" id="tickersWrite">
-                                    <option value="Allowed">Allowed</option>
-                                    <option value="Restricted">Restricted</option>
-                                </select>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="tickersReport" class="form-label">Tickers Report</label>
-                                <select class="form-select form-control" id="tickersReport">
-                                    <option value="Enabled">Enabled</option>
-                                    <option value="Disabled">Disabled</option>
-                                </select>
-                            </div>
-
-                            <!-- RSS Permissions -->
-                            <div class="col-md-4">
-                                <label for="rssEnvironment" class="form-label">RSS Environment</label>
-                                <input type="text" class="form-control" id="rssEnvironment" value="RSS_Env3">
-                            </div>
-                            <div class="col-md-4">
-                                <label for="rssRead" class="form-label">RSS Read</label>
-                                <select class="form-select form-control" id="rssRead">
-                                    <option value="Allowed">Allowed</option>
-                                    <option value="Restricted">Restricted</option>
-                                </select>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="rssWrite" class="form-label">RSS Write</label>
-                                <select class="form-select form-control" id="rssWrite">
-                                    <option value="Allowed">Allowed</option>
-                                    <option value="Restricted">Restricted</option>
-                                </select>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="rssReport" class="form-label">RSS Report</label>
-                                <select class="form-select form-control" id="rssReport">
-                                    <option value="Enabled">Enabled</option>
-                                    <option value="Disabled">Disabled</option>
-                                </select>
-                            </div>
-
-                            <!-- Lockscreen Permissions -->
-                            <div class="col-md-4">
-                                <label for="lockscreenEnvironment" class="form-label">Lockscreen Environment</label>
-                                <input type="text" class="form-control" id="lockscreenEnvironment" value="LockscreenEnv4">
-                            </div>
-                            <div class="col-md-4">
-                                <label for="lockscreenRead" class="form-label">Lockscreen Read</label>
-                                <select class="form-select form-control" id="lockscreenRead">
-                                    <option value="Allowed">Allowed</option>
-                                    <option value="Restricted">Restricted</option>
-                                </select>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="lockscreenWrite" class="form-label">Lockscreen Write</label>
-                                <select class="form-select form-control" id="lockscreenWrite">
-                                    <option value="Allowed">Allowed</option>
-                                    <option value="Restricted">Restricted</option>
-                                </select>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="lockscreenReport" class="form-label">Lockscreen Report</label>
-                                <select class="form-select form-control" id="lockscreenReport">
-                                    <option value="Enabled">Enabled</option>
-                                    <option value="Disabled">Disabled</option>
-                                </select>
-                            </div>
-
-                          
+                        <div class="col-md-4">
+                            <label for="machineLastModified" class="form-label">Machine </label>
+                            <input type="text" class="form-control" id="machineLastModified" value="LegeB-PC" readonly>
                         </div>
-                    </form>
+                        <div class="col-md-4">
+                            <label for="userSelection" class="form-label">UserName </label>
+                            <input type="text" class="form-control" id="userSelection" value="" placeholder="Selected User" readonly>
+                        </div>
+                  
+
+           
+                        
+                       
+                        <div class="col-md-4">
+                            <label for="desktopEnvironment" class="form-label">Desktop Environment</label>
+                            <input type="text" class="form-control" id="desktopEnvironment" value="desktopEnvironment" readonly>
+                        </div>
+
+                        <!-- Desktop Permissions -->
+                        <div class="col-md-4">
+                            <label for="desktopRead" class="form-label">Desktop Read</label>
+                            <select class="form-select form-control" id="desktopRead">
+                                <option value="Allowed">Allowed</option>
+                                <option value="Restricted">Restricted</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="desktopWrite" class="form-label">Desktop Write</label>
+                            <select class="form-select form-control" id="desktopWrite">
+                                <option value="Allowed">Allowed</option>
+                                <option value="Restricted">Restricted</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="desktopReport" class="form-label">Desktop Report</label>
+                            <select class="form-select form-control" id="desktopReport">
+                                <option value="Enabled">Enabled</option>
+                                <option value="Disabled">Disabled</option>
+                            </select>
+                        </div>
+
+                        <!-- Tickers Permissions -->
+                        <div class="col-md-4">
+                            <label for="tickersEnvironment" class="form-label">Tickers Environment</label>
+                            <input type="text" class="form-control" id="tickersEnvironment" value="TickersEnv1">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="tickersRead" class="form-label">Tickers Read</label>
+                            <select class="form-select form-control" id="tickersRead">
+                                <option value="Allowed">Allowed</option>
+                                <option value="Restricted">Restricted</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="tickersWrite" class="form-label">Tickers Write</label>
+                            <select class="form-select form-control" id="tickersWrite">
+                                <option value="Allowed">Allowed</option>
+                                <option value="Restricted">Restricted</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="tickersReport" class="form-label">Tickers Report</label>
+                            <select class="form-select form-control" id="tickersReport">
+                                <option value="Enabled">Enabled</option>
+                                <option value="Disabled">Disabled</option>
+                            </select>
+                        </div>
+
+                        <!-- RSS Permissions -->
+                        <div class="col-md-4">
+                            <label for="rssEnvironment" class="form-label">RSS Environment</label>
+                            <input type="text" class="form-control" id="rssEnvironment" value="RSS_Env3">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="rssRead" class="form-label">RSS Read</label>
+                            <select class="form-select form-control" id="rssRead">
+                                <option value="Allowed">Allowed</option>
+                                <option value="Restricted">Restricted</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="rssWrite" class="form-label">RSS Write</label>
+                            <select class="form-select form-control" id="rssWrite">
+                                <option value="Allowed">Allowed</option>
+                                <option value="Restricted">Restricted</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="rssReport" class="form-label">RSS Report</label>
+                            <select class="form-select form-control" id="rssReport">
+                                <option value="Enabled">Enabled</option>
+                                <option value="Disabled">Disabled</option>
+                            </select>
+                        </div>
+
+                        <!-- Lockscreen Permissions -->
+                        <div class="col-md-4">
+                            <label for="lockscreenEnvironment" class="form-label">Lockscreen Environment</label>
+                            <input type="text" class="form-control" id="lockscreenEnvironment" value="LockscreenEnv4">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="lockscreenRead" class="form-label">Lockscreen Read</label>
+                            <select class="form-select form-control" id="lockscreenRead">
+                                <option value="Allowed">Allowed</option>
+                                <option value="Restricted">Restricted</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="lockscreenWrite" class="form-label">Lockscreen Write</label>
+                            <select class="form-select form-control" id="lockscreenWrite">
+                                <option value="Allowed">Allowed</option>
+                                <option value="Restricted">Restricted</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="lockscreenReport" class="form-label">Lockscreen Report</label>
+                            <select class="form-select form-control" id="lockscreenReport">
+                                <option value="Enabled">Enabled</option>
+                                <option value="Disabled">Disabled</option>
+                            </select>
+                        </div>
+
+
+                    </div>
+                </form>
+
+
 
             </div>
             <div class="modal-footer">
-                <button type="button"  class="btn custom-btn  btn-secondary" data-bs-dismiss="modal" onclick="closeModal('CreateStagingUserModal')">Cancel</button>
-                <button type="button" class="custom-btn  custom-btn-default" onclick="SaveStagingUser()">Save User</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Save User</button>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Second Modal -->
+<div class="modal fade" id="directoryModal" tabindex="-1" aria-labelledby="directoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="directoryModalLabel">Select a User</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="card-bordered-section">
+                    <label for="filterInput" class="section-title-tree">Filter:</label>
+                    <div class="d-flex">
+                        <input type="text" id="filterInputMember" class="form-control filter-input" placeholder="Search..." oninput="filterTree()">
+
+                        <button class="btn btn-secondary ms-2"><i class="bi bi-search"></i></button>
+                    </div>
+                    <div class="scroll-box treeview mt-3">
+                        <ul id="directoryTree" class="tree-view">
+                            <li>
+                                <span class="tree-toggle"><i class="bi bi-folder"></i> Active Directory Objects</span>
+                                <ul class="tree-content">
+                                    <li>
+                                        <span class="tree-toggle"><i class="bi bi-people"></i> Groups</span>
+                                        <ul class="tree-content">
+                                            <li class="option-item">Admins</li>
+                                            <li class="option-item">Developers</li>
+                                            <li class="option-item">HR</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <span class="tree-toggle"><i class="bi bi-person"></i> Users</span>
+                                        <ul class="tree-content">
+                                            <li class="option-item"  data-username="nhlamulo" onclick="">nhlamulo</li>
+                                            <li class="option-item" data-username="jane_smith">Jane Smith</li>
+                                            <li class="option-item" data-username="john_doe">John Doe</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <span class="tree-toggle"><i class="bi bi-laptop"></i> Machines</span>
+                                        <ul class="tree-content">
+                                            <li class="option-item" >Server-1</li>
+                                            <li class="option-item" >Workstation-5</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <span class="tree-toggle"><i class="bi bi-globe"></i> IP Ranges</span>
+                                        <ul class="tree-content">
+                                            <li class="option-item" >192.168.0.0/24</li>
+                                            <li class="option-item" >10.0.0.0/8</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="saveAndCloseDirectoryModal()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 <!-- Edit Admin Access  Modal -->
 <div class="modal fade" id="EditModal" tabindex="-1" aria-labelledby="EditModalLabel" aria-hidden="true">
@@ -318,8 +372,115 @@
 {
     width: 100%;
 }
+
+    .option-item.active {
+        background-color: #007bff;
+        color: white;
+        border-color: #007bff;
+    }
+
+    .option-item {
+        padding: 10px;
+        cursor: pointer;
+        border: 1px solid transparent;
+        border-radius: 5px;
+    }
+
+        .option-item:hover {
+            background-color: #f1f1f1;
+            color: black;
+        }
+
+
 </style>
 <script>
+
+
+    function AddNewAdminUser() {
+ 
+        const usersModal = new bootstrap.Modal(document.getElementById('CreateStagingUserModal'));
+        usersModal.show();
+
+       
+        const userSelectionInput = document.getElementById('userSelection');
+        userSelectionInput.addEventListener('click', (event) => {
+            event.stopPropagation(); 
+            const directoryModal = new bootstrap.Modal(document.getElementById('directoryModal'));
+            directoryModal.show();
+        });
+    }
+
+    document.getElementById("directoryModal").addEventListener("show.bs.modal", () => {
+        document.getElementById("CreateStagingUserModal").setAttribute("inert", "true");
+    });
+
+
+    document.getElementById("directoryModal").addEventListener("hidden.bs.modal", () => {
+        document.getElementById("CreateStagingUserModal").removeAttribute("inert");
+    });  
+
+    document.querySelectorAll('.tree-toggle').forEach(toggle => {
+        toggle.addEventListener('click', function () {
+            this.classList.toggle('opened');
+        });
+    });
+
+    function filterTree() {
+        const filterInput = document.getElementById("filterInputMember").value.toLowerCase();
+        const allOptions = document.querySelectorAll(".option-item");
+
+        allOptions.forEach((option) => {
+            const text = option.textContent.toLowerCase();
+            if (text.includes(filterInput)) {
+                option.style.display = ""; // Show matching items
+            } else {
+                option.style.display = "none"; // Hide non-matching items
+            }
+        });
+    }
+
+
+    function selectUser(event) {
+        const selectedOption = event.target;
+
+        const allOptions = document.querySelectorAll(".option-item");
+        allOptions.forEach((option) => {
+            option.classList.remove("active");
+        });
+
+  
+        selectedOption.classList.add("active");
+
+  
+        const userSelectionInput = document.getElementById("userSelection");
+        userSelectionInput.value = selectedOption.textContent.trim();
+    }
+
+
+    function saveAndCloseDirectoryModal() {
+        const userSelectionInput = document.getElementById("userSelection").value;
+        console.log(userSelectionInput);
+        if (userSelectionInput) {
+        
+            const directoryModalInstance = bootstrap.Modal.getInstance(document.getElementById("directoryModal"));
+            directoryModalInstance.hide();
+        } else {
+            alert("Please select a user before saving.");
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const allOptions = document.querySelectorAll(".option-item");
+        allOptions.forEach((option) => {
+            option.addEventListener("click", selectUser);
+        });
+    });
+
+
+
+
+
+
 
       function DeleteAdminAccess(connectionID) 
       {
@@ -335,11 +496,7 @@
      
     });
 
-    function AddNewAdminUser()
-    {
-        const usersModal = new bootstrap.Modal(document.getElementById('CreateStagingUserModal'));
-        usersModal.show();
-    }
+ 
 
     function FilterByDomain() 
     {
@@ -388,80 +545,6 @@
         });
     }
 
-    function closeModal(modalId) {
-        var modal = document.getElementById(modalId);
-        var backdrop = document.querySelector('.modal-backdrop');
-
-        modal.style.display = 'none';
-
-        if (backdrop) {
-            backdrop.style.display = 'none';
-        }
-    }
-
-    function openTreeViewModals(triggerInput, modal1Id, modal2Id) {
-        const modal1 = document.getElementById(modal1Id); // Secondary modal
-        const modal2 = document.getElementById(modal2Id); // Main modal
-        const backdrop = document.querySelector('.modal-backdrop');
-
-        if (!modal1 || !modal2) {
-            console.error("Modal IDs provided do not exist.");
-            return;
-        }
-
-
-        modal1.style.display = 'block';
-        modal1.style.opacity = '1';
-        modal1.style.zIndex = '1055';
-
-
-        modal2.style.zIndex = '1040';
-
-
-        if (backdrop) {
-            backdrop.style.zIndex = '1040';
-            backdrop.style.opacity = '0.5';
-        } else {
-            console.warn("Backdrop not found. Ensure the modal system is initialized correctly.");
-        }
-
-
-        const lastModifiedField = triggerInput.getAttribute('data-username-field');
-        const callbackFunction = triggerInput.getAttribute('data-callback');
-
-        if (!lastModifiedField || !callbackFunction) {
-            console.warn("Missing data attributes on the trigger input.");
-        }
-
-
-        window.selectedFields = {
-            lastModifiedField,
-            callbackFunction,
-            inputFieldId: triggerInput.id,
-        };
-
-        console.log("Selected fields for callback:", window.selectedFields);
-    }
-
-
-    function closeUsersModal() {
-        var usersModal = document.getElementById('UsersModal');
-        var mainModal = document.getElementById('CreateStagingUserModal');
-
-
-        usersModal.style.display = 'none';
-
-
-        mainModal.style.zIndex = '1050';
-        usersModal.style.zIndex = '0';
-        usersModal.style.opacity = '0';
-
-        var backdrop = document.querySelector('.modal-backdrop');
-        if (backdrop) {
-            backdrop.style.zIndex = '1040';
-            backdrop.style.position = 'relative'
-        }
-    }
 
 
 
