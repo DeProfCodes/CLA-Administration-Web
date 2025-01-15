@@ -1,6 +1,7 @@
 ﻿@using CLA_Administration_Web.ViewModels.Settings.ManageAdminAccess
 @model ManageAdminAccessMainViewModel
-
+@using CLA_Administration_Web.ViewModels.Targeting
+@using CLA_Administration_Web.ViewModels.Shared
 @{
     int index = 0;
     var usersDomains = Model.AdminAccessItems?.Select(x => x.Domain).Distinct().ToList() ?? new List<string>();
@@ -112,6 +113,7 @@
 </div>
 
 
+
 <div class="modal fade" id="CreateStagingUserModal" tabindex="-1" aria-labelledby="CreateStagingUserModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
@@ -147,12 +149,18 @@
                             </div>
 
                             <!-- Username and Desktop Environment (Read-only) -->
-                            <div class="col-md-4">
-                                <label for="username" class="form-label">Username</label>
-                                <input type="text" class="form-control" id="username" value="" >
-
-
-                             </div>
+                        <div class="col-md-4">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text"
+                                   id="stagingUserInput"
+                                   class="form-control"
+                                   placeholder=""
+                                   data-callback="updateStagingUserField"
+                                   data-username-field="stagingUserInput"
+                                   value=""
+                                   
+                                   onclick="openTreeViewModals(this, 'UsersModal', 'CreateStagingUserModal')">
+                        </div>
                             <div class="col-md-4">
                                 <label for="desktopEnvironment" class="form-label">Desktop Environment</label>
                                 <input type="text" class="form-control" id="desktopEnvironment" value="desktopEnvironment" readonly>
@@ -379,5 +387,83 @@
             }
         });
     }
+
+    function closeModal(modalId) {
+        var modal = document.getElementById(modalId);
+        var backdrop = document.querySelector('.modal-backdrop');
+
+        modal.style.display = 'none';
+
+        if (backdrop) {
+            backdrop.style.display = 'none';
+        }
+    }
+
+    function openTreeViewModals(triggerInput, modal1Id, modal2Id) {
+        const modal1 = document.getElementById(modal1Id); // Secondary modal
+        const modal2 = document.getElementById(modal2Id); // Main modal
+        const backdrop = document.querySelector('.modal-backdrop');
+
+        if (!modal1 || !modal2) {
+            console.error("Modal IDs provided do not exist.");
+            return;
+        }
+
+
+        modal1.style.display = 'block';
+        modal1.style.opacity = '1';
+        modal1.style.zIndex = '1055';
+
+
+        modal2.style.zIndex = '1040';
+
+
+        if (backdrop) {
+            backdrop.style.zIndex = '1040';
+            backdrop.style.opacity = '0.5';
+        } else {
+            console.warn("Backdrop not found. Ensure the modal system is initialized correctly.");
+        }
+
+
+        const lastModifiedField = triggerInput.getAttribute('data-username-field');
+        const callbackFunction = triggerInput.getAttribute('data-callback');
+
+        if (!lastModifiedField || !callbackFunction) {
+            console.warn("Missing data attributes on the trigger input.");
+        }
+
+
+        window.selectedFields = {
+            lastModifiedField,
+            callbackFunction,
+            inputFieldId: triggerInput.id,
+        };
+
+        console.log("Selected fields for callback:", window.selectedFields);
+    }
+
+
+    function closeUsersModal() {
+        var usersModal = document.getElementById('UsersModal');
+        var mainModal = document.getElementById('CreateStagingUserModal');
+
+
+        usersModal.style.display = 'none';
+
+
+        mainModal.style.zIndex = '1050';
+        usersModal.style.zIndex = '0';
+        usersModal.style.opacity = '0';
+
+        var backdrop = document.querySelector('.modal-backdrop');
+        if (backdrop) {
+            backdrop.style.zIndex = '1040';
+            backdrop.style.position = 'relative'
+        }
+    }
+
+
+
 
 </script>

@@ -430,114 +430,108 @@ var ipRangesDomain = Model.TargetedIPRanges?.Select(x => x.Description).Distinct
     </div>
 </div>
 </div>
-   
 <div class="modal fade" id="directoryModal" tabindex="-1" aria-labelledby="directoryModalLabel" aria-hidden="true">
-<div class="modal-dialog modal-fullscreen">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="directoryModalLabel">Active Directory Membership Information</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <div class="row">
-                <!-- Left Section: Active Directory Objects -->
-                <div class="col-md-4">
-                    <div class="card-bordered-section">
-                        <label for="filterInput" class="section-title">Filter:</label>
-                        <div class="d-flex">
-                            <input type="text" id="filterInputMember" class="form-control filter-input" placeholder="Search..." oninput="filterTree()">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="directoryModalLabel">Active Directory Membership Information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <!-- Left Section: Active Directory Objects -->
+                    <div class="col-md-4">
+                        <div class="card-bordered-section">
+                            <label for="filterInput" class="section-title-tree">Filter:</label>
+                            <div class="d-flex">
+                                <input type="text" id="filterInputMember" class="form-control filter-input" placeholder="Search..." oninput="filterTree()">
 
-                            <button class="btn btn-secondary ms-2"><i class="bi bi-search"></i></button>
-                        </div>
-                        <div class="scroll-box treeview mt-3">
-                            <ul id="directoryTree" class="tree-view">
-                                <li>
-                                    <input type="checkbox" id="node1" class="tree-toggle">
-                                    <label for="node1" class="tree-toggle-label"><i class="bi bi-folder"></i> Active Directory Objects</label>
-                                    <ul class="tree-content">
-                                        <li>
-                                            <input type="checkbox" id="node1-1" class="tree-toggle">
-                                            <label for="node1-1" class="tree-toggle-label"><i class="bi bi-people"></i> Groups</label>
-                                            <ul class="tree-content">
-                                                <li>Admins</li>
-                                                <li>Developers</li>
-                                                <li>HR</li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="node1-2" class="tree-toggle">
-                                            <label for="node1-2" class="tree-toggle-label"><i class="bi bi-person"></i> Users</label>
-                                            <ul class="tree-content">
-                                                <li data-username="nhlamulo">nhlamulo</li>
-                                                <li data-username="jane_smith">Jane Smith</li>
-                                                <li data-username="john_doe">John Doe</li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="node1-3" class="tree-toggle">
-                                            <label for="node1-3" class="tree-toggle-label"><i class="bi bi-laptop"></i> Machines</label>
-                                            <ul class="tree-content">
-                                                <li>Server-1</li>
-                                                <li>Workstation-5</li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="node1-4" class="tree-toggle">
-                                            <label for="node1-4" class="tree-toggle-label"><i class="bi bi-globe"></i> IP Ranges</label>
-                                            <ul class="tree-content">
-                                                <li>192.168.0.0/24</li>
-                                                <li>10.0.0.0/8</li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
+                                <button class="btn btn-secondary ms-2"><i class="bi bi-search"></i></button>
+                            </div>
+                            <div class="scroll-box treeview mt-3">
+                                <ul id="directoryTree" class="tree-view">
+                                    <li>
+                                        <span class="tree-toggle"><i class="bi bi-folder"></i> Active Directory Objects</span>
+                                        <ul class="tree-content">
+                                            <li>
+                                                <span class="tree-toggle"><i class="bi bi-people"></i> Groups</span>
+                                                <ul class="tree-content">
+                                                    <li>Admins</li>
+                                                    <li>Developers</li>
+                                                    <li>HR</li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <span class="tree-toggle"><i class="bi bi-person"></i> Users</span>
+                                                <ul class="tree-content">
+                                                    <li data-username="nhlamulo">nhlamulo</li>
+                                                    <li data-username="jane_smith">Jane Smith</li>
+                                                    <li data-username="john_doe">John Doe</li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <span class="tree-toggle"><i class="bi bi-laptop"></i> Machines</span>
+                                                <ul class="tree-content">
+                                                    <li>Server-1</li>
+                                                    <li>Workstation-5</li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <span class="tree-toggle"><i class="bi bi-globe"></i> IP Ranges</span>
+                                                <ul class="tree-content">
+                                                    <li>192.168.0.0/24</li>
+                                                    <li>10.0.0.0/8</li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Middle Section: Members -->
-                <div class="col-md-4">
-                    <div class="card-bordered-section">
-                        <label class="section-title">Members:</label>
-                        <div class="scroll-box">
-                            <ul id="membersList" class="tree-view">
-                                <li>
-                                    <label class="tree-toggle-label"><i class="bi bi-person"></i> Select a user to view members</label>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="btn-group-vertical mt-3">
-                            <button class="btn btn-secondary btn-sm"><i class="bi bi-pencil-square"></i> Modify</button>
-                            <button class="btn btn-secondary btn-sm"><i class="bi bi-arrow-bar-down"></i> Import Members</button>
+                    <!-- Middle Section: Members -->
+                    <div class="col-md-4">
+                        <div class="card-bordered-section">
+                            <label class="section-title-tree">Members</label>
+                            <div class="scroll-box">
+                                <ul id="membersList" class="tree-view">
+                                    <li>
+                                        <label class="tree-toggle-label"><i class="bi bi-person"></i> Select a user to view members</label>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="btn-group-vertical mt-3">
+                                <button class="btn btn-secondary btn-sm"><i class="bi bi-pencil-square"></i> Modify</button>
+                                <button class="btn btn-secondary btn-sm"><i class="bi bi-arrow-bar-down"></i> Import Members</button>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Right Section: Member Of -->
-                <div class="col-md-4">
-                    <div class="card-bordered-section">
-                        <label class="section-title">Member Of:</label>
-                        <div class="scroll-box">
-                            <ul id="memberOfList" class="tree-view">
-                                <li>
-                                    <label class="tree-toggle-label"><i class="bi bi-folder"></i> Select a user to view membership</label>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="btn-group-vertical mt-3">
-                            <button class="btn btn-secondary btn-sm"><i class="bi bi-pencil-square"></i> Modify</button>
+                    <!-- Right Section: Member Of -->
+                    <div class="col-md-4">
+                        <div class="card-bordered-section">
+                            <label class="section-title-tree">Member Of</label>
+                            <div class="scroll-box">
+                                <ul id="memberOfList" class="tree-view">
+                                    <li>
+                                        <label class="tree-toggle-label"><i class="bi bi-folder"></i> Select a user to view membership</label>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="btn-group-vertical mt-3">
+                                <button class="btn btn-secondary btn-sm"><i class="bi bi-pencil-square"></i> Modify</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
         </div>
     </div>
-</div>
 </div>
 
 <!-- Bulk Import Modal -->
@@ -715,6 +709,15 @@ var ipRangesDomain = Model.TargetedIPRanges?.Select(x => x.Description).Distinct
 
 
 <script>
+
+
+    document.querySelectorAll('.tree-toggle').forEach(toggle => {
+        toggle.addEventListener('click', function () {
+            this.classList.toggle('opened');
+        });
+    });
+
+
 
 
 const directoryData = {
