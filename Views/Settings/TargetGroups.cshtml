@@ -12,6 +12,7 @@ var groupsDomain = Model.TargetedGroups?.Select(x => x.DomainName).Distinct().To
 var machinesDomains = Model.TargetedMachines?.Select(x => x.DomainName).Distinct().ToList() ?? new List<string>();
 var ipRangesDomain = Model.TargetedIPRanges?.Select(x => x.Description).Distinct().ToList() ?? new List<string>();
 
+    var filterTypes = new List<string> { "Users", "Machines", "Both" };
 
 }
 
@@ -21,204 +22,204 @@ var ipRangesDomain = Model.TargetedIPRanges?.Select(x => x.Description).Distinct
 
 <!-- Breadcrumb Component -->
 @{
-    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Settings/SettingsBreadcrumb.cshtml", new SettingsBreadcrumbViewModel
-        {
-            SettingsCurrentPage = SettingsPages.TargetGroups,
-            HasAddNewButton = true,
-            BreadcrumbButtonName = "Add New Target Group",
-            BreadcrumbButtonCallbackFunction = "AddNewTargetGroup"
-        });
+await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Settings/SettingsBreadcrumb.cshtml", new SettingsBreadcrumbViewModel
+    {
+        SettingsCurrentPage = SettingsPages.TargetGroups,
+        HasAddNewButton = true,
+        BreadcrumbButtonName = "Add New Target Group",
+        BreadcrumbButtonCallbackFunction = "AddNewTargetGroup"
+    });
 
-    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/ContentPreviewers/AllContentPreviewer.cshtml");
-    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Targeting/TargetedEntityModal.cshtml");
-    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Targeting/TargetingExposureModal.cshtml");
+await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/ContentPreviewers/AllContentPreviewer.cshtml");
+await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Targeting/TargetedEntityModal.cshtml");
+await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Targeting/TargetingExposureModal.cshtml");
     
 }
 
 
 
-    <div class="mb-3">
-        <div class="card mb-4 mt-2 overview-filters-card">
-            <div class="card-body pt-0 pb-0">
-                <div class="row align-items-center">
-                    <!-- Filters Section -->
-                    <div class="col-md-6 d-flex flex-column justify-content-start mb-2" id="StatusFilterContainer">
-                        <p class="theme-txt-clr fw-bold text-center mb-1">Filters</p>
-                        <div class="row mx-auto mt-1 justify-content-start">
-                            <p class="theme-txt-clr overview-filter-title2 text-center" id="TypeFilterTitle">Type</p>
-                            <div class="btn-group w-auto overview-filter-btn-group" role="group" aria-label="Status filter" id="TypeStagingLiveBtns">
-                                <button class="btn module-filter-btn-group filter-type-btn Screensaver btn-group-active" onclick="ToggleStaginUserMachines(this.id)" id="TargetUsers">Staging</button>
-                                <button class="btn module-filter-btn-group filter-type-btn Screensaver" onclick="ToggleStaginUserMachines(this.id)" id="StagingGroupdBtn">Groups</button>
-                                <button class="btn module-filter-btn-group filter-type-btn Screensaver" onclick="ToggleStaginUserMachines(this.id)" id="StagingMachinesBtn">Machines</button>
-                                <button class="btn module-filter-btn-group filter-type-btn Screensaver" onclick="ToggleStaginUserMachines(this.id)" id="StagingIPRangesBtn">IP Ranges</button>
-                            </div>
+<div class="mb-3">
+    <div class="card mb-4 mt-2 overview-filters-card">
+        <div class="card-body pt-0 pb-0">
+            <div class="row align-items-center">
+                <!-- Filters Section -->
+                <div class="col-md-6 d-flex flex-column justify-content-start mb-2" id="StatusFilterContainer">
+                    <p class="theme-txt-clr fw-bold text-center mb-1">Filters</p>
+                    <div class="row mx-auto mt-1 justify-content-start">
+                        <p class="theme-txt-clr overview-filter-title2 text-center" id="TypeFilterTitle">Type</p>
+                        <div class="btn-group w-auto overview-filter-btn-group" role="group" aria-label="Status filter" id="TypeStagingLiveBtns">
+                            <button class="btn module-filter-btn-group filter-type-btn Screensaver btn-group-active" onclick="ToggleStaginUserMachines(this.id)" id="TargetUsers">Staging</button>
+                            <button class="btn module-filter-btn-group filter-type-btn Screensaver" onclick="ToggleStaginUserMachines(this.id)" id="StagingGroupdBtn">Groups</button>
+                            <button class="btn module-filter-btn-group filter-type-btn Screensaver" onclick="ToggleStaginUserMachines(this.id)" id="StagingMachinesBtn">Machines</button>
+                            <button class="btn module-filter-btn-group filter-type-btn Screensaver" onclick="ToggleStaginUserMachines(this.id)" id="StagingIPRangesBtn">IP Ranges</button>
                         </div>
                     </div>
+                </div>
 
-                    <div class="col-md-6 d-flex flex-column align-items-end mb-2" id="ModuleFilterActionButtonsContainer">
-                        <p class="theme-txt-clr fw-bold text-center mb-2" id="ModuleActionBtsFilterTitle">Action Buttons</p>
-                        <div class="row mb-3 mb-md-0 w-fit-content gap-2">
+                <div class="col-md-6 d-flex flex-column align-items-end mb-2" id="ModuleFilterActionButtonsContainer">
+                    <p class="theme-txt-clr fw-bold text-center mb-2" id="ModuleActionBtsFilterTitle">Action Buttons</p>
+                    <div class="row mb-3 mb-md-0 w-fit-content gap-2">
                           
-                            <button class="custom-btn custom-btn-default  w-fit-content" data-bs-toggle="modal" data-bs-target="#bulkImportModal" id="BulkImportBtn"> <i class="bi bi-plus-circle-fill"></i>Bulk Import</button>
-                            <button class="custom-btn custom-btn-default w-fit-content" data-bs-toggle="modal" data-bs-target="#directoryModal" id="MembershipInfoBtn"> <i class="bi bi-plus-circle-fill"></i>MembershipInfo</button>
-                        </div>
-               
+                        <button class="custom-btn custom-btn-default  w-fit-content" data-bs-toggle="modal" data-bs-target="#bulkImportModal" id="BulkImportBtn"> <i class="bi bi-plus-circle-fill"></i>Bulk Import</button>
+                        <button class="custom-btn custom-btn-default w-fit-content" data-bs-toggle="modal" data-bs-target="#directoryModal" id="MembershipInfoBtn"> <i class="bi bi-plus-circle-fill"></i>MembershipInfo</button>
                     </div>
+               
+                </div>
 
                  
-                </div>
             </div>
         </div>
     </div>
+</div>
 
 
 
 
 <!-- Card for Popup Report Body -->
 <div class="card mb-1 mt-1 overview-filters-card app-card-main-scaling p-4" id="report-data-area">
-    <div id="SettingsData">
-        <h3 class="w-100 text-center theme-txt-clr">
-            Target <span id="StagingUserMachineTitle">Users</span>
-        </h3>
+<div id="SettingsData">
+    <h3 class="w-100 text-center theme-txt-clr">
+        Target <span id="StagingUserMachineTitle">Users</span>
+    </h3>
          
-        <!-- Inject Partial Here -->
-        <div id="StagingUsersSettings" class="mt-3">
-            <table id="StagingUsersData" class="table table-striped table-bordered table-hover theme-border align-middle campain-table-type fs-12">
-                <thead>
-                    <tr>
+    <!-- Inject Partial Here -->
+    <div id="StagingUsersSettings" class="mt-3">
+        <table id="StagingUsersData" class="table table-striped table-bordered table-hover theme-border align-middle campain-table-type fs-12">
+            <thead>
+                <tr>
                       
-                        <th class="theme-bg text-white">Domain</th>
-                        <th class="theme-bg text-white">NT Username</th>
-                        <th class="theme-bg text-white">Firstname</th>
-                        <th class="theme-bg text-white">User Last Modified</th>
-                        <th class="theme-bg text-white">Status</th>                     
-                        <th class="theme-bg text-white">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var stagingUser in Model.TargetedUsers)
-                    {
-                        var cssBg = (index++ % 2 == 0) ? "report-piechart-color-silver-dim" : "";
-                        cssBg += " theme-txt-clr";
+                    <th class="theme-bg text-white">Domain</th>
+                    <th class="theme-bg text-white">NT Username</th>
+                    <th class="theme-bg text-white">Firstname</th>
+                    <th class="theme-bg text-white">User Last Modified</th>
+                    <th class="theme-bg text-white">Status</th>                     
+                    <th class="theme-bg text-white">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var stagingUser in Model.TargetedUsers)
+                {
+                    var cssBg = (index++ % 2 == 0) ? "report-piechart-color-silver-dim" : "";
+                    cssBg += " theme-txt-clr";
 
-                        <tr>
+                    <tr>
                            
-                            <td class="@cssBg">@stagingUser.DomainName</td>
-                            <td class="@cssBg">@stagingUser.NTUsername</td>
-                            <td class="@cssBg">@stagingUser.DisplayName</td>
-                            <td class="@cssBg">@stagingUser.LastSyncDT</td>
-                            <td><span class="@cssBg">Active</span></td>
+                        <td class="@cssBg">@stagingUser.DomainName</td>
+                        <td class="@cssBg">@stagingUser.NTUsername</td>
+                        <td class="@cssBg">@stagingUser.DisplayName</td>
+                        <td class="@cssBg">@stagingUser.LastSyncDT</td>
+                        <td><span class="@cssBg">Active</span></td>
                               
-                            <td class="@cssBg">
-                                <button class="btn btn-sm custom-btn-sm btn-danger" onclick="DeleteAdminAccess(@stagingUser.Id)">Delete</button>
-                                <button class="btn btn-sm custom-btn-sm btn-success" id="edit-staging-btn" onclick="EditNewStagingEnting('@stagingUser.Id', 'User')">Edit</button>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-
-    <div id="StagingMachinesSettings" class="mt-3 hidden">
-            <table id="StagingMachinesData" class="table table-striped table-bordered table-hover theme-border align-middle campain-table-type fs-12">
-                <thead>
-                    <tr>
-                       
-                        <th class="theme-bg text-white">Domain</th>
-                        <th class="theme-bg text-white">Machine Name</th>
-                        <th class="theme-bg text-white">Machine Description</th>
-                        <th class="theme-bg text-white">User Last Modified</th>
-                        <th class="theme-bg text-white">Machine Last Modified</th>
-                        <th class="theme-bg text-white">Action</th>
+                        <td class="@cssBg">
+                            <button class="btn btn-sm custom-btn-sm btn-danger" onclick="DeleteAdminAccess(@stagingUser.Id)">Delete</button>
+                            <button class="btn btn-sm custom-btn-sm btn-success" id="edit-staging-btn" onclick="EditNewStagingEnting('@stagingUser.Id', 'User')">Edit</button>
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                    @foreach (var targetMachine in Model.TargetedMachines)
-                    {
-                        var cssBg = (index++ % 2 == 0) ? "report-piechart-color-silver-dim" : "";
-                        cssBg += " theme-txt-clr";
+                }
+            </tbody>
+        </table>
+    </div>
 
-                        <tr>
+<div id="StagingMachinesSettings" class="mt-3 hidden">
+        <table id="StagingMachinesData" class="table table-striped table-bordered table-hover theme-border align-middle campain-table-type fs-12">
+            <thead>
+                <tr>
+                       
+                    <th class="theme-bg text-white">Domain</th>
+                    <th class="theme-bg text-white">Machine Name</th>
+                    <th class="theme-bg text-white">Machine Description</th>
+                    <th class="theme-bg text-white">User Last Modified</th>
+                    <th class="theme-bg text-white">Machine Last Modified</th>
+                    <th class="theme-bg text-white">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var targetMachine in Model.TargetedMachines)
+                {
+                    var cssBg = (index++ % 2 == 0) ? "report-piechart-color-silver-dim" : "";
+                    cssBg += " theme-txt-clr";
+
+                    <tr>
                                
-                                <td class="@cssBg">@targetMachine.DomainName</td>
-                                <td class="@cssBg">@targetMachine.DisplayName</td>
-                                <td class="@cssBg">@targetMachine.LastSyncDT</td>
-                                <td class="@cssBg">@targetMachine.DomainName</td>
-                                <td class="@cssBg">@targetMachine.NTUsername</td>
-                            <td class="@cssBg">
-                                    <button class="btn btn-sm custom-btn-sm btn-danger" onclick="DeleteAdminAccess(@targetMachine.machineId)">Delete</button>
-                                    <button class="btn btn-sm custom-btn-sm btn-success" id="edit-staging-btn" onclick="EditNewStagingEnting('@targetMachine.machineId', 'Machine')">Edit</button>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-
-        <div id="TargetGroups" class="mt-3 hidden">
-            <table id="TargetGroupsData" class="table table-striped table-bordered table-hover theme-border align-middle campain-table-type fs-12">
-                <thead>
-                    <tr>
-                       
-                        <th class="theme-bg text-white">DomainName</th>
-                        <th class="theme-bg text-white">DisplayName</th>                           
-                        <th class="theme-bg text-white">Action</th>
+                            <td class="@cssBg">@targetMachine.DomainName</td>
+                            <td class="@cssBg">@targetMachine.DisplayName</td>
+                            <td class="@cssBg">@targetMachine.LastSyncDT</td>
+                            <td class="@cssBg">@targetMachine.DomainName</td>
+                            <td class="@cssBg">@targetMachine.NTUsername</td>
+                        <td class="@cssBg">
+                                <button class="btn btn-sm custom-btn-sm btn-danger" onclick="DeleteAdminAccess(@targetMachine.machineId)">Delete</button>
+                                <button class="btn btn-sm custom-btn-sm btn-success" id="edit-staging-btn" onclick="EditNewStagingEnting('@targetMachine.machineId', 'Machine')">Edit</button>
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                    @foreach (var targetgroups in Model.TargetedGroups)
-                    {
-                        var cssBg = (index++ % 2 == 0) ? "report-piechart-color-silver-dim" : "";
-                        cssBg += " theme-txt-clr";
+                }
+            </tbody>
+        </table>
+    </div>
 
-                        <tr>
+    <div id="TargetGroups" class="mt-3 hidden">
+        <table id="TargetGroupsData" class="table table-striped table-bordered table-hover theme-border align-middle campain-table-type fs-12">
+            <thead>
+                <tr>
+                       
+                    <th class="theme-bg text-white">DomainName</th>
+                    <th class="theme-bg text-white">DisplayName</th>                           
+                    <th class="theme-bg text-white">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var targetgroups in Model.TargetedGroups)
+                {
+                    var cssBg = (index++ % 2 == 0) ? "report-piechart-color-silver-dim" : "";
+                    cssBg += " theme-txt-clr";
+
+                    <tr>
                                 
                             
-                            <td class="@cssBg">@targetgroups.DomainName</td>
-                            <td class="@cssBg">@targetgroups.DisplayName</td>
+                        <td class="@cssBg">@targetgroups.DomainName</td>
+                        <td class="@cssBg">@targetgroups.DisplayName</td>
                                                     
-                            <td class="@cssBg">
-                                <button class="btn btn-sm custom-btn-sm btn-danger"  onclick="DeleteAdminAccess(@targetgroups.GroupId)">Delete</button>
-                                <button class="btn btn-sm custom-btn-sm btn-success" id="edit-staging-btn" onclick="EditNewStagingEnting('@targetgroups.GroupId', 'Groups')">Edit</button>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
+                        <td class="@cssBg">
+                            <button class="btn btn-sm custom-btn-sm btn-danger"  onclick="DeleteAdminAccess(@targetgroups.GroupId)">Delete</button>
+                            <button class="btn btn-sm custom-btn-sm btn-success" id="edit-staging-btn" onclick="EditNewStagingEnting('@targetgroups.GroupId', 'Groups')">Edit</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 
-            <div id="IPRangesSettings" class="mt-3 hidden">
+        <div id="IPRangesSettings" class="mt-3 hidden">
 <table id="IPRangesData" class="table table-striped table-bordered table-hover theme-border align-middle campain-table-type fs-12">
-    <thead>
-        <tr>
+<thead>
+    <tr>
            
-            <th class="theme-bg text-white">Start IP</th>
-            <th class="theme-bg text-white">End IP</th>
-            <th class="theme-bg text-white">Description</th>
-            <th class="theme-bg text-white">Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var ipRange in Model.TargetedIPRanges)
-        {
-            var cssBg = (index++ % 2 == 0) ? "report-piechart-color-silver-dim" : "";
-            cssBg += " theme-txt-clr";
+        <th class="theme-bg text-white">Start IP</th>
+        <th class="theme-bg text-white">End IP</th>
+        <th class="theme-bg text-white">Description</th>
+        <th class="theme-bg text-white">Action</th>
+    </tr>
+</thead>
+<tbody>
+    @foreach (var ipRange in Model.TargetedIPRanges)
+    {
+        var cssBg = (index++ % 2 == 0) ? "report-piechart-color-silver-dim" : "";
+        cssBg += " theme-txt-clr";
 
-            <tr>
+        <tr>
               
-                <td class="@cssBg">@ipRange.StartIP</td>
-                <td class="@cssBg">@ipRange.EndIP</td>
-                <td class="@cssBg">@ipRange.Description</td>
-                <td class="@cssBg">
-                    <button class="btn btn-sm custom-btn-sm btn-danger" onclick="DeleteAdminAccess(@ipRange.RangeId)">Delete</button>
-                    <button class="btn btn-sm custom-btn-sm btn-success" id="edit-iprange-btn" onclick="EditNewStagingEnting('@ipRange.RangeId', 'IPRanges')">Edit</button>
-                </td>
-            </tr>
-        }
-    </tbody>
+            <td class="@cssBg">@ipRange.StartIP</td>
+            <td class="@cssBg">@ipRange.EndIP</td>
+            <td class="@cssBg">@ipRange.Description</td>
+            <td class="@cssBg">
+                <button class="btn btn-sm custom-btn-sm btn-danger" onclick="DeleteAdminAccess(@ipRange.RangeId)">Delete</button>
+                <button class="btn btn-sm custom-btn-sm btn-success" id="edit-iprange-btn" onclick="EditNewStagingEnting('@ipRange.RangeId', 'IPRanges')">Edit</button>
+            </td>
+        </tr>
+    }
+</tbody>
 </table>
 </div>
-    </div>
+</div>
 </div>
 
 </div>
@@ -228,186 +229,186 @@ var ipRangesDomain = Model.TargetedIPRanges?.Select(x => x.Description).Distinct
 </div>
 <!-- Add new target group user -->
 <div class="modal fade" id="CreateTargetGroupModal" tabindex="-1" aria-labelledby="CreateTargetGroupModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="CreateTargetGroupModalLabel">Add Target Group User</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal('CreateTargetGroupModal')"></button>
-            </div>
-            <div class="modal-body">
-                <form id="CreateStagingUserForm">
-                    <div class="mb-3">
-                        <label for="StagingUserDomain" class="form-label">Domain</label>
-                        <select class="form-select" id="StagingUserDomain" required>
-                            <option value="">Please select a domain</option>
-                            <!-- Your dynamic options -->
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="StagingUserUsername" class="form-label">Username</label>
-                        <input type="text" class="form-control" id="StagingUserUsername" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="StagingUserFirstname" class="form-label">First Name</label>
-                        <input type="text" class="form-control" id="StagingUserFirstname" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="StagingUserLastname" class="form-label">Last Name</label>
-                        <input type="text" class="form-control" id="StagingUserLastname" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="StagingUserUserLastModified" class="form-label">User Last Modified</label>
-                        <input type="text" class="form-control" id="StagingUserUserLastModified">
-                    </div>
-                    <div class="mb-3">
-                        <label for="StagingUserMachineLastModified" class="form-label">Machine Last Modified</label>
-                        <input type="text" class="form-control" id="StagingUserMachineLastModified">
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal('CreateTargetGroupModal')">Cancel</button>
-                <button type="button" class="btn custom-btn-default" onclick="SaveStagingUser()">Save User</button>
-            </div>
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="CreateTargetGroupModalLabel">Add Target Group User</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal('CreateTargetGroupModal')"></button>
+        </div>
+        <div class="modal-body">
+            <form id="CreateStagingUserForm">
+                <div class="mb-3">
+                    <label for="StagingUserDomain" class="form-label">Domain</label>
+                    <select class="form-select" id="StagingUserDomain" required>
+                        <option value="">Please select a domain</option>
+                        <!-- Your dynamic options -->
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="StagingUserUsername" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="StagingUserUsername" required>
+                </div>
+                <div class="mb-3">
+                    <label for="StagingUserFirstname" class="form-label">First Name</label>
+                    <input type="text" class="form-control" id="StagingUserFirstname" required>
+                </div>
+                <div class="mb-3">
+                    <label for="StagingUserLastname" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="StagingUserLastname" required>
+                </div>
+                <div class="mb-3">
+                    <label for="StagingUserUserLastModified" class="form-label">User Last Modified</label>
+                    <input type="text" class="form-control" id="StagingUserUserLastModified">
+                </div>
+                <div class="mb-3">
+                    <label for="StagingUserMachineLastModified" class="form-label">Machine Last Modified</label>
+                    <input type="text" class="form-control" id="StagingUserMachineLastModified">
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal('CreateTargetGroupModal')">Cancel</button>
+            <button type="button" class="btn custom-btn-default" onclick="SaveStagingUser()">Save User</button>
         </div>
     </div>
+</div>
 </div>
 
 <!-- Add new staging user -->
 <div class="modal fade" id="CreateStagingUserModal" tabindex="-1" aria-labelledby="CreateStagingUserModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="CreateStagingUserModalLabel">Add Staging User</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal('CreateStagingUserModal')"></button>
-            </div>
-            <div class="modal-body">
-                <form id="CreateStagingUserForm">
-                    <div class="mb-3">
-                        <label for="StagingUserDomain" class="form-label">Domain</label>
-                        <select class="form-select" id="StagingUserDomain" required>
-                            <option value="">Please select a domain</option>
-                            <!-- Your dynamic options -->
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="StagingUserUsername" class="form-label">Username</label>
-                        <input type="text" class="form-control" id="StagingUserUsername" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="StagingUserFirstname" class="form-label">First Name</label>
-                        <input type="text" class="form-control" id="StagingUserFirstname" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="StagingUserLastname" class="form-label">Last Name</label>
-                        <input type="text" class="form-control" id="StagingUserLastname" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="StagingUserUserLastModified" class="form-label">User Last Modified</label>
-                        <input type="text" class="form-control" id="StagingUserUserLastModified">
-                    </div>
-                    <div class="mb-3">
-                        <label for="StagingUserMachineLastModified" class="form-label">Machine Last Modified</label>
-                        <input type="text" class="form-control" id="StagingUserMachineLastModified">
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal('CreateStagingUserModal')">Cancel</button>
-                <button type="button" class="btn custom-btn-default" onclick="SaveStagingUser()">Save Staging User</button>
-            </div>
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="CreateStagingUserModalLabel">Add Staging User</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal('CreateStagingUserModal')"></button>
+        </div>
+        <div class="modal-body">
+            <form id="CreateStagingUserForm">
+                <div class="mb-3">
+                    <label for="StagingUserDomain" class="form-label">Domain</label>
+                    <select class="form-select" id="StagingUserDomain" required>
+                        <option value="">Please select a domain</option>
+                        <!-- Your dynamic options -->
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="StagingUserUsername" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="StagingUserUsername" required>
+                </div>
+                <div class="mb-3">
+                    <label for="StagingUserFirstname" class="form-label">First Name</label>
+                    <input type="text" class="form-control" id="StagingUserFirstname" required>
+                </div>
+                <div class="mb-3">
+                    <label for="StagingUserLastname" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="StagingUserLastname" required>
+                </div>
+                <div class="mb-3">
+                    <label for="StagingUserUserLastModified" class="form-label">User Last Modified</label>
+                    <input type="text" class="form-control" id="StagingUserUserLastModified">
+                </div>
+                <div class="mb-3">
+                    <label for="StagingUserMachineLastModified" class="form-label">Machine Last Modified</label>
+                    <input type="text" class="form-control" id="StagingUserMachineLastModified">
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal('CreateStagingUserModal')">Cancel</button>
+            <button type="button" class="btn custom-btn-default" onclick="SaveStagingUser()">Save Staging User</button>
         </div>
     </div>
+</div>
 </div>
 
 
 <!-- Create New Staging Machine Modal -->
 <div class="modal fade" id="CreateStagingMachineModal" tabindex="-1" aria-labelledby="CreateStagingMachineModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="CreateStagingMachineModalLabel">Add New Staging Machine</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal('CreateStagingMachineModal')"></button>
-            </div>
-            <div class="modal-body">
-                <form id="CreateStagingMachineForm">
-                    <div class="mb-3">
-                        <label for="StagingMachineDomain" class="form-label">Domain</label>
-                        <select class="form-select" id="StagingMachineDomain" required>
-                            <option value="">Please select a domain</option>
-                            <!-- Your dynamic options -->
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="StagingMachinename" class="form-label">Machine Name</label>
-                        <input type="text" class="form-control" id="StagingMachinename" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="StagingMachineDescription" class="form-label">Machine Description</label>
-                        <input type="text" class="form-control" id="StagingMachineDescription" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="StagingUserLastModified" class="form-label">User Last Modified</label>
-                        <input type="text" class="form-control" id="StagingUserLastModified">
-                    </div>
-                    <div class="mb-3">
-                        <label for="StagingMachineLastModified" class="form-label">Machine Last Modified</label>
-                        <input type="datetime-local" class="form-control" id="StagingMachineLastModified">
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal('CreateStagingMachineModal')">Cancel</button>
-                <button type="button" class="btn custom-btn-default" onclick="SaveStagingMachine()">Save Machine</button>
-            </div>
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="CreateStagingMachineModalLabel">Add New Staging Machine</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal('CreateStagingMachineModal')"></button>
+        </div>
+        <div class="modal-body">
+            <form id="CreateStagingMachineForm">
+                <div class="mb-3">
+                    <label for="StagingMachineDomain" class="form-label">Domain</label>
+                    <select class="form-select" id="StagingMachineDomain" required>
+                        <option value="">Please select a domain</option>
+                        <!-- Your dynamic options -->
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="StagingMachinename" class="form-label">Machine Name</label>
+                    <input type="text" class="form-control" id="StagingMachinename" required>
+                </div>
+                <div class="mb-3">
+                    <label for="StagingMachineDescription" class="form-label">Machine Description</label>
+                    <input type="text" class="form-control" id="StagingMachineDescription" required>
+                </div>
+                <div class="mb-3">
+                    <label for="StagingUserLastModified" class="form-label">User Last Modified</label>
+                    <input type="text" class="form-control" id="StagingUserLastModified">
+                </div>
+                <div class="mb-3">
+                    <label for="StagingMachineLastModified" class="form-label">Machine Last Modified</label>
+                    <input type="datetime-local" class="form-control" id="StagingMachineLastModified">
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal('CreateStagingMachineModal')">Cancel</button>
+            <button type="button" class="btn custom-btn-default" onclick="SaveStagingMachine()">Save Machine</button>
         </div>
     </div>
+</div>
 </div>
 
 
 <!-- Create New IP Range Modal -->
 <div class="modal fade" id="CreateIPRangeModal" tabindex="-1" aria-labelledby="CreateIPRangeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="CreateIPRangeModalLabel">Add New IP Range</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal('CreateIPRangeModal')"></button>
-            </div>
-            <div class="modal-body">
-                <form id="CreateIPRangeForm">
-                    <div class="mb-3">
-                        <label for="RangeID" class="form-label">Range ID</label>
-                        <input type="text" class="form-control" id="RangeID" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="StartIP" class="form-label">Start IP</label>
-                        <input type="text" class="form-control" id="StartIP" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="EndIP" class="form-label">End IP</label>
-                        <input type="text" class="form-control" id="EndIP" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="IPDescription" class="form-label">Description</label>
-                        <input type="text" class="form-control" id="IPDescription" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="IPRangeAction" class="form-label">Action</label>
-                        <select class="form-select" id="IPRangeAction" required>
-                            <option value="">Please select an action</option>
-                            <option value="Create">Create</option>
-                            <option value="Delete">Delete</option>
-                            <option value="Update">Update</option>
-                        </select>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal('CreateIPRangeModal')">Cancel</button>
-                <button type="button" class="btn custom-btn-default" onclick="SaveIPRange()">Save IP Range</button>
-            </div>
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="CreateIPRangeModalLabel">Add New IP Range</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal('CreateIPRangeModal')"></button>
+        </div>
+        <div class="modal-body">
+            <form id="CreateIPRangeForm">
+                <div class="mb-3">
+                    <label for="RangeID" class="form-label">Range ID</label>
+                    <input type="text" class="form-control" id="RangeID" required>
+                </div>
+                <div class="mb-3">
+                    <label for="StartIP" class="form-label">Start IP</label>
+                    <input type="text" class="form-control" id="StartIP" required>
+                </div>
+                <div class="mb-3">
+                    <label for="EndIP" class="form-label">End IP</label>
+                    <input type="text" class="form-control" id="EndIP" required>
+                </div>
+                <div class="mb-3">
+                    <label for="IPDescription" class="form-label">Description</label>
+                    <input type="text" class="form-control" id="IPDescription" required>
+                </div>
+                <div class="mb-3">
+                    <label for="IPRangeAction" class="form-label">Action</label>
+                    <select class="form-select" id="IPRangeAction" required>
+                        <option value="">Please select an action</option>
+                        <option value="Create">Create</option>
+                        <option value="Delete">Delete</option>
+                        <option value="Update">Update</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal('CreateIPRangeModal')">Cancel</button>
+            <button type="button" class="btn custom-btn-default" onclick="SaveIPRange()">Save IP Range</button>
         </div>
     </div>
+</div>
 </div>
 
 
@@ -415,291 +416,293 @@ var ipRangesDomain = Model.TargetedIPRanges?.Select(x => x.Description).Distinct
 <!-- Edit Staging Modal -->
 <div class="modal fade" id="EditModal" tabindex="-1" aria-labelledby="EditModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="EditModalLabel">Edit Target Group Entity</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal('EditModal')"></button>
-        </div>
-        <div class="modal-body" id="EditModalContainer">
-            <!-- Dynamic content for the modal goes here -->
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal('EditModal')">Cancel</button>
-            <button type="button" class="btn custom-btn-default" onclick="SaveStagingUser()">Save User</button>
-        </div>
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="EditModalLabel">Edit Target Group Entity</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal('EditModal')"></button>
+    </div>
+    <div class="modal-body" id="EditModalContainer">
+        <!-- Dynamic content for the modal goes here -->
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal('EditModal')">Cancel</button>
+        <button type="button" class="btn custom-btn-default" onclick="SaveStagingUser()">Save User</button>
     </div>
 </div>
 </div>
+</div>
+
+
+
+<!-- Membership info-->
 <div class="modal fade" id="directoryModal" tabindex="-1" aria-labelledby="directoryModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="directoryModalLabel">Active Directory Membership Information</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <!-- Left Section: Active Directory Objects -->
-                    <div class="col-md-4">
-                        <div class="card-bordered-section">
-                            <label for="filterInput" class="section-title-tree">Filter:</label>
-                            <div class="d-flex">
-                                <input type="text" id="filterInputMember" class="form-control filter-input" placeholder="Search..." oninput="filterTree()">
-
-                                <button class="btn btn-secondary ms-2"><i class="bi bi-search"></i></button>
-                            </div>
-                            <div class="scroll-box treeview mt-3">
-                                <ul id="directoryTree" class="tree-view">
-                                    <li>
-                                        <span class="tree-toggle"><i class="bi bi-folder"></i> Active Directory Objects</span>
-                                        <ul class="tree-content">
-                                            <li>
-                                                <span class="tree-toggle"><i class="bi bi-people"></i> Groups</span>
-                                                <ul class="tree-content">
-                                                    <li>Admins</li>
-                                                    <li>Developers</li>
-                                                    <li>HR</li>
-                                                </ul>
-                                            </li>
-                                            <li>
-                                                <span class="tree-toggle"><i class="bi bi-person"></i> Users</span>
-                                                <ul class="tree-content">
-                                                    <li data-username="nhlamulo">nhlamulo</li>
-                                                    <li data-username="jane_smith">Jane Smith</li>
-                                                    <li data-username="john_doe">John Doe</li>
-                                                </ul>
-                                            </li>
-                                            <li>
-                                                <span class="tree-toggle"><i class="bi bi-laptop"></i> Machines</span>
-                                                <ul class="tree-content">
-                                                    <li>Server-1</li>
-                                                    <li>Workstation-5</li>
-                                                </ul>
-                                            </li>
-                                            <li>
-                                                <span class="tree-toggle"><i class="bi bi-globe"></i> IP Ranges</span>
-                                                <ul class="tree-content">
-                                                    <li>192.168.0.0/24</li>
-                                                    <li>10.0.0.0/8</li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Middle Section: Members -->
-                    <div class="col-md-4">
-                        <div class="card-bordered-section">
-                            <label class="section-title-tree">Members</label>
-                            <div class="scroll-box">
-                                <ul id="membersList" class="tree-view">
-                                    <li>
-                                        <label class="tree-toggle-label"><i class="bi bi-person"></i> Select a user to view members</label>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="btn-group-vertical mt-3">
-                                <button class="btn btn-secondary btn-sm"><i class="bi bi-pencil-square"></i> Modify</button>
-                                <button class="btn btn-secondary btn-sm"><i class="bi bi-arrow-bar-down"></i> Import Members</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Right Section: Member Of -->
-                    <div class="col-md-4">
-                        <div class="card-bordered-section">
-                            <label class="section-title-tree">Member Of</label>
-                            <div class="scroll-box">
-                                <ul id="memberOfList" class="tree-view">
-                                    <li>
-                                        <label class="tree-toggle-label"><i class="bi bi-folder"></i> Select a user to view membership</label>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="btn-group-vertical mt-3">
-                                <button class="btn btn-secondary btn-sm"><i class="bi bi-pencil-square"></i> Modify</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Bulk Import Modal -->
-<div class="modal fade" id="bulkImportModal" tabindex="-1" aria-labelledby="bulkImportLabel" aria-hidden="true">
 <div class="modal-dialog modal-fullscreen">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="bulkImportLabel">Active Directory Bulk Import</h5>
+                <h5 class="modal-titletheme-txt-clr" id="directoryModalLabel">Active Directory Membership Information</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <!-- Browse and Processing -->
-            <div class="row mb-3">
-                    <div class="col-md-2">
-                    <input type="file" class="form-control" id="fileInput" />
+            <div class="row">
+                <!-- Left Section: Active Directory Objects -->
+                <div class="col-md-4">
+                    <div class="card-bordered-section">
+                        <label for="filterInput" class="section-title-tree">Filter:</label>
+                        <div class="d-flex">
+                            <input type="text" id="filterInputMember" class="form-control filter-input" placeholder="Search..." oninput="filterTree()">
+
+                            <button class="btn btn-secondary ms-2"><i class="bi bi-search"></i></button>
+                        </div>
+                        <div class="scroll-box treeview mt-3">
+                            <ul id="directoryTree" class="tree-view">
+                                <li>
+                                    <span class="tree-toggle"><i class="bi bi-folder"></i> Active Directory Objects</span>
+                                    <ul class="tree-content">
+                                        <li>
+                                            <span class="tree-toggle"><i class="bi bi-people"></i> Groups</span>
+                                            <ul class="tree-content">
+                                                <li>Admins</li>
+                                                <li>Developers</li>
+                                                <li>HR</li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <span class="tree-toggle"><i class="bi bi-person"></i> Users</span>
+                                            <ul class="tree-content">
+                                                <li data-username="nhlamulo">nhlamulo</li>
+                                                <li data-username="jane_smith">Jane Smith</li>
+                                                <li data-username="john_doe">John Doe</li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <span class="tree-toggle"><i class="bi bi-laptop"></i> Machines</span>
+                                            <ul class="tree-content">
+                                                <li>Server-1</li>
+                                                <li>Workstation-5</li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <span class="tree-toggle"><i class="bi bi-globe"></i> IP Ranges</span>
+                                            <ul class="tree-content">
+                                                <li>192.168.0.0/24</li>
+                                                <li>10.0.0.0/8</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-<div class="col-md-10">
-    <label class="me-2">Processing:</label>
-    <div class="progress" id="progressBarContainer">
-        <div class="progress-bar" id="progressBar" role="progressbar" style="width: 0%;"
-                aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-            0%
+
+                <!-- Middle Section: Members -->
+                <div class="col-md-4">
+                    <div class="card-bordered-section">
+                        <label class="section-title-tree">Members</label>
+                        <div class="scroll-box">
+                            <ul id="membersList" class="tree-view">
+                                <li>
+                                    <label class="tree-toggle-label"><i class="bi bi-person"></i> Select a user to view members</label>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="mt-3">
+                                <button class="custom-btn-default custom-btn"><i class="bi bi-pencil-square"></i> Modify</button>
+                                <button class="custom-btn custom-btn-default"><i class="bi bi-arrow-bar-down"></i> Import Members</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Section: Member Of -->
+                <div class="col-md-4">
+                    <div class="card-bordered-section">
+                        <label class="section-title-tree">Member Of</label>
+                        <div class="scroll-box">
+                            <ul id="memberOfList" class="tree-view">
+                                <li>
+                                    <label class="tree-toggle-label"><i class="bi bi-folder"></i> Select a user to view membership</label>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="btn-group-vertical mt-3">
+                                <button class="custom-btn-default custom-btn"><i class="bi bi-pencil-square"></i> Modify</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger custom-btn" data-bs-dismiss="modal">Close</button>
         </div>
     </div>
-    <div class="form-check form-check-inline mt-2">
-        <input class="form-check-input" type="radio" name="processOption" id="users" value="users" onchange="ToogleBulkImport('users')">
-        <label class="form-check-label" for="users">Users</label>
-    </div>
-    <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="processOption" id="machines" value="machines" onchange="ToogleBulkImport('machines')">
-        <label class="form-check-label" for="machines">Machines</label>
-    </div>
-    <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="processOption" id="both" value="both" onchange="ToogleBulkImport('both')">
-        <label class="form-check-label" for="both">Both</label>
-    </div>
 </div>
 </div>
 
 
-            <!-- Users Section -->
-            <div class="row" id="usersSection">
-                <div class="col-md-6">
-                    <div class="section-border">
-                        <div class="section-title">Users</div>
-                        <form id="User">
-                            <div class="mb-2">
-                                <label class="form-label">User ID:</label>
-                                <select class="form-control">
-                                    @foreach (var user in Model.TargetedUsers)
-                                    {
-                                        <option value="@user.DomainName">@user.DomainName</option>
-                                    }
-                                </select>
+<!-- Bulk Import Modal -->
+<div class="modal fade" id="bulkImportModal" tabindex="-1" aria-labelledby="bulkImportLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="bulkImportLabel">Active Directory Bulk Import</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Browse and Processing -->
+                <div class="row mb-3">
+                    <div class="col-md-2">
+                        <input type="file" class="form-control" id="fileInput" />
+                    </div>
+                    <div class="col-md-10">
+                      
+                        <div class="progress" id="progressBarContainer">
+                            <div class="progress-bar" id="progressBar" role="progressbar" style="width: 0%;"
+                                 aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                0%
                             </div>
-                            <div class="mb-2">
-                                <label class="form-label">Firstname:</label>
-                                <select class="form-control">
-                                    @if (Model.TargetedUsers != null && Model.TargetedUsers.Any())
-                                    {
+                        </div>
+                        <div class="row mx-auto">
+                            <div class="btn-group w-auto overview-filter-btn-group" role="group" aria-label="Status filter" id="ConnectionTypeBtns">
+                                @foreach (var filter in filterTypes)
+                                {
+                                    <button class="btn module-filter-btn-group filter-type-btn id ='@filter' @((filter == "Users") ? "btn-group-active" : "")" onclick="ToogleBulkImport(this.id)" id="@filter">@filter</button>
+                                }
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+
+
+                <!-- Users Section -->
+                <div class="row" id="usersSection">
+                    <div class="col-md-6">
+                        <div class="section-border">
+                            <div class="section-title">Users</div>
+                            <form id="User">
+                                <div class="mb-2">
+                                    <label class="form-label">User ID:</label>
+                                    <select class="form-control">
                                         @foreach (var user in Model.TargetedUsers)
                                         {
-                                            <option value="@user.DisplayName">@user.DisplayName</option>
+                                            <option value="@user.DomainName">@user.DomainName</option>
                                         }
-                                    }
-                                    else
-                                    {
-                                        <option value="">No users available</option>
-                                    }
-                                </select>
-                            </div>
-                            <div class="mb-2">
-                                <label class="form-label">Lastname:</label>
-                                <select class="form-control">
-                                    @if (Model.TargetedGroups != null && Model.TargetedGroups.Any())
-                                    {
-                                        @foreach (var group in Model.TargetedGroups)
+                                    </select>
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label">Firstname:</label>
+                                    <select class="form-control">
+                                        @if (Model.TargetedUsers != null && Model.TargetedUsers.Any())
                                         {
-                                            <option value="@group.DisplayName">@group.DisplayName</option>
+                                            @foreach (var user in Model.TargetedUsers)
+                                            {
+                                                <option value="@user.DisplayName">@user.DisplayName</option>
+                                            }
                                         }
-                                    }
-                                    else
-                                    {
-                                        <option value="">No groups available</option>
-                                    }
-                                </select>
-                            </div>
-                            <div class="mb-2">
-                                <label class="form-label">Employee Identifier:</label>
-                                <select class="form-control">
-                                    <option value="E001">E001</option>
-                                    <option value="E002">E002</option>
-                                    <option value="E003">E003</option>
-                                </select>
-                            </div>
-                            <div class="mb-2">
-                                <label class="form-label">Group:</label>
-                                <select class="form-control">
-                                    @if (Model.TargetedGroups != null && Model.TargetedGroups.Any())
-                                    {
-                                        @foreach (var group in Model.TargetedGroups)
+                                        else
                                         {
-                                            <option value="@group.DisplayName">@group.DisplayName</option>
+                                            <option value="">No users available</option>
                                         }
-                                    }
-                                    else
-                                    {
-                                        <option value="">No groups available</option>
-                                    }
-                                </select>
-                            </div>
-                        </form>
+                                    </select>
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label">Lastname:</label>
+                                    <select class="form-control">
+                                        @if (Model.TargetedGroups != null && Model.TargetedGroups.Any())
+                                        {
+                                            @foreach (var group in Model.TargetedGroups)
+                                            {
+                                                <option value="@group.DisplayName">@group.DisplayName</option>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <option value="">No groups available</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label">Employee Identifier:</label>
+                                    <select class="form-control">
+                                        <option value="E001">E001</option>
+                                        <option value="E002">E002</option>
+                                        <option value="E003">E003</option>
+                                    </select>
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label">Group:</label>
+                                    <select class="form-control">
+                                        @if (Model.TargetedGroups != null && Model.TargetedGroups.Any())
+                                        {
+                                            @foreach (var group in Model.TargetedGroups)
+                                            {
+                                                <option value="@group.DisplayName">@group.DisplayName</option>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <option value="">No groups available</option>
+                                        }
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Machines Section -->
+                    <div class="col-md-6" id="Machine">
+                        <div class="section-border">
+                            <div class="section-title">Machines</div>
+                            <form>
+                                <div class="mb-2">
+                                    <label class="form-label">Machine ID:</label>
+                                    <select class="form-control">
+                                        <option value="M001">M001</option>
+                                        <option value="M002">M002</option>
+                                        <option value="M003">M003</option>
+                                    </select>
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label">Description:</label>
+                                    <select class="form-control">
+                                        <option value="Printer">Printer</option>
+                                        <option value="Scanner">Scanner</option>
+                                        <option value="Projector">Projector</option>
+                                    </select>
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label">Group:</label>
+                                    <select class="form-control">
+                                        <option value="Office">Office</option>
+                                        <option value="Lab">Lab</option>
+                                        <option value="Workshop">Workshop</option>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Machines Section -->
-                <div class="col-md-6" id="Machine">
-                    <div class="section-border">
-                        <div class="section-title">Machines</div>
-                        <form>
-                            <div class="mb-2">
-                                <label class="form-label">Machine ID:</label>
-                                <select class="form-control">
-                                    <option value="M001">M001</option>
-                                    <option value="M002">M002</option>
-                                    <option value="M003">M003</option>
-                                </select>
-                            </div>
-                            <div class="mb-2">
-                                <label class="form-label">Description:</label>
-                                <select class="form-control">
-                                    <option value="Printer">Printer</option>
-                                    <option value="Scanner">Scanner</option>
-                                    <option value="Projector">Projector</option>
-                                </select>
-                            </div>
-                            <div class="mb-2">
-                                <label class="form-label">Group:</label>
-                                <select class="form-control">
-                                    <option value="Office">Office</option>
-                                    <option value="Lab">Lab</option>
-                                    <option value="Workshop">Workshop</option>
-                                </select>
-                            </div>
-                        </form>
+                <!-- Excel File Contents -->
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <div class="section-border file-contents p-2" id="fileContents">
+                            <div class="section-title">Excel File Contents</div>
+                            <!-- Content placeholder -->
+                            <p class="text-muted">Uploaded file data will appear here...</p>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Excel File Contents -->
-            <div class="row mb-3">
-                <div class="col-12">
-                    <div class="section-border file-contents p-2" id="fileContents">
-                        <div class="section-title">Excel File Contents</div>
-                        <!-- Content placeholder -->
-                        <p class="text-muted">Uploaded file data will appear here...</p>
-                    </div>
+                <!-- Buttons -->
+                <div class="text-center">
+                    <button class="btn btn-outline-secondary btn-verify me-2">Verify</button>
+                    <button class="btn btn-outline-primary btn-process">Process</button>
                 </div>
-            </div>
-
-            <!-- Buttons -->
-            <div class="text-center">
-                <button class="btn btn-outline-secondary btn-verify me-2">Verify</button>
-                <button class="btn btn-outline-primary btn-process">Process</button>
             </div>
         </div>
     </div>
-</div>
 </div>
 
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
@@ -711,33 +714,33 @@ var ipRangesDomain = Model.TargetedIPRanges?.Select(x => x.Description).Distinct
 <script>
 
 
-    document.querySelectorAll('.tree-toggle').forEach(toggle => {
-        toggle.addEventListener('click', function () {
-            this.classList.toggle('opened');
-        });
+document.querySelectorAll('.tree-toggle').forEach(toggle => {
+    toggle.addEventListener('click', function () {
+        this.classList.toggle('opened');
     });
+});
 
 
 
 
 const directoryData = {
 users: {
-    nhlamulo: { groups: ["Admins", "HR"], machines: ["Server-1"], ipRanges: ["192.168.0.0/24"] },
-    jane_smith: { groups: ["Developers"], machines: ["Workstation-5"], ipRanges: [] },
-    john_doe: { groups: ["HR"], machines: [], ipRanges: ["10.0.0.0/8"] },
+nhlamulo: { groups: ["Admins", "HR"], machines: ["Server-1"], ipRanges: ["192.168.0.0/24"] },
+jane_smith: { groups: ["Developers"], machines: ["Workstation-5"], ipRanges: [] },
+john_doe: { groups: ["HR"], machines: [], ipRanges: ["10.0.0.0/8"] },
 },
 groups: {
-    Admins: { users: ["nhlamulo"], machines: ["Server-1"] },
-    Developers: { users: ["jane_smith"], machines: [] },
-    HR: { users: ["nhlamulo", "john_doe"], machines: [] },
+Admins: { users: ["nhlamulo"], machines: ["Server-1"] },
+Developers: { users: ["jane_smith"], machines: [] },
+HR: { users: ["nhlamulo", "john_doe"], machines: [] },
 },
 machines: {
-    "Server-1": { users: ["nhlamulo"], groups: ["Admins"], ipRanges: ["192.168.0.0/24"] },
-    "Workstation-5": { users: ["jane_smith"], groups: [], ipRanges: [] },
+"Server-1": { users: ["nhlamulo"], groups: ["Admins"], ipRanges: ["192.168.0.0/24"] },
+"Workstation-5": { users: ["jane_smith"], groups: [], ipRanges: [] },
 },
 ipRanges: {
-    "192.168.0.0/24": { users: ["nhlamulo"], machines: ["Server-1"] },
-    "10.0.0.0/8": { users: ["john_doe"], machines: [] },
+"192.168.0.0/24": { users: ["nhlamulo"], machines: ["Server-1"] },
+"10.0.0.0/8": { users: ["john_doe"], machines: [] },
 },
 };
 
@@ -751,22 +754,22 @@ membersList.innerHTML = "";
 memberOfList.innerHTML = "";
 
 if (type === "users") {
-    const userData = directoryData.users[key];
+const userData = directoryData.users[key];
 
-    membersList.innerHTML += `
-        <li><strong>Groups:</strong> ${userData.groups.join(", ") || "None"}</li>
-        <li><strong>Machines:</strong> ${userData.machines.join(", ") || "None"}</li>
-        <li><strong>IP Ranges:</strong> ${userData.ipRanges.join(", ") || "None"}</li>
-    `;
+membersList.innerHTML += `
+    <li><strong>Groups:</strong> ${userData.groups.join(", ") || "None"}</li>
+    <li><strong>Machines:</strong> ${userData.machines.join(", ") || "None"}</li>
+    <li><strong>IP Ranges:</strong> ${userData.ipRanges.join(", ") || "None"}</li>
+`;
 
-    const memberOf = Object.keys(directoryData.groups)
-        .filter(group => directoryData.groups[group].users.includes(key))
-        .map(group => `<li>${group}</li>`)
-        .join("");
+const memberOf = Object.keys(directoryData.groups)
+    .filter(group => directoryData.groups[group].users.includes(key))
+    .map(group => `<li>${group}</li>`)
+    .join("");
 
-    memberOfList.innerHTML += `
-        <li><strong>Groups:</strong><ul>${memberOf || "<li>None</li>"}</ul></li>
-    `;
+memberOfList.innerHTML += `
+    <li><strong>Groups:</strong><ul>${memberOf || "<li>None</li>"}</ul></li>
+`;
 }
 }
 
@@ -774,7 +777,7 @@ if (type === "users") {
 document.getElementById("directoryTree").addEventListener("click", function (event) {
 const clickedItem = event.target;
 if (clickedItem.dataset.username) {
-    showDetails("users", clickedItem.dataset.username);
+showDetails("users", clickedItem.dataset.username);
 }
 });
 
@@ -784,18 +787,18 @@ const query = document.getElementById("filterInputMember").value.toLowerCase();
 const allItems = document.querySelectorAll("#directoryTree li");
 
 allItems.forEach(item => {
-    const text = item.textContent.toLowerCase();
-    const matches = text.includes(query);
+const text = item.textContent.toLowerCase();
+const matches = text.includes(query);
 
   
-    item.style.display = matches ? "list-item" : "none";
-    if (matches) {
-        let parent = item.parentElement;
-        while (parent && parent.tagName === "UL") {
-            parent.style.display = "block"; 
-            parent = parent.parentElement; 
-        }
+item.style.display = matches ? "list-item" : "none";
+if (matches) {
+    let parent = item.parentElement;
+    while (parent && parent.tagName === "UL") {
+        parent.style.display = "block"; 
+        parent = parent.parentElement; 
     }
+}
 });
 
 
@@ -808,96 +811,96 @@ item.style.display = "list-item";
 });
 }
 const fileInput = document.getElementById("fileInput");
-    const fileContentsDiv = document.getElementById("fileContents");
-    const progressBar = document.getElementById("progressBar");
+const fileContentsDiv = document.getElementById("fileContents");
+const progressBar = document.getElementById("progressBar");
 
-    fileInput.addEventListener("change", function (event) {
-        const file = event.target.files[0];
-        if (file) {
-            // Reset progress bar
-            progressBar.style.width = "0%";
-            progressBar.setAttribute("aria-valuenow", 0);
-            progressBar.textContent = "0%";
+fileInput.addEventListener("change", function (event) {
+    const file = event.target.files[0];
+    if (file) {
+        // Reset progress bar
+        progressBar.style.width = "0%";
+        progressBar.setAttribute("aria-valuenow", 0);
+        progressBar.textContent = "0%";
 
-            const reader = new FileReader();
+        const reader = new FileReader();
 
-            reader.onloadstart = function () {
-                // Show progress bar container if hidden
-                document.getElementById("progressBarContainer").style.display = "block";
-            };
+        reader.onloadstart = function () {
+            // Show progress bar container if hidden
+            document.getElementById("progressBarContainer").style.display = "block";
+        };
 
-            reader.onprogress = function (e) {
-                if (e.lengthComputable) {
-                    const percentLoaded = Math.round((e.loaded / e.total) * 100);
-                    progressBar.style.width = percentLoaded + "%";
-                    progressBar.setAttribute("aria-valuenow", percentLoaded);
-                    progressBar.textContent = percentLoaded + "%";
-                }
-            };
+        reader.onprogress = function (e) {
+            if (e.lengthComputable) {
+                const percentLoaded = Math.round((e.loaded / e.total) * 100);
+                progressBar.style.width = percentLoaded + "%";
+                progressBar.setAttribute("aria-valuenow", percentLoaded);
+                progressBar.textContent = percentLoaded + "%";
+            }
+        };
 
-            reader.onload = function (e) {
-                // Hide progress bar
-                progressBar.style.width = "100%";
-                progressBar.setAttribute("aria-valuenow", 100);
-                progressBar.textContent = "100%";
+        reader.onload = function (e) {
+            // Hide progress bar
+            progressBar.style.width = "100%";
+            progressBar.setAttribute("aria-valuenow", 100);
+            progressBar.textContent = "100%";
 
-                const content = e.target.result;
-                displayFileContent(content, file.name);
-            };
+            const content = e.target.result;
+            displayFileContent(content, file.name);
+        };
 
-            reader.onerror = function () {
-                alert("Error reading file!");
-            };
+        reader.onerror = function () {
+            alert("Error reading file!");
+        };
 
-            const fileExtension = file.name.split('.').pop().toLowerCase();
-            if (fileExtension === 'csv') {
-                reader.readAsText(file);
-            } else if (fileExtension === 'xls' || fileExtension === 'xlsx') {
+        const fileExtension = file.name.split('.').pop().toLowerCase();
+        if (fileExtension === 'csv') {
+            reader.readAsText(file);
+        } else if (fileExtension === 'xls' || fileExtension === 'xlsx') {
                     
-                alert("Excel file processing is not implemented client-side. Please use CSV files.");
+            alert("Excel file processing is not implemented client-side. Please use CSV files.");
                   
-            } else {
-                alert("Unsupported file type. Please upload a CSV or Excel file.");
-            }
+        } else {
+            alert("Unsupported file type. Please upload a CSV or Excel file.");
         }
-    });
-
-    function displayFileContent(content, fileName) {
-           
-        const rows = content.split(/\r?\n/);
-        if (rows.length === 0) {
-            fileContentsDiv.innerHTML = `
-                <div class="section-title">Excel File Contents</div>
-                <p class="text-muted">No data found in the uploaded file.</p>
-            `;
-            return;
-        }
-
-        let tableHtml = `<div class="section-title">Excel File Contents (${fileName})</div><table class="table table-bordered"><thead><tr>`;
-
-        // Handle headers
-        const headers = rows[0].split(",");
-        headers.forEach(header => {
-            tableHtml += `<th>${header.trim()}</th>`;
-        });
-        tableHtml += `</tr></thead><tbody>`;
-
-        // Handle data rows
-        for (let i = 1; i < rows.length; i++) {
-            const row = rows[i].trim();
-            if (row) { // Skip empty lines
-                const columns = row.split(",");
-                tableHtml += `<tr>`;
-                columns.forEach(col => {
-                    tableHtml += `<td>${col.trim()}</td>`;
-                });
-                tableHtml += `</tr>`;
-            }
-        }
-        tableHtml += `</tbody></table>`;
-
-        fileContentsDiv.innerHTML = tableHtml;
     }
+});
+
+function displayFileContent(content, fileName) {
+           
+    const rows = content.split(/\r?\n/);
+    if (rows.length === 0) {
+        fileContentsDiv.innerHTML = `
+            <div class="section-title">Excel File Contents</div>
+            <p class="text-muted">No data found in the uploaded file.</p>
+        `;
+        return;
+    }
+
+    let tableHtml = `<div class="section-title">Excel File Contents (${fileName})</div><table class="table table-bordered"><thead><tr>`;
+
+    // Handle headers
+    const headers = rows[0].split(",");
+    headers.forEach(header => {
+        tableHtml += `<th>${header.trim()}</th>`;
+    });
+    tableHtml += `</tr></thead><tbody>`;
+
+    // Handle data rows
+    for (let i = 1; i < rows.length; i++) {
+        const row = rows[i].trim();
+        if (row) { // Skip empty lines
+            const columns = row.split(",");
+            tableHtml += `<tr>`;
+            columns.forEach(col => {
+                tableHtml += `<td>${col.trim()}</td>`;
+            });
+            tableHtml += `</tr>`;
+        }
+    }
+    tableHtml += `</tbody></table>`;
+
+    fileContentsDiv.innerHTML = tableHtml;
+}
 
 var usersDomains = @Html.Raw(Json.Serialize(usersDomains));
 var machinesDomains = @Html.Raw(Json.Serialize(usersDomains));
@@ -906,24 +909,26 @@ var ipRangesDomain = @Html.Raw(Json.Serialize(ipRangesDomain));
 
 $(document).ready(function ()
 {
-    usersDT = MakeStandardDataTable("StagingUsersData");
-    machinesDT = MakeStandardDataTable("StagingMachinesData");
-    targetGroupDT = MakeStandardDataTable("TargetGroupsData");
-    ipRangeDT = MakeStandardDataTable("IPRangesData");
+usersDT = MakeStandardDataTable("StagingUsersData");
+machinesDT = MakeStandardDataTable("StagingMachinesData");
+targetGroupDT = MakeStandardDataTable("TargetGroupsData");
+ipRangeDT = MakeStandardDataTable("IPRangesData");
 
 });
 
+
+
     
 function ToogleBulkImport(id) {
-if (id === "users") {
-    HideShowElement("#usersSection", HideShow.SHOW);
-    HideShowElement("#Machine", HideShow.HIDE);
-} else if (id === "machines") {
-    HideShowElement("#usersSection", HideShow.HIDE);
-    HideShowElement("#Machine", HideShow.SHOW);
-} else if (id === "both") {
-    HideShowElement("#usersSection", HideShow.SHOW);
-    HideShowElement("#Machine", HideShow.SHOW);
+ if (id === "Users") {
+HideShowElement("#usersSection", HideShow.SHOW);
+HideShowElement("#Machine", HideShow.HIDE);
+        } else if (id === "Machines") {
+HideShowElement("#usersSection", HideShow.HIDE);
+HideShowElement("#Machine", HideShow.SHOW);
+        } else if (id === "Both") {
+HideShowElement("#usersSection", HideShow.SHOW);
+HideShowElement("#Machine", HideShow.SHOW);
 }
 }
 
@@ -941,37 +946,37 @@ let ipRangesSettings = HideShow.HIDE;
 let dataSource = null;
 
 switch (true) {
-    case id.includes("User"):
-        btnText = "Add New Target Group User";
-        title = "Users";
-        usersSettings = HideShow.SHOW;
-        dataSource = usersDomains;
-        break;
+case id.includes("User"):
+    btnText = "Add New Target Group User";
+    title = "Users";
+    usersSettings = HideShow.SHOW;
+    dataSource = usersDomains;
+    break;
 
-    case id.includes("Machine"):
-        btnText = "Add New Target Group Machine";
-        title = "Machines";
-        machinesSettings = HideShow.SHOW;
-        dataSource = machinesDomains;
-        break;
+case id.includes("Machine"):
+    btnText = "Add New Target Group Machine";
+    title = "Machines";
+    machinesSettings = HideShow.SHOW;
+    dataSource = machinesDomains;
+    break;
 
-    case id.includes("Group"):
-        btnText = "Add New Target Groups";
-        title = "Groups";
-        groupsSettings = HideShow.SHOW;
-        dataSource = groupsDomain;
-        break;
+case id.includes("Group"):
+    btnText = "Add New Target Groups";
+    title = "Groups";
+    groupsSettings = HideShow.SHOW;
+    dataSource = groupsDomain;
+    break;
 
-    case id.includes("IPRanges"):
-        btnText = "Add New IP Range";
-        title = "IP Ranges";
-        ipRangesSettings = HideShow.SHOW;
-        dataSource = ipRangesDomain;
-        break;
+case id.includes("IPRanges"):
+    btnText = "Add New IP Range";
+    title = "IP Ranges";
+    ipRangesSettings = HideShow.SHOW;
+    dataSource = ipRangesDomain;
+    break;
 
-    default:
-        console.error("Unknown id type");
-        return; 
+default:
+    console.error("Unknown id type");
+    return; 
 }
 
 $("#BreadcrumSettingsBtnText").text(btnText);
@@ -982,52 +987,52 @@ HideShowElement("#TargetGroups", groupsSettings);
 HideShowElement("#IPRangesSettings", ipRangesSettings);
 
 if (dataSource) {
-    SwitchDomainsSelectDataSource(dataSource);
+SwitchDomainsSelectDataSource(dataSource);
 }
 }
 
 
 function SwitchDomainsSelectDataSource(dataSource) 
 {
-    const selectList = document.getElementById("ReportModuleSelect");
+const selectList = document.getElementById("ReportModuleSelect");
 
-    selectList.innerHTML = "";
+selectList.innerHTML = "";
 
-    const defaultOption = document.createElement("option");
-    defaultOption.value = "0";
-    defaultOption.textContent = "Please select Domain Name";
-    selectList.appendChild(defaultOption);
+const defaultOption = document.createElement("option");
+defaultOption.value = "0";
+defaultOption.textContent = "Please select Domain Name";
+selectList.appendChild(defaultOption);
 
-    dataSource.forEach(domain =>
-        {
-        const option = document.createElement("option");
-        option.value = domain;
-        option.textContent = domain;
-        selectList.appendChild(option);
-    });
+dataSource.forEach(domain =>
+    {
+    const option = document.createElement("option");
+    option.value = domain;
+    option.textContent = domain;
+    selectList.appendChild(option);
+});
 }
 
 function FilterByDomain()
 {
-    const selectedDomain = $("#ReportModuleSelect").val();
+const selectedDomain = $("#ReportModuleSelect").val();
 
-    var userActive = $("#StagingUserBtn").hasClass("btn-group-active");
+var userActive = $("#StagingUserBtn").hasClass("btn-group-active");
 
-    if (selectedDomain === "0")
-    {
-        if (userActive)
-            usersDT.column(0).search("").draw();
-        else
-            machinesDT.column(0).search("").draw();
-    }
+if (selectedDomain === "0")
+{
+    if (userActive)
+        usersDT.column(0).search("").draw();
     else
-    {
-        if (userActive)
-            usersDT.column(0).search(selectedDomain).draw();
+        machinesDT.column(0).search("").draw();
+}
+else
+{
+    if (userActive)
+        usersDT.column(0).search(selectedDomain).draw();
 
-        else
-            machinesDT.column(0).search(selectedDomain).draw();
-    }
+    else
+        machinesDT.column(0).search(selectedDomain).draw();
+}
 }
 
 
@@ -1036,67 +1041,67 @@ function FilterByDomain()
 
 
 
-    function AddNewTargetGroup() {
-        const buttonText = document.getElementById("BreadcrumSettingsBtnText").innerText;
+function AddNewTargetGroup() {
+    const buttonText = document.getElementById("BreadcrumSettingsBtnText").innerText;
 
-        if (buttonText.includes("User")) {
-            const userModal = new bootstrap.Modal(document.getElementById('CreateStagingUserModal'));
-            userModal.show();
-        } else if (buttonText.includes("Machine")) {
-            const machineModal = new bootstrap.Modal(document.getElementById('CreateStagingMachineModal'));
-            machineModal.show();
-        } else if (buttonText.includes("IPRange")) {
-            const ipRangeModal = new bootstrap.Modal(document.getElementById('CreateIPRangeModal'));
-            ipRangeModal.show();
-        } else if (buttonText.includes("Group")) {
-            const groupModal = new bootstrap.Modal(document.getElementById('CreateTargetGroupModal'));
-            groupModal.show();
-        } else {
-            console.error("No matching modal found for the button text.");
-        }
+    if (buttonText.includes("User")) {
+        const userModal = new bootstrap.Modal(document.getElementById('CreateStagingUserModal'));
+        userModal.show();
+    } else if (buttonText.includes("Machine")) {
+        const machineModal = new bootstrap.Modal(document.getElementById('CreateStagingMachineModal'));
+        machineModal.show();
+    } else if (buttonText.includes("IPRange")) {
+        const ipRangeModal = new bootstrap.Modal(document.getElementById('CreateIPRangeModal'));
+        ipRangeModal.show();
+    } else if (buttonText.includes("Group")) {
+        const groupModal = new bootstrap.Modal(document.getElementById('CreateTargetGroupModal'));
+        groupModal.show();
+    } else {
+        console.error("No matching modal found for the button text.");
     }
+}
 
 
 
 
 function EditNewStagingEnting(targetId, entityType)
 {
-        // LoadEditModal(formData, '@Url.Action("EditTargetGroups", "Settings")', 'POST', editMachineForm, edit-machine-btn)
-    $.ajax({
-        url: '@Url.Action("EditTargetGroups", "Settings")',
-        type: 'GET',
-            data: { targetId: targetId, entityType: entityType },
-        success: function (response)
-        {
+    // LoadEditModal(formData, '@Url.Action("EditTargetGroups", "Settings")', 'POST', editMachineForm, edit-machine-btn)
+$.ajax({
+    url: '@Url.Action("EditTargetGroups", "Settings")',
+    type: 'GET',
+        data: { targetId: targetId, entityType: entityType },
+    success: function (response)
+    {
               
-            $('#EditModalContainer').html(response);
-            const editModal = new bootstrap.Modal(document.getElementById('EditModal'));
-            editModal.show();
+        $('#EditModalContainer').html(response);
+        const editModal = new bootstrap.Modal(document.getElementById('EditModal'));
+        editModal.show();
 
-        },
-        error: function (error)
-        {
-            console.log('Error fetching machine data:', error);
-        }
-    });
+    },
+    error: function (error)
+    {
+        console.log('Error fetching machine data:', error);
+    }
+});
 }
 
 function SaveEditNewStagingEnting(formdata)
 {
 
-    LoadEditModal(formData, '@Url.Action("SaveStagingData", "Settings")', 'POST', editMachineForm, edit - machine - btn)
+LoadEditModal(formData, '@Url.Action("SaveStagingData", "Settings")', 'POST', editMachineForm, edit - machine - btn)
 }
 
 function closeModal(modalId)
 {
-    $('#' + modalId).modal('hide');
+$('#' + modalId).modal('hide');
 }
 
     
-    function DeleteAdminAccess(connectionID) {
-    if (confirm("Are you sure you want to terminate this connection?")) {
-        alert(`Delete admin: ${connectionID}`);
-    }
+function DeleteAdminAccess(connectionID) {
+if (confirm("Are you sure you want to terminate this connection?")) {
+    alert(`Delete admin: ${connectionID}`);
+}
 }
 
 </script>

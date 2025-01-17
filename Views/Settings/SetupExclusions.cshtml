@@ -17,7 +17,7 @@ var users = Model.Users.Select(x => x.UserLastModified).Distinct().ToList();
     {
         SettingsCurrentPage = SettingsPages.SetupExclusions,
         HasAddNewButton = true,
-        BreadcrumbButtonName = "Add Excluded User",
+        BreadcrumbButtonName = "Add Exclusion User",
         BreadcrumbButtonCallbackFunction = "AddNewExcludedEntity"
     });
 }
@@ -60,7 +60,7 @@ var users = Model.Users.Select(x => x.UserLastModified).Distinct().ToList();
 <div class="card mb-1 mt-1  p-4 overview-filters-card app-card-main-scaling" id="report-data-area">
     <div id="SettingsData">
         <h3 class="w-100 text-center theme-txt-clr">
-            Setup Excluded <span id="StagingUserMachineTitle">Users</span>
+            Setup Exclusion <span id="StagingUserMachineTitle">Users</span>
         </h3>
         <!-- Inject Partial Here -->
         <div id="StagingUsersSettings" class="mt-3">
@@ -163,11 +163,11 @@ await Html.RenderPartialAsync("~/Views/Shared/Components/Modal/_UserSelectionMod
         <div class="modal-body">
            
             <div class="mb-3">
-                   <label for="SelectUser" class="form-label">First Name</label>
+                   <label for="SelectUser" class="form-label">NT Username</label>
                 <input type="text"
                         id="stagingUserInput"
                         class="form-control"
-                        placeholder="Click to select a user"
+                        
                         data-callback="updateStagingUserField"
                         data-username-field="stagingUserInput"
                         value=""
@@ -187,9 +187,13 @@ await Html.RenderPartialAsync("~/Views/Shared/Components/Modal/_UserSelectionMod
             </div>
            
             <div class="mb-3">
-                <label for="StagingUserLastname" class="form-label">Last Name</label>
+                <label for="StagingUserLastname" class="form-label">First Name</label>
                 <input type="text" class="form-control" id="StagingUserLastname" required>
             </div>
+                <div class="mb-3">
+                    <label for="StagingUserLastname" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="StagingUserLastname" required>
+                </div>
             <div class="mb-3">
                 <label for="StagingUserUserLastModified" class="form-label">User Last Modified</label>
                 <input type="text" class="form-control" id="StagingUserUserLastModified" readonly>

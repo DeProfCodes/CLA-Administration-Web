@@ -146,22 +146,22 @@
     let stagingPosition = "Top Left";
     let livePosition = "Center";
 
-    function ToggleStaginLive(activeSection)
+    function ToggleStaginLive(id)
     {
         $(".filter-type-btn").removeClass("btn-group-active");
-        $(`#${activeSection}`).addClass("btn-group-active");
+        $(`#${id}`).addClass("btn-group-active");
 
-        if (activeSection === "Staging")
+        if (id === "Staging")
         {
-            $("#BreadcrumSettingsBtnText").text("Add New Live Information");
+            $("#BreadcrumSettingsBtnText").text("Add New Staging Information");
             $("#DesktopStaging").removeClass("d-none");
             $("#DesktopLive").addClass("d-none");
 
             setDefaultPositionToCenter(stagingPosition, `PopupPosition${stagingPosition.replace(" ", "")}`);
         }
-        else if (activeSection === "Live")
+        else if (id === "Live")
         {
-            $("#BreadcrumSettingsBtnText").text("Add New Staging Information");
+            $("#BreadcrumSettingsBtnText").text("Add New Live Information");
             $("#DesktopStaging").addClass("d-none");
             $("#DesktopLive").removeClass("d-none");
 

@@ -2,19 +2,23 @@
 @using CLA_Administration_Web.Helpers.Enums.AppPages
 @using CLA_Administration_Web.Helpers.Enums.Shared
 @using CLA_Administration_Web.Helpers.Enums.Shared.PageNames
-@{
-    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Settings/SettingsBreadcrumb.cshtml", new SettingsBreadcrumbViewModel
-    {
-        SettingsCurrentPage = SettingsPages.DefaultFonts,
-        HasAddNewButton = true,
-        BreadcrumbButtonName = "Add New Default Fonts",
-        BreadcrumbButtonCallbackFunction = "AddNewDefaultFonts"
-    });
-}
+
 
 <div class="container-fluid">
+
+    @{
+        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Settings/SettingsBreadcrumb.cshtml", new SettingsBreadcrumbViewModel
+            {
+                SettingsCurrentPage = SettingsPages.DefaultFonts,
+                HasAddNewButton = true,
+                BreadcrumbButtonName = "Add New Default Fonts",
+                BreadcrumbButtonCallbackFunction = "AddNewDefaultFonts"
+            });
+    }
+
+
     <!-- Settings Filter Component -->
-    <div class="card mb-4 mt-2 overview-filters-card app-card-main-scaling">
+    <div class="card mb-4 mt-2 overview-filters-card app-card-main-scaling ">
         <div class="card-body pt-0 pb-0">
             <div class="row fs-12 mt-1 mb-2">
                 <H4 class="theme-txt-clr text-center w-100 fw-bold fs-16" id="TypeFilterTitle">Filters To be Added</H4>
@@ -26,40 +30,44 @@
 
 
 
-<div class="container-fluid my-4 border p-3 rounded">
-    @foreach (var data in Model.DefaultFonts) 
-    {
-        <div class="border p-3 mb-3">
-            <h5 class="text-center">
-               <span>@data.DefaultHeading</span>
-            </h5>
+<div class="container-fluid overview-filters-card app-card-main-scaling">
+    <div class="card border mb-3 overflow-auto" style="max-height: 400px;">
+        <!-- Scrollable container -->
+        @foreach (var data in Model.DefaultFonts)
+        {
+            <div class="p-3">
+                <h5 class="fw-bold mb-3 text-center text-md-center col-sm-12">
+                    <!-- Responsive alignment -->
+                    <span>@data.DefaultHeading</span>
+                </h5>
 
-            @if (data.SubHeadings != null && data.SubHeadings.Any())
-            {
-                @foreach (var subheading in data.SubHeadings)
+                @if (data.SubHeadings != null && data.SubHeadings.Any())
                 {
-                    <div class="row mb-3 align-items-center fs-14">
-                        <div class="col-1 text-center fs-14">
-                            <span data-sub="@subheading.SubId" style="cursor: pointer;" onclick=" EditNewStagingEnting(@subheading.SubId)">
-                                <img src="@subheading.Icon" alt="Icon" />
-                            </span>
-                        </div>
-                        <div class="col-4 fs-14">
-                            <label for="subheadingTitle_@subheading.SubId" class="form-label">@subheading.Title</label>
-                        </div>
-                        <div class="col-7 fs-14">
-                            <div class="form-control" style="border: none; background-color: gray;">
-                                @subheading.Text
+                    @foreach (var subheading in data.SubHeadings)
+                    {
+                        <div class="row align-items-center mb-3 gx-3">
+                            <div class="col-2 col-md-1 text-center">
+                                <span data-sub="@subheading.SubId" style="cursor: pointer;" onclick="EditNewStagingEnting(@subheading.SubId)">
+                                    <img src="~/images/icons/blue/settings/default-fonts.png" alt="Icon" class="img-fluid" style="max-height: 35px;" />
+                                </span>
+                            </div>
+                            <div class="col-10 col-md-4">
+                                <label for="subheadingTitle_@subheading.SubId" class="form-label fw-normal">@subheading.Title</label>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <div class="form-control bg-secondary text-white border-0">
+                                    @subheading.Text
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    }
                 }
-            }
-        </div>
-    }
+            </div>
+        }
+    </div>
 </div>
 
-<div id="details-section" class="mt-4"></div>
+
 
 
 <!-- Add New Default fonts Modal -->
@@ -116,7 +124,7 @@
 
 <!-- Edit Default fonts Modal -->
 <div class="modal fade" id="EditDefaultFontsModal" tabindex="-1" aria-labelledby="EditModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
             
