@@ -1,6 +1,6 @@
-﻿@model CLA_Administration_Web.ViewModels.Settings.DefaultFonts.DefaultFontMainViewModel
+﻿@using CLA_Administration_Web.ViewModels.Settings.DefaultFonts
+@model DefaultFontMainViewModel
 @using CLA_Administration_Web.Helpers.Enums.AppPages
-@using CLA_Administration_Web.Helpers.Enums.Shared
 @using CLA_Administration_Web.Helpers.Enums.Shared.PageNames
 
 
@@ -29,15 +29,13 @@
 </div>
 
 
-
 <div class="container-fluid overview-filters-card app-card-main-scaling">
     <div class="card border mb-3 overflow-auto" style="max-height: 400px;">
-        <!-- Scrollable container -->
+        <!-- Added scroll container -->
         @foreach (var data in Model.DefaultFonts)
         {
             <div class="p-3">
-                <h5 class="fw-bold mb-3 text-center text-md-center col-sm-12">
-                    <!-- Responsive alignment -->
+                <h5 class="text-center fw-bold mb-3">
                     <span>@data.DefaultHeading</span>
                 </h5>
 
@@ -66,7 +64,6 @@
         }
     </div>
 </div>
-
 
 
 

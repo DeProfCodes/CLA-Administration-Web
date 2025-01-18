@@ -73,8 +73,6 @@ await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Targetin
 </div>
 
 
-
-
 <!-- Card for Popup Report Body -->
 <div class="card mb-1 mt-1 overview-filters-card app-card-main-scaling p-4" id="report-data-area">
 <div id="SettingsData">
@@ -236,7 +234,7 @@ await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Targetin
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal('CreateTargetGroupModal')"></button>
         </div>
         <div class="modal-body">
-            <form id="CreateStagingUserForm">
+            <div id="CreateStagingUserForm">
                 <div class="mb-3">
                     <label for="StagingUserDomain" class="form-label">Domain</label>
                     <select class="form-select" id="StagingUserDomain" required>
@@ -245,26 +243,11 @@ await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Targetin
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label for="StagingUserUsername" class="form-label">Username</label>
+                    <label for="StagingUserUsername" class="form-label">DisplayName</label>
                     <input type="text" class="form-control" id="StagingUserUsername" required>
                 </div>
-                <div class="mb-3">
-                    <label for="StagingUserFirstname" class="form-label">First Name</label>
-                    <input type="text" class="form-control" id="StagingUserFirstname" required>
-                </div>
-                <div class="mb-3">
-                    <label for="StagingUserLastname" class="form-label">Last Name</label>
-                    <input type="text" class="form-control" id="StagingUserLastname" required>
-                </div>
-                <div class="mb-3">
-                    <label for="StagingUserUserLastModified" class="form-label">User Last Modified</label>
-                    <input type="text" class="form-control" id="StagingUserUserLastModified">
-                </div>
-                <div class="mb-3">
-                    <label for="StagingUserMachineLastModified" class="form-label">Machine Last Modified</label>
-                    <input type="text" class="form-control" id="StagingUserMachineLastModified">
-                </div>
-            </form>
+               
+            </div>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal('CreateTargetGroupModal')">Cancel</button>
@@ -353,7 +336,7 @@ await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Targetin
                 </div>
                 <div class="mb-3">
                     <label for="StagingMachineLastModified" class="form-label">Machine Last Modified</label>
-                    <input type="datetime-local" class="form-control" id="StagingMachineLastModified">
+                    <input type="text" class="form-control" id="StagingMachineLastModified">
                 </div>
             </form>
         </div>
@@ -416,9 +399,9 @@ await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Targetin
 <!-- Edit Staging Modal -->
 <div class="modal fade" id="EditModal" tabindex="-1" aria-labelledby="EditModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-lg">
-<div class="modal-content">
+<div class="modal-content">  
     <div class="modal-header">
-        <h5 class="modal-title" id="EditModalLabel">Edit Target Group Entity</h5>
+        <h5 class="modal-title" id="EditModalLabel">Edit</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal('EditModal')"></button>
     </div>
     <div class="modal-body" id="EditModalContainer">
@@ -1037,9 +1020,6 @@ else
 
 
 
- 
-
-
 
 function AddNewTargetGroup() {
     const buttonText = document.getElementById("BreadcrumSettingsBtnText").innerText;
@@ -1050,7 +1030,7 @@ function AddNewTargetGroup() {
     } else if (buttonText.includes("Machine")) {
         const machineModal = new bootstrap.Modal(document.getElementById('CreateStagingMachineModal'));
         machineModal.show();
-    } else if (buttonText.includes("IPRange")) {
+        } else if (buttonText.includes("IPRanges")) {
         const ipRangeModal = new bootstrap.Modal(document.getElementById('CreateIPRangeModal'));
         ipRangeModal.show();
     } else if (buttonText.includes("Group")) {
@@ -1076,6 +1056,7 @@ $.ajax({
               
         $('#EditModalContainer').html(response);
         const editModal = new bootstrap.Modal(document.getElementById('EditModal'));
+        
         editModal.show();
 
     },
