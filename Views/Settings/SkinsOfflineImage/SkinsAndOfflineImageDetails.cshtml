@@ -210,12 +210,12 @@
 
 
 <!-------- Add New Skins and Offline Images Modal -------->
-<div class="modal fade" id="EditModal" tabindex="-1" aria-labelledby="EditModalLabel" aria-hidden="true">
+<div class="modal fade" id="AddNewSkinModal" tabindex="-1" aria-labelledby="AddNewSkinModallLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
-                <h5 class="modal-title" id="EditModalLabel">Select Item Path</h5>
+                <h5 class="modal-title" id="AddNewSkinModalLabel">Select Item Path</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal('EditModal')">
                 </button>
             </div>
@@ -251,21 +251,23 @@
         </div>
     </div>
 </div>
-
 <!-- Edit Skins and Offline Image Modal -->
+
 <div class="modal fade" id="EditModal" tabindex="-1" aria-labelledby="EditModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-dialog-centered modal-fullscreen">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="EditModalLabel">Edit Staging Entity</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal('EditModal')"></button>
             </div>
-            <div class="modal-body" id="EditModalContainer">
-                <!-- Dynamic content for the modal goes here -->
+            <div class="modal-body" id="EditModalNewSkin">
+                <!-- Dynamic content for the modal -->
+               
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn custom-btn  btn-secondary" data-bs-dismiss="modal" onclick="closeModal('EditModal')">Cancel</button>
-                <button type="button" class="custom-btn  custom-btn-default" onclick="SaveStagingUser()">Save User</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal('EditModal')">Cancel</button>
+          
+                <button class="btn btn-success px-4" onclick="SaveStagingUser()">Save Category</button>
             </div>
         </div>
     </div>
@@ -287,21 +289,31 @@
 
 
     // Function to open the modal and load data via AJAX
-    function EditNewStagingEntry(CategoryId) {
+    function EditNewStagingEntry(CategoryId)
+    {
+      
         $.ajax({
-            url: '@Url.Action("EditSkinsAndOfflineImage", "Settings")/' + CategoryId,
+            url: '@Url.Action("EditSkinsAndOfflineImage", "Settings")',
             type: 'GET',
-            success: function (data) {
-                // Inject the dynamic content into the modal container
-                $('#EditModalContainer').html(data);
-                $('#EditModal').modal('show'); // Show the modal
+            data: { CategoryId: CategoryId},
+            success: function (response) {
+
+                $('#EditModalNewSkin').html(response);
+                 
+
+                const editModal = new bootstrap.Modal(document.getElementById('EditModal'));
+                editModal.show();
+
             },
-            error: function () {
-                alert('Error fetching the skin details.');
+            error: function (error) {
+                console.log('Error fetching machine data:', error);
             }
         });
-        };
 
+
+
+    };
+  
 
     // Function to close the modal
     function closeModal(modalId) {
@@ -310,7 +322,7 @@
 
     function AddNewTargetGroup() {
       
-        const userModal = new bootstrap.Modal(document.getElementById('EditModal'));
+        const userModal = new bootstrap.Modal(document.getElementById('AddNewSkinModal'));
         userModal.show(); 
        
     }

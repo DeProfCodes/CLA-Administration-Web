@@ -382,6 +382,8 @@ namespace CLA_Administration_Web.Controllers
             return PartialView(AppPagesLinks.Settings.SkinsOfflineImagesPageLink, skinsAndOfflineImageData);
         }
 
+
+        [HttpGet]
         public async Task<IActionResult> EditSkinsAndOfflineImage(int CategoryId)
         {
             // Recursive function to find the category by ID

@@ -1,1 +1,114 @@
-﻿<h1>Worked</h1>
+﻿@using CLA_Administration_Web.ViewModels.Settings.SkinAndOfflineImage;
+@using Newtonsoft.Json
+@model SkinsAndOfflineModel;
+@using CLA_Administration_Web.Helpers.Enums.AppPages
+@using CLA_Administration_Web.Helpers.Enums.Shared
+@using CLA_Administration_Web.Helpers.Enums.Shared.PageNames
+@using CLA_Administration_Web.Helpers.Constants
+
+
+
+@{
+    var treeParents = !string.IsNullOrEmpty(Model.CategoryName) ? $"{Model.CategoryName} > " : "";
+    //var pageTitle = Model.AddOrEdit == AddOrEditType.Add ? "Add Content Library Category" : $"Edit Content Library Category: {Model.CategoryId}";
+}
+
+<p>@Model</p>
+<div class="card">
+    <div class="card-body">
+        <h5 class="fw-bold text-center mt-3 mb-4">Category Details</h5>
+        <div class="table-responsive">
+            <table class="table custom-table align-start">
+                <tbody>
+                    <!-- Parent Category -->
+                    @if (!string.IsNullOrEmpty(Model.CategoryName))
+                    {
+                        <tr>
+                            <td class="text-end w-50 custom-p"><strong>Parent Category:</strong></td>
+                            <td>
+                                <span class="fst-italic theme-txt-clr">@treeParents</span>
+                                <span class="fw-bold text-success">@Model.CategoryName</span>
+                            </td>
+                        </tr>
+                    }
+
+                    <!-- New Category Name -->
+                    <tr>
+                        <td class="text-end  custom-p"><strong>New Category Name:</strong></td>
+                        <td>
+                            <input class="form-control" type="text" id="NewContentLibCategoryName" value="@Model.CategoryName" />
+                            <p class="text-danger fs-6 fst-italic mt-1" id="NewContentLibCategoryNameError"></p>
+                        </td>
+                    </tr>
+
+                    <!-- Category Description -->
+                    <tr>
+                        <td class="text-end  custom-p"><strong>Category Description:</strong></td>
+                        <td>
+                            <input class="form-control" type="text" id="NewContentLibCategoryDescription" value="@Model.Description" />
+                            <p class="text-danger fs-6 fst-italic mt-1" id="NewContentLibCategoryDescriptionError"></p>
+                        </td>
+                    </tr>
+
+                    <!-- Default -->
+                    <tr>
+                        <td class="text-end  custom-p"><strong>Default?</strong></td>
+                        <td>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="Default" @(Model.IsDefault == "Yes" ? "checked" : "") />
+                                <label class="form-check-label" for="Default">Set as Default</label>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- User Last Modified -->
+                    <tr>
+                        <td class="text-end  custom-p"><strong>User Last Modified:</strong></td>
+                        <td class="fw-bold">@Model.UserLastModified</td>
+                    </tr>
+
+                    <!-- Machine Last Modified -->
+                    <tr>
+                        <td class="text-end  custom-p"><strong>Machine Last Modified:</strong></td>
+                        <td class="fw-bold">@Model.MachineLastModified</td>
+                    </tr>
+
+                    <!-- Select Item (if applicable) -->
+                    <tr>
+                        <td class="text-end  custom-p"><strong>Select Item:</strong></td>
+                        <td>
+                            <button class="btn btn-success px-3" onclick="SubmitNewContentLibraryCategory()">Save Category</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+<style>
+    .custom-table tr {
+        border-bottom: none !important;
+    }
+
+    .custom-table td,
+    .custom-table th {
+        border: none !important;
+    }
+</style>
+
+
+<style>
+
+    .custom-table tr {
+        border-bottom: none !important;
+    }
+
+    .custom-table td,
+    .custom-table th {
+        border: none !important;
+    }
+
+
+</style>
