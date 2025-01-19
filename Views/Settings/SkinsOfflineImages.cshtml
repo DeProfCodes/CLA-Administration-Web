@@ -198,12 +198,12 @@ await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Settings/Setting
 
                 <div class="mb-3">
                     <label for="UserLastModified" class="form-label">User Last Modified</label>
-                    <input type="text" class="form-control" id="UserLastModified" name="UserLastModified">
+                    <input type="text" class="form-control" id="UserLastModified" name="UserLastModified" value="Proficient Mkansi" disabled>
                 </div>
 
                 <div class="mb-3">
                     <label for="MachineLastModified" class="form-label">Machine Last Modified</label>
-                    <input type="text" class="form-control" id="MachineLastModified" name="MachineLastModified">
+                    <input type="text" class="form-control" id="MachineLastModified" name="MachineLastModified" value="Proficient-PC" disabled>
                 </div>
             </div>
 
@@ -236,10 +236,7 @@ await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Settings/Setting
             </div>
             <div class="modal-body" id="EditModalContainer">
                 <form>
-                    <div class="mb-3">
-                        <label for="UserId" class="form-label">Item Path: </label>
-                        <input type="text" class="form-control" id="Path" name="Path" value="" readonly>
-                    </div>
+                  
 
                     <div class="mb-3">
                         <div class="error-message" id="errorMessage" style="color: red; display: none;"></div>
@@ -263,12 +260,12 @@ await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Settings/Setting
 
                     <div class="mb-3">
                         <label for="UserLastModified" class="form-label">User Last Modified</label>
-                        <input type="text" class="form-control" id="UserLastModified" name="UserLastModified" value="">
+                        <input type="text" class="form-control" id="UserLastModified" name="UserLastModified" value="Proficient Mkansi" disabled>
                     </div>
 
                     <div class="mb-3">
                         <label for="MachineLastModified" class="form-label">Machine Last Modified</label>
-                        <input type="text" class="form-control" id="MachineLastModified" name="MachineLastModified" value="">
+                        <input type="text" class="form-control" id="MachineLastModified" name="MachineLastModified" value="Proficient-PC" disabled>
                     </div>
                 </form>
               

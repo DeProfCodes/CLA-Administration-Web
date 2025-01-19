@@ -62,11 +62,16 @@ padding-left: 0.8rem;
     cursor: pointer;
 }
 
-    .custom-tree li .custom-file.active {
+    .custom-tree li .custom-file.active
+    {
         background-color: #1d457b;
         color: white;
     }
 
+.gray-out-input {
+   background-color: #e9ecef;
+   color: #6c757d;
+}
 
 #UsersModal
 {

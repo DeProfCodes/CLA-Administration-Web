@@ -1,6 +1,8 @@
 ﻿@model StagingUserMachineViewModel
 @{
     string entityType = ViewBag.EntityType as string;
+
+ 
 }
 
 @if (entityType == "User")
@@ -8,13 +10,21 @@
 
     <form>
         <div class="mb-3">
-            <label for="UserId" class="form-label">User ID : @Model.Id</label>
+           
             <input type="hidden" class="form-control" id="UserId" name="Id" value="@Model.Id" readonly>
         </div>
 
         <div class="mb-3">
             <label for="Domain" class="form-label">Domain</label>
-            <input type="text" class="form-control" id="Domain" name="Domain" value="@Model.Domain">
+            <select class="form-control" id="ReportModuleSelect">
+                <option value="0">Please select Domain Name</option>
+
+                <option value="Corporate-Vocie">Corporate-Vocie</option>
+                <option value="Corporate-Vocie">Test Domian</option>
+                <option value="Corporate-Vocie">Admin</option>
+                <option value="Corporate-Vocie">NTHDIM</option>
+                
+            </select>
         </div>
 
         <div class="mb-3">
@@ -34,12 +44,12 @@
 
         <div class="mb-3">
             <label for="UserLastModified" class="form-label">User Last Modified</label>
-            <input type="text" class="form-control" id="UserLastModified" name="UserLastModified" value="@Model.UserLastModified" readonly>
+            <input type="text" class="form-control" id="UserLastModified" name="UserLastModified" value="@Model.UserLastModified" disabled>
         </div>
 
         <div class="mb-3">
             <label for="MachineLastModified" class="form-label">Machine Last Modified</label>
-            <input type="text" class="form-control" id="MachineLastModified" name="MachineLastModified" value="@Model.MachineLastModified" readonly>
+            <input type="text" class="form-control" id="MachineLastModified" name="MachineLastModified" value="@Model.MachineLastModified" disabled>
         </div>
     </form>
 
@@ -49,12 +59,20 @@
 {
     <form>
         <div class="mb-3">
-            <label for="MachineId" class="form-label">Machine ID : @Model.Id </label>
+            
             <input type="hidden" class="form-control" id="MachineId" name="Id" value="@Model.Id" readonly>
         </div>
         <div class="mb-3">
             <label for="MachineName" class="form-label">Domain</label>
-            <input type="text" class="form-control" id="MachineName" name="MachineName" value="@Model.Domain">
+            <select class="form-control" id="ReportModuleSelect">
+                <option value="0">Please select Domain Name</option>
+
+                <option value="Corporate-Vocie">Corporate-Vocie</option>
+                <option value="Corporate-Vocie">Test Domian</option>
+                <option value="Corporate-Vocie">Admin</option>
+                <option value="Corporate-Vocie">NTHDIM</option>
+
+            </select>
         </div>
         <div class="mb-3">
             <label for="MachineName" class="form-label">Machine Name</label>
@@ -66,11 +84,11 @@
         </div>
         <div class="mb-3">
             <label for="UserLastModified" class="form-label">User Last Modified</label>
-            <input type="text" class="form-control" id="UserLastModified" name="UserLastModified" value="@Model.UserLastModified" readonly>
+            <input type="text" class="form-control" id="UserLastModified" name="UserLastModified" value="@Model.UserLastModified" disabled>
         </div>
         <div class="mb-3">
             <label for="MachineLastModified" class="form-label">Machine Last Modified</label>
-            <input type="text" class="form-control" id="MachineLastModified" name="MachineLastModified" value="@Model.MachineLastModified" readonly>
+            <input type="text" class="form-control" id="MachineLastModified" name="MachineLastModified" value="@Model.MachineLastModified" disabled>
         </div>
     </form>
 

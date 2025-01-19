@@ -237,10 +237,15 @@ await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Targetin
             <div id="CreateStagingUserForm">
                 <div class="mb-3">
                     <label for="StagingUserDomain" class="form-label">Domain</label>
-                    <select class="form-select" id="StagingUserDomain" required>
-                        <option value="">Please select a domain</option>
-                        <!-- Your dynamic options -->
-                    </select>
+                        <select class="form-control" id="ReportModuleSelect">
+                            <option value="0">Please select Domain Name</option>
+
+                            <option value="Corporate-Vocie">Corporate-Vocie</option>
+                            <option value="Corporate-Vocie">Test Domian</option>
+                            <option value="Corporate-Vocie">Admin</option>
+                            <option value="Corporate-Vocie">NTHDIM</option>
+
+                        </select>
                 </div>
                 <div class="mb-3">
                     <label for="StagingUserUsername" class="form-label">DisplayName</label>
@@ -269,10 +274,15 @@ await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Targetin
             <form id="CreateStagingUserForm">
                 <div class="mb-3">
                     <label for="StagingUserDomain" class="form-label">Domain</label>
-                    <select class="form-select" id="StagingUserDomain" required>
-                        <option value="">Please select a domain</option>
-                        <!-- Your dynamic options -->
-                    </select>
+                        <select class="form-control" id="ReportModuleSelect">
+                            <option value="0">Please select Domain Name</option>
+
+                            <option value="Corporate-Vocie">Corporate-Vocie</option>
+                            <option value="Corporate-Vocie">Test Domian</option>
+                            <option value="Corporate-Vocie">Admin</option>
+                            <option value="Corporate-Vocie">NTHDIM</option>
+
+                        </select>
                 </div>
                 <div class="mb-3">
                     <label for="StagingUserUsername" class="form-label">Username</label>
@@ -286,14 +296,15 @@ await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Targetin
                     <label for="StagingUserLastname" class="form-label">Last Name</label>
                     <input type="text" class="form-control" id="StagingUserLastname" required>
                 </div>
-                <div class="mb-3">
-                    <label for="StagingUserUserLastModified" class="form-label">User Last Modified</label>
-                    <input type="text" class="form-control" id="StagingUserUserLastModified">
-                </div>
-                <div class="mb-3">
-                    <label for="StagingUserMachineLastModified" class="form-label">Machine Last Modified</label>
-                    <input type="text" class="form-control" id="StagingUserMachineLastModified">
-                </div>
+                    <div class="mb-3">
+                        <label for="UserLastModified" class="form-label">User Last Modified</label>
+                        <input type="text" class="form-control" id="UserLastModified" name="UserLastModified" value="Proficient Mkansi" disabled>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="MachineLastModified" class="form-label">Machine Last Modified</label>
+                        <input type="text" class="form-control" id="MachineLastModified" name="MachineLastModified" value="Proficient-PC" disabled>
+                    </div>
             </form>
         </div>
         <div class="modal-footer">
@@ -317,9 +328,15 @@ await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Targetin
             <form id="CreateStagingMachineForm">
                 <div class="mb-3">
                     <label for="StagingMachineDomain" class="form-label">Domain</label>
-                    <select class="form-select" id="StagingMachineDomain" required>
-                        <option value="">Please select a domain</option>
-                        <!-- Your dynamic options -->
+                        <select class="form-control" id="ReportModuleSelect">
+                            <option value="0">Please select Domain Name</option>
+
+                            <option value="Corporate-Vocie">Corporate-Vocie</option>
+                            <option value="Corporate-Vocie">Test Domian</option>
+                            <option value="Corporate-Vocie">Admin</option>
+                            <option value="Corporate-Vocie">NTHDIM</option>
+
+                        </select>
                     </select>
                 </div>
                 <div class="mb-3">
@@ -330,14 +347,15 @@ await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Targetin
                     <label for="StagingMachineDescription" class="form-label">Machine Description</label>
                     <input type="text" class="form-control" id="StagingMachineDescription" required>
                 </div>
-                <div class="mb-3">
-                    <label for="StagingUserLastModified" class="form-label">User Last Modified</label>
-                    <input type="text" class="form-control" id="StagingUserLastModified">
-                </div>
-                <div class="mb-3">
-                    <label for="StagingMachineLastModified" class="form-label">Machine Last Modified</label>
-                    <input type="text" class="form-control" id="StagingMachineLastModified">
-                </div>
+                    <div class="mb-3">
+                        <label for="UserLastModified" class="form-label">User Last Modified</label>
+                        <input type="text" class="form-control" id="UserLastModified" name="UserLastModified" value="Proficient Mkansi" disabled>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="MachineLastModified" class="form-label">Machine Last Modified</label>
+                        <input type="text" class="form-control" id="MachineLastModified" name="MachineLastModified" value="Proficient-PC" disabled>
+                    </div>
             </form>
         </div>
         <div class="modal-footer">

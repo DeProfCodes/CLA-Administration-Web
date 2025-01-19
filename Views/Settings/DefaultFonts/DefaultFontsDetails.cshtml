@@ -70,16 +70,16 @@ var namedColors = new List<string> { "Red", "Green", "Blue", "Yellow", "Orange",
         <input type="color" id="TextColor" name="TextColor" class="form-control" onchange="updatePreview()">
     </div>
 
-    <div class="default-toolbar-item">
+  <!----  <div class="default-toolbar-item">
         <input type="color" id="BackgroundColor" name="BackgroundColor" class="form-control" onchange="updatePreview()">
-    </div>
+    </div>--->
 </div>
 
-<!-- Editable Document Area --
+<!-- Editable Document Area -->
 <div class="default-editor-area mt-3">
     <div class="default-editor" id="documentEditor" contenteditable="true" style="border: 1px solid #ccc; padding: 20px; background-color: @Model.BackgroundColor; color: @Model.TextColor; font-family: @Model.HeadingFontFamily; font-size: @Model.FontSize; font-weight: @Model.FontWeight; font-style: @Model.FontStyle;">
         @Model.Text
-    </div>---->
+    </div>
 </div>
 </div>
 

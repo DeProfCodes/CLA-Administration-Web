@@ -1,24 +1,30 @@
 ﻿<div class="container-fluid">
     <form>
+        <input type="hidden" class="form-control" id="adminId" value="5" disabled>
         <div class="row g-3">
-            <!-- Admin ID and Domain (Read-only) -->
-            <div class="col-md-3">
-                <label for="adminId" class="form-label hidden">Admin ID</label>
-                <input type="text" class="form-control hidden" id="adminId" value="5" hidden readonly>
-            </div>
+           
             <div class="col-md-3">
                 <label for="domain" class="form-label">Domain</label>
-                <input type="text" class="form-control" id="domain" value="domain" readonly>
+                <select class="form-control" id="ReportModuleSelect">
+                    <option value="0">Please select Domain Name</option>
+
+                    <option value="Corporate-Vocie">Corporate-Vocie</option>
+                    <option value="Corporate-Vocie">Test Domian</option>
+                    <option value="Corporate-Vocie">Admin</option>
+                    <option value="Corporate-Vocie">NTHDIM</option>
+
+                </select>
+
             </div>
 
             <!-- Username and Desktop Environment (Read-only) -->
             <div class="col-md-3">
                 <label for="username" class="form-label">Username</label>
-                <input type="text" class="form-control" id="username" value="Administrator-PC" readonly>
+                <input type="text" class="form-control" id="username" value="Administrator-PC" disabled>
             </div>
             <div class="col-md-3">
                 <label for="desktopEnvironment" class="form-label">Desktop Environment</label>
-                <input type="text" class="form-control" id="desktopEnvironment" value="desktopEnvironment" readonly>
+                <input type="text" class="form-control gray-out-input" id="desktopEnvironment" value="desktopEnvironment" >
             </div>
 
             <!-- Desktop Permissions -->
@@ -128,18 +134,12 @@
         
             <div class="col-md-3">
                 <label for="userLastModified" class="form-label">User Last Modified</label>
-                <input type="text" class="form-control" id="userLastModified" value="userLastModified" readonly>
+                <input type="text" class="form-control" id="userLastModified" value="userLastModified" disabled>
             </div>
             <div class="col-md-3">
                 <label for="machineLastModified" class="form-label">Machine Last Modified</label>
-                <input type="text" class="form-control" id="machineLastModified" value="machineLastModified" readonly>
+                <input type="text" class="form-control" id="machineLastModified" value="machineLastModified" disabled>
             </div>
         </div>
     </form>
 </div>
-
-<style>
-    .form-select{
-        width : 100%;
-    }
-</style>
