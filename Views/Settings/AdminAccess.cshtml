@@ -363,81 +363,97 @@
 <script>
 
     (() => {
-        // Initialize modals
+   
         const firstModal = document.getElementById('CreateStagingUserModal');
         const secondModal = document.getElementById('directoryModal');
 
-        // Function to show the first modal
-        function AddNewAdminUser() {
+
+        function AddNewAdminUser()
+        {
             const usersModal = new bootstrap.Modal(firstModal);
             usersModal.show();
 
             const userSelectionInput = document.getElementById('userSelection');
-            userSelectionInput.addEventListener('click', (event) => {
+            userSelectionInput.addEventListener('click', (event) =>
+            {
                 event.stopPropagation();
                 const directoryModal = new bootstrap.Modal(secondModal);
                 directoryModal.show();
 
-                // Listen for the 'hidden.bs.modal' event to remove the backdrop
-                directoryModal._element.addEventListener('hidden.bs.modal', () => {
+        
+                directoryModal._element.addEventListener('hidden.bs.modal', () =>
+                {
                     const backdrop = document.querySelector('.modal-backdrop');
                     if (backdrop) backdrop.remove();
                 });
             });
         }
 
-        // Prevent interaction with the first modal when the second modal is open
-        secondModal.addEventListener('show.bs.modal', () => {
+    
+        secondModal.addEventListener('show.bs.modal', () =>
+        {
             firstModal.setAttribute('inert', 'true');
         });
 
-        // Allow interaction with the first modal again when the second modal is closed
-        secondModal.addEventListener('hidden.bs.modal', () => {
+    
+        secondModal.addEventListener('hidden.bs.modal', () =>
+        {
             firstModal.removeAttribute('inert');
             const backdrop = document.querySelector('.modal-backdrop');
-            if (backdrop) backdrop.remove(); // Explicitly remove any lingering backdrop
+            if (backdrop) backdrop.remove();
         });
 
-        // Highlight the selected user and populate the input field in the first modal
-        function selectUser(event) {
+
+        function selectUser(event) 
+        {
             const selectedOption = event.target;
-            document.querySelectorAll('.option-item').forEach((item) => {
+            document.querySelectorAll('.option-item').forEach((item) =>
+            {
                 item.classList.remove('active');
             });
             selectedOption.classList.add('active');
             document.getElementById('userSelection').value = selectedOption.textContent.trim();
         }
 
-        // Attach click event to all user options
-        document.querySelectorAll('.option-item').forEach((option) => {
+     
+        document.querySelectorAll('.option-item').forEach((option) =>
+        {
             option.addEventListener('click', selectUser);
         });
 
-        // Save and close the second modal
-        function saveAndCloseDirectoryModal() {
+    
+        function saveAndCloseDirectoryModal()
+        {
             const userSelection = document.getElementById('userSelection').value;
-            if (userSelection) {
+            if (userSelection)
+            {
                 const directoryModalInstance = bootstrap.Modal.getInstance(secondModal);
                 directoryModalInstance.hide();
                 const backdrop = document.querySelector('.modal-backdrop');
-                if (backdrop) backdrop.remove(); // Remove the backdrop after closing
-            } else {
+                if (backdrop) backdrop.remove(); 
+            }
+            else 
+            {
                 alert('Please select a user before saving.');
             }
         }
 
-        // Handle tree toggling
-        document.querySelectorAll('.tree-toggle').forEach((toggle) => {
-            toggle.addEventListener('click', function () {
+   
+        document.querySelectorAll('.tree-toggle').forEach((toggle) =>
+        {
+            toggle.addEventListener('click', function ()
+            {
                 this.classList.toggle('opened');
             });
         });
 
-        // Filter options in the directory modal
-        function filterTree() {
+     
+        function filterTree()
+        {
             const filterInput = document.getElementById('filterInputMember').value.toLowerCase();
             const allOptions = document.querySelectorAll('.option-item');
-            allOptions.forEach((option) => {
+            allOptions.forEach((option) =>
+            {
                 const text = option.textContent.toLowerCase();
                 option.style.display = text.includes(filterInput) ? '' : 'none';
             });
@@ -451,17 +467,21 @@
 
 
 
-    function DeleteAdminAccess(connectionID) {
-        if (confirm("Are you sure you want to terminate this connection?")) {
+    function DeleteAdminAccess(connectionID)
+    {
+        if (confirm("Are you sure you want to terminate this connection?"))
+        {
             alert(`Delete admin: ${connectionID}`);
         }
     }
-    $(document).ready(function () {
+    $(document).ready(function () 
+    {
         MakeStandardDataTable("AdminAccessData");
     });
 
 
-    function EditAdminAccess(machineId) {
+    function EditAdminAccess(machineId) 
+    {
         $.ajax({
             url: '@Url.Action("EditAdminAccess", "Settings")',
             type: 'GET',
@@ -469,12 +489,14 @@
             {
                 adminID: machineId
             },
-            success: function (response) {
+            success: function (response)
+            {
                 $('#EditModalContainer').html(response);
                 const editModal = new bootstrap.Modal(document.getElementById('EditModal'));
                 editModal.show();
             },
-            error: function (error) {
+            error: function (error)
+            {
                 console.log('Error fetching machine data:', error);
             }
         });
