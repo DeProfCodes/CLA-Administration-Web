@@ -6,110 +6,8 @@
 @using CLA_Administration_Web.Helpers.Enums.Shared.PageNames
 
 @{
-int index = 0;
-var connectServer = "";
-var lastSyncLast3Days = "";
-var lastDBSync = "";
-var userMachine = "";
-var ipAddress = "";
-var syncVersion = "";
-var msdimVersion = "";
-var svcVersion = "";
-var activeConns = "";
-var lastPopup = "";
-var lastPopupDisplay = "";
-var lastSurvey = "";
-var lastSurveyDisplay = "";
-var network = "";
-var screenTime = "";
-var popupTime = "";
-var desktopTime = "";
-var ticker = "";
-var syncTime = "";
-var syncFrom = "";
-var syncTo = "";
-var allowTickerLaunch = false;
-var updateFuture = false;
-var passProtectScr = false;
-var allowUserChangeScre = false;
-var allowUserChangeDesk = false;
-var enableErrorLog = false;
-var aspectRatio = false;
-var impresionLog = false;
-var audio = false;
-var useMachineId = false;
-var surveyTargeting = "module-not-targeted";
-var popupTargeting = "module-not-targeted";
-var tickerTargeting = "module-not-targeted";
-var screensaverTargeting = "module-not-targeted";
-var desktopTargeting = "module-not-targeted";
-var lockscreenTargeting = "module-not-targeted";
-var usersGroups = "";
-var bgRedCss = "";
-var bgGreenCss = "";
-@if (Model != null && !Model.IsBlank)
-{
-var lastSyncDetails = Model.LastSyncDetails;
-if (lastSyncDetails != null)
-{
-connectServer = Model.ConnectedToLive ? "Connected to Live" : "Connected to Staging";
-lastSyncLast3Days = (lastSyncDetails.LastUpdateDT >= DateTime.Now.AddDays(-3) && lastSyncDetails.LastUpdateDT <= DateTime.Now) ? "Yes" : "No";
-lastDBSync = lastSyncDetails.LastUpdateDT?.ToString("yyyy/MM/dd HH:mm:ss") ?? "";
-userMachine = lastSyncDetails.MachineID;
-ipAddress = lastSyncDetails.IPAddress;
-syncVersion = lastSyncDetails.MSDIMSYNCVersion?.ToString("yyyy/MM/dd");
-msdimVersion = lastSyncDetails.MSDIMVersion?.ToString("yyyy/MM/dd");
-svcVersion = lastSyncDetails.MSDIMSVCVersion?.ToString("yyyy/MM/dd");
-activeConns = "1/100";
-lastPopup = $"({lastSyncDetails.LastSurveyID}) {lastSyncDetails.PopupTitle}";
-lastPopupDisplay = lastSyncDetails.LastSTMDT?.ToString("yyyy/MM/dd HH:mm:ss");
-lastSurvey = $"({lastSyncDetails.LastSurveyID}) {lastSyncDetails.SurveyTitle}";
-lastSurveyDisplay = lastSyncDetails.LastSurveyDT?.ToString("yyyy/MM/dd HH:mm:ss");
-bgRedCss = "bg-red";
-bgGreenCss = "bg-success";
-}
-var settings = Model.Settings;
-if (settings != null)
-{
-network = settings.Network;
-screenTime = settings.ScreensaverTimeout?.ToString() ?? "";
-popupTime = settings.PopUpTimeout?.ToString() ?? "";
-desktopTime = settings.DesktopTimeout?.ToString() ?? "";
-ticker = settings.TickerTimeout?.ToString() ?? "";
-syncTime = settings.SyncTimeout?.ToString() ?? "";
-syncFrom = settings.SyncTimeslotFrom;
-syncTo = settings.SyncTimeslotTo;
-allowTickerLaunch = settings.AllowTickerToLaunchAutomatically == 1;
-updateFuture = settings.UpdateFutureContent == 1;
-passProtectScr = settings.ScreenSaverIsSecure == 1;
-allowUserChangeScre = settings.PolicyControlledScreensaver == 1;
-allowUserChangeDesk = settings.DesktopIsSecure == 1;
-enableErrorLog = settings.ErrorLogging == 1;
-aspectRatio = settings.MaintainAspectRatio == 1;
-impresionLog = settings.ImpressionLogging == 1;
-audio = settings.UseAudio == "1";
-useMachineId = settings.UseMachineID == 1;
-}
-var targeting = Model.Targeting;
-if (targeting != null)
-{
-surveyTargeting = targeting.FirstOrDefault(x => x.Destination == "SURVEYS")?.CNT > 0 ? "module-targeted" : "module-not-targeted";
-popupTargeting = targeting.FirstOrDefault(x => x.Destination == "POPUPS")?.CNT > 0 ? "module-targeted" : "module-not-targeted"; ;
-tickerTargeting = targeting.FirstOrDefault(x => x.Destination == "TICKERS")?.CNT > 0 ? "module-targeted" : "module-not-targeted"; ;
-screensaverTargeting = targeting.FirstOrDefault(x => x.Destination == "SEQUENCES")?.CNT > 0 ? "module-targeted" : "module-not-targeted"; ;
-desktopTargeting = targeting.FirstOrDefault(x => x.Destination == "DESKTOPS")?.CNT > 0 ? "module-targeted" : "module-not-targeted"; ;
-lockscreenTargeting = targeting.FirstOrDefault(x => x.Destination == "LOCKED DESKTOPS")?.CNT > 0 ? "module-targeted" : "module-not-targeted"; ;
-}
-var users = Model.UserGroups.Select(x => x.GroupID);
-if (users != null)
-{
-usersGroups = string.Join(Environment.NewLine, users);
-}
-}
-}
-@{
-
-await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Settings/SettingsBreadcrumb.cshtml", new SettingsBreadcrumbViewModel
+    var index = 0;
+    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Settings/SettingsBreadcrumb.cshtml", new SettingsBreadcrumbViewModel
 {
 SettingsCurrentPage = SettingsPages.CustomUserSettings,
 HasAddNewButton = true,
@@ -222,7 +120,7 @@ Existing <span id="StagingUserMachineTitle">Users Settings</span>
             </div>
             <div class="modal-body">
                 <div id="CreateStagingUserForm">
-                    a <div class="mb-3" hidden>
+                     <div class="mb-3" hidden>
                         <label for="Description" class="form-label">Custom ID</label>
                         <input type="text" class="form-control" id="Description" required>
                     </div>
@@ -257,8 +155,8 @@ Existing <span id="StagingUserMachineTitle">Users Settings</span>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" id="closeModal" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal('CreateStagingMachineModal')">Cancel</button>
-                <button type="button" class="btn custom-btn-default" onclick="SaveStagingMachine()">Save Machine</button>
+                <button type="button" id="closeModal" class="btn btn-danger" data-bs-dismiss="modal" onclick="closeModal('CreateStagingMachineModal')">Cancel</button>
+                <button type="button" class="btn custom-btn  btn-success" onclick="SaveStagingMachine()">Save Machine</button>
             </div>
         </div>
     </div>

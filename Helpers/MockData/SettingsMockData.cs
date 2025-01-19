@@ -626,7 +626,7 @@ namespace CLA_Administration_Web.Helpers.MockData
                 result.Add(new TargetedMachine
                 {  machineId = random.Next(41, 999),
                     DomainName = MockDataHelperFunctions.GetRandomDomainName(),
-                    LastSyncDT = DateTime.Now.AddHours(-new Random().Next(1, 100)).ToString("yyyy/MM/dd HH:mm"),
+                    LastSyncDT = MockDataHelperFunctions.GetRandomMachineID(),
                     DisplayName = MockDataHelperFunctions.GetRandomFirstname(),
                     NTUsername = MockDataHelperFunctions.GetRandomLastname(),
                 });

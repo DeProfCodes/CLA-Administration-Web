@@ -17,12 +17,24 @@
     }
 
 
-    <!-- Settings Filter Component -->
+    <!-- Default fonts Filter Component -->
+
     <div class="card mb-4 mt-2 overview-filters-card app-card-main-scaling ">
         <div class="card-body pt-0 pb-0">
             <div class="row fs-12 mt-1 mb-2">
                 <H4 class="theme-txt-clr text-center w-100 fw-bold fs-16" id="TypeFilterTitle">Filters To be Added</H4>
-                
+                <div class="w-auto me-auto mb-1">
+                    <div class="d-flex">
+                        <p class="custom-p w-fit-content align-content-center">ModuleName</p>
+                        <select class="custom-input-text w-200p ms-2" id="ReportModuleSelect" onchange="FilterByModuleName()">
+                            <option value="0">Please select Module Name</option>
+                            @foreach (var data in Model.DefaultFonts) {
+                                <option value="@data.DefaultHeading">@data.DefaultHeading</option>
+                            }
+
+                        </select>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -35,7 +47,7 @@
         @foreach (var data in Model.DefaultFonts)
         {
             <div class="p-3">
-                <h5 class="text-center fw-bold mb-3">
+                <h5 class="text-center fw-bold mb-3" id="DefaultModuleName">
                     <span>@data.DefaultHeading</span>
                 </h5>
 
@@ -121,7 +133,7 @@
 
 <!-- Edit Default fonts Modal -->
 <div class="modal fade" id="EditDefaultFontsModal" tabindex="-1" aria-labelledby="EditModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
             <div class="modal-header">
             
@@ -177,16 +189,22 @@
             }
         });
     }
+
+
  
-    $(document).ready(function () {
-        // Handle button click for details
-        $('.details-button').click(function () {
+    $(document).ready(function ()
+    {
+      
+        $('.details-button').click(function () 
+        {
             var id = $(this).data('sub'); 
 
             OpenPage('@SettingsPages.DefaultFontsDetails', subId)
-            // AJAX call to fetch details
+  
          
         });
+
+      modulename= document.getElementById('DefaultModuleName')
     });
 
 
@@ -210,17 +228,38 @@
     {
 
         const modalElement = document.getElementById(modalId);
-        if (modalElement) {
+        if (modalElement)
+        {
             const bootstrapModal = bootstrap.Modal.getInstance(modalElement) || new bootstrap.Modal(modalElement);
             bootstrapModal.hide();
-        } else {
+        } else
+        {
             console.error(`Modal with ID "${modalId}" not found.`);
         }
     }
 
+    function FilterByModuleName()
+    {
+        const selectedModule = document.getElementById("ReportModuleSelect").value; 
+        const modules = document.querySelectorAll("#DefaultModuleName span"); 
 
-    // function closeModal(modalId) {
-    //     $('#' + modalId).modal('hide');
-    // }
+       
+        modules.forEach((module) =>
+        {
+            const moduleCard = module.closest(".p-3");
+            if (selectedModule === "0" || module.textContent.trim() === selectedModule)
+            {
+               
+                moduleCard.style.display = "block";
+            }
+            else
+            {
+          
+                moduleCard.style.display = "none";
+            }
+        });
+    }
+
+   
 
 </script>

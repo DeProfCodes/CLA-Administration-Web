@@ -13,10 +13,9 @@
     //var pageTitle = Model.AddOrEdit == AddOrEditType.Add ? "Add Content Library Category" : $"Edit Content Library Category: {Model.CategoryId}";
 }
 
-<p>@Model</p>
 <div class="card">
     <div class="card-body">
-        <h5 class="fw-bold text-center mt-3 mb-4">Category Details</h5>
+        <h5 class="fw-bold text-center mt-3 mb-4">Edit Skins and Offline Image Details</h5>
         <div class="table-responsive">
             <table class="table custom-table align-start">
                 <tbody>
@@ -24,10 +23,10 @@
                     @if (!string.IsNullOrEmpty(Model.CategoryName))
                     {
                         <tr>
-                            <td class="text-end w-50 custom-p"><strong>Parent Category:</strong></td>
+                            <td class="text-end w-50 custom-p"><strong>Category Name:</strong></td>
                             <td>
                                 <span class="fst-italic theme-txt-clr">@treeParents</span>
-                                <span class="fw-bold text-success">@Model.CategoryName</span>
+                               
                             </td>
                         </tr>
                     }
@@ -36,7 +35,7 @@
                     <tr>
                         <td class="text-end  custom-p"><strong>New Category Name:</strong></td>
                         <td>
-                            <input class="form-control" type="text" id="NewContentLibCategoryName" value="@Model.CategoryName" />
+                            <input class="form-control" style=" width:65%;" type="text" id="NewContentLibCategoryName" value="@Model.CategoryName" />
                             <p class="text-danger fs-6 fst-italic mt-1" id="NewContentLibCategoryNameError"></p>
                         </td>
                     </tr>
@@ -45,7 +44,7 @@
                     <tr>
                         <td class="text-end  custom-p"><strong>Category Description:</strong></td>
                         <td>
-                            <input class="form-control" type="text" id="NewContentLibCategoryDescription" value="@Model.Description" />
+                            <input class="form-control" type="text" style=" width:65%;" id="NewContentLibCategoryDescription" value="@Model.Description" />
                             <p class="text-danger fs-6 fst-italic mt-1" id="NewContentLibCategoryDescriptionError"></p>
                         </td>
                     </tr>
@@ -77,7 +76,10 @@
                     <tr>
                         <td class="text-end  custom-p"><strong>Select Item:</strong></td>
                         <td>
-                            <button class="btn btn-success px-3" onclick="SubmitNewContentLibraryCategory()">Save Category</button>
+                            @{
+                                await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Form/FileUploader.cshtml",
+                                new FileUploaderModel { ComponentId = "SkinsAndOfllineImage", InputId = "SkinsAndOfllineImageUploadInput", ShowPreviewButton = true, InitialHidden = false, WidthPx = "396px", OnFileUploadCallback = null });
+                            }
                         </td>
                     </tr>
                 </tbody>
@@ -112,3 +114,115 @@
 
 
 </style>
+
+
+<script>
+
+
+    function SaveImage() {
+        const module = document.getElementById("Module").value;
+        const fileInput = document.getElementById("SkinsAndOfllineImageUploadInput").files[0];
+
+        if (!fileInput) {
+            swal("Validation Error", "Please upload an image.", "error");
+            return;
+        }
+
+        // Validate the image
+        ValidateImage(fileInput, module)
+            .then(() => {
+
+                SaveImageToServer(fileInput)
+                    .then(() => {
+                        swal("Success", "New Skin and Offline Image is saved successfully.", "success");
+                    })
+                    .catch((err) => {
+                        swal("Error", `Failed to save the image: ${err}`, "error");
+                    });
+            })
+            .catch(errMessage => {
+                swal("Validation Error", errMessage, "error");
+            });
+    }
+
+
+    function SaveImageToServer(file) {
+        return new Promise((resolve, reject) => {
+
+            setTimeout(() => {
+                const isSuccess = true;
+                if (isSuccess) {
+                    resolve();
+                } else {
+                    reject("Server error occurred");
+                }
+            }, 1000);
+        });
+    }
+
+    function ValidateImage(file, module) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                const image = new Image();
+                image.src = e.target.result;
+
+                image.onload = function () {
+                    const width = image.width;
+                    const height = image.height;
+                    const fileType = file.type.split("/")[1].toUpperCase();
+
+                    const validationRules = {
+                        "@ModuleNamesType.Popup": { formats: ["JPG", "PNG"], width: null, height: null },
+                        "@ModuleNamesType.Screensaver": { formats: ["BMP"], width: [314, 414], height: [188, 288] },
+                        "Survey": { formats: ["BMP"], width: [485], height: [600] },
+                        "Ticker": { formats: ["BMP"], width: [80], height: [40] },
+                        "Ticker": { formats: ["BMP"], width: [80], height: [80] }
+                    };
+
+                    const rules = validationRules[module];
+
+
+                    if (!rules) {
+                        reject(`Invalid module type: ${module}. Please select a valid module.`);
+                        return;
+                    }
+
+
+                    const validFormats = rules.formats.map(format => format.toUpperCase());
+
+                    if (!validFormats.includes(fileType)) {
+                        reject(`Invalid file type. Allowed formats: ${validFormats.join(", ")}`);
+                        return;
+                    }
+
+                    if (rules.width && (!Array.isArray(rules.width) || !rules.width.includes(width))) {
+                        reject(`Invalid width (${width}px). Expected: ${rules.width.join(", ")}px`);
+                        return;
+                    }
+
+                    if (rules.height && (!Array.isArray(rules.height) || !rules.height.includes(height))) {
+                        reject(`Invalid height (${height}px). Expected: ${rules.height.join(", ")}px`);
+                        return;
+                    }
+
+                    resolve();
+                };
+
+                image.onerror = function () {
+                    reject("The uploaded file is not a valid image.");
+                };
+            };
+
+            reader.onerror = function () {
+                reject("An error occurred while reading the file.");
+            };
+
+            reader.readAsDataURL(file);
+        });
+    }
+
+
+
+</script>
