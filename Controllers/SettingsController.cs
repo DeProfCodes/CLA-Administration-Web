@@ -386,7 +386,7 @@ namespace CLA_Administration_Web.Controllers
         [HttpGet]
         public async Task<IActionResult> EditSkinsAndOfflineImage(int CategoryId)
         {
-            // Recursive function to find the category by ID
+        
             SkinOfflineCategortyTree FindSkinOfflineImageById(List<SkinOfflineCategortyTree> categories, int CategoryId)
             {
                 foreach (var category in categories)
@@ -406,10 +406,10 @@ namespace CLA_Administration_Web.Controllers
                     }
                 }
 
-                return null; // Not found
+                return null;
             }
 
-            // Find the category by ID
+        
             var customVm = FindSkinOfflineImageById(SettingsMockData.AllSkinsOfflineImageCategories, CategoryId);
 
             if (customVm == null)
@@ -417,7 +417,7 @@ namespace CLA_Administration_Web.Controllers
                 return NotFound(new { Message = "Category not found." });
             }
 
-            // Prepare the model to populate the modal
+        
             var skinsAndOfflineImageData = new SkinsAndOfflineModel
             {
                 Id = customVm.CategoryId,
@@ -428,13 +428,12 @@ namespace CLA_Administration_Web.Controllers
                 UserLastModified = customVm.UserLastModified,
                 MachineLastModified = customVm.MachineLastModified,
                 CategoryName = customVm.CategoryName,
-                SkinOfflineCategortyTrees = new List<SkinOfflineCategortyTree>() // Exclude nested children
+                SkinOfflineCategortyTrees = new List<SkinOfflineCategortyTree>()
             };
 
-            // Return the model to the modal as JSON
+         
             return PartialView(AppPagesLinks.Settings.SkinsOfflineImagesModalPageLink, skinsAndOfflineImageData);
         }
-
 
 
         [HttpGet]
@@ -457,7 +456,7 @@ namespace CLA_Administration_Web.Controllers
 
                     if (category._children != null && category._children.Any())
                     {
-                        grandchildName = parentName; // Save the parent as grandchild
+                        grandchildName = parentName;
                         grandparentName = parentName;
                         parentName = category.CategoryName;
 
@@ -467,7 +466,7 @@ namespace CLA_Administration_Web.Controllers
                             return found;
                         }
 
-                        // Reset the names if not found in this branch
+                     
                         parentName = grandparentName;
                         grandparentName = grandchildName;
                         grandchildName = string.Empty;
@@ -503,39 +502,6 @@ namespace CLA_Administration_Web.Controllers
             return PartialView(AppPagesLinks.Settings.SkinsOfflineImagesDetailsPageLink, model);
         }
 
-
-        [HttpGet]
-        public ActionResult EditSkinsAndOfflineImages(int machineId, string entityType)
-        {
-
-            var skinsAndOfflineImageData = new SkinsAndOfflineImageMainViewModel()
-            {
-                SkinAndOfflineImage = SettingsMockData.SkinsAndOfflineImage,
-                SkinOfflineCategortyTrees = SettingsMockData.AllSkinsOfflineImageCategories,
-
-            };
-
-            object selectedEntity = null;
-
-            if (entityType == "Machine")
-            {
-                selectedEntity = skinsAndOfflineImageData.SkinOfflineCategortyTrees.FirstOrDefault(m => m.CategoryId == machineId);
-            }
-            else if (entityType == "User")
-            {
-                selectedEntity = skinsAndOfflineImageData.SkinAndOfflineImage.FirstOrDefault(u => u.Id == machineId);
-            }
-
-
-            if (selectedEntity == null)
-            {
-                return NotFound($"{entityType} with ID {machineId} not found.");
-            }
-
-            ViewBag.EntityType = entityType;
-
-            return PartialView(AppPagesLinks.Settings.StagingModalViewPageLink, selectedEntity);
-        }
         #endregion
 
         #region Desktopinfo
