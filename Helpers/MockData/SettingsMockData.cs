@@ -202,47 +202,45 @@ namespace CLA_Administration_Web.Helpers.MockData
         {
             var random = new Random();
             var items = new List<AdminAccessItem>();
-         
+            var environments = new[] { "B", "S", "N" };
 
             for (int i = 1; i <= 15; i++)
-            {            
-              
+            {
                 var domain = MockDataHelperFunctions.GetRandomDomainName();
                 var username = $"User{random.Next(1, 101)}";
                 var id = random.Next(1, 100);
-                var desktopEnvironment = $"Environment{random.Next(1, 6)}";
-             
+                var desktopEnvironment = environments[random.Next(environments.Length)];
 
                 var item = new AdminAccessItem
                 {
-                   
+                    AdminID = id,
                     Domain = domain,
                     Username = MockDataHelperFunctions.GetRandomMachineID(),
                     DesktopEnvironment = desktopEnvironment,
-                    DesktopRead = random.Next(0, 2) == 0 ? "Allowed" : "Restricted",
-                    DesktopWrite = random.Next(0, 2) == 0 ? "Allowed" : "Restricted",
-                    DesktopReport = random.Next(0, 2) == 0 ? "Enabled" : "Disabled",
+                    DesktopRead = random.Next(0, 2) == 1,
+                    DesktopWrite = random.Next(0, 2) == 1,
+                    DesktopReport = random.Next(0, 2) == 1,
                     TickersEnvironment = $"TickersEnv{random.Next(1, 6)}",
-                    TickersRead = random.Next(0, 2) == 0 ? "Allowed" : "Restricted",
-                    TickersWrite = random.Next(0, 2) == 0 ? "Allowed" : "Restricted",
-                    TickersReport = random.Next(0, 2) == 0 ? "Enabled" : "Disabled",
+                    TickersRead = random.Next(0, 2) == 1,
+                    TickersWrite = random.Next(0, 2) == 1,
+                    TickersReport = random.Next(0, 2) == 1,
                     RSS_Environment = $"RSS_Env{random.Next(1, 6)}",
-                    RSS_Read = random.Next(0, 2) == 0 ? "Allowed" : "Restricted",
-                    RSS_Write = random.Next(0, 2) == 0 ? "Allowed" : "Restricted",
-                    RSS_Report = random.Next(0, 2) == 0 ? "Enabled" : "Disabled",
+                    RSS_Read = random.Next(0, 2) == 1,
+                    RSS_Write = random.Next(0, 2) == 1,
+                    RSS_Report = random.Next(0, 2) == 1,
                     LockscreenEnvironment = $"LockscreenEnv{random.Next(1, 6)}",
-                    LockscreenRead = random.Next(0, 2) == 0 ? "Allowed" : "Restricted",
-                    LockscreenWrite = random.Next(0, 2) == 0 ? "Allowed" : "Restricted",
-                    LockscreenReport = random.Next(0, 2) == 0 ? "Enabled" : "Disabled",
+                    LockscreenRead = random.Next(0, 2) == 1,
+                    LockscreenWrite = random.Next(0, 2) == 1,
+                    LockscreenReport = random.Next(0, 2) == 1,
                     UserLastModified = MockDataHelperFunctions.GetRandomUserID(),
                     MachineLastModified = MockDataHelperFunctions.GetRandomMachineID()
-
                 };
 
                 items.Add(item);
             }
             return items;
         }
+
 
         private static List<PositionViewModel> GetDesktopPositionData()
         {

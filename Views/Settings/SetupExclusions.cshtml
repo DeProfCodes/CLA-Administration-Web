@@ -428,6 +428,7 @@ var users = Model.Users.Select(x => x.UserLastModified).Distinct().ToList();
 
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="~/js/settings/settings.js"></script>
 
 <script>
 
@@ -516,55 +517,45 @@ function AddNewExcludedEntity()
 
     if (buttonText.includes("User"))
     {
-        const userModal = new bootstrap.Modal(document.getElementById('CreateStagingUserModal'));
-        userModal.show();
+        openModal('CreateStagingUserModal')
         var backdrop = document.querySelector('.modal-backdrop');
         if (backdrop) {
-               
+              
             backdrop.style.position = 'relative'
         }
     } 
     else if (buttonText.includes("Machine"))
     {
-        const machineModal = new bootstrap.Modal(document.getElementById('CreateStagingMachineModal'));
-        machineModal.show();
+            openModal('CreateStagingMachineModal')
+      
     }
 }
 
-function EditSetupExclusions(machineId, entityType)
-{
 
-    formdata = 
-    {
-        machineId: machineId,
-        entityType: entityType
-    }
 
-    $.ajax({
-        url: '@Url.Action("EditSetupExclusions", "Settings")',
-        type: 'GET',
-        data: formdata,
-        success: function (response)
+ function EditSetupExclusions(machineId, entityType)
+ {
+
+        formdata =
         {
-            console.log(response)
-            $('#EditModalContainer').html(response);
-            const editModal = new bootstrap.Modal(document.getElementById('EditModal'));
-            editModal.show();
-
-        },
-        error: function (error) 
-        {
-            console.log('Error fetching machine data:', error);
+            machineId: machineId,
+            entityType: entityType
         }
-    });
-    
-    // const formData = {
-    //      "machineId": machineId,
-    //      "entityType": entityType
-    //  };
 
-    // dynamicAjaxRequest(formData, "GET", '@Url.Action("EditSetupExclusions", "Settings")', 'EditModalContainer', 'EditModal');
-}
+        performAjaxRequest('@Url.Action("EditSetupExclusions", "Settings")', 'GET', formdata,
+            function (response)
+            {
+              
+                $('#EditModalContainer').html(response);
+                openModal('EditModal')
+            },
+            function (error) 
+            {
+                console.log('Error fetching machine data:', error);
+            }
+        );
+    }
+
 
  
 function SaveEditNewStagingEnting(formdata)
@@ -637,21 +628,9 @@ function closeModal(modalId)
 $(document).ready(function ()
 {
 
-     
-    const userTable = $('#userTable').DataTable({
-        paging: true,
-        searching: true,
-        info: true,
-        responsive: true,
-    });
-
-    const machineTable = $('#MachineTable').DataTable({
-        paging: true,
-        searching: true,
-        info: true,
-        responsive: true,
-    });
-
+   
+        const userTable = MakeStandardDataTable("userTable")
+        const machineTable = MakeStandardDataTable("MachineTable")
 
         $("#searchButton").click(function () {
             const searchTerm = $('#searchInput').val();
@@ -677,8 +656,7 @@ $(document).ready(function ()
                 'GET', 
                 { searchTerm },
                 function (data) { 
-                    console.log(data);
-                    populateTable(data, 'machine');
+                   populateTable(data, 'machine');
                 },
                 function () { 
                     alert("An error occurred while fetching data.");
@@ -688,7 +666,8 @@ $(document).ready(function ()
 
 
 
-        function populateTable(data, type) {
+        function populateTable(data, type)
+        {
             const tbody = (type === 'user') ? $("#userTable tbody") : $("#MachineTable tbody");
             tbody.empty();
 
@@ -703,7 +682,7 @@ $(document).ready(function ()
                     </tr>` :
                         `<tr data-machine-id="${item.id}">
                         <td>${item.machineName}</td>
-                            <td>${item.machineDescription}</td>
+                        <td>${item.machineDescription}</td>
                    
                     
                     </tr>`;
@@ -771,23 +750,6 @@ document.querySelector('#MachineTable tbody').addEventListener('click', function
 });
 
 
-    function performAjaxRequest(url, type, data, successCallback, errorCallback) {
-        $.ajax({
-            url: url,
-            type: type,
-            data: data,
-            success: function (response) {
-                if (successCallback) {
-                    successCallback(response);
-                }
-            },
-            error: function (error) {
-                if (errorCallback) {
-                    errorCallback(error);
-                }
-            }
-        });
-    }
 
 
 

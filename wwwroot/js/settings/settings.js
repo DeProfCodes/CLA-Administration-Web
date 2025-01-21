@@ -97,7 +97,7 @@ function applyRealTimeStyles(previewTextId, fontFamilyDropdownId, fontWeightDrop
     }
 }
 
-function triggerDelete(customID, confirmMessage, successMessage, deleteCallback)
+function triggerDelete(customID, confirmMessage= null, successMessage, deleteCallback)
 {
     
     Swal.fire({
@@ -130,8 +130,6 @@ function triggerDelete(customID, confirmMessage, successMessage, deleteCallback)
         }
     });
 }
-
-
 
 function closeModal(modalId)
 {
@@ -226,14 +224,11 @@ function ValidateImage(file, module)
     });
 }
 
-
-
 function renderTreeView(containerId, data)
 {
     const container = document.getElementById(containerId);
     container.innerHTML = createTreeHTML(data);
 }
-
 
 function createTreeHTML(model)
 {
@@ -261,7 +256,6 @@ function createTreeHTML(model)
     return html;
 }
 
-
 function filterTree(containerId, inputId)
 {
     const filter = document.getElementById(inputId).value.toLowerCase();
@@ -276,10 +270,7 @@ function filterTree(containerId, inputId)
 }
 
 
-
 /// User Modal Js
-
-
 function confirmSelection(tableId, inputMappings, modalId)
 {
     const selectedRow = document.querySelector(`#${tableId} tbody tr.selected`);
@@ -296,13 +287,15 @@ function confirmSelection(tableId, inputMappings, modalId)
     }
 }
 
-function selectRow(row, tableId) {
+function selectRow(row, tableId)
+{
     const rows = document.querySelectorAll(`#${tableId} tbody tr`);
     rows.forEach(r => r.classList.remove('selected'));
     row.classList.add('selected');
 }
 
-function setupTable(tableId, searchButtonId, searchInputId, ajaxUrl, populateTableCallback) {
+function setupTable(tableId, searchButtonId, searchInputId, ajaxUrl, populateTableCallback)
+{
     $(`#${tableId}`).DataTable({
         paging: true,
         searching: true,
@@ -310,26 +303,58 @@ function setupTable(tableId, searchButtonId, searchInputId, ajaxUrl, populateTab
         responsive: true,
     });
 
-    document.querySelector(`#${tableId} tbody`).addEventListener('click', function (e) {
+    document.querySelector(`#${tableId} tbody`).addEventListener('click', function (e)
+    {
         const row = e.target.closest('tr');
         if (row) selectRow(row, tableId);
     });
 
-    $(`#${searchButtonId}`).click(function () {
+    $(`#${searchButtonId}`).click(function ()
+    {
         const searchTerm = $(`#${searchInputId}`).val();
         $.ajax({
             url: ajaxUrl,
             type: 'GET',
             data: { searchTerm },
-            success: function (data) {
+            success: function (data)
+            {
                 populateTableCallback(tableId, data);
             },
-            error: function () {
+            error: function ()
+            {
                 alert("An error occurred while fetching data.");
             }
         });
     });
 }
 
+function performAjaxRequest(url, type, payload, successCallback, errorCallback)
+{
+    $.ajax({
+        url: url,
+        type: type,
+        data: payload,
+        success: function (response)
+        {
+            if (successCallback)
+            {
+                successCallback(response);
+            }
+        },
+        error: function (error)
+        {
+            if (errorCallback)
+            {
+                errorCallback(error);
+            }
+        }
+    });
+}
+
+function openModal(modalId)
+{
+    const modal = new bootstrap.Modal(document.getElementById(modalId));
+    modal.show();
+}
 
 /// User Modal Js
