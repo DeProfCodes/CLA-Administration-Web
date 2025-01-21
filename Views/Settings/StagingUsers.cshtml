@@ -697,15 +697,12 @@
         }
     }
 
-
-
     function selectRow(row, table)
     {
         const rows = table === 'user' ? document.querySelectorAll('#userTable tbody tr') : document.querySelectorAll('#MachineTable tbody tr');
         rows.forEach(r => r.classList.remove('selected'));
         row.classList.add('selected');
     }
-
 
     document.querySelector('#userTable tbody').addEventListener('click', function (e)
     {

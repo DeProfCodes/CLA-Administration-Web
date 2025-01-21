@@ -7,7 +7,7 @@
 @if (entityType == "User")
 {
     var user = (SetupExclusionsUsersViewModel)Model;
-    <form>
+    <div>
         <div class="mb-3">
           
             <input type="hidden" class="form-control" id="UserId" name="Id" value="@user.Id" readonly>
@@ -20,38 +20,30 @@
 
         <div class="mb-3">
             <label for="NTUserName" class="form-label">NT Username</label>
-            <input type="text" class="form-control" id="NTUserName" name="NTUserName" value="@user.Username">
+            <input type="text" class="form-control" id="NTUserName" name="NTUserName" value="@user.Username" disabled >
         </div>
 
         <div class="mb-3">
             <label for="Firstname" class="form-label">Firstname</label>
-            <input type="text" class="form-control" id="Firstname" name="Firstname" value="@user.Firstname">
+            <input type="text" class="form-control" id="Firstname" name="Firstname" value="@user.Firstname" disabled>
         </div>
 
         <div class="mb-3">
             <label for="Surname" class="form-label">Surname</label>
-            <input type="text" class="form-control" id="Surname" name="Surname" value="@user.Lastname">
+            <input type="text" class="form-control" id="Surname" name="Surname" value="@user.Lastname" disabled>
         </div>
 
-        <div class="mb-3">
-            <label for="UserLastModified" class="form-label">User Last Modified</label>
-            <input type="text" class="form-control" id="UserLastModified" name="UserLastModified" value="@user.UserLastModified" disabled>
-        </div>
-
-        <div class="mb-3">
-            <label for="MachineLastModified" class="form-label">Machine Last Modified</label>
-            <input type="text" class="form-control" id="MachineLastModified" name="MachineLastModified" value="@user.MachineLastModified" disabled>
-        </div>
-    </form>
+        
+    </div>
 
 }
 
 @if (entityType == "Machine")
 {
     var machine = (SetupExclusionMachinesViewModel)Model;
-    <form>
+    <div>
         <div class="mb-3">
-            <label for="MachineId" class="form-label">Machine ID : @machine.Id </label>
+         
             <input type="hidden" class="form-control" id="MachineId" name="Id" value="@machine.Id" readonly>
         </div>
         <div class="mb-3">
@@ -60,21 +52,14 @@
         </div>
         <div class="mb-3">
             <label for="MachineName" class="form-label">Machine Name</label>
-            <input type="text" class="form-control" id="MachineName" name="MachineName" value="@machine.MachineName">
+            <input type="text" class="form-control" id="MachineName" name="MachineName" value="@machine.MachineName" disabled>
         </div>
         <div class="mb-3">
             <label for="MachineDescription" class="form-label">Machine Description</label>
             <input type="text" class="form-control" id="MachineDescription" name="MachineDescription" value="@machine.MachineDescription">
         </div>
-        <div class="mb-3">
-            <label for="UserLastModified" class="form-label">User Last Modified</label>
-            <input type="text" class="form-control" id="UserLastModified" name="UserLastModified" value="@machine.UserLastModified" readonly>
-        </div>
-        <div class="mb-3">
-            <label for="MachineLastModified" class="form-label">Machine Last Modified</label>
-            <input type="text" class="form-control" id="MachineLastModified" name="MachineLastModified" value="@machine.MachineLastModified" readonly>
-        </div>
-    </form>
+       
+    </div>
 
 }
 
