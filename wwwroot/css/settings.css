@@ -380,3 +380,12 @@ transition: transform 0.2s, box-shadow 0.2s;
 
 
 /*Desktop information close*/
+
+
+.form-border-inputs-settings {
+    width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    padding: 20px;
+}

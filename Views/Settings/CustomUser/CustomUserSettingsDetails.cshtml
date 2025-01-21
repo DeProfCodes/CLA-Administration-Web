@@ -58,148 +58,295 @@
         <h4 class="w-100 text-center theme-txt-clr">Custom user settings for ID: @Model.Id</h4>
     </div>
 </div>
-  
-<!-- User Settings Details -->
-<div class="row">
-    <div class="col-lg-8">
-        <div class="card-bordered-section">
-            <h5>User Settings Details</h5>
-            <form>
-                <div class="mb-3">
-                    <label for="settingDescription" class="form-label">Setting Description</label>
-                    <input type="text" id="settingDescription" class="form-control">
-                </div>
-                <div class="mb-3">
-                    <label for="network" class="form-label">Network</label>
-                    <select id="network" class="form-select">
-                        <option>MICROSOFT</option>
-                        <!-- Add more options if needed -->
-                    </select>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label for="screensaverTimeout" class="form-label">Screensaver Timeout (Seconds)</label>
-                        <input type="number" id="screensaverTimeout" class="form-control" value="@Model.ScreensaverTimeout">
+
+
+    <!-- User Settings Section -->
+    <div class="row">
+        <!-- Input Fields Section -->
+        <div class="col-lg-6">
+           <div class="card-bordered-section">
+            <h5 class="text-center">User Settings Details</h5>
+                <div class="form-border-inputs-settings">
+                <!-- Setting Description -->
+                <div class="row mt-3">
+                    <div class="common-titles-col">
+                        <p class="custom-p fl-right">Setting Description</p>
                     </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="popupTimeout" class="form-label">Popup Timeout (Seconds)</label>
-                        <input type="number" id="popupTimeout" class="form-control" value="@Model.PopupTimeout">
+                    <div class="common-titles-value-col">
+                        <input class="custom-input-text w-250p" type="text" id="settingDescription">
+                        <p class="mb-0 fs-12 text-danger fst-italic ps-1" id="settingDescriptionError"></p>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label for="desktopTimeout" class="form-label">Desktop Timeout (Seconds)</label>
-                        <input type="number" id="desktopTimeout" class="form-control" value="@Model.DeskTopTimeout">
+
+                <!-- Network -->
+                <div class="row mt-3">
+                    <div class="common-titles-col">
+                        <p class="custom-p fl-right">Network</p>
                     </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="tickerTimeout" class="form-label">Ticker Timeout (Seconds)</label>
-                        <input type="number" id="tickerTimeout" class="form-control" value="@Model.TickerTimeout">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label for="syncTimeout" class="form-label">Sync Timeout (Seconds)</label>
-                        <input type="number" id="syncTimeout" class="form-control" value="@Model.SyncTimeout">
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="syncTime" class="form-label">Sync Time</label>
-                        <input type="time" id="syncTime" class="form-control" value="@Model.SyncTimeout">
+                    <div class="common-titles-value-col">
+                        <select id="network" class="custom-input-text w-250p">
+                            <option>MICROSOFT</option>
+                            <!-- Add more options if needed -->
+                        </select>
+                        <p class="mb-0 fs-12 text-danger fst-italic ps-1" id="networkError"></p>
                     </div>
                 </div>
-                <div class="form-check">
-                        <input type="checkbox" id="passwordProtect" class="form-check-input"  @(allowTickerLaunch ? "checked" : "")>
-                    <label for="passwordProtect" class="form-check-label">Password Protect Screensaver</label>
+
+                <!-- Screensaver Timeout -->
+                <div class="row mt-3">
+                    <div class="common-titles-col">
+                        <p class="custom-p fl-right">Screensaver Timeout (Seconds)</p>
+                    </div>
+                    <div class="common-titles-value-col">
+                        <input class="custom-input-text w-250p" type="number" id="screensaverTimeout" value="@Model.ScreensaverTimeout">
+                        <p class="mb-0 fs-12 text-danger fst-italic ps-1" id="screensaverTimeoutError"></p>
+                    </div>
                 </div>
-                <div class="form-check">
-                    <input type="checkbox" id="overrideDesktop" class="form-check-input">
-                    <label for="overrideDesktop" class="form-check-label">Allow User to Override Desktop</label>
+
+                <!-- Popup Timeout -->
+                <div class="row mt-3">
+                    <div class="common-titles-col">
+                        <p class="custom-p fl-right">Popup Timeout (Seconds)</p>
+                    </div>
+                    <div class="common-titles-value-col">
+                        <input class="custom-input-text w-250p" type="number" id="popupTimeout" value="@Model.PopupTimeout">
+                        <p class="mb-0 fs-12 text-danger fst-italic ps-1" id="popupTimeoutError"></p>
+                    </div>
                 </div>
-                <!-- Add more form fields if necessary -->
-            </form>
+
+                <!-- Desktop Timeout -->
+                <div class="row mt-3">
+                    <div class="common-titles-col">
+                        <p class="custom-p fl-right">Desktop Timeout (Seconds)</p>
+                    </div>
+                    <div class="common-titles-value-col">
+                        <input class="custom-input-text w-250p" type="number" id="desktopTimeout" value="@Model.DeskTopTimeout">
+                        <p class="mb-0 fs-12 text-danger fst-italic ps-1" id="desktopTimeoutError"></p>
+                    </div>
+                </div>
+
+                <!-- Ticker Timeout -->
+                <div class="row mt-3">
+                    <div class="common-titles-col">
+                        <p class="custom-p fl-right">Ticker Timeout (Seconds)</p>
+                    </div>
+                    <div class="common-titles-value-col">
+                        <input class="custom-input-text w-250p" type="number" id="tickerTimeout" value="@Model.TickerTimeout">
+                        <p class="mb-0 fs-12 text-danger fst-italic ps-1" id="tickerTimeoutError"></p>
+                    </div>
+                </div>
+
+                <!-- Sync Timeout -->
+                <div class="row mt-3">
+                    <div class="common-titles-col">
+                        <p class="custom-p fl-right">Sync Timeout (Seconds)</p>
+                    </div>
+                    <div class="common-titles-value-col">
+                        <input class="custom-input-text w-250p" type="number" id="syncTimeout" value="@Model.SyncTimeout">
+                        <p class="mb-0 fs-12 text-danger fst-italic ps-1" id="syncTimeoutError"></p>
+                    </div>
+                </div>
+
+                <!-- Sync Time -->
+                <div class="row mt-3">
+                    <div class="common-titles-col">
+                        <p class="custom-p fl-right">Sync Time</p>
+                    </div>
+                    <div class="common-titles-value-col">
+                        <input class="custom-input-text w-250p" type="time" id="syncTime" value="@Model.SyncTimeout">
+                        <p class="mb-0 fs-12 text-danger fst-italic ps-1" id="syncTimeError"></p>
+                    </div>
+                </div>
+            </div>
         </div>
+        </div>
+
+        <div class="col-6">
+            <div class="card-bordered-section">
+                <div class="card">
+                    <div class="card-header custom-p fw-bold fs-14">
+                        Client Components
+                    </div>
+                    <div class="card-body" id="table-scroll">
+                        <div>
+                            <table class="table table-borderless">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Module</th>
+                                        <th scope="col">Is Enabled</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Screensaver</td>
+                                        <td>
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" checked>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Dynamic Desktop</td>
+                                        <td>
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" checked>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Surveys</td>
+                                        <td>
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Surveys</td>
+                                        <td>
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Surveys</td>
+                                        <td>
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Surveys</td>
+                                        <td>
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Surveys</td>
+                                        <td>
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <!-- Add more rows as needed -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Switch Fields Section -->
+        <div class="col-lg-6">
+            <div class="card-bordered-section">
+                <div class="card">
+                    <div class="card-header custom-p fw-bold fs-14">
+                        User Settings Switches
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 col-12 mb-3">
+                                <div class="form-check form-switch">
+                                    <input type="checkbox" id="passwordProtect" class="form-check-input" @(allowTickerLaunch ? "checked" : "")>
+                                    <label for="passwordProtect" class="form-check-label">Password Protect Screensaver</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12 mb-3">
+                                <div class="form-check form-switch">
+                                    <input type="checkbox" id="overrideDesktop1" class="form-check-input">
+                                    <label for="overrideDesktop1" class="form-check-label">Allow User to Override Desktop</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12 mb-3">
+                                <div class="form-check form-switch">
+                                    <input type="checkbox" id="overrideDesktop2" class="form-check-input">
+                                    <label for="overrideDesktop2" class="form-check-label">Enable Feature X</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12 mb-3">
+                                <div class="form-check form-switch">
+                                    <input type="checkbox" id="overrideDesktop3" class="form-check-input">
+                                    <label for="overrideDesktop3" class="form-check-label">Enable Feature Y</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12 mb-3">
+                                <div class="form-check form-switch">
+                                    <input type="checkbox" id="overrideDesktop3" class="form-check-input">
+                                    <label for="overrideDesktop3" class="form-check-label">Enable Feature Y</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12 mb-3">
+                                <div class="form-check form-switch">
+                                    <input type="checkbox" id="overrideDesktop3" class="form-check-input">
+                                    <label for="overrideDesktop3" class="form-check-label">Enable Feature Y</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12 mb-3">
+                                <div class="form-check form-switch">
+                                    <input type="checkbox" id="overrideDesktop3" class="form-check-input">
+                                    <label for="overrideDesktop3" class="form-check-label">Enable Feature Y</label>
+                                </div>
+                            </div>
+                               <div class="col-md-6 col-12 mb-3">
+                                <div class="form-check form-switch">
+                                    <input type="checkbox" id="overrideDesktop3" class="form-check-input">
+                                    <label for="overrideDesktop3" class="form-check-label">Enable Feature Y</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12 mb-3">
+                                <div class="form-check form-switch">
+                                    <input type="checkbox" id="overrideDesktop3" class="form-check-input">
+                                    <label for="overrideDesktop3" class="form-check-label">Enable Feature Y</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12 mb-3">
+                                <div class="form-check form-switch">
+                                    <input type="checkbox" id="overrideDesktop3" class="form-check-input">
+                                    <label for="overrideDesktop3" class="form-check-label">Enable Feature Y</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12 mb-3">
+                                <div class="form-check form-switch">
+                                    <input type="checkbox" id="overrideDesktop3" class="form-check-input">
+                                    <label for="overrideDesktop3" class="form-check-label">Enable Feature Y</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12 mb-3">
+                                <div class="form-check form-switch">
+                                    <input type="checkbox" id="overrideDesktop3" class="form-check-input">
+                                    <label for="overrideDesktop3" class="form-check-label">Enable Feature Y</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
     </div>
 
     <!-- Client Components -->
-    <div class="col-lg-4">
-        <div class="card-bordered-section">
-
-            <div class="card">
-                <div class="card-header custom-p fw-bold fs-14">
-                    Client Components
-                </div>
-                <div class="card-body" id="table-scroll">
-                    <div>
-
-                        <table class="table">
-                            <thead>
-                                <tr>
-
-                                    <th scope="col">Module</th>
-                                    <th scope="col">Is Enable</th>
-
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-
-                                    <td>Screensave</td>
-                                    <td> <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked></td>
-                                </tr>
-                                <tr>
-
-                                    <td>Dynamic Desktop</td>
-                                    <td> <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked></td>
-                                </tr>
-                                <tr>
-
-                                    <td>Surveys</td>
-                                    <td> <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></td>
-                                </tr>
-                                <tr>
-
-                                    <td>Screensave</td>
-                                    <td> <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked></td>
-                                </tr>
-                                <tr>
-
-                                    <td>Dynamic Desktop</td>
-                                    <td> <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked></td>
-                                </tr>
-                                <tr>
-
-                                    <td>Surveys</td>
-                                    <td> <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></td>
-                                </tr>
-                                <tr>
-
-                                    <td>Screensave</td>
-                                    <td> <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked></td>
-                                </tr>
-                                <tr>
-
-                                    <td>Dynamic Desktop</td>
-                                    <td> <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked></td>
-                                </tr>
-                                <tr>
-
-                                    <td>Surveys</td>
-                                    <td> <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                </div>
-            </div>
-            <!-- Add additional client components as needed -->
-        </div>
+    <div class="row mt-">
+       
     </div>
-</div>
 
-<div class="d-flex justify-content-between">
-        <button class="custom-btn custom-btn-default  w-fit-content" id="BulkImportBtn"> <i class="bi bi-plus-circle-fill"></i>Add</button>
-        <button class="custom-btn custom-btn-default  w-fit-content" id="BulkImportBtn"> <i class="bi bi-plus-circle-fill"></i>Revert to Globsl Settings</button>
-        <button class="btn-danger custom-btn custom-btn-default  w-fit-content" id="BulkImportBtn"> <i class="bi bi-plus-circle-fill"></i>Delete</button>
-  
-</div>
+    <!-- Action Buttons -->
+    <div class="d-flex justify-content-between mt-3">
+        <button class="btn btn-primary custom-btn" id="BulkImportBtn1">
+            <i class="bi bi-plus-circle-fill"></i> Add
+        </button>
+        <button class="btn btn-secondary custom-btn" id="BulkImportBtn2">
+            <i class="bi bi-gear"></i> Revert to Global Settings
+        </button>
+        <button class="btn btn-danger custom-btn" id="BulkImportBtn3">
+            <i class="bi bi-trash"></i> Delete
+        </button>
+    </div>
+
+
 </div>

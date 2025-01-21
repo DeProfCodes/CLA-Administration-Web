@@ -556,13 +556,6 @@ await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Targetin
                         <input type="file" class="form-control" id="fileInput" />
                     </div>
                     <div class="col-md-10">
-                      
-                        <div class="progress" id="progressBarContainer">
-                            <div class="progress-bar" id="progressBar" role="progressbar" style="width: 0%;"
-                                 aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                                0%
-                            </div>
-                        </div>
                         <div class="row mx-auto">
                             <div class="btn-group w-auto overview-filter-btn-group" role="group" aria-label="Status filter" id="ConnectionTypeBtns">
                                 @foreach (var filter in filterTypes)
@@ -570,6 +563,13 @@ await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Targetin
                                     <button class="btn module-filter-btn-group filter-type-btn id ='@filter' @((filter == "Users") ? "btn-group-active" : "")" onclick="ToogleBulkImport(this.id)" id="@filter">@filter</button>
                                 }
                             </div>
+                        <div class="progress" id="progressBarContainer">
+                            <div class="progress-bar" id="progressBar" role="progressbar" style="width: 0%;"
+                                 aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                0%
+                            </div>
+                        </div>
+                      
                         </div>
                        
                     </div>
