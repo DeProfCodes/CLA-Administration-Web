@@ -85,7 +85,7 @@ namespace CLA_Administration_Web.Controllers
                 }
             }
 
-            return Json(new List<User>()); // Return an empty list if no users are found
+            return Json(new List<StagingUserMachineViewModel>());
         }
 
         [HttpGet]
@@ -108,7 +108,7 @@ namespace CLA_Administration_Web.Controllers
                 }
             }
 
-            return Json(new List<Machine>()); // Return an empty list if no machines are found
+            return Json(new List<StagingUserMachineViewModel>()); 
         }
 
 
