@@ -23,7 +23,9 @@ using DocumentFormat.OpenXml.InkML;
 using DocumentFormat.OpenXml.Wordprocessing;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
+using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
 using System;
+using System.Reflection.PortableExecutable;
 
 namespace CLA_Administration_Web.Controllers
 {
@@ -36,11 +38,17 @@ namespace CLA_Administration_Web.Controllers
             _logger = logger;
         }
 
-        #region Stagingusers
+
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        #region StagingUsers
         [HttpGet]
         public async Task<IActionResult> StagingUsers()
         {
-
             var targetingTree = TargetingHelper.GetTargetedEntities();
             var targetingSelect = TargetingHelper.GetTargetedEntitiesSelect();
 
@@ -58,9 +66,55 @@ namespace CLA_Administration_Web.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> SearchOrFetchAllUsers(string searchTerm)
+        {
+            if (string.IsNullOrEmpty(searchTerm))
+            {
+                var allUsers = SettingsMockData.StagingUsers;
+                return Json(allUsers);
+            }
+            else
+            {
+                var users = SettingsMockData.StagingUsers
+                            .Where(u => u.Username.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
+                            .ToList();
+
+                if (users.Any())
+                {
+                    return Json(users);
+                }
+            }
+
+            return Json(new List<User>()); // Return an empty list if no users are found
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> SearchOrFetchAllMachines(string searchTerm)
+        {
+            if (string.IsNullOrEmpty(searchTerm))
+            {
+                var allMachines = SettingsMockData.StagingMachines;
+                return Json(allMachines);
+            }
+            else
+            {
+                var machines = SettingsMockData.StagingMachines
+                            .Where(m => m.MachineName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
+                            .ToList();
+
+                if (machines.Any())
+                {
+                    return Json(machines);
+                }
+            }
+
+            return Json(new List<Machine>()); // Return an empty list if no machines are found
+        }
+
+
+        [HttpGet]
         public ActionResult EditStagingMachine(int machineId, string entityType)
         {
-
             var stagingUsersData = new StagingUsersMainViewModel()
             {
                 StagingUsers = SettingsMockData.StagingUsers,
@@ -78,14 +132,12 @@ namespace CLA_Administration_Web.Controllers
                 selectedEntity = stagingUsersData.StagingUsers.FirstOrDefault(u => u.Id == machineId);
             }
 
-
             if (selectedEntity == null)
             {
                 return NotFound($"{entityType} with ID {machineId} not found.");
             }
 
             ViewBag.EntityType = entityType;
-
             return PartialView(AppPagesLinks.Settings.StagingModalViewPageLink, selectedEntity);
         }
 
@@ -116,21 +168,20 @@ namespace CLA_Administration_Web.Controllers
 
             ViewBag.EntityType = entityType;
             return PartialView(AppPagesLinks.Settings.SetupExclusionModalPageLink, selectedEntity);
-
         }
 
         [HttpPost]
         public ActionResult UpdateStagingMachine(StagingUserMachineViewModel updatedMachine)
         {
-
             var machine = LocalDataStorage.StagingData.SingleStagingMachine.FirstOrDefault(m => m.Id == updatedMachine.Id);
 
-
-            machine.MachineName = updatedMachine.MachineName;
-            machine.MachineDescription = updatedMachine.MachineDescription;
-            machine.UserLastModified = updatedMachine.UserLastModified;
-            machine.MachineLastModified = updatedMachine.MachineLastModified;
-
+            if (machine != null)
+            {
+                machine.MachineName = updatedMachine.MachineName;
+                machine.MachineDescription = updatedMachine.MachineDescription;
+                machine.UserLastModified = updatedMachine.UserLastModified;
+                machine.MachineLastModified = updatedMachine.MachineLastModified;
+            }
 
             return RedirectToAction("Index");
         }
@@ -143,12 +194,11 @@ namespace CLA_Administration_Web.Controllers
             var setupExcludedData = new SetupExclusionsMainViewModel()
             {
                 Users = SettingsMockData.SetupExcludedUsers,
-                Machines = SettingsMockData.SetupExcludedMachines,                 
+                Machines = SettingsMockData.SetupExcludedMachines,
                 TargetedEntities = targetingTree,
                 TargetedAccepted = targetingSelect,
                 TargetedGroups = targetingSelect,
             };
-        
 
             return PartialView(AppPagesLinks.Settings.SetupExclusionsPageLink, setupExcludedData);
         }
@@ -181,10 +231,8 @@ namespace CLA_Administration_Web.Controllers
             ViewBag.EntityType = entityType;
             return PartialView(AppPagesLinks.Settings.EditAdminModalPageLink, selectedEntity);
         }
-
-        [HttpGet]
-
         #endregion
+
 
         #region Admin
         public async Task<IActionResult> AdminAccess()

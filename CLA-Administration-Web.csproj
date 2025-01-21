@@ -16,6 +16,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Views\Settings\StagingUsers\" />
     <Folder Include="Views\Settings\TargetGroup\" />
     <Folder Include="Views\Shared\Components\Custom\Modules\Views\" />
     <Folder Include="wwwroot\assets\plugins\bootstrap-material-datetimepicker\css\" />

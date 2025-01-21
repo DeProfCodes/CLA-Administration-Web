@@ -47,12 +47,6 @@ function FilterByDomain()
     }
 }
 
-
-function closeModal(modalId)
-{
-    $('#' + modalId).modal('hide');
-}
-
 function applyRealTimeStyles(previewTextId, fontFamilyDropdownId, fontWeightDropdownId, fontStyleDropdownId)
 {
 
@@ -233,14 +227,14 @@ function ValidateImage(file, module)
 }
 
 
-// Reusable function to render a tree view
+
 function renderTreeView(containerId, data)
 {
     const container = document.getElementById(containerId);
     container.innerHTML = createTreeHTML(data);
 }
 
-// Helper function to generate tree HTML recursively
+
 function createTreeHTML(model)
 {
     let html = "<ul>";
@@ -267,7 +261,7 @@ function createTreeHTML(model)
     return html;
 }
 
-// Function to filter tree view dynamically
+
 function filterTree(containerId, inputId)
 {
     const filter = document.getElementById(inputId).value.toLowerCase();
@@ -282,3 +276,60 @@ function filterTree(containerId, inputId)
 }
 
 
+
+/// User Modal Js
+
+
+function confirmSelection(tableId, inputMappings, modalId)
+{
+    const selectedRow = document.querySelector(`#${tableId} tbody tr.selected`);
+    if (selectedRow) {
+        inputMappings.forEach(mapping => {
+            const { targetId, columnIndex } = mapping;
+            const value = selectedRow.querySelector(`td:nth-child(${columnIndex})`).textContent;
+            document.getElementById(targetId).value = value;
+        });
+
+        closeModal(modalId);
+    } else {
+        alert('Please select a row first!');
+    }
+}
+
+function selectRow(row, tableId) {
+    const rows = document.querySelectorAll(`#${tableId} tbody tr`);
+    rows.forEach(r => r.classList.remove('selected'));
+    row.classList.add('selected');
+}
+
+function setupTable(tableId, searchButtonId, searchInputId, ajaxUrl, populateTableCallback) {
+    $(`#${tableId}`).DataTable({
+        paging: true,
+        searching: true,
+        info: true,
+        responsive: true,
+    });
+
+    document.querySelector(`#${tableId} tbody`).addEventListener('click', function (e) {
+        const row = e.target.closest('tr');
+        if (row) selectRow(row, tableId);
+    });
+
+    $(`#${searchButtonId}`).click(function () {
+        const searchTerm = $(`#${searchInputId}`).val();
+        $.ajax({
+            url: ajaxUrl,
+            type: 'GET',
+            data: { searchTerm },
+            success: function (data) {
+                populateTableCallback(tableId, data);
+            },
+            error: function () {
+                alert("An error occurred while fetching data.");
+            }
+        });
+    });
+}
+
+
+/// User Modal Js
