@@ -2,136 +2,36 @@
     <form>
         <input type="hidden" class="form-control" id="adminId" value="5" disabled>
         <div class="row g-3">
-           
             <div class="col-md-3">
                 <label for="domain" class="form-label">Domain</label>
                 <select class="form-control" id="ReportModuleSelect">
                     <option value="0">Please select Domain Name</option>
-
-                    <option value="Corporate-Vocie">Corporate-Vocie</option>
-                    <option value="Corporate-Vocie">Test Domian</option>
-                    <option value="Corporate-Vocie">Admin</option>
-                    <option value="Corporate-Vocie">NTHDIM</option>
-
+                    <option value="Corporate-Voice">Corporate-Voice</option>
+                    <option value="Test Domain">Test Domain</option>
+                    <option value="Admin">Admin</option>
+                    <option value="NTHDIM">NTHDIM</option>
                 </select>
-
             </div>
 
-            <!-- Username and Desktop Environment (Read-only) -->
             <div class="col-md-3">
                 <label for="username" class="form-label">Username</label>
                 <input type="text" class="form-control" id="username" value="Administrator-PC" disabled>
             </div>
             <div class="col-md-3">
                 <label for="desktopEnvironment" class="form-label">Desktop Environment</label>
-                <input type="text" class="form-control gray-out-input" id="desktopEnvironment" value="desktopEnvironment" >
+                <input type="text" class="form-control gray-out-input" id="desktopEnvironment" value="desktopEnvironment">
             </div>
 
             <!-- Desktop Permissions -->
-            <div class="col-md-3">
-                <label for="desktopRead" class="form-label">Desktop Read</label>
-                <select class="form-select form-control" id="desktopRead">
-                    <option value="Allowed">Allowed</option>
-                    <option value="Restricted">Restricted</option>
-                </select>
-            </div>
-            <div class="col-md-3">
-                <label for="desktopWrite" class="form-label">Desktop Write</label>
-                <select class="form-select form-control" id="desktopWrite">
-                    <option value="Allowed">Allowed</option>
-                    <option value="Restricted">Restricted</option>
-                </select>
-            </div>
-            <div class="col-md-3">
-                <label for="desktopReport" class="form-label">Desktop Report</label>
-                <select class="form-select form-control" id="desktopReport">
-                    <option value="Enabled">Enabled</option>
-                    <option value="Disabled">Disabled</option>
-                </select>
-            </div>
-
-            <!-- Tickers Permissions -->
             <div class="col-md-3">
                 <label for="tickersEnvironment" class="form-label">Tickers Environment</label>
                 <input type="text" class="form-control" id="tickersEnvironment" value="TickersEnv1">
             </div>
             <div class="col-md-3">
-                <label for="tickersRead" class="form-label">Tickers Read</label>
-                <select class="form-select form-control" id="tickersRead">
-                    <option value="Allowed">Allowed</option>
-                    <option value="Restricted">Restricted</option>
-                </select>
-            </div>
-            <div class="col-md-3">
-                <label for="tickersWrite" class="form-label">Tickers Write</label>
-                <select class="form-select form-control" id="tickersWrite">
-                    <option value="Allowed">Allowed</option>
-                    <option value="Restricted">Restricted</option>
-                </select>
-            </div>
-            <div class="col-md-3">
-                <label for="tickersReport" class="form-label">Tickers Report</label>
-                <select class="form-select form-control" id="tickersReport">
-                    <option value="Enabled">Enabled</option>
-                    <option value="Disabled">Disabled</option>
-                </select>
-            </div>
-
-            <!-- RSS Permissions -->
-            <div class="col-md-3">
                 <label for="rssEnvironment" class="form-label">RSS Environment</label>
                 <input type="text" class="form-control" id="rssEnvironment" value="RSS_Env3">
             </div>
-            <div class="col-md-3">
-                <label for="rssRead" class="form-label">RSS Read</label>
-                <select class="form-select form-control" id="rssRead">
-                    <option value="Allowed">Allowed</option>
-                    <option value="Restricted">Restricted</option>
-                </select>
-            </div>
-            <div class="col-md-3">
-                <label for="rssWrite" class="form-label">RSS Write</label>
-                <select class="form-select form-control" id="rssWrite">
-                    <option value="Allowed">Allowed</option>
-                    <option value="Restricted">Restricted</option>
-                </select>
-            </div>
-            <div class="col-md-3">
-                <label for="rssReport" class="form-label">RSS Report</label>
-                <select class="form-select form-control" id="rssReport">
-                    <option value="Enabled">Enabled</option>
-                    <option value="Disabled">Disabled</option>
-                </select>
-            </div>
 
-            <!-- Lockscreen Permissions -->
-            <div class="col-md-3">
-                <label for="lockscreenEnvironment" class="form-label">Lockscreen Environment</label>
-                <input type="text" class="form-control" id="lockscreenEnvironment" value="LockscreenEnv4">
-            </div>
-            <div class="col-md-3">
-                <label for="lockscreenRead" class="form-label">Lockscreen Read</label>
-                <select class="form-select form-control" id="lockscreenRead">
-                    <option value="Allowed">Allowed</option>
-                    <option value="Restricted">Restricted</option>
-                </select>
-            </div>
-            <div class="col-md-3">
-                <label for="lockscreenWrite" class="form-label">Lockscreen Write</label>
-                <select class="form-select form-control" id="lockscreenWrite">
-                    <option value="Allowed">Allowed</option>
-                    <option value="Restricted">Restricted</option>
-                </select>
-            </div>
-            <div class="col-md-3">
-                <label for="lockscreenReport" class="form-label">Lockscreen Report</label>
-                <select class="form-select form-control" id="lockscreenReport">
-                    <option value="Enabled">Enabled</option>
-                    <option value="Disabled">Disabled</option>
-                </select>
-            </div>
-
-        
             <div class="col-md-3">
                 <label for="userLastModified" class="form-label">User Last Modified</label>
                 <input type="text" class="form-control" id="userLastModified" value="userLastModified" disabled>
@@ -140,6 +40,104 @@
                 <label for="machineLastModified" class="form-label">Machine Last Modified</label>
                 <input type="text" class="form-control" id="machineLastModified" value="machineLastModified" disabled>
             </div>
+
+            <div class="col-md-3">
+                <label class="form-label">Desktop Read</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="desktopRead" checked>
+                    <label class="form-check-label" for="desktopRead">Allowed</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Desktop Write</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="desktopWrite">
+                    <label class="form-check-label" for="desktopWrite">Allowed</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Desktop Report</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="desktopReport">
+                    <label class="form-check-label" for="desktopReport">Enabled</label>
+                </div>
+            </div>
+
+            <!-- Tickers Permissions -->
+         
+         
+
+            <div class="col-md-3">
+                <label class="form-label">Tickers Read</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="tickersRead" checked>
+                    <label class="form-check-label" for="tickersRead">Allowed</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Tickers Write</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="tickersWrite">
+                    <label class="form-check-label" for="tickersWrite">Allowed</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Tickers Report</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="tickersReport">
+                    <label class="form-check-label" for="tickersReport">Enabled</label>
+                </div>
+            </div>
+
+            <!-- RSS Permissions -->
+           
+            <div class="col-md-3">
+                <label class="form-label">RSS Read</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="rssRead" checked>
+                    <label class="form-check-label" for="rssRead">Allowed</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">RSS Write</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="rssWrite">
+                    <label class="form-check-label" for="rssWrite">Allowed</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">RSS Report</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="rssReport">
+                    <label class="form-check-label" for="rssReport">Enabled</label>
+                </div>
+            </div>
+
+            <!-- Lockscreen Permissions -->
+           
+            <div class="col-md-3">
+                <label class="form-label">Lockscreen Read</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="lockscreenRead" checked>
+                    <label class="form-check-label" for="lockscreenRead">Allowed</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Lockscreen Write</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="lockscreenWrite">
+                    <label class="form-check-label" for="lockscreenWrite">Allowed</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Lockscreen Report</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="lockscreenReport">
+                    <label class="form-check-label" for="lockscreenReport">Enabled</label>
+                </div>
+            </div>
+
+          
         </div>
     </form>
 </div>
