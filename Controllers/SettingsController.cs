@@ -427,68 +427,14 @@ namespace CLA_Administration_Web.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> EditSkinsAndOfflineImage(int CategoryId)
+        public async Task<IActionResult> EditSkinsAndOfflineImage(int? CategoryId)
         {
-        
-            SkinOfflineCategortyTree FindSkinOfflineImageById(List<SkinOfflineCategortyTree> categories, int CategoryId)
+            if (CategoryId == null || CategoryId == 0)
             {
-                foreach (var category in categories)
-                {
-                    if (category.CategoryId == CategoryId)
-                    {
-                        return category;
-                    }
-
-                    if (category._children != null && category._children.Any())
-                    {
-                        var found = FindSkinOfflineImageById(category._children, CategoryId);
-                        if (found != null)
-                        {
-                            return found; 
-                        }
-                    }
-                }
-
-                return null;
+                return NotFound(new { Message = "Invalid Category ID." });
             }
 
-        
-            var customVm = FindSkinOfflineImageById(SettingsMockData.AllSkinsOfflineImageCategories, CategoryId);
-
-            if (customVm == null)
-            {
-                return NotFound(new { Message = "Category not found." });
-            }
-
-        
-            var skinsAndOfflineImageData = new SkinsAndOfflineModel
-            {
-                Id = customVm.CategoryId,
-                ItemPath = "path/to/item",
-                ViewImagePath = "path/to/image",
-                IsDefault = "No",
-                Description = customVm.CategoryDescription,
-                UserLastModified = customVm.UserLastModified,
-                MachineLastModified = customVm.MachineLastModified,
-                CategoryName = customVm.CategoryName,
-                SkinOfflineCategortyTrees = new List<SkinOfflineCategortyTree>()
-            };
-
-         
-            return PartialView(AppPagesLinks.Settings.SkinsOfflineImagesModalPageLink, skinsAndOfflineImageData);
-        }
-
-
-        [HttpGet]
-     
-        public async Task<IActionResult> SkinsAndOfflineImageDetails(int CategoryId)
-        {
-            SkinOfflineCategortyTree FindSkinOfflineImageById(
-                List<SkinOfflineCategortyTree> categories,
-                int id,
-                ref string parentName,
-                ref string grandparentName,
-                ref string grandchildName)
+            SkinOfflineCategortyTree FindSkinOfflineImageById(List<SkinOfflineCategortyTree> categories, int id)
             {
                 foreach (var category in categories)
                 {
@@ -497,53 +443,95 @@ namespace CLA_Administration_Web.Controllers
                         return category;
                     }
 
-                    if (category._children != null && category._children.Any())
+                    var children = category._SubCategoryName ?? category._children;
+                    if (children != null && children.Any())
                     {
-                        grandchildName = parentName;
-                        grandparentName = parentName;
-                        parentName = category.CategoryName;
-
-                        var found = FindSkinOfflineImageById(category._children, id, ref parentName, ref grandparentName, ref grandchildName);
+                        var found = FindSkinOfflineImageById(children, id);
                         if (found != null)
                         {
                             return found;
                         }
-
-                     
-                        parentName = grandparentName;
-                        grandparentName = grandchildName;
-                        grandchildName = string.Empty;
                     }
                 }
 
                 return null;
             }
 
-            string parentName = string.Empty;
-            string grandparentName = string.Empty;
-            string grandchildName = string.Empty;
+            var customVm = FindSkinOfflineImageById(SettingsMockData.AllSkinsOfflineImageCategories, CategoryId.Value);
 
-            var customVm = FindSkinOfflineImageById(SettingsMockData.AllSkinsOfflineImageCategories, CategoryId, ref parentName, ref grandparentName, ref grandchildName);
+            if (customVm == null)
+            {
+                return NotFound(new { Message = "Category not found." });
+            }
+
+            var skinsAndOfflineImageData = new SkinsAndOfflineModel
+            {
+                Id = customVm.CategoryId,
+                Description = customVm.CategoryDescription ?? string.Empty,
+                UserLastModified = customVm.UserLastModified ?? string.Empty,
+                MachineLastModified = customVm.MachineLastModified ?? string.Empty,
+                CategoryName = customVm.CategoryName ?? string.Empty,
+                SkinOfflineCategortyTrees = customVm._children ?? new List<SkinOfflineCategortyTree>()
+            };
+
+            return PartialView(AppPagesLinks.Settings.SkinsOfflineImagesModalPageLink, skinsAndOfflineImageData);
+        }
+
+
+
+        [HttpGet]
+      public async Task<IActionResult> SkinsAndOfflineImageDetails(int? CategoryId)
+        {
+            if (CategoryId == null || CategoryId == 0)
+            {
+              
+                return PartialView(AppPagesLinks.Settings.SkinsOfflineImagesPageLink);
+            }
+
+            SkinOfflineCategortyTree FindSkinOfflineImageById(
+                List<SkinOfflineCategortyTree> categories,
+                int id)
+            {
+                foreach (var category in categories)
+                {
+                    if (category.CategoryId == id)
+                    {
+                        return category; 
+                    }
+
+                    if (category._children != null && category._children.Any())
+                    {
+                        var found = FindSkinOfflineImageById(category._children, id);
+                        if (found != null)
+                        {
+                            return found; 
+                        }
+                    }
+                }
+
+                return null; 
+            }
+
+            var matchedCategory = FindSkinOfflineImageById(SettingsMockData.AllSkinsOfflineImageCategories, CategoryId.Value);
 
             var model = new SkinsAndOfflineModel
             {
-                Id = customVm?.CategoryId ?? 0,
+                Id = matchedCategory?.CategoryId ?? 0,
                 ItemPath = "path/to/item",
                 ViewImagePath = "path/to/image",
                 IsDefault = "No",
-                Description = customVm?.CategoryDescription ?? "",
-                UserLastModified = customVm?.UserLastModified ?? "",
-                MachineLastModified = customVm?.MachineLastModified ?? "",
-                CategoryName = customVm?.CategoryName ?? "",
-                SkinOfflineCategortyTrees = customVm?._children ?? new List<SkinOfflineCategortyTree>()
+                Description = matchedCategory?.CategoryDescription ?? "",
+                UserLastModified = matchedCategory?.UserLastModified ?? "",
+                MachineLastModified = matchedCategory?.MachineLastModified ?? "",
+                CategoryName = matchedCategory?.CategoryName ?? "",
+                SkinOfflineCategortyTrees = matchedCategory?._SubCategoryName ?? new List<SkinOfflineCategortyTree>()
             };
-
-            ViewBag.ParentCategoryName = parentName;
-            ViewBag.GrandparentCategoryName = grandparentName;
-            ViewBag.GrandchildCategoryName = grandchildName;
 
             return PartialView(AppPagesLinks.Settings.SkinsOfflineImagesDetailsPageLink, model);
         }
+
+
+
 
         #endregion
 

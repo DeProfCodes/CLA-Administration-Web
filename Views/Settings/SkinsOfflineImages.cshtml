@@ -289,12 +289,19 @@ await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Settings/Setting
 
 var tableDataNested2 = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.SkinOfflineCategortyTrees));
 
-var actionButtons = function (cell, formatterParams)
-{
-    return `<button class='btn btn-sm btn-info custom-btn-sm' onclick="OpenSkinsCategories(${cell.getRow().getData().CategoryId})">Open Content</button>
-                                          
-            <button class='btn btn-sm btn-danger me-2 me-2 custom-btn-sm' onclick="alert('Delete = ${cell.getRow().getData().CategoryId}');">Delete</button>`;
-};
+    var actionButtons = function (cell, formatterParams) {
+        const categoryId = cell.getRow().getData().CategoryId;
+        const isDisabled = categoryId === 0 ? "hidden" : "";
+
+        return `
+                <button class='btn btn-sm btn-info custom-btn-sm  ${isDisabled}' onclick="OpenSkinsCategories(${categoryId})">
+                Open Content
+            </button>
+                <button class='btn btn-sm btn-danger me-2 custom-btn-sm  ${isDisabled}' onclick="alert('Delete = ${categoryId}');">
+                Delete
+            </button>`;
+    };
+
 var table = new Tabulator("#example-table",
 {
     layout: "fitColumns",
@@ -420,10 +427,12 @@ function ValidateImage(file, module)
 
 
 
-    function OpenSkinsCategories(CategoryId) {
-        console.log(CategoryId)
-        OpenPage('@SettingsPages.SkinsAndOfflineImageDetails', CategoryId);
-}
+    function OpenSkinsCategories(CategoryId)
+    {
+       
+            OpenPage('@SettingsPages.SkinsAndOfflineImageDetails', CategoryId);
+        
+    }
 
 
 function AddNewSkinsAndOfflineImages() 

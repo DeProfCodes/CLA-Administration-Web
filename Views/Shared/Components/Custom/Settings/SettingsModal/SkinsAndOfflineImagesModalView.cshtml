@@ -9,8 +9,8 @@
 
 
 @{
-    var treeParents = !string.IsNullOrEmpty(Model.CategoryName) ? $"{Model.CategoryName} > " : "";
-    //var pageTitle = Model.AddOrEdit == AddOrEditType.Add ? "Add Content Library Category" : $"Edit Content Library Category: {Model.CategoryId}";
+    var treeParents = !string.IsNullOrEmpty(Model.CategoryName) ? $"{Model.CategoryName} " : "";
+
 }
 
 <div class="card">
@@ -19,7 +19,7 @@
         <div class="table-responsive">
             <table class="table custom-table align-start">
                 <tbody>
-                    <!-- Parent Category -->
+                
                     @if (!string.IsNullOrEmpty(Model.CategoryName))
                     {
                         <tr>

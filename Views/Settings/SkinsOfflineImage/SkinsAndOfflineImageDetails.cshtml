@@ -43,7 +43,7 @@
 
     <div class="card mb-4 mt-2 overview-filters-card">
         <div class="card-body">
-            <h4 class="w-100 text-center theme-txt-clr">Edit Skins And Offline Images  for @Model.CategoryName  category</h4>
+            <h4 class="w-100 text-center theme-txt-clr">Edit Skins And Offline Images  for @Model.CategoryName  category </h4>
         </div>
     </div>
  
@@ -78,7 +78,7 @@
                                 @category.CategoryName
                             </td>
                             <td class="cssBg">
-                                <button class="btn btn-sm custom-btn-sm btn-success" onclick="AddNewTargetGroup()">Select Item Path</button>
+                                <button class="btn btn-sm custom-btn-sm btn-success" onclick="AddNewTargetGroup()">Select New Item</button>
                             </td>
                             <td class="cssBg">
                                
@@ -106,87 +106,7 @@
                             </td>
                         </tr>
 
-                        @* Render child categories *@
-                        @if (category._children != null && category._children.Any())
-                        {
-                            @foreach (var child in category._children)
-                            {
-                                <tr>
-                                    <td class="cssBg"></td> <!-- Empty cell for alignment -->
-                                    <td class="cssBg" style="padding-left: 20px;">
-                                        @child.CategoryName
-                                    </td>
-                                    <td class="cssBg">
-                                        <button class="btn btn-sm custom-btn-sm btn-success" onclick="AddNewTargetGroup()">Select Item Path</button>
-                                    </td>
-                                    <td class="cssBg">
-                                       
-                                        <button class="btn btn-sm btn-info custom-btn-sm" onclick="PreviewContentType(ContentTypes.IMAGE, `${APP_BASE_ADDRESS}/images/others/modules/skins/Popup_Skin_Default.png`)">View image</button>
-                                    </td>
-                                    <td class="cssBg">
-                                        <input type="checkbox" name="default" aria-label="Set as Default">
-                                    </td>
-                                    <td class="cssBg">
-                                        @child.CategoryDescription
-                                    </td>
-                                    <td class="cssBg">
-                                        @child.UserLastModified
-                                    </td>
-                                    <td class="cssBg">
-                                        @child.MachineLastModified
-                                    </td>
-                                    <td class="cssBg">
-                                        <button class="btn btn-sm custom-btn-sm btn-danger" aria-label="Delete" onclick="deleteSkine(@child.CategoryId)">
-                                            Delete
-                                        </button>
-                                        <button class="btn btn-sm custom-btn-sm btn-success" id="edit-staging-btn" onclick="EditNewStagingEntry(@child.CategoryId)" aria-label="Edit">
-                                            Edit
-                                        </button>
-                                    </td>
-                                </tr>
-
-                                @* Render grandchild categories *@
-                                @if (child._children != null && child._children.Any())
-                                {
-                                    @foreach (var grandchild in child._children)
-                                    {
-                                        <tr>
-                                            <td class="cssBg"></td> <!-- Empty cell for alignment -->
-                                            <td class="cssBg" style="padding-left: 40px;">
-                                                @grandchild.CategoryName
-                                            </td>
-                                            <td class="cssBg">
-                                                <button class="btn btn-sm custom-btn-sm btn-success" onclick="AddNewTargetGroup()">Select Item Path</button>
-                                            </td>
-                                            <td class="cssBg">
-                                     
-                                                <button class="btn btn-sm btn-info custom-btn-sm" onclick="PreviewContentType(ContentTypes.IMAGE, `${APP_BASE_ADDRESS}/images/others/modules/skins/Popup_Skin_Default.png`)">View image</button>
-                                            </td>
-                                            <td class="cssBg">
-                                                <input type="checkbox" name="default" aria-label="Set as Default">
-                                            </td>
-                                            <td class="cssBg">
-                                                @grandchild.CategoryDescription
-                                            </td>
-                                            <td class="cssBg">
-                                                @grandchild.UserLastModified
-                                            </td>
-                                            <td class="cssBg">
-                                                @grandchild.MachineLastModified
-                                            </td>
-                                            <td class="cssBg">
-                                                <button class="btn btn-sm custom-btn-sm btn-danger" aria-label="Delete" onclick="deleteSkine(@grandchild.CategoryId)">
-                                                    Delete
-                                                </button>
-                                                <button class="btn btn-sm custom-btn-sm btn-success" id="edit-staging-btn" onclick="EditNewStagingEntry(@grandchild.CategoryId)" aria-label="Edit">
-                                                    Edit
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    }
-                                }
-                            }
-                        }
+                  
                     }
 
 
