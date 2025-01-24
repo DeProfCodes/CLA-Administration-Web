@@ -4,6 +4,8 @@
 @using CLA_Administration_Web.Helpers.Enums.AppPages
 @using CLA_Administration_Web.Helpers.Enums.Shared
 @using CLA_Administration_Web.Helpers.Enums.Shared.PageNames;
+@using CLA_Administration_Web.ViewModels.Shared
+@using CLA_Administration_Web.ViewModels.Targeting
 @{
 
 int index = 0;
@@ -444,93 +446,86 @@ await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Targetin
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <div class="row">
-                <!-- Left Section: Active Directory Objects -->
-                <div class="col-md-4">
-                    <div class="card-bordered-section">
-                        <label for="filterInput" class="section-title-tree">Filter:</label>
-                        <div class="d-flex">
-                            <input type="text" id="filterInputMember" class="form-control filter-input" placeholder="Search..." oninput="filterTree()">
+                <div class="row">
+                    <div class="custom-tree" id="custom-directoryTree">
+                        <ul>
+                          
+                        </ul>
+                    </div>
 
-                            <button class="btn btn-secondary ms-2"><i class="bi bi-search"></i></button>
+                    <!-- Left Section: Active Directory Objects -->
+                    <div class="col-md-4">
+                        <div class="card-bordered-section">
+                            <label for="filterInputMember" class="section-title-tree">Filter:</label>
+                            <div class="d-flex">
+                                <input type="text"
+                                       id="filterInputMember"
+                                       class="form-control filter-input"
+                                       placeholder="Search..."
+                                       oninput="filterTree()">
+                                <button class="btn btn-secondary ms-2">
+                                    <i class="bi bi-search"></i>
+                                </button>
+                            </div>
+
+                            <div class="scroll-box treeview mt-3">
+                                <ul id="directoryTree" class="tree-view">
+                                    @foreach (var entity in Model.TargetedEntities)
+                                    {
+                                        @Html.Raw(RenderTreeNode(entity))
+                                    }
+                                </ul>
+                            </div>
                         </div>
-                        <div class="scroll-box treeview mt-3">
-                            <ul id="directoryTree" class="tree-view">
-                                <li>
-                                    <span class="tree-toggle"><i class="bi bi-folder"></i> Active Directory Objects</span>
-                                    <ul class="tree-content">
-                                        <li>
-                                            <span class="tree-toggle"><i class="bi bi-people"></i> Groups</span>
-                                            <ul class="tree-content">
-                                                <li>Admins</li>
-                                                <li>Developers</li>
-                                                <li>HR</li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <span class="tree-toggle"><i class="bi bi-person"></i> Users</span>
-                                            <ul class="tree-content">
-                                                <li data-username="nhlamulo">nhlamulo</li>
-                                                <li data-username="jane_smith">Jane Smith</li>
-                                                <li data-username="john_doe">John Doe</li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <span class="tree-toggle"><i class="bi bi-laptop"></i> Machines</span>
-                                            <ul class="tree-content">
-                                                <li>Server-1</li>
-                                                <li>Workstation-5</li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <span class="tree-toggle"><i class="bi bi-globe"></i> IP Ranges</span>
-                                            <ul class="tree-content">
-                                                <li>192.168.0.0/24</li>
-                                                <li>10.0.0.0/8</li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
+                    </div>
+
+                    <!-- Middle Section: Members -->
+                    <div class="col-md-4">
+                        <div class="card-bordered-section">
+
+                          
+
+                        
+
+                            <label class="section-title-tree">Members</label>
+                            <div class="scroll-box" >
+                                <div id ="newTree" class="tree-view">
+                                
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <button class="custom-btn-default custom-btn">
+                                    <i class="bi bi-pencil-square"></i> Modify
+                                </button>
+                                <button class="custom-btn custom-btn-default">
+                                    <i class="bi bi-arrow-bar-down"></i> Import Members
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Section: Member Of -->
+                    <div class="col-md-4">
+                        <div class="card-bordered-section">
+                            <label class="section-title-tree">Member Of</label>
+                            <div class="scroll-box">
+                                <ul id="memberOfList" class="tree-view">
+                                    <li>
+                                        <label class="tree-toggle-label">
+                                            <i class="bi bi-folder"></i> Select a user to view membership
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="btn-group-vertical mt-3">
+                                <button class="custom-btn-default custom-btn">
+                                    <i class="bi bi-pencil-square"></i> Modify
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Middle Section: Members -->
-                <div class="col-md-4">
-                    <div class="card-bordered-section">
-                        <label class="section-title-tree">Members</label>
-                        <div class="scroll-box">
-                            <ul id="membersList" class="tree-view">
-                                <li>
-                                    <label class="tree-toggle-label"><i class="bi bi-person"></i> Select a user to view members</label>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="mt-3">
-                                <button class="custom-btn-default custom-btn"><i class="bi bi-pencil-square"></i> Modify</button>
-                                <button class="custom-btn custom-btn-default"><i class="bi bi-arrow-bar-down"></i> Import Members</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Right Section: Member Of -->
-                <div class="col-md-4">
-                    <div class="card-bordered-section">
-                        <label class="section-title-tree">Member Of</label>
-                        <div class="scroll-box">
-                            <ul id="memberOfList" class="tree-view">
-                                <li>
-                                    <label class="tree-toggle-label"><i class="bi bi-folder"></i> Select a user to view membership</label>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="btn-group-vertical mt-3">
-                                <button class="custom-btn-default custom-btn"><i class="bi bi-pencil-square"></i> Modify</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <div class="modal-footer">
@@ -539,6 +534,40 @@ await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Targetin
     </div>
 </div>
 </div>
+@functions {
+    string RenderTreeNode(TargetedEntityTree node)
+    {
+        var html = string.Empty;
+
+        if (node._children != null && node._children.Any())
+        {
+            // Render folder with children
+            html = $@"
+            <li>
+                <span class='tree-toggle'>
+                    <i class='bi bi-folder'></i> {node.EntityName}
+                </span>
+                <ul class='tree-content'>";
+
+            foreach (var child in node._children)
+            {
+                html += RenderTreeNode(child);
+            }
+
+            html += "</ul></li>";
+        }
+        else
+        {
+           
+            html = $@"
+            <li data-id='{node.Id}'>
+            {node.EntityName}
+            </li>";
+        }
+
+        return html;
+    }
+}
 
 
 <!-- Bulk Import Modal -->
@@ -707,7 +736,7 @@ await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Targetin
 </div>
 
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
-
+<script src="~/js/settings/settings.js"></script>
 
 
 
@@ -722,65 +751,90 @@ document.querySelectorAll('.tree-toggle').forEach(toggle => {
 });
 
 
+    document.addEventListener('click', function (event) {
+        const clickedElement = event.target.closest('li');
+
+        if (clickedElement && !clickedElement.querySelector('ul')) {
+            const selectedId = clickedElement.dataset.id;
+
+            if (selectedId) {
+                fetchSelectedEntity(selectedId);
+            }
+        }
+    });
+
+    function fetchSelectedEntity(id) {
+        $.ajax({
+            url: '@Url.Action("GetSelectedEntity", "Settings")',
+            method: 'GET',
+            data: { id: id },
+            success: function (data) {
+                const newTree = document.getElementById('newTree');
+                newTree.innerHTML = ''; 
+
+                if (data && data.EntityName) {
+                
+                    renderTreeNode(data, newTree);
+                } else {
+               
+                    renderStaticTree(newTree);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error('Error fetching selected entity:', error);
+            }
+        });
+    }
 
 
-const directoryData = {
-users: {
-nhlamulo: { groups: ["Admins", "HR"], machines: ["Server-1"], ipRanges: ["192.168.0.0/24"] },
-jane_smith: { groups: ["Developers"], machines: ["Workstation-5"], ipRanges: [] },
-john_doe: { groups: ["HR"], machines: [], ipRanges: ["10.0.0.0/8"] },
-},
-groups: {
-Admins: { users: ["nhlamulo"], machines: ["Server-1"] },
-Developers: { users: ["jane_smith"], machines: [] },
-HR: { users: ["nhlamulo", "john_doe"], machines: [] },
-},
-machines: {
-"Server-1": { users: ["nhlamulo"], groups: ["Admins"], ipRanges: ["192.168.0.0/24"] },
-"Workstation-5": { users: ["jane_smith"], groups: [], ipRanges: [] },
-},
-ipRanges: {
-"192.168.0.0/24": { users: ["nhlamulo"], machines: ["Server-1"] },
-"10.0.0.0/8": { users: ["john_doe"], machines: [] },
-},
-};
+    function renderTreeNode(node, container) {
+        const li = document.createElement('li');
+        li.innerHTML = `<span class='tree-toggle'><i class='bi bi-folder'></i> ${node.EntityName}</span>`;
+        li.dataset.id = node.Id;
+        container.appendChild(li);
+
+        if (node._children && node._children.length > 0) {
+            const ul = document.createElement('ul');
+            ul.classList.add('tree-content');
+            node._children.forEach(child => {
+                renderTreeNode(child, ul);
+            });
+            li.appendChild(ul);
+        }
+    }
+
+    function renderStaticTree(container) {
+    
+        const root = document.createElement('li');
+        root.innerHTML = `<span class='tree-toggle'><i class='bi bi-folder'></i>Active Directory</span>`;;
+
+   
+        const workGroup = document.createElement('ul');
+        const workGroupItem = document.createElement('li');
+        workGroupItem.textContent = 'WorkGroup';
+
+        const childList = document.createElement('ul');
+
+        ['Group', 'Users', 'Machine', 'IpRange'].forEach(entityName => {
+            const child = document.createElement('li');
+            child.textContent = entityName;
+            childList.appendChild(child);
+        });
+
+    
+        workGroupItem.appendChild(childList);
+        workGroup.appendChild(workGroupItem);
+
+        root.appendChild(workGroup);
+
+        container.appendChild(root);
+    }
 
 
-function showDetails(type, key) {
-const membersList = document.getElementById("membersList");
-const memberOfList = document.getElementById("memberOfList");
-
-// Clear previous details
-membersList.innerHTML = "";
-memberOfList.innerHTML = "";
-
-if (type === "users") {
-const userData = directoryData.users[key];
-
-membersList.innerHTML += `
-    <li><strong>Groups:</strong> ${userData.groups.join(", ") || "None"}</li>
-    <li><strong>Machines:</strong> ${userData.machines.join(", ") || "None"}</li>
-    <li><strong>IP Ranges:</strong> ${userData.ipRanges.join(", ") || "None"}</li>
-`;
-
-const memberOf = Object.keys(directoryData.groups)
-    .filter(group => directoryData.groups[group].users.includes(key))
-    .map(group => `<li>${group}</li>`)
-    .join("");
-
-memberOfList.innerHTML += `
-    <li><strong>Groups:</strong><ul>${memberOf || "<li>None</li>"}</ul></li>
-`;
-}
-}
 
 
-document.getElementById("directoryTree").addEventListener("click", function (event) {
-const clickedItem = event.target;
-if (clickedItem.dataset.username) {
-showDetails("users", clickedItem.dataset.username);
-}
-});
+
+
 
 
 function filterTree() {

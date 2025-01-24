@@ -274,12 +274,21 @@ namespace CLA_Administration_Web.Controllers
         [HttpGet]
         public async Task<IActionResult> TargetGroups()
         {
+            var targetingTree = TargetingHelper.GetTargetedEntities();
+            var targetingSelect = TargetingHelper.GetTargetedEntitiesSelect();
+
+         
+
             var targetGroups = new TargetingExposureViewModel()
             {
                 TargetedUsers = SettingsMockData.TargetGroupUsers,
                 TargetedMachines = SettingsMockData.TargetedMachines,
                 TargetedGroups = SettingsMockData.TargetedGroups,
-                TargetedIPRanges = SettingsMockData.TargetedIPRanges
+                TargetedIPRanges = SettingsMockData.TargetedIPRanges,
+                     // ModuleName = moduleName,
+                TargetedEntities = targetingTree,
+                TargetedAccepted = targetingSelect,
+            
             };
 
             return PartialView(AppPagesLinks.Settings.TargetGroupsPageLink, targetGroups);
@@ -325,6 +334,76 @@ namespace CLA_Administration_Web.Controllers
 
             return PartialView(AppPagesLinks.Settings.TargeGroupEditModal, targetGroups);
         }
+
+ 
+
+        public IActionResult GetSelectedEntity(int id)
+        {
+        
+            var rootEntities = new List<TargetedEntityTree>
+    {
+        new TargetedEntityTree
+        {
+            Id = 1111,
+            EntityName = "Active Directory",
+            _children = new List<TargetedEntityTree>
+            {
+                new TargetedEntityTree
+                {
+                    Id = 2,
+                    EntityName = "WorkGroup",
+                    _children = new List<TargetedEntityTree>
+                    {
+                        new TargetedEntityTree {
+                            Id = 3,
+                            EntityName = "Group",
+                            _children = new List<TargetedEntityTree>
+                            {
+                                new TargetedEntityTree { Id = 4, EntityName = "Group 1" },
+                            new TargetedEntityTree { Id = 5, EntityName = "Group 2" },
+                            new TargetedEntityTree { Id = 6, EntityName = "Group 3 " }
+                            }
+                        },
+                        new TargetedEntityTree { Id = 4, EntityName = "User" },
+                        new TargetedEntityTree { Id = 5, EntityName = "Machine" },
+                        new TargetedEntityTree { Id = 6, EntityName = "IpRange" }
+                    }
+                }
+            }
+        }
+    };
+
+         
+            var selectedEntity = FindEntityById(rootEntities, id);
+
+            if (selectedEntity != null)
+            {
+                return Json(selectedEntity);
+            }
+            else
+            {
+                return Json(new { message = "Entity not found" });
+            }
+        }
+
+        private TargetedEntityTree FindEntityById(List<TargetedEntityTree> entities, int id)
+        {
+            foreach (var entity in entities)
+            {
+                if (entity.Id == id)
+                    return entity;
+
+                if (entity._children != null)
+                {
+                    var found = FindEntityById(entity._children, id);
+                    if (found != null)
+                        return found;
+                }
+            }
+
+            return null;
+        }
+
 
 
         #endregion

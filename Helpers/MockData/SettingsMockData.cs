@@ -679,6 +679,72 @@ namespace CLA_Administration_Web.Helpers.MockData
 
             return new List<SkinOfflineCategortyTree> { rootCategory };
         }
+        public static List<TargetedEntityTree> GenerateDummyDataEntities()
+        {
+            int idCounter = 1;
+            var random = new Random();
+            var rootEntity = new TargetedEntityTree
+            {
+                EntityName = "CLA - Key Stakeholder",
+             
+                _children = new List<TargetedEntityTree>
+        {
+            new TargetedEntityTree
+            {
+                EntityName = "Sub Entity 1",
+          
+                _children = new List<TargetedEntityTree>
+                {
+                    new TargetedEntityTree
+                    {
+                        Id = random.Next(1000, 9999),
+                        EntityName = "Leaf Entity 1",
+                   
+                        _children = GenerateRandomEntityChildren(ref idCounter)
+                    }
+                }
+            },
+            new TargetedEntityTree
+            {
+                EntityName = "Sub Entity 2",
+             
+                _children = new List<TargetedEntityTree>
+                {
+                    new TargetedEntityTree
+                    {
+                        Id = random.Next(1000, 9999),
+                        EntityName = "Leaf Entity 2",
+                     
+                        _children = GenerateRandomEntityChildren(ref idCounter)
+                    }
+                }
+            }
+        }
+            };
+
+            return new List<TargetedEntityTree> { rootEntity };
+        }
+
+      
+        public static List<TargetedEntityTree> GenerateRandomEntityChildren(ref int idCounter)
+        {
+            Random random = new Random();
+            var children = new List<TargetedEntityTree>();
+            int childrenCount = random.Next(1, 7);
+
+            for (int i = 0; i < childrenCount; i++)
+            {
+                children.Add(new TargetedEntityTree
+                {
+                    Id = idCounter++, 
+                    EntityName = "Entity " + idCounter,
+               
+                    _children = null 
+                });
+            }
+
+            return children;
+        }
 
 
 

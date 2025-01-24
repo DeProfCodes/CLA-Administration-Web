@@ -11,5 +11,10 @@
         public  List<TargetedIPRange> TargetedIPRanges { get; set; }
 
 
+        public List<TargetedEntityTree> TargetedEntities { get; set; }
+
+        public List<TargetedEntityTree> TargetedAccepted { get; set; }
+
+
     }
 }

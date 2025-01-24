@@ -9,13 +9,7 @@
 
 
 @{
-    @*await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Settings/SettingsBreadcrumb.cshtml", new SettingsBreadcrumbViewModel
-            {
-                SettingsCurrentPage =SettingsPages.CustomUserSettingsDetails,
-                HasAddNewButton = true,
-                BreadcrumbButtonName = "Add New Staging User",
-                BreadcrumbButtonCallbackFunction = "AddNewStagingEntity"
-            });*@
+
 
     var allowTickerLaunch = false;
     var updateFuture = false;
@@ -153,7 +147,7 @@
                         <p class="custom-p fl-right">Sync Time</p>
                     </div>
                     <div class="common-titles-value-col">
-                        <input class="custom-input-text w-250p" type="time" id="syncTime" value="@Model.SyncTimeout">
+                        <input class="custom-input-text w-250p" type="text" id="syncTime" value="@Model.SyncTimeout">
                         <p class="mb-0 fs-12 text-danger fst-italic ps-1" id="syncTimeError"></p>
                     </div>
                 </div>
@@ -265,68 +259,76 @@
                             <div class="col-md-6 col-12 mb-3">
                                 <div class="form-check form-switch">
                                     <input type="checkbox" id="overrideDesktop2" class="form-check-input">
-                                    <label for="overrideDesktop2" class="form-check-label">Enable Feature X</label>
+                                    <label for="overrideDesktop2" class="form-check-label">Policy Controlled Screensaver</label>
                                 </div>
                             </div>
                             <div class="col-md-6 col-12 mb-3">
                                 <div class="form-check form-switch">
                                     <input type="checkbox" id="overrideDesktop3" class="form-check-input">
-                                    <label for="overrideDesktop3" class="form-check-label">Enable Feature Y</label>
+                                    <label for="overrideDesktop3" class="form-check-label">Allow Tiker to Laungh Automatically</label>
                                 </div>
                             </div>
                             <div class="col-md-6 col-12 mb-3">
                                 <div class="form-check form-switch">
                                     <input type="checkbox" id="overrideDesktop3" class="form-check-input">
-                                    <label for="overrideDesktop3" class="form-check-label">Enable Feature Y</label>
+                                    <label for="overrideDesktop3" class="form-check-label">Update Future Content</label>
                                 </div>
                             </div>
                             <div class="col-md-6 col-12 mb-3">
                                 <div class="form-check form-switch">
                                     <input type="checkbox" id="overrideDesktop3" class="form-check-input">
-                                    <label for="overrideDesktop3" class="form-check-label">Enable Feature Y</label>
+                                    <label for="overrideDesktop3" class="form-check-label">Enable Impression Logging</label>
                                 </div>
                             </div>
                             <div class="col-md-6 col-12 mb-3">
                                 <div class="form-check form-switch">
                                     <input type="checkbox" id="overrideDesktop3" class="form-check-input">
-                                    <label for="overrideDesktop3" class="form-check-label">Enable Feature Y</label>
+                                    <label for="overrideDesktop3" class="form-check-label">Enable Error Logging</label>
                                 </div>
                             </div>
                                <div class="col-md-6 col-12 mb-3">
                                 <div class="form-check form-switch">
                                     <input type="checkbox" id="overrideDesktop3" class="form-check-input">
-                                    <label for="overrideDesktop3" class="form-check-label">Enable Feature Y</label>
+                                    <label for="overrideDesktop3" class="form-check-label">Maintain Aspect Ration</label>
                                 </div>
                             </div>
                             <div class="col-md-6 col-12 mb-3">
                                 <div class="form-check form-switch">
                                     <input type="checkbox" id="overrideDesktop3" class="form-check-input">
-                                    <label for="overrideDesktop3" class="form-check-label">Enable Feature Y</label>
+                                    <label for="overrideDesktop3" class="form-check-label">Use Audio</label>
                                 </div>
                             </div>
                             <div class="col-md-6 col-12 mb-3">
                                 <div class="form-check form-switch">
                                     <input type="checkbox" id="overrideDesktop3" class="form-check-input">
-                                    <label for="overrideDesktop3" class="form-check-label">Enable Feature Y</label>
+                                    <label for="overrideDesktop3" class="form-check-label">Use Machine ID</label>
                                 </div>
                             </div>
                             <div class="col-md-6 col-12 mb-3">
-                                <div class="form-check form-switch">
-                                    <input type="checkbox" id="overrideDesktop3" class="form-check-input">
-                                    <label for="overrideDesktop3" class="form-check-label">Enable Feature Y</label>
+                                <div class="row">
+                                    <div class="common-titles-value-col">
+                                        <input class="custom-input-text w-250p" type="text" id="syncTime" value="" placeholder="Set Popup Position"
+                                               onclick="openEditModal()">
+                                        <p class="mb-0 fs-12 text-danger fst-italic ps-1" id="syncTimeError"></p>
+                                    </div>
                                 </div>
                             </div>
+
                             <div class="col-md-6 col-12 mb-3">
                                 <div class="form-check form-switch">
-                                    <input type="checkbox" id="overrideDesktop3" class="form-check-input">
-                                    <label for="overrideDesktop3" class="form-check-label">Enable Feature Y</label>
+                                    <div class="row mb-3 mb-md-0 w-fit-content gap-2">
+
+                                        <button class="btn btn-sm btn-success" id="PromoteModuleBtn" onclick="OpenTargetedEntityPreviewModal('@SettingsNamesType.DesktopInformation', true)">Target Users</button>
+                                        <button class="btn btn-warning btn-sm" id="RepeatModuleBtn" onclick="OpenTargetingExposurePreviewModal('@SettingsNamesType.DesktopInformation')">Who is Targeted</button>
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </div>s
     
     </div>
 
@@ -337,9 +339,7 @@
 
     <!-- Action Buttons -->
     <div class="d-flex justify-content-between mt-3">
-        <button class="btn btn-primary custom-btn" id="BulkImportBtn1">
-            <i class="bi bi-plus-circle-fill"></i> Add
-        </button>
+        <button class="custom-btn custom-btn-default btn-danger w-fit-content" data-bs-toggle="modal" data-bs-target="#bulkImportModal" id="BulkImportBtn"> <i class="bi bi-plus-circle-fill"></i>Target Users</button>
         <button class="btn btn-secondary custom-btn" id="BulkImportBtn2">
             <i class="bi bi-gear"></i> Revert to Global Settings
         </button>
@@ -350,3 +350,88 @@
 
 
 </div>
+@{
+    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Targeting/TargetedEntityModal.cshtml");
+    await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Modules/Targeting/TargetingExposureModal.cshtml");
+}
+<!-- Edit Staging Modal -->
+<div class="modal fade" id="EditModal" tabindex="-1" aria-labelledby="EditModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="EditModalLabel">Edit Popup Position</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal('EditModal')"></button>
+            </div>
+            <div class="modal-body" id="EditModalContainer">
+
+
+                <div class="row mt-3">
+                   
+                    <div class="popup-display-settings-info popup-pos-container">
+                        <div class="grid-container">
+                            <div class="popup-pos grid-item" id="PopupPositionTL" onclick="setPopupPosition(this)">Top Left</div>
+                            <div class="popup-pos grid-item" id="PopupPositionTC" onclick="setPopupPosition(this)">Top Center</div>
+                            <div class="popup-pos grid-item" id="PopupPositionTR" onclick="setPopupPosition(this)">Top Right</div>
+                            <div class="popup-pos grid-item" id="PopupPositionML" onclick="setPopupPosition(this)" >Middle Left</div>
+                            <div class="popup-pos grid-item" id="PopupPositionC"  onclick="setPopupPosition(this)"   >Center</div>
+                            <div class="popup-pos grid-item" id="PopupPositionMR" onclick="setPopupPosition(this)"  >Middle Right</div>
+                            <div class="popup-pos grid-item" id="PopupPositionBL" onclick="setPopupPosition(this)"  >Bottom Left</div>
+                            <div class="popup-pos grid-item" id="PopupPositionBC" onclick="setPopupPosition(this)"   >Bottom Center</div>
+                            <div class="popup-pos grid-item active" id="PopupPositionBR" onclick="setPopupPosition(this)">Bottom Right</div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn custom-btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal('EditModal')">Cancel</button>
+                <button type="button" class="custom-btn custom-btn-default" onclick="savePopupPosition()">Save</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    let selectedPosition = '';
+
+    function openEditModal() {
+  
+        const modal = new bootstrap.Modal(document.getElementById('EditModal'));
+        modal.show();
+    }
+
+    function setPopupPosition(element) {
+   
+        document.querySelectorAll('.popup-pos').forEach(item => item.classList.remove('active'));
+
+  
+        element.classList.add('active');
+
+        selectedPosition = element.textContent;
+    }
+
+    function savePopupPosition() {
+        if (selectedPosition) {
+          
+            document.getElementById('syncTime').value = selectedPosition;
+
+            const modalElement = document.getElementById('EditModal');
+            const modalInstance = bootstrap.Modal.getInstance(modalElement);
+            modalInstance.hide();
+        } else {
+            alert('Please select a position before saving.');
+        }
+    }
+
+    function closeModal(modalId) {
+        const modalElement = document.getElementById(modalId);
+        const modalInstance = bootstrap.Modal.getInstance(modalElement);
+        modalInstance.hide();
+    }
+
+
+</script>

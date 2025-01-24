@@ -1,4 +1,51 @@
 ﻿
+      <!-- Texts Tab -->
+                        <div id="TextsTab-3" class="popup-wizard-tabs flex-wrap  text-center align-content-center justify-content-center mb-3 hidden">
+                            <h5 class="fw-bold mt-4">3. Popup Title & Body Texts</h5>
+                            <p class="custom-p mt-2 fs-13 text-center">Enter popup title and body texts.</p>
+                            <!-- Title input-->
+                            <div class="row mt-4">
+                                <label class="col-sm-2 fw-bold text-center">Title:</label>
+                                <div class="col-sm-10">
+                                    @{
+                                        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Form/HtmlEditor.cshtml",
+                                        new HtmlEditorModel 
+                                        { 
+                                            EditorId = "PopupTextHeader", 
+                                            HeightPx = "55px", 
+                                            WriteToDesitnationOnInput = true, 
+                                            MaxCharacterCount = 25,
+                                            DestinationTextDivId = "PopupBodyPreviewTitleText" 
+                                        });
+                                    }
+                                    <p class="mb-0 fs-12 text-danger fst-italic ps-1 w-fit-content" id="LinkTypeTextsTitleError"></p>
+                                    <div class="form-check form-switch w-fit-content mb-0">
+                                        <label class="form-check-label fs-12" for="ShowHidePopupTitle">Show</label>
+                                        <input class="form-check-input" type="checkbox" id="ShowHidePopupTitle" onchange="ShowHidePopupText(this.id,'title')" checked>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <!-- Body input-->
+                            <div class="row">
+                                <label class="col-sm-2 fw-bold  text-center">Body:</label>
+                                <div class="col-sm-10">
+                                    @{
+                                        await Html.RenderPartialAsync("~/Views/Shared/Components/Custom/Form/HtmlEditor.cshtml",
+                                        new HtmlEditorModel { EditorId = "PopupTextBody", HeightPx = "150px", WriteToDesitnationOnInput = true, DestinationTextDivId = "PopupBodyPreviewTextBody" });
+                                    }
+                                    <p class="mb-0 fs-12 text-danger fst-italic ps-1 w-fit-content" id="LinkTypeTextsBodyError"></p>
+                                    <div class="form-check form-switch w-fit-content mb-0">
+                                        <label class="form-check-label fs-12" for="ShowHidePopupBody">Show</label>
+                                        <input class="form-check-input" type="checkbox" id="ShowHidePopupBody" onchange="ShowHidePopupText(this.id,'body')" checked>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Times Tab -->
+
+
+
 <div class="toolbar">
     <!-- Font Family -->
     <select id="fontFamily" class="form-control-sm">
